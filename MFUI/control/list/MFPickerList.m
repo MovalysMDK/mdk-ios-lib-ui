@@ -260,21 +260,6 @@ const int NO_LAST_INDEX = -1;
     }
 }
 
-
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    return @[
-             (nil != self.staticView) ? self.staticView : [[UIView alloc] initWithFrame:CGRectZero]
-             ];
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    return @[
-             @"StaticView"
-             ];
-}
-
 #pragma mark - Specific methods for this component
 /**
  * @brief This method builds and shows the pickerView in an ActionSheet (iPhone) or in a PopoverViewController (iPad)
@@ -364,7 +349,6 @@ const int NO_LAST_INDEX = -1;
     [self.cancelButton addTarget:self action:@selector(dismissPickerViewAndCancel) forControlEvents:UIControlEventValueChanged];
     
     //Show the actionSheet
-    [self setAllTags];
     [self.modalPickerView addSubview:self.confirmButton];
     [self.modalPickerView  addSubview:self.cancelButton];
     [self.modalPickerView  addSubview:self.searchBar];

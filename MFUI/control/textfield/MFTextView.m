@@ -152,7 +152,6 @@
     //L'ajout de la toolbar est géré au niveau du setter de l'attribut editable.
     
     //Le textview est ajouté au composant
-    [self setAllTags];
     [self addSubview:self.textView];
 
 }
@@ -240,42 +239,12 @@
 
 
 
--(void)modifyComponentAfterHideErrorButtons {
-    [super modifyComponentAfterHideErrorButtons];
-    self.textView.frame = self.bounds;
-}
-
--(void)modifyComponentAfterShowErrorButtons {
-    
-    [super modifyComponentAfterShowErrorButtons];
-    CGFloat errorButtonSize = ERROR_BUTTON_SIZE;
-    self.textView.frame = CGRectMake(errorButtonSize,
-                                      0,
-                                      self.bounds.size.width-errorButtonSize,
-                                      self.bounds.size.height);
-}
-
 
 #pragma mark - Tags for automatic testing
 -(void) setAllTags {
     if (self.textView.tag == 0) {
         [self.textView setTag:TAG_MFTEXTVIEW_TEXTVIEW];
     }
-}
-
-
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    return @[
-             self.textView
-             ];
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    return @[
-             @"TextView"
-             ];
 }
 
 
@@ -334,7 +303,7 @@
         [self.context addErrors:@[error]];
         nbOfErrors++;
     }
-    if(self.mf.mandatory != nil && [self.mf.mandatory integerValue] == 1 && [self getValue].length == 0){
+    if(self.mandatory != nil && [self.mandatory integerValue] == 1 && [self getValue].length == 0){
         error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
         [self addErrors:@[error]];
         [self.context addErrors:@[error]];
@@ -412,30 +381,16 @@
 -(void) setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor
 {
     [super setSelfDescriptor:selfDescriptor];
-    // Configuration
-    [self loadConfiguration:selfDescriptor.configurationName];
 }
 
-
-
--(MFConfigurationKeyboardingUIComponent *) loadConfiguration:(NSString *) configurationName
-{
-    MFConfigurationKeyboardingUIComponent *config = (MFConfigurationKeyboardingUIComponent*)[super loadConfiguration:configurationName];
-    if(config) {
-        self.mf.maxLength = [MFUIBaseComponent getNumberConfigurationWithValue:config.maxLength andDefaultValue:self.mf.maxLength];
-        self.mf.minLength = [MFUIBaseComponent getNumberConfigurationWithValue:config.minLength andDefaultValue:self.mf.minLength];
-        self.mf.mandatory = [MFUIBaseComponent getBoolConfigurationWithValue:config.mandatory andDefaultValue:self.mf.mandatory];
-    }
-    return config;
-}
 
 -(NSString *) description
 {
-    return [NSString stringWithFormat:@"MFTextView<value:%@, active: %c, mf.mandatory: %@, mf.maxLength: %@, mf.minLength: %@>", [self getValue], self.isActive ?  : NO, self.mf.mandatory ? @"YES" : @"NO", self.mf.maxLength, self.mf.minLength];
+    return [NSString stringWithFormat:@"MFTextView<value:%@, active: %c, mf.mandatory: %@, mf.maxLength: %@, mf.minLength: %@>", [self getValue], self.isActive ?  : NO, self.mandatory ? @"YES" : @"NO", self.mf.maxLength, self.mf.minLength];
 }
 
 -(void)setMandatory:(NSNumber *)mandatory {
-    self.mf.mandatory = mandatory ;
+    self.mandatory = mandatory ;
 }
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor {

@@ -28,7 +28,6 @@
  * - TAG : "TAG"
  * - COMPONENTNAME : nom du composant (nom du fichier .h/.m sans l'extension)
  * - SUBVIEWVARNAME : nom de la variable de chaque subview déclarée dans la méthode customizableComponents() du composant
- *                    (en cas de subview utilisant des attributs d'autres classes, utiliser l'équivalent CSS dans la méthode suffixForCustomizableComponents() du composant)
  * Tous les caractères sont en majuscules.
  *
  * Convention de numérotation, pour la valeur des tags : AAABB

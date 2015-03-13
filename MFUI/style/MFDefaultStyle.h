@@ -1,0 +1,20 @@
+//
+//  MFBaseStyle.h
+//  LiveRendering
+//
+//  Created by Lagarde Quentin on 03/03/2015.
+//  Copyright (c) 2015 Lagarde Quentin. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+@interface MFDefaultStyle : NSObject
+
+-(void) applyStyleOnView:(UIView *)view;
+
+-  (void)applyErrorStyleOnView:(UIView *)view;
+
+-  (void)applyValidStyleOnView:(UIView *)view;
+
+@end

@@ -22,10 +22,9 @@
 #ifndef MFUI_MFUIControlExtension_h
 #define MFUI_MFUIControlExtension_h
 
-#import "MFExtensionKeyboardingUIControlProtocol.h"
-#import "MFExtensionKeyboardingUIControlWithRegExpProtocol.h"
-#import "MFExtensionKeyboardingUIControl.h"
-#import "MFExtensionKeyboardingUIControlWithRegExp.h"
-#import "MFExtensionUIControlProtocol.h"
+#import "MFTextFieldExtension.h"
+#import "MFBaseTextExtensionProtocol.h"
+#import "MFRegularExpressionTextFieldExtension.h"
+#import "MFRegexTextExtensionProtocol.h"
 
 #endif

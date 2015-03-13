@@ -24,7 +24,7 @@
 #import <MFCore/MFCoreContext.h>
 #import <MFCore/MFCoreApplication.h>
 
-#import "MFUIError.h"
+#import "MFUIErrorView.h"
 #import "MFUIProtocol.h"
 
 #import "MFComponentChangedListenerProtocol.h"
@@ -194,22 +194,6 @@
  * @brief hide errors on components (tooltip and icon)
  */
 -(void)hideErrorButtons ;
-
-
-@optional
-/**
- * @brief Returns a list of sub-components of this component that could be customized with a custom CSS class
- * @return An array of sub-components that are customizable in this component
- */
--(NSArray *)customizableComponents;
-
-
-@optional
-/**
- * @brief Returns a list of suffix of CSS class for the customizable components of this component
- * @return A array of string that are the suffixes
- */
--(NSArray *)suffixForCustomizableComponents;
 
 @optional
 /**

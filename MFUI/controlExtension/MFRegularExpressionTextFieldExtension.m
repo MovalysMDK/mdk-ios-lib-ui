@@ -13,21 +13,22 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFExtensionKeyboardingUIControl.h
-//  MFUI
-//
-//
+
+#import "MFRegularExpressionTextFieldExtension.h"
 
 
-#import "MFExtensionUIControlProtocol.h"
+const NSString *PARAMETER_REGULAREXPRESSIONTEXTFIELD_PATTERN_KEY = @"pattern";
 
-@protocol MFExtensionKeyboardingUIControlProtocol <MFExtensionUIControlProtocol>
 
-@required
+@implementation MFRegularExpressionTextFieldExtension
+@synthesize pattern = _regularExpression;
 
-@property(nonatomic, strong) NSNumber *maxLength;
 
-@property(nonatomic, strong) NSNumber *minLength;
+#pragma mark - Methods
+
+- (NSString *) description
+{
+    return [NSString stringWithFormat:@"MFExtensionKeyboardingUIControlWithRegExp<maxLength: %@, minLength: %@, regularExpression: %@>", self.maxLength, self.minLength, self.pattern];
+}
 
 @end

@@ -43,7 +43,7 @@
 /*
  Extended properties of text field.
  */
-@property(nonatomic, strong) NSObject<MFExtensionKeyboardingUIControlProtocol> *mf;
+@property(nonatomic, strong) NSObject<MFBaseTextExtensionProtocol> *mf;
 
 /**
  Underlying component.
@@ -56,15 +56,6 @@
  */
 @property (nonatomic, strong) MFOrientationChangedDelegate *orientationChangedDelegate;
 
-
-#pragma mark - Methods
-/**
- * Load configuration according to the given name.
- *
- * @param configurationName - Name of the configuration to load.
- * @return Appropriate configuration.
- */
--(MFConfigurationKeyboardingUIComponent *) loadConfiguration:(NSString *) configurationName;
 
 #pragma mark - Specific TextField method implementation
 

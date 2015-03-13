@@ -91,19 +91,18 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     UIImage* image = [UIImage imageNamed:[self defaultImage]];
     self.photoImageView.image = image;
     
-    self.dateLabel = [[MFLabel alloc] init];
+    self.dateLabel = [[MFUILabel alloc] init];
     self.dateLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
-    self.titreLabel = [[MFLabel alloc] init];
+    self.titreLabel = [[MFUILabel alloc] init];
     self.titreLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.titreLabel.numberOfLines = 2;
     
-    self.descriptionLabel = [[MFLabel alloc] init];
+    self.descriptionLabel = [[MFUILabel alloc] init];
     self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
     //Nombre de lignes infini
     self.descriptionLabel.numberOfLines = 0;
     
-    [self setAllTags];
     [self addSubview:self.photoImageView];
     [self addSubview:self.dateLabel];
     [self addSubview:self.titreLabel];
@@ -239,28 +238,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         [self.descriptionLabel setTag:TAG_MFPHOTOTHUMBNAIL_DESCRIPTION];
     }
 }
-
-
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    return @[
-             self.photoImageView,
-             self.dateLabel,
-             self.titreLabel,
-             self.descriptionLabel
-             ];
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    return @[
-             @"ImageView",
-             @"DateLabel",
-             @"TitleLabel",
-             @"DescriptionLabel"
-             ];
-}
-
 
 
 #pragma mark - Specific methods

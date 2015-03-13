@@ -13,15 +13,24 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFExtensionKeyboardingUIControlWithRegExp.h
-//  MFUI
-//
-//
 
-#import "MFExtensionKeyboardingUIControl.h"
-#import "MFExtensionKeyboardingUIControlWithRegExpProtocol.h"
 
-@interface MFExtensionKeyboardingUIControlWithRegExp : MFExtensionKeyboardingUIControl<MFExtensionKeyboardingUIControlWithRegExpProtocol>
+/**
+ * @protocol MFBaseTextExtensionProtocol
+ * @brief This protocol defines parameters that a component base on a UItextField can use.
+ */
+@protocol MFBaseTextExtensionProtocol
+
+#pragma mark - Properties
+
+/**
+ * @brief The max length the text value can have
+ */
+@property(nonatomic, strong) NSNumber *maxLength;
+
+/**
+ * @brief The min length the text value can have
+ */
+@property(nonatomic, strong) NSNumber *minLength;
 
 @end

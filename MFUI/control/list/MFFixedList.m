@@ -114,7 +114,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     self.topBarView = [[UIView alloc] init];
     self.topBarView.userInteractionEnabled = YES;
     
-    [self setAllTags];
     [self addSubview:self.tableView];
     [self addSubview:self.topBarView];
     
@@ -304,22 +303,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 }
 
 
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    return @[
-             //             self.tableView,
-             //             self.topBarView
-             ];
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    return @[
-             //             @"TableView",
-             //             @"TopBarView"
-             ];
-}
-
 #pragma mark - Fast Forwarding UILabel methods
 
 -(id)forwardingTargetForSelector:(SEL)sel {
@@ -487,6 +470,16 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 
 -(BOOL)isPhotoFixedList {
     return [[((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:FIXED_LIST_PARAMETER_IS_PHOTO] boolValue];
+}
+
+#pragma mark  - LiveRendering methods
+
+-(void)buildDesignableComponentView {
+    //TODO: Implémenter
+}
+
+-(void)renderComponentFromInspectableAttributes {
+    //TODO: Implémenter
 }
 
 @end

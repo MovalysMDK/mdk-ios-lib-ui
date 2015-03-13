@@ -14,19 +14,22 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 //
-//  MFExtensionKeyboardingUIControlWithRegExp.m
+//  MFExtensionKeyboardingUIControlWithRegExp.h
 //  MFUI
 //
 //
 
-#import "MFExtensionKeyboardingUIControlWithRegExp.h"
 
-@implementation MFExtensionKeyboardingUIControlWithRegExp
-@synthesize regularExpression = _regularExpression;
+#import "MFBaseTextExtensionProtocol.h"
 
-- (NSString *) description
-{
-    return [NSString stringWithFormat:@"MFExtensionKeyboardingUIControlWithRegExp<maxLength: %@, minLength: %@, mandatory: %@, regularExpression: %@>", self.maxLength, self.minLength, self.mandatory ? @"YES" : @"NO", self.regularExpression];
-}
+@protocol MFRegexTextExtensionProtocol <MFBaseTextExtensionProtocol>
+
+#pragma mark - Properties
+
+/**
+ * @brief The regular expression pattern that a component that use an extension implementing 
+ * this protocol can manage
+ */
+@property(nonatomic , strong) NSString *pattern;
 
 @end

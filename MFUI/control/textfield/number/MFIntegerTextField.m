@@ -33,7 +33,6 @@
 -(void) initialize
 {
     [super initialize];
-    [self setAllTags];
     
     self.errorBuilderBlock = ^MFNoMatchingValueUIValidationError *(NSString *localizedFieldName, NSString *technicalFieldName){
         return [[MFInvalidIntegerValueUIValidationError alloc] initWithLocalizedFieldName:localizedFieldName technicalFieldName:technicalFieldName];

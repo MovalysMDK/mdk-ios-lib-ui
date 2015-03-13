@@ -64,7 +64,6 @@ NSString *const MF_LIVERENDERING_DEFAULT_EMAIL_VALUE = @"email@email.fr";
 -(void) initialize
 {
     [super initialize];
-    [self setAllTags];
     
     self.pattern = MFSETF_DEFAULT_EMAIL_PATTERN;
     self.urlSpecificField = MFSETF_DEFAULT_URL_TO_SEND_EMAIL;

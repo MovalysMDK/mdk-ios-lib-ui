@@ -25,6 +25,13 @@
 #import "MFUIBaseComponent.h"
 
 #import "MFConverterProtocol.h"
+#import "MFRegularExpressionTextFieldExtension.h"
+
+@interface MFRegularExpressionTextField ()
+
+@property (nonatomic, strong) MFRegularExpressionTextFieldExtension *extension;
+
+@end
 
 @implementation MFRegularExpressionTextField
 
@@ -42,18 +49,15 @@ CGFloat const MFRETFWAB_DEFAULT_ACTION_BUTTON_LEFT_MARGIN = 4;
     self.regularExpressionTextField.applySelfStyle = NO;
     self.regularExpressionTextField.sender= self.sender;
     
-    [self setAllTags];
     
     
-    self.mf = [self.applicationContext getBeanWithType:@protocol(MFExtensionKeyboardingUIControlWithRegExpProtocol)];
+    self.extension = [MFRegularExpressionTextFieldExtension new];
     
     
         self.actionButton.applySelfStyle = NO;
     [self.actionButton addTarget:self action:@selector(verify) forControlEvents:UIControlEventTouchUpInside];
     
     self.actionButton.hidden = ![self useActionButton];
-    
-    [self setAllTags];
     
     self.actionButtonWidth = MFRETFWAB_DEFAULT_ACTION_BUTTON_WIDTH;
     self.actionButtonLeftMargin = MFRETFWAB_DEFAULT_ACTION_BUTTON_LEFT_MARGIN;
@@ -113,23 +117,6 @@ CGFloat const MFRETFWAB_DEFAULT_ACTION_BUTTON_LEFT_MARGIN = 4;
     if (self.actionButton.tag == 0) {
         [self.actionButton setTag:TAG_MFREGULAREXPRESSIONTEXTFIELD_ACTIONBUTTON];
     }
-}
-
-
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    return @[
-             self.regularExpressionTextField.textField,
-             self.actionButton
-             ];
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    return @[
-             @"TextField",
-             @"Button"
-             ];
 }
 
 
@@ -202,7 +189,7 @@ CGFloat const MFRETFWAB_DEFAULT_ACTION_BUTTON_LEFT_MARGIN = 4;
     //En effet, c'est dans celui-ci que les erreurs sont ajoutées.
     [self.regularExpressionTextField.baseErrors removeAllObjects];
     
-    if(self.mf.mandatory != nil && [self.mf.mandatory integerValue] == 1 && [self getValue].length == 0){
+    if(self.mandatory != nil && [self.mandatory integerValue] == 1 && [self getValue].length == 0){
         NSError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
         [self addErrors:@[error]];
         [self.context addErrors:@[error]];
@@ -317,14 +304,6 @@ CGFloat const MFRETFWAB_DEFAULT_ACTION_BUTTON_LEFT_MARGIN = 4;
 
 #pragma mark - specific function for regex
 
-/*
- Show error message to user.
- */
--(void) showErrors
-{
-    [self.regularExpressionTextField showErrorButtons];
-    [self.regularExpressionTextField showErrorTooltips];
-}
 
 -(id<UITextFieldDelegate>) delegate
 {
@@ -340,20 +319,20 @@ CGFloat const MFRETFWAB_DEFAULT_ACTION_BUTTON_LEFT_MARGIN = 4;
 
 -(void) setKeyboardType:(UIKeyboardType) type
 {
-    [self.regularExpressionTextField setKeyboardType:type];
+    [self.regularExpressionTextField.textField setKeyboardType:type];
 }
 
-#pragma mark - Control extension
-
--(void) setMf:(id<MFExtensionKeyboardingUIControlWithRegExpProtocol>)mf
-{
-    self.regularExpressionTextField.mf = mf;
-}
-
--(id<MFExtensionKeyboardingUIControlWithRegExpProtocol>) mf
-{
-    return (id<MFExtensionKeyboardingUIControlWithRegExpProtocol>)self.regularExpressionTextField.mf;
-}
+//#pragma mark - Control extension
+//
+//-(void) setMf:(id<MFRegexTextExtensionProtocol>)mf
+//{
+//    self.regularExpressionTextField.mf = mf;
+//}
+//
+//-(id<MFRegexTextExtensionProtocol>) mf
+//{
+//    return (id<MFRegexTextExtensionProtocol>)self.regularExpressionTextField.mf;
+//}
 
 #pragma mark - Descriptor
 
@@ -372,7 +351,7 @@ CGFloat const MFRETFWAB_DEFAULT_ACTION_BUTTON_LEFT_MARGIN = 4;
     NSError *error = nil;
     // We compile the regular expression with options
     
-    NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:([NSString isNilOrEmpty:self.mf.regularExpression] ? self.pattern : self.mf.regularExpression) options:self.regularExpressionOptions error:&error];
+    NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:([NSString isNilOrEmpty:self.extension.pattern] ? self.pattern : self.extension.pattern) options:self.regularExpressionOptions error:&error];
     // We check matching
     NSUInteger numberOfMatches = 0;
     if([self getValue] != nil)
@@ -424,14 +403,7 @@ CGFloat const MFRETFWAB_DEFAULT_ACTION_BUTTON_LEFT_MARGIN = 4;
     return self.errorBuilderBlock(self.localizedFieldDisplayName, self.selfDescriptor.name);
 }
 
--(MFConfigurationKeyboardingRegularExpressionUIComponent *) loadConfiguration:(NSString *) configurationName
-{
-    MFConfigurationKeyboardingRegularExpressionUIComponent *config = (MFConfigurationKeyboardingRegularExpressionUIComponent*) [super loadConfiguration:configurationName];
-    if(config) {
-        //Nothing to do here for now
-    }
-    return config;
-}
+
 
 -(void) displayButton:(BOOL)shouldBeDisplayed {
     //On affiche ou non le bouton
@@ -497,48 +469,7 @@ CGFloat const MFRETFWAB_DEFAULT_ACTION_BUTTON_LEFT_MARGIN = 4;
 }
 
 
-#pragma mark - LiveRendering Methods
 
-
--(void)buildDesignableComponentView {
-    self.regularExpressionTextField = [[MFTextField alloc] initWithFrame:self.bounds withSender:self];
-    self.actionButton = [[MFButton  alloc] init];
-    [self addSubview:self.regularExpressionTextField];
-    [self addSubview:self.actionButton];
-    [self defineAndAddConstraints];
-}
-
--(void)initializeInspectableAttributes {
-    [super initializeInspectableAttributes];
-    self.IB_TextSize = 16;
-    self.IB_TextColor = [UIColor blackColor];
-    self.IB_primaryBackgroundColor = [UIColor clearColor];
-    self.IB_secondaryTintColor = [UIColor clearColor];
-}
-
--(void)willLayoutSubviewsNoDesignable {
-}
-
--(void)renderComponentFromInspectableAttributes {
-    self.regularExpressionTextField.textColor = self.IB_TextColor;
-    self.regularExpressionTextField.font = [UIFont fontWithName:self.regularExpressionTextField.textField.font.familyName size:self.IB_TextSize];
-    self.regularExpressionTextField.text = self.IB_uText;
-    self.actionButton.backgroundColor = [UIColor orangeColor];
-//    self.actionButton.backgroundColor = self.IB_primaryBackgroundColor;
-
-    self.regularExpressionTextField.backgroundColor = self.IB_primaryBackgroundColor;
-
-}
-
--(void)prepareForInterfaceBuilder {
-    [super prepareForInterfaceBuilder];
-    self.regularExpressionTextField.textField.frame = self.frame;
-    if(!self.IB_enableIBStyle) {
-        [self.actionButton setImage:[UIImage imageNamed:@"gps"] forState:UIControlStateNormal];
-        self.actionButton.backgroundColor = [UIColor purpleColor];
-        self.actionButton.button.backgroundColor = [UIColor orangeColor];
-    }
-}
 
 
 @end

@@ -21,7 +21,7 @@
 
 #import "MFTextField+UITextFieldForwarding.h"
 
-@implementation MFTextField (UITextFieldForwarding)
+@implementation MFUITextField (UITextFieldForwarding)
 
 @dynamic text;
 @dynamic attributedText;

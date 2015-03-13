@@ -37,7 +37,6 @@ NSString *const MF_LIVERENDERING_DEFAULT_DOUBLE_VALUE = @"18,5";
     
     [super initialize];
 #if !TARGET_INTERFACE_BUILDER
-    [self setAllTags];
     
     self.errorBuilderBlock = ^MFNoMatchingValueUIValidationError *(NSString *localizedFieldName, NSString *technicalFieldName){
         return [[MFInvalidDoubleValueUIValidationError alloc] initWithLocalizedFieldName:localizedFieldName technicalFieldName:technicalFieldName];
@@ -261,12 +260,5 @@ NSString *const MF_LIVERENDERING_DEFAULT_DOUBLE_VALUE = @"18,5";
 }
 
 #pragma mark - Live Rendering methods
-
--(void)prepareForInterfaceBuilder {
-    [super prepareForInterfaceBuilder];
-    if(!self.IB_enableIBStyle) {
-        self.regularExpressionTextField.text = MF_LIVERENDERING_DEFAULT_DOUBLE_VALUE;
-    }
-}
 
 @end

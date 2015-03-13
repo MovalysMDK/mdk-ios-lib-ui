@@ -122,6 +122,7 @@
     self.hasChanged = NO;
     self.translatesAutoresizingMaskIntoConstraints = YES;
     self.mf = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_FORM_EXTEND];
+//    self.contentView.userInteractionEnabled = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

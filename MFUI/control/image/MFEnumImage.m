@@ -133,30 +133,6 @@ NSString *const ENUMIMAGE_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 }
 
 
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    NSMutableArray *componentsToRegister = [NSMutableArray array];
-    if(self.imageView) {
-        [componentsToRegister addObject:self.imageView];
-    }
-    if(self.label) {
-        [componentsToRegister addObject:self.label];
-    }
-    return componentsToRegister;
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    NSMutableArray *suffixesToRegister = [NSMutableArray array];
-    if(self.imageView) {
-        [suffixesToRegister addObject:@"ImageView"];
-    }
-    if(self.label) {
-        [suffixesToRegister addObject:@"Label"];
-    }
-    return suffixesToRegister;
-}
-
 
 #pragma mark -  MFOrieentationChangedDelegate
 

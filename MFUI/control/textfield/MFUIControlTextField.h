@@ -26,7 +26,7 @@
 #import "MFTextField+UITextFieldForwarding.h"
 #import "MFTextView + UITextViewForwarding.h"
 #import "MFRegularExpressionTextField.h"
-#import "MFTextField.h"
+#import "MFUITextField.h"
 #import "MFTextView.h"
 
 #import "MFUIControlEmailTextField.h"

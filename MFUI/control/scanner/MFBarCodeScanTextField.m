@@ -166,25 +166,7 @@ static NSString const *NIL_DEBUG_VALUE = @"GET_NIL_VALUE";
     
 }
 
--(void)modifyComponentAfterHideErrorButtons {
-    [super modifyComponentAfterHideErrorButtons];
-    CGFloat errorButtonSize = ERROR_BUTTON_SIZE;
-    self.innerValueTextField.frame = CGRectMake(0,
-                                                0,
-                                                self.innerValueTextField.frame.size.width+errorButtonSize,
-                                                self.bounds.size.height);
-    
-}
 
--(void)modifyComponentAfterShowErrorButtons {
-    
-    [super modifyComponentAfterShowErrorButtons];
-    CGFloat errorButtonSize = ERROR_BUTTON_SIZE;
-    self.innerValueTextField.frame = CGRectMake(errorButtonSize,
-                                      0,
-                                      self.innerValueTextField.frame.size.width-errorButtonSize,
-                                      self.innerValueTextField.frame.size.height);
-}
 
 
 
@@ -206,21 +188,5 @@ static NSString const *NIL_DEBUG_VALUE = @"GET_NIL_VALUE";
     [self updateValue:_privateData];
 }
 
-
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    return @[
-             self.innerValueTextField,
-             self.innerScanButton,
-             ];
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    return @[
-             @"TextField",
-             @"Button",
-             ];
-}
 
 @end

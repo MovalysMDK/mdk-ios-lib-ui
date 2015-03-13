@@ -42,10 +42,12 @@
 
 //Tooltip
 #import "MFUIControlTooltip.h"
+#import "MFUIError.h"
 
 //Framework constants
 FOUNDATION_EXPORT NSTimeInterval const ERROR_BUTTON_ANIMATION_DURATION;
 FOUNDATION_EXPORT CGFloat const ERROR_BUTTON_SIZE;
+IB_DESIGNABLE
 
 /**
  * @class MFUIBaseComponent
@@ -59,11 +61,6 @@ FOUNDATION_EXPORT CGFloat const ERROR_BUTTON_SIZE;
 
 
 #pragma mark - Properties
-
-/**
- * Bouton indiquant une erreur
- */
-@property (nonatomic, strong) UIButton *baseErrorButton;
 
 /**
  * @brief The component that holds or has created this component
@@ -105,25 +102,7 @@ FOUNDATION_EXPORT CGFloat const ERROR_BUTTON_SIZE;
  */
 @property (nonatomic, strong) NSNumber *parentEditable;
 
-#pragma mark - Inspectable Methods
-
-/**
- * @brief The main background color of the component that implements this protocol.
- * @discussion This property is used both on InterfaceBuilder and on execution
- */
-@property (nonatomic, strong) IBInspectable UIColor *IB_primaryBackgroundColor;
-
-/**
- * @brief The main background color of the component that implements this protocol.
- * @discussion This property is used both on InterfaceBuilder and on execution
- */
-@property (nonatomic, strong) IBInspectable UIColor *IB_secondaryTintColor;
-
-/**
- * @brief This property enables or disables the override of the IB Style on the code style
- * @discussion This property is used both on InterfaceBuilder and on execution
- */
-@property (nonatomic) IBInspectable BOOL IB_enableIBStyle;
+@property (nonatomic, strong) id componentData;
 
 
 #pragma mark - Methods
@@ -142,34 +121,10 @@ FOUNDATION_EXPORT CGFloat const ERROR_BUTTON_SIZE;
 -(void) initialize;
 
 /**
- * @brief Permet de masquer le bouton baseErrorButton
+ * @brief Allows to display or not the view that indicates that the component is in an invalid state
+ * @param showErrorView A BOOL value that indicates if the component is in an invalid state or not
  */
--(void)hideErrorButtons;
-
-/**
- * @brief Permet d'afficher le bouton baseErrorButton
- */
--(void)showErrorButtons;
-
-/**
- * @brief Permet de redimensionner le composant après avoir affiché le bouton baseErrorButton
- */
--(void)modifyComponentAfterShowErrorButtons;
-
-/**
- * @brief Permet de redimensionner le composant après avoir masqué le bouton baseErrorButton
- */
--(void)modifyComponentAfterHideErrorButtons;
-
-/**
- * @brief Affiche l'info-bulle contenant la liste des erreurs
- */
--(void)showErrorTooltips;
-
-/**
- * @brief Masque l'info-bulle contenant la liste des erreurs
- */
--(void)hideErrorTooltips;
+-(void) showError:(BOOL)showErrorView;
 
 /**
  * @brief Permet de vider la liste des erreurs
@@ -182,17 +137,6 @@ FOUNDATION_EXPORT CGFloat const ERROR_BUTTON_SIZE;
  */
 -(void) addErrors:(NSArray *) errors;
 
-/**
- * @brief Action appelée lorsque l'utilisateur tape sur le bouton indiquant qu'il y a des erreurs sur le composant
- */
--(void)toggleErrorInfo;
-
-/**
- * @brief Chargement des configurations
- * @param Le nom de la configuration à charger
- * @return Une configuration
- */
--(MFConfigurationUIComponent *) loadConfiguration:(NSString *) configurationName;
 
 /**
  * @brief Cette méthode est appelée dès que la valeur du composant est modifiée. 
@@ -278,34 +222,5 @@ FOUNDATION_EXPORT CGFloat const ERROR_BUTTON_SIZE;
  * @discussion This method is optional;
  */
 -(void) didLayoutSubviewsDesignable;
-
-#pragma mark - Static methods
-
-/**
- * @brief Cette méthode réalise le merge entre les valeurs de configuration et de base du storyboard
- * @param configurationValue La valeur booléenne de base en configuration
- * @param defaultValue La valeur par défaut dans le storyboard
- * @return La valeur choisie en fonction des règles établies
- */
-+(NSNumber *) getBoolConfigurationWithValue:(NSNumber *)configurationValue andDefaultValue:(NSNumber *)defaultValue;
-
-/**
- * @brief Cette méthode réalise le merge entre les valeurs de configuration et de base du storyboard
- * @param configurationValue La valeur numérique de base en configuration
- * @param defaultValue La valeur par défaut dans le storyboard
- * @return La valeur choisie en fonction des règles établies
- */
-+(NSNumber *) getNumberConfigurationWithValue:(NSNumber *)configurationValue andDefaultValue:(NSNumber *)defaultValue;
-
-/**
- * @brief Cette méthode réalise le merge entre les valeurs de configuration et de base du storyboard
- * @param configurationValue La chaîne de caractères de base en configuration
- * @param defaultValue La valeur par défaut dans le storyboard
- * @return La valeur choisie en fonction des règles établies
- */
-+(NSString *) getStringConfigurationWithValue:(NSString *)configurationValue andDefaultValue:(NSString *)defaultValue;
-
-
-#pragma mark - Methods to delete (be sure before deleting it)
 
 @end

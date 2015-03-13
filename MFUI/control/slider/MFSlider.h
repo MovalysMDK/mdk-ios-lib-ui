@@ -23,7 +23,7 @@
 #import "MFUIConversion.h"
 
 #import "MFUIBaseComponent.h"
-#import "MFLabel.h"
+#import "MFUILabel.h"
 
 IB_DESIGNABLE
 
@@ -40,7 +40,7 @@ IB_DESIGNABLE
 /**
  * @brief The inner MFLabel component that displays the value of the slider.
  */
-@property (nonatomic, strong) MFLabel *innerSliderValueLabel;
+@property (nonatomic, strong) MFUILabel *innerSliderValueLabel;
 
 /**
  * @brief The setp of the slider

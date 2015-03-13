@@ -20,9 +20,9 @@
 //
 
 #import "MFUIBaseComponent.h"
-#import "MFButton.h"
+//#import "MFButton.h"
 #import "MFOrientationChangedDelegate.h"
-#import "MFLabel.h"
+#import "MFUILabel.h"
 #import "MFDefaultConstraintsProtocol.h"
 
 
@@ -58,7 +58,7 @@ typedef enum {
 /**
  * @brief The button displays a selected date and allow to display the picker to choose another one
  */
-@property (nonatomic, strong) MFLabel *dateButton;
+@property (nonatomic, strong) MFUILabel *dateButton;
 
 /**
  * @brief The current selected date

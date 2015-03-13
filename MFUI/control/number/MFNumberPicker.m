@@ -32,7 +32,7 @@
 /**
  * @brief The inner texfield of this component that displays the number
  */
-@property (nonatomic, strong) MFTextField *innerTextField;
+@property (nonatomic, strong) MFUITextField *innerTextField;
 
 /**
  * @brief The inner stepper used to choose the value of the stepper.
@@ -76,7 +76,7 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 -(void)initialize {
     
     //Create inner components
-    self.innerTextField = [[MFTextField alloc] initWithFrame:self.frame withSender:self];
+    self.innerTextField = [[MFUITextField alloc] initWithFrame:self.frame withSender:self];
     self.innerStepper = [[UIStepper alloc] init];
     
     //Add inner components
@@ -146,7 +146,7 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
         self.innerTextField.textField.inputAccessoryView = toolBar;
     }
     
-    [self.innerTextField setKeyboardType:UIKeyboardTypeNumberPad];
+    [self.innerTextField.textField setKeyboardType:UIKeyboardTypeNumberPad];
     
     [self.innerTextField.textField setDelegate:self];
 }
@@ -265,22 +265,6 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
     return @"NSNumber";
 }
 
--(void)modifyComponentAfterShowErrorButtons {
-    
-    [super modifyComponentAfterShowErrorButtons];
-    CGFloat errorButtonSize = ERROR_BUTTON_SIZE;
-    ((NSLayoutConstraint *)[self.savedConstraints objectForKey:@"textFieldWidthConstraint"]).constant -= errorButtonSize;
-    ((NSLayoutConstraint *)[self.savedConstraints objectForKey:@"textFieldLeftMarginConstraint"]).constant += errorButtonSize;
-    
-}
-
--(void)modifyComponentAfterHideErrorButtons {
-    [super modifyComponentAfterHideErrorButtons];
-    CGFloat errorButtonSize = ERROR_BUTTON_SIZE;
-    ((NSLayoutConstraint *)[self.savedConstraints objectForKey:@"textFieldWidthConstraint"]).constant += errorButtonSize;
-    ((NSLayoutConstraint *)[self.savedConstraints objectForKey:@"textFieldLeftMarginConstraint"]).constant -= errorButtonSize;
-    
-}
 
 #pragma mark - InnerTextField events
 

@@ -135,26 +135,17 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
     self.editable = @1;
     self.applySelfStyle = YES;
     //Ajout du bouton à la vue du composant
-    [self addSubview:self.baseErrorButton];
+//    [self addSubview:self.baseErrorButton];
     
 #endif
 }
 
 -(void) initErrors {
-    //Initialisation de la liste des erreurs et du bouton indiquant des erreurs sur le composant
     self.baseErrors = [[NSMutableArray alloc] init];
-    self.baseErrorButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
-    self.baseErrorButton.backgroundColor = [UIColor clearColor];
-    self.baseErrorButton.alpha = 0.0;
-    [self.baseErrorButton addTarget:self action:@selector(toggleErrorInfo) forControlEvents:UIControlEventTouchUpInside];
-    
 }
 
 -(void)drawRect:(CGRect)rect {
     [super drawRect:rect];
-    if(self.IB_enableIBStyle) {
-        [self renderComponentFromInspectableAttributes];
-    }
 }
 
 #pragma mark - Méthodes communes à tous les composants
@@ -164,14 +155,13 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
     _selfDescriptor = selfDescriptor;
     
 #warning TODO: This call should be removed
-    [self didFinishLoadDescriptor];
     [self didLoadFieldDescriptor:self.selfDescriptor];
     
     
 }
 
 -(void) didFinishLoadDescriptor __attribute__((deprecated("Use method didLoadFieldDescriptor: instead"))){
-    //Default : nothing
+    [self didLoadFieldDescriptor:((MFFieldDescriptor *)self.selfDescriptor)];
 }
 
 -(void) didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
@@ -183,43 +173,10 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 -(void)setIsValid:(BOOL)isValid {
     if (self.isValid != isValid) {
         _isValid = isValid;
-        if (isValid) {
-            [self hideErrorButtons];
-        } else {
-            [self showErrorButtons];
-        }
+        [self showError:!isValid];
     }
 }
 
--(void)layoutSubviews {
-    
-    if(self.IB_enableIBStyle) {
-        
-        [self willLayoutSubviewsDesignable];
-    }
-#if !TARGET_INTERFACE_BUILDER
-    
-    [self willLayoutSubviewsNoDesignable];
-    [super layoutSubviews];
-    
-#else
-#endif
-    
-    if(self.IB_enableIBStyle) {
-        [self didLayoutSubviewsDesignable];
-    }
-#if !TARGET_INTERFACE_BUILDER
-    
-    [self didLayoutSubviewsNoDesignable];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self selfCustomization];
-    });
-    
-#else
-#endif
-    
-    
-}
 
 -(NSInteger)validateWithParameters:(NSDictionary *)parameters {
     // We remove all control's errors
@@ -233,31 +190,22 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 
 
 -(id)getData {
+    
     MFCoreLogError(@"The component %@ should have implemented the method called \"getData\"",self.class);
     return nil;
 }
 
 -(void)setData:(id)data {
-    MFCoreLogError(@"The component %@ should have implemented the method called \"setData\"",self.class);
+    //Here the data has been potentially fixed by the component
+    self.componentData = data;
+    
+    //Update the component with this value
+    [self performSelector:@selector(setDisplayComponentValue:) withObject:self.componentData];
 }
 
 + (NSString *) getDataType {
     MFCoreLogError(@"The component %@ should have implemented the method called \"getDataType\"",self.class);
     return nil;
-}
-
-
-#pragma mark - Customisation CSS
-
-
--(NSArray *)customizableComponents {
-    return @[
-             ];
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    return @[
-             ];
 }
 
 -(void) selfCustomization {
@@ -274,64 +222,6 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
     @throw([NSException exceptionWithName:@"Not Implemented" reason:@"This method should be implemented in child classes" userInfo:nil]);
 }
 
-
-
-#pragma mark - Gestion et affichage des erreurs
-
--(void)showErrorButtons {
-    CGFloat const value = 1.0f;
-    if(value != self.baseErrorButton.alpha)
-    {
-        [[MFApplication getInstance] execInMainQueue:^{
-            [UIView animateWithDuration:ERROR_BUTTON_ANIMATION_DURATION animations:^{
-                [self bringSubviewToFront:self.baseErrorButton];
-                self.baseErrorButton.frame = [self getErrorButtonFrameForInvalid];
-                self.baseErrorButton.alpha = value;
-                
-            } completion:^(BOOL finished){
-                //              self.isValid = NO;
-                [self modifyComponentAfterShowErrorButtons];
-            }];
-        }];
-    }
-    
-}
-
--(void)hideErrorButtons {
-    [self hideErrorButtons:YES];
-}
-
--(void) hideErrorButtons:(BOOL)anim {
-    CGFloat const value = 0.0f;
-    if(value != self.baseErrorButton.alpha)
-    {
-        void (^bloc)(void) = ^(void) {
-            self.baseErrorButton.frame = [self getErrorButtonFrameForValid];
-            //self.errorMesgLabel.hidden = YES;
-            self.baseErrorButton.alpha = value;
-        };
-        
-        [[MFApplication getInstance] execInMainQueue:^{
-            if ( anim ) {
-                [UIView animateWithDuration:ERROR_BUTTON_ANIMATION_DURATION animations:bloc completion:^(BOOL finished) {
-                    //                    self.isValid = YES;
-                    [self hideErrorTooltips];
-                    [self modifyComponentAfterHideErrorButtons];
-                }];
-            } else {
-                bloc();
-            }
-        }];
-    }
-}
-
--(void)modifyComponentAfterShowErrorButtons {
-    //Default : nothing to do
-}
-
--(void)modifyComponentAfterHideErrorButtons {
-    //Default : nothing to do
-}
 
 
 -(CGRect)getErrorButtonFrameForInvalid {
@@ -352,49 +242,6 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
                       errorButtonSize);
 }
 
-
--(void)showErrorTooltips {
-    
-    if( (self.baseErrors != nil) &&  [self.baseErrors count] >0) {
-        if(nil == self.baseTooltipView.text){
-            
-            // We calculate the tooltip's anchor point
-            CGPoint point = [self.baseErrorButton convertPoint:CGPointMake(0.0, self.baseErrorButton.frame.size.height - 4.0) toView:self];
-            
-            // We calculate the tooltip' size
-            CGRect tooltipViewFrame = CGRectMake(-10, point.y, self.sender.frame.size.width, self.baseTooltipView.frame.size.height);
-            
-            // We create the tooltip' size
-            self.baseTooltipView = [[InvalidTooltipView alloc] init];
-            self.baseTooltipView.frame = tooltipViewFrame;
-            
-            // We build the tooltip's message : one message per line
-            int errorNumber = 0;
-            for (NSError *error in self.baseErrors) {
-                if(errorNumber > 0){
-                    self.baseTooltipView.text = [self.baseTooltipView.text stringByAppendingString: @"\n"];
-                }
-                errorNumber++;
-                self.baseTooltipView.text = [self.baseTooltipView.text stringByAppendingString: [error localizedDescription]];
-            }
-            // We add tooltip to view
-            [self addSubview:self.baseTooltipView];
-            
-            
-            //Passage de la vue au premier plan
-            UIView *currentView = self;
-            do {
-                UIView *superView = currentView.superview;
-                [superView setClipsToBounds:NO];
-                [superView bringSubviewToFront:currentView];
-                currentView = superView;
-            } while (currentView.tag != FORM_BASE_TABLEVIEW_TAG && currentView.tag != FORM_BASE_VIEW_TAG);
-            [currentView bringSubviewToFront:self.baseTooltipView];
-            [currentView bringSubviewToFront:self.baseErrorButton];
-        }
-    }
-}
-
 -(void)hideErrorTooltips {
     if (nil != self.baseTooltipView)
     {
@@ -413,7 +260,7 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 
 -(void) clearErrors:(BOOL)anim {
     [self.baseErrors removeAllObjects];
-    [self hideErrorButtons:anim];
+//    [self hideErrorButtons:anim];
     [self hideErrorTooltips];
     [self setIsValid:YES];
 }
@@ -430,68 +277,6 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
         }
         [self.baseErrors addObjectsFromArray:newErrors];
     }
-}
-
--(void)toggleErrorInfo {
-    if (self.baseTooltipView == nil) {
-        // please show error label
-        [self showErrorTooltips];
-    } else {
-        // please hide error label
-        [self hideErrorTooltips];
-    }
-}
-
--(MFConfigurationUIComponent *) loadConfiguration:(NSString *) configurationName {
-    MFConfigurationUIComponent *config = nil;
-    if(![NSString isNilOrEmpty:configurationName]){
-        MFConfigurationHandler* registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
-        config = [registry getVisualConfiguration:configurationName];
-    }
-    return config;
-}
-
-
-
-
-#pragma mark - Merge des configurations
-
-+(NSNumber *) getBoolConfigurationWithValue:(NSNumber *)configurationValue andDefaultValue:(NSNumber *)defaultValue {
-    return [self getNumberConfigurationWithValue:configurationValue andDefaultValue:defaultValue];
-}
-
-+(NSString *) getStringConfigurationWithValue:(NSString *)configurationValue andDefaultValue:(NSString *)defaultValue {
-    NSString *returnValue;
-    
-    if(defaultValue == nil)
-    {
-        defaultValue = @"";
-    }
-    returnValue = defaultValue;
-    
-    if(configurationValue != nil)
-    {
-        returnValue = configurationValue;
-    }
-    
-    return returnValue;
-}
-
-+(NSNumber *) getNumberConfigurationWithValue:(NSNumber *)configurationValue andDefaultValue:(NSNumber *)defaultValue {
-    NSNumber *returnValue;
-    
-    if(defaultValue == nil)
-    {
-        defaultValue = [[NSNumber alloc] initWithInt:0];
-    }
-    returnValue = defaultValue;
-    
-    if(configurationValue != nil)
-    {
-        returnValue = configurationValue;
-    }
-    
-    return returnValue;
 }
 
 -(void)dispatchEventOnValueChanged {
@@ -586,10 +371,7 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
     return _isValid;
 }
 
--(void)setEditable:(NSNumber *)editable {
-    _editable = editable;
-    self.userInteractionEnabled = [editable isEqual:@1];
-}
+
 
 
 
@@ -630,14 +412,19 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 }
 
 -(void)initializeInspectableAttributes {
-    self.IB_enableIBStyle = NO;
-    self.IB_primaryBackgroundColor = [UIColor clearColor];
-    self.IB_secondaryTintColor = [UIColor clearColor];
     self.backgroundColor = [UIColor clearColor];
 }
 
 -(void)prepareForInterfaceBuilder {
     self.backgroundColor = [UIColor clearColor];
+}
+
+-(void) buildDesignableComponentView {
+    
+}
+
+-(void) renderComponentFromInspectableAttributes {
+    
 }
 
 @end

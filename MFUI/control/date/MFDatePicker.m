@@ -92,7 +92,6 @@
     
     
     
-    [self setAllTags];
     
     self.isShowing = NO;
     self.isModalPickerViewDisplayed = NO;
@@ -176,43 +175,6 @@
 }
 
 
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    NSMutableArray *componentsToRegister = [NSMutableArray array];
-    if(self.dateButton) {
-        [componentsToRegister addObject:self.dateButton];
-    }
-    if(self.datePicker) {
-        [componentsToRegister addObject:self.datePicker];
-    }
-    if(self.confirmButton) {
-        [componentsToRegister addObject:self.confirmButton];
-    }
-    if(self.cancelButton) {
-        [componentsToRegister addObject:self.cancelButton];
-    }
-    return componentsToRegister;
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    NSMutableArray *suffixesToRegister = [NSMutableArray array];
-    if(self.dateButton) {
-        [suffixesToRegister addObject:@"DateButton"];
-    }
-    if(self.datePicker) {
-        [suffixesToRegister addObject:@"DatePicker"];
-    }
-    if(self.confirmButton) {
-        [suffixesToRegister addObject:@"ConfirmButton"];
-    }
-    if(self.cancelButton) {
-        [suffixesToRegister addObject:@"CancelButton"];
-    }
-    return suffixesToRegister;
-}
-
-
 #pragma mark - Specific methods for this component
 
 /**
@@ -285,7 +247,6 @@
     [self.cancelButton addTarget:self action:@selector(dismissPickerViewAndCancel) forControlEvents:UIControlEventValueChanged];
     
     //Show the actionSheet
-    [self setAllTags];
     [self.modalPickerView addSubview:self.confirmButton];
     [self.modalPickerView  addSubview:self.cancelButton];
     [self.modalPickerView  addSubview:self.datePicker];
@@ -544,70 +505,7 @@
 
 #pragma mark - LiveRendering Methods
 
--(void)buildDesignableComponentView {
-    
-    if(!self.IB_enableIBStyle) {
-        self.layer.borderColor = self.IB_secondaryTintColor.CGColor;
-        self.layer.borderWidth = self.IB_borderWidth;
-        self.layer.cornerRadius = self.IB_cornerRadius;
-        self.layer.masksToBounds = YES;
-    }
-    self.dateButton.textAlignment = NSTextAlignmentCenter;
-    
-    self.dateButton = [[MFLabel alloc] initWithFrame:self.frame];
-    self.dateButton.adjustsFontSizeToFitWidth = YES;
-    self.dateButton.translatesAutoresizingMaskIntoConstraints = NO;
-    self.dateButton.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:self.dateButton];
-    
-}
 
-
--(void)renderComponentFromInspectableAttributes {
-    self.dateButton.textAlignment = self.IB_textAlignment;
-    self.dateButton.textColor = self.tintColor;
-    self.dateButton.font = [UIFont fontWithName:self.dateButton.font.familyName size:self.IB_textSize];
-    self.layer.borderColor = self.tintColor.CGColor;
-    self.layer.borderWidth = self.IB_borderWidth;
-    self.layer.cornerRadius = self.IB_cornerRadius;
-    self.layer.masksToBounds = YES;
-    self.layer.backgroundColor = self.IB_primaryBackgroundColor.CGColor;
-    
-}
-
--(void)didLayoutSubviewsDesignable {
-    self.dateButton.textAlignment = NSTextAlignmentCenter;
-
-}
-
--(void)didLayoutSubviewsNoDesignable {
-    self.dateButton.textAlignment = NSTextAlignmentCenter;
-
-}
-
--(void)initializeInspectableAttributes {
-    [super initializeInspectableAttributes];
-    self.IB_primaryBackgroundColor = [UIColor colorWithWhite:0.95 alpha:1];
-    self.IB_secondaryTintColor = self.tintColor;
-    self.IB_uDateString = [NSDate date].description;
-    self.IB_borderWidth = 1;
-    self.IB_cornerRadius = 7;
-    self.IB_textSize = 16;
-    self.IB_textAlignment = NSTextAlignmentCenter;
-}
-
-
--(void)prepareForInterfaceBuilder {
-    [super prepareForInterfaceBuilder];
-    self.layer.borderColor = self.IB_secondaryTintColor.CGColor;
-    self.dateButton.text = self.IB_uDateString;
-    if(!self.IB_enableIBStyle) {
-        self.dateButton.textAlignment = NSTextAlignmentCenter;
-        self.dateButton.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1];
-        self.dateButton.textColor = self.tintColor;
-        self.layer.borderColor = self.tintColor.CGColor;
-    }
-}
 
 
 

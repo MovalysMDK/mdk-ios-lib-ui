@@ -64,7 +64,6 @@ NSTimer *timer =nil;
     self.isLoading = NO;
     self.userInteractionEnabled = YES;
     
-    [self setAllTags];
     [self addSubview:self.webview];
     
     NSLayoutConstraint *insideLabelConstraintLeftMargin = [NSLayoutConstraint constraintWithItem:self.webview attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:0 constant:0];
@@ -86,32 +85,6 @@ NSTimer *timer =nil;
         [self.spinner setTag:TAG_MFWEBVIEW_SPINNER];
     }
 }
-
-
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    NSMutableArray *componentsToRegister = [NSMutableArray array];
-    if(self.webview) {
-        [componentsToRegister addObject:self.webview];
-    }
-    if(self.spinner) {
-        [componentsToRegister addObject:self.spinner];
-    }
-    return componentsToRegister;
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    NSMutableArray *suffixesToRegister = [NSMutableArray array];
-    if(self.webview) {
-        [suffixesToRegister addObject:@"WebView"];
-    }
-    if(self.spinner) {
-        [suffixesToRegister addObject:@"Spinner"];
-    }
-    return suffixesToRegister;
-}
-
 
 #pragma mark - Méthodes de gestion du label
 

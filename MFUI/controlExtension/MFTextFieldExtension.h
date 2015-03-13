@@ -13,16 +13,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFExtensionUIControlProtocol.h
-//  MFUI
-//
-//
 
 
+#import "MFBaseTextExtensionProtocol.h"
 
-@protocol MFExtensionUIControlProtocol <NSObject>
+FOUNDATION_EXPORT const NSString *PARAMETER_TEXTFIELD_MAXLENGTH_KEY;
+FOUNDATION_EXPORT const NSString *PARAMETER_TEXTFIELD_MINLENGTH_KEY;
 
-@property(nonatomic, strong) NSNumber *mandatory;
+/**
+ * @class MFTextFieldExtension
+ * @brief This class represents the parameters the framework can manage on a MFUITextField
+ */
+@interface MFTextFieldExtension : NSObject<MFBaseTextExtensionProtocol>
 
 @end

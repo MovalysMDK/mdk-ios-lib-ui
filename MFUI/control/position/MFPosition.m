@@ -82,7 +82,6 @@
     [self.mapButton addTarget:self action:@selector(mapButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.mapButton.applySelfStyle = NO;
     
-    [self setAllTags];
     [self addSubview:self.latitude];
     [self addSubview:self.longitude];
     [self addSubview:self.gpsButton];
@@ -152,28 +151,6 @@
         [self.mapButton setTag:TAG_MFPOSITION_MAPBUTTON];
     }
 }
-
-
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    return @[
-             self.latitude.regularExpressionTextField.textField,
-             self.longitude.regularExpressionTextField.textField,
-             self.gpsButton,
-             self.mapButton
-             ];
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    return @[
-             @"LatitudeTextField",
-             @"LongitudeTextField",
-             @"GpsButton",
-             @"MapButton"
-             ];
-}
-
 
 
 -(id)initWithCoder:(NSCoder *)aDecoder {

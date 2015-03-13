@@ -20,7 +20,7 @@
 //
 
 #import "MFUIControlExtension.h"
-#import "MFUIError.h"
+//#import "MFUIError.h"
 #import "MFUIControlButton.h"
 
 #import "MFTextField+UITextFieldForwarding.h"
@@ -59,7 +59,7 @@ extern CGFloat const MFRETFWAB_DEFAULT_ACTION_BUTTON_LEFT_MARGIN;
 /**
  Regular expression text field where user keyboards data.
  */
-@property(nonatomic, strong) MFTextField* regularExpressionTextField;
+@property(nonatomic, strong) MFUITextField* regularExpressionTextField;
 
 /**
  Button where user taps to launch an action.

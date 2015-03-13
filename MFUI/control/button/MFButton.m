@@ -1,22 +1,9 @@
-/**
- * Copyright (C) 2010 Sopra (support_movalys@sopra.com)
- *
- * This file is part of Movalys MDK.
- * Movalys MDK is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * Movalys MDK is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- * You should have received a copy of the GNU Lesser General Public License
- * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
- */
     //
 //  MFButton.m
 //  MFUI
 //
+//  Created by Sébastien Pacreau on 10/06/13.
+//  Copyright (c) 2013 Sopra Consulting. All rights reserved.
 //
 
 #import <MFCore/MFCoreBean.h>
@@ -50,15 +37,24 @@
 
 
 -(void) initialize {
-    
-    [super initialize];
-#if !TARGET_INTERFACE_BUILDER
-
     //Création du bouton et ajout à la vue
+    self.button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.button.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.translatesAutoresizingMaskIntoConstraints = NO;
+    
     self.button.userInteractionEnabled = YES;
     self.userInteractionEnabled = YES;
-    [self setAllTags];
+    
+    [self addSubview:self.button];
+    
+    
+    NSLayoutConstraint *insideButtonConstraintLeftMargin = [NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
+    NSLayoutConstraint *insideButtonConstraintTopMargin = [NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+    NSLayoutConstraint *insideButtonConstraintRight = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.button attribute:NSLayoutAttributeRight multiplier:1 constant:0];
+    NSLayoutConstraint *insideButtonConstraintBottom = [NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    
+    [self addConstraints:@[insideButtonConstraintLeftMargin, insideButtonConstraintTopMargin, insideButtonConstraintBottom, insideButtonConstraintRight]];
+    
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if([self respondsToSelector:@selector(mf)]) {
@@ -70,8 +66,7 @@
     });
     
     [self.button addTarget:self action:@selector(launchAction) forControlEvents:UIControlEventTouchDown];
-#else
-#endif
+    
 }
 
 
@@ -83,24 +78,11 @@
 }
 
 
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    return @[
-             self.button
-             ];
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    return @[
-             @"Button"
-             ];
-}
 
 #pragma mark - Fast Forwarding UIButton methods
-//-(id)forwardingTargetForSelector:(SEL)sel {
-//    return self.button;
-//}
+-(id)forwardingTargetForSelector:(SEL)sel {
+    return self.button;
+}
 
 
 #pragma mark - KVC magic forwarding
@@ -156,34 +138,5 @@
 -(void)setComponentAlignment:(NSNumber *)alignValue {
     [self.button.titleLabel setTextAlignment:[alignValue intValue]];
 }
-
-#pragma mark - LiveRendering Methods
-
--(void)buildDesignableComponentView {
-    self.button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self addSubview:self.button];
-    [self addInnerButtonConstraints];
-}
-
--(void) addInnerButtonConstraints {
-    NSLayoutConstraint *insideButtonConstraintLeftMargin = [NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
-    NSLayoutConstraint *insideButtonConstraintTopMargin = [NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    NSLayoutConstraint *insideButtonConstraintRight = [NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0];
-    NSLayoutConstraint *insideButtonConstraintBottom = [NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    
-    [self addConstraints:@[insideButtonConstraintLeftMargin, insideButtonConstraintTopMargin, insideButtonConstraintBottom, insideButtonConstraintRight]];
-}
-
--(void)renderComponentFromInspectableAttributes {
-    self.button.backgroundColor = [UIColor greenColor];
-}
-
--(void)prepareForInterfaceBuilder {
-    [super prepareForInterfaceBuilder];
-    self.button.backgroundColor = [UIColor redColor];
-}
-
-
-
 
 @end

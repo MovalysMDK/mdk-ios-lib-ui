@@ -22,7 +22,6 @@
 #import "MFSwitch.h"
 
 @implementation MFSwitch
-@dynamic IB_secondaryTintColor;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -39,7 +38,6 @@
     
 #if !TARGET_INTERFACE_BUILDER
     [self.innerSwitch addTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
-    [self setAllTags];
 #else
 #endif
     
@@ -56,21 +54,6 @@
     if (self.innerSwitch.tag == 0) {
         [self.innerSwitch setTag:TAG_MFSWITCH_SWITCHCOMPONENT];
     }
-}
-
-
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    return @[
-             self.innerSwitch,
-             ];
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    return @[
-             @"Switch",
-             ];
 }
 
 
@@ -116,42 +99,5 @@
 
 #pragma mark - LiveRendering methods
 
--(void)buildDesignableComponentView {
-    self.innerSwitch = [[UISwitch alloc] init];
-    [self innerSwitchConstraints];
-    [self addSubview:self.innerSwitch];
-}
 
--(void)renderComponentFromInspectableAttributes {
-    self.innerSwitch.tintColor = self.IB_secondaryTintColor;
-    self.backgroundColor = self.IB_primaryBackgroundColor;
-    self.innerSwitch.onTintColor = self.IB_onTintColor;
-}
-
--(void)didLayoutSubviewsDesignable {
-    self.innerSwitch.tintColor = self.IB_secondaryTintColor;
-    self.backgroundColor = self.IB_primaryBackgroundColor;
-}
-
--(void)initializeInspectableAttributes {
-    [super initializeInspectableAttributes];
-    self.IB_secondaryTintColor = self.tintColor;
-    self.IB_onTintColor = self.tintColor;
-    self.IB_uState = NO;}
-
--(void)prepareForInterfaceBuilder {
-    [super prepareForInterfaceBuilder];
-    if(self.IB_enableIBStyle) {
-        [self.innerSwitch setOn:self.IB_uState];
-        self.innerSwitch.tintColor = self.IB_secondaryTintColor;
-    }
-}
-
--(void) innerSwitchConstraints {
-    NSLayoutConstraint *innerSwitchTopConstraint = [NSLayoutConstraint constraintWithItem:self.innerSwitch attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    
-    NSLayoutConstraint *innerSwitchXConstraint = [NSLayoutConstraint constraintWithItem:self.innerSwitch attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
-    
-    [self addConstraints:@[innerSwitchTopConstraint, innerSwitchXConstraint]];
-}
 @end

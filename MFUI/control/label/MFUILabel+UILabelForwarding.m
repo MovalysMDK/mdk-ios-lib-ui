@@ -14,14 +14,40 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 //
-//  MFExtensionKeyboardingUIControl.h
+//  MFUILabel+UILabelForwarding.m
 //  MFUI
 //
 //
 
+#import "MFUILabel+UILabelForwarding.h"
 
-#import "MFExtensionKeyboardingUIControlProtocol.h"
+@implementation MFUILabel (UILabelForwarding)
 
-@interface MFExtensionKeyboardingUIControl : NSObject<MFExtensionKeyboardingUIControlProtocol>
+
+@dynamic text;
+@dynamic attributedText;
+@dynamic textColor;
+@dynamic backgroundColor;
+@dynamic font;
+@dynamic textAlignment;
+@dynamic borderStyle;
+@dynamic placeholder;
+@dynamic attributedPlaceholder;
+@dynamic clearsOnBeginEditing;
+@dynamic adjustsFontSizeToFitWidth;
+@dynamic minimumFontSize;
+@dynamic delegate;
+@dynamic background;
+@dynamic disabledBackground;
+@dynamic editing;
+@dynamic allowsEditingTextAttributes;
+@dynamic typingAttributes;
+@dynamic leftView;
+@dynamic rightView;
+@dynamic numberOfLines;
+@dynamic lineBreakMode;
+@dynamic shadowColor;
+@dynamic shadowOffset;
+
 
 @end

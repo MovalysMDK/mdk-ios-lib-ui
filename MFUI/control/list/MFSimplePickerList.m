@@ -84,7 +84,6 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     
     self.pickerButton = [[MFButton alloc] init];
     self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    [self setAllTags];
     [self addSubview:self.pickerButton];
     
     self.isShowing = NO;
@@ -157,43 +156,6 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 }
 
 
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    NSMutableArray *componentsToRegister = [NSMutableArray array];
-    if(self.pickerButton) {
-        [componentsToRegister addObject:self.pickerButton];
-    }
-    if(self.pickerView) {
-        [componentsToRegister addObject:self.pickerView];
-    }
-    if(self.confirmButton) {
-        [componentsToRegister addObject:self.confirmButton];
-    }
-    if(self.cancelButton) {
-        [componentsToRegister addObject:self.cancelButton];
-    }
-    return componentsToRegister;
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    NSMutableArray *suffixesToRegister = [NSMutableArray array];
-    if(self.pickerButton) {
-        [suffixesToRegister addObject:@"PickerButton"];
-    }
-    if(self.pickerView) {
-        [suffixesToRegister addObject:@"PickerView"];
-    }
-    if(self.confirmButton) {
-        [suffixesToRegister addObject:@"ConfirmButton"];
-    }
-    if(self.cancelButton) {
-        [suffixesToRegister addObject:@"CancelButton"];
-    }
-    return suffixesToRegister;
-}
-
-
 #pragma mark - Specific methods for this component
 
 /**
@@ -253,7 +215,6 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     [self.cancelButton addTarget:self action:@selector(dismissPickerViewAndCancel) forControlEvents:UIControlEventValueChanged];
     
     //Show the actionSheet
-    [self setAllTags];
     [self.modalPickerView addSubview:self.confirmButton];
     [self.modalPickerView addSubview:self.cancelButton];
     [self.modalPickerView addSubview:self.pickerView];

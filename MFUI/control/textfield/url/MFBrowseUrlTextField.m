@@ -60,7 +60,6 @@ NSString *const MFBUTF_DEFAULT_URL_TO_BROWSE_URL = @"%@";
 -(void) initialize
 {
     [super initialize];
-    [self setAllTags];
     
     self.applicationContext = [MFApplication getInstance];
     self.urlSpecificField = MFBUTF_DEFAULT_URL_TO_BROWSE_URL;

@@ -13,26 +13,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFExtensionKeyboardingUIControl.m
-//  MFUI
-//
-//
 
-#import "MFExtensionKeyboardingUIControl.h"
+#import "MFTextFieldExtension.h"
+#import "MFRegexTextExtensionProtocol.h"
 
-@implementation MFExtensionKeyboardingUIControl
-@synthesize maxLength = _maxLength;
-@synthesize minLength = _minLength;
-@synthesize mandatory = _mandatory;
+FOUNDATION_EXPORT const NSString *PARAMETER_REGULAREXPRESSIONTEXTFIELD_PATTERN_KEY;
 
-- (NSString *) description
-{
-    return [NSString stringWithFormat:@"MFExtensionKeyboardingUIControl<maxLength: %@, minLength: %@, mandatory: %@>", self.maxLength, self.minLength, self.mandatory ? @"YES" : @"NO"];
-}
-
--(void) setValue:(id)value forUndefinedKey:(NSString *)key {
-        [super setValue:value forUndefinedKey:key];
-}
+/**
+ * @class MFRegularExpressionTextFieldExtension
+ * @brief This class represents the parameters the framework can manage on a MFUIRegularExpressionTextField
+ */
+@interface MFRegularExpressionTextFieldExtension : MFTextFieldExtension<MFRegexTextExtensionProtocol>
 
 @end

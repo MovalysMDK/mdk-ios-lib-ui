@@ -35,7 +35,6 @@ NSString *const MFCPNTF_DEFAULT_URL_TO_CALL_PHONE_NUMBER = @"tel://%@";
 -(void) initialize
 {
     [super initialize];
-    [self setAllTags];
     
     [self displayButton:[[[UIDevice currentDevice] model] isEqualToString:@"iPhone"]];
     self.urlSpecificField = MFCPNTF_DEFAULT_URL_TO_CALL_PHONE_NUMBER;

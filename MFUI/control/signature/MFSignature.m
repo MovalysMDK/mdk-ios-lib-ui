@@ -164,7 +164,6 @@
     [self setNeedsDisplay];
 }
 
-
 #pragma mark - Tags for automatic testing
 -(void) setAllTags {
     if (self.signature.tag == 0) {
@@ -181,42 +180,6 @@
     }
 }
 
-
-#pragma mark - CSS customization
-
--(NSArray *)customizableComponents {
-    NSMutableArray *componentsToRegister = [NSMutableArray array];
-    if(self.signature) {
-        [componentsToRegister addObject:self.signature];
-    }
-    if(self.confirmButton) {
-        [componentsToRegister addObject:self.confirmButton];
-    }
-    if(self.cancelButton) {
-        [componentsToRegister addObject:self.cancelButton];
-    }
-    if(self.clearButton) {
-        [componentsToRegister addObject:self.clearButton];
-    }
-    return componentsToRegister;
-}
-
--(NSArray *)suffixForCustomizableComponents {
-    NSMutableArray *suffixesToRegister = [NSMutableArray array];
-    if(self.signature) {
-        [suffixesToRegister addObject:@"Signature"];
-    }
-    if(self.confirmButton) {
-        [suffixesToRegister addObject:@"ConfirmButton"];
-    }
-    if(self.cancelButton) {
-        [suffixesToRegister addObject:@"CancelButton"];
-    }
-    if(self.clearButton) {
-        [suffixesToRegister addObject:@"ClearButton"];
-    }
-    return suffixesToRegister;
-}
 
 
 - (void) displayModalSignatureDrawingView {
@@ -269,7 +232,6 @@
     
     
     // Fill in the modal view
-    [self setAllTags];
     [self.modalSignatureDrawingView addSubview:self.signature];
     [self.modalSignatureDrawingView addSubview:self.cancelButton];
     [self.modalSignatureDrawingView addSubview:self.clearButton];

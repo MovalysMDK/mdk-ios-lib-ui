@@ -14,14 +14,14 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 //
-//  MFLabel+UILabelForwarding.h
+//  MFUILabel+UILabelForwarding.h
 //  MFUI
 //
 //
 
-#import "MFLabel.h"
+#import "MFUILabel.h"
 
-@interface MFLabel (UILabelForwarding)
+@interface MFUILabel (UILabelForwarding)
 
 // forwarded properties to inner UITextField
 @property(nonatomic,copy)   NSString                                            *text;

@@ -19,7 +19,7 @@
 //
 //
 
-#import "MFCoreLog.h"
+#import <MFCore/MFCoreLog.h>
 
 #define MF_UI_LOG_CONTEXT 2
 

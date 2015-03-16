@@ -19,7 +19,7 @@
 //
 //
 
-#import "MFCoreAction.h"
+#import <MFCore/MFCoreAction.h>
 
 @interface MFEmailLogsAction : NSObject<MFActionProtocol>
 

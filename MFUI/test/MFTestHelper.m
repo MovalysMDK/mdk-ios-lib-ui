@@ -24,7 +24,7 @@
 #import "MFBeanLoader.h"
 #import "MFActionNotFound.h"
 #import "MFContextProtocol.h"
-#import "MFCoreDataHelper.h"
+#import <MFCore/MFCoreCoredata.h>
 #import "MFConfigurationHandler.h"
 #import "MFBeansKeys.h"
 #import "MFFwkProperty.h"
@@ -33,7 +33,6 @@
 #import "MFProjectCsvLoaderRunInit.h"
 #import "MFUserCsvLoaderRunInit.h"
 #import "MFStarter.h"
-#import "MFCoreDataRunInit.h"
 
 @implementation MFTestHelper
 

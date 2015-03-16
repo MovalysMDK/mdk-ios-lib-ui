@@ -20,7 +20,7 @@
 //
 
 #import "MFHelperFile.h"
-#import "MFCoreLogging.h"
+#import <MFCore/MFCoreLog.h>
 #import "MFURL.h"
 
 @implementation MFHelperFile

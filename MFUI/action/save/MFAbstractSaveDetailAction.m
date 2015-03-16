@@ -24,9 +24,9 @@
 #import "MFContextProtocol.h"
 #import "MFActionProgressMessageDispatcher.h"
 
-#import "MFCoreDataHelper.h"
-#import "MFBeanLoader.h"
 #import <MFCore/MFCoreBean.h>
+#import <MFCore/MFCoreCoredata.h>
+#import "MFBeanLoader.h"
 #import "MFLocalizedString.h"
 
 @implementation MFAbstractSaveDetailAction

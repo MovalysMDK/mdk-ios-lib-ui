@@ -20,7 +20,7 @@
 //
 
 #import "MFUIValidationError.h"
-#import "MFCoreLogging.h"
+#import <MFCore/MFCoreCoredata.h>
 #import "MFApplication.h"
 
 @interface MFUIValidationError ()

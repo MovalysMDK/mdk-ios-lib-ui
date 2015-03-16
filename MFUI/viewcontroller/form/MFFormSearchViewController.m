@@ -24,7 +24,7 @@
  */
 
 #import "MFFormSearchViewController.h"
-#import "MFLocalizedString.h"
+#import <MFCore/MFCoreI18n.h>
 #import "MFUILogging.h"
 #import "MFUILoggingHelper.h"
 #import <MFCore/MFCoreApplication.h>

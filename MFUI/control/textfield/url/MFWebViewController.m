@@ -24,7 +24,7 @@
 
 
 #import "MFWebViewController.h"
-#import "MFLocalizedString.h"
+#import <MFCore/MFCoreI18n.h>
 
 @implementation MFWebViewController
 

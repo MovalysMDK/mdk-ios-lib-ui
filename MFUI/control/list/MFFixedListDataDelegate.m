@@ -35,7 +35,7 @@
 #import "MFCellAbstract.h"
 
 //Utils
-#import "MFLocalizedString.h"
+#import <MFCore/MFCoreI18n.h>
 #import "MFHelperIndexPath.h"
 #import "MFTypeValueProcessingProtocol.h"
 #import "MFException.h"

@@ -54,7 +54,7 @@
 #import "MFBaseBindingForm.h"
 
 //Utils
-#import "MFLocalizedString.h"
+#import <MFCore/MFCoreI18n.h>
 #import "MFConstants.h"
 #import "MFTypeValueProcessingProtocol.h"
 

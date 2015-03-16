@@ -33,7 +33,7 @@
 #import <MFCore/MFCoreApplication.h>
 #import "MFUIBaseViewModel.h"
 #import "MFChildSaveProtocol.h"
-#import "MFLocalizedString.h"
+#import <MFCore/MFCoreI18n.h>
 #import "MFFormViewController.h"
 #import "MFException.h"
 

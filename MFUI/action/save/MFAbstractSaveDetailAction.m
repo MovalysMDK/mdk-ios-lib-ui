@@ -26,8 +26,7 @@
 
 #import <MFCore/MFCoreBean.h>
 #import <MFCore/MFCoreCoredata.h>
-#import "MFBeanLoader.h"
-#import "MFLocalizedString.h"
+#import <MFCore/MFCoreI18n.h>
 
 @implementation MFAbstractSaveDetailAction
 

@@ -25,7 +25,7 @@
 #import "MFUIApplication.h"
 #import <ViewDeck/IIViewDeckController.h>
 #import <MBProgressHUD/MBProgressHUD.h>
-#import "MFLocalizedString.h"
+#import <MFCore/MFCoreI18n.h>
 #import "MFButton.h"
 #import "MFMultiPanelViewController.h"
 

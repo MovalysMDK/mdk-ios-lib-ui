@@ -21,18 +21,13 @@
 
 #import "MFTestHelper.h"
 
-#import "MFBeanLoader.h"
-#import "MFActionNotFound.h"
-#import "MFContextProtocol.h"
+#import <MFCore/MFCoreBean.h>
+#import <MFCore/MFCoreContext.h>
 #import <MFCore/MFCoreCoredata.h>
-#import "MFConfigurationHandler.h"
-#import "MFBeansKeys.h"
-#import "MFFwkProperty.h"
-#import "MFActionProtocol.h"
-#import "MFFwkCsvLoaderRunInit.h"
-#import "MFProjectCsvLoaderRunInit.h"
-#import "MFUserCsvLoaderRunInit.h"
-#import "MFStarter.h"
+#import <MFCore/MFCoreConfig.h>
+#import <MFCore/MFCoreAction.h>
+#import <MFCore/MFCoreCsvloader.h>
+#import <MFCore/MFCoreApplication.h>
 
 @implementation MFTestHelper
 

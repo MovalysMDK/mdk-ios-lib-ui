@@ -20,7 +20,7 @@
 //
 
 
-#import "MFContextProtocol.h"
+#import <MFCore/MFCoreContext.h>
 
 @interface MFTestHelper : NSObject
 

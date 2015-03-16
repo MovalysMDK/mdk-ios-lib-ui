@@ -30,7 +30,7 @@
 #import "MFFormConstants.h"
 #import "MFWorkspaceViewController.h"
 #import "MFWorkspaceView.h"
-#import "MFApplication.h"
+#import <MFCore/MFCoreApplication.h>
 #import "MFUIBaseViewModel.h"
 #import "MFChildSaveProtocol.h"
 #import "MFLocalizedString.h"

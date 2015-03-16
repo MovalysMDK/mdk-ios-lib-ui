@@ -21,7 +21,7 @@
 
 #import "MFUIValidationError.h"
 #import <MFCore/MFCoreCoredata.h>
-#import "MFApplication.h"
+#import <MFCore/MFCoreApplication.h>
 
 @interface MFUIValidationError ()
 

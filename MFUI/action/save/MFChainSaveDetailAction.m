@@ -22,7 +22,7 @@
 #import "MFChainSaveDetailAction.h"
 #import "MFAbstractSaveDetailAction.h"
 #import "MFChainSaveActionDetailParameter.h"
-#import "MFApplication.h"
+#import <MFCore/MFCoreApplication.h>
 #import "MFLocalizedString.h"
 
 @implementation MFChainSaveDetailAction

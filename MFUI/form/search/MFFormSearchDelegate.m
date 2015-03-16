@@ -24,7 +24,7 @@
  */
 
 #import "MFFormSearchDelegate.h"
-#import "MFApplication.h"
+#import <MFCore/MFCoreApplication.h>
 #import "MFFormSearchViewController.h"
 #import "MFUILogging.h"
 #import "MFContextProtocol.h"

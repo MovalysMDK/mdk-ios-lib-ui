@@ -27,7 +27,7 @@
 #import "MFViewControllerDelegate.h"
 #import "MFButton.h"
 #import "MFUILogging.h"
-#import "MFApplication.h"
+#import <MFCore/MFCoreApplication.h>
 #import "UIViewController+MFViewControllerUtils.h"
 #import "MFMenuViewController.h"
 #import "MFWorkspaceViewController.h"

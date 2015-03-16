@@ -23,7 +23,7 @@
 #import <MFCore/MFCoreConfig.h>
 
 #import "MFFloatConverter.h"
-#import "MFApplication.h"
+#import <MFCore/MFCoreApplication.h>
 
 
 

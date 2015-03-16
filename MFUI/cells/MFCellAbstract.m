@@ -24,10 +24,9 @@
 #import <MFCore/MFCoreError.h>
 #import <MFCore/MFCoreConfig.h>
 #import <MFCore/MFCoreBean.h>
-#import <MFCore/MFApplication.h>
 
 #import "MFCellAbstract.h"
-#import "MFApplication.h"
+#import <MFCore/MFCoreApplication.h>
 #import "MFUIBaseComponent.h"
 #import "MFException.h"
 #import "MFVersionManager.h"

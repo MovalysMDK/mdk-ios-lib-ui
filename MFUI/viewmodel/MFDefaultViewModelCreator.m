@@ -19,7 +19,7 @@
 //
 //
 
-#import "MFApplication.h"
+#import <MFCore/MFCoreApplication.h>
 #import "MFDefaultViewModelCreator.h"
 #import "MFUIBaseListViewModel.h"
 #import "MFUIBaseViewModel.h"

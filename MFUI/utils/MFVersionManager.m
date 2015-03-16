@@ -20,7 +20,7 @@
 //
 
 #import "MFVersionManager.h"
-#import "MFApplication.h"
+#import <MFCore/MFCoreApplication.h>
 
 @implementation MFVersionManager
 

@@ -27,7 +27,7 @@
 #import "MFLocalizedString.h"
 #import "MFUILogging.h"
 #import "MFUILoggingHelper.h"
-#import "MFApplication.h"
+#import <MFCore/MFCoreApplication.h>
 #import "MFUIBaseViewModel.h"
 #import "MFAbstractDataLoader.h"
 #import "MFDataLoaderActionParameter.h"

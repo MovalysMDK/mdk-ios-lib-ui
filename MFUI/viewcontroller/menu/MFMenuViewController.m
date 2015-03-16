@@ -21,10 +21,9 @@
 //
 
 
-#import "MFApplication.h"
+#import <MFCore/MFCoreApplication.h>
 #import <MFCore/MFCoreI18n.h>
 #import <MFCore/MFCoreLogging.h>
-#import "MFCoreLogging.h"
 #import "UIViewController+MFViewControllerUtils.h"
 #import "MFViewController.h"
 #import "MFTransitionController.h"

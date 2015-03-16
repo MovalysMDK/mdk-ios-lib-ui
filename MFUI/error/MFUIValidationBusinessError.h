@@ -19,7 +19,7 @@
 //
 //
 
-#import "MFBusinessError.h"
+#import <MFCore/MFCoreError.h>
 
 /**
  * Business error associated with a specific field.

@@ -19,7 +19,7 @@
 //
 //
 
-#import "MFTechnicalError.h"
+#import <MFCore/MFCoreError.h>
 
 /**
  * Technical error thrown from UI layer.

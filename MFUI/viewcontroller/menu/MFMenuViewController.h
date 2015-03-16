@@ -19,7 +19,7 @@
 //
 //
 
-#import "IIViewDeckController.h"
+#import <ViewDeck/IIViewDeckController.h>
 #import "MFViewControllerProtocol.h"
 #import "MFMenuViewControllerProtocol.h"
 

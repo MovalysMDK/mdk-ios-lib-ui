@@ -22,7 +22,7 @@
 #import "MFUILogging.h"
 
 #import "MFWebView.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "MFCellAbstract.h"
 #import "math.h"
 

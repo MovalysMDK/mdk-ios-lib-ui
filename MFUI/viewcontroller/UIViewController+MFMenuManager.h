@@ -20,7 +20,7 @@
 //
 
 
-#import "IIViewDeckController.h"
+#import <ViewDeck/IIViewDeckController.h>
 #import "MFTransitionController.h"
 
 @interface UIViewController (MFMenuManager)

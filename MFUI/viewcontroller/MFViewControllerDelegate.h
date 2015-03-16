@@ -19,8 +19,7 @@
 //
 //
 
-#import "MBProgressHUD.h"
-
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "MFViewControllerProtocol.h"
 
 @interface MFViewControllerDelegate : NSObject<MFViewControllerProtocol>

@@ -26,7 +26,7 @@
 
 #import "MFSimpleSplashViewController.h"
 #import "MFTransitionController.h"
-#import "IIViewDeckController.h"
+#import <ViewDeck/IIViewDeckController.h>
 #import "MFViewController.h"
 
 @interface MFSimpleSplashViewController ()

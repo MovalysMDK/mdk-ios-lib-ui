@@ -20,7 +20,7 @@
 //
 
 #import "MFDeckViewGestureDelegate.h"
-#import "IIViewDeckController.h"
+#import <ViewDeck/IIViewDeckController.h>
 
 @implementation MFDeckViewGestureDelegate
 

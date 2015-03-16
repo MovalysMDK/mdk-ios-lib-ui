@@ -19,7 +19,7 @@
 //
 //
 
-#import "IIViewDeckController.h"
+#import <ViewDeck/IIViewDeckController.h>
 #import "MFDeckViewGestureDelegate.h"
 
 @interface MFDeckViewController : IIViewDeckController <UIGestureRecognizerDelegate>

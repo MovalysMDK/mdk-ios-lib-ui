@@ -52,7 +52,7 @@
 #import "MFFormBaseViewController.h"
 
 //UI
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 //FIXME : A supprimer ?
 const static int TABLEVIEW_RESIZE_OFFSET = 0;

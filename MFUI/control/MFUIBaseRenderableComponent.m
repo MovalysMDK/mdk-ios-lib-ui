@@ -69,6 +69,8 @@
             self.internalView = [[[NSBundle bundleForClass:bundleClass] loadNibNamed:[self retrieveCustomXIB] owner:nil options:nil] firstObject];
             self.errorView = [[[NSBundle bundleForClass:errorBundleClass] loadNibNamed:[self retrieveCustomErrorXIB] owner:nil options:nil] firstObject];
             self.errorView.userInteractionEnabled = YES;
+            [self.internalView performSelector:@selector(setExternalView:) withObject:self];
+            
         }
         @catch(NSException *e) {
             NSLog(@"%@", e.description);
@@ -82,6 +84,9 @@
         [self defineInternalViewConstraints];
         
         [(id<MFInternalComponent>)self.internalView forwardOutlets:self];
+        if([self respondsToSelector:@selector(didInitializeOutlets)]) {
+            [self performSelector:@selector(didInitializeOutlets)];
+        }
         [self forwardBaseRenderableProperties];
         [self forwardSpecificRenderableProperties];
         [self setDisplayComponentValue:self.componentData];
@@ -199,6 +204,7 @@
     return @[
              @"MFUILabel",
              @"MFUIErrorView",
+             @"MFUITextField",
              ];
 }
 
@@ -240,6 +246,7 @@
 -(void)forwardSpecificRenderableProperties {
     //Exception
 }
+
 
 /**
  * @brief Forwards the tjhe base renderable properties on the intenal view
@@ -362,7 +369,11 @@
         clazz = [clazz superclass];
     }
     
+    NSArray *forbiddenCandidate = @[@"sender", @"mfParent", @"scrollingTableView", @"internalView", @"externalView"];
     for(NSString *candidatePropertyForForwarding in propertyArray) {
+        if([forbiddenCandidate containsObject:candidatePropertyForForwarding]) {
+            continue;
+        }
         NSString *getterSelectorAsString = [NSString stringWithFormat:@"%@", candidatePropertyForForwarding];
         
         NSString *capitalizedSentence = [getterSelectorAsString stringByReplacingCharactersInRange:NSMakeRange(0,1)
@@ -407,13 +418,23 @@
                              }];
         }
         else {
+            [self.tooltipView hideAnimated:YES];
             [self.errorView removeFromSuperview];
-            [self removeConstraints:@[self.errorWidthConstraint, self.errorLeftConstraint, self.errorHeightConstraint, self.errorCenterYConstraint]];
+            if(self.errorWidthConstraint) [self removeConstraint:self.errorWidthConstraint];
+            if(self.errorLeftConstraint) [self removeConstraint:self.errorLeftConstraint];
+            if(self.errorHeightConstraint) [self removeConstraint:self.errorHeightConstraint];
+            if(self.errorCenterYConstraint) [self removeConstraint:self.errorCenterYConstraint];
+            
             self.errorCenterYConstraint = nil;
             self.errorHeightConstraint = nil;
             self.errorLeftConstraint = nil;
             self.errorWidthConstraint = nil;
             self.leftConstraint.constant  = 0;
+            [UIView animateWithDuration:0.25
+                             animations:^{
+                                 [self layoutIfNeeded];
+                             }
+             ];
         }
         [self bringSubviewToFront:self.errorView];
     }
@@ -462,5 +483,18 @@
     return [UIColor colorWithRed:0.8 green:0.1 blue:0.1 alpha:1];
 }
 
+-(void)setForm:(id<MFComponentChangedListenerProtocol>)form {
+    [super setForm:form];
+    if([self conformsToProtocol:@protocol(MFExternalComponent)]) {
+        [self.internalView setForm:form];
+    }
+}
+
+-(void)setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor {
+    [super setSelfDescriptor:selfDescriptor];
+    if([self conformsToProtocol:@protocol(MFExternalComponent)]) {
+        [self.internalView setSelfDescriptor:selfDescriptor];
+    }
+}
 
 @end

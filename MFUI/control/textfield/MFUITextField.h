@@ -40,7 +40,7 @@ IB_DESIGNABLE
 /**
  Underlying component.
  */
-@property(nonatomic, strong) UITextField *textField;
+@property(nonatomic, weak) IBOutlet UITextField *textField;
 
 /**
  * @brief the delegate that manages orientation changes

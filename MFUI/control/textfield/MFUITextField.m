@@ -101,13 +101,17 @@
     
     //Automatic tests
     
-    // We listen all text updates
+#else
+#endif
+}
+
+
+
+- (void)didInitializeOutlets {
     [self.textField
      addTarget:self
      action:@selector(updateValue)
      forControlEvents:UIControlEventEditingChanged];
-#else
-#endif
 }
 
 -(void)dealloc {
@@ -120,7 +124,7 @@
 
 
 -(void) updateValue {
-    [self.sender performSelectorOnMainThread: @selector(updateValue:) withObject:self.textField.text waitUntilDone:YES];
+    [self.sender performSelectorOnMainThread: @selector(updateValue:) withObject:[self displayComponentValue] waitUntilDone:YES];
 }
 
 -(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor  {
@@ -144,7 +148,7 @@
 -(NSInteger) validateWithParameters:(NSDictionary *)parameters{
     
     [super validateWithParameters:parameters];
-    NSInteger length = [[self getValue] length];
+    NSInteger length = [[self displayComponentValue] length];
     NSError *error = nil;
     // Control's errros init or reinit
     NSInteger nbOfErrors = 0;
@@ -164,7 +168,7 @@
         [self.context addErrors:@[error]];
         nbOfErrors++;
     }
-    if(self.mandatory != nil && [self.mandatory integerValue] == 1 && [self getValue].length == 0){
+    if(self.mandatory != nil && [self.mandatory integerValue] == 1 && ((NSString *)[self displayComponentValue]).length == 0){
         error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
         [self addErrors:@[error]];
         [self.context addErrors:@[error]];
@@ -194,12 +198,10 @@
 }
 
 -(id)getData {
-    return [self getValue];
+    return [self displayComponentValue];
 }
 
-
-
--(id)displayComponentValue {
+-(NSString *)displayComponentValue {
     return self.textField.text;
 }
 
@@ -210,14 +212,8 @@
     else if([value isKindOfClass:[NSAttributedString class]]){
         self.textField.attributedText = value;
     }
+
 }
-
-
-#pragma mark - Fast Forwarding
--(id)forwardingTargetForSelector:(SEL)sel {
-    return self.textField;
-}
-
 
 #pragma mark - Specific TextField method implementation
 
@@ -264,8 +260,6 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     self.hasFocus = NO;
 }
-
-
 
 
 #pragma mark - Keyboard and scrolling management

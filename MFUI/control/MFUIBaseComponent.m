@@ -256,6 +256,7 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 
 -(void) clearErrors{
     [self clearErrors:YES];
+    [self showError:NO];
 }
 
 -(void) clearErrors:(BOOL)anim {
@@ -304,10 +305,13 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
             id value = (NSString *) x;
             if (value) {
                 // We validate the value
-                if(![strongSelf validate]) {
+                if([strongSelf validate] == 0) {
                     // If there aren't any errors, we clean all component's errors
                     [strongSelf clearErrors];
                 }
+//                else {
+//                    [strongSelf showError:YES];
+//                }
             } else {
                 [strongSelf clearErrors];
             }

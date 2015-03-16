@@ -80,6 +80,11 @@ IB_DESIGNABLE
 @property (nonatomic, strong) MFUIBaseRenderableComponent *internalView;
 
 /**
+ * @brief The parent container of this view
+ */
+@property (nonatomic, weak) MFUIBaseRenderableComponent *externalView;
+
+/**
  * @brief The style class that can be filled in Used Defined Runtime Attributes in InterfaceBuilder
  * @discussion This property aims to specify a custom class style for this component
  */

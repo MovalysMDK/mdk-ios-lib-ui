@@ -19,9 +19,10 @@
 //
 //
 
+#import <MFCore/MFCoreConfig.h>
+
 #import "MFColorValueProcessing.h"
 #import "MFUILogging.h"
-#import "MFFwkProperty.h"
 
 @implementation MFColorValueProcessing
 

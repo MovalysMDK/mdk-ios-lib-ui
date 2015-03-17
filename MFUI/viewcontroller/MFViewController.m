@@ -32,7 +32,7 @@
 #import "MFMenuViewController.h"
 #import "MFWorkspaceViewController.h"
 #import "MFFormDetailViewController.h"
-#import "MFException.h"
+#import  <MFCore/MFCoreError.h>
 
 
 @interface MFViewController()

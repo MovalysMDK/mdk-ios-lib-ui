@@ -38,7 +38,7 @@
 #import "MFUILogging.h"
 #import "MFUILoggingHelper.h"
 #import "MFUIBaseListViewModel.h"
-#import "MFException.h"
+#import  <MFCore/MFCoreError.h>
 
 
 int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;

@@ -27,7 +27,7 @@
 
 //Components
 #import "MFUIBaseComponent.h"
-#import "MFException.h"
+#import  <MFCore/MFCoreError.h>
 #import "MFUILogging.h"
 
 @interface MFBinding()

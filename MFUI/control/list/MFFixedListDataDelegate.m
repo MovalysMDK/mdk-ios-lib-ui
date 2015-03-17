@@ -38,7 +38,7 @@
 #import <MFCore/MFCoreI18n.h>
 #import "MFHelperIndexPath.h"
 #import "MFTypeValueProcessingProtocol.h"
-#import "MFException.h"
+#import  <MFCore/MFCoreError.h>
 #import "MFUILog.h"
 
 

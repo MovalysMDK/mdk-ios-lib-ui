@@ -35,7 +35,7 @@
 #import "MFChildSaveProtocol.h"
 #import <MFCore/MFCoreI18n.h>
 #import "MFFormViewController.h"
-#import "MFException.h"
+#import  <MFCore/MFCoreError.h>
 
 #define POR_IDAP_COLUMN_NUMBER 2
 #define PAY_IDAP_COLUMN_NUMBER 4

@@ -28,7 +28,6 @@
 #import "MFCellAbstract.h"
 #import <MFCore/MFCoreApplication.h>
 #import "MFUIBaseComponent.h"
-#import "MFException.h"
 #import "MFVersionManager.h"
 
 @interface MFCellAbstract()

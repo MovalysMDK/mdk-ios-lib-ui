@@ -23,11 +23,12 @@
  * @brief This class is a delegate that allow to integrate un search button in a formController
  */
 
-#import "MFFormSearchDelegate.h"
 #import <MFCore/MFCoreApplication.h>
+#import <MFcore/MFCoreContext.h>
+
+#import "MFFormSearchDelegate.h"
 #import "MFFormSearchViewController.h"
 #import "MFUILogging.h"
-#import "MFContextProtocol.h"
 
 
 @interface MFFormSearchDelegate ()

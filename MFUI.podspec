@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '6.0'
   s.dependency 'MBProgressHUD', '~>0.8'
   s.dependency 'ViewDeck', '~>2.2.11'
-  s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'MFCore'
+  s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore'
   s.header_mappings_dir = '.'
   s.source_files = 'MFUI/**/*.{h,m}'
   s.resource_bundles = {

@@ -13,18 +13,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUI.h
-//  MFUI
-//
-//
+
 
 #import <MFCore/MFCoreLog.h>
 
 #define MF_UI_LOG_CONTEXT 2
 
-#define MFUILogError(frmt, ...)     SYNC_LOG_OBJC_MAYBE(ddLogLevel, LOG_FLAG_ERROR,   MF_UI_LOG_CONTEXT, frmt, ##__VA_ARGS__)
-#define MFUILogWarn(frmt, ...)     ASYNC_LOG_OBJC_MAYBE(ddLogLevel, LOG_FLAG_WARN,    MF_UI_LOG_CONTEXT, frmt, ##__VA_ARGS__)
-#define MFUILogInfo(frmt, ...)     ASYNC_LOG_OBJC_MAYBE(ddLogLevel, LOG_FLAG_INFO,    MF_UI_LOG_CONTEXT, frmt, ##__VA_ARGS__)
-#define MFUILogVerbose(frmt, ...)  ASYNC_LOG_OBJC_MAYBE(ddLogLevel, LOG_FLAG_VERBOSE, MF_UI_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define MFUILogError(frmt, ...)     LOG_OBJC_MAYBE(LOG_ASYNC_ERROR, ddLogLevel, DDLogLevelError,   MF_UI_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define MFUILogWarn(frmt, ...)      LOG_OBJC_MAYBE(LOG_ASYNC_WARN, ddLogLevel, DDLogLevelWarning,    MF_UI_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define MFUILogInfo(frmt, ...)      LOG_OBJC_MAYBE(LOG_ASYNC_INFO, ddLogLevel, DDLogLevelInfo,    MF_UI_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+#define MFUILogVerbose(frmt, ...)   LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, ddLogLevel, DDLogLevelVerbose, MF_UI_LOG_CONTEXT, frmt, ##__VA_ARGS__)
 

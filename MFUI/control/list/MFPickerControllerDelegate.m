@@ -21,7 +21,8 @@
 
 //MFCore imports
 #import <MFCore/MFCoreConfig.h>
-#import  <MFCore/MFCoreError.h>
+#import <MFCore/MFCoreError.h>
+#import <MFCore/MFCoreFormConfig.h>
 
 
 //Main intrface
@@ -34,7 +35,6 @@
 #import "MFUIBaseViewModelProtocol.h"
 #import "MFTypeValueProcessingProtocol.h"
 
-#import "MFFormConstants.h"
 #import "MFUILogging.h"
 #import "MFUILoggingHelper.h"
 #import "MFUIBaseListViewModel.h"

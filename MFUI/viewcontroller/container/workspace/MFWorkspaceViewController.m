@@ -26,10 +26,10 @@
 #import <MFCore/MFCoreConfig.h>
 #import <MFCore/MFCoreError.h>
 #import <MFCore/MFCoreApplication.h>
+#import <MFCore/MFCoreFormConfig.h>
 
 #import "MFUILog.h"
 
-#import "MFFormConstants.h"
 #import "MFWorkspaceViewController.h"
 #import "MFWorkspaceView.h"
 #import "MFUIBaseViewModel.h"

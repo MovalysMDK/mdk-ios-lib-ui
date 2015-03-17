@@ -25,9 +25,8 @@
 #import <MFCore/MFCoreAction.h>
 #import <MFCore/MFCoreApplication.h>
 #import <MFCore/MFCoreConfig.h>
+#import <MFCore/MFCoreFormConfig.h>
 
-//Utils
-#import "MFFormConstants.h"
 
 //ViewModel
 #import "MFUIBaseViewModel.h"

@@ -2083,9 +2083,7 @@
 				B0D455161A5ED26A00C6D376 /* Headers */,
 				B0D455171A5ED26A00C6D376 /* Resources */,
 				E4FE8FE34AE0F7379256A15F /* Copy Pods Resources */,
-				396906F995C129E4F5B2B2E7 /* Embed Pods Frameworks */,
 				B02BB7B11A83CD41008ACD2A /* Run Script */,
-				B05BAEE61AB881430081F211 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -2206,21 +2204,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MFUITests/Pods-MFUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		396906F995C129E4F5B2B2E7 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MFUI/Pods-MFUI-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		74234BEE2752AFF060290804 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2249,20 +2232,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "echo \"Creating derivedDataDirectory file\"\necho \"${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH}\" > ${PROJECT_DIR}/derivedDataDirectory\n\n#--------------------\necho 'SRCROOT: '${SRCROOT}\ncd \"${SRCROOT}\"\n\necho 'Copying Headers preserving hierarchy'\nfor H in `find ./MFUI -name \"*.h\"`; do\necho \"$H\"\nditto \"${H}\" \"${BUILT_PRODUCTS_DIR}/${H}\"\ndone\n#--------------------";
-		};
-		B05BAEE61AB881430081F211 /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MFUI/Pods-MFUI-frameworks.sh\"";
 		};
 		E4FE8FE34AE0F7379256A15F /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

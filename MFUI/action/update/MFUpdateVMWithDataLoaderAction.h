@@ -19,7 +19,7 @@
 //
 //
 
-#import "MFActionProtocol.h"
+#import <MFCore/MFCoreAction.h>
 /**
  * @class MFUpdateVMWithDataLoaderAction
  * @brief An action to update a ViewModel from a dataloader

@@ -21,7 +21,7 @@
 
 
 
-#import "MFActionProtocol.h"
+#import <MFCore/MFCoreAction.h>
 
 @interface MFChainSaveDetailAction : NSObject<MFActionProtocol>
 

@@ -23,15 +23,16 @@
  * @brief This class is the base Controller to display a search form
  */
 
-#import "MFFormSearchViewController.h"
+//MFCore imports
+#import <MFCore/MFCoreDataloader.h>
+#import <MFCore/MFCoreApplication.h>
 #import <MFCore/MFCoreI18n.h>
+
+
+#import "MFFormSearchViewController.h"
 #import "MFUILogging.h"
 #import "MFUILoggingHelper.h"
-#import <MFCore/MFCoreApplication.h>
 #import "MFUIBaseViewModel.h"
-#import "MFAbstractDataLoader.h"
-#import "MFDataLoaderActionParameter.h"
-#import "MFGenericLoadDataAction.h"
 
 
 @interface MFFormSearchViewController ()

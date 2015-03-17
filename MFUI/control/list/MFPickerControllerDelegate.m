@@ -20,7 +20,8 @@
 //
 
 //MFCore imports
-
+#import <MFCore/MFCoreConfig.h>
+#import  <MFCore/MFCoreError.h>
 
 
 //Main intrface
@@ -32,13 +33,11 @@
 //Protocol imports
 #import "MFUIBaseViewModelProtocol.h"
 #import "MFTypeValueProcessingProtocol.h"
-#import "MFConfigurationHandler+Forms.h"
 
 #import "MFFormConstants.h"
 #import "MFUILogging.h"
 #import "MFUILoggingHelper.h"
 #import "MFUIBaseListViewModel.h"
-#import  <MFCore/MFCoreError.h>
 
 
 int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;

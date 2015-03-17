@@ -32,6 +32,7 @@
 #import "MFPosition.h"
 #import "MFPositionViewModel.h"
 #import "MFNumberConverter.h"
+#import "MFButton.h"
 
 #define MFPOSITION_HEIGHT 30
 #define MFPOSITION_BUTTON_SIZE 44

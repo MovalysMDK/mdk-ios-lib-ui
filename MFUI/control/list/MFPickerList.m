@@ -24,6 +24,7 @@
 #import <MFCore/MFCoreI18n.h>
 #import <MFCore/MFCoreBean.h>
 #import <MFCore/MFCoreConfig.h>
+#import <MFCore/MFCoreFormConfig.h>
 
 
 //Picker imports

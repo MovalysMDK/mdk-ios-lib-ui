@@ -32,6 +32,7 @@
 #import <MFCore/MFCoreError.h>
 #import <MFCore/MFCoreConfig.h>
 #import <MFCore/MFCoreDataloader.h>
+#import <MFCore/MFCoreFormConfig.h>
 
 // Interface
 #import "MFFormBaseViewController.h"

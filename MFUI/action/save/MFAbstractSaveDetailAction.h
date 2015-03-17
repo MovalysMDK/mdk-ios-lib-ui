@@ -22,8 +22,6 @@
 #import <MFCore/MFCoreAction.h>
 #import <MFCore/MFCoreContext.h>
 
-#import "MFActionProgressMessageDispatcher.h"
-
 @interface MFAbstractSaveDetailAction : NSObject<MFActionProtocol>
 
 -(id) doOnSuccess:(id) parameterOut withContext: (id<MFContextProtocol>) context withQualifier:(id<MFActionQualifierProtocol>) qualifier withDispatcher:(MFActionProgressMessageDispatcher*) dispatch ;

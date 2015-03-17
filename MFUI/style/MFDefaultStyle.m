@@ -18,8 +18,8 @@
 }
 
 -(void)applyErrorStyleOnView:(UIView *)view {
-//    view.layer.backgroundColor = [UIColor redColor].CGColor;
-//    view.backgroundColor = [UIColor redColor];
+   view.layer.backgroundColor = [UIColor redColor].CGColor;
+    view.backgroundColor = [UIColor redColor];
 }
 
 -(void)applyValidStyleOnView:(UIView *)view {

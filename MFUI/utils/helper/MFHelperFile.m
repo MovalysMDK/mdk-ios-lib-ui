@@ -21,7 +21,7 @@
 
 #import "MFHelperFile.h"
 #import <MFCore/MFCoreLog.h>
-#import "MFURL.h"
+#import <MFCore/MFCoreFoundationExt.h>
 
 @implementation MFHelperFile
 

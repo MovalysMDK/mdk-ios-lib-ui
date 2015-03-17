@@ -31,7 +31,8 @@
 //Main interface
 #import "MFFormViewController.h"
 
-//Components
+//MFCore imports
+#import <MFCore/MFCoreFormDescriptor.h>
 
 //Delegate & Protocol
 #import "MFAppDelegate.h"
@@ -54,7 +55,7 @@
 #import "MFConstants.h"
 
 //Binding and form
-#import "MFFormDescriptor.h"
+
 #import "MFUIBaseViewModel.h"
 
 // Allowed values : (DiscardChangesAlert,SaveChangesAlert, AutomaticSave)

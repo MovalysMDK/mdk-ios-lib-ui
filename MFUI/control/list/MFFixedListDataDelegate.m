@@ -25,6 +25,12 @@
 //MFCore imports
 #import <MFCore/MFCoreFormConfig.h>
 #import <MFCore/MFCoreBean.h>
+#import <MFCore/MFCoreError.h>
+#import <MFCore/MFCoreI18n.h>
+
+//UI
+#import <MBProgressHUD/MBProgressHUD.h>
+
 
 //FixedList import
 #import "MFFixedList.h"
@@ -35,24 +41,18 @@
 #import "MFCellAbstract.h"
 
 //Utils
-#import <MFCore/MFCoreI18n.h>
 #import "MFHelperIndexPath.h"
 #import "MFTypeValueProcessingProtocol.h"
-#import  <MFCore/MFCoreError.h>
 #import "MFUILog.h"
 
 
 //Binding
 #import "MFBaseBindingForm.h"
-#import "MFKeyNotFound.h"
 #import "MFUIBaseListViewModel.h"
 
 //Forms
 #import "MFFormWithDetailViewControllerProtocol.h"
 #import "MFFormBaseViewController.h"
-
-//UI
-#import <MBProgressHUD/MBProgressHUD.h>
 
 //FIXME : A supprimer ?
 const static int TABLEVIEW_RESIZE_OFFSET = 0;

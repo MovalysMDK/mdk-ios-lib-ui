@@ -13,6 +13,9 @@ target 'MFUI' do
 end
 
 target 'MFUITests' do
+	pod 'MFCore', :path => '../mfcore'
+	pod 'ViewDeck', '~>2.2.11'
+	pod 'MBProgressHUD', '~> 0.8'
 end
 
 post_install do |installer_representation|

@@ -20,14 +20,13 @@
 //
 
 #import <MFCore/MFCoreFoundationExt.h>
+#import <MFCore/MFCoreFormDescriptor.h>
 #import <MFCore/MFCoreBean.h>
 
 
 //Main interface
 #import "MFBindingViewAbstract.h"
 
-//Descriptors
-#import "MFFieldDescriptor.h"
 
 //Tils
 #import "MFUILogging.h"

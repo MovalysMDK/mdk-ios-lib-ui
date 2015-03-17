@@ -19,9 +19,9 @@
 //
 //
 
-#import "MFActionProtocol.h"
-#import "MFActionQualifierProtocol.h"
-#import "MFContextProtocol.h"
+#import <MFCore/MFCoreAction.h>
+#import <MFCore/MFCoreContext.h>
+
 #import "MFActionProgressMessageDispatcher.h"
 
 @interface MFAbstractSaveDetailAction : NSObject<MFActionProtocol>

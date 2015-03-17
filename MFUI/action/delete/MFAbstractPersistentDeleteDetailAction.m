@@ -20,7 +20,8 @@
 //
 
 #import "MFAbstractPersistentDeleteDetailAction.h"
-#import "MFActionProgressMessageDispatcher.h"
+
+#import <MFCore/MFCoreAction.h>
 
 @implementation MFAbstractPersistentDeleteDetailAction
 

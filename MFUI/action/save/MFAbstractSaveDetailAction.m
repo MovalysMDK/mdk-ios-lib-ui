@@ -20,9 +20,6 @@
 //
 
 #import "MFAbstractSaveDetailAction.h"
-#import "MFActionQualifierProtocol.h"
-#import "MFContextProtocol.h"
-#import "MFActionProgressMessageDispatcher.h"
 
 #import <MFCore/MFCoreBean.h>
 #import <MFCore/MFCoreCoredata.h>

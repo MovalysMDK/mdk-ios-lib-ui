@@ -46,6 +46,7 @@
 		B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */; };
 		B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */; };
 		B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */; };
+		B097AB541ABC5B110026784A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B097AB531ABC5B110026784A /* Pods.framework */; };
 		B0D4551F1A5ED26A00C6D376 /* MFUI.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D4551E1A5ED26A00C6D376 /* MFUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D455291A5ED26A00C6D376 /* MFUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D455281A5ED26A00C6D376 /* MFUITests.m */; };
 		B0D45D171A5ED2F400C6D376 /* MFAbstractDeleteDetailAction.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45B6E1A5ED2F300C6D376 /* MFAbstractDeleteDetailAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -462,6 +463,7 @@
 		B08E1C081A83DBC700F09DE2 /* ViewDeck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ViewDeck.framework; path = "Pods/build/Debug-iphoneos/Pods-MFUI/ViewDeck.framework"; sourceTree = "<group>"; };
 		B08E1C111A83DC5600F09DE2 /* Pods_MFUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_MFUI.framework; path = "Pods/build/Debug-iphoneos/Pods_MFUI.framework"; sourceTree = "<group>"; };
 		B0927F021A7101C3000CBFC0 /* MFCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MFCore.framework; path = "Pods/build/Debug-iphoneos/Pods-MFUI/MFCore.framework"; sourceTree = "<group>"; };
+		B097AB531ABC5B110026784A /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
 		B0AFBF9E1A84B3E00072BDAB /* MFCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MFCore.framework; path = "Pods/build/Debug-iphoneos/Pods-MFUI/MFCore.framework"; sourceTree = "<group>"; };
 		B0AFBFA01A84B3F10072BDAB /* Pods_MFUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_MFUI.framework; path = "Pods/build/Debug-iphoneos/Pods_MFUI.framework"; sourceTree = "<group>"; };
 		B0AFBFA21A84B4F60072BDAB /* Pods_MFUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_MFUI.framework; path = "Pods/build/Debug-iphoneos/Pods_MFUI.framework"; sourceTree = "<group>"; };
@@ -840,6 +842,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B097AB541ABC5B110026784A /* Pods.framework in Frameworks */,
 				B0D45E8C1A5ED33F00C6D376 /* Foundation.framework in Frameworks */,
 				B0D45E8A1A5ED33900C6D376 /* UIKit.framework in Frameworks */,
 			);
@@ -868,6 +871,7 @@
 		A417D180CAED9DDD804A7C0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B097AB531ABC5B110026784A /* Pods.framework */,
 				B0AFBFA21A84B4F60072BDAB /* Pods_MFUI.framework */,
 				B0AFBFA01A84B3F10072BDAB /* Pods_MFUI.framework */,
 				B0AFBF9E1A84B3E00072BDAB /* MFCore.framework */,
@@ -2548,6 +2552,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/Pods-MFUI",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MFUI/MFUI-Prefix.pch";
@@ -2584,6 +2589,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/Pods-MFUI",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MFUI/MFUI-Prefix.pch";

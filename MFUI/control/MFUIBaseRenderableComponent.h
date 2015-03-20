@@ -22,7 +22,6 @@
 
 #pragma mark MFUIBaseRenderableComponent
 
-
 /**
  * @class MFBaseRenderableComponent
  * @brief This class represents a basic MDK iOS renderable component.
@@ -153,6 +152,32 @@ IB_DESIGNABLE
  */
 -(void) doOnErrorButtonClicked;
 
+/**
+ * @brief This method allows to do some treatments on outlets of this view
+ * @discussion It is called at the end of awakeFromNib method 
+ */
+-(void)didInitializeOutlets;
+
+/**
+ * @brief Returns the class name. This method is used to build the baseStyleClass of the component
+ * @return The class name
+ */
+-(NSString *) className;
+
+-(void) definePositionOfErrorViewWithParameters:(NSDictionary *)parameters whenShown:(BOOL)isShown;
+
+extern const struct ErrorPositionParameters_Struct
+{
+    __unsafe_unretained NSString *ErrorView;
+    __unsafe_unretained NSString *ParentView;
+    __unsafe_unretained NSString *InternalViewLeftConstraint;
+    __unsafe_unretained NSString *InternalViewTopConstraint;
+    __unsafe_unretained NSString *InternalViewRightConstraint;
+    __unsafe_unretained NSString *InternalViewBottomConstraint;
+    
+    //@non-generated-start[custom-structproperties][X]
+    //@non-generated-end
+} ErrorPositionParameters;
 @end
 
 

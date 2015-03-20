@@ -23,8 +23,6 @@
 		B0183FEE1AB099530081133F /* MFUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B0183FEA1AB099530081133F /* MFUILabel.m */; };
 		B0183FEF1AB099530081133F /* MFUILabel+UILabelForwarding.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FEB1AB099530081133F /* MFUILabel+UILabelForwarding.h */; };
 		B0183FF01AB099530081133F /* MFUILabel+UILabelForwarding.m in Sources */ = {isa = PBXBuildFile; fileRef = B0183FEC1AB099530081133F /* MFUILabel+UILabelForwarding.m */; };
-		B0183FF21AB0995A0081133F /* MFUILabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0183FF11AB0995A0081133F /* MFUILabel.xib */; };
-		B0183FF41AB09A600081133F /* MFUIErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0183FF31AB09A600081133F /* MFUIErrorView.xib */; };
 		B0183FFD1AB09E530081133F /* MFButton+MFButtonExt.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FF61AB09E530081133F /* MFButton+MFButtonExt.h */; };
 		B0183FFE1AB09E530081133F /* MFButton+MFButtonExt.m in Sources */ = {isa = PBXBuildFile; fileRef = B0183FF71AB09E530081133F /* MFButton+MFButtonExt.m */; };
 		B0183FFF1AB09E530081133F /* MFButton+UIButtonForwarding.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FF81AB09E530081133F /* MFButton+UIButtonForwarding.h */; };
@@ -40,8 +38,14 @@
 		B0289F321AA89342007A2E75 /* UIView+Styleable.m in Sources */ = {isa = PBXBuildFile; fileRef = B0289F2E1AA89342007A2E75 /* UIView+Styleable.m */; };
 		B032D0D71AB188CE001C114F /* MFUIErrorView.h in Headers */ = {isa = PBXBuildFile; fileRef = B032D0D51AB188CE001C114F /* MFUIErrorView.h */; };
 		B032D0D81AB188CE001C114F /* MFUIErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B032D0D61AB188CE001C114F /* MFUIErrorView.m */; };
-		B0A1DBAD1AB2E5CF00181941 /* MFUITextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0A1DBAC1AB2E5CF00181941 /* MFUITextField.xib */; };
-		B0AFBFA31A84B4F60072BDAB /* Pods_MFUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AFBFA21A84B4F60072BDAB /* Pods_MFUI.framework */; };
+		B06C529C1ABAD7E5002BE0F2 /* MFStyleProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06C52991ABAD7E5002BE0F2 /* MFStyleProtocol.h */; };
+		B06C529D1ABAD7E5002BE0F2 /* MFUITextFieldStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = B06C529A1ABAD7E5002BE0F2 /* MFUITextFieldStyle.h */; };
+		B06C529E1ABAD7E5002BE0F2 /* MFUITextFieldStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B06C529B1ABAD7E5002BE0F2 /* MFUITextFieldStyle.m */; };
+		B076BEDF1ABC565200756351 /* Pods.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B076BEDD1ABC565200756351 /* Pods.debug.xcconfig */; };
+		B076BEE01ABC565200756351 /* Pods.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B076BEDE1ABC565200756351 /* Pods.release.xcconfig */; };
+		B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */; };
+		B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */; };
+		B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */; };
 		B0D4551F1A5ED26A00C6D376 /* MFUI.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D4551E1A5ED26A00C6D376 /* MFUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D455291A5ED26A00C6D376 /* MFUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D455281A5ED26A00C6D376 /* MFUITests.m */; };
 		B0D45D171A5ED2F400C6D376 /* MFAbstractDeleteDetailAction.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45B6E1A5ED2F300C6D376 /* MFAbstractDeleteDetailAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -408,7 +412,6 @@
 
 /* Begin PBXFileReference section */
 		57F26B8740018774D9002A3B /* Pods_MFUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MFUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F2DB8F294189DAFAB5420C1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B06D6A8AEE3FE0CD8104ACB /* Pods_MFUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MFUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00787BA1AB1E37A009F6D95 /* JDFSequentialTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFSequentialTooltipManager.h; sourceTree = "<group>"; };
 		B00787BB1AB1E37A009F6D95 /* JDFSequentialTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFSequentialTooltipManager.m; sourceTree = "<group>"; };
@@ -425,8 +428,6 @@
 		B0183FEA1AB099530081133F /* MFUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUILabel.m; sourceTree = "<group>"; };
 		B0183FEB1AB099530081133F /* MFUILabel+UILabelForwarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFUILabel+UILabelForwarding.h"; sourceTree = "<group>"; };
 		B0183FEC1AB099530081133F /* MFUILabel+UILabelForwarding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFUILabel+UILabelForwarding.m"; sourceTree = "<group>"; };
-		B0183FF11AB0995A0081133F /* MFUILabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MFUILabel.xib; sourceTree = "<group>"; };
-		B0183FF31AB09A600081133F /* MFUIErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MFUIErrorView.xib; sourceTree = "<group>"; };
 		B0183FF61AB09E530081133F /* MFButton+MFButtonExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFButton+MFButtonExt.h"; sourceTree = "<group>"; };
 		B0183FF71AB09E530081133F /* MFButton+MFButtonExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFButton+MFButtonExt.m"; sourceTree = "<group>"; };
 		B0183FF81AB09E530081133F /* MFButton+UIButtonForwarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFButton+UIButtonForwarding.h"; sourceTree = "<group>"; };
@@ -442,9 +443,15 @@
 		B0289F2E1AA89342007A2E75 /* UIView+Styleable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Styleable.m"; sourceTree = "<group>"; };
 		B032D0D51AB188CE001C114F /* MFUIErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIErrorView.h; sourceTree = "<group>"; };
 		B032D0D61AB188CE001C114F /* MFUIErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUIErrorView.m; sourceTree = "<group>"; };
-		B03F834C1A6FFE05004C48E1 /* Pods-MFUI.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-MFUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MFUI/Pods-MFUI.debug.xcconfig"; sourceTree = "<group>"; };
-		B03F834D1A6FFE05004C48E1 /* Pods-MFUI.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Pods-MFUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-MFUI/Pods-MFUI.release.xcconfig"; sourceTree = "<group>"; };
 		B03F83501A6FFFCB004C48E1 /* libPods-MFUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MFUI.a"; path = "Pods/build/Debug-iphoneos/libPods-MFUI.a"; sourceTree = "<group>"; };
+		B06C52991ABAD7E5002BE0F2 /* MFStyleProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFStyleProtocol.h; sourceTree = "<group>"; };
+		B06C529A1ABAD7E5002BE0F2 /* MFUITextFieldStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUITextFieldStyle.h; sourceTree = "<group>"; };
+		B06C529B1ABAD7E5002BE0F2 /* MFUITextFieldStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUITextFieldStyle.m; sourceTree = "<group>"; };
+		B076BEDD1ABC565200756351 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		B076BEDE1ABC565200756351 /* Pods.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUIErrorView.xib; sourceTree = "<group>"; };
+		B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUILabel.xib; sourceTree = "<group>"; };
+		B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUITextField.xib; sourceTree = "<group>"; };
 		B08E1C011A83DBC700F09DE2 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = "Pods/build/Debug-iphoneos/Pods-MFUI/CocoaLumberjack.framework"; sourceTree = "<group>"; };
 		B08E1C021A83DBC700F09DE2 /* CocoaSecurity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaSecurity.framework; path = "Pods/build/Debug-iphoneos/Pods-MFUI/CocoaSecurity.framework"; sourceTree = "<group>"; };
 		B08E1C031A83DBC700F09DE2 /* JSONKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONKit.framework; path = "Pods/build/Debug-iphoneos/Pods-MFUI/JSONKit.framework"; sourceTree = "<group>"; };
@@ -455,7 +462,6 @@
 		B08E1C081A83DBC700F09DE2 /* ViewDeck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ViewDeck.framework; path = "Pods/build/Debug-iphoneos/Pods-MFUI/ViewDeck.framework"; sourceTree = "<group>"; };
 		B08E1C111A83DC5600F09DE2 /* Pods_MFUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_MFUI.framework; path = "Pods/build/Debug-iphoneos/Pods_MFUI.framework"; sourceTree = "<group>"; };
 		B0927F021A7101C3000CBFC0 /* MFCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MFCore.framework; path = "Pods/build/Debug-iphoneos/Pods-MFUI/MFCore.framework"; sourceTree = "<group>"; };
-		B0A1DBAC1AB2E5CF00181941 /* MFUITextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MFUITextField.xib; sourceTree = "<group>"; };
 		B0AFBF9E1A84B3E00072BDAB /* MFCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MFCore.framework; path = "Pods/build/Debug-iphoneos/Pods-MFUI/MFCore.framework"; sourceTree = "<group>"; };
 		B0AFBFA01A84B3F10072BDAB /* Pods_MFUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_MFUI.framework; path = "Pods/build/Debug-iphoneos/Pods_MFUI.framework"; sourceTree = "<group>"; };
 		B0AFBFA21A84B4F60072BDAB /* Pods_MFUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_MFUI.framework; path = "Pods/build/Debug-iphoneos/Pods_MFUI.framework"; sourceTree = "<group>"; };
@@ -826,8 +832,7 @@
 		B0D45D161A5ED2F400C6D376 /* MFViewModelChangedListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFViewModelChangedListenerProtocol.h; sourceTree = "<group>"; };
 		B0D45E891A5ED33900C6D376 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B0D45E8B1A5ED33F00C6D376 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		CA40DC34BDBA56F2B9FC14E9 /* Pods-MFUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MFUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MFUITests/Pods-MFUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		FA65AE025CA55CA6FF3183AF /* Pods-MFUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MFUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MFUITests/Pods-MFUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CCA82901B22B34EE7A22C908 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -835,7 +840,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0AFBFA31A84B4F60072BDAB /* Pods_MFUI.framework in Frameworks */,
 				B0D45E8C1A5ED33F00C6D376 /* Foundation.framework in Frameworks */,
 				B0D45E8A1A5ED33900C6D376 /* UIKit.framework in Frameworks */,
 			);
@@ -855,10 +859,8 @@
 		6473B9EE302CF415CE853C04 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B03F834C1A6FFE05004C48E1 /* Pods-MFUI.debug.xcconfig */,
-				B03F834D1A6FFE05004C48E1 /* Pods-MFUI.release.xcconfig */,
-				CA40DC34BDBA56F2B9FC14E9 /* Pods-MFUITests.debug.xcconfig */,
-				FA65AE025CA55CA6FF3183AF /* Pods-MFUITests.release.xcconfig */,
+				B076BEDD1ABC565200756351 /* Pods.debug.xcconfig */,
+				B076BEDE1ABC565200756351 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -883,9 +885,9 @@
 				B03F83501A6FFFCB004C48E1 /* libPods-MFUI.a */,
 				B0D45E8B1A5ED33F00C6D376 /* Foundation.framework */,
 				B0D45E891A5ED33900C6D376 /* UIKit.framework */,
-				7F2DB8F294189DAFAB5420C1 /* libPods.a */,
 				57F26B8740018774D9002A3B /* Pods_MFUI.framework */,
 				9B06D6A8AEE3FE0CD8104ACB /* Pods_MFUITests.framework */,
+				CCA82901B22B34EE7A22C908 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -925,6 +927,9 @@
 		B0289F2A1AA89342007A2E75 /* style */ = {
 			isa = PBXGroup;
 			children = (
+				B06C52991ABAD7E5002BE0F2 /* MFStyleProtocol.h */,
+				B06C529A1ABAD7E5002BE0F2 /* MFUITextFieldStyle.h */,
+				B06C529B1ABAD7E5002BE0F2 /* MFUITextFieldStyle.m */,
 				B0289F2B1AA89342007A2E75 /* MFDefaultStyle.h */,
 				B0289F2C1AA89342007A2E75 /* MFDefaultStyle.m */,
 				B0289F2D1AA89342007A2E75 /* UIView+Styleable.h */,
@@ -936,9 +941,9 @@
 		B0289F331AA893B9007A2E75 /* xib */ = {
 			isa = PBXGroup;
 			children = (
-				B0183FF11AB0995A0081133F /* MFUILabel.xib */,
-				B0183FF31AB09A600081133F /* MFUIErrorView.xib */,
-				B0A1DBAC1AB2E5CF00181941 /* MFUITextField.xib */,
+				B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */,
+				B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */,
+				B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */,
 			);
 			path = xib;
 			sourceTree = "<group>";
@@ -1878,6 +1883,7 @@
 				B0D45E1E1A5ED2F400C6D376 /* MFAlignmentValueProcessing.h in Headers */,
 				B0D45E281A5ED2F400C6D376 /* MFTypeValueProcessingProtocol.h in Headers */,
 				B0D45DB71A5ED2F400C6D376 /* MFUIControlUrlTextField.h in Headers */,
+				B06C529D1ABAD7E5002BE0F2 /* MFUITextFieldStyle.h in Headers */,
 				B0D45D6A1A5ED2F400C6D376 /* MFUIControlList.h in Headers */,
 				B0D45DD71A5ED2F400C6D376 /* MFInvalidDoubleValueUIValidationError.h in Headers */,
 				B0D45D941A5ED2F400C6D376 /* MFSlider+UISliderForwarding.h in Headers */,
@@ -2033,6 +2039,7 @@
 				B0D45E551A5ED2F400C6D376 /* MFFormSearchViewController.h in Headers */,
 				B0D45E131A5ED2F400C6D376 /* MFHelperFile.h in Headers */,
 				B0D45DBD1A5ED2F400C6D376 /* TooltipView.h in Headers */,
+				B06C529C1ABAD7E5002BE0F2 /* MFStyleProtocol.h in Headers */,
 				B0D45E071A5ED2F400C6D376 /* MFOrientationChangedDelegate.h in Headers */,
 				B0D45D541A5ED2F400C6D376 /* MFEnumImage.h in Headers */,
 				B0D45D5E1A5ED2F400C6D376 /* MFFixedList.h in Headers */,
@@ -2102,7 +2109,6 @@
 				B0D455201A5ED26A00C6D376 /* Sources */,
 				B0D455211A5ED26A00C6D376 /* Frameworks */,
 				B0D455221A5ED26A00C6D376 /* Resources */,
-				0C47E4A6384767AF913778BC /* Embed Pods Frameworks */,
 				099CCD8D445DC3C1CC6DAA31 /* Copy Pods Resources */,
 			);
 			buildRules = (
@@ -2154,13 +2160,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */,
 				B0D45DFF1A5ED2F400C6D376 /* image_tooltip_invalid@2x.png in Resources */,
 				B0D45E001A5ED2F400C6D376 /* image_tooltip_valid.png in Resources */,
-				B0A1DBAD1AB2E5CF00181941 /* MFUITextField.xib in Resources */,
 				B0D45DFE1A5ED2F400C6D376 /* image_tooltip_invalid.png in Resources */,
-				B0183FF21AB0995A0081133F /* MFUILabel.xib in Resources */,
+				B076BEDF1ABC565200756351 /* Pods.debug.xcconfig in Resources */,
+				B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */,
+				B076BEE01ABC565200756351 /* Pods.release.xcconfig in Resources */,
+				B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */,
 				B0D45E011A5ED2F400C6D376 /* image_tooltip_valid@2x.png in Resources */,
-				B0183FF41AB09A600081133F /* MFUIErrorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2187,21 +2195,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MFUITests/Pods-MFUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0C47E4A6384767AF913778BC /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MFUITests/Pods-MFUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		74234BEE2752AFF060290804 /* Check Pods Manifest.lock */ = {
@@ -2245,7 +2238,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MFUI/Pods-MFUI-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F7CAE9773C43F90C183843BF /* Check Pods Manifest.lock */ = {
@@ -2327,6 +2320,7 @@
 				B0D45D851A5ED2F400C6D376 /* MFBarCodeScannerDelegate.m in Sources */,
 				B0D45DDE1A5ED2F400C6D376 /* MFInvalidPhoneNumberValueUIValidationError.m in Sources */,
 				B00787CD1AB1E37A009F6D95 /* UILabel+JDFTooltips.m in Sources */,
+				B06C529E1ABAD7E5002BE0F2 /* MFUITextFieldStyle.m in Sources */,
 				B01840001AB09E530081133F /* MFButton+UIButtonForwarding.m in Sources */,
 				B0D45E6B1A5ED2F400C6D376 /* MFPhotoDetailViewController.m in Sources */,
 				B0D45D481A5ED2F400C6D376 /* MFPhotoFixedListItemCell.m in Sources */,
@@ -2434,7 +2428,7 @@
 /* Begin XCBuildConfiguration section */
 		B0D4552A1A5ED26A00C6D376 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B03F834C1A6FFE05004C48E1 /* Pods-MFUI.debug.xcconfig */;
+			baseConfigurationReference = B076BEDD1ABC565200756351 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -2474,6 +2468,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)/**",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks' $(CONFIGURATION_BUILD_DIR)";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -2487,7 +2485,7 @@
 		};
 		B0D4552B1A5ED26A00C6D376 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B03F834D1A6FFE05004C48E1 /* Pods-MFUI.release.xcconfig */;
+			baseConfigurationReference = B076BEDE1ABC565200756351 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -2521,6 +2519,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)/**",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks' $(CONFIGURATION_BUILD_DIR)";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -2534,7 +2536,7 @@
 		};
 		B0D4552D1A5ED26A00C6D376 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B03F834C1A6FFE05004C48E1 /* Pods-MFUI.debug.xcconfig */;
+			baseConfigurationReference = B076BEDD1ABC565200756351 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -2564,12 +2566,13 @@
 				OTHER_LIBTOOLFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
 			};
 			name = Debug;
 		};
 		B0D4552E1A5ED26A00C6D376 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B03F834D1A6FFE05004C48E1 /* Pods-MFUI.release.xcconfig */;
+			baseConfigurationReference = B076BEDE1ABC565200756351 /* Pods.release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -2599,12 +2602,13 @@
 				OTHER_LIBTOOLFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
 			};
 			name = Release;
 		};
 		B0D455301A5ED26A00C6D376 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA40DC34BDBA56F2B9FC14E9 /* Pods-MFUITests.debug.xcconfig */;
+			baseConfigurationReference = B076BEDD1ABC565200756351 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -2624,7 +2628,7 @@
 		};
 		B0D455311A5ED26A00C6D376 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA65AE025CA55CA6FF3183AF /* Pods-MFUITests.release.xcconfig */;
+			baseConfigurationReference = B076BEDE1ABC565200756351 /* Pods.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

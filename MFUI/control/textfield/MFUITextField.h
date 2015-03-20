@@ -61,6 +61,8 @@ IB_DESIGNABLE
 IB_DESIGNABLE
 
 @interface MFUIExternalTextField : MFUITextField <MFExternalComponent>
+@property(nonatomic, weak) IBOutlet UITextField *textField;
+
 
 @property (nonatomic, strong) IBInspectable NSString *customXIBName;
 

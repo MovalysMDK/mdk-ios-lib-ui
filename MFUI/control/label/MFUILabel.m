@@ -110,12 +110,6 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 
 @implementation MFUIExternalLabel
 
--(NSString *)defaultXIBName {
-    return @"MFUILabel";
-}
-
-
-
 @end
 
 @implementation MFUIInternalLabel

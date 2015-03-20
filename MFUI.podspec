@@ -18,8 +18,7 @@ Pod::Spec.new do |s|
   s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore'
   s.header_mappings_dir = '.'
   s.source_files = 'MFUI/**/*.{h,m}'
-  s.resource_bundles = {
-    'MFUIComponents' => ['MFUI/**/*.xib']  }
+  s.resources = 'MFUI/**/*.xib'
 
   s.subspec 'NonARC' do |files|
     files.source_files = 'MFUI/**/MFPickerListSelectionIndicator.{h,m}'

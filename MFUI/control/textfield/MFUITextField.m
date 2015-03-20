@@ -48,7 +48,7 @@
 @property (nonatomic, strong) id<UITextFieldDelegate> textFieldDelegate;
 
 /**
- * @brief This property is the current keyboard height. this property is update 
+ * @brief This property is the current keyboard height. this property is update
  * after configurayion changes
  */
 @property (nonatomic) CGFloat keyboardHeight;
@@ -67,8 +67,7 @@
 
 
 @implementation MFUITextField
-@synthesize currentOrientation = _currentOrientation;
-
+@synthesize currentOrientation;
 
 #pragma mark - Component Lifecycle
 
@@ -87,7 +86,7 @@
     else {
         self.sender = self;
     }
-    self.textField.delegate = self.textFieldDelegate;
+    //    self.textField.delegate = self.textFieldDelegate;
     
     //Set default state of this component
     self.isValid = YES;
@@ -212,7 +211,7 @@
     else if([value isKindOfClass:[NSAttributedString class]]){
         self.textField.attributedText = value;
     }
-
+    
 }
 
 #pragma mark - Specific TextField method implementation
@@ -370,21 +369,14 @@
     [self.orientationChangedDelegate unregisterOrientationChanges];
 }
 
-
 @end
-
 
 
 #pragma mark -
 #pragma mark MFUIExternalTextField
 @implementation MFUIExternalTextField
 
--(NSString *)defaultXIBName {
-    return @"MFUITextField";
-}
-
 @end
-
 
 
 #pragma mark -

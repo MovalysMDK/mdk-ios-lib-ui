@@ -256,7 +256,7 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 
 -(void) clearErrors{
     [self clearErrors:YES];
-    [self showError:NO];
+//    [self showError:NO];
 }
 
 -(void) clearErrors:(BOOL)anim {

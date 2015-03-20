@@ -6,17 +6,9 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 use_frameworks!
 
-target 'MFUI' do
-	pod 'MFCore', :path => '../mfcore'
-	pod 'ViewDeck', '~>2.2.11'
-	pod 'MBProgressHUD', '~> 0.8'
-end
-
-target 'MFUITests' do
-	pod 'MFCore', :path => '../mfcore'
-	pod 'ViewDeck', '~>2.2.11'
-	pod 'MBProgressHUD', '~> 0.8'
-end
+pod 'MFCore', :path => '../mfcore'
+pod 'ViewDeck', '~>2.2.11'
+pod 'MBProgressHUD', '~> 0.8'
 
 post_install do |installer_representation|
   installer_representation.project.targets.each do |target|

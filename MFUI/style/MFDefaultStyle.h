@@ -9,12 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface MFDefaultStyle : NSObject
+#import "MFStyleProtocol.h"
 
--(void) applyStyleOnView:(UIView *)view;
-
--  (void)applyErrorStyleOnView:(UIView *)view;
-
--  (void)applyValidStyleOnView:(UIView *)view;
+@interface MFDefaultStyle : NSObject <MFStyleProtocol>
 
 @end

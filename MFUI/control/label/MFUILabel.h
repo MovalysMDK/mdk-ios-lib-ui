@@ -63,6 +63,8 @@ IB_DESIGNABLE
 
 @interface MFUIExternalLabel : MFUILabel <MFExternalComponent>
 
+@property (weak, nonatomic) IBOutlet UILabel *label;
+
 @property (nonatomic, strong) IBInspectable NSString *customXIBName;
 
 @property (nonatomic, strong) IBInspectable NSString *customErrorXIBName;

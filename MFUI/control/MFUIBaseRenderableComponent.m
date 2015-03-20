@@ -32,41 +32,56 @@
 @property (nonatomic, strong) JDFTooltipView *tooltipView;
 
 /**
+ * @brief This dictionary contains the name of the XIBs used to load base MDK iOS components.
+ * @discussion It is loaded from the "Framework-components.plist" file from the generated project
+ * @discussion The developer can modify this file to use a custom XIB for a MDK Component Type.
+ */
+@property (nonatomic, strong) NSDictionary *baseMDKComponentsXIBsName;
+
+/**
  * @brief The constraints applied to the internalView to this component.
  * @discussion These constraints can be modified by this class to display/hide the errorView
  */
-@property (nonatomic, strong) NSLayoutConstraint *leftConstraint, *topConstraint, *rightConstraint, *bottomConstraint;
+@property (nonatomic, weak) NSLayoutConstraint *leftConstraint, *topConstraint, *rightConstraint, *bottomConstraint;
 
 /**
  * @brief The constraints applied to the errorView to this component
  * @discussion These constraints can be modified by this class to display/hide the errorView
  */
-@property (nonatomic, strong) NSLayoutConstraint *errorLeftConstraint, *errorCenterYConstraint, *errorWidthConstraint, *errorHeightConstraint;
+@property (nonatomic, weak) NSLayoutConstraint *errorLeftConstraint, *errorCenterYConstraint, *errorWidthConstraint, *errorHeightConstraint;
 
 @end
 
 
 @implementation MFUIBaseRenderableComponent
 @synthesize editable = _editable;
+@synthesize styleClass = _styleClass;
 
-#pragma mark - Drawing component
+const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
+    .ErrorView = @"ErrorView",
+    .ParentView = @"ParentView",
+    .InternalViewLeftConstraint = @"InternalViewLeftConstraint",
+    .InternalViewTopConstraint = @"InternalViewTopConstraint",
+    .InternalViewRightConstraint = @"InternalViewRightConstraint",
+    .InternalViewBottomConstraint = @"InternalViewbottomConstraint"
+};
 
-/**
- * @brief The drawRect: UIview method
- * @discussion Following this view represents the internal view or the external view of the component,
- * this method do some specific treatments
- */
--(void)drawRect:(CGRect)rect {
-    [super drawRect:rect];
+-(void)initialize {
+    self.baseMDKComponentsXIBsName = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:NSClassFromString(@"AppDelegate")] pathForResource:@"Framework-components" ofType:@"plist"]];
+    [super initialize];
+}
+
+-(void) commonInit {
     if([self conformsToProtocol:@protocol(MFExternalComponent)]) {
+        
         if(self.internalView) {
             [self.internalView removeFromSuperview];
         }
         @try {
-            Class bundleClass = [[self frameworkXIBs] containsObject:[self retrieveCustomXIB]] ?  NSClassFromString([self retrieveCustomXIB]) : NSClassFromString(@"AppDelegate");
-            Class errorBundleClass = [[self frameworkXIBs] containsObject:[self retrieveCustomErrorXIB]] ?  NSClassFromString(@"MFUIApplication") : NSClassFromString(@"AppDelegate");
+            Class bundleClass = [[self retrieveCustomXIB] hasPrefix:MDK_XIB_IDENTIFIER] ?  NSClassFromString(@"MFUIApplication") : NSClassFromString(@"AppDelegate");
+            Class errorBundleClass = [[self retrieveCustomErrorXIB] hasPrefix:MDK_XIB_IDENTIFIER] ?  NSClassFromString(@"MFUIApplication") : NSClassFromString(@"AppDelegate");
             
-            self.internalView = [[[NSBundle bundleForClass:bundleClass] loadNibNamed:[self retrieveCustomXIB] owner:nil options:nil] firstObject];
+            self.internalView = [[[NSBundle bundleForClass:bundleClass] loadNibNamed:[self retrieveCustomXIB] owner:self options:nil] firstObject];
             self.errorView = [[[NSBundle bundleForClass:errorBundleClass] loadNibNamed:[self retrieveCustomErrorXIB] owner:nil options:nil] firstObject];
             self.errorView.userInteractionEnabled = YES;
             [self.internalView performSelector:@selector(setExternalView:) withObject:self];
@@ -75,65 +90,85 @@
         @catch(NSException *e) {
             NSLog(@"%@", e.description);
         }
-        @finally {
-            NSString *b = [NSBundle bundleForClass:NSClassFromString([self retrieveCustomXIB])].description;
-            NSLog(@"%@", b);
-        }
         
         [self addSubview:self.internalView];
-        [self defineInternalViewConstraints];
-        
-        [(id<MFInternalComponent>)self.internalView forwardOutlets:self];
-        if([self respondsToSelector:@selector(didInitializeOutlets)]) {
-            [self performSelector:@selector(didInitializeOutlets)];
+        if(self.internalView && self.errorView) {
+            [self setNeedsUpdateConstraints];
         }
+        [self setDisplayComponentValue:self.componentData];
         [self forwardBaseRenderableProperties];
         [self forwardSpecificRenderableProperties];
-        [self setDisplayComponentValue:self.componentData];
         
     }
     else if([self conformsToProtocol:@protocol(MFInternalComponent)]){
-        [self computeStyleClass];
         [self applyStandardStyle];
         [self renderComponent:self];
         self.translatesAutoresizingMaskIntoConstraints = NO;
     }
+    [self computeStyleClass];
+    
 }
+
+-(void)awakeFromNib {
+    [super awakeFromNib];
+    [self commonInit];
+    [self didInitializeOutlets];
+}
+
+
+-(void)updateConstraints {
+    [self defineInternalViewConstraints];
+    [super updateConstraints];
+}
+
+-(void) didInitializeOutlets {
+    //    [self commonInit];
+}
+
+#pragma mark - Drawing component
+
 
 /**
  * @brief Defines the constraints of the internal view in the external view
  */
 -(void) defineInternalViewConstraints {
-#if !TARGET_INTERFACE_BUILDER
     
     self.leftConstraint = nil;
     self.bottomConstraint = nil;
     self.rightConstraint = nil;
     self.topConstraint = nil;
     
-    if(!self.leftConstraint) {
-        self.leftConstraint = [NSLayoutConstraint constraintWithItem:self.internalView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:[self isValid] ? 0 : self.errorView.frame.size.width];
-        [self addConstraint:self.leftConstraint];
-    }
-    
-    if(!self.topConstraint) {
-        self.topConstraint = [NSLayoutConstraint constraintWithItem:self.internalView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-        [self addConstraint:self.topConstraint];
-    }
-    
-    if(!self.rightConstraint) {
-        self.rightConstraint = [NSLayoutConstraint constraintWithItem:self.internalView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0];
-        [self addConstraint:self.rightConstraint];
-    }
-    
-    if(!self.bottomConstraint) {
-        self.bottomConstraint = [NSLayoutConstraint constraintWithItem:self.internalView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-        [self addConstraint:self.bottomConstraint];
-    }
+    if(self.internalView && self.errorView) {
+#if TARGET_INTERFACE_BUILDER
+        if(!self.leftConstraint) {
+            self.leftConstraint = [NSLayoutConstraint constraintWithItem:self.internalView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:![self IB_onError] ? 0 : self.errorView.frame.size.width];
+            [self addConstraint:self.leftConstraint];
+        }
 #else
-    self.internalView.frame = self.bounds;
+        if(!self.leftConstraint) {
+            self.leftConstraint = [NSLayoutConstraint constraintWithItem:self.internalView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:[self isValid] ? 0 : self.errorView.frame.size.width];
+            [self addConstraint:self.leftConstraint];
+        }
 #endif
-    [UIView animateWithDuration:0.25
+        
+        if(!self.topConstraint) {
+            self.topConstraint = [NSLayoutConstraint constraintWithItem:self.internalView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+            [self addConstraint:self.topConstraint];
+        }
+        
+        if(!self.rightConstraint) {
+            self.rightConstraint = [NSLayoutConstraint constraintWithItem:self.internalView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0];
+            [self addConstraint:self.rightConstraint];
+        }
+        
+        if(!self.bottomConstraint) {
+            self.bottomConstraint = [NSLayoutConstraint constraintWithItem:self.internalView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+            [self addConstraint:self.bottomConstraint];
+        }
+    }
+    //    self.internalView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [UIView animateWithDuration:0.0
                      animations:^{
                          self.errorView.alpha = 1.0;
                          [self layoutIfNeeded]; // Called on parent view
@@ -179,7 +214,7 @@
         return [((id<MFExternalComponent>)self) customXIBName];
     }
     else {
-        return [((id<MFExternalComponent>)self) defaultXIBName];
+        return [self.baseMDKComponentsXIBsName objectForKey:[((id<MFExternalComponent>)self) defaultXIBName]];
     }
 }
 
@@ -196,23 +231,12 @@
     }
 }
 
-/**
- * @brief An array that describes the list of framework XIBs
- * @return An array that contains the files names of the framework components XIB's
- */
--(NSArray *) frameworkXIBs {
-    return @[
-             @"MFUILabel",
-             @"MFUIErrorView",
-             @"MFUITextField",
-             ];
-}
 
 /**
  * @brief Returns the name of the default XIB file to render the error view
  */
 -(NSString *)defaultErrorXIBName {
-    return @"MFUIErrorView";
+    return @"MDK_MFUIErrorView";
 }
 
 
@@ -249,7 +273,7 @@
 
 
 /**
- * @brief Forwards the tjhe base renderable properties on the intenal view
+ * @brief Forwards the the base renderable properties on the intenal view
  */
 -(void) forwardBaseRenderableProperties {
     if(self.IB_borderColor) {
@@ -261,19 +285,20 @@
     if(self.IB_cornerRadius) {
         self.internalView.IB_cornerRadius = self.IB_cornerRadius;
     }
-    if(self.styleClass) {
-        self.internalView.styleClass = self.styleClass;
-    }
     if(self.IB_tooltipBgColor) {
         self.internalView.IB_tooltipBgColor = self.IB_tooltipBgColor;
     }
+    if(self.styleClass) {
+        self.internalView.styleClass = self.styleClass;
+    }
+    [self.internalView renderComponent:self.internalView];
 }
 
 
 -(void)prepareForInterfaceBuilder {
     
     [super prepareForInterfaceBuilder];
-    [(id<MFInternalComponent>)self.internalView forwardOutlets:self];
+    [self commonInit];
     [self computeStyleClass];
     if(self.IB_onError) {
         [self applyStandardStyle];
@@ -286,7 +311,6 @@
     [self showError:self.IB_onError];
 }
 
-
 #pragma mark - Style
 
 
@@ -298,7 +322,7 @@
      * 3. Class style defined as a bean base on the component class name
      * 4. Default Movalys style
      */
-    Class componentClassStyle = NSClassFromString([NSString stringWithFormat:@"%@Style", NSStringFromClass([self superclass])]);
+    Class componentClassStyle = NSClassFromString([NSString stringWithFormat:@"%@Style", [self className]]);
     if(self.styleClass) {
         self.baseStyleClass = NSClassFromString(self.styleClass);
     }
@@ -325,73 +349,6 @@
 }
 
 #pragma mark - Generic methods for ExternalComponent
-/**
- * @brief This method is optional and already implemented in MFBaseRenderableComponent.
- * It allows to forward outlets from this "InternalView" to the "ExternalView". This forward
- * is automatic, but this method should be overloaded if the developer want to forward others
- * unforwarded outlets.
- * @param receiver The receiver of the forward
- */
--(void) forwardOutlets:(MFUIBaseRenderableComponent *)parent {
-    //TODO: Cache
-    Class clazz = [self class];
-    u_int count;
-    NSMutableArray* propertyArray = [NSMutableArray array];
-    
-    while(clazz != nil) {
-        objc_property_t* properties = class_copyPropertyList(clazz, &count);
-        
-        for (int i = 0; i < count ; i++)
-        {
-            const char* propertyAttributesAsChar = property_getAttributes(properties[i]);
-            const char* propertyName = property_getName(properties[i]);
-            NSArray *propertyAttributes = [[NSString stringWithFormat:@"%s",propertyAttributesAsChar] componentsSeparatedByString:@","];
-            BOOL isCandidate = YES;
-            BOOL isView = NO;
-            for(NSString *propertyAttribute in propertyAttributes) {
-                if([propertyAttribute containsString:@"UILabel"]) {
-                    YES;
-                }
-                if([propertyAttribute hasPrefix:@"T@"] && [propertyAttribute componentsSeparatedByString:@"\""].count > 1){
-                    if([NSClassFromString([propertyAttribute componentsSeparatedByString:@"\""][1]) isSubclassOfClass:NSClassFromString(@"UIView")]) {
-                        isView = YES;
-                        break;
-                    }
-                }
-            }
-            isCandidate = isCandidate && [propertyAttributes containsObject:@"W"];
-            isCandidate = isCandidate && isView;
-            if(isCandidate) {
-                [propertyArray addObject:[NSString  stringWithCString:propertyName encoding:NSUTF8StringEncoding]];
-            }
-        }
-        free(properties);
-        clazz = [clazz superclass];
-    }
-    
-    NSArray *forbiddenCandidate = @[@"sender", @"mfParent", @"scrollingTableView", @"internalView", @"externalView"];
-    for(NSString *candidatePropertyForForwarding in propertyArray) {
-        if([forbiddenCandidate containsObject:candidatePropertyForForwarding]) {
-            continue;
-        }
-        NSString *getterSelectorAsString = [NSString stringWithFormat:@"%@", candidatePropertyForForwarding];
-        
-        NSString *capitalizedSentence = [getterSelectorAsString stringByReplacingCharactersInRange:NSMakeRange(0,1)
-                                                                                        withString:[[getterSelectorAsString substringToIndex:1] capitalizedString]];
-        NSString *setterSelectorAsString = [NSString stringWithFormat:@"set%@:", capitalizedSentence];
-        SEL setterSelector = NSSelectorFromString(setterSelectorAsString);
-        SEL getterSelector = NSSelectorFromString(getterSelectorAsString);
-        if([parent respondsToSelector:setterSelector]) {
-            [parent performSelector:setterSelector withObject:[self performSelector:getterSelector]];
-        }
-    }
-    
-    //Automatic test
-    if([self respondsToSelector:@selector(setAllTags)]) {
-        [self performSelector:@selector(setAllTags)];
-    }
-    
-}
 
 #pragma mark - Managing error
 
@@ -406,8 +363,30 @@
             [self addSubview:self.errorView];
             self.tooltipView = [[JDFTooltipView alloc] initWithTargetView:self.errorView.errorButton hostView:self tooltipText:@"" arrowDirection:JDFTooltipViewArrowDirectionUp width:self.frame.size.width];
             
-            [self defineErrorViewConstraints];
-            self.leftConstraint.constant  = self.errorView.frame.size.width;
+            if([self respondsToSelector:@selector(definePositionOfErrorViewWithParameters:whenShown:)]) {
+#if !TARGET_INTERFACE_BUILDER
+                NSDictionary *errorPositionParameters = [NSDictionary
+                                                         dictionaryWithObjects:@[self.errorView,
+                                                                                 self,
+                                                                                 self.leftConstraint,
+                                                                                 self.topConstraint,
+                                                                                 self.rightConstraint,
+                                                                                 self.bottomConstraint]
+                                                         forKeys:@[ErrorPositionParameters.ErrorView,
+                                                                   ErrorPositionParameters.ParentView,
+                                                                   ErrorPositionParameters.InternalViewLeftConstraint,
+                                                                   ErrorPositionParameters.InternalViewTopConstraint,
+                                                                   ErrorPositionParameters.InternalViewRightConstraint,
+                                                                   ErrorPositionParameters.InternalViewBottomConstraint]];
+                
+                [self definePositionOfErrorViewWithParameters:errorPositionParameters whenShown:showError];
+#endif
+
+            }
+            else {
+                [self defineErrorViewConstraints];
+                self.leftConstraint.constant  = self.errorView.frame.size.width;
+            }
             
             self.errorView.alpha = 0.0;
             
@@ -420,16 +399,41 @@
         else {
             [self.tooltipView hideAnimated:YES];
             [self.errorView removeFromSuperview];
-            if(self.errorWidthConstraint) [self removeConstraint:self.errorWidthConstraint];
-            if(self.errorLeftConstraint) [self removeConstraint:self.errorLeftConstraint];
-            if(self.errorHeightConstraint) [self removeConstraint:self.errorHeightConstraint];
-            if(self.errorCenterYConstraint) [self removeConstraint:self.errorCenterYConstraint];
+            if([self respondsToSelector:@selector(definePositionOfErrorViewWithParameters:whenShown:)]) {
+#if !TARGET_INTERFACE_BUILDER
+
+                NSDictionary *errorPositionParameters = [NSDictionary
+                                                         dictionaryWithObjects:@[self.errorView,
+                                                                                 self,
+                                                                                 self.leftConstraint,
+                                                                                 self.topConstraint,
+                                                                                 self.rightConstraint,
+                                                                                 self.bottomConstraint]
+                                                         forKeys:@[ErrorPositionParameters.ErrorView,
+                                                                   ErrorPositionParameters.ParentView,
+                                                                   ErrorPositionParameters.InternalViewLeftConstraint,
+                                                                   ErrorPositionParameters.InternalViewTopConstraint,
+                                                                   ErrorPositionParameters.InternalViewRightConstraint,
+                                                                   ErrorPositionParameters.InternalViewBottomConstraint]];
+                
+                [self definePositionOfErrorViewWithParameters:errorPositionParameters whenShown:showError];
+#endif
+            }
+            else {
+                if(self.errorWidthConstraint) [self removeConstraint:self.errorWidthConstraint];
+                if(self.errorLeftConstraint) [self removeConstraint:self.errorLeftConstraint];
+                if(self.errorHeightConstraint) [self removeConstraint:self.errorHeightConstraint];
+                if(self.errorCenterYConstraint) [self removeConstraint:self.errorCenterYConstraint];
+                
+                self.errorCenterYConstraint = nil;
+                self.errorHeightConstraint = nil;
+                self.errorLeftConstraint = nil;
+                self.errorWidthConstraint = nil;
+                self.leftConstraint.constant  = 0;
+            }
+
             
-            self.errorCenterYConstraint = nil;
-            self.errorHeightConstraint = nil;
-            self.errorLeftConstraint = nil;
-            self.errorWidthConstraint = nil;
-            self.leftConstraint.constant  = 0;
+
             [UIView animateWithDuration:0.25
                              animations:^{
                                  [self layoutIfNeeded];
@@ -496,5 +500,26 @@
         [self.internalView setSelfDescriptor:selfDescriptor];
     }
 }
+
+-(NSString *)className {
+    return [self respondsToSelector:@selector(defaultXIBName)] ? [[self performSelector:@selector(defaultXIBName)] stringByReplacingOccurrencesOfString:MDK_XIB_IDENTIFIER withString:@""] : nil;
+}
+
+-(void)addErrors:(NSArray *)errors {
+    [super addErrors:errors];
+    [self applyErrorStyle];
+}
+
+-(void)clearErrors {
+    [super clearErrors];
+    [self applyValidStyle];
+}
+
+
+-(NSString *)defaultXIBName {
+    return NSStringFromClass(self.class);
+}
+
+#pragma mark - LiveRendering
 
 @end

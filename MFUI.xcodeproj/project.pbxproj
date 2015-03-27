@@ -45,6 +45,7 @@
 		B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */; };
 		B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */; };
 		B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */; };
+		B08683DF1ABC7DE200C8B5F8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B08683DE1ABC7DE200C8B5F8 /* Pods.framework */; };
 		B097AB5B1ABC79AD0026784A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B097AB5A1ABC79AD0026784A /* Pods.framework */; };
 		B0D4551F1A5ED26A00C6D376 /* MFUI.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D4551E1A5ED26A00C6D376 /* MFUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D455291A5ED26A00C6D376 /* MFUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D455281A5ED26A00C6D376 /* MFUITests.m */; };
@@ -449,6 +450,8 @@
 		B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUIErrorView.xib; sourceTree = "<group>"; };
 		B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUILabel.xib; sourceTree = "<group>"; };
 		B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUITextField.xib; sourceTree = "<group>"; };
+		B08683DC1ABC7DD500C8B5F8 /* MFCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MFCore.framework; path = "Pods/../build/Debug-iphoneos/Pods/MFCore.framework"; sourceTree = "<group>"; };
+		B08683DE1ABC7DE200C8B5F8 /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
 		B097AB5A1ABC79AD0026784A /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
 		B0D455191A5ED26A00C6D376 /* MFUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MFUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D4551D1A5ED26A00C6D376 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -823,6 +826,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B08683DF1ABC7DE200C8B5F8 /* Pods.framework in Frameworks */,
 				B0D45E8C1A5ED33F00C6D376 /* Foundation.framework in Frameworks */,
 				B0D45E8A1A5ED33900C6D376 /* UIKit.framework in Frameworks */,
 			);
@@ -851,6 +855,8 @@
 		A417D180CAED9DDD804A7C0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B08683DE1ABC7DE200C8B5F8 /* Pods.framework */,
+				B08683DC1ABC7DD500C8B5F8 /* MFCore.framework */,
 				B097AB5A1ABC79AD0026784A /* Pods.framework */,
 				B0D45E8B1A5ED33F00C6D376 /* Foundation.framework */,
 				B0D45E891A5ED33900C6D376 /* UIKit.framework */,
@@ -2075,7 +2081,6 @@
 				B0D455201A5ED26A00C6D376 /* Sources */,
 				B0D455211A5ED26A00C6D376 /* Frameworks */,
 				B0D455221A5ED26A00C6D376 /* Resources */,
-				B065A69C1ABC7BFC00B36664 /* Copy Embed Pods */,
 			);
 			buildRules = (
 			);
@@ -2161,7 +2166,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		74234BEE2752AFF060290804 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2192,23 +2196,9 @@
 			shellPath = /bin/sh;
 			shellScript = "echo \"Creating derivedDataDirectory file\"\necho \"${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH}\" > ${PROJECT_DIR}/derivedDataDirectory\n\n#--------------------\necho 'SRCROOT: '${SRCROOT}\ncd \"${SRCROOT}\"\n\necho 'Copying Headers preserving hierarchy'\nfor H in `find ./MFUI -name \"*.h\"`; do\necho \"$H\"\nditto \"${H}\" \"${BUILT_PRODUCTS_DIR}/${H}\"\ndone\n#--------------------";
 		};
-		B065A69C1ABC7BFC00B36664 /* Copy Embed Pods */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Embed Pods";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"";
-		};
 		E4FE8FE34AE0F7379256A15F /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -2219,7 +2209,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2514,6 +2503,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/Pods-MFUI",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MFUI/MFUI-Prefix.pch";
@@ -2551,6 +2541,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/Pods-MFUI",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MFUI/MFUI-Prefix.pch";

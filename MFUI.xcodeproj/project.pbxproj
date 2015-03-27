@@ -411,6 +411,16 @@
 		B0D45E8C1A5ED33F00C6D376 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D45E8B1A5ED33F00C6D376 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B0D2E77E1AC58F55007CD2AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0D455101A5ED26A00C6D376 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0D455181A5ED26A00C6D376;
+			remoteInfo = MFUI;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		B00787BA1AB1E37A009F6D95 /* JDFSequentialTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFSequentialTooltipManager.h; sourceTree = "<group>"; };
 		B00787BB1AB1E37A009F6D95 /* JDFSequentialTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFSequentialTooltipManager.m; sourceTree = "<group>"; };
@@ -2086,6 +2096,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B0D2E77F1AC58F55007CD2AA /* PBXTargetDependency */,
 			);
 			name = MFUITests;
 			productName = MFUITests;
@@ -2393,6 +2404,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B0D2E77F1AC58F55007CD2AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B0D455181A5ED26A00C6D376 /* MFUI */;
+			targetProxy = B0D2E77E1AC58F55007CD2AA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B0D4552A1A5ED26A00C6D376 /* Debug */ = {

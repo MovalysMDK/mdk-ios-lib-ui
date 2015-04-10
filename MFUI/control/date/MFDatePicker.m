@@ -85,8 +85,7 @@
 
 -(void)initialize {
     
-    //The super should be done last, because he calls applyDefaultConstraints and needs that all "constrained" ui elements exist.
-    [super initialize];
+
     
 #if !TARGET_INTERFACE_BUILDER
     
@@ -112,11 +111,13 @@
     [self registerOrientationChange];
 #else
 #endif
-    
+    //The super should be done last, because he calls applyDefaultConstraints and needs that all "constrained" ui elements exist.
+    [super initialize];
     
 }
 
 -(void)applyDefaultConstraints {
+    if(self.dateButton) {
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.dateButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSLayoutConstraint *topDateLabelConstraint = [NSLayoutConstraint constraintWithItem:self.dateButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
@@ -134,6 +135,7 @@
     [self addConstraints:@[
                            topDateLabelConstraint, bottomDateLabelConstraint, leftDateLabelConstraint, rightDateLabelConstraint
                            ]];
+    }
 }
 
 

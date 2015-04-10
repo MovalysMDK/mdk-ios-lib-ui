@@ -37,6 +37,7 @@
 		B0289F321AA89342007A2E75 /* UIView+Styleable.m in Sources */ = {isa = PBXBuildFile; fileRef = B0289F2E1AA89342007A2E75 /* UIView+Styleable.m */; };
 		B032D0D71AB188CE001C114F /* MFUIErrorView.h in Headers */ = {isa = PBXBuildFile; fileRef = B032D0D51AB188CE001C114F /* MFUIErrorView.h */; };
 		B032D0D81AB188CE001C114F /* MFUIErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B032D0D61AB188CE001C114F /* MFUIErrorView.m */; };
+		B06868F51AD6AEEF00D6B529 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06868F41AD6AEEF00D6B529 /* Pods.framework */; };
 		B06C529C1ABAD7E5002BE0F2 /* MFStyleProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06C52991ABAD7E5002BE0F2 /* MFStyleProtocol.h */; };
 		B06C529D1ABAD7E5002BE0F2 /* MFUITextFieldStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = B06C529A1ABAD7E5002BE0F2 /* MFUITextFieldStyle.h */; };
 		B06C529E1ABAD7E5002BE0F2 /* MFUITextFieldStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B06C529B1ABAD7E5002BE0F2 /* MFUITextFieldStyle.m */; };
@@ -45,8 +46,6 @@
 		B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */; };
 		B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */; };
 		B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */; };
-		B08683DF1ABC7DE200C8B5F8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B08683DE1ABC7DE200C8B5F8 /* Pods.framework */; };
-		B097AB5B1ABC79AD0026784A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B097AB5A1ABC79AD0026784A /* Pods.framework */; };
 		B0D4551F1A5ED26A00C6D376 /* MFUI.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D4551E1A5ED26A00C6D376 /* MFUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D455291A5ED26A00C6D376 /* MFUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D455281A5ED26A00C6D376 /* MFUITests.m */; };
 		B0D45D171A5ED2F400C6D376 /* MFAbstractDeleteDetailAction.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45B6E1A5ED2F300C6D376 /* MFAbstractDeleteDetailAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -452,6 +451,7 @@
 		B0289F2E1AA89342007A2E75 /* UIView+Styleable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Styleable.m"; sourceTree = "<group>"; };
 		B032D0D51AB188CE001C114F /* MFUIErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIErrorView.h; sourceTree = "<group>"; };
 		B032D0D61AB188CE001C114F /* MFUIErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUIErrorView.m; sourceTree = "<group>"; };
+		B06868F41AD6AEEF00D6B529 /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
 		B06C52991ABAD7E5002BE0F2 /* MFStyleProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFStyleProtocol.h; sourceTree = "<group>"; };
 		B06C529A1ABAD7E5002BE0F2 /* MFUITextFieldStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUITextFieldStyle.h; sourceTree = "<group>"; };
 		B06C529B1ABAD7E5002BE0F2 /* MFUITextFieldStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUITextFieldStyle.m; sourceTree = "<group>"; };
@@ -460,9 +460,6 @@
 		B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUIErrorView.xib; sourceTree = "<group>"; };
 		B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUILabel.xib; sourceTree = "<group>"; };
 		B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUITextField.xib; sourceTree = "<group>"; };
-		B08683DC1ABC7DD500C8B5F8 /* MFCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MFCore.framework; path = "Pods/../build/Debug-iphoneos/Pods/MFCore.framework"; sourceTree = "<group>"; };
-		B08683DE1ABC7DE200C8B5F8 /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
-		B097AB5A1ABC79AD0026784A /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
 		B0D455191A5ED26A00C6D376 /* MFUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MFUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D4551D1A5ED26A00C6D376 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0D4551E1A5ED26A00C6D376 /* MFUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFUI.h; sourceTree = "<group>"; };
@@ -836,7 +833,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B08683DF1ABC7DE200C8B5F8 /* Pods.framework in Frameworks */,
+				B06868F51AD6AEEF00D6B529 /* Pods.framework in Frameworks */,
 				B0D45E8C1A5ED33F00C6D376 /* Foundation.framework in Frameworks */,
 				B0D45E8A1A5ED33900C6D376 /* UIKit.framework in Frameworks */,
 			);
@@ -846,7 +843,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B097AB5B1ABC79AD0026784A /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,9 +861,7 @@
 		A417D180CAED9DDD804A7C0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B08683DE1ABC7DE200C8B5F8 /* Pods.framework */,
-				B08683DC1ABC7DD500C8B5F8 /* MFCore.framework */,
-				B097AB5A1ABC79AD0026784A /* Pods.framework */,
+				B06868F41AD6AEEF00D6B529 /* Pods.framework */,
 				B0D45E8B1A5ED33F00C6D376 /* Foundation.framework */,
 				B0D45E891A5ED33900C6D376 /* UIKit.framework */,
 			);
@@ -2498,7 +2492,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$PODS_FRAMEWORK_BUILD_PATH\"",
-					"\"$(CONFIGURATION_BUILD_DIR)\"",
+					"\"$(CONFIGURATION_BUILD_DIR)\"/**",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2541,10 +2535,6 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MFUI/MFUI-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)/**",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-				);
 				INFOPLIST_FILE = MFUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
@@ -2556,7 +2546,6 @@
 				OTHER_LIBTOOLFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
 			};
 			name = Debug;
 		};
@@ -2579,10 +2568,6 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MFUI/MFUI-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)/**",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-				);
 				INFOPLIST_FILE = MFUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
@@ -2594,7 +2579,6 @@
 				OTHER_LIBTOOLFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/**";
 			};
 			name = Release;
 		};
@@ -2608,6 +2592,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/Pods-MFUI",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -2629,6 +2614,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/Pods-MFUI",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods",
 				);
 				INFOPLIST_FILE = MFUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

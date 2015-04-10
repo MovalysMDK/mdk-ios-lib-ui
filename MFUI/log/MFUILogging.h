@@ -19,7 +19,7 @@
 
 #define MF_UI_LOG_CONTEXT 2
 
-#define MFUILogError(frmt, ...)       LOG_MAYBE(LOG_ASYNC_ENABLED, ddLogLevel, DDLogFlagError, MF_UI_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
-#define MFUILogWarn(frmt, ...)        LOG_MAYBE(LOG_ASYNC_ENABLED, ddLogLevel, DDLogFlagWarning, MF_UI_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
-#define MFUILogInfo(frmt, ...)        LOG_MAYBE(LOG_ASYNC_ENABLED, ddLogLevel, DDLogFlagInfo, MF_UI_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
-#define MFUILogVerbose(frmt, ...)     LOG_MAYBE(LOG_ASYNC_ENABLED, ddLogLevel, DDLogFlagVerbose, MF_UI_LOG_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define MFUILogError(frmt, ...)       DDLogError(frmt, ##__VA_ARGS__)
+#define MFUILogWarn(frmt, ...)        DDLogWarn(frmt, ##__VA_ARGS__)
+#define MFUILogInfo(frmt, ...)        DDLogInfo(frmt, ##__VA_ARGS__)
+#define MFUILogVerbose(frmt, ...)     DDLogVerbose(frmt, ##__VA_ARGS__)

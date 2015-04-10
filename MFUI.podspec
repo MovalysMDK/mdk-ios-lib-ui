@@ -13,12 +13,16 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source       = { :git => "gitmovalys@git.ptx.fr.sopra:mfui.git", :tag => "1.3.0" }
   s.platform     = :ios, '6.0'
-  s.dependency 'MBProgressHUD', '~>0.8'
-  s.dependency 'ViewDeck', '~>2.2.11'
+
   s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore'
   s.header_mappings_dir = '.'
   s.source_files = 'MFUI/**/*.{h,m}'
   s.resources = 'MFUI/**/*.xib'
+
+  s.subspec 'Dependencies' do|dep| 
+    dep.dependency 'MBProgressHUD', '~>0.8'
+    dep.dependency 'ViewDeck', '~>2.2.11'
+  end
 
   s.subspec 'NonARC' do |files|
     files.source_files = 'MFUI/**/MFPickerListSelectionIndicator.{h,m}'

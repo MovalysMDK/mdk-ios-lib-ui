@@ -144,10 +144,6 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
     self.baseErrors = [[NSMutableArray alloc] init];
 }
 
--(void)drawRect:(CGRect)rect {
-    [super drawRect:rect];
-}
-
 #pragma mark - Méthodes communes à tous les composants
 
 

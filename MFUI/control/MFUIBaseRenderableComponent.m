@@ -79,11 +79,10 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
         }
         @try {
             Class bundleClass = [[self retrieveCustomXIB] hasPrefix:MDK_XIB_IDENTIFIER] ?  NSClassFromString(@"MFUIApplication") : NSClassFromString(@"AppDelegate");
-            Class errorBundleClass = [[self retrieveCustomErrorXIB] hasPrefix:MDK_XIB_IDENTIFIER] ?  NSClassFromString(@"MFUIApplication") : NSClassFromString(@"AppDelegate");
+
             
             self.internalView = [[[NSBundle bundleForClass:bundleClass] loadNibNamed:[self retrieveCustomXIB] owner:self options:nil] firstObject];
-            self.errorView = [[[NSBundle bundleForClass:errorBundleClass] loadNibNamed:[self retrieveCustomErrorXIB] owner:nil options:nil] firstObject];
-            self.errorView.userInteractionEnabled = YES;
+
             [self.internalView performSelector:@selector(setExternalView:) withObject:self];
             
         }
@@ -92,7 +91,7 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
         }
         
         [self addSubview:self.internalView];
-        if(self.internalView && self.errorView) {
+        if(self.internalView) {
             [self setNeedsUpdateConstraints];
         }
         [self setDisplayComponentValue:self.componentData];
@@ -138,7 +137,7 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
     self.rightConstraint = nil;
     self.topConstraint = nil;
     
-    if(self.internalView && self.errorView) {
+    if(self.internalView) {
 #if TARGET_INTERFACE_BUILDER
         if(!self.leftConstraint) {
             self.leftConstraint = [NSLayoutConstraint constraintWithItem:self.internalView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:![self IB_onError] ? 0 : self.errorView.frame.size.width];
@@ -357,9 +356,15 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
  * @param showErrorView A BOOL value that indicates if the component is in an invalid state or not
  */
 -(void) showError:(BOOL)showError {
-    if([self conformsToProtocol:@protocol(MFExternalComponent) ] && self.errorView) {
+
+    if([self conformsToProtocol:@protocol(MFExternalComponent) ]) {
         
         if(showError) {
+            if(!self.errorView) {
+                Class errorBundleClass = [[self retrieveCustomErrorXIB] hasPrefix:MDK_XIB_IDENTIFIER] ?  NSClassFromString(@"MFUIApplication") : NSClassFromString(@"AppDelegate");
+                self.errorView = [[[NSBundle bundleForClass:errorBundleClass] loadNibNamed:[self retrieveCustomErrorXIB] owner:nil options:nil] firstObject];
+            }
+            self.errorView.userInteractionEnabled = YES;
             [self addSubview:self.errorView];
             self.tooltipView = [[JDFTooltipView alloc] initWithTargetView:self.errorView.errorButton hostView:self tooltipText:@"" arrowDirection:JDFTooltipViewArrowDirectionUp width:self.frame.size.width];
             

@@ -29,6 +29,7 @@
 
 -(NSString *) regex {
 //    @throw [[NSException alloc] initWithName:@"Missing Regex" reason:@"You should implement the regex for this component" userInfo:nil];
+    return nil;
 }
 
 @end

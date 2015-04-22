@@ -13,11 +13,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFFormViewController.m
-//  MFUI
-//
-//
+
 
 //Imports MFCore
 #import <MFCore/MFCoreFoundationExt.h>
@@ -540,7 +536,7 @@ NSString *const MFPROP_FORM_ONUNSAVEDCHANGES = @"FormOnUnsavedChanges";
     else {
         // if not found, read value from viewmodel (return MFKeyNotFound if binding key not found)
         valueForKeyPath = [self.viewModel valueForKeyPath:componentDescriptor.bindingKey];
-        [component clearErrors:NO];
+        [component clearErrors];
     }
     
     if( valueForKeyPath != [MFKeyNotFound keyNotFound]) {

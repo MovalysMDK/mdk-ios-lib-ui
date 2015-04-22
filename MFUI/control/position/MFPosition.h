@@ -25,7 +25,7 @@
 #import "MFPositionDelegate.h"
 #import "MFUIComponentProtocol.h"
 #import "MFUIBaseComponent.h"
-#import "MFDoubleTextField.h"
+#import "MFTextField.h"
 
 
 /**
@@ -44,12 +44,12 @@
 /**
  * @brief The textfield to display latitude
  */
-@property(nonatomic, strong) MFDoubleTextField *latitude;
+@property(nonatomic, strong) UITextField *latitude;
 
 /**
  * @brief The textfield to display longitude
  */
-@property(nonatomic, strong) MFDoubleTextField *longitude;
+@property(nonatomic, strong) UITextField *longitude;
 
 
 @end

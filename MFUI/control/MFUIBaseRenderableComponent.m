@@ -1,3 +1,4 @@
+
 /**
  * Copyright (C) 2010 Sopra (support_movalys@sopra.com)
  *
@@ -459,7 +460,7 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
         NSString *errorText = @"";
         
         int errorNumber = 0;
-        for (NSError *error in self.baseErrors) {
+        for (NSError *error in self.errors) {
             if(errorNumber > 0){
                 errorText = [errorText stringByAppendingString: @"\n"];
             }

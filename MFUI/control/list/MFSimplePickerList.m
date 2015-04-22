@@ -65,11 +65,9 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 
 @implementation MFSimplePickerList
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize context = _context;
 @synthesize transitionDelegate = _transitionDelegate;
 @synthesize groupDescriptor = _groupDescriptor;
 @synthesize selfDescriptor = _selfDescriptor;
-@synthesize applicationContext = _applicationContext;
 @synthesize isValid = _isValid;
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
@@ -424,10 +422,6 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     [self setPickerButtonTitle:self.currentEnumValue];
 }
 
--(void) setTextColor:(UIColor *)color {
-    [self.pickerButton setTitleColor:color forState:UIControlStateNormal];
-}
-
 
 
 #pragma mark - MFUIBasecomponent base methods
@@ -511,9 +505,6 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     MFUILogVerbose(@"pickerView: didSelectRow:%ld - self.currentEnumValue=%i (apres)", (long)row, self.currentEnumValue);
 }
 
--(void)setComponentAlignment:(NSNumber *)alignValue {
-    [self.pickerButton.titleLabel setTextAlignment:[alignValue intValue]];
-}
 
 /**
  * @brief Event called when the keyboard is displayed

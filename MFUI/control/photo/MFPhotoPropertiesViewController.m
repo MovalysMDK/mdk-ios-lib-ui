@@ -103,8 +103,8 @@
 
     //Données non modifiables si le composant n'est pas éditable
     if (!self.donneesEditables) {
-        [self.titreField setEditable:@0];
-        [self.descriptionField setEditable:@0];
+//        [self.titreField setEditable:@0];
+//        [self.descriptionField setEditable:@0];
     }
 
     self.dateLabel.text = MFLocalizedStringFromKey(@"photoThumbnail_date_label");

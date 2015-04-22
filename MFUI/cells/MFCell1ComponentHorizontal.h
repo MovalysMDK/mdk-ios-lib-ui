@@ -44,6 +44,6 @@
 /**
  * @brief The main Movalys component for this cell
  */
-@property(nonatomic, strong) IBOutlet MFUIBaseComponent *componentView;
+@property(nonatomic, strong) IBOutlet UIView<MFUIComponentProtocol> *componentView;
 
 @end

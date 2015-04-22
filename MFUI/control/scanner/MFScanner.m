@@ -51,7 +51,7 @@ NSUInteger ERROR_BUTTON_RIGHT_MARGIN = 5;
 @synthesize barCodeScannerDelegate = _barCodeScannerDelegate;
 @synthesize mainView = _mainView;
 @synthesize orientationChangedDelegate = _orientationChangedDelegate;
-
+@synthesize privateData = _privateData;
 
 #pragma mark - MFUIBaseCompoennt - Initializing
 
@@ -99,7 +99,6 @@ NSUInteger ERROR_BUTTON_RIGHT_MARGIN = 5;
                           initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
         
         [self addErrors:@[error]];
-        [self.context addErrors:@[error]];
         nbOfErrors++;
     }
 #if DEBUG
@@ -109,7 +108,6 @@ NSUInteger ERROR_BUTTON_RIGHT_MARGIN = 5;
                           initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
         
         [self addErrors:@[error]];
-        [self.context addErrors:@[error]];
         nbOfErrors++;
     }
 #endif

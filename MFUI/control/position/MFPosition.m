@@ -52,36 +52,30 @@
     int positionUpdates;
 }
 
-@synthesize applySelfStyle = _applySelfStyle;
-
 -(void)initialize {
     
     // Latitude Field
-    self.latitude = [[MFDoubleTextField alloc] initWithFrame:CGRectZero withSender:self];
-    self.latitude.decimalPartMaxDigits = @"6";
-    self.latitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRW");
-    [self.latitude createPattern];
-    self.latitude.mfParent = self;
-    self.latitude.applySelfStyle = NO;
-    
-    // Longitude Field
-    self.longitude = [[MFDoubleTextField alloc] initWithFrame:CGRectZero withSender:self];
-    self.longitude.decimalPartMaxDigits = @"6";
-    self.longitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRW");
-    [self.longitude createPattern];
-    self.longitude.mfParent = self;
-    self.longitude.applySelfStyle = NO;
+//    self.latitude = [[MFDoubleTextField alloc] initWithFrame:CGRectZero withSender:self];
+//    self.latitude.decimalPartMaxDigits = @"6";
+//    self.latitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRW");
+//    [self.latitude createPattern];
+//    self.latitude.mfParent = self;
+//
+//    // Longitude Field
+//    self.longitude = [[MFDoubleTextField alloc] initWithFrame:CGRectZero withSender:self];
+//    self.longitude.decimalPartMaxDigits = @"6";
+//    self.longitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRW");
+//    [self.longitude createPattern];
+//    self.longitude.mfParent = self;
     
     
     // GPS Button
     self.gpsButton = [[MFButton alloc] init];
     [self.gpsButton addTarget:self action:@selector(gpsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.gpsButton.applySelfStyle = NO;
     
     // Map Button
     self.mapButton = [[MFButton alloc] init];
     [self.mapButton addTarget:self action:@selector(mapButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.mapButton.applySelfStyle = NO;
     
     [self addSubview:self.latitude];
     [self addSubview:self.longitude];
@@ -165,10 +159,10 @@
 
 -(NSInteger) validateWithParameters:(NSDictionary *)parameters{
     
-    [super validateWithParameters:parameters];
-    [self addErrors:[self.latitude getErrors]];
-    [self addErrors:[self.longitude getErrors]];
-    return [self.baseErrors count];
+//    [super validateWithParameters:parameters];
+//    [self addErrors:[self.latitude getErrors]];
+//    [self addErrors:[self.longitude getErrors]];
+    return [self.errors count];
 }
 
 #pragma mark - Custom Accessors
@@ -183,8 +177,8 @@
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setMaximumFractionDigits:6];
     
-    [self.latitude setData:[MFNumberConverter  toString:[NSNumber numberWithFloat:location.coordinate.latitude] withFormatter:numberFormatter]];
-    [self.longitude setData:[MFNumberConverter  toString:[NSNumber numberWithFloat:location.coordinate.longitude] withFormatter:numberFormatter]];
+//    [self.latitude setData:[MFNumberConverter  toString:[NSNumber numberWithFloat:location.coordinate.latitude] withFormatter:numberFormatter]];
+//    [self.longitude setData:[MFNumberConverter  toString:[NSNumber numberWithFloat:location.coordinate.longitude] withFormatter:numberFormatter]];
     
     
     //    [self.latitude updateValue:self.latitude.text];
@@ -198,7 +192,7 @@
 #pragma mark - Synchonization method
 
 -(void)updateLocationProperty {
-    self.location = [[CLLocation alloc] initWithLatitude:[[MFStringConverter toNumber:self.latitude.regularExpressionTextField.text] doubleValue] longitude:[[MFStringConverter toNumber:self.longitude.regularExpressionTextField.text] doubleValue]];
+//    self.location = [[CLLocation alloc] initWithLatitude:[[MFStringConverter toNumber:self.latitude.regularExpressionTextField.text] doubleValue] longitude:[[MFStringConverter toNumber:self.longitude.regularExpressionTextField.text] doubleValue]];
 }
 
 #pragma mark - geolocalisation
@@ -237,8 +231,8 @@
 
 -(void)setData:(id)data {
     MFPositionViewModel *location = (MFPositionViewModel *)data;
-    self.latitude.regularExpressionTextField.text = location.latitude;
-    self.longitude.regularExpressionTextField.text = location.longitude;
+//    self.latitude.regularExpressionTextField.text = location.latitude;
+//    self.longitude.regularExpressionTextField.text = location.longitude;
 }
 
 + (NSString *) getDataType {
@@ -247,8 +241,8 @@
 
 -(id)getData {
     MFPositionViewModel *location = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_POSITION_VIEW_MODEL];
-    location.longitude = self.longitude.regularExpressionTextField.text;
-    location.latitude = self.latitude.regularExpressionTextField.text;
+//    location.longitude = self.longitude.regularExpressionTextField.text;
+//    location.latitude = self.latitude.regularExpressionTextField.text;
     return location;
 }
 
@@ -261,16 +255,16 @@
  */
 -(void) setComponentInCellAtIndexPath:(NSIndexPath *)componentInCellAtIndexPath {
     [super setComponentInCellAtIndexPath:componentInCellAtIndexPath];
-    [self.latitude setComponentInCellAtIndexPath:componentInCellAtIndexPath];
-    [self.longitude setComponentInCellAtIndexPath:componentInCellAtIndexPath];
+//    [self.latitude setComponentInCellAtIndexPath:componentInCellAtIndexPath];
+//    [self.longitude setComponentInCellAtIndexPath:componentInCellAtIndexPath];
 }
 /**
  * give the form controller to the components too
  */
 -(void)setForm:(id<MFComponentChangedListenerProtocol> )formController {
     [super setForm:formController];
-    [self.latitude  setForm:formController];
-    [self.longitude  setForm:formController];
+//    [self.latitude  setForm:formController];
+//    [self.longitude  setForm:formController];
 }
 
 /**
@@ -279,17 +273,17 @@
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];
     if([editable isEqualToNumber:@0]) {
-        self.latitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRO");
-        self.longitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRO");
+//        self.latitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRO");
+//        self.longitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRO");
         self.gpsButton.hidden = YES;
     }
     else {
         self.gpsButton.hidden = NO;
-        self.latitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRW");
-        self.longitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRW");
+//        self.latitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRW");
+//        self.longitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRW");
     }
-    self.latitude.editable = self.editable;
-    self.longitude.editable = self.editable;
+//    self.latitude.editable = self.editable;
+//    self.longitude.editable = self.editable;
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -317,13 +311,6 @@
 
 
 
--(void)setApplySelfStyle:(BOOL)applySelfStyle {
-    _applySelfStyle = applySelfStyle;
-}
 
 
--(void)setComponentAlignment:(NSNumber *)alignValue {
-    [self.latitude setComponentAlignment:alignValue];
-    [self.longitude setComponentAlignment:alignValue];
-}
 @end

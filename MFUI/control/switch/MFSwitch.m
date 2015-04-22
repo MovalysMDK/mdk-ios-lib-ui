@@ -35,7 +35,8 @@
 -(void)initialize {
     
     [super initialize];
-    
+    self.innerSwitch = [[UISwitch alloc] initWithFrame:self.frame];
+    [self addSubview:self.innerSwitch];
 #if !TARGET_INTERFACE_BUILDER
     [self.innerSwitch addTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
 #else
@@ -75,15 +76,6 @@
 
 -(void) updateValue {
     [self performSelectorOnMainThread: @selector(updateValue:) withObject:[self getData] waitUntilDone:YES];
-}
-
-
--(BOOL) isActive {
-    return self.innerSwitch.enabled;
-}
-
--(void) setIsActive:(BOOL)isActive{
-    self.innerSwitch.enabled = isActive;
 }
 
 -(void)setEditable:(NSNumber *)editable {

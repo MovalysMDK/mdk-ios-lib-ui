@@ -72,10 +72,7 @@ IB_DESIGNABLE
  */
 @property (nonatomic, strong) TooltipView *baseTooltipView;
 
-/**
- * Liste des erreurs du composant
- */
-@property (nonatomic, strong) NSMutableArray *baseErrors;
+
 
 /**
  * Cell container
@@ -87,15 +84,6 @@ IB_DESIGNABLE
  */
 @property (nonatomic, weak) MFUIBaseComponent *mfParent;
 
-/**
- * initialisation
- */
-@property (nonatomic) BOOL inInitMode;
-
-/**
- * initialisation
- */
-@property (nonatomic) BOOL applySelfStyle;
 
 /**
  * initialisation

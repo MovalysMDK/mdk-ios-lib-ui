@@ -23,6 +23,8 @@
 
 NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 @synthesize mandatory = _mandatory;
+@synthesize inInitMode = _inInitMode;
+@synthesize tooltipView = _tooltipView;
 
 #pragma mark - Constructeurs et initialisation
 

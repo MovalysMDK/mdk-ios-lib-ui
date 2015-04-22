@@ -80,9 +80,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 
 @synthesize cellContainer = _cellContainer;
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize context = _context;
 @synthesize groupDescriptor = _groupDescriptor;
-@synthesize applicationContext = _applicationContext;
 @synthesize isValid = _isValid;
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
@@ -121,9 +119,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     self.buttonsView.userInteractionEnabled = YES;
     [self.topBarView addSubview:self.buttonsView];
     [self.topBarView addSubview:self.titleLabel];
-    
-    [self hideErrorButtons];
-    
+        
     self.tableView.scrollEnabled = NO;
     
     
@@ -276,9 +272,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     //Non implémenté
 }
 
--(void)setTextColor:(UIColor *) textColor{
-    //Non implémenté
-}
+
 
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];

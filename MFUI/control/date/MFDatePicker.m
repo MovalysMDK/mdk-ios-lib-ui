@@ -62,10 +62,8 @@
 
 @implementation MFDatePicker
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize context = _context;
 @synthesize transitionDelegate = _transitionDelegate;
 @synthesize groupDescriptor = _groupDescriptor;
-@synthesize applicationContext = _applicationContext;
 @synthesize isValid = _isValid;
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
@@ -94,9 +92,10 @@
     
     self.isShowing = NO;
     self.isModalPickerViewDisplayed = NO;
-    
+    self.dateButton = [[UIButton alloc] initWithFrame:self.frame];
+    self.dateButton.backgroundColor = [UIColor blueColor];
     [self.dateButton addTarget:self action:@selector(displayPickerView:) forControlEvents:UIControlEventTouchUpInside];
-    [self.dateButton setTextAlignment:NSTextAlignmentCenter];
+    [self addSubview:self.dateButton];
     //Add observers
     //Add observers
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -118,7 +117,7 @@
 
 -(void)applyDefaultConstraints {
     if(self.dateButton) {
-    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    [self setTranslatesAutoresizingM askIntoConstraints:NO];
     [self.dateButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSLayoutConstraint *topDateLabelConstraint = [NSLayoutConstraint constraintWithItem:self.dateButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
     
@@ -391,10 +390,10 @@
 -(void) setButtonDateTitle:(NSDate *)date {
     NSDictionary *customParameters = ((MFFieldDescriptor *)self.selfDescriptor).parameters;
     if(customParameters && [customParameters objectForKey:@"dateFormat"]) {
-        self.dateButton.text = [MFDateConverter toString:date withCustomFormat:[customParameters objectForKey:@"dateFormat"]];
+        self.dateButton.titleLabel.text = [MFDateConverter toString:date withCustomFormat:[customParameters objectForKey:@"dateFormat"]];
     }
     else {
-        self.dateButton.text = [MFDateConverter toString:date withMode:self.datePickerMode];
+        self.dateButton.titleLabel.text = [MFDateConverter toString:date withMode:self.datePickerMode];
     }
 }
 
@@ -460,11 +459,6 @@
     }
 }
 
--(void) setTextColor:(UIColor *)color {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.dateButton setTextColor:color];
-    });
-}
 
 
 
@@ -496,7 +490,7 @@
     else {
         [self.dateButton addTarget:self action:@selector(displayPickerView:) forControlEvents:UIControlEventTouchUpInside];
     }
-    [self.dateButton setEditable:editable];
+//    [self.dateButton setEditable:editable];
 }
 
 - (void)keyboardWasShown:(NSNotification *)notification {

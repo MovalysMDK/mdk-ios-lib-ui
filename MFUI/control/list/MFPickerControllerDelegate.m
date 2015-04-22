@@ -134,12 +134,7 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
         if(topLevelObjects && topLevelObjects.count >0) {
             view = [topLevelObjects objectAtIndex:0];
         }
-        for(UIView * subview in view.subviews) {
-            if([subview isKindOfClass:[MFUIBaseComponent class]]) {
-                MFUIBaseComponent *subcomponent = (MFUIBaseComponent *)subview;
-                subcomponent.applySelfStyle = NO;
-            }
-        }
+        
     }
     else {
         [MFException throwExceptionWithName:@"Missing property" andReason:[NSString stringWithFormat:@"The property typeName must be filled on %@%@.plist (group)",CONST_FORM_RESOURCE_PREFIX, [self.picker selectedViewFormDescriptorName]] andUserInfo:nil];

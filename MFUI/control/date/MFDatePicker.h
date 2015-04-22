@@ -58,7 +58,7 @@ typedef enum {
 /**
  * @brief The button displays a selected date and allow to display the picker to choose another one
  */
-@property (nonatomic, strong) MFUILabel *dateButton;
+@property (nonatomic, strong) UIButton *dateButton;
 
 /**
  * @brief The current selected date

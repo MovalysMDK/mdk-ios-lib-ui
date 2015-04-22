@@ -57,11 +57,9 @@ NSString *const ENUMIMAGE_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 
 @implementation MFEnumImage
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize context = _context;
 @synthesize transitionDelegate = _transitionDelegate;
 @synthesize groupDescriptor = _groupDescriptor;
 @synthesize selfDescriptor = _selfDescriptor;
-@synthesize applicationContext = _applicationContext;
 @synthesize isValid = _isValid;
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
@@ -217,10 +215,6 @@ NSString *const ENUMIMAGE_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     else {
         self.label.text = [[imageName componentsSeparatedByString:@"_"] objectAtIndex:2];
     }
-}
-
--(void)setComponentAlignment:(NSNumber *)alignValue {
-    [self.label setTextAlignment:[alignValue intValue]];
 }
 
 @end

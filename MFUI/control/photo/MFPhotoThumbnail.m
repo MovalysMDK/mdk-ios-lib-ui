@@ -107,11 +107,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [self addSubview:self.dateLabel];
     [self addSubview:self.titreLabel];
     [self addSubview:self.descriptionLabel];
-    
-    self.dateLabel.applySelfStyle = NO;
-    self.titreLabel.applySelfStyle = NO;
-    self.descriptionLabel.applySelfStyle = NO;
-    
+        
     //Ajout de l'action de clic sur le composant
     [self addTarget:self action:@selector(displayManagePhotoView:) forControlEvents:(UIControlEventTouchUpInside)];
     
@@ -220,7 +216,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 #pragma mark - View lifecycle
 -(void)layoutSubviews {
     [super layoutSubviews];
-    [self setComponentAlignment:self.privateComponentAlignment];
 }
 
 #pragma mark - Tags for automatic testing
@@ -440,14 +435,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                           initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
         
         [self addErrors:@[error]];
-        [self.context addErrors:@[error]];
         nbOfErrors++;
     }
     return nbOfErrors;
-}
-
--(NSInteger) validate {
-    return [self validateWithParameters:nil];
 }
 
 -(NSString *) defaultImage {
@@ -455,12 +445,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     return defaultImageName ? defaultImageName : DEFAUT_NO_PHOTO_IMAGE;
 }
 
--(void)setComponentAlignment:(NSNumber *)alignValue {
-    self.privateComponentAlignment = alignValue;
-    if([alignValue intValue] == NSTextAlignmentCenter) {
-        [self.photoImageView setCenter:self.center];
-    }
-}
+
 
 -(void)setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor {
     [super setSelfDescriptor:selfDescriptor];

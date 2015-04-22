@@ -40,7 +40,7 @@ IB_DESIGNABLE
 /**
  * @brief The inner MFLabel component that displays the value of the slider.
  */
-@property (nonatomic, strong) MFUILabel *innerSliderValueLabel;
+@property (nonatomic, strong) UILabel *innerSliderValueLabel;
 
 /**
  * @brief The setp of the slider

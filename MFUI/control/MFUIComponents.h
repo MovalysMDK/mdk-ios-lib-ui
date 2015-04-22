@@ -59,9 +59,6 @@
 //Switch
 #import "MFUIControlSwitch.h"
 
-//TextField
-#import "MFUIControlTextField.h"
-
 //Webview
 #import "MFUIControlWebView.h"
 

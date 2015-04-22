@@ -32,7 +32,7 @@
 #import "MFFormCellProtocol.h"
 #import "MFPosition.h"
 #import "MFMapViewController.h"
-#import "MFUITextField.h"
+#import "MFTextField.h"
 #import "MFConstants.h"
 #import "MFUIBaseViewModel.h"
 #import "MFCellAbstract.h"
@@ -44,6 +44,7 @@
 #import "MFDeleteDetailActionParamOut.h"
 #import "MFUIBaseListViewModel.h"
 #import "MFFormViewController.h"
+#import "MFLocalizedString.h"
 
 #pragma mark - Interface privée
 
@@ -503,7 +504,7 @@
     
     id vmItem = [self viewModelAtIndexPath: indexPath];
     [vmItem valueForKeyPath:componentDescriptor.bindingKey];
-    [component clearErrors:NO];
+    [component clearErrors];
     
     //Initializing each bindableProperty if defined
     for(NSString *bindablePropertyName in [self.bindableProperties allKeys]) {

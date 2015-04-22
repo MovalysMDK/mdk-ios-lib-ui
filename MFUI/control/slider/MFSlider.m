@@ -47,11 +47,9 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     
     
 #if !TARGET_INTERFACE_BUILDER
-    
+    self.innerSlider = [[UISlider alloc] initWithFrame:self.frame];
     [self.innerSlider addTarget:self action:@selector(sliderValueChangedAction:) forControlEvents:UIControlEventValueChanged];
 
-    
-   
 #else
 #endif
 }
@@ -155,7 +153,7 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     //Blocage à 3 décimales car le nombre est un float avec un grand nombre de décimales
     numberFormatter.maximumFractionDigits = 3;
-    [self.innerSliderValueLabel setData:[MFNumberConverter toString:number withFormatter:numberFormatter]];
+    [self.innerSliderValueLabel setText:[MFNumberConverter toString:number withFormatter:numberFormatter]];
 }
 
 #pragma mark - MFUIComponentProtocol implementation
@@ -186,15 +184,6 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     [self performSelectorOnMainThread: @selector(updateValue:) withObject:[self getData] waitUntilDone:YES];
 }
 
-
--(BOOL) isActive
-{
-    return self.innerSlider.enabled;
-}
-
--(void) setIsActive:(BOOL)isActive{
-    self.innerSlider.enabled = isActive;
-}
 
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];

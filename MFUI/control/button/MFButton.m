@@ -135,8 +135,4 @@
 }
 
 
--(void)setComponentAlignment:(NSNumber *)alignValue {
-    [self.button.titleLabel setTextAlignment:[alignValue intValue]];
-}
-
 @end

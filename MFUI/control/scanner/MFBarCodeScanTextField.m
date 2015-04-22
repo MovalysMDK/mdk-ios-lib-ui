@@ -49,7 +49,7 @@
 static NSString const *NIL_DEBUG_VALUE = @"GET_NIL_VALUE";
 
 @implementation MFBarCodeScanTextField
-
+@synthesize privateData = _privateData;
 
 #pragma mark - MFUIBaseCompoennt - Initializing
 
@@ -140,7 +140,6 @@ static NSString const *NIL_DEBUG_VALUE = @"GET_NIL_VALUE";
                           initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
         
         [self addErrors:@[error]];
-        [self.context addErrors:@[error]];
         nbOfErrors++;
     }
 #if DEBUG
@@ -150,7 +149,6 @@ static NSString const *NIL_DEBUG_VALUE = @"GET_NIL_VALUE";
                           initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
         
         [self addErrors:@[error]];
-        [self.context addErrors:@[error]];
         nbOfErrors++;
     }
 #endif

@@ -123,7 +123,7 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
     else {
         // if not found, read value from viewmodel (return MFKeyNotFound if binding key not found)
         valueForKeyPath = [[listViewModel.viewModels objectAtIndex:indexPath.row]  valueForKeyPath:componentDescriptor.bindingKey];
-        [component clearErrors:NO];
+        [component clearErrors];
     }
     
     if( valueForKeyPath != [MFKeyNotFound keyNotFound]) {

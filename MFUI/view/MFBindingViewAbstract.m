@@ -75,7 +75,6 @@
     for(UIView *subView in self.subviews) {
         if([subView isKindOfClass:[MFUIBaseComponent class]]) {
             MFUIBaseComponent *baseComponent = (MFUIBaseComponent *)subView;
-            baseComponent.applySelfStyle = NO;
             [baseComponent setTranslatesAutoresizingMaskIntoConstraints:NO];
         }
     }

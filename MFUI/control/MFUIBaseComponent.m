@@ -54,21 +54,18 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 @implementation MFUIBaseComponent
 
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize context = _context;
 @synthesize transitionDelegate = _transitionDelegate;
 @synthesize selfDescriptor = _selfDescriptor;
-@synthesize applicationContext = _applicationContext;
 @synthesize isValid = _isValid;
 @synthesize form = _form;
 @synthesize mandatory = _mandatory;
 @synthesize visible = _visible;
 @synthesize componentInCellAtIndexPath = _componentInCellAtIndexPath;
-@synthesize hasFocus = _hasFocus;
 @synthesize editable = _editable;
 @synthesize groupDescriptor = _groupDescriptor;
-@synthesize mfParent = _mfParent;
 @synthesize lastUpdateSender = _lastUpdateSender;
-
+@synthesize errors = _errors;
+@synthesize inInitMode = _inInitMode;
 
 #pragma mark - Constructeurs et initialisation
 -(id)init {
@@ -120,28 +117,24 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
     [self initializeInspectableAttributes];
     [self buildDesignableComponentView];
     if([self conformsToProtocol:@protocol(MFDefaultConstraintsProtocol)]) {
-        [self performSelector:@selector(applyDefaultConstraints) withObject:nil
-         ];
+        [self performSelector:@selector(applyDefaultConstraints) withObject:nil];
     }
 #if !TARGET_INTERFACE_BUILDER
     
-    //Récupération du contexte
-    self.applicationContext = [MFApplication getInstance];
     //    self.tag = [MFApplication getViewTag];
     [self initErrors];
     
     
     //Par défaut tout composant est éditable.
     self.editable = @1;
-    self.applySelfStyle = YES;
     //Ajout du bouton à la vue du composant
-//    [self addSubview:self.baseErrorButton];
+    //    [self addSubview:self.baseErrorButton];
     
 #endif
 }
 
 -(void) initErrors {
-    self.baseErrors = [[NSMutableArray alloc] init];
+    self.errors = [[NSMutableArray alloc] init];
 }
 
 #pragma mark - Méthodes communes à tous les composants
@@ -176,13 +169,10 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 
 -(NSInteger)validateWithParameters:(NSDictionary *)parameters {
     // We remove all control's errors
-    [self.baseErrors removeAllObjects];
+    [self.errors removeAllObjects];
     return 0;
 }
 
--(NSInteger) validate {
-    return [self validateWithParameters:nil];
-}
 
 
 -(id)getData {
@@ -209,15 +199,6 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 }
 
 #pragma mark - Méthodes du protocole mais non implémentées ici
-
--(BOOL)isActive {
-    @throw([NSException exceptionWithName:@"Not Implemented" reason:@"This method should be implemented in child classes" userInfo:nil]);
-}
-
--(void)setIsActive:(BOOL)isActive {
-    @throw([NSException exceptionWithName:@"Not Implemented" reason:@"This method should be implemented in child classes" userInfo:nil]);
-}
-
 
 
 -(CGRect)getErrorButtonFrameForInvalid {
@@ -247,17 +228,15 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 }
 
 -(NSMutableArray *) getErrors {
-    return self.baseErrors;
+    return self.errors;
 }
 
 -(void) clearErrors{
     [self clearErrors:YES];
-//    [self showError:NO];
 }
 
 -(void) clearErrors:(BOOL)anim {
-    [self.baseErrors removeAllObjects];
-//    [self hideErrorButtons:anim];
+    [self.errors removeAllObjects];
     [self hideErrorTooltips];
     [self setIsValid:YES];
 }
@@ -268,11 +247,11 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
         
         NSMutableArray *newErrors = [errors mutableCopy];
         for(NSError *error in errors) {
-            if([self.baseErrors containsObject:error]) {
+            if([self.errors containsObject:error]) {
                 [newErrors removeObject:error];
             }
         }
-        [self.baseErrors addObjectsFromArray:newErrors];
+        [self.errors addObjectsFromArray:newErrors];
     }
 }
 
@@ -301,13 +280,13 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
             id value = (NSString *) x;
             if (value) {
                 // We validate the value
-                if([strongSelf validate] == 0) {
+                if([strongSelf validateWithParameters:nil] == 0) {
                     // If there aren't any errors, we clean all component's errors
                     [strongSelf clearErrors];
                 }
-//                else {
-//                    [strongSelf showError:YES];
-//                }
+                else {
+                    [strongSelf showError:YES];
+                }
             } else {
                 [strongSelf clearErrors];
             }
@@ -342,57 +321,12 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
     [self setData:defaultValue];
 }
 
--(void)setData:(id)data andUpdate:(BOOL)shouldUpdateAfterSettingData{
-    if(data && ![data isKindOfClass:[MFKeyNotFound class]]) {
-        [self setData:data];
-    }
-    if(shouldUpdateAfterSettingData) {
-        [self updateValue:data];
-    }
-}
-
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-//-(void) setInnerComponentsBackgroundColor:(NSDictionary *)componentsWithColors {
-//    for(NSString *key in [componentsWithColors allKeys]) {
-//        if([self respondsToSelector:NSSelectorFromString(key)]) {
-//            MFUIBaseComponent *component = [self performSelector:NSSelectorFromString(key)];
-//            dispatch_barrier_async(dispatch_get_main_queue(), ^{
-//                [component setBackgroundColor:[componentsWithColors objectForKey:key]];
-//            });
-//        }
-//    }
-//}
-#pragma clang diagnostic pop
-
-
--(BOOL) isValid {
-    return _isValid;
-}
-
-
-
-
-
--(void)setForm:(id<MFComponentChangedListenerProtocol>)form {
-    _form = form;
-}
-
-
--(void) setTransitionDelegate:(id<MFUITransitionDelegate>)transitionDelegate {
-    _transitionDelegate = transitionDelegate;
-}
-
 -(void)setComponentParameters:(NSDictionary *)parameters {
     if(self.selfDescriptor) {
         [((MFFieldDescriptor *)self.selfDescriptor).parameters addEntriesFromDictionary:parameters];
     }
 }
 
--(void)setComponentAlignment:(NSNumber *)alignValue {
-    //Nothing to do. should be implemented in components that need to set an alignment.
-}
 
 #pragma mark - Live Rendering Default Implementation
 
@@ -424,6 +358,11 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 }
 
 -(void) renderComponentFromInspectableAttributes {
+    
+}
+
+
+-(void)showError:(BOOL)showErrorView {
     
 }
 

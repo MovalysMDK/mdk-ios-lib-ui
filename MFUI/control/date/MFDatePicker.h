@@ -20,6 +20,7 @@
 //
 
 #import "MFUIBaseComponent.h"
+#import "MFUIOldBaseComponent.h"
 //#import "MFButton.h"
 #import "MFOrientationChangedDelegate.h"
 #import "MFUILabel.h"
@@ -32,7 +33,7 @@ IB_DESIGNABLE
  * @brief The date framework component
  * @discussion This components allows to choose and display a date, a time, or a datetime.
  */
-@interface MFDatePicker : MFUIBaseComponent <MFOrientationChangedProtocol, MFDefaultConstraintsProtocol>
+@interface MFDatePicker : MFUIOldBaseComponent <MFOrientationChangedProtocol, MFDefaultConstraintsProtocol>
 
 
 #pragma mark - Custom enumeration (edit mode options)

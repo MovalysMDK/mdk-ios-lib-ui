@@ -13,38 +13,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFTextField+UITextFieldForwarding.m
-//  MFUI
-//
-//
 
-#import "MFTextField+UITextFieldForwarding.h"
+#import "MFDoubleTextField.h"
 
-@implementation MFUITextField (UITextFieldForwarding)
+@implementation MFDoubleTextField
 
-@dynamic text;
-@dynamic attributedText;
-@dynamic textColor;
-@dynamic font;
-@dynamic textAlignment;
-@dynamic borderStyle;
-@dynamic placeholder;
-@dynamic attributedPlaceholder;
-@dynamic clearsOnBeginEditing;
-@dynamic adjustsFontSizeToFitWidth;
-@dynamic minimumFontSize;
-@dynamic delegate;
-@dynamic background;
-@dynamic disabledBackground;
-@dynamic editing;
-@dynamic allowsEditingTextAttributes;
-@dynamic typingAttributes;
-@dynamic clearButtonMode;
-@dynamic leftView;
-@dynamic leftViewMode;
-@dynamic rightView;
-@dynamic rightViewMode;
-@dynamic inputView;
+-(NSString *)regex {
+    return @"^-?[0-9]{%@}([,][0-9]{%@})?$";
+}
 
 @end

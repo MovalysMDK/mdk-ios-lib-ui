@@ -26,7 +26,6 @@
 #import "MFUILabel.h"
 
 IB_DESIGNABLE
-
 @interface MFSlider : MFUIBaseComponent
 
 
@@ -47,50 +46,6 @@ IB_DESIGNABLE
  */
 @property (nonatomic) float step;
 
-
-#pragma mark - Inspectable properties
-
-/**
- * @brief The unbinded slider current value to display on IB.
- * @discussion This property is used on IB only.
- */
-@property (nonatomic) IBInspectable NSRange IB_labelProportion;
-
-/**
- * @brief The unbinded slider minimum value to display on IB.
- * @discussion This property is used on IB only.
- */
-@property (nonatomic) IBInspectable NSInteger IB_uMinValue;
-
-/**
- * @brief The unbinded slider maximum value to display on IB.
- * @discussion This property is used on IB only.
- */
-@property (nonatomic) IBInspectable NSInteger IB_uMaxValue;
-
-/**
- * @brief The unbinded slider current value to display on IB.
- * @discussion This property is used on IB only.
- */
-@property (nonatomic) IBInspectable NSInteger IB_uValue;
-
-/**
- * @brief The text color of the component that implements this protocol.
- * @discussion This property is used both on InterfaceBuilder and on execution
- */
-@property (nonatomic, strong) IBInspectable UIColor *IB_textColor;
-
-/**
- * @brief The text color of the component that implements this protocol.
- * @discussion This property is used both on InterfaceBuilder and on execution
- */
-@property (nonatomic) IBInspectable NSInteger IB_textAlignment;
-
-/**
- * @brief The text size of the component that implements this protocol.
- * @discussion This property is used both on InterfaceBuilder and on execution
- */
-@property (nonatomic) IBInspectable NSInteger IB_textSize;
 
 
 #pragma mark - Methods

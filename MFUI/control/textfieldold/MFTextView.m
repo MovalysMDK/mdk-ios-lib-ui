@@ -27,8 +27,6 @@
 
 @property (nonatomic, strong) NSDate *date;
 
-@property (nonatomic) BOOL hasACustomColor;
-
 @property (nonatomic) CGFloat keyboardHeight;
 
 @property (nonatomic) BOOL keyboardVisible;
@@ -70,7 +68,7 @@
     self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
     self.textView.delegate = self;
     self.textView.userInteractionEnabled = YES;
-    self.hasACustomColor = NO;
+
     self.textView.keyboardType = UIKeyboardTypeDefault;
     
     self.isValid = YES;
@@ -383,20 +381,6 @@
     _mandatory = mandatory ;
 }
 
--(void)setBackgroundColor:(UIColor *)backgroundColor {
-    //    self.hasACustomColor = YES;
-    //    self.privateBackgroundColor = backgroundColor;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.textView setBackgroundColor:backgroundColor];;
-    });
-    
-}
-
--(void)setTextColor:(UIColor *)textColor {
-    if(textColor) {
-        [self.textView setTextColor:textColor];
-    }
-}
 
 
 #pragma mark - Observers
@@ -519,9 +503,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)setDisplayComponentValue:(id)data {
-    [self setData:data];
-}
 
 
 @end

@@ -19,7 +19,7 @@
 //
 //
 
-#import "MFUITextField.h"
+#import "MFTextField.h"
 
 /**
  little trick from ObjC to declare current properties of UITextField. This is used to make the compiler happy when using a property of UITextField for an MFTextField object.
@@ -27,7 +27,7 @@
  MFTextField implements KVC magic forwarding of this properties.
  
  */
-@interface MFUITextField (UITextFieldForwarding)
+@interface MFTextField (UITextFieldForwarding)
 
 // forwarded properties to inner UITextField
 @property(nonatomic,copy)   NSString               *text;

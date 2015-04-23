@@ -1,17 +1,25 @@
-//
-//  MFEmailTextField.m
-//  ComponentInherited
-//
-//  Created by Lagarde Quentin on 20/04/2015.
-//  Copyright (c) 2015 Lagarde Quentin. All rights reserved.
-//
+/**
+ * Copyright (C) 2010 Sopra (support_movalys@sopra.com)
+ *
+ * This file is part of Movalys MDK.
+ * Movalys MDK is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * Movalys MDK is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #import "MFEmailTextField.h"
 
 @implementation MFEmailTextField
 
 -(NSString *)regex {
-    return @".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    return @"^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-z]{2,6})$";
 }
 
 @end

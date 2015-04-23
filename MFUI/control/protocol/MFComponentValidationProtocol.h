@@ -14,7 +14,7 @@
 /**
  Indicate if the control is valid.
  */
-@property(nonatomic) BOOL isValid;
+@property(nonatomic, setter=setIsValid:) BOOL isValid;
 
 /**
  * Validate the ui component value.

@@ -64,7 +64,6 @@
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
 @synthesize transitionDelegate = _transitionDelegate;
 @synthesize groupDescriptor = _groupDescriptor;
-@synthesize isValid = _isValid;
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize data =_data;
@@ -93,7 +92,7 @@
     self.isShowing = NO;
     self.isModalPickerViewDisplayed = NO;
     self.dateButton = [[UIButton alloc] initWithFrame:self.frame];
-    self.dateButton.backgroundColor = [UIColor blueColor];
+    self.dateButton.backgroundColor = [UIColor clearColor];
     [self.dateButton addTarget:self action:@selector(displayPickerView:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.dateButton];
     //Add observers
@@ -389,16 +388,16 @@
 
 -(void) setButtonDateTitle:(NSDate *)date {
     NSDictionary *customParameters = ((MFFieldDescriptor *)self.selfDescriptor).parameters;
+    NSString *buttonTitle = nil;
     if(customParameters && [customParameters objectForKey:@"dateFormat"]) {
-        self.dateButton.titleLabel.text = [MFDateConverter toString:date withCustomFormat:[customParameters objectForKey:@"dateFormat"]];
+        buttonTitle = [MFDateConverter toString:date withCustomFormat:[customParameters objectForKey:@"dateFormat"]];
     }
     else {
-        self.dateButton.titleLabel.text = [MFDateConverter toString:date withMode:self.datePickerMode];
+        buttonTitle = [MFDateConverter toString:date withMode:self.datePickerMode];
     }
+    [self.dateButton setTitle:buttonTitle forState:UIControlStateNormal];
+    [self.dateButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
 }
-
-
-
 
 
 #pragma mark -  MFOrientationChangedDelegate

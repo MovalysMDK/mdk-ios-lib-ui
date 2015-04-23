@@ -93,11 +93,6 @@
 /**
  * initialisation
  */
-@property (nonatomic) BOOL inInitMode;
-
-/**
- * initialisation
- */
 @property (nonatomic) BOOL applySelfStyle;
 
 /**
@@ -106,19 +101,6 @@
 @property (nonatomic, strong) NSNumber *parentEditable;
 
 #pragma mark - Inspectable Methods
-
-/**
- * @brief The main background color of the component that implements this protocol.
- * @discussion This property is used both on InterfaceBuilder and on execution
- */
-@property (nonatomic, strong) IBInspectable UIColor *IB_primaryBackgroundColor;
-
-/**
- * @brief The main background color of the component that implements this protocol.
- * @discussion This property is used both on InterfaceBuilder and on execution
- */
-@property (nonatomic, strong) IBInspectable UIColor *IB_secondaryTintColor;
-
 /**
  * @brief This property enables or disables the override of the IB Style on the code style
  * @discussion This property is used both on InterfaceBuilder and on execution

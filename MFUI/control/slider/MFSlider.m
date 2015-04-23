@@ -47,9 +47,12 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     
     
 #if !TARGET_INTERFACE_BUILDER
-    self.innerSlider = [[UISlider alloc] initWithFrame:self.frame];
+    
     [self.innerSlider addTarget:self action:@selector(sliderValueChangedAction:) forControlEvents:UIControlEventValueChanged];
-
+    [self setAllTags];
+    
+    
+    
 #else
 #endif
 }
@@ -99,10 +102,8 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 
 #pragma mark - Binding
 
--(void)didFinishLoadDescriptor {
+-(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
     
-    
-    [super didFinishLoadDescriptor];
     
     //Biding des propriétés
     
@@ -119,7 +120,7 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     if (self.step == 0) {
         self.step = 1;
     }
-
+    
 }
 
 
@@ -133,10 +134,27 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     }
 }
 
+
+#pragma mark - CSS customization
+
+-(NSArray *)customizableComponents {
+    return @[
+             self.innerSlider,
+             self.innerSliderValueLabel
+             ];
+}
+
+-(NSArray *)suffixForCustomizableComponents {
+    return @[
+             @"Slider",
+             @"SliderValue"
+             ];
+}
+
 #pragma mark - Custom implementation
 
 - (void)setValue:(float)value animated:(BOOL)animated {
-
+    
     //Mise à jour du slider
     if (animated == YES)
     {
@@ -185,6 +203,15 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 }
 
 
+-(BOOL) isActive
+{
+    return self.innerSlider.enabled;
+}
+
+-(void) setIsActive:(BOOL)isActive{
+    self.innerSlider.enabled = isActive;
+}
+
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];
     self.innerSlider.enabled = ([editable isEqualToNumber:@1]) ? YES : NO;
@@ -196,4 +223,70 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     return self.innerSlider;
 }
 
+
+#pragma mark - IB_Designable methods
+
+-(void)buildDesignableComponentView {
+    self.innerSlider = [[UISlider alloc] init];
+    self.step = 1;
+    self.innerSlider.minimumValue = 0;
+    self.innerSlider.maximumValue = 0;
+    self.innerSlider.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    //Champ de texte affichant la valeur du slider
+    self.innerSliderValueLabel = [[UILabel alloc] init];
+    self.innerSliderValueLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    //Le slider et le label sont ajoutés à la vue du composant
+    [self addSubview:self.innerSliderValueLabel];
+    [self addSubview:self.innerSlider];
+    [self innerComponentConstraints];
+    self.backgroundColor = [UIColor whiteColor];
+    
+}
+
+-(void)renderComponentFromInspectableAttributes {
+}
+
+
+-(void) innerComponentConstraints {
+    //Positionnement du slider
+    
+    NSLayoutConstraint *insideSliderConstraintLeftMargin = [NSLayoutConstraint constraintWithItem:self.innerSlider attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
+    
+    NSLayoutConstraint *insideSliderConstraintWidth = [NSLayoutConstraint constraintWithItem:self.innerSlider attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:0.8 constant:0];
+    
+    NSLayoutConstraint *insideSliderConstraintTopMargin= [NSLayoutConstraint constraintWithItem:self.innerSlider attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+    
+    NSLayoutConstraint *insideSlideCenterPosition = [NSLayoutConstraint constraintWithItem:self.innerSlider attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    
+    //Positionnement du label affichant la valeur du slider
+    
+    NSLayoutConstraint *insideSliderValueConstraintLeftMargin = [NSLayoutConstraint constraintWithItem:self.innerSliderValueLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.innerSlider attribute:NSLayoutAttributeRight multiplier:1 constant:0];
+    
+    NSLayoutConstraint *insideSliderValueConstraintTopMargin = [NSLayoutConstraint constraintWithItem:self.innerSliderValueLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.innerSlider attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+    
+    NSLayoutConstraint *insideSliderValueConstraintWidth = [NSLayoutConstraint constraintWithItem:self.innerSliderValueLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:0.2 constant:0];
+    
+    NSLayoutConstraint *insideSliderValueConstraintHeight= [NSLayoutConstraint constraintWithItem:self.innerSliderValueLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.innerSlider attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
+    
+    //Ajout des contraintes de positionnement pour placer les éléments
+    [self addConstraints:@[insideSliderConstraintLeftMargin, insideSliderConstraintWidth, insideSliderConstraintTopMargin, insideSlideCenterPosition, insideSliderValueConstraintLeftMargin, insideSliderValueConstraintTopMargin, insideSliderValueConstraintWidth, insideSliderValueConstraintHeight]];
+}
+
+-(void)initializeInspectableAttributes {
+    [super initializeInspectableAttributes];
+
+}
+
+-(void)prepareForInterfaceBuilder {
+    [super prepareForInterfaceBuilder];
+
+    self.innerSliderValueLabel.textAlignment = NSTextAlignmentCenter;
+    self.innerSliderValueLabel.textColor = [UIColor colorWithRed:0 green:128.0/255.0 blue:1 alpha:1];
+}
+
+-(void)willLayoutSubviewsNoDesignable {
+    self.innerSliderValueLabel.textAlignment = NSTextAlignmentCenter;
+}
 @end

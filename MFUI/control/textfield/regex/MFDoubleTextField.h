@@ -13,16 +13,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUIControlNumberTextField.h
-//  MFUI
-//
-//
 
-#ifndef MFUI_MFUIControlNumberTextField_h
-#define MFUI_MFUIControlNumberTextField_h
+#import "MFRegexTextField.h"
 
-#import "MFDoubleTextField.h"
-#import "MFIntegerTextField.h"
+/**
+ * @class MFDoubleTextField
+ * @brief This class represents the Double Text Field component.
+ * @discussion This component inherits from MFRegexTextField and must contains
+ * a valid "double value" to be validated (ex : -45.8)
+ */
+@interface MFDoubleTextField : MFRegexTextField
 
-#endif
+@end

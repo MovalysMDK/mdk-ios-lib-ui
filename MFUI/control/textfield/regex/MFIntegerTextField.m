@@ -13,42 +13,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFIntegerTextField.h
-//  MFUI
-//
-//
 
-#import "MFUIError.h"
+#import "MFIntegerTextField.h"
 
-#import "MFRegularExpressionTextField.h"
+@implementation MFIntegerTextField
 
-/**
- * @brief This class represents a component aimed to display a integer value.
- */
-@interface MFIntegerTextField : MFRegularExpressionTextField
-
-#pragma mark - Properties
-
-/**
- * @brief The minimum number of digits of this number
- */
-@property (nonatomic, strong) NSString *minDigits;
-
-
-/**
- * @brief The maximum number of digits of this number
- */
-
-@property (nonatomic, strong) NSString *maxDigits;
-
-
-
-#pragma mark - Methods
-
-/**
- * @brief Generate the regex to control
- */
-- (void)createPattern;
-
+-(NSString *)regex {
+    return @"^-?[0-9]{%@}$";
+}
 @end

@@ -13,31 +13,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFCallPhoneNumberTextField.h
-//  MFUI
-//
-//
 
-#import "MFUIError.h"
+#import "MFRegexTextField.h"
 
-#import "MFRegularExpressionTextField.h"
-
-/*
- Open a dialog to ask user a confirmation.
- Phone number used is control's value.
- Prior to call, this control checks control's value is a well formed phone number.
+/**
+ * @class MFDoubleTextField
+ * @brief This class represents the Double Text Field component.
+ * @discussion This component inherits from MFRegexTextField and must contains
+ * a valid "double value" to be validated (ex : -45.8)
  */
-@interface MFCallPhoneNumberTextField : MFRegularExpressionTextField
-
-/*
- Default phone number pattern used to validate user keyboarding data.
- */
-extern NSString *const MFSETF_DEFAULT_PHONE_NUMBER_PATTERN;
-
-/*
- Default url used to call a phone number.
- */
-extern NSString *const MFSETF_DEFAULT_URL_TO_CALL_PHONE_NUMBER;
+@interface MFIntegerTextField : MFRegexTextField
 
 @end

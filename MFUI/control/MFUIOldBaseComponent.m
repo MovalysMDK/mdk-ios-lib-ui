@@ -57,7 +57,7 @@
 @synthesize groupDescriptor = _groupDescriptor;
 @synthesize mfParent = _mfParent;
 @synthesize lastUpdateSender = _lastUpdateSender;
-
+@synthesize inInitMode = _inInitMode;
 
 #pragma mark - Constructeurs et initialisation
 -(id)init {
@@ -116,9 +116,11 @@
     //    self.tag = [MFApplication getViewTag];
     [self initErrors];
     
-    
+    self.backgroundColor = [UIColor clearColor];
+
     //Par défaut tout composant est éditable.
     self.editable = @1;
+    self.sender = self;
     self.applySelfStyle = YES;
     //Ajout du bouton à la vue du composant
     [self addSubview:self.baseErrorButton];
@@ -175,6 +177,7 @@
         }
     }
 }
+
 
 -(void)layoutSubviews {
     
@@ -567,9 +570,6 @@
 #pragma clang diagnostic pop
 
 
--(BOOL) isValid {
-    return _isValid;
-}
 
 -(void)setEditable:(NSNumber *)editable {
     _editable = editable;
@@ -593,36 +593,31 @@
     }
 }
 
--(void)setComponentAlignment:(NSNumber *)alignValue {
-    //Nothing to do. should be implemented in components that need to set an alignment.
-}
 
 #pragma mark - Live Rendering Default Implementation
 
-//-(void)willLayoutSubviewsNoDesignable {
-//    //Default : nothing
-//}
-//
-//-(void)didLayoutSubviewsNoDesignable {
-//    //Default : nothing
-//}
-//
-//-(void)willLayoutSubviewsDesignable {
-//}
-//
-//-(void)didLayoutSubviewsDesignable {
-//    //Default : nothing
-//}
-//
-//-(void)initializeInspectableAttributes {
-//    self.IB_enableIBStyle = NO;
-//    self.IB_primaryBackgroundColor = [UIColor clearColor];
-//    self.IB_secondaryTintColor = [UIColor clearColor];
-//    self.backgroundColor = [UIColor clearColor];
-//}
-//
-//-(void)prepareForInterfaceBuilder {
-//    self.backgroundColor = [UIColor clearColor];
-//}
+-(void)willLayoutSubviewsNoDesignable {
+    //Default : nothing
+}
+
+-(void)didLayoutSubviewsNoDesignable {
+    //Default : nothing
+}
+
+-(void)willLayoutSubviewsDesignable {
+}
+
+-(void)didLayoutSubviewsDesignable {
+    //Default : nothing
+}
+
+-(void)initializeInspectableAttributes {
+    self.IB_enableIBStyle = NO;
+    self.backgroundColor = [UIColor clearColor];
+}
+
+-(void)prepareForInterfaceBuilder {
+    self.backgroundColor = [UIColor clearColor];
+}
 
 @end

@@ -14,15 +14,37 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 //
-//  MFUIControlUrlTextField.h
+//  MFTextField+UITextFieldForwarding.m
 //  MFUI
 //
 //
 
-#ifndef MFUI_MFUIControlUrlTextField_h
-#define MFUI_MFUIControlUrlTextField_h
+#import "MFTextField+UITextFieldForwarding.h"
 
-#import "MFBrowseUrlTextField.h"
-#import "MFWebViewController.h"
+@implementation MFTextField (UITextFieldForwarding)
 
-#endif
+@dynamic text;
+@dynamic attributedText;
+@dynamic textColor;
+@dynamic font;
+@dynamic textAlignment;
+@dynamic borderStyle;
+@dynamic placeholder;
+@dynamic attributedPlaceholder;
+@dynamic clearsOnBeginEditing;
+@dynamic adjustsFontSizeToFitWidth;
+@dynamic minimumFontSize;
+@dynamic delegate;
+@dynamic background;
+@dynamic disabledBackground;
+@dynamic editing;
+@dynamic allowsEditingTextAttributes;
+@dynamic typingAttributes;
+@dynamic clearButtonMode;
+@dynamic leftView;
+@dynamic leftViewMode;
+@dynamic rightView;
+@dynamic rightViewMode;
+@dynamic inputView;
+
+@end

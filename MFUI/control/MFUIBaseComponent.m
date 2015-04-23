@@ -71,8 +71,8 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 -(id)init {
     self = [super init];
     if(self) {
-        //Initialisation des éléments communs
-        //        self.sender = self;
+//        Initialisation des éléments communs
+            self.sender = self;
         [self initialize];
     }
     return self;
@@ -127,6 +127,7 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
     
     //Par défaut tout composant est éditable.
     self.editable = @1;
+    self.sender = self;
     //Ajout du bouton à la vue du composant
     //    [self addSubview:self.baseErrorButton];
     

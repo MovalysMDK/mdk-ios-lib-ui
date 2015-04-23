@@ -15,13 +15,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFPhoneTextFieldStyle.h"
-#import "MFRegexTextFieldStyle+Button.h"
+#import "MFIntegerTextFieldStyle.h"
 
-@implementation MFPhoneTextFieldStyle
+@implementation MFIntegerTextFieldStyle
 
 -(NSString *)accessoryButtonImageName {
-    return @"phone_icon";
+    return nil;
 }
 
 @end

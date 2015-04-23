@@ -1,4 +1,3 @@
-
 /**
  * Copyright (C) 2010 Sopra (support_movalys@sopra.com)
  *

@@ -1,3 +1,4 @@
+
 /**
  * Copyright (C) 2010 Sopra (support_movalys@sopra.com)
  *
@@ -13,26 +14,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUIControlTextField.h
-//  MFUI
-//
-//
 
-#ifndef MFUI_MFUIControlTextField_h
-#define MFUI_MFUIControlTextField_h
+#import "MFRegexTextFieldStyle.h"
 
+/**
+ * @class MFDoubleTextFieldStyle
+ * @brief This class manages the syle of a MFDoubleTextField component
+ */
+@interface MFDoubleTextFieldStyle : MFRegexTextFieldStyle
 
-#import "MFTextField+UITextFieldForwarding.h"
-#import "MFTextView + UITextViewForwarding.h"
-#import "MFRegularExpressionTextField.h"
-#import "MFUITextField.h"
-#import "MFTextView.h"
-
-#import "MFUIControlEmailTextField.h"
-#import "MFUIControlUrlTextField.h"
-#import "MFUIControlPhoneTextField.h"
-#import "MFUIControlNumberTextField.h"
-
-
-#endif
+@end

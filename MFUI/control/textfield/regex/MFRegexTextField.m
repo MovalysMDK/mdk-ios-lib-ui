@@ -21,23 +21,26 @@
 
 -(void)initializeComponent {
     [super initializeComponent];
-        [self.styleClass performSelector:@selector(addButtonOnTextField:) withObject:self];
+    [self.styleClass performSelector:@selector(addButtonOnTextField:) withObject:self];
 }
 
 -(void)textDidChange:(id)sender {
-    [self setIsValid:[self NSStringIsValidEmail:self.text]];
+    [self setIsValid:[self matchPattern:self.text]];
 }
 
--(BOOL) NSStringIsValidEmail:(NSString *)checkString
+-(BOOL) matchPattern:(NSString *)checkString
 {
-    NSString *emailRegex = [self regex];
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:checkString];
+    NSString *regex = [self regex];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return [predicate evaluateWithObject:checkString];
 }
 
 -(NSString *) regex {
-//    @throw [[NSException alloc] initWithName:@"Missing Regex" reason:@"You should implement the regex for this component" userInfo:nil];
     return nil;
+}
+
+-(UIKeyboardType)keyboardType {
+    return UIKeyboardTypeNumberPad;
 }
 
 @end

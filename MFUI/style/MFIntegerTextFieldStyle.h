@@ -14,14 +14,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
+#import "MFRegexTextFieldStyle.h"
 
-#import "MFPhoneTextFieldStyle.h"
-#import "MFRegexTextFieldStyle+Button.h"
-
-@implementation MFPhoneTextFieldStyle
-
--(NSString *)accessoryButtonImageName {
-    return @"phone_icon";
-}
+/**
+ * @class MFIntegerTextField
+ * @brief This class manages the syle of a MFIntegerTextField component
+ */
+@interface MFIntegerTextFieldStyle : MFRegexTextFieldStyle
 
 @end

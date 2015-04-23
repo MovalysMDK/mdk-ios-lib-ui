@@ -1,4 +1,3 @@
-
 /**
  * Copyright (C) 2010 Sopra (support_movalys@sopra.com)
  *
@@ -15,13 +14,13 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFPhoneTextFieldStyle.h"
-#import "MFRegexTextFieldStyle+Button.h"
 
-@implementation MFPhoneTextFieldStyle
 
--(NSString *)accessoryButtonImageName {
-    return @"phone_icon";
-}
+@interface MFWebViewController : UIViewController <UITextFieldDelegate, UIWebViewDelegate>
+
+@property (nonatomic, strong) UIWebView	*myWebView;
+@property (nonatomic, strong) UINavigationBar *navigationBar;
+@property (nonatomic, strong) UITextField *urlField;
+@property (nonatomic, strong) NSString *url;
 
 @end

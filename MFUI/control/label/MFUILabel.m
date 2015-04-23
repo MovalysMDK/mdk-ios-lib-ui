@@ -116,4 +116,8 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 
 @implementation MFUIInternalLabel
 
+-(void)prepareForInterfaceBuilder {
+    self.label.text = @"Un label";
+}
+
 @end

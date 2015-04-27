@@ -15,6 +15,7 @@
  */
 
 #import "MFRegexTextField.h"
+#import "MFException.h"
 
 @implementation MFRegexTextField
 @synthesize customStyleClass;
@@ -22,10 +23,6 @@
 -(void)initializeComponent {
     [super initializeComponent];
     [self.styleClass performSelector:@selector(addButtonOnTextField:) withObject:self];
-}
-
--(void)textDidChange:(id)sender {
-    [self setIsValid:[self matchPattern:self.text]];
 }
 
 -(BOOL) matchPattern:(NSString *)checkString
@@ -39,8 +36,9 @@
     return nil;
 }
 
--(UIKeyboardType)keyboardType {
-    return UIKeyboardTypeNumberPad;
+-(void) doAction {
+    [MFException throwNotImplementedExceptionOfMethodName:@"doAction" inClass:[self class] andUserInfo:nil];
 }
+
 
 @end

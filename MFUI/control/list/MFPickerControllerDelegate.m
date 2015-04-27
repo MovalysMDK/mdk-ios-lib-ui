@@ -219,6 +219,11 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
     if(pickerItemView == nil) {
         pickerItemView = [self itemView];
     }
+    CGRect itemFrame = pickerItemView.frame;
+    itemFrame.size.height = [self pickerView:pickerView rowHeightForComponent:component];
+    itemFrame.size.width = pickerView.frame.size.width;
+    pickerItemView.frame = itemFrame;
+    
     
     if([pickerItemView conformsToProtocol:@protocol(MFBindingViewProtocol)]) {
         
@@ -413,6 +418,66 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
 -(void)dispatchEventOnViewModelPropertyValueChangedWithKey:(NSString *)keyPath sender:(MFUIBaseViewModel *)sender {
     [self fillSelectedViewWithViewModel:[self getSelectedViewModel]];
     
+}
+
+/**
+ * @see MFFormListViewController.h
+ */
+-(void) dispatchEventOnComponentValueChangedWithKey:(NSString *)bindingKey atIndexPath:(NSIndexPath *)indexPath
+{
+    if([self.formBindingDelegate mutexForProperty:bindingKey]) {
+        
+        //Récupération et application du filtre ppour ce composant
+        MFValueChangedFilter applyFilter = [[self filtersFromFormToViewModel] objectForKey:bindingKey];
+        BOOL continueDispatch = YES;
+        if(applyFilter)
+            continueDispatch = applyFilter(bindingKey, [((MFUIBaseListViewModel *)[self getViewModel]).viewModels objectAtIndex:indexPath.row], self.binding);
+        
+        //Si la mise a jour n'est pas bloquée par le filtre
+        NSMutableArray *componentList = [[self.binding componentsAtIndexPath:indexPath withBindingKey:bindingKey] mutableCopy];
+        if(continueDispatch && componentList) {
+            for(id<MFUIComponentProtocol> component in componentList) {
+                [[self viewModelAtIndexPath:indexPath] setValue:[component getData] forKeyPath:bindingKey];
+            }
+        }
+    }
+    else {
+        [self releasePropertyFromMutex:bindingKey];
+    }
+}
+
+#pragma mark - ViewModels management
+
+-(id<MFUIBaseViewModelProtocol>) viewModelAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<MFUIBaseViewModelProtocol> vmItem = nil;
+    MFUIBaseListViewModel *listVm = ((MFUIBaseListViewModel *)[self.picker getValues]);
+    
+    
+    if ( [listVm.viewModels count]>indexPath.row) {
+        vmItem = [listVm.viewModels objectAtIndex:indexPath.row];
+        if ( [[NSNull null] isEqual: vmItem]) {
+            vmItem = nil ;
+        }
+    }
+    
+    
+    if (vmItem == nil ) {
+        
+        id vmCreator = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_VIEW_MODEL_CREATOR];
+        if([[listVm.fetch.sections objectAtIndex:0] objects].count > indexPath.row) {
+            id temp = [listVm.fetch objectAtIndexPath:indexPath];
+            
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wundeclared-selector"
+            id tempVM =[vmCreator performSelector:@selector(createOrUpdateItemVM:withData:) withObject:[listVm defineViewModelName] withObject: temp];
+#pragma clang diagnostic pop
+            
+            [listVm add:tempVM atIndex:indexPath.row];
+            vmItem = tempVM ; //[listVm.viewModels objectAtIndex:indexPath.row];
+        }
+    }
+    return vmItem;
 }
 
 

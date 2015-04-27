@@ -45,7 +45,8 @@ NSString * ERROR_VIEW_RIGHT_CONSTRAINT = @"ERROR_VIEW_RIGHT_CONSTRAINT";
 
 -(void) addErrorViewOnComponent:(MFTextField *)component {
     if(!self.errorView) {
-        UIButton *errorButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        UIButton *errorButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+        errorButton.clipsToBounds = YES;
         [errorButton addTarget:component action:@selector(onErrorButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         self.errorView = errorButton;
         self.errorView.alpha = 0.0;

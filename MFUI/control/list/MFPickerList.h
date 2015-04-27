@@ -24,6 +24,7 @@
 #import "MFUIForm.h"
 
 #import "MFUIBaseComponent.h"
+#import "MFUIOldBaseComponent.h"
 
 @class MFUIBaseListViewModel;
 @class MFUIBaseViewModel;
@@ -46,7 +47,7 @@ FOUNDATION_EXPORT NSString *const PICKER_PARAMETER_CANCEL_BUTTON_COLOR_KEY;
 FOUNDATION_EXPORT const int PICKER_VIEW_TAG;
 
 
-@interface MFPickerList : MFUIBaseComponent <UIGestureRecognizerDelegate, UISearchBarDelegate, MFOrientationChangedProtocol>
+@interface MFPickerList : MFUIOldBaseComponent <UIGestureRecognizerDelegate, UISearchBarDelegate, MFOrientationChangedProtocol>
 
 
 #pragma mark -  Properties - Graphics

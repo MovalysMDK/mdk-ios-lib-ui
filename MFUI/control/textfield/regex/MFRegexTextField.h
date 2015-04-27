@@ -33,4 +33,12 @@
  */
 -(NSString *) regex;
 
+/**
+ * @brief Indicates if the Regex Component match the given pattern
+ * @param checkString The pattern to match
+ * @return A BOOL value that is YES if the component is matching the pattern, NO otherwhise.
+ */
+-(BOOL) matchPattern:(NSString *)checkString;
+
+
 @end

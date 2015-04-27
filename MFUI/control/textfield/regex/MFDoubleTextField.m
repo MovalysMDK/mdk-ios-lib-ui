@@ -20,10 +20,7 @@
 
 @interface MFDoubleTextField ()
 
-@property (nonatomic, strong) NSString *integerPartMinDigits;
-@property (nonatomic, strong) NSString *integerPartMaxDigits;
-@property (nonatomic, strong) NSString *decimalPartMinDigits;
-@property (nonatomic, strong) NSString *decimalPartMaxDigits;
+@property (nonatomic, strong) UIBarButtonItem *minusButton;
 
 @property (nonatomic, strong) NSString *pattern;
 
@@ -70,11 +67,11 @@
         
         toolBar.translucent = NO;
         
-        UIBarButtonItem *minusButton = [[UIBarButtonItem alloc] initWithTitle:@"—"
+        self.minusButton = [[UIBarButtonItem alloc] initWithTitle:[self.text containsString:@"-"] ? @"+" :@"—"
                                                                         style:UIBarButtonItemStylePlain
                                                                        target:self
                                                                        action:@selector(signButtonClick:)];
-        minusButton.tintColor = [UIColor blackColor];
+        self.minusButton.tintColor = [UIColor blackColor];
         
         
         UIBarButtonItem *okButton = [[UIBarButtonItem alloc] initWithTitle:MFLocalizedStringFromKey(@"okButton")
@@ -83,7 +80,7 @@
                                                                     action:@selector(okButtonClick:)];
         okButton.tintColor = [UIColor blackColor];
         
-        toolBar.items =   @[minusButton,
+        toolBar.items =   @[self.minusButton,
                             [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                           target:nil
                                                                           action:nil],
@@ -106,7 +103,7 @@
         }
         sender.title = @"—";
     }
-    [self performSelector:@selector(updateValue)];
+    [self.sender performSelector:@selector(updateValue)];
 }
 
 
@@ -155,9 +152,18 @@
     
     //Génération de la regex de vérification
     self.pattern = [NSString stringWithFormat:@"^-?[0-9]{%@}([,][0-9]{%@})?$", quantificateurPartieEntiere, quantificateurPartieDecimale];
-    
 }
 
+-(void)setData:(id)data {
+    [super setData:data];
+    if([data containsString:@"-"]) {
+        [self.minusButton setTitle:@"+"];
+    }
+    else {
+        [self.minusButton setTitle:@"—"];
+
+    }
+}
 
 -(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
     
@@ -169,4 +175,5 @@
     self.decimalPartMinDigits = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"decimalPartMinDigits"];
     self.decimalPartMaxDigits = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"decimalPartMaxDigits"];
 }
+
 @end

@@ -140,7 +140,7 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
     if(self.internalView) {
 #if TARGET_INTERFACE_BUILDER
         if(!self.leftConstraint) {
-            self.leftConstraint = [NSLayoutConstraint constraintWithItem:self.internalView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:![self IB_onError] ? 0 : self.errorView.frame.size.width];
+            self.leftConstraint = [NSLayoutConstraint constraintWithItem:self.internalView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:![self onError_MDK] ? 0 : self.errorView.frame.size.width];
             [self addConstraint:self.leftConstraint];
         }
 #else
@@ -250,11 +250,11 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
  * @param view The renderable component view to render using specific inspectable properties
  */
 -(void)renderComponent:(MFUIBaseRenderableComponent *)view {
-    view.layer.borderWidth = self.IB_borderWidth;
-    view.layer.borderColor = self.IB_borderColor.CGColor;
-    view.layer.cornerRadius = self.IB_cornerRadius;
+    view.layer.borderWidth = self.borderWidth_MDK;
+    view.layer.borderColor = self.borderColor_MDK.CGColor;
+    view.layer.cornerRadius = self.cornerRadius_MDK;
     view.layer.masksToBounds = YES;
-    view.tooltipView.tooltipBackgroundColour = self.IB_tooltipBgColor;
+    view.tooltipView.tooltipBackgroundColour = self.tooltipColor_MDK;
 }
 
 /**
@@ -275,17 +275,17 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
  * @brief Forwards the the base renderable properties on the intenal view
  */
 -(void) forwardBaseRenderableProperties {
-    if(self.IB_borderColor) {
-        self.internalView.IB_borderColor = self.IB_borderColor;
+    if(self.borderColor_MDK) {
+        self.internalView.borderColor_MDK = self.borderColor_MDK;
     }
-    if(self.IB_borderWidth) {
-        self.internalView.IB_borderWidth = self.IB_borderWidth;
+    if(self.borderWidth_MDK) {
+        self.internalView.borderWidth_MDK = self.borderWidth_MDK;
     }
-    if(self.IB_cornerRadius) {
-        self.internalView.IB_cornerRadius = self.IB_cornerRadius;
+    if(self.cornerRadius_MDK) {
+        self.internalView.cornerRadius_MDK = self.cornerRadius_MDK;
     }
-    if(self.IB_tooltipBgColor) {
-        self.internalView.IB_tooltipBgColor = self.IB_tooltipBgColor;
+    if(self.tooltipColor_MDK) {
+        self.internalView.tooltipColor_MDK = self.tooltipColor_MDK;
     }
     if(self.styleClass) {
         self.internalView.styleClass = self.styleClass;
@@ -299,7 +299,7 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
     [super prepareForInterfaceBuilder];
     [self commonInit];
     [self computeStyleClass];
-    if(self.IB_onError) {
+    if(self.onError_MDK) {
         [self applyStandardStyle];
         [self applyErrorStyle];
     }
@@ -307,7 +307,7 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
         [self applyStandardStyle];
         [self applyValidStyle];
     }
-    [self showError:self.IB_onError];
+    [self showError:self.onError_MDK];
 }
 
 #pragma mark - Style
@@ -477,7 +477,7 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
         [currentView bringSubviewToFront:self.tooltipView];
         [currentView bringSubviewToFront:self.errorView];
         self.tooltipView.tooltipText = errorText;
-        self.tooltipView.tooltipBackgroundColour = self.IB_tooltipBgColor ? self.IB_tooltipBgColor : [self defaultTooltipBackgroundColor];
+        self.tooltipView.tooltipBackgroundColour = self.tooltipColor_MDK ? self.tooltipColor_MDK : [self defaultTooltipBackgroundColor];
         
         [self.tooltipView show];
         [self bringSubviewToFront:self.tooltipView];

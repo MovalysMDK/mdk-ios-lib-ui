@@ -70,7 +70,7 @@
     NSString *bindingKey = ((MFFieldDescriptor *)self.component.selfDescriptor).bindingKey;
     if(self.component.form && bindingKey) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.component.form dispatchEventOnComponentValueChangedWithKey:bindingKey atIndexPath:self.component.componentInCellAtIndexPath];
+                [self.component.form dispatchEventOnComponentValueChangedWithKey:bindingKey atIndexPath:self.component.componentInCellAtIndexPath];
         });
     }
 }
@@ -106,7 +106,7 @@
     if(isValid) {
         [self.component.styleClass applyValidStyleOnComponent:self.component];
         [self.component.tooltipView hideAnimated:YES];
-
+        
     }
     else{
         [self.component.styleClass applyErrorStyleOnComponent:self.component];

@@ -44,27 +44,27 @@ IB_DESIGNABLE
 /**
  * @brief The border color of the component
  */
-@property (nonatomic, strong) IBInspectable UIColor *IB_borderColor;
+@property (nonatomic, strong) IBInspectable UIColor *borderColor_MDK;
 
 /**
  * @brief The border width of the component
  */
-@property (nonatomic) IBInspectable NSInteger IB_borderWidth;
+@property (nonatomic) IBInspectable NSInteger borderWidth_MDK;
 
 /**
  * @brief The corner radius of the component
  */
-@property (nonatomic) IBInspectable NSInteger IB_cornerRadius;
+@property (nonatomic) IBInspectable NSInteger cornerRadius_MDK;
 
 /**
  * @brief Indicates on InterfaceBuilder if the component should be displayed with error style or not.
  */
-@property (nonatomic) IBInspectable BOOL IB_onError;
+@property (nonatomic) IBInspectable BOOL onError_MDK;
 
 /**
  * @brief The background color of the error tooltip view
  */
-@property (nonatomic, strong) IBInspectable UIColor *IB_tooltipBgColor;
+@property (nonatomic, strong) IBInspectable UIColor *tooltipColor_MDK;
 
 
 

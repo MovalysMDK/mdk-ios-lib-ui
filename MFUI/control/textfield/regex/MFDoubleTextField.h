@@ -24,4 +24,9 @@
  */
 @interface MFDoubleTextField : MFRegexTextField
 
+@property (nonatomic, strong) NSString *integerPartMinDigits;
+@property (nonatomic, strong) NSString *integerPartMaxDigits;
+@property (nonatomic, strong) NSString *decimalPartMinDigits;
+@property (nonatomic, strong) NSString *decimalPartMaxDigits;
+
 @end

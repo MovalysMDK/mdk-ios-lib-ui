@@ -91,14 +91,14 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     UIImage* image = [UIImage imageNamed:[self defaultImage]];
     self.photoImageView.image = image;
     
-    self.dateLabel = [[MFUILabel alloc] init];
+    self.dateLabel = [[UILabel alloc] init];
     self.dateLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
-    self.titreLabel = [[MFUILabel alloc] init];
+    self.titreLabel = [[UILabel alloc] init];
     self.titreLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.titreLabel.numberOfLines = 2;
     
-    self.descriptionLabel = [[MFUILabel alloc] init];
+    self.descriptionLabel = [[UILabel alloc] init];
     self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
     //Nombre de lignes infini
     self.descriptionLabel.numberOfLines = 0;
@@ -421,9 +421,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (void) setEditable:(NSNumber *)editable {
     [super setEditable:editable];
-    self.dateLabel.editable = editable;
-    self.titreLabel.editable = editable;
-    self.descriptionLabel.editable = editable;
+    self.dateLabel.enabled = editable;
+    self.titreLabel.enabled = editable;
+    self.descriptionLabel.enabled = editable;
 }
 
 

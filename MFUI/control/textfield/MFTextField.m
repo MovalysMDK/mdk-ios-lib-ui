@@ -76,6 +76,9 @@
     [self.styleClass applyStandardStyleOnComponent:self];
     self.errors = [NSMutableArray new];
     self.extension = [[MFTextFieldExtension alloc] init];
+    if(!self.sender) {
+        self.sender = self;
+    }
     [self addTarget:self action:@selector(textDidChange) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
 }
 
@@ -83,7 +86,7 @@
 #pragma mark - TextField Methods
 
 -(void)textDidChange {
-    [self updateValue];
+    [self.sender performSelector:@selector(updateValue)];
 }
 
 
@@ -171,6 +174,7 @@
         fixedData = @"";
     }
     self.text = fixedData;
+    [self updateValue];
 }
 
 -(id)getData {

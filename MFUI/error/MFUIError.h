@@ -25,6 +25,7 @@
 #import "MFInvalidDoubleValueUIValidationError.h"
 #import "MFInvalidEmailValueUIValidationError.h"
 #import "MFInvalidIntegerValueUIValidationError.h"
+#import "MFInvalidLocationValueUIValidationError.h"
 #import "MFInvalidPhoneNumberValueUIValidationError.h"
 #import "MFInvalidUrlValueUIValidationError.h"
 #import "MFMandatoryFieldUIValidationError.h"

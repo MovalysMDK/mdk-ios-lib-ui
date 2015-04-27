@@ -23,6 +23,7 @@
 #import "MFUIMotion.h"
 
 #import "MFUIBaseComponent.h"
+#import "MFUIOldBaseComponent.h"
 #import "MFButton.h"
 
 
@@ -30,7 +31,7 @@
 FOUNDATION_EXPORT NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY;
 
 
-@interface MFSimplePickerList : MFUIBaseComponent <UIGestureRecognizerDelegate, MFOrientationChangedProtocol, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface MFSimplePickerList : MFUIOldBaseComponent <UIGestureRecognizerDelegate, MFOrientationChangedProtocol, UIPickerViewDataSource, UIPickerViewDelegate>
 
 #pragma mark - Properties
 /**

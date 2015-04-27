@@ -507,7 +507,7 @@
             id value = (NSString *) x;
             if (value) {
                 // We validate the value
-                if(![strongSelf validate]) {
+                if(![strongSelf validateWithParameters:nil]) {
                     // If there aren't any errors, we clean all component's errors
                     [strongSelf clearErrors];
                 }
@@ -609,6 +609,10 @@
 
 -(void)didLayoutSubviewsDesignable {
     //Default : nothing
+}
+
+-(void)setMandatory:(NSNumber *)mandatory {
+    _mandatory = mandatory;
 }
 
 -(void)initializeInspectableAttributes {

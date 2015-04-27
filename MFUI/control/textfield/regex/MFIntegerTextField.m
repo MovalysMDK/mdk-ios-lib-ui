@@ -44,6 +44,7 @@
     return UIKeyboardTypeNumberPad;
 }
 
+
 -(void) customizeKeyboard {
     //Si on est pas sur iPad
     if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)

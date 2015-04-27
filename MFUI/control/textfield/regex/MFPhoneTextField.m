@@ -15,11 +15,32 @@
  */
 
 #import "MFPhoneTextField.h"
+#import "MFInvalidPhoneNumberValueUIValidationError.h"
 
 @implementation MFPhoneTextField
 
 -(NSString *)regex {
     return @"^(\\+[0-9]{1,3})?[ ]?(\\([0-9]{1,3}\\))?[0-9]([ \\.\\-]?[0-9]{1,3}){0,4}[0-9]$";
+}
+
+-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+    NSInteger numberOfErrors = [super validateWithParameters:parameters];
+    if(![self matchPattern:[self text]]) {
+        NSError *error = [[MFInvalidPhoneNumberValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        [self addErrors:@[error]];
+        numberOfErrors++;
+        
+    }
+    return numberOfErrors;
+}
+
+-(UIKeyboardType)keyboardType {
+    return UIKeyboardTypePhonePad;
+}
+
+-(void) doAction {
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [self getData]]];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 @end

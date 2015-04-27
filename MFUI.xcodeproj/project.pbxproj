@@ -94,6 +94,8 @@
 		B08EF72A1AE53FC000F3754E /* MFUrlTextFieldStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = B08EF7181AE53FC000F3754E /* MFUrlTextFieldStyle.h */; };
 		B08EF72B1AE53FC000F3754E /* MFUrlTextFieldStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B08EF7191AE53FC000F3754E /* MFUrlTextFieldStyle.m */; };
 		B08EF72D1AE5407E00F3754E /* MFCreateEmailViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B08EF72C1AE5407E00F3754E /* MFCreateEmailViewControllerDelegate.h */; };
+		B099BE6A1AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.h in Headers */ = {isa = PBXBuildFile; fileRef = B099BE681AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.h */; };
+		B099BE6B1AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.m in Sources */ = {isa = PBXBuildFile; fileRef = B099BE691AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.m */; };
 		B0A0ED621AE8D578004F0FF7 /* MFUIOldBaseComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = B0A0ED601AE8D578004F0FF7 /* MFUIOldBaseComponent.h */; };
 		B0A0ED631AE8D578004F0FF7 /* MFUIOldBaseComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0ED611AE8D578004F0FF7 /* MFUIOldBaseComponent.m */; };
 		B0AF66FD1AE64E1400A472FC /* MFComponentBindingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0AF66FB1AE64E1400A472FC /* MFComponentBindingDelegate.h */; };
@@ -537,6 +539,8 @@
 		B08EF7181AE53FC000F3754E /* MFUrlTextFieldStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUrlTextFieldStyle.h; sourceTree = "<group>"; };
 		B08EF7191AE53FC000F3754E /* MFUrlTextFieldStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUrlTextFieldStyle.m; sourceTree = "<group>"; };
 		B08EF72C1AE5407E00F3754E /* MFCreateEmailViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCreateEmailViewControllerDelegate.h; sourceTree = "<group>"; };
+		B099BE681AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFInvalidLocationValueUIValidationError.h; sourceTree = "<group>"; };
+		B099BE691AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFInvalidLocationValueUIValidationError.m; sourceTree = "<group>"; };
 		B0A0ED601AE8D578004F0FF7 /* MFUIOldBaseComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIOldBaseComponent.h; sourceTree = "<group>"; };
 		B0A0ED611AE8D578004F0FF7 /* MFUIOldBaseComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUIOldBaseComponent.m; sourceTree = "<group>"; };
 		B0AF66FB1AE64E1400A472FC /* MFComponentBindingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentBindingDelegate.h; sourceTree = "<group>"; };
@@ -1537,6 +1541,8 @@
 				B0D45C4E1A5ED2F300C6D376 /* MFInvalidEmailValueUIValidationError.m */,
 				B0D45C4F1A5ED2F300C6D376 /* MFInvalidIntegerValueUIValidationError.h */,
 				B0D45C501A5ED2F300C6D376 /* MFInvalidIntegerValueUIValidationError.m */,
+				B099BE681AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.h */,
+				B099BE691AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.m */,
 				B0D45C511A5ED2F300C6D376 /* MFInvalidPhoneNumberValueUIValidationError.h */,
 				B0D45C521A5ED2F300C6D376 /* MFInvalidPhoneNumberValueUIValidationError.m */,
 				B0D45C531A5ED2F300C6D376 /* MFInvalidUrlValueUIValidationError.h */,
@@ -2059,6 +2065,7 @@
 				B0183FEF1AB099530081133F /* MFUILabel+UILabelForwarding.h in Headers */,
 				B0D45D3E1A5ED2F400C6D376 /* MFBindingViewProtocol.h in Headers */,
 				B0D45D741A5ED2F400C6D376 /* MFUIControlNumber.h in Headers */,
+				B099BE6A1AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.h in Headers */,
 				B0D45E3C1A5ED2F400C6D376 /* MFWorkspaceColumnSegue.h in Headers */,
 				B08EF7261AE53FC000F3754E /* MFTextFieldStyle+ErrorView.h in Headers */,
 				B08EF71C1AE53FC000F3754E /* MFPhoneTextFieldStyle.h in Headers */,
@@ -2420,6 +2427,7 @@
 				B00787CB1AB1E37A009F6D95 /* JDFTooltipView.m in Sources */,
 				B0D45E631A5ED2F400C6D376 /* MFViewController.m in Sources */,
 				B0D45D3C1A5ED2F400C6D376 /* MFBinding.m in Sources */,
+				B099BE6B1AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.m in Sources */,
 				B0D45E871A5ED2F400C6D376 /* MFUpdateVMInParameter.m in Sources */,
 				B00787C81AB1E37A009F6D95 /* JDFTooltipManager.m in Sources */,
 				B08EF6FD1AE53F8F00F3754E /* MFPhoneTextField.m in Sources */,

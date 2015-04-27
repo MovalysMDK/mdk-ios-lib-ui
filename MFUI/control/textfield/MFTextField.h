@@ -35,6 +35,10 @@ IB_DESIGNABLE
 
 @property (nonatomic, strong) NSMutableArray *errors;
 
+
+@property (nonatomic, strong) id<MFUIComponentProtocol> sender;
+
+
 #pragma mark - Methods
 -(void)setIsValid:(BOOL) isValid;
 
@@ -58,4 +62,6 @@ IB_DESIGNABLE
 
 
 -(void) onErrorButtonClick:(id)sender;
+
+-(void) setSender:(id<MFUIComponentProtocol>)sender ;
 @end

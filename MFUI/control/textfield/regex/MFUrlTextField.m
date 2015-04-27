@@ -15,11 +15,37 @@
  */
 
 #import "MFUrlTextField.h"
+#import "MFInvalidUrlValueUIValidationError.h"
 
 @implementation MFUrlTextField
 
 -(NSString *)regex {
    return @"\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+}
+
+-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+    NSInteger numberOfErrors = [super validateWithParameters:parameters];
+    if(![self matchPattern:[self text]]) {
+        NSError *error = [[MFInvalidUrlValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        [self addErrors:@[error]];
+        numberOfErrors++;
+        
+    }
+    return numberOfErrors;
+}
+
+-(UIKeyboardType)keyboardType {
+    return UIKeyboardTypeURL;
+}
+
+-(void) doAction {
+    NSString *newUrl = [self text];
+    if(newUrl && !([newUrl length] == 0) &&
+       [newUrl rangeOfString:@"://"].location == NSNotFound)
+    {
+        newUrl = [@"http://"stringByAppendingString:newUrl];
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:newUrl]];
 }
 
 @end

@@ -106,9 +106,9 @@ typedef enum {
 
 @property (nonatomic, strong) IBInspectable NSString *IB_uDateString;
 
-@property (nonatomic) IBInspectable NSInteger IB_borderWidth;
+@property (nonatomic) IBInspectable NSInteger borderWidth_MDK;
 
-@property (nonatomic) IBInspectable NSInteger IB_cornerRadius;
+@property (nonatomic) IBInspectable NSInteger cornerRadius_MDK;
 
 @property (nonatomic) IBInspectable NSInteger IB_textAlignment;
 

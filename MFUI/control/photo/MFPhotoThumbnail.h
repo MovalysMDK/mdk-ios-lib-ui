@@ -23,8 +23,9 @@
 //iOS imports
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "MFUILabel.h"
+#import "MFUIOldBaseComponent.h"
 
-@interface MFPhotoThumbnail : MFUIBaseComponent
+@interface MFPhotoThumbnail : MFUIOldBaseComponent
 
 #pragma mark - Constants
 
@@ -48,17 +49,17 @@ FOUNDATION_EXPORT NSString *const  DEFAUT_PHOTO_MANAGER_CONTROLLER_NAME;
 /**
  * @brief The label that displays the date of the photo
  */
-@property (nonatomic, strong) MFUILabel *dateLabel;
+@property (nonatomic, strong) UILabel *dateLabel;
 
 /**
  * @brief The label that displays the titre of the photo
  */
-@property (nonatomic, strong) MFUILabel *titreLabel;
+@property (nonatomic, strong) UILabel *titreLabel;
 
 /**
  * @brief The label that displays the description of the photo
  */
-@property (nonatomic, strong) MFUILabel *descriptionLabel;
+@property (nonatomic, strong) UILabel *descriptionLabel;
 
 
 

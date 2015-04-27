@@ -54,20 +54,21 @@
 
 -(void)initialize {
     
-    // Latitude Field
-//    self.latitude = [[MFDoubleTextField alloc] initWithFrame:CGRectZero withSender:self];
-//    self.latitude.decimalPartMaxDigits = @"6";
-//    self.latitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRW");
-//    [self.latitude createPattern];
-//    self.latitude.mfParent = self;
-//
-//    // Longitude Field
-//    self.longitude = [[MFDoubleTextField alloc] initWithFrame:CGRectZero withSender:self];
-//    self.longitude.decimalPartMaxDigits = @"6";
-//    self.longitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRW");
-//    [self.longitude createPattern];
-//    self.longitude.mfParent = self;
+    [super initialize];
     
+    // Latitude Field
+    self.latitude = [[MFDoubleTextField alloc] initWithFrame:CGRectZero];
+    
+    self.latitude.decimalPartMaxDigits = @"6";
+    self.latitude.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRW");
+    [self.latitude setSender:self];
+    
+    // Longitude Field
+    self.longitude = [[MFDoubleTextField alloc] initWithFrame:CGRectZero];
+    self.longitude.decimalPartMaxDigits = @"6";
+    self.longitude.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRW");
+    [self.longitude setSender:self];
+    self.backgroundColor = [UIColor clearColor];
     
     // GPS Button
     self.gpsButton = [[MFButton alloc] init];
@@ -86,7 +87,10 @@
     
     [self setNeedsDisplay];
     
+    [self selfCustomization];
+    
     locationManager = [[CLLocationManager alloc] init];
+    [locationManager requestWhenInUseAuthorization];
     
 }
 
@@ -113,8 +117,8 @@
     //TextFields positions
     NSLayoutConstraint *latitudeTopMargin = [NSLayoutConstraint constraintWithItem:self.latitude attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:10];
     NSLayoutConstraint *longitudeBottomMargin = [NSLayoutConstraint constraintWithItem:self.longitude attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:-10];
-    NSLayoutConstraint *latitudeLeftMargin = [NSLayoutConstraint constraintWithItem:self.latitude attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:10];
-    NSLayoutConstraint *longitudeLeftMargin = [NSLayoutConstraint constraintWithItem:self.longitude attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:10];
+    NSLayoutConstraint *latitudeLeftMargin = [NSLayoutConstraint constraintWithItem:self.latitude attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:30];
+    NSLayoutConstraint *longitudeLeftMargin = [NSLayoutConstraint constraintWithItem:self.longitude attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:30];
     
     
     NSLayoutConstraint *latitudeRightMargin = [NSLayoutConstraint constraintWithItem:self.latitude attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.gpsButton attribute:NSLayoutAttributeLeft multiplier:1 constant:-10];
@@ -157,13 +161,6 @@
 }
 
 
--(NSInteger) validateWithParameters:(NSDictionary *)parameters{
-    
-//    [super validateWithParameters:parameters];
-//    [self addErrors:[self.latitude getErrors]];
-//    [self addErrors:[self.longitude getErrors]];
-    return [self.errors count];
-}
 
 #pragma mark - Custom Accessors
 
@@ -177,14 +174,9 @@
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setMaximumFractionDigits:6];
     
-//    [self.latitude setData:[MFNumberConverter  toString:[NSNumber numberWithFloat:location.coordinate.latitude] withFormatter:numberFormatter]];
-//    [self.longitude setData:[MFNumberConverter  toString:[NSNumber numberWithFloat:location.coordinate.longitude] withFormatter:numberFormatter]];
-    
-    
-    //    [self.latitude updateValue:self.latitude.text];
-    //    [self.longitude updateValue:self.longitude.text];
-    [self updateValue:[self getData]];
-    // [self.latitude setValue:[NSString stringWithFormat:@"%.6f", location.coordinate.latitude]];
+    [self.latitude setData:[MFNumberConverter  toString:[NSNumber numberWithFloat:location.coordinate.latitude] withFormatter:numberFormatter]];
+    [self.longitude setData:[MFNumberConverter  toString:[NSNumber numberWithFloat:location.coordinate.longitude] withFormatter:numberFormatter]];
+    [self updateValue];
     
 }
 
@@ -192,7 +184,7 @@
 #pragma mark - Synchonization method
 
 -(void)updateLocationProperty {
-//    self.location = [[CLLocation alloc] initWithLatitude:[[MFStringConverter toNumber:self.latitude.regularExpressionTextField.text] doubleValue] longitude:[[MFStringConverter toNumber:self.longitude.regularExpressionTextField.text] doubleValue]];
+    self.location = [[CLLocation alloc] initWithLatitude:[[MFStringConverter toNumber:self.latitude.text] doubleValue] longitude:[[MFStringConverter toNumber:self.longitude.text] doubleValue]];
 }
 
 #pragma mark - geolocalisation
@@ -202,6 +194,8 @@
     positionUpdates = 0;
     
     [locationManager startUpdatingLocation];
+    [self.gpsButton setUserInteractionEnabled:NO];
+    [self.gpsButton setTintColor:[UIColor lightGrayColor]];
     
     int64_t delayInSeconds = 5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -209,6 +203,8 @@
         if (positionUpdates != -1) { // On vérifie que la localisation n'a pas déjà été stopée
             if (positionUpdates > 0) { // Si la position a été mise à jour on l'arrête sinon on affiche une erreur
                 [locationManager stopUpdatingLocation];
+                [self.gpsButton setUserInteractionEnabled:YES];
+                [self.gpsButton setTintColor:nil];
             } else {
                 UIAlertView *errorAlert = [[UIAlertView alloc]
                                            initWithTitle:MFLocalizedStringFromKey(@"MFPositionError") message:MFLocalizedStringFromKey(@"MFPositionErrorMessage") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -231,8 +227,8 @@
 
 -(void)setData:(id)data {
     MFPositionViewModel *location = (MFPositionViewModel *)data;
-//    self.latitude.regularExpressionTextField.text = location.latitude;
-//    self.longitude.regularExpressionTextField.text = location.longitude;
+    [self.latitude setData:location.latitude];
+    [self.longitude setData:location.longitude];
 }
 
 + (NSString *) getDataType {
@@ -241,30 +237,9 @@
 
 -(id)getData {
     MFPositionViewModel *location = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_POSITION_VIEW_MODEL];
-//    location.longitude = self.longitude.regularExpressionTextField.text;
-//    location.latitude = self.latitude.regularExpressionTextField.text;
+    location.longitude = self.longitude.text;
+    location.latitude = self.latitude.text;
     return location;
-}
-
--(void)setMandatory:(NSNumber *)mandatory {
-    // Non implémenté
-}
-
-/**
- * give the index path to the components too
- */
--(void) setComponentInCellAtIndexPath:(NSIndexPath *)componentInCellAtIndexPath {
-    [super setComponentInCellAtIndexPath:componentInCellAtIndexPath];
-//    [self.latitude setComponentInCellAtIndexPath:componentInCellAtIndexPath];
-//    [self.longitude setComponentInCellAtIndexPath:componentInCellAtIndexPath];
-}
-/**
- * give the form controller to the components too
- */
--(void)setForm:(id<MFComponentChangedListenerProtocol> )formController {
-    [super setForm:formController];
-//    [self.latitude  setForm:formController];
-//    [self.longitude  setForm:formController];
 }
 
 /**
@@ -273,17 +248,17 @@
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];
     if([editable isEqualToNumber:@0]) {
-//        self.latitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRO");
-//        self.longitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRO");
+        self.latitude.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRO");
+        self.longitude.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRO");
         self.gpsButton.hidden = YES;
     }
     else {
         self.gpsButton.hidden = NO;
-//        self.latitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRW");
-//        self.longitude.regularExpressionTextField.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRW");
+        self.latitude.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRW");
+        self.longitude.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRW");
     }
-//    self.latitude.editable = self.editable;
-//    self.longitude.editable = self.editable;
+    self.latitude.enabled = self.editable;
+    self.longitude.enabled = self.editable;
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -305,12 +280,41 @@
         if (positionUpdates >= 7) {
             positionUpdates = -1;
             [manager stopUpdatingLocation];
+            [self.gpsButton setUserInteractionEnabled:YES];
+            [self.gpsButton setTintColor:nil];
         }
     }
 }
 
+-(void) updateValue {
+    [self performSelectorOnMainThread: @selector(updateValue:) withObject:[self getData] waitUntilDone:YES];
+}
 
 
-
+-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+    int nbOfErrors = 0;
+    NSError *error = nil;
+    
+    if(self.mandatory)
+    {
+        if(self.latitude.text.length == 0 || self.longitude.text.length == 0) {
+            error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+            [self addErrors:@[error]];
+            nbOfErrors++;
+            
+        }
+    }
+    if([[self.latitude getData] doubleValue] > 90 ||
+       [[self.latitude getData] doubleValue] < -90 ||
+       [[self.longitude getData] doubleValue] > 180 ||
+       [[self.longitude getData] doubleValue] < -180) {
+        error = [[MFInvalidLocationValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        [self addErrors:@[error]];
+        nbOfErrors++;
+   
+    }
+    return nbOfErrors;
+    
+}
 
 @end

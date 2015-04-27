@@ -56,6 +56,8 @@ NSString * REGEX_BUTTON_RIGHT_CONSTRAINT = @"REGEX_BUTTON_RIGHT_CONSTRAINT";
         [button setImage:btnImage forState:UIControlStateNormal];
         [component addSubview:button];
         
+        [button addTarget:component action:@selector(doAction) forControlEvents:UIControlEventTouchUpInside];
+        
         NSDictionary *buttonConstraints = [self defineButton:button constraintsOnComponent:component];
         buttonConstraints = [self customizeButtonConstraints:buttonConstraints onComponent:component];
         [component addConstraints:buttonConstraints.allValues];

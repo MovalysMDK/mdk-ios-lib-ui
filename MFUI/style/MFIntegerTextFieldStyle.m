@@ -23,4 +23,8 @@
     return nil;
 }
 
+-(BOOL)hasAccessoryButton {
+    return NO;
+}
+
 @end

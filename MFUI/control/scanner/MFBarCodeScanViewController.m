@@ -134,7 +134,7 @@
 
 #pragma mark - MFBarCodeScannerProtocol methods
 -(void) doActionOnDetectionOfString:(NSString *)detectionString {
-    [self.sourceComponent updateValueFromExternalSource:detectionString];
+    [self.sourceComponent performSelector:@selector(updateValueFromExternalSource:) withObject:detectionString];
     [self closeViewController];
 }
 

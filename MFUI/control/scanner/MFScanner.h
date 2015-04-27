@@ -24,8 +24,9 @@
 #import "MFBarCodeScanTextField.h"
 #import "MFBarCodeScannerDelegate.h"
 #import "MFUIBaseComponent.h"
+#import "MFUIOldBaseComponent.h"
 
 
-@interface MFScanner : MFUIBaseComponent  <MFBarCodeScannerProtocol>
+@interface MFScanner : MFUIOldBaseComponent  <MFBarCodeScannerProtocol>
 
 @end

@@ -73,5 +73,9 @@
     return dictionary;
 }
 
+-(BOOL)hasAccessoryButton {
+    return YES;
+}
+
 
 @end

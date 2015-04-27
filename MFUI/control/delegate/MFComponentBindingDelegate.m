@@ -54,6 +54,9 @@
                     // If there aren't any errors, we clean all component's errors
                     [strongSelf.bindingDelegate clearErrors];
                 }
+                else {
+                    [strongSelf showError:YES];
+                }
             }
             else {
                 [strongSelf showError:YES];

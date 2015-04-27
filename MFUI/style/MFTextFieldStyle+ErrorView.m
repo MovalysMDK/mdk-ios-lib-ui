@@ -56,11 +56,12 @@ NSString * ERROR_VIEW_RIGHT_CONSTRAINT = @"ERROR_VIEW_RIGHT_CONSTRAINT";
         errorViewConstraints = [self customizeErrorViewConstraints:errorViewConstraints onComponent:component];
         [component addConstraints:errorViewConstraints.allValues];
         
-        [UIView animateWithDuration:0.25
-                         animations:^{
-                             self.errorView.alpha = 1.0;
-                         }];
     }
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         self.errorView.alpha = 1.0;
+                     }];
+
 }
 
 -(void) removeErrorViewOnComponent:(MFTextField *)component {

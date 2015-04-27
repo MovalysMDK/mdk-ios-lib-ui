@@ -110,12 +110,12 @@
 }
 
 - (CGRect)placeholderRectForBounds:(CGRect)bounds {
-    [super textRectForBounds:bounds];
+    bounds = [super textRectForBounds:bounds];
     return [((MFTextFieldStyle *)self.styleClass) placeholderRectForBounds:bounds onComponent:self];
 }
 
 -(CGRect)borderRectForBounds:(CGRect)bounds {
-    [super borderRectForBounds:bounds];
+    bounds = [super borderRectForBounds:bounds];
     return [((MFTextFieldStyle *)self.styleClass) borderRectForBounds:bounds onComponent:self];
     
 }

@@ -102,6 +102,11 @@
 		B0AF66FE1AE64E1400A472FC /* MFComponentBindingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0AF66FC1AE64E1400A472FC /* MFComponentBindingDelegate.m */; };
 		B0C28DF91AE647BF00640748 /* MFComponentBindingProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C28DF71AE647BF00640748 /* MFComponentBindingProtocol.h */; };
 		B0C28DFA1AE647BF00640748 /* MFUIComponentProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C28DF81AE647BF00640748 /* MFUIComponentProtocol.h */; };
+		B0CFEA701AEE6F5300279631 /* MFBarCodeScanTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B0CFEA6E1AEE6F5300279631 /* MFBarCodeScanTextField.h */; };
+		B0CFEA711AEE6F5300279631 /* MFBarCodeScanTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B0CFEA6F1AEE6F5300279631 /* MFBarCodeScanTextField.m */; };
+		B0CFEA741AEE6F9900279631 /* MFBarCodeScanTextFieldStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = B0CFEA721AEE6F9900279631 /* MFBarCodeScanTextFieldStyle.h */; };
+		B0CFEA751AEE6F9900279631 /* MFBarCodeScanTextFieldStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B0CFEA731AEE6F9900279631 /* MFBarCodeScanTextFieldStyle.m */; };
+		B0CFEA771AEE6FF800279631 /* qrcode_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B0CFEA761AEE6FF800279631 /* qrcode_icon.png */; };
 		B0D0EFF41AE78B250008C59A /* browser_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D0EFF11AE78B250008C59A /* browser_icon.png */; };
 		B0D0EFF51AE78B250008C59A /* custom_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D0EFF21AE78B250008C59A /* custom_icon.png */; };
 		B0D0EFF61AE78B250008C59A /* mail_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D0EFF31AE78B250008C59A /* mail_icon.png */; };
@@ -207,8 +212,6 @@
 		B0D45D831A5ED2F400C6D376 /* MFUIControlPosition.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45BE91A5ED2F300C6D376 /* MFUIControlPosition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45D841A5ED2F400C6D376 /* MFBarCodeScannerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45BEB1A5ED2F300C6D376 /* MFBarCodeScannerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45D851A5ED2F400C6D376 /* MFBarCodeScannerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45BEC1A5ED2F300C6D376 /* MFBarCodeScannerDelegate.m */; };
-		B0D45D861A5ED2F400C6D376 /* MFBarCodeScanTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45BED1A5ED2F300C6D376 /* MFBarCodeScanTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45D871A5ED2F400C6D376 /* MFBarCodeScanTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45BEE1A5ED2F300C6D376 /* MFBarCodeScanTextField.m */; };
 		B0D45D881A5ED2F400C6D376 /* MFBarCodeScanViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45BEF1A5ED2F300C6D376 /* MFBarCodeScanViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45D891A5ED2F400C6D376 /* MFBarCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45BF01A5ED2F300C6D376 /* MFBarCodeScanViewController.m */; };
 		B0D45D8A1A5ED2F400C6D376 /* MFScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45BF11A5ED2F300C6D376 /* MFScanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -547,6 +550,11 @@
 		B0AF66FC1AE64E1400A472FC /* MFComponentBindingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFComponentBindingDelegate.m; sourceTree = "<group>"; };
 		B0C28DF71AE647BF00640748 /* MFComponentBindingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentBindingProtocol.h; sourceTree = "<group>"; };
 		B0C28DF81AE647BF00640748 /* MFUIComponentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIComponentProtocol.h; sourceTree = "<group>"; };
+		B0CFEA6E1AEE6F5300279631 /* MFBarCodeScanTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBarCodeScanTextField.h; sourceTree = "<group>"; };
+		B0CFEA6F1AEE6F5300279631 /* MFBarCodeScanTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBarCodeScanTextField.m; sourceTree = "<group>"; };
+		B0CFEA721AEE6F9900279631 /* MFBarCodeScanTextFieldStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBarCodeScanTextFieldStyle.h; sourceTree = "<group>"; };
+		B0CFEA731AEE6F9900279631 /* MFBarCodeScanTextFieldStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBarCodeScanTextFieldStyle.m; sourceTree = "<group>"; };
+		B0CFEA761AEE6FF800279631 /* qrcode_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qrcode_icon.png; sourceTree = "<group>"; };
 		B0D0EFF11AE78B250008C59A /* browser_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browser_icon.png; sourceTree = "<group>"; };
 		B0D0EFF21AE78B250008C59A /* custom_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom_icon.png; sourceTree = "<group>"; };
 		B0D0EFF31AE78B250008C59A /* mail_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail_icon.png; sourceTree = "<group>"; };
@@ -656,8 +664,6 @@
 		B0D45BE91A5ED2F300C6D376 /* MFUIControlPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIControlPosition.h; sourceTree = "<group>"; };
 		B0D45BEB1A5ED2F300C6D376 /* MFBarCodeScannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBarCodeScannerDelegate.h; sourceTree = "<group>"; };
 		B0D45BEC1A5ED2F300C6D376 /* MFBarCodeScannerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBarCodeScannerDelegate.m; sourceTree = "<group>"; };
-		B0D45BED1A5ED2F300C6D376 /* MFBarCodeScanTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBarCodeScanTextField.h; sourceTree = "<group>"; };
-		B0D45BEE1A5ED2F300C6D376 /* MFBarCodeScanTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBarCodeScanTextField.m; sourceTree = "<group>"; };
 		B0D45BEF1A5ED2F300C6D376 /* MFBarCodeScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBarCodeScanViewController.h; sourceTree = "<group>"; };
 		B0D45BF01A5ED2F300C6D376 /* MFBarCodeScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBarCodeScanViewController.m; sourceTree = "<group>"; };
 		B0D45BF11A5ED2F300C6D376 /* MFScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFScanner.h; sourceTree = "<group>"; };
@@ -991,6 +997,8 @@
 				B08EF7191AE53FC000F3754E /* MFUrlTextFieldStyle.m */,
 				B0289F2D1AA89342007A2E75 /* UIView+Styleable.h */,
 				B0289F2E1AA89342007A2E75 /* UIView+Styleable.m */,
+				B0CFEA721AEE6F9900279631 /* MFBarCodeScanTextFieldStyle.h */,
+				B0CFEA731AEE6F9900279631 /* MFBarCodeScanTextFieldStyle.m */,
 			);
 			path = style;
 			sourceTree = "<group>";
@@ -1085,6 +1093,7 @@
 		B0D0EFF01AE78B250008C59A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B0CFEA761AEE6FF800279631 /* qrcode_icon.png */,
 				B0D0EFF71AE7988F0008C59A /* phone_icon.png */,
 				B0D0EFF11AE78B250008C59A /* browser_icon.png */,
 				B0D0EFF21AE78B250008C59A /* custom_icon.png */,
@@ -1414,8 +1423,6 @@
 			children = (
 				B0D45BEB1A5ED2F300C6D376 /* MFBarCodeScannerDelegate.h */,
 				B0D45BEC1A5ED2F300C6D376 /* MFBarCodeScannerDelegate.m */,
-				B0D45BED1A5ED2F300C6D376 /* MFBarCodeScanTextField.h */,
-				B0D45BEE1A5ED2F300C6D376 /* MFBarCodeScanTextField.m */,
 				B0D45BEF1A5ED2F300C6D376 /* MFBarCodeScanViewController.h */,
 				B0D45BF01A5ED2F300C6D376 /* MFBarCodeScanViewController.m */,
 				B0D45BF11A5ED2F300C6D376 /* MFScanner.h */,
@@ -1466,10 +1473,12 @@
 		B0D45C081A5ED2F300C6D376 /* textfield */ = {
 			isa = PBXGroup;
 			children = (
-				B08AAC4E1AE91ADF0029EC88 /* MFTextField+UITextFieldForwarding.h */,
-				B08AAC4F1AE91ADF0029EC88 /* MFTextField+UITextFieldForwarding.m */,
+				B0CFEA6E1AEE6F5300279631 /* MFBarCodeScanTextField.h */,
+				B0CFEA6F1AEE6F5300279631 /* MFBarCodeScanTextField.m */,
 				B08EF6ED1AE53F8F00F3754E /* MFTextField.h */,
 				B08EF6EE1AE53F8F00F3754E /* MFTextField.m */,
+				B08AAC4E1AE91ADF0029EC88 /* MFTextField+UITextFieldForwarding.h */,
+				B08AAC4F1AE91ADF0029EC88 /* MFTextField+UITextFieldForwarding.m */,
 				B08EF6EF1AE53F8F00F3754E /* regex */,
 			);
 			path = textfield;
@@ -1964,7 +1973,6 @@
 				B0D45DD61A5ED2F400C6D376 /* MFUIConversion.h in Headers */,
 				B0D45E0C1A5ED2F400C6D376 /* MFUIElementCommonProtocol.h in Headers */,
 				B0D45E861A5ED2F400C6D376 /* MFUpdateVMInParameter.h in Headers */,
-				B0D45D861A5ED2F400C6D376 /* MFBarCodeScanTextField.h in Headers */,
 				B0D45E731A5ED2F400C6D376 /* MFUIViewControllerTransition.h in Headers */,
 				B08EF71A1AE53FC000F3754E /* MFEmailTextFieldStyle.h in Headers */,
 				B0D45E021A5ED2F400C6D376 /* MFUILog.h in Headers */,
@@ -2030,6 +2038,7 @@
 				B0D45D911A5ED2F400C6D376 /* MFSignatureHelper.h in Headers */,
 				B0D45DC81A5ED2F400C6D376 /* MFRegularExpressionTextFieldExtension.h in Headers */,
 				B0D45DFC1A5ED2F400C6D376 /* MFFormViewControllerValidationDelegate.h in Headers */,
+				B0CFEA701AEE6F5300279631 /* MFBarCodeScanTextField.h in Headers */,
 				B0D45DD01A5ED2F400C6D376 /* MFFloatConverter.h in Headers */,
 				B0D45E1C1A5ED2F400C6D376 /* MFVersionManager.h in Headers */,
 				B0D45E591A5ED2F400C6D376 /* MFFormViewControllerProtocol.h in Headers */,
@@ -2104,6 +2113,7 @@
 				B0D45D601A5ED2F400C6D376 /* MFFixedListDataDelegate.h in Headers */,
 				B0D45DEC1A5ED2F400C6D376 /* MFUIValidationBusinessError.h in Headers */,
 				B0D45E331A5ED2F400C6D376 /* MFContainerViewController.h in Headers */,
+				B0CFEA741AEE6F9900279631 /* MFBarCodeScanTextFieldStyle.h in Headers */,
 				B0D45D791A5ED2F400C6D376 /* MFPhotoThumbnail.h in Headers */,
 				B0D45DE91A5ED2F400C6D376 /* MFUIError.h in Headers */,
 				B08EF7201AE53FC000F3754E /* MFRegexTextFieldStyle+Button.h in Headers */,
@@ -2276,6 +2286,7 @@
 				B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */,
 				B0D0EFF81AE7988F0008C59A /* phone_icon.png in Resources */,
 				B0D0EFF51AE78B250008C59A /* custom_icon.png in Resources */,
+				B0CFEA771AEE6FF800279631 /* qrcode_icon.png in Resources */,
 				B076BEE01ABC565200756351 /* Pods.release.xcconfig in Resources */,
 				B0D0EFF41AE78B250008C59A /* browser_icon.png in Resources */,
 				B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */,
@@ -2486,6 +2497,7 @@
 				B0D45E751A5ED2F400C6D376 /* UIViewController+MFMenuManager.m in Sources */,
 				B0D45D8E1A5ED2F400C6D376 /* MFSignature.m in Sources */,
 				B0D45DC41A5ED2F400C6D376 /* MFWebView.m in Sources */,
+				B0CFEA751AEE6F9900279631 /* MFBarCodeScanTextFieldStyle.m in Sources */,
 				B0D45E271A5ED2F400C6D376 /* MFStringValueProcessing.m in Sources */,
 				B0D45E2C1A5ED2F400C6D376 /* MFForm3DHeaderViewControls.m in Sources */,
 				B08EF71B1AE53FC000F3754E /* MFEmailTextFieldStyle.m in Sources */,
@@ -2498,6 +2510,7 @@
 				B0AF66FE1AE64E1400A472FC /* MFComponentBindingDelegate.m in Sources */,
 				B0183FFE1AB09E530081133F /* MFButton+MFButtonExt.m in Sources */,
 				B0D45E501A5ED2F400C6D376 /* MFFormBaseViewController.m in Sources */,
+				B0CFEA711AEE6F5300279631 /* MFBarCodeScanTextField.m in Sources */,
 				B0D45E4E1A5ED2F400C6D376 /* MFForm3DListViewController.m in Sources */,
 				B0D45DC91A5ED2F400C6D376 /* MFRegularExpressionTextFieldExtension.m in Sources */,
 				B00787C61AB1E37A009F6D95 /* JDFSequentialTooltipManager.m in Sources */,
@@ -2528,7 +2541,6 @@
 				B0D45D241A5ED2F400C6D376 /* MFActionLauncher+MFUIActionLauncher.m in Sources */,
 				B0D45E521A5ED2F400C6D376 /* MFFormDetailViewController.m in Sources */,
 				B08AAC511AE91ADF0029EC88 /* MFTextField+UITextFieldForwarding.m in Sources */,
-				B0D45D871A5ED2F400C6D376 /* MFBarCodeScanTextField.m in Sources */,
 				B08EF7251AE53FC000F3754E /* MFTextFieldStyle+BackgroundView.m in Sources */,
 				B0D45D431A5ED2F400C6D376 /* MFCellAbstract.m in Sources */,
 				B0D45D7A1A5ED2F400C6D376 /* MFPhotoThumbnail.m in Sources */,

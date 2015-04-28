@@ -23,7 +23,7 @@
 #import "MFSignatureDrawing.h"
 
 @implementation MFSignatureHelper {
-
+    
 }
 
 static CGPoint formerPoint;
@@ -51,26 +51,29 @@ static inline Line translateLine(Line line, float x0, float y0) {
     
     BOOL isFirstPoint = YES;
     [data appendString:@"{"];
-    
+    [data appendString:@"["];
+
     for (NSValue *nsLine in lines) {
         struct Line line;
         [nsLine getValue:&line];
         line = translateLine(line, -x0, -y0);
         line = scaleLine(line, virtualWidth/width);
         if (isFirstPoint || (line.from.x != currentPoint.x && line.from.y != currentPoint.y)) {
-            if (isFirstPoint) {
-                isFirstPoint = NO;
-            } else {
+//            if (isFirstPoint) {
+//                isFirstPoint = NO;
+//            } else {
                 [data appendFormat:@"(%.0f,%.0f)", currentPoint.x, currentPoint.y];
                 [data appendString:@"]"];
-            }
+//            }
             [data appendString:@"["];
         }
         formerPoint = line.from;
         currentPoint = line.to;
         [data appendFormat:@"(%.0f,%.0f)", formerPoint.x, formerPoint.y];
     }
-    [data appendFormat:@"(%.0f,%.0f)", currentPoint.x, currentPoint.y];
+    if(lines.count > 0 ) {
+        [data appendFormat:@"(%.0f,%.0f)", currentPoint.x, currentPoint.y];
+    }
     [data appendString:@"]"];
     [data appendString:@"}"];
     return data;
@@ -80,7 +83,7 @@ static inline Line translateLine(Line line, float x0, float y0) {
 // A point is of 2 coordinates : (x,y)
 // A line is of mutiple points : [(x0,y0)(x1,y1)...]
 // A signature is of mutiple lines {[(x0,y0)(x1,y1)...][...].....}
-// The goal here is to fill in an 
+// The goal here is to fill in an
 + (NSMutableArray *) convertFromStringToLines:(NSString *) string width:(float) width originX:(float) x0 originY:(float) y0 {
     NSError *regexError = NULL;
     NSMutableArray *lines = [[NSMutableArray alloc] init];
@@ -95,8 +98,8 @@ static inline Line translateLine(Line line, float x0, float y0) {
                                                                                   error:&regexError];
     
     NSArray *matchesLines = [lineRegex matchesInString:string
-                                      options:0
-                                        range:NSMakeRange(0, [string length])];
+                                               options:0
+                                                 range:NSMakeRange(0, [string length])];
     for (NSTextCheckingResult *matchLine in matchesLines) {
         NSRange matchLineRange = [matchLine range];
         NSString *lineString = [string substringWithRange:matchLineRange];
@@ -104,7 +107,7 @@ static inline Line translateLine(Line line, float x0, float y0) {
                                                      options:0
                                                        range:NSMakeRange(0, [lineString length])];
         BOOL isFirstPoint = YES;
-       
+        
         for (NSTextCheckingResult *matchPoint in matchesPoints) {
             NSRange matchPointRange = [matchPoint range];
             NSString *pointString = [lineString substringWithRange:matchPointRange];
@@ -126,7 +129,7 @@ static inline Line translateLine(Line line, float x0, float y0) {
                 NSValue *nsLine = [NSValue valueWithBytes:&line objCType:@encode(struct Line)];
                 [lines addObject:nsLine];
             }
-         }
+        }
     }
     return lines;
 }

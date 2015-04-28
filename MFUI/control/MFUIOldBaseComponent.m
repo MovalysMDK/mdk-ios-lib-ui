@@ -574,7 +574,7 @@
 
 -(void)setEditable:(NSNumber *)editable {
     _editable = editable;
-    self.userInteractionEnabled = [editable isEqual:@1];
+    self.userInteractionEnabled = [editable boolValue];
 }
 
 

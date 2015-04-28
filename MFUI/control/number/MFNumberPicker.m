@@ -21,7 +21,7 @@
 #import <MFCore/MFCoreI18n.h>
 
 #import "MFNumberPicker.h"
-#import "MFTextField.h"
+#import "MFIntegerTextField.h"
 
 #pragma mark - Define some constants
 
@@ -32,7 +32,7 @@
 /**
  * @brief The inner texfield of this component that displays the number
  */
-@property (nonatomic, strong) MFTextField *innerTextField;
+@property (nonatomic, strong) MFIntegerTextField *innerTextField;
 
 /**
  * @brief The inner stepper used to choose the value of the stepper.
@@ -74,17 +74,12 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 -(void)initialize {
     
     //Create inner components
-    self.innerTextField = [[MFTextField alloc] initWithFrame:self.frame];
+    self.innerTextField = [[MFIntegerTextField alloc] initWithFrame:self.frame];
     self.innerStepper = [[UIStepper alloc] init];
     
     //Add inner components
     [self addSubview:self.innerStepper];
     [self addSubview:self.innerTextField];
-    
-    //Customize inner components
-    [self.innerTextField setKeyboardType:UIKeyboardTypeNumberPad];
-    
-    [self customizeKeyboard];
     
     //super initialize
     [super initialize];
@@ -98,56 +93,6 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 }
 
 
--(void) customizeKeyboard {
-    //Si on est pas sur iPad
-    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad)
-    {
-        
-        //Sur le téléphone, le clavier "décimal" ne propose pas le signe "-" : on l'ajoute via
-        //une barre de boutons personnalisée.
-        
-        //On créé la barre de boutons personnalisée pour l'ajouter au clavier
-        //Cette barre contient les caractères supplémentaires nécessaires (ici le caractère -)
-        UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f,
-                                                                         0.0f,
-                                                                         self.frame.size.width,
-                                                                         44.0f)];
-        
-        
-        toolBar.tintColor = [UIColor colorWithRed:0.56f
-                                            green:0.59f
-                                             blue:0.63f
-                                            alpha:1.0f];
-        
-        toolBar.translucent = NO;
-        
-        self.minusButton = [[UIBarButtonItem alloc] initWithTitle:@"-"
-                                                            style:UIBarButtonItemStylePlain
-                                                           target:self
-                                                           action:@selector(barButtonAddText:)];
-        
-        self.okButton = [[UIBarButtonItem alloc] initWithTitle:MFLocalizedStringFromKey(@"okButton")
-                                                         style:UIBarButtonItemStylePlain
-                                                        target:self
-                                                        action:@selector(barButtonDismissKeyboard:)];
-        toolBar.items =   @[self.minusButton,
-                            [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                          target:nil
-                                                                          action:nil],
-                            self.okButton
-                            ];
-        
-        
-        
-        
-        //La barre de boutons personnalisée est ajoutée au clavier.
-        self.innerTextField.inputAccessoryView = toolBar;
-    }
-    
-    [self.innerTextField setKeyboardType:UIKeyboardTypeNumberPad];
-    
-    [self.innerTextField setDelegate:self];
-}
 
 /**
  * @brief Méthode appelée lors du clic sur le bouton pour effacer tout le texte associé au clavier
@@ -180,23 +125,6 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 }
 
 
-/**
- * @brief Méthode appelée lors du clic sur un bouton de la barre de boutons personnalisées associée au clavier
- *
- */
-
--(IBAction)barButtonAddText:(UIBarButtonItem*)sender
-{
-    if (self.innerTextField.isFirstResponder && [self.innerTextField.text rangeOfString:sender.title].location == NSNotFound)
-    {
-        //On insère le caractère cliqué
-        [self.innerTextField insertText:sender.title];
-    }
-}
-
--(void) toogleMinusButton {
-    self.minusButton.enabled = (self.innerTextField.text.length == 0);
-}
 
 #pragma mark - MFDefaultConstraintsProtocol method
 
@@ -232,7 +160,7 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 
 #pragma mark - MFUIBaseComponents inherited methods
 
--(void)didFinishLoadDescriptor {
+-(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
     NSNumber *minValueNumber = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:NUMBER_PICKER_PARAMETER_MIN_VALUE_KEY];
     NSNumber *maxValueNumber = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:NUMBER_PICKER_PARAMETER_MAX_VALUE_KEY];
     NSNumber *stepNumber = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:NUMBER_PICKER_PARAMETER_STEP_KEY];
@@ -252,7 +180,7 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 
 -(void)setData:(id)data {
     self.currentValue = [data integerValue];
-//    [self.innerTextField setData:[NSString stringWithFormat:@"%d", self.currentValue]];
+    [self.innerTextField setData:[NSString stringWithFormat:@"%d", self.currentValue]];
 }
 
 -(id)getData {
@@ -267,10 +195,9 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 #pragma mark - InnerTextField events
 
 -(void) updateValue {
-//    self.currentValue = [[self.innerTextField getData] integerValue];
+    self.currentValue = [[self.innerTextField getData] integerValue];
     [self validateWithParameters:nil];
     [self updateValue:[self getData]];
-    [self toogleMinusButton];
 }
 
 
@@ -279,9 +206,9 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 -(void)setCurrentValue:(NSInteger)currentValue {
     _currentValue = currentValue;
     self.innerStepper.value = currentValue;
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self.innerTextField setData:@(currentValue)];
-//    });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.innerTextField setData:@(currentValue).description];
+    });
 }
 
 -(void)setMinimalValue:(NSInteger)minimalValue {
@@ -302,7 +229,7 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 #pragma mark - Inner Stepper events
 
 -(void) stepperValueChanged {
-//    [self.innerTextField setData:[NSString stringWithFormat:@"%@", @(self.innerStepper.value)]];
+    [self.innerTextField setData:[NSString stringWithFormat:@"%@", @(self.innerStepper.value)]];
     [self becomeFirstResponder];
     [self.innerTextField resignFirstResponder];
     [self updateValue];
@@ -316,12 +243,11 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
     
     NSInteger nbOfErrors = [super validateWithParameters:parameters];
     
-//    if ([self number:@(self.currentValue) isEqualToString:[self.innerTextField getData]]) {
-//        NSError *error = [[MFInvalidIntegerValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
-//        [self addErrors:@[error]];
-//        [self.context addErrors:@[error]];
-//        nbOfErrors++;
-//    }
+    if ([self number:@(self.currentValue) isEqualToString:[self.innerTextField getData]]) {
+        NSError *error = [[MFInvalidIntegerValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        [self addErrors:@[error]];
+        nbOfErrors++;
+    }
     
     return nbOfErrors;
 }

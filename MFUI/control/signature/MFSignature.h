@@ -20,6 +20,7 @@
 //
 
 #import "MFUIBaseComponent.h"
+#import "MFUIOldBaseComponent.h"
 #import "MFSignatureDrawing.h"
 
 /**
@@ -27,7 +28,7 @@
  * @brief The framework Signature component
  * @discussion This component display a view that allows the user to draw a signature.
  */
-@interface MFSignature : MFUIBaseComponent
+@interface MFSignature : MFUIOldBaseComponent
 
 #pragma mark - Properties
 /**

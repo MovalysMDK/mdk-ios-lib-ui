@@ -421,9 +421,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (void) setEditable:(NSNumber *)editable {
     [super setEditable:editable];
-    self.dateLabel.enabled = editable;
-    self.titreLabel.enabled = editable;
-    self.descriptionLabel.enabled = editable;
+    self.dateLabel.userInteractionEnabled = editable;
+    self.titreLabel.userInteractionEnabled = editable;
+    self.descriptionLabel.userInteractionEnabled = editable;
 }
 
 

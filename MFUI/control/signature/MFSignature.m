@@ -26,6 +26,7 @@
 #import "MFSignatureDrawing.h"
 #import "MFCellAbstract.h"
 #import "MFVersionManager.h"
+#import "MFMandatoryFieldUIValidationError.h"
 
 
 @interface MFSignature()
@@ -56,33 +57,29 @@
 @synthesize lineWidth = _lineWidth;
 @synthesize strokeColor = _strokeColor;
 @synthesize signaturePath = _signaturePath;
-
+@synthesize cellContainer = _cellContainer;
 #define SIGNATURE_DRAWING_WIDTH 240
 #define SIGNATURE_DRAWING_HEIGHT 160
 
 
 #pragma mark - Initializing
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self initialize];
-    }
-    return self;
-}
+
 
 - (void) initialize {
+    [super initialize];
+
     _data = @"{}";
     _lineWidth = 3.0f;
     _strokeColor = [UIColor blackColor];
-    [self setBackgroundColor:[UIColor colorWithRed:242./255. green:242./255. blue:242./255. alpha:1.0]];
     
     self.isModalSignatureDrawingDisplayed = NO;
     
     CGRect frame = CGRectMake(self.frame.origin.x, self.frame.origin.y,
                                SIGNATURE_DRAWING_WIDTH, SIGNATURE_DRAWING_HEIGHT);
-    
     [self setFrame:frame];
+    [self setBackgroundColor:[UIColor colorWithRed:242./255. green:242./255. blue:242./255. alpha:1.0]];
+
+    
 }
 
 
@@ -410,6 +407,16 @@
 
 -(void) updateValue {
     [self performSelectorOnMainThread: @selector(updateValue:) withObject:self.data waitUntilDone:YES];
+}
+
+-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+    int numberOfErrors = [super validateWithParameters:parameters];
+    if([self.mandatory isEqualToNumber:@1] && [[self getData] isEqualToString:[MFSignatureHelper convertFromLinesToString:@[] width:1 originX:0 originY:0]]) {
+        MFMandatoryFieldUIValidationError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        [self addErrors:@[error]];
+        numberOfErrors++;
+    }
+    return numberOfErrors;
 }
 
 @end

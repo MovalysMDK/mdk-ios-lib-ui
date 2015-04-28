@@ -214,7 +214,7 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];
-    self.innerSlider.enabled = ([editable isEqualToNumber:@1]) ? YES : NO;
+    self.innerSlider.userInteractionEnabled = ([editable isEqualToNumber:@1]) ? YES : NO;
 }
 
 

@@ -80,7 +80,7 @@
 
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];
-    self.innerSwitch.enabled = ([editable isEqualToNumber:@1]) ? YES : NO;
+    self.innerSwitch.userInteractionEnabled = ([editable isEqualToNumber:@1]) ? YES : NO;
 }
 
 #pragma mark - Fast Forwarding UISwitch methods

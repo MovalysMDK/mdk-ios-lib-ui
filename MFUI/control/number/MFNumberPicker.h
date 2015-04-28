@@ -23,13 +23,14 @@
 #import "MFUIProtocol.h"
 
 #import "MFUIBaseComponent.h"
+#import "MFUIOldBaseComponent.h"
 
 /**
  * @class MFNumberPicker
  * @brief The framework number picker component
  * @discussion This component display a picker aimed to select a n interger value.
  */
-@interface MFNumberPicker : MFUIBaseComponent <MFDefaultConstraintsProtocol, UITextFieldDelegate>
+@interface MFNumberPicker : MFUIOldBaseComponent <MFDefaultConstraintsProtocol, UITextFieldDelegate>
 
 #pragma mark - Properties
 

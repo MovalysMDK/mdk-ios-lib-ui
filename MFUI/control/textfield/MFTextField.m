@@ -234,7 +234,10 @@
     self.extension.minLength = [fieldDescriptor.parameters objectForKey:PARAMETER_TEXTFIELD_MINLENGTH_KEY];
 }
 
-
+-(void)setEditable:(NSNumber *)editable {
+    _editable = editable;
+    self.userInteractionEnabled = [editable boolValue];
+}
 
 #pragma mark - Forwarding to binding delegate
 

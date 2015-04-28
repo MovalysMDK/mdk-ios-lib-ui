@@ -206,8 +206,8 @@
                toBindingOnForm:(id<MFBindingFormDelegate>) formController {
     NSDictionary *result = [NSDictionary dictionary];
     if(component) {
-        if([component isKindOfClass:[MFUIBaseComponent class]]) {
-            [(MFUIBaseComponent *)component setCellContainer:self];
+        if([component conformsToProtocol:@protocol(MFUIComponentProtocol)]) {
+            [component setCellContainer:self];
         }
         
         //Récupération de la bindingKey et paramétrage du composant

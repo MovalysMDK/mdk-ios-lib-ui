@@ -20,15 +20,22 @@
 @implementation MFDefaultStyle
 
 
--(void) applyStyleOnView:(UIView *)view {
-    if(view) {
+-(void)applyStandardStyleOnComponent:(id)component {
+    if(component) {
+        
     }
 }
 
--(void)applyErrorStyleOnView:(UIView *)view {
+-(void)applyErrorStyleOnComponent:(id)component {
+    if(component) {
+        
+    }
 }
 
--(void)applyValidStyleOnView:(UIView *)view {
-    
+-(void)applyValidStyleOnComponent:(id)component {
+    if(component) {
+        
+    }
 }
+
 @end

@@ -126,7 +126,7 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
     
     
     //Création de la vue statique
-    [self.picker didFinishLoadDescriptor];
+    [self.picker didLoadFieldDescriptor:self.picker.selfDescriptor];
 
     MFBindingViewAbstract * view = nil;
     if(self.staticViewNibName) {

@@ -731,7 +731,8 @@ const int NO_LAST_INDEX = -1;
 }
 
 
--(void)didFinishLoadDescriptor {
+-(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
+    [super didLoadFieldDescriptor:fieldDescriptor];
     self.emptyViewNibName = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_EMPTY_VIEW_NIB_NAME];
     [self.controllerDelegate fillSelectedViewWithViewModel:[[NSClassFromString(@"MFEmptyViewModel") alloc] init]];
 }

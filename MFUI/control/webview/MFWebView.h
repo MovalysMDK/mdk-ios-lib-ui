@@ -22,12 +22,13 @@
 
 
 #import "MFUIBaseComponent.h"
+#import "MFUIOldBaseComponent.h"
 
 /**
  * @class MFWebView
  * @brief The base Movalys webview component
  */
-@interface MFWebView : MFUIBaseComponent<UIWebViewDelegate>
+@interface MFWebView : MFUIOldBaseComponent<UIWebViewDelegate>
 
 
 #pragma mark - Propriétés

@@ -209,14 +209,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 
 #pragma mark - Méthodes dérivées de MFUIBaseComponent
 
-
--(void)setCellContainer:(id<MFFormCellProtocol>)cellContainer{
-    _cellContainer = cellContainer;
-    self.tableView.dataSource = self.dataDelegate;
-    self.tableView.delegate =  self.dataDelegate;
-}
-
-
 +(NSString *)getDataType {
     return @"MFUIBaseListViewModel";
 }
@@ -446,8 +438,8 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     return MFFixedListAlignmentRight;
 }
 
--(void)didFinishLoadDescriptor {
-    [super didFinishLoadDescriptor];
+-(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
+    [super didLoadFieldDescriptor:fieldDescriptor];
     NSDictionary *componentParameters = ((MFFieldDescriptor *)self.selfDescriptor).parameters;
     Class dataDelegateClass = NSClassFromString([componentParameters objectForKey:FIXED_LIST_PARAMETER_DATA_DELEGATE_NAME]);
     self.dataDelegate = [[dataDelegateClass alloc] initWithFixedList:self];
@@ -459,7 +451,12 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     self.mf.formDescriptorName = [componentParameters objectForKey:FIXED_LIST_PARAMETER_FORM_DESCRIPTOR_NAME];
     
     [self.dataDelegate setContent];
-    
+}
+
+-(void)setDataDelegate:(MFFixedListDataDelegate *)dataDelegate {
+    _dataDelegate = dataDelegate;
+    self.tableView.dataSource = _dataDelegate;
+    self.tableView.delegate =  _dataDelegate;
 }
 
 -(BOOL)isPhotoFixedList {

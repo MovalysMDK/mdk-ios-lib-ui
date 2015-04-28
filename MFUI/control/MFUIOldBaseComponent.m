@@ -57,6 +57,7 @@
 @synthesize groupDescriptor = _groupDescriptor;
 @synthesize mfParent = _mfParent;
 @synthesize lastUpdateSender = _lastUpdateSender;
+@synthesize cellContainer = _cellContainer;
 @synthesize inInitMode = _inInitMode;
 
 #pragma mark - Constructeurs et initialisation

@@ -33,6 +33,7 @@
 
 @protocol MFUIGroupedElementCommonProtocol;
 @protocol MFStyleProtocol;
+@protocol MFFormCellProtocol;
 
 
 /**
@@ -80,6 +81,11 @@
 
 
 @property (nonatomic, weak) id lastUpdateSender;
+
+/**
+ * Cell container
+ */
+@property (nonatomic, weak) id<MFFormCellProtocol> cellContainer;
 
 #pragma mark - Methods
 

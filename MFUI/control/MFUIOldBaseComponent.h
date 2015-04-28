@@ -81,11 +81,6 @@
 @property (nonatomic, strong) NSMutableArray *baseErrors;
 
 /**
- * Cell container
- */
-@property (nonatomic, weak) id<MFFormCellProtocol> cellContainer;
-
-/**
  * MF Parent Composant
  */
 @property (nonatomic, weak) MFUIOldBaseComponent *mfParent;

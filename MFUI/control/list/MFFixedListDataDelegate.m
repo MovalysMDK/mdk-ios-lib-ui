@@ -104,7 +104,7 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
  */
 -(void) initComponent:(id<MFUIComponentProtocol>) component atIndexPath:(NSIndexPath *)indexPath{
     
-    [(MFUIBaseComponent *)component setInInitMode:YES];
+    [component setInInitMode:YES];
     
     MFFieldDescriptor * componentDescriptor = (MFFieldDescriptor *) component.selfDescriptor;
     NSString *fullBindingKey  = [self bindingKeyWithIndexPathFromKey:componentDescriptor.bindingKey andIndexPath:indexPath];
@@ -158,7 +158,7 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
         [component setEditable:@0];
     }
     
-    [(MFUIBaseComponent *)component setInInitMode:NO];
+    [component setInInitMode:NO];
 }
 
 /**
@@ -226,7 +226,7 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
     
     
     //for(NSArray *componentList in cellComponents) {
-    for(MFUIBaseComponent *component in cellComponents) {
+    for(id<MFUIComponentProtocol> component in cellComponents) {
         MFFieldDescriptor *componentDescriptor = (MFFieldDescriptor *)component.selfDescriptor;
         
         
@@ -316,7 +316,7 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
             NSMutableArray *componentList = [[self.binding componentsAtIndexPath:indexPath withBindingKey:key] mutableCopy];
             
             if(componentList) {
-                for(MFUIBaseComponent *component in componentList) {
+                for(id<MFUIComponentProtocol> component in componentList) {
                     //Initialisation des composants
                     [self initComponent:component atIndexPath:indexPath];
                 }

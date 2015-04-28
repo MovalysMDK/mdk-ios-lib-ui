@@ -44,6 +44,7 @@
 @synthesize visible = _visible;
 @synthesize editable = _editable;
 @synthesize tooltipView= _tooltipView;
+@synthesize cellContainer = _cellContainer;
 
 
 #pragma mark - Initialization

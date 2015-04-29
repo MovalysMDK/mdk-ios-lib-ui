@@ -26,7 +26,6 @@
 
 #import "MFBaseBindingForm.h"
 #import "MFFormCellProtocol.h"
-#import "MFUIBaseComponent.h"
 #import "MFUIComponentProtocol.h"
 #import "MFConverterProtocol.h"
 #import "MFUILogging.h"

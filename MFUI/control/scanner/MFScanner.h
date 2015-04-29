@@ -23,7 +23,6 @@
 // Custom imports
 #import "MFBarCodeScanTextField.h"
 #import "MFBarCodeScannerDelegate.h"
-#import "MFUIBaseComponent.h"
 #import "MFUIOldBaseComponent.h"
 
 

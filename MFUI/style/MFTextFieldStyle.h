@@ -20,6 +20,7 @@
 #import "MFErrorViewProtocol.h"
 #import "MFBackgroundViewProtocol.h"
 #import "MFTextField.h"
+#import "MFDefaultStyle.h"
 
 FOUNDATION_EXPORT NSInteger DEFAULT_ACCESSORIES_MARGIN;
 
@@ -27,7 +28,7 @@ FOUNDATION_EXPORT NSInteger DEFAULT_ACCESSORIES_MARGIN;
  * @class MFTextFieldStyle
  * @brief This class manages the syle of a MFUrlTextField component
  */
-@interface MFTextFieldStyle : NSObject <MFStyleProtocol, MFErrorViewProtocol, MFBackgroundViewProtocol>
+@interface MFTextFieldStyle : MFDefaultStyle <MFErrorViewProtocol, MFBackgroundViewProtocol>
 
 #pragma mark - Methods
 

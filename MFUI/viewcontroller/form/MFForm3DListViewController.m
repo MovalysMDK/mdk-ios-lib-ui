@@ -180,7 +180,7 @@
             NSMutableArray *componentList = [[self.binding componentsArrayAtIndexPath:virtualIndexPath] mutableCopy];
             if(componentList) {
                 for( NSString *fieldName in currentGd.fieldNames) {
-                    MFUIBaseComponent *component = [self.headerView.contentView valueForKey:fieldName];
+                    UIView<MFUIComponentProtocol> *component = [self.headerView.contentView valueForKey:fieldName];
                     [self initComponent:component atIndexPath:virtualIndexPath];
                 }
             }

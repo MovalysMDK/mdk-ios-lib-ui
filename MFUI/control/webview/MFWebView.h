@@ -21,7 +21,6 @@
 
 
 
-#import "MFUIBaseComponent.h"
 #import "MFUIOldBaseComponent.h"
 
 /**

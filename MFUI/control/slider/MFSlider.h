@@ -21,12 +21,11 @@
 
 
 #import "MFUIConversion.h"
-
-#import "MFUIBaseComponent.h"
+#import "MFUIOldBaseComponent.h"
 #import "MFUILabel.h"
 
 IB_DESIGNABLE
-@interface MFSlider : MFUIBaseComponent
+@interface MFSlider : MFUIOldBaseComponent
 
 
 

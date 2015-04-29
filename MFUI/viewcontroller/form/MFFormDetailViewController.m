@@ -21,8 +21,8 @@
 #import <MFCore/MFCoreI18n.h>
 
 #import "MFFormDetailViewController.h"
-#import "MFUIBaseComponent.h"
 #import "MFFormValidationDelegate.h"
+#import "MFUIComponentProtocol.h"
 
 @interface MFFormDetailViewController ()
 

@@ -47,9 +47,6 @@
 #import "MFPickerList.h"
 #import "MFCell1ComponentHorizontal.h"
 
-// Components and cells
-#import "MFUIBaseComponent.h"
-
 //Application
 #import "MFUIApplication.h"
 

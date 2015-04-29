@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Sopra Consulting. All rights reserved.
 //
 
-#import "MFUIBaseComponent.h"
+#import "MFUIOldBaseComponent.h"
 
-@interface MFButton : MFUIBaseComponent <UIAppearanceContainer>
+@interface MFButton : MFUIOldBaseComponent <UIAppearanceContainer>
 
 @property (nonatomic, strong)   UIButton *button;
 

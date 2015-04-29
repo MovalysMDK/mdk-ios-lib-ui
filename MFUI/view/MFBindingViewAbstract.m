@@ -31,6 +31,7 @@
 //Tils
 #import "MFUILogging.h"
 
+@protocol MFUIComponentProtocol;
 
 
 @implementation MFBindingViewAbstract
@@ -73,8 +74,8 @@
 -(void) initialize {
     //    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     for(UIView *subView in self.subviews) {
-        if([subView isKindOfClass:[MFUIBaseComponent class]]) {
-            MFUIBaseComponent *baseComponent = (MFUIBaseComponent *)subView;
+        if([subView conformsToProtocol:@protocol(MFUIComponentProtocol)]) {
+            UIView<MFUIComponentProtocol> *baseComponent = (UIView<MFUIComponentProtocol> *)subView;
             [baseComponent setTranslatesAutoresizingMaskIntoConstraints:NO];
         }
     }
@@ -84,7 +85,7 @@
 #pragma mark - BindingView Protocol
 -(void) refreshComponents {
     for( NSString *fieldName in self.groupDescriptor.fieldNames ) {
-        MFUIBaseComponent *component = [self valueForKey:fieldName];
+        id<MFUIComponentProtocol> component = [self valueForKey:fieldName];
         [component setData:nil];
     }
 }
@@ -96,9 +97,9 @@
     _parentEditable = parentEditable;
     //On propage la valeur editable du parent sur les composant movalys fils de cette vue.
     for(UIView *subview in self.subviews) {
-        if([subview isKindOfClass:[MFUIBaseComponent class]]) {
-            MFUIBaseComponent *subComponent = (MFUIBaseComponent *)subview;
-            subComponent.parentEditable = parentEditable;
+        if([subview conformsToProtocol:@protocol(MFUIComponentProtocol)]) {
+            id<MFUIComponentProtocol> subComponent = (id<MFUIComponentProtocol>)subview;
+//            subComponent.parentEditable = parentEditable;
         }
     }
 }
@@ -145,7 +146,7 @@
     NSMutableDictionary *returnDictionary = [NSMutableDictionary dictionary];
     
     for( NSString *fieldName in self.groupDescriptor.fieldNames) {
-        MFUIBaseComponent *uiComponent = [self valueForKey:fieldName];
+        id<MFUIComponentProtocol> uiComponent = [self valueForKey:fieldName];
         MFUILogInfo(@"Enregistrement du composant : %@", uiComponent.selfDescriptor.name);
         [returnDictionary addEntriesFromDictionary:[self addComponent:uiComponent toBindingOnForm:formController]];
         [self registerBindablePropertiesFromComponent:uiComponent toPropertiesBindingOnForm:formController];
@@ -156,8 +157,8 @@
 -(NSMutableDictionary *) addComponent:(id<MFUIComponentProtocol>) component
                       toBindingOnForm:(id<MFBindingFormDelegate>) formController {
     
-    if([component isKindOfClass:[MFUIBaseComponent class]]) {
-        [(MFUIBaseComponent *)component setCellContainer:self];
+    if([component conformsToProtocol:@protocol(MFUIComponentProtocol)]) {
+        [(id<MFUIComponentProtocol> )component setCellContainer:self];
     }
     
     //Récupération de la bindingKey et paramétrage du composant

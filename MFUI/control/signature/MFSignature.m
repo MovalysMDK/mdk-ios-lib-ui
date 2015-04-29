@@ -386,7 +386,7 @@
 
 
 
-#pragma mark - MFUIBasecomponent base methods
+#pragma mark - MFUIComponentProtocol base methods
 
 +(NSString *)getDataType {
     return @"NSString";

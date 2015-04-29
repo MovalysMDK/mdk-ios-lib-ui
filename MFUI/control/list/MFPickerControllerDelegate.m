@@ -253,7 +253,7 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
             
             NSMutableArray *componentList = [[self.binding componentsAtIndexPath:virtualIndexPath withBindingKey:key] mutableCopy];
             if(componentList) {
-                for(MFUIBaseComponent *component in componentList) {
+                for(UIView<MFUIComponentProtocol> *component in componentList) {
                     //Initialisation des composants
                     [self initComponent:component atIndexPath:virtualIndexPath];
                 }
@@ -571,7 +571,7 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
     
     //Traitement des champs de la vue statique
     for( NSString *fieldName in self.picker.staticView.groupDescriptor.fieldNames) {
-        MFUIBaseComponent *component = [self.picker.staticView valueForKey:fieldName];
+        UIView<MFUIComponentProtocol> *component = [self.picker.staticView valueForKey:fieldName];
         
         id componentData =[(MFUIBaseViewModel *)viewModel valueForKey:((MFFieldDescriptor *)component.selfDescriptor).bindingKey];
         componentData = [self applyConverterOnComponent:component forValue:componentData isFormToViewModel:NO];
@@ -699,7 +699,7 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
     return [self.formBindingDelegate generateSetterFromProperty:propertyName];
 }
 
--(void)performSelector:(SEL)selector onComponent:(MFUIBaseComponent *)component withObject:(id)object {
+-(void)performSelector:(SEL)selector onComponent:(UIView<MFUIComponentProtocol> *)component withObject:(id)object {
     [self.formBindingDelegate performSelector:selector onComponent:component withObject:object];
 }
 

@@ -19,7 +19,6 @@
 //
 //
 
-#import "MFUIBaseComponent.h"
 #import "MFUIOldBaseComponent.h"
 #import "MFSignatureDrawing.h"
 

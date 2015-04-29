@@ -20,7 +20,6 @@
 @property(nonatomic, readonly, retain)  UIColor                         *currentTitleColor;
 @property(nonatomic, readonly, retain)  UIColor                         *currentTitleShadowColor;
 @property(nonatomic, readonly, retain)  UILabel                         *titleLabel;
-
 @property(nonatomic)                    BOOL                            adjustsImageWhenDisabled;
 @property(nonatomic)                    BOOL                            adjustsImageWhenHighlighted;
 @property(nonatomic)                    BOOL                            reversesTitleShadowWhenHighlighted;

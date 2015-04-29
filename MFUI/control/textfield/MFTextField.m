@@ -80,6 +80,7 @@
     if(!self.sender) {
         self.sender = self;
     }
+    self.delegate = self;
     [self addTarget:self action:@selector(textDidChange) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
 }
 
@@ -121,6 +122,9 @@
     
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    return [self resignFirstResponder];
+}
 
 
 #pragma mark - MDK

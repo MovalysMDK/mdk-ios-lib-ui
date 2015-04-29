@@ -24,7 +24,7 @@
 #import "MFUIBinding.h"
 #import "MFUITransitionDelegate.h"
 
-@class MFUIBaseComponent;
+@protocol MFUIComponentProtocol;
 
 /**
  * @brief A protocol defining some basic methods and attributes for framework cells.

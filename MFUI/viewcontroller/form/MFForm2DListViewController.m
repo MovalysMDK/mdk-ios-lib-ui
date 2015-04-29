@@ -283,7 +283,7 @@
             NSMutableArray *componentList = [[self.binding componentsAtIndexPath:virtualIndexPath withBindingKey:key] mutableCopy];
             if(componentList) {
                 for( NSString *fieldName in currentGd.fieldNames ) {
-                    MFUIBaseComponent *component = [view valueForKey:fieldName];
+                    UIView<MFUIComponentProtocol> *component = [view valueForKey:fieldName];
                     [self initComponent:component atIndexPath:virtualIndexPath];
                 }
             }
@@ -440,7 +440,7 @@
     
     cellComponents = [[self.binding componentsArrayAtIndexPath:indexPath] mutableCopy];
     
-    for(MFUIBaseComponent *component in cellComponents) {
+    for(UIView<MFUIComponentProtocol> *component in cellComponents) {
         MFFieldDescriptor *componentDescriptor = (MFFieldDescriptor *)(component.selfDescriptor);
         
         id componentData = [viewModel valueForKeyPath:componentDescriptor.bindingKey];

@@ -24,7 +24,7 @@
 #import "MFUIBaseRenderableComponent.h"
 
 
-FOUNDATION_EXPORT NSString * const MF_MANDATORY_INDICATOR;
+//FOUNDATION_EXPORT NSString * const MF_MANDATORY_INDICATOR;
 
 
 

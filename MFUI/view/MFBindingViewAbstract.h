@@ -20,7 +20,6 @@
 //
 
 #import "MFBindingViewProtocol.h"
-#import "MFUIBaseComponent.h"
 #import "MFFormViewControllerProtocol.h"
 
 @interface MFBindingViewAbstract : UIView <MFBindingViewProtocol, MFFormCellProtocol>

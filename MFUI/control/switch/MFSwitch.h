@@ -19,7 +19,7 @@
 //
 //
 
-#import "MFUIBaseComponent.h"
+#import "MFUIOldBaseComponent.h"
 
 IB_DESIGNABLE
 
@@ -29,7 +29,7 @@ IB_DESIGNABLE
  * @discussion This components allows two states : enabled or disabled. It is similar
  * to a checkbox component.
  */
-@interface MFSwitch : MFUIBaseComponent
+@interface MFSwitch : MFUIOldBaseComponent
 
 #pragma mark - Properties
 

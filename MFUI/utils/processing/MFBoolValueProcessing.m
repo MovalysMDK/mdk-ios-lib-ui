@@ -20,7 +20,6 @@
 //
 
 #import "MFBoolValueProcessing.h"
-#import "MFUIBaseComponent.h"
 @implementation MFBoolValueProcessing
 
 

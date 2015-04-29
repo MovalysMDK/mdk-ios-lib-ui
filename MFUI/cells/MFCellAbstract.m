@@ -27,7 +27,6 @@
 
 #import "MFCellAbstract.h"
 #import <MFCore/MFCoreApplication.h>
-#import "MFUIBaseComponent.h"
 #import "MFVersionManager.h"
 
 @interface MFCellAbstract()
@@ -123,16 +122,6 @@
 //    self.contentView.userInteractionEnabled = NO;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
-    for( NSString *fieldName in self.groupDescriptor.fieldNames) {
-        MFUIBaseComponent *component = [self valueForKey:fieldName];
-        [component setSelected:selected];
-    }
-}
-
 
 #pragma mark - Not implemented
 
@@ -159,7 +148,7 @@
     for( MFFieldDescriptor *fieldDesc in self.groupDescriptor.fields) {
         id<MFUIComponentProtocol> field =  [self valueForKey:fieldDesc.cellPropertyBinding];
         if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-            [((MFUIBaseComponent *)field) setTranslatesAutoresizingMaskIntoConstraints:YES];
+            [((UIView<MFUIComponentProtocol> *)field) setTranslatesAutoresizingMaskIntoConstraints:YES];
         }
         field.localizedFieldDisplayName = groupDescriptor.getFieldDescriptorLabel.getLabel;
         // Descriptor
@@ -298,7 +287,7 @@
 
 -(void) refreshComponents {
     for( NSString *fieldName in self.groupDescriptor.fieldNames) {
-        MFUIBaseComponent * component = [self valueForKey:fieldName];
+       UIView<MFUIComponentProtocol> *component = [self valueForKey:fieldName];
         [component setData:nil];
     }
 }

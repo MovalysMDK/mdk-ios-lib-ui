@@ -21,7 +21,7 @@
 @implementation MFUILabel
 
 
-NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
+//NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 @synthesize mandatory = _mandatory;
 @synthesize inInitMode = _inInitMode;
 @synthesize tooltipView = _tooltipView;
@@ -34,7 +34,7 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 #if !TARGET_INTERFACE_BUILDER
     //Récupération de la mention obligatoire
     MFConfigurationHandler *registry = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
-    self.mandatoryIndicator = [registry getStringProperty:MF_MANDATORY_INDICATOR];
+//    self.mandatoryIndicator = [registry getStringProperty:MF_MANDATORY_INDICATOR];
 //    self.baseErrorButton.hidden = YES;
     self.userInteractionEnabled = YES;
     

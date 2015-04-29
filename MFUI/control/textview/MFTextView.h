@@ -32,7 +32,6 @@
 #import "MFUIBaseComponent.h"
 
 
-
 /**
  * TextView component permit the input of a multiline text
  */

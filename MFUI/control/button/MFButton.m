@@ -66,7 +66,7 @@
     });
     
     [self.button addTarget:self action:@selector(launchAction) forControlEvents:UIControlEventTouchDown];
-    
+    [super initialize];
 }
 
 

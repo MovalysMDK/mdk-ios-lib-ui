@@ -308,7 +308,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [self performSelectorOnMainThread: @selector(updateValue:) withObject:self.photoViewModel waitUntilDone:YES];
 }
 
-#pragma mark - Inherited methods from MFUIBaseComponent
+#pragma mark - Inherited methods from MFUIComponentProtocol
 
 /**
  * @brief Met à jour le composant avec les données du view model

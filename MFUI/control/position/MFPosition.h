@@ -24,7 +24,6 @@
 
 #import "MFPositionDelegate.h"
 #import "MFUIComponentProtocol.h"
-#import "MFUIBaseComponent.h"
 #import "MFUIOldBaseComponent.h"
 #import "MFTextField.h"
 #import "MFDoubleTextField.h"

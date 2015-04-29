@@ -24,6 +24,7 @@
 #define Pods_MFUIControl_h
 
 #import "MFUIBaseComponent.h"
+#import "MFUIOldBaseComponent.h"
 #import "MFUIComponents.h"
 #import "MFViewTags.h"
 #import "MFUIComponentProtocol.h"

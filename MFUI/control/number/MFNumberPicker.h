@@ -22,7 +22,7 @@
 #import "MFUIMotion.h"
 #import "MFUIProtocol.h"
 
-#import "MFUIBaseComponent.h"
+
 #import "MFUIOldBaseComponent.h"
 
 /**

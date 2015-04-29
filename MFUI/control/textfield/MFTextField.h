@@ -25,7 +25,7 @@
  */
 
 IB_DESIGNABLE
-@interface MFTextField : UITextField <MFUIComponentProtocol>
+@interface MFTextField : UITextField <MFUIComponentProtocol, UITextFieldDelegate>
 
 #pragma mark - Properties
 

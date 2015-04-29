@@ -158,7 +158,7 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 
 
 
-#pragma mark - MFUIBaseComponents inherited methods
+#pragma mark - MFUIComponentProtocol inherited methods
 
 -(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
     NSNumber *minValueNumber = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:NUMBER_PICKER_PARAMETER_MIN_VALUE_KEY];

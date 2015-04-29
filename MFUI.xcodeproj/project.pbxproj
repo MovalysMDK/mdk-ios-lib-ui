@@ -100,6 +100,10 @@
 		B0A0ED631AE8D578004F0FF7 /* MFUIOldBaseComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0ED611AE8D578004F0FF7 /* MFUIOldBaseComponent.m */; };
 		B0AF66FD1AE64E1400A472FC /* MFComponentBindingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0AF66FB1AE64E1400A472FC /* MFComponentBindingDelegate.h */; };
 		B0AF66FE1AE64E1400A472FC /* MFComponentBindingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0AF66FC1AE64E1400A472FC /* MFComponentBindingDelegate.m */; };
+		B0B760C21AEFE75200E52B97 /* MFLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B760C01AEFE75200E52B97 /* MFLabel.h */; };
+		B0B760C31AEFE75200E52B97 /* MFLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B760C11AEFE75200E52B97 /* MFLabel.m */; };
+		B0B760C61AEFEA3E00E52B97 /* MFLabelStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B760C41AEFEA3E00E52B97 /* MFLabelStyle.h */; };
+		B0B760C71AEFEA3E00E52B97 /* MFLabelStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B760C51AEFEA3E00E52B97 /* MFLabelStyle.m */; };
 		B0C28DF91AE647BF00640748 /* MFComponentBindingProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C28DF71AE647BF00640748 /* MFComponentBindingProtocol.h */; };
 		B0C28DFA1AE647BF00640748 /* MFUIComponentProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C28DF81AE647BF00640748 /* MFUIComponentProtocol.h */; };
 		B0CFEA701AEE6F5300279631 /* MFBarCodeScanTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B0CFEA6E1AEE6F5300279631 /* MFBarCodeScanTextField.h */; };
@@ -548,6 +552,10 @@
 		B0A0ED611AE8D578004F0FF7 /* MFUIOldBaseComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUIOldBaseComponent.m; sourceTree = "<group>"; };
 		B0AF66FB1AE64E1400A472FC /* MFComponentBindingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentBindingDelegate.h; sourceTree = "<group>"; };
 		B0AF66FC1AE64E1400A472FC /* MFComponentBindingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFComponentBindingDelegate.m; sourceTree = "<group>"; };
+		B0B760C01AEFE75200E52B97 /* MFLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFLabel.h; sourceTree = "<group>"; };
+		B0B760C11AEFE75200E52B97 /* MFLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFLabel.m; sourceTree = "<group>"; };
+		B0B760C41AEFEA3E00E52B97 /* MFLabelStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFLabelStyle.h; sourceTree = "<group>"; };
+		B0B760C51AEFEA3E00E52B97 /* MFLabelStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFLabelStyle.m; sourceTree = "<group>"; };
 		B0C28DF71AE647BF00640748 /* MFComponentBindingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentBindingProtocol.h; sourceTree = "<group>"; };
 		B0C28DF81AE647BF00640748 /* MFUIComponentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIComponentProtocol.h; sourceTree = "<group>"; };
 		B0CFEA6E1AEE6F5300279631 /* MFBarCodeScanTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBarCodeScanTextField.h; sourceTree = "<group>"; };
@@ -999,6 +1007,8 @@
 				B0289F2E1AA89342007A2E75 /* UIView+Styleable.m */,
 				B0CFEA721AEE6F9900279631 /* MFBarCodeScanTextFieldStyle.h */,
 				B0CFEA731AEE6F9900279631 /* MFBarCodeScanTextFieldStyle.m */,
+				B0B760C41AEFEA3E00E52B97 /* MFLabelStyle.h */,
+				B0B760C51AEFEA3E00E52B97 /* MFLabelStyle.m */,
 			);
 			path = style;
 			sourceTree = "<group>";
@@ -1353,6 +1363,8 @@
 				B0183FEB1AB099530081133F /* MFUILabel+UILabelForwarding.h */,
 				B0183FEC1AB099530081133F /* MFUILabel+UILabelForwarding.m */,
 				B0D45BBD1A5ED2F300C6D376 /* MFUIControlLabel.h */,
+				B0B760C01AEFE75200E52B97 /* MFLabel.h */,
+				B0B760C11AEFE75200E52B97 /* MFLabel.m */,
 			);
 			path = label;
 			sourceTree = "<group>";
@@ -1977,6 +1989,7 @@
 				B08EF71A1AE53FC000F3754E /* MFEmailTextFieldStyle.h in Headers */,
 				B0D45E021A5ED2F400C6D376 /* MFUILog.h in Headers */,
 				B0D45DC71A5ED2F400C6D376 /* MFBaseTextExtensionProtocol.h in Headers */,
+				B0B760C61AEFEA3E00E52B97 /* MFLabelStyle.h in Headers */,
 				B0D45D2F1A5ED2F400C6D376 /* MFUIActionSave.h in Headers */,
 				B0D45E361A5ED2F400C6D376 /* MFMultiPanelViewController.h in Headers */,
 				B0D45DBF1A5ED2F400C6D376 /* TooltipViewPrivate.h in Headers */,
@@ -2059,6 +2072,7 @@
 				B0D45DCD1A5ED2F400C6D376 /* MFConverterProtocol.h in Headers */,
 				B0D45D351A5ED2F400C6D376 /* MFApplication+MFUIAppSingleton.h in Headers */,
 				B0D45D7D1A5ED2F400C6D376 /* MFMapViewController.h in Headers */,
+				B0B760C21AEFE75200E52B97 /* MFLabel.h in Headers */,
 				B0D45E741A5ED2F400C6D376 /* UIViewController+MFMenuManager.h in Headers */,
 				B0D45E3F1A5ED2F400C6D376 /* MFWorkspaceMasterColumnProtocol.h in Headers */,
 				B08EF7061AE53F9E00F3754E /* MFErrorViewProtocol.h in Headers */,
@@ -2404,6 +2418,7 @@
 				B0D45DCF1A5ED2F400C6D376 /* MFDateConverter.m in Sources */,
 				B0289F301AA89342007A2E75 /* MFDefaultStyle.m in Sources */,
 				B0D45D8B1A5ED2F400C6D376 /* MFScanner.m in Sources */,
+				B0B760C71AEFEA3E00E52B97 /* MFLabelStyle.m in Sources */,
 				B0D45E181A5ED2F400C6D376 /* MFHelperIndexPath.m in Sources */,
 				B0D45DD81A5ED2F400C6D376 /* MFInvalidDoubleValueUIValidationError.m in Sources */,
 				B08EF6F91AE53F8F00F3754E /* MFTextField.m in Sources */,
@@ -2482,6 +2497,7 @@
 				B0D45DF31A5ED2F400C6D376 /* MFFormSearchExtend.m in Sources */,
 				B0D45D2B1A5ED2F400C6D376 /* MFChainSaveActionDetailParameter.m in Sources */,
 				B0D45D361A5ED2F400C6D376 /* MFApplication+MFUIAppSingleton.m in Sources */,
+				B0B760C31AEFE75200E52B97 /* MFLabel.m in Sources */,
 				B0D45D411A5ED2F400C6D376 /* MFCell1ComponentHorizontal.m in Sources */,
 				B0D45D551A5ED2F400C6D376 /* MFEnumImage.m in Sources */,
 				B0D45D651A5ED2F400C6D376 /* MFPickerList.m in Sources */,

@@ -424,7 +424,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 
 
 
-#pragma mark - MFUIBasecomponent base methods
+#pragma mark - MFUIComponentProtocol base methods
 
 +(NSString *) getDataType {
     return @"NSNumber";

@@ -84,7 +84,10 @@
 
 -(void) clear {
     self.fetch = nil;
-    [self.viewModels removeAllObjects];
+    @synchronized(self.viewModels) {
+        [self.viewModels removeAllObjects];
+
+    }
 }
 
 -(void) add:(MFUIBaseViewModel *)itemVm {

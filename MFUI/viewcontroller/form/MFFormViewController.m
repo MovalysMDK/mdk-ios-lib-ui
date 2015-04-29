@@ -162,7 +162,7 @@ NSString *const MFPROP_FORM_ONUNSAVEDCHANGES = @"FormOnUnsavedChanges";
             break;
     }
     
-    for(MFUIBaseComponent *component in [self.binding componentsArrayAtIndexPath:self.screenIndexPath]) {
+    for(UIView<MFUIComponentProtocol> *component in [self.binding componentsArrayAtIndexPath:self.screenIndexPath]) {
         [self initComponent:component atIndexPath:self.screenIndexPath];
     }
 }
@@ -171,7 +171,7 @@ NSString *const MFPROP_FORM_ONUNSAVEDCHANGES = @"FormOnUnsavedChanges";
     for(MFSectionDescriptor *screenSectionDescriptor in screenSectionDescriptors) {
         for(MFGroupDescriptor *groupDescriptor in screenSectionDescriptor.orderedGroups) {
             for(MFFieldDescriptor *fieldDescriptor in groupDescriptor.fields) {
-                MFUIBaseComponent *component = (MFUIBaseComponent *)[self valueForKey:fieldDescriptor.cellPropertyBinding];
+                UIView<MFUIComponentProtocol> *component = (UIView<MFUIComponentProtocol> *)[self valueForKey:fieldDescriptor.cellPropertyBinding];
                 component.form = self;
                 component.groupDescriptor = groupDescriptor;
                 [component setComponentInCellAtIndexPath:self.screenIndexPath];
@@ -520,7 +520,7 @@ NSString *const MFPROP_FORM_ONUNSAVEDCHANGES = @"FormOnUnsavedChanges";
 
 -(void) initComponent:(id<MFUIComponentProtocol>)component atIndexPath:(NSIndexPath *)indexPath{
     
-    [(MFUIBaseComponent *)component setInInitMode:YES];
+    [(UIView<MFUIComponentProtocol> *)component setInInitMode:YES];
     
     //Initialize Data
     MFFieldDescriptor * componentDescriptor = (MFFieldDescriptor *) component.selfDescriptor;
@@ -576,7 +576,7 @@ NSString *const MFPROP_FORM_ONUNSAVEDCHANGES = @"FormOnUnsavedChanges";
         }
     }
     
-    [(MFUIBaseComponent *)component setInInitMode:NO];
+    [(UIView<MFUIComponentProtocol> *)component setInInitMode:NO];
 }
 
 -(MFGroupDescriptor *) getGroupDescriptor:(NSIndexPath *)indexPath {

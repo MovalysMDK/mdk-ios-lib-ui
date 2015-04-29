@@ -26,9 +26,9 @@
 #import "MFHelperIndexPath.h"
 
 //Components
-#import "MFUIBaseComponent.h"
 #import  <MFCore/MFCoreError.h>
 #import "MFUILogging.h"
+#import "MFUIComponentProtocol.h"
 
 @interface MFBinding()
 
@@ -121,7 +121,7 @@
     //S'il y a déja des composant enregistrés pour ce binding
     if(registeredComponents) {
         //On élimine les doublons à enregistrer
-        for(MFUIBaseComponent *component in componentList) {
+        for(id<MFUIComponentProtocol> component in componentList) {
             if([registeredComponents containsObject:component]) {
                 [componentsToRegister removeObject:component];
             }

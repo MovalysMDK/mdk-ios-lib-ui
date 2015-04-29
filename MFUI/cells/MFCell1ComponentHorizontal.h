@@ -25,7 +25,7 @@
 /**
  * @brief Main default framework cell.
  * @discussion It is used to display a component with a label.
- * @discussion The component must be an MFUIBaseComponent inherited object.
+ * @discussion The component must be an MFUIComponentProtocol inherited object.
  * @discussion The label is a MFLabel object.
  * @discussion The component and the label have default frames defined with constraints and are responsive to cell size.
  * @discussion The cellPropertyBinding associated to this cell is "componentView". Used this to bind a component to a ViewModel value with the "cellPropertyBinding" attribute in PLIST forms and sections descriptor files.

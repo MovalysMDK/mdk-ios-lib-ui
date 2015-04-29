@@ -23,7 +23,6 @@
 #import "MFUIMotion.h"
 #import "MFUIForm.h"
 
-#import "MFUIBaseComponent.h"
 #import "MFUIOldBaseComponent.h"
 
 @class MFUIBaseListViewModel;

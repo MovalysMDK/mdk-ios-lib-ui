@@ -22,11 +22,10 @@
 #import "MFUIUtils.h"
 #import "MFUIMotion.h"
 
-#import "MFUIBaseComponent.h"
 #import "MFButton.h"
 
 
-@interface MFEnumImage : MFUIBaseComponent <UIGestureRecognizerDelegate, MFOrientationChangedProtocol>
+@interface MFEnumImage : MFUIOldBaseComponent <UIGestureRecognizerDelegate, MFOrientationChangedProtocol>
 
 #pragma mark - Properties
 

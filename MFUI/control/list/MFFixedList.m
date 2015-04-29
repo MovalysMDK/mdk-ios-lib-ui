@@ -207,7 +207,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     
 }
 
-#pragma mark - Méthodes dérivées de MFUIBaseComponent
+#pragma mark - Méthodes dérivées de MFUIComponentProtocol
 
 +(NSString *)getDataType {
     return @"MFUIBaseListViewModel";

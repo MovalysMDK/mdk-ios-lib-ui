@@ -22,7 +22,6 @@
 #import "MFUIUtils.h"
 #import "MFUIMotion.h"
 
-#import "MFUIBaseComponent.h"
 #import "MFUIOldBaseComponent.h"
 #import "MFButton.h"
 

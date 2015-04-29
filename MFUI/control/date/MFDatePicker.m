@@ -462,7 +462,7 @@
 
 
 
-#pragma mark - MFUIBasecomponent base methods
+#pragma mark - MFUIComponentProtocol base methods
 
 -(void)setData:(id)data {
     _data = data;

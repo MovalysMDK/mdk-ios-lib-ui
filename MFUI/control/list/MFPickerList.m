@@ -204,7 +204,7 @@ const int NO_LAST_INDEX = -1;
 
 
 
-#pragma mark - MFUIBaseComponent methods
+#pragma mark - MFUIComponentProtocol methods
 
 +(NSString *)getDataType {
     return @"MFUIBaseViewModel";

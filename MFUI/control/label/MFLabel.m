@@ -50,6 +50,7 @@
 @synthesize editable = _editable;
 @synthesize tooltipView= _tooltipView;
 @synthesize cellContainer = _cellContainer;
+@synthesize styleClassName = styleClassName;
 
 NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 
@@ -80,7 +81,7 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 
 -(void) initializeComponent {
     self.bindingDelegate = [[MFComponentBindingDelegate alloc] initWithComponent:self];
-    [self.styleClass applyStandardStyleOnComponent:self];
+//    [self.baseStyleClass applyStandardStyleOnComponent:self];
     self.errors = [NSMutableArray new];
     if(!self.sender) {
         self.sender = self;
@@ -90,7 +91,6 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
     MFConfigurationHandler *registry = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
     self.mandatoryIndicator = [registry getStringProperty:MF_MANDATORY_INDICATOR];
 #endif
-    self.backgroundColor = [UIColor clearColor];
 }
 
 
@@ -114,12 +114,6 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
     _selfDescriptor = fieldDescriptor;
 }
 
--(id<MFStyleProtocol>)styleClass {
-    if(!_styleClass) {
-        _styleClass = self.customStyleClass ? [self.customStyleClass new] : [NSClassFromString([NSString stringWithFormat:@"%@Style", self.class] ) new];
-    }
-    return _styleClass;
-}
 
 +(NSString *)getDataType {
     return @"NSString";
@@ -220,10 +214,6 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
     [self.bindingDelegate setIsValid:!showError];
 }
 
--(void) onErrorButtonClick:(id)sender {
-    [self.bindingDelegate onErrorButtonClick:sender];
-}
-
 -(void)prepareForInterfaceBuilder {
     [self.styleClass applyStandardStyleOnComponent:self];
     
@@ -234,7 +224,9 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
         [self.styleClass applyValidStyleOnComponent:self];
     }
     self.text = @"Label";
-
+//    self.backgroundColor = [UIColor clearColor];
 }
+
+
 
 @end

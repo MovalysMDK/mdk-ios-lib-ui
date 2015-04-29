@@ -68,6 +68,8 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 @synthesize errors = _errors;
 @synthesize inInitMode = _inInitMode;
 @synthesize cellContainer = _cellContainer;
+@synthesize styleClass = _styleClass;
+@synthesize styleClassName = styleClassName;
 
 #pragma mark - Constructeurs et initialisation
 -(id)init {

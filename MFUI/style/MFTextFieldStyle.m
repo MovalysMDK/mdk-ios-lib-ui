@@ -24,13 +24,19 @@ NSInteger DEFAULT_ACCESSORIES_MARGIN = 2;
 @synthesize backgroundView;
 
 -(void)applyErrorStyleOnComponent:(MFTextField *)component {
+    [super applyErrorStyleOnComponent:component];
     [self performSelector:@selector(addErrorViewOnComponent:) withObject:component];
 }
 
 -(void)applyStandardStyleOnComponent:(MFTextField *)component {
+    [super applyStandardStyleOnComponent:component];
+    if([component.editable isEqualToNumber:@1]) {
+        component.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1];
+    }
 }
 
 -(void)applyValidStyleOnComponent:(MFTextField *) component {
+    [super applyValidStyleOnComponent:component];
     [self performSelector:@selector(removeErrorViewOnComponent:) withObject:component];
 }
 

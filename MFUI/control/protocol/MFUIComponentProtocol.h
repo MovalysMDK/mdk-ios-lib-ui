@@ -30,6 +30,7 @@
 #import "MFComponentErrorProtocol.h"
 #import "MFComponentPropertiesProtocol.h"
 #import "MFComponentValidationProtocol.h"
+#import "UIView+Styleable.h"
 
 @protocol MFUIGroupedElementCommonProtocol;
 @protocol MFStyleProtocol;
@@ -66,6 +67,8 @@
  */
 @property (nonatomic, weak) id<MFComponentChangedListenerProtocol> form;
 
+
+@property (nonatomic, strong) NSString *styleClassName;
 
 @property (nonatomic, strong) id<MFStyleProtocol> styleClass;
 

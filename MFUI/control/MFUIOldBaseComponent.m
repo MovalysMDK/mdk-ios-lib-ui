@@ -59,6 +59,8 @@
 @synthesize lastUpdateSender = _lastUpdateSender;
 @synthesize cellContainer = _cellContainer;
 @synthesize inInitMode = _inInitMode;
+@synthesize styleClass = _styleClass;
+@synthesize styleClassName = styleClassName;
 
 #pragma mark - Constructeurs et initialisation
 -(id)init {
@@ -125,7 +127,32 @@
     self.applySelfStyle = YES;
     //Ajout du bouton à la vue du composant
     [self addSubview:self.baseErrorButton];
+    
+    [self computeStyleClass];
+
 #endif
+}
+
+-(void) computeStyleClass {
+    /**
+     * Style priority :
+     * 1. User Defined Runtime Attribute named "styleClass"
+     * 2. Class style based on the component class name
+     * 3. Class style defined as a bean base on the component class name
+     * 4. Default Movalys style
+     */
+    NSString *componentClassStyleName = [NSString stringWithFormat:@"%@Style", [self class]];
+    
+    if(self.styleClassName) {
+        self.styleClass = [NSClassFromString(self.styleClassName) new];
+    }
+    else if(NSClassFromString(componentClassStyleName)){
+        self.styleClass = [NSClassFromString(componentClassStyleName) new];
+    }
+    //TODO: Style via BeanLoader
+    else {
+        self.styleClass = [NSClassFromString(@"MFDefaultStyle") new];
+    }
 }
 
 -(void) initErrors {
@@ -169,11 +196,14 @@
 
 
 -(void)setIsValid:(BOOL)isValid {
+    [self applyStandardStyle];
     if (self.isValid != isValid) {
         _isValid = isValid;
         if (isValid) {
+            [self applyValidStyle];
             [self hideErrorButtons];
         } else {
+            [self applyErrorStyle];
             [self showErrorButtons];
         }
     }
@@ -622,6 +652,7 @@
 }
 
 -(void)prepareForInterfaceBuilder {
+    [self computeStyleClass];
     self.backgroundColor = [UIColor clearColor];
 }
 

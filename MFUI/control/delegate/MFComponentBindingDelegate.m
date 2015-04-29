@@ -19,6 +19,7 @@
 #import "MFStyleProtocol.h"
 #import "MFConstants.h"
 #import "MFErrorViewProtocol.h"
+#import "UIView+Styleable.h"
 
 @interface MFComponentBindingDelegate ()
 
@@ -33,7 +34,7 @@
     self = [super init];
     if(self) {
         self.component = component;
-        
+        [self computeStyleClass];
 #if !TARGET_INTERFACE_BUILDER
         [self.component addObserver:self forKeyPath:@"selfDescriptor" options:NSKeyValueObservingOptionNew context:NULL];
 #endif
@@ -95,6 +96,7 @@
     if([keyPath isEqualToString:@"selfDescriptor"]) {
         [(id<MFUIComponentProtocol>)object didLoadFieldDescriptor:change[NSKeyValueChangeNewKey]];
     }
+    
 }
 
 -(void)dealloc {
@@ -113,14 +115,14 @@
 }
 
 -(void)setIsValid:(BOOL)isValid {
-    [self.component.styleClass applyStandardStyleOnComponent:self.component];
+    [self.component applyStandardStyle];
     if(isValid) {
-        [self.component.styleClass applyValidStyleOnComponent:self.component];
+        [self.component applyValidStyle];
         [self.component.tooltipView hideAnimated:YES];
         
     }
     else{
-        [self.component.styleClass applyErrorStyleOnComponent:self.component];
+        [self.component applyErrorStyle];
     }
 }
 
@@ -162,5 +164,27 @@
 
 -(UIColor *) defaultTooltipBackgroundColor {
     return [UIColor colorWithRed:0.8 green:0.1 blue:0.1 alpha:1];
+}
+
+-(void) computeStyleClass {
+    /**
+     * Style priority :
+     * 1. User Defined Runtime Attribute named "styleClass"
+     * 2. Class style based on the component class name
+     * 3. Class style defined as a bean base on the component class name
+     * 4. Default Movalys style
+     */
+    NSString *componentClassStyleName = [NSString stringWithFormat:@"%@Style", [self.component class]];
+    
+    if(self.component.styleClassName) {
+        self.component.styleClass = [NSClassFromString(self.component.styleClassName) new];
+    }
+    else if(componentClassStyleName){
+        self.component.styleClass = [NSClassFromString(componentClassStyleName) new];
+    }
+    //TODO: Style via BeanLoader
+    else {
+        self.component.styleClass = [NSClassFromString(@"MFDefaultStyle") new];
+    }
 }
 @end

@@ -321,16 +321,17 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
      * 3. Class style defined as a bean base on the component class name
      * 4. Default Movalys style
      */
-    Class componentClassStyle = NSClassFromString([NSString stringWithFormat:@"%@Style", [self className]]);
-    if(self.styleClass) {
-        self.baseStyleClass = NSClassFromString(self.styleClass);
+    NSString *componentClassStyleName = [NSString stringWithFormat:@"%@Style", [self class]];
+    
+    if(self.styleClassName) {
+        self.styleClass = [NSClassFromString(self.styleClassName) new];
     }
-    else if(componentClassStyle){
-        self.baseStyleClass = componentClassStyle;
+    else if(componentClassStyleName){
+        self.styleClass = [NSClassFromString(componentClassStyleName) new];
     }
     //TODO: Style via BeanLoader
     else {
-        self.baseStyleClass = NSClassFromString(@"MFDefaultStyle");
+        self.styleClass = [NSClassFromString(@"MFDefaultStyle") new];
     }
 }
 

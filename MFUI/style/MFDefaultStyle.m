@@ -20,19 +20,19 @@
 @implementation MFDefaultStyle
 
 
--(void)applyStandardStyleOnComponent:(id)component {
+-(void)applyStandardStyleOnComponent:(UIView *)component {
     if(component) {
-        
+
     }
 }
 
--(void)applyErrorStyleOnComponent:(id)component {
+-(void)applyErrorStyleOnComponent:(UIView *)component {
     if(component) {
-        
+
     }
 }
 
--(void)applyValidStyleOnComponent:(id)component {
+-(void)applyValidStyleOnComponent:(UIView *)component {
     if(component) {
         
     }

@@ -15,27 +15,31 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 #import "UIView+Styleable.h"
+@protocol MFStyleProtocol;
 
-@implementation MFUIBaseRenderableComponent (Styleable)
+@implementation UIView (Styleable)
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void)applyStandardStyle {
-    if([[[self.baseStyleClass alloc] init] respondsToSelector:@selector(applyStyleOnView:)]) {
-        [[[self.baseStyleClass alloc] init] performSelector:@selector(applyStyleOnView:) withObject:self];
+    NSObject<MFStyleProtocol> *baseStyleClass = [self performSelector:@selector(styleClass)];
+    if([baseStyleClass respondsToSelector:@selector(applyStandardStyleOnComponent:)]) {
+        [baseStyleClass performSelector:@selector(applyStandardStyleOnComponent:) withObject:self];
     }
 }
 
 -(void)applyErrorStyle {
-    if([[[self.baseStyleClass alloc] init] respondsToSelector:@selector(applyErrorStyleOnView:)]) {
-        [[[self.baseStyleClass alloc] init] performSelector:@selector(applyErrorStyleOnView:) withObject:self];
+    NSObject<MFStyleProtocol> *baseStyleClass = [self performSelector:@selector(styleClass)];
+    if([baseStyleClass respondsToSelector:@selector(applyErrorStyleOnComponent:)]) {
+        [baseStyleClass performSelector:@selector(applyErrorStyleOnComponent:) withObject:self];
     }
 }
 
 
 -(void)applyValidStyle {
-    if([[[self.baseStyleClass alloc] init] respondsToSelector:@selector(applyValidStyleOnView:)]) {
-        [[[self.baseStyleClass alloc] init] performSelector:@selector(applyValidStyleOnView:) withObject:self];
+    NSObject<MFStyleProtocol> *baseStyleClass = [self performSelector:@selector(styleClass)];
+    if([baseStyleClass respondsToSelector:@selector(applyValidStyleOnComponent:)]) {
+        [baseStyleClass performSelector:@selector(applyValidStyleOnComponent:) withObject:self];
     }
 }
 #pragma clang diagnostic pop

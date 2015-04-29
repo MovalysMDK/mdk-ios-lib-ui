@@ -20,7 +20,4 @@
 
 @implementation MFLabelStyle
 
--(void)applyStandardStyleOnComponent:(MFLabel *)component {
-}
-
 @end

@@ -38,10 +38,10 @@
 //Label
 #import "MFUIControlLabel.h"
 
-////Lists
+//Lists
 #import "MFUIControlList.h"
 
-////Number
+//Number
 #import "MFUIControlNumber.h"
 
 //Photo
@@ -58,6 +58,9 @@
 
 //Switch
 #import "MFUIControlSwitch.h"
+
+//TextField
+#import "MFUIControlTextField.h"
 
 //Webview
 #import "MFUIControlWebView.h"

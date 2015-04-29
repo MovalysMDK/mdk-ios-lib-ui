@@ -95,6 +95,13 @@
  */
 @property (nonatomic, strong) NSNumber *parentEditable;
 
+/**
+ * @brief The class abstract object this component should used to apply style.
+ * @discussion This property is computed at runtime following the style's priority.
+ */
+@property  (nonatomic) Class baseStyleClass;
+
+
 #pragma mark - Inspectable Methods
 /**
  * @brief This property enables or disables the override of the IB Style on the code style

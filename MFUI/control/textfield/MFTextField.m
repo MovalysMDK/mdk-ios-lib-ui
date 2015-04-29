@@ -45,6 +45,7 @@
 @synthesize editable = _editable;
 @synthesize tooltipView= _tooltipView;
 @synthesize cellContainer = _cellContainer;
+@synthesize styleClassName = _styleClassName;
 
 
 #pragma mark - Initialization
@@ -74,7 +75,6 @@
 
 -(void) initializeComponent {
     self.bindingDelegate = [[MFComponentBindingDelegate alloc] initWithComponent:self];
-    [self.styleClass applyStandardStyleOnComponent:self];
     self.errors = [NSMutableArray new];
     self.extension = [[MFTextFieldExtension alloc] init];
     if(!self.sender) {
@@ -129,10 +129,10 @@
 
 #pragma mark - MDK
 
--(void)setCustomStyleClass:(Class)customStyleClass {
-    _customStyleClass = customStyleClass;
-    self.styleClass = [customStyleClass new];
-}
+//-(void)setCustomStyleClass:(Class)customStyleClass {
+//    _customStyleClass = customStyleClass;
+//    self.styleClass = [customStyleClass new];
+//}
 
 -(void)setBorderStyle:(UITextBorderStyle)borderStyle {
     if(borderStyle == UITextBorderStyleRoundedRect) {
@@ -157,12 +157,7 @@
     }
 }
 
--(id<MFStyleProtocol>)styleClass {
-    if(!_styleClass) {
-        _styleClass = self.customStyleClass ? [self.customStyleClass new] : [NSClassFromString([NSString stringWithFormat:@"%@Style", self.class] ) new];
-    }
-    return _styleClass;
-}
+
 
 +(NSString *)getDataType {
     return @"NSString";
@@ -274,13 +269,13 @@
 }
 
 -(void)prepareForInterfaceBuilder {
-    [self.styleClass applyStandardStyleOnComponent:self];
+    [self applyStandardStyle];
 
     if(self.onError_MDK) {
-        [self.styleClass applyErrorStyleOnComponent:self];
+        [self applyErrorStyle];
     }
     else {
-        [self.styleClass applyValidStyleOnComponent:self];
+        [self applyValidStyle];
     }
 }
 

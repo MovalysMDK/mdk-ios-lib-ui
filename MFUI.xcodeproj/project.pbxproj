@@ -20,8 +20,8 @@
 		B00787CF1AB1E37A009F6D95 /* UIView+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = B00787C41AB1E37A009F6D95 /* UIView+JDFTooltips.m */; };
 		B0183FED1AB099530081133F /* MFUILabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FE91AB099530081133F /* MFUILabel.h */; };
 		B0183FEE1AB099530081133F /* MFUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B0183FEA1AB099530081133F /* MFUILabel.m */; };
-		B0183FEF1AB099530081133F /* MFUILabel+UILabelForwarding.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FEB1AB099530081133F /* MFUILabel+UILabelForwarding.h */; };
-		B0183FF01AB099530081133F /* MFUILabel+UILabelForwarding.m in Sources */ = {isa = PBXBuildFile; fileRef = B0183FEC1AB099530081133F /* MFUILabel+UILabelForwarding.m */; };
+		B0183FEF1AB099530081133F /* MFLabel+UILabelForwarding.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FEB1AB099530081133F /* MFLabel+UILabelForwarding.h */; };
+		B0183FF01AB099530081133F /* MFLabel+UILabelForwarding.m in Sources */ = {isa = PBXBuildFile; fileRef = B0183FEC1AB099530081133F /* MFLabel+UILabelForwarding.m */; };
 		B0183FFD1AB09E530081133F /* MFButton+MFButtonExt.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FF61AB09E530081133F /* MFButton+MFButtonExt.h */; };
 		B0183FFE1AB09E530081133F /* MFButton+MFButtonExt.m in Sources */ = {isa = PBXBuildFile; fileRef = B0183FF71AB09E530081133F /* MFButton+MFButtonExt.m */; };
 		B0183FFF1AB09E530081133F /* MFButton+UIButtonForwarding.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FF81AB09E530081133F /* MFButton+UIButtonForwarding.h */; };
@@ -472,8 +472,8 @@
 		B00787C41AB1E37A009F6D95 /* UIView+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JDFTooltips.m"; sourceTree = "<group>"; };
 		B0183FE91AB099530081133F /* MFUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUILabel.h; sourceTree = "<group>"; };
 		B0183FEA1AB099530081133F /* MFUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUILabel.m; sourceTree = "<group>"; };
-		B0183FEB1AB099530081133F /* MFUILabel+UILabelForwarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFUILabel+UILabelForwarding.h"; sourceTree = "<group>"; };
-		B0183FEC1AB099530081133F /* MFUILabel+UILabelForwarding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFUILabel+UILabelForwarding.m"; sourceTree = "<group>"; };
+		B0183FEB1AB099530081133F /* MFLabel+UILabelForwarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFLabel+UILabelForwarding.h"; sourceTree = "<group>"; };
+		B0183FEC1AB099530081133F /* MFLabel+UILabelForwarding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFLabel+UILabelForwarding.m"; sourceTree = "<group>"; };
 		B0183FF61AB09E530081133F /* MFButton+MFButtonExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFButton+MFButtonExt.h"; sourceTree = "<group>"; };
 		B0183FF71AB09E530081133F /* MFButton+MFButtonExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFButton+MFButtonExt.m"; sourceTree = "<group>"; };
 		B0183FF81AB09E530081133F /* MFButton+UIButtonForwarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFButton+UIButtonForwarding.h"; sourceTree = "<group>"; };
@@ -1360,8 +1360,8 @@
 			children = (
 				B0183FE91AB099530081133F /* MFUILabel.h */,
 				B0183FEA1AB099530081133F /* MFUILabel.m */,
-				B0183FEB1AB099530081133F /* MFUILabel+UILabelForwarding.h */,
-				B0183FEC1AB099530081133F /* MFUILabel+UILabelForwarding.m */,
+				B0183FEB1AB099530081133F /* MFLabel+UILabelForwarding.h */,
+				B0183FEC1AB099530081133F /* MFLabel+UILabelForwarding.m */,
 				B0D45BBD1A5ED2F300C6D376 /* MFUIControlLabel.h */,
 				B0B760C01AEFE75200E52B97 /* MFLabel.h */,
 				B0B760C11AEFE75200E52B97 /* MFLabel.m */,
@@ -2085,7 +2085,7 @@
 				B0D45D8D1A5ED2F400C6D376 /* MFSignature.h in Headers */,
 				B0D45E1B1A5ED2F400C6D376 /* MFUIUtils.h in Headers */,
 				B0183FFD1AB09E530081133F /* MFButton+MFButtonExt.h in Headers */,
-				B0183FEF1AB099530081133F /* MFUILabel+UILabelForwarding.h in Headers */,
+				B0183FEF1AB099530081133F /* MFLabel+UILabelForwarding.h in Headers */,
 				B0D45D3E1A5ED2F400C6D376 /* MFBindingViewProtocol.h in Headers */,
 				B0D45D741A5ED2F400C6D376 /* MFUIControlNumber.h in Headers */,
 				B099BE6A1AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.h in Headers */,
@@ -2401,7 +2401,7 @@
 				B0D45D611A5ED2F400C6D376 /* MFFixedListDataDelegate.m in Sources */,
 				B0D45DBE1A5ED2F400C6D376 /* TooltipView.m in Sources */,
 				B00787CF1AB1E37A009F6D95 /* UIView+JDFTooltips.m in Sources */,
-				B0183FF01AB099530081133F /* MFUILabel+UILabelForwarding.m in Sources */,
+				B0183FF01AB099530081133F /* MFLabel+UILabelForwarding.m in Sources */,
 				B0D45E581A5ED2F400C6D376 /* MFFormViewController.m in Sources */,
 				B08AAC5F1AE91C5D0029EC88 /* MFWebViewController.m in Sources */,
 				B0D45E5E1A5ED2F400C6D376 /* MFMenuViewController.m in Sources */,

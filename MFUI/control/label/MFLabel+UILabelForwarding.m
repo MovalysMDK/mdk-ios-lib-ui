@@ -19,9 +19,9 @@
 //
 //
 
-#import "MFUILabel+UILabelForwarding.h"
+#import "MFLabel+UILabelForwarding.h"
 
-@implementation MFUILabel (UILabelForwarding)
+@implementation MFLabel (UILabelForwarding)
 
 
 @dynamic text;

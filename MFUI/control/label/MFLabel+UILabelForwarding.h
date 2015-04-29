@@ -19,9 +19,9 @@
 //
 //
 
-#import "MFUILabel.h"
+#import "MFLabel.h"
 
-@interface MFUILabel (UILabelForwarding)
+@interface MFLabel (UILabelForwarding)
 
 // forwarded properties to inner UITextField
 @property(nonatomic,copy)   NSString                                            *text;

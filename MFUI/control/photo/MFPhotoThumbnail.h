@@ -22,7 +22,6 @@
 
 //iOS imports
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "MFUILabel.h"
 #import "MFUIOldBaseComponent.h"
 
 @interface MFPhotoThumbnail : MFUIOldBaseComponent

@@ -15,7 +15,12 @@
  */
 
 #import "MFLabelStyle.h"
+#import "MFLabel.h"
+
 
 @implementation MFLabelStyle
+
+-(void)applyStandardStyleOnComponent:(MFLabel *)component {
+}
 
 @end

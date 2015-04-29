@@ -21,7 +21,6 @@
 
 #import "MFUIOldBaseComponent.h"
 #import "MFOrientationChangedDelegate.h"
-#import "MFUILabel.h"
 #import "MFDefaultConstraintsProtocol.h"
 
 

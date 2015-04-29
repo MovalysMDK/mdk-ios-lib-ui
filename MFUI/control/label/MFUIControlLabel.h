@@ -22,7 +22,6 @@
 #ifndef MFUI_MFUIControlLabel_h
 #define MFUI_MFUIControlLabel_h
 
-#import "MFLabel+UILabelForwarding.h"
 #import "MFLabel.h"
 
 #endif

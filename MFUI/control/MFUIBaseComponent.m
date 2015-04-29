@@ -33,6 +33,7 @@
 #import "MFConstants.h"
 #import "MFBindingViewAbstract.h"
 #import "MFErrorViewProtocol.h"
+#import "MFUIBaseRenderableComponent.h"
 
 /**
  * Constante indiquant la durée de l'animation du bouton d'erreur

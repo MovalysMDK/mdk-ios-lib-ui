@@ -14,8 +14,7 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-@import MFCore.MFBeansKeys;
+#import <MFCore/MFCoreBean.h>
 
 #import "MFLabel.h"
 #import "MFLabelStyle.h"
@@ -86,8 +85,11 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
     if(!self.sender) {
         self.sender = self;
     }
+    
+#if !TARGET_INTERFACE_BUILDER
     MFConfigurationHandler *registry = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
     self.mandatoryIndicator = [registry getStringProperty:MF_MANDATORY_INDICATOR];
+#endif
     self.backgroundColor = [UIColor clearColor];
 }
 
@@ -191,6 +193,7 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 }
 
 
+
 #pragma mark - Forwarding to binding delegate
 
 -(void) updateValue {
@@ -230,6 +233,8 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
     else {
         [self.styleClass applyValidStyleOnComponent:self];
     }
+    self.text = @"Label";
+
 }
 
 @end

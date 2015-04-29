@@ -13,41 +13,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUILabel+UILabelForwarding.m
-//  MFUI
-//
-//
 
-#import "MFLabel+UILabelForwarding.h"
+#ifndef MFUI_MFUIControlTextField_h
+#define MFUI_MFUIControlTextField_h
 
-@implementation MFLabel (UILabelForwarding)
+#import "MFTextField.h"
+#import "MFBarCodeScanTextField.h"
+#import "MFRegexTextField.h"
+#import "MFEmailTextField.h"
+#import "MFPhoneTextField.h"
+#import "MFUrlTextField.h"
+#import "MFDoubleTextField.h"
+#import "MFIntegerTextField.h"
 
-
-@dynamic text;
-@dynamic attributedText;
-@dynamic textColor;
-@dynamic backgroundColor;
-@dynamic font;
-@dynamic textAlignment;
-@dynamic borderStyle;
-@dynamic placeholder;
-@dynamic attributedPlaceholder;
-@dynamic clearsOnBeginEditing;
-@dynamic adjustsFontSizeToFitWidth;
-@dynamic minimumFontSize;
-@dynamic delegate;
-@dynamic background;
-@dynamic disabledBackground;
-@dynamic editing;
-@dynamic allowsEditingTextAttributes;
-@dynamic typingAttributes;
-@dynamic leftView;
-@dynamic rightView;
-@dynamic numberOfLines;
-@dynamic lineBreakMode;
-@dynamic shadowColor;
-@dynamic shadowOffset;
-
-
-@end
+#endif

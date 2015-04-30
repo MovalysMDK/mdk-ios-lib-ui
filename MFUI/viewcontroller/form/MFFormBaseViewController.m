@@ -41,6 +41,8 @@
 #import "MFUILogging.h"
 #import "MFUILoggingHelper.h"
 
+
+
 // ViewModel
 #import "MFUIBaseListViewModel.h"
 #import "MFUIBaseViewModelProtocol.h"
@@ -77,7 +79,6 @@
  * @brief A boolean that indicates if a picker is actually shown.
  */
 @property (nonatomic) BOOL isPickerDisplayed;
-
 
 @end
 
@@ -136,8 +137,10 @@
     self.isPickerDisplayed = NO;
     self.needDoFillAction = YES;
     self.onDestroy = NO;
+
     
 }
+
 
 #pragma mark - Controller lifecycle
 
@@ -148,12 +151,13 @@
         MFConfigurationHandler *configurationHandlerInstance = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
         [configurationHandlerInstance loadFormWithName:self.mf.formDescriptorName];
     }
-    
+
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(displayBackButton:)
                    name:PICKER_NOTIFICATION_SHOW object:nil];
     [center addObserver:self selector:@selector(displayBackButton:)
                    name:PICKER_NOTIFICATION_HIDE object:nil];
+    
     //    [self.navigationController.view setTag:NSIntegerMax];
     self.tableView.tag = FORM_BASE_TABLEVIEW_TAG;
     self.view.tag = FORM_BASE_VIEW_TAG;
@@ -165,6 +169,10 @@
         self.searchDelegate.isLiveSearch = self.mf.search.liveSearch;
         self.searchDelegate.displayNumberOfResults = self.mf.search.displayNumberOfResults;
     }
+    
+    
+
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -209,11 +217,11 @@
         self.formBindingDelegate = nil;
         ((id<MFUIBaseViewModelProtocol>)self.viewModel).form = nil;
     }
-    
 }
 
-
-
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 -(void)viewDidDisappear:(BOOL)animated {
     if([self isInWorkspace]) {

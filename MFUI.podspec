@@ -22,6 +22,7 @@ Pod::Spec.new do |s|
   s.subspec 'Dependencies' do|dep| 
     dep.dependency 'MBProgressHUD', '~>0.8'
     dep.dependency 'ViewDeck', '~>2.2.11'
+    dep.dependency 'IQKeyboardManager', '~>3.2.3'
   end
 
   s.subspec 'NonARC' do |files|

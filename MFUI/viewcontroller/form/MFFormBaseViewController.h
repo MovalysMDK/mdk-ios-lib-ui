@@ -92,6 +92,11 @@ FOUNDATION_EXPORT NSString *const MF_BINDABLE_PROPERTIES;
  */
 @property(nonatomic) MFFormType formType;
 
+/**
+ * @brief The actived Field
+ */
+@property (nonatomic, weak) UIControl *activedField;
+
 #pragma mark - Methods
 
 /**

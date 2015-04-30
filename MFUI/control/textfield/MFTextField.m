@@ -21,10 +21,13 @@
 #import "MFKeyNotFound.h"
 #import "MFUIError.h"
 #import "MFUIControlExtension.h"
+#import "MFFormBaseViewController.h"
 
 @interface MFTextField ()
 
 @property (nonatomic, strong) MFTextFieldExtension *extension;
+
+
 
 @end
 
@@ -87,11 +90,6 @@
 
 #pragma mark - TextField Methods
 
--(void)textDidChange {
-    [self.sender performSelector:@selector(updateValue)];
-}
-
-
 -(void)setIsValid:(BOOL) isValid {
     [self.bindingDelegate setIsValid:isValid];
 }
@@ -122,8 +120,21 @@
     
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    return [self resignFirstResponder];
+#pragma mark - TextFieldDelegate Methods
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    ((MFFormBaseViewController *)self.form).activedField = self;
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    ((MFFormBaseViewController *)self.form).activedField = nil;
+}
+
+
+
+#pragma mark - Target Actions
+-(void)textDidChange {
+    [self.sender performSelector:@selector(updateValue)];
 }
 
 

@@ -120,17 +120,6 @@
     
 }
 
-#pragma mark - TextFieldDelegate Methods
-
--(void)textFieldDidBeginEditing:(UITextField *)textField {
-    ((MFFormBaseViewController *)self.form).activedField = self;
-}
-
--(void)textFieldDidEndEditing:(UITextField *)textField {
-    ((MFFormBaseViewController *)self.form).activedField = nil;
-}
-
-
 
 #pragma mark - Target Actions
 -(void)textDidChange {

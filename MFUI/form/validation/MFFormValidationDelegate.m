@@ -88,7 +88,7 @@ const int kSaveChangesAlert = 11 ;
                 if ( ![self hasInvalidValueForFullBindingKey:fullBindingKey]) {
                     
                     //TODO: mandatory peut etre une methode
-                    if ( fieldDesc.mandatory == YES ) {
+                    if ( [fieldDesc.mandatory isEqualToString:@"YES"] ) {
                         id value = nil ;
                         if(self.formController.viewModel) {
                             if([self.formController.viewModel isKindOfClass:[MFUIBaseListViewModel class]]) {

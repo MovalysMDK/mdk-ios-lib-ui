@@ -185,7 +185,6 @@
         fixedData = @"";
     }
     self.text = fixedData;
-    [self updateValue];
 }
 
 -(id)getData {

@@ -102,23 +102,17 @@
             if ([oldValue respondsToSelector:@selector(isEqualToString:)]) {
                 if (![oldValue isEqualToString:newValue]) {
                     self.hasChanged = YES;
-                    //                   dispatch_async([MFUIApplication getInstance].updateVMtoControllerQueue, ^{
                     [[self getForm] dispatchEventOnViewModelPropertyValueChangedWithKey:keyPath sender:self];
-                    //                   });
                 }
             }else {
                 if (![oldValue isEqual:newValue]) {
                     self.hasChanged = YES;
-                    //                    dispatch_async([MFUIApplication getInstance].updateVMtoControllerQueue, ^{
                     [[self getForm] dispatchEventOnViewModelPropertyValueChangedWithKey:keyPath sender:self];
-                    //                    });
                 }
             }
         }else {
             self.hasChanged = YES;
-            //            dispatch_async([MFUIApplication getInstance].updateVMtoControllerQueue, ^{
             [self.form dispatchEventOnViewModelPropertyValueChangedWithKey:keyPath sender:self];
-            //            });
         }
     }
 }

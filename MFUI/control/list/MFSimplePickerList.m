@@ -27,7 +27,7 @@
 #import "MFCellAbstract.h"
 #import "MFPickerList.h"
 #import "MFVersionManager.h"
-#import "MFFormBaseViewController.h"
+#import "MFFormSearchViewController.h"
 
 #pragma mark - Define some constants
 #define PICKER_TOP_BAR_HEIGHT  40.f
@@ -162,7 +162,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 -(void) displayPickerView:(id)sender {
     
     [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
-
+    
     
     if(self.isModalPickerViewDisplayed) {
         return;
@@ -170,9 +170,15 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     
     //Get FormViewController parent
     self.mainFormControllerView = self;
-    while(self.mainFormControllerView.tag != NSIntegerMax) {
-        self.mainFormControllerView = self.mainFormControllerView.superview;
+    if([self.form isKindOfClass:[MFFormSearchViewController class]]) {
+        self.mainFormControllerView = ((UIViewController *)self.form).view;
     }
+    else {
+        while(self.mainFormControllerView.tag != NSIntegerMax) {
+            self.mainFormControllerView = self.mainFormControllerView.superview;
+        }
+    }
+    
     
     int pickerListWidth = MIN([MFVersionManager isCurrentDeviceOfTypePhone] ? self.mainFormControllerView.frame.size.width : self.mainFormControllerView.frame.size.width/2, 400);
     int pickerListOriginX = 0;
@@ -279,9 +285,9 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     NSInteger nsiRow = [aEnumTexts indexOfObject:sEnumText]; // indice de l'Enum
     
     @try                     { [self.pickerView selectRow:nsiRow inComponent:0 animated:NO];  }
-	@catch (id theException) { [self.pickerView selectRow:0      inComponent:0 animated:NO];
-                               [self pickerView:self.pickerView didSelectRow:0 inComponent:0];}
-
+    @catch (id theException) { [self.pickerView selectRow:0      inComponent:0 animated:NO];
+        [self pickerView:self.pickerView didSelectRow:0 inComponent:0];}
+    
     self.isShowing = YES;
 }
 
@@ -359,7 +365,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     NSInteger nsiRow = [aEnumTexts indexOfObject:sEnumText]; // indice de l'Enum
     
     @try                     { [self.pickerView selectRow:nsiRow inComponent:0 animated:YES]; }
-	@catch (id theException) {                                                                }
+    @catch (id theException) {                                                                }
     
     MFUILogVerbose(@"dismissPickerViewAndCancel - self.currentEnumValue=%i (apres)", self.currentEnumValue);
     
@@ -371,7 +377,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 
 #pragma mark - Enum Changed Event
 
--(void) setPickerButtonTitle:(int)enumValue {    
+-(void) setPickerButtonTitle:(int)enumValue {
     if(!enumValue) {
         [self.pickerButton setTitle:@"NONE" forState:UIControlStateNormal];
         
@@ -477,7 +483,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, pickerView.frame.size.width, 45)];
-
+    
     label.textAlignment = NSTextAlignmentCenter;
     
     NSString *sEnumClassName = [((MFFieldDescriptor *) self.selfDescriptor).parameters objectForKey:(PICKER_PARAMETER_ENUM_CLASS_NAME_KEY)]; // Nom de la classe Enum utilisée par le SimplePickerList
@@ -499,7 +505,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     NSArray *aEnumTexts = [cEnumHelper performSelector:@selector(valuesToTexts) withObject:nil]; // Valeurs de l'Enum
     NSString *sEnumText = [aEnumTexts objectAtIndex:row]; // Texte de l'Enum
     int idEnum = (int)[cEnumHelper performSelector:@selector(enumFromText:) withObject:sEnumText]; // Enum souhaitée
-
+    
     MFUILogVerbose(@"pickerView: didSelectRow:%ld - self.currentEnumValue=%i (avant)", (long)row, self.currentEnumValue);
     self.currentEnumValue = idEnum;
     MFUILogVerbose(@"pickerView: didSelectRow:%ld - self.currentEnumValue=%i (apres)", (long)row, self.currentEnumValue);

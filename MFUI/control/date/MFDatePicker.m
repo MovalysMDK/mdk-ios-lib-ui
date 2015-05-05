@@ -190,8 +190,13 @@
     
     //Get FormViewController parent
     self.mainFormControllerView = self;
-    while(self.mainFormControllerView.tag != NSIntegerMax) {
-        self.mainFormControllerView = self.mainFormControllerView.superview;
+    if([self.form isKindOfClass:[MFFormSearchViewController class]]) {
+        self.mainFormControllerView = ((UIViewController *)self.form).view;
+    }
+    else {
+        while(self.mainFormControllerView.tag != NSIntegerMax) {
+            self.mainFormControllerView = self.mainFormControllerView.superview;
+        }
     }
     
     int pickerListWidth = MIN([MFVersionManager isCurrentDeviceOfTypePhone] ? self.mainFormControllerView.frame.size.width : self.mainFormControllerView.frame.size.width/2, 400);

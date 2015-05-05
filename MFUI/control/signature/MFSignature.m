@@ -27,6 +27,7 @@
 #import "MFCellAbstract.h"
 #import "MFVersionManager.h"
 #import "MFMandatoryFieldUIValidationError.h"
+#import "MFFormSearchViewController.h"
 
 
 @interface MFSignature()
@@ -186,8 +187,13 @@
     
     //Get FormViewController parent
     self.mainFormControllerView = self;
-    while(self.mainFormControllerView.tag != NSIntegerMax) {
-        self.mainFormControllerView = self.mainFormControllerView.superview;
+    if([self.form isKindOfClass:[MFFormSearchViewController class]]) {
+        self.mainFormControllerView = ((UIViewController *)self.form).view;
+    }
+    else {
+        while(self.mainFormControllerView.tag != NSIntegerMax) {
+            self.mainFormControllerView = self.mainFormControllerView.superview;
+        }
     }
     
     self.modalSignatureDrawingView = [[UIView alloc] init];

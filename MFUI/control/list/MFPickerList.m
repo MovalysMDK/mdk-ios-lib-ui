@@ -36,7 +36,7 @@
 #import "MFCellAbstract.h"
 
 //Import Binding
-#import "MFFormBaseViewController.h"
+#import "MFFormSearchViewController.h"
 
 //Import Utils
 #import "MFColorValueProcessing.h"
@@ -280,9 +280,15 @@ const int NO_LAST_INDEX = -1;
     //        topView = topView.superview;
     //    }
     self.mainFormControllerView = self;
-    while(self.mainFormControllerView.tag != NSIntegerMax) {
-        self.mainFormControllerView = self.mainFormControllerView.superview;
+    if([self.form isKindOfClass:[MFFormSearchViewController class]]) {
+        self.mainFormControllerView = ((UIViewController *)self.form).view;
     }
+    else {
+        while(self.mainFormControllerView.tag != NSIntegerMax) {
+            self.mainFormControllerView = self.mainFormControllerView.superview;
+        }
+    }
+    
     
     int pickerListWidth = MIN([MFVersionManager isCurrentDeviceOfTypePhone] ? self.mainFormControllerView.frame.size.width : self.mainFormControllerView.frame.size.width/2, 400);
     int pickerListOriginX = 0;

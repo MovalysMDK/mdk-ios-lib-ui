@@ -271,7 +271,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         
         
         //Récupération des données EXIF de la photo
-        NSMutableDictionary *imageMetadata = info[UIImagePickerControllerMediaMetadata];
+        NSMutableDictionary *imageMetadata = [info[UIImagePickerControllerMediaMetadata] mutableCopy];
         
         //Ajout des données de localisation (si elles existent)
         if (self.location)

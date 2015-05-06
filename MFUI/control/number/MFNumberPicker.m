@@ -75,6 +75,7 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
     
     //Create inner components
     self.innerTextField = [[MFIntegerTextField alloc] initWithFrame:self.frame];
+    self.innerTextField.componentValidation = NO;
     self.innerStepper = [[UIStepper alloc] init];
     
     //Add inner components

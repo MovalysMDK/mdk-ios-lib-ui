@@ -48,6 +48,7 @@
 @synthesize tooltipView= _tooltipView;
 @synthesize cellContainer = _cellContainer;
 @synthesize styleClassName = _styleClassName;
+@synthesize componentValidation = _componentValidation;
 
 
 #pragma mark - Initialization
@@ -83,6 +84,7 @@
         self.sender = self;
     }
     self.delegate = self;
+    self.componentValidation = YES;
     [self addTarget:self action:@selector(textDidChange) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
 }
 
@@ -177,6 +179,9 @@
 
 -(NSInteger)validateWithParameters:(NSDictionary *)parameters {
     
+    if(!self.componentValidation) {
+        return 0;
+    }
     [self.errors removeAllObjects];
     if(parameters) {
         // Do some treatments with specific

@@ -61,6 +61,7 @@
 @synthesize inInitMode = _inInitMode;
 @synthesize styleClass = _styleClass;
 @synthesize styleClassName = styleClassName;
+@synthesize componentValidation = _componentValidation;
 
 #pragma mark - Constructeurs et initialisation
 -(id)init {

@@ -158,6 +158,9 @@
 #pragma mark - Validation
 -(NSInteger) validateWithParameters:(NSDictionary *)parameters
 {
+    if(!self.componentValidation) {
+        return 0;
+    }
     NSInteger nbOfErrors = [super validateWithParameters:parameters];
     
     if([[self getData] isEqualToString:@"-"]) {

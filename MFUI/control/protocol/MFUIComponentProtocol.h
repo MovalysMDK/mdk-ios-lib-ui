@@ -48,32 +48,42 @@
 @property (nonatomic, strong) MFComponentBindingDelegate *bindingDelegate;
 
 /**
- UI control display name.
+ * @brief UI control display name.
  */
 @property(nonatomic, strong) NSString *localizedFieldDisplayName;
 
 /**
- Transition delegate uses to open a new controller.
+ * @brief Transition delegate uses to open a new controller.
  */
 @property(nonatomic, weak) id<MFUITransitionDelegate> transitionDelegate;
 
 /**
- Current component's descriptor.
+ * @brief Current component's descriptor.
  */
 @property(nonatomic, weak) NSObject<MFDescriptorCommonProtocol> *selfDescriptor;
 
 /**
- Le formulaire qui contient ce composant 
+ * @brief Le formulaire qui contient ce composant
  */
 @property (nonatomic, weak) id<MFComponentChangedListenerProtocol> form;
 
-
+/**
+ * @brief The name of the custom class to use to render component style
+ */
 @property (nonatomic, strong) NSString *styleClassName;
 
+/**
+ * @brief The instance of the style lass to use to render the component style.
+ */
 @property (nonatomic, strong) id<MFStyleProtocol> styleClass;
 
 /**
- * initialisation
+ * @brief Indicates if the component self-validation is active
+ */
+@property (nonatomic) BOOL componentValidation;
+
+/**
+ * @brief initialisation
  */
 @property (nonatomic) BOOL inInitMode;
 
@@ -82,7 +92,9 @@
  */
 @property (nonatomic, strong) NSIndexPath *componentInCellAtIndexPath;
 
-
+/**
+ * @brief todo
+ */
 @property (nonatomic, weak) id lastUpdateSender;
 
 /**
@@ -90,9 +102,15 @@
  */
 @property (nonatomic, weak) id<MFFormCellProtocol> cellContainer;
 
+
+
 #pragma mark - Methods
 
-
+/**
+ * @brief Callback called when the Field Descriptor of the component has been loaded by the framework.
+ * @discussion You should use this methods to be sure to have a full-initialized FieldDescriptor.
+ * @param fieldDescriptor The FieldDescriptor of the component that has been loaded by the framework
+ */
 -(void) didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor;
 
 

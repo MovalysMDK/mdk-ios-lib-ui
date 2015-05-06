@@ -119,7 +119,6 @@
     //    self.tag = [MFApplication getViewTag];
     [self initErrors];
     
-    self.backgroundColor = [UIColor clearColor];
 
     //Par défaut tout composant est éditable.
     self.editable = @1;
@@ -648,12 +647,11 @@
 
 -(void)initializeInspectableAttributes {
     self.IB_enableIBStyle = NO;
-    self.backgroundColor = [UIColor clearColor];
 }
 
 -(void)prepareForInterfaceBuilder {
     [self computeStyleClass];
-    self.backgroundColor = [UIColor clearColor];
+//    self.backgroundColor = [UIColor clearColor];
 }
 
 @end

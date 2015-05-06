@@ -200,8 +200,5 @@
     return nbOfErrors;
 }
 
--(double) convertStringToDouble:(NSString *) doubleString {
-    
-}
 
 @end

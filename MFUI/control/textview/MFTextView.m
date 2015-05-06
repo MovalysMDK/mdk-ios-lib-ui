@@ -60,7 +60,6 @@
 }
 
 -(void)initialize {
-    [super initialize];
     
     
     
@@ -145,7 +144,9 @@
     //L'ajout de la toolbar est géré au niveau du setter de l'attribut editable.
     
     //Le textview est ajouté au composant
+    self.textView.backgroundColor = [UIColor clearColor];
     [self addSubview:self.textView];
+    [super initialize];
 
 }
 

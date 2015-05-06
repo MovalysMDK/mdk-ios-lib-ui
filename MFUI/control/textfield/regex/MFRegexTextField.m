@@ -16,6 +16,7 @@
 
 #import "MFRegexTextField.h"
 #import "MFException.h"
+#import "MFNoMatchingValueUIValidationError.h"
 
 @implementation MFRegexTextField
 @synthesize customStyleClass;
@@ -38,6 +39,17 @@
 
 -(void) doAction {
     [MFException throwNotImplementedExceptionOfMethodName:@"doAction" inClass:[self class] andUserInfo:nil];
+}
+
+-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+    NSInteger nbOfErrors = [super validateWithParameters:parameters];
+    
+    if(![self matchPattern:[self getData]]) {
+        NSError *error = [[MFNoMatchingValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        [self addErrors:@[error]];
+        nbOfErrors++;
+    }
+    return nbOfErrors;
 }
 
 

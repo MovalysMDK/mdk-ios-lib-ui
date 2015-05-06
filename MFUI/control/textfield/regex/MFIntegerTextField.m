@@ -16,6 +16,8 @@
 
 #import "MFIntegerTextField.h"
 #import "MFInvalidIntegerValueUIValidationError.h"
+#import "MFMandatoryFieldUIValidationError.h"
+
 @import MFCore.MFLocalizedString;
 
 @interface MFIntegerTextField ()
@@ -157,6 +159,12 @@
 -(NSInteger) validateWithParameters:(NSDictionary *)parameters
 {
     NSInteger nbOfErrors = [super validateWithParameters:parameters];
+    
+    if([[self getData] isEqualToString:@"-"]) {
+        NSError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        [self addErrors:@[error]];
+        nbOfErrors++;
+    }
     
     if ([[self getData] longLongValue] > INT32_MAX || [[self getData] longLongValue] < INT32_MIN) {
         NSError *error = [[MFInvalidIntegerValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];

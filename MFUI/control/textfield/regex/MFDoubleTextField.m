@@ -16,6 +16,9 @@
 
 
 #import "MFDoubleTextField.h"
+#import "MFInvalidDoubleValueUIValidationError.h"
+#import "MFMandatoryFieldUIValidationError.h"
+
 @import MFCore.MFLocalizedString;
 
 @interface MFDoubleTextField ()
@@ -112,8 +115,7 @@
 }
 
 - (void)createPattern {
-    
-    
+
     //Construction de la regex de vérification en fonction des propriétés du PLIST
     NSString *quantificateurPartieEntiere;
     NSString *quantificateurPartieDecimale;
@@ -174,6 +176,32 @@
     self.integerPartMaxDigits = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"integerPartMaxDigits"];
     self.decimalPartMinDigits = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"decimalPartMinDigits"];
     self.decimalPartMaxDigits = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"decimalPartMaxDigits"];
+    
+    //La regex de vérification est créée en prenant compte les valeurs spécifiées dans le PLIST
+    [self createPattern];
+}
+
+#pragma mark - Validation
+-(NSInteger) validateWithParameters:(NSDictionary *)parameters
+{
+    NSInteger nbOfErrors = [super validateWithParameters:parameters];
+    if([[self getData] isEqualToString:@"-"]) {
+        NSError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        [self addErrors:@[error]];
+        nbOfErrors++;
+    }
+    double value = [[self getData] doubleValue];
+    if (value > DBL_MAX || value < -DBL_MAX) {
+        NSError *error = [[MFInvalidDoubleValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        [self addErrors:@[error]];
+        nbOfErrors++;
+    }
+    
+    return nbOfErrors;
+}
+
+-(double) convertStringToDouble:(NSString *) doubleString {
+    
 }
 
 @end

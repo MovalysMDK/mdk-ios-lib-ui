@@ -65,7 +65,7 @@
             if(self.createMailDelegate == nil
                || (self.createMailDelegate != nil && [self.createMailDelegate mailComposeController:controller didSaveWithError:error]))
             {
-                alert = [[UIAlertView alloc] initWithTitle:MFLocalizedStringFromKey(@"SendMailSavedAlertTitle") message:MFLocalizedStringFromKey(@"SendMailSavedAlertMessage") delegate:nil cancelButtonTitle:MFLocalizedStringFromKey(@"SendMailCancelButtonTitle") otherButtonTitles:nil, nil];
+                alert = [[UIAlertView alloc] initWithTitle:MFLocalizedStringFromKey(@"SendMailSavedAlertTitle") message:MFLocalizedStringFromKey(@"SendMailSavedAlertMessage") delegate:nil cancelButtonTitle:MFLocalizedStringFromKey(@"SendMailDefaultCancelButtonTitle") otherButtonTitles:nil, nil];
             }
             break;
         case MFMailComposeResultSent:
@@ -73,7 +73,7 @@
             if(self.createMailDelegate == nil
                || (self.createMailDelegate != nil && [self.createMailDelegate mailComposeController:controller didSendWithError:error]))
             {
-                alert = [[UIAlertView alloc] initWithTitle:MFLocalizedStringFromKey(@"SendMailSentAlertTitle") message:MFLocalizedStringFromKey(@"SendMailSentAlertMessage") delegate:nil cancelButtonTitle:MFLocalizedStringFromKey(@"SendMailCancelButtonTitle") otherButtonTitles:nil, nil];
+                alert = [[UIAlertView alloc] initWithTitle:MFLocalizedStringFromKey(@"SendMailSentAlertTitle") message:MFLocalizedStringFromKey(@"SendMailSentAlertMessage") delegate:nil cancelButtonTitle:MFLocalizedStringFromKey(@"SendMailDefaultCancelButtonTitle") otherButtonTitles:nil, nil];
             }
             break;
         case MFMailComposeResultFailed:
@@ -81,7 +81,7 @@
             if(self.createMailDelegate == nil
                || (self.createMailDelegate != nil && [self.createMailDelegate mailComposeController:controller didFailWithError:error]))
             {
-                alert = [[UIAlertView alloc] initWithTitle:MFLocalizedStringFromKey(@"SendMailFailedAlertTitle") message:MFLocalizedStringFromKey(@"SendMailFailedAlertMessage") delegate:nil cancelButtonTitle:MFLocalizedStringFromKey(@"SendMailCancelButtonTitle") otherButtonTitles:nil, nil];
+                alert = [[UIAlertView alloc] initWithTitle:MFLocalizedStringFromKey(@"SendMailFailedAlertTitle") message:MFLocalizedStringFromKey(@"SendMailFailedAlertMessage") delegate:nil cancelButtonTitle:MFLocalizedStringFromKey(@"SendMailDefaultCancelButtonTitle") otherButtonTitles:nil, nil];
             }
             break;
         default:
@@ -89,7 +89,7 @@
             if(self.createMailDelegate == nil
                || (self.createMailDelegate != nil && [self.createMailDelegate mailComposeController:controller didNotSendWithError:error]))
             {
-                alert = [[UIAlertView alloc] initWithTitle:MFLocalizedStringFromKey(@"SendMailDefaultAlertTitle") message:MFLocalizedStringFromKey(@"SendMailDefaultAlertMessage") delegate:nil cancelButtonTitle:MFLocalizedStringFromKey(@"SendMailCancelButtonTitle") otherButtonTitles:nil, nil];
+                alert = [[UIAlertView alloc] initWithTitle:MFLocalizedStringFromKey(@"SendMailDefaultAlertTitle") message:MFLocalizedStringFromKey(@"SendMailDefaultAlertMessage") delegate:nil cancelButtonTitle:MFLocalizedStringFromKey(@"SendMailDefaultCancelButtonTitle") otherButtonTitles:nil, nil];
             }
             break;
     }

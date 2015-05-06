@@ -809,6 +809,7 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
     //de la FixedList car c'est celle qui porte l'erreur.
     
     //Il n'y a donc rien à faire ici.
+    return YES;
 }
 
 

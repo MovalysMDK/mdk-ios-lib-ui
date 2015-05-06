@@ -22,7 +22,7 @@
 
 -(void)applyStandardStyleOnComponent:(UIView *)component {
     if(component) {
-
+        component.backgroundColor = [UIColor clearColor];
     }
 }
 

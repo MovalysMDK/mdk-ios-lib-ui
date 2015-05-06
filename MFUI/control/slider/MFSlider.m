@@ -46,15 +46,13 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     [super initialize];
     
     
-#if !TARGET_INTERFACE_BUILDER
+    [self buildDesignableComponentView];
     
-    [self.innerSlider addTarget:self action:@selector(sliderValueChangedAction:) forControlEvents:UIControlEventValueChanged];
+    [self.innerSlider addTarget:self action:@selector(sliderValueChangedAction) forControlEvents:UIControlEventValueChanged];
     [self setAllTags];
     
     
-    
-#else
-#endif
+
 }
 
 
@@ -62,7 +60,7 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
  * @brief Cette méthode est appelée à chaque changement de valeur du slider
  */
 
--(void)sliderValueChangedAction:(id)sender {
+-(void)sliderValueChangedAction {
     
     //On récupère la valeur en fonction de l'steple spécifié
     //self.slider.value = [self adjustValue:self.slider.value Withstep:self.step];
@@ -104,6 +102,7 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 
 -(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
     
+    [super didLoadFieldDescriptor:fieldDescriptor];
     
     //Biding des propriétés
     
@@ -250,6 +249,8 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 
 
 -(void) innerComponentConstraints {
+    
+    self.innerSlider.translatesAutoresizingMaskIntoConstraints = NO;
     //Positionnement du slider
     
     NSLayoutConstraint *insideSliderConstraintLeftMargin = [NSLayoutConstraint constraintWithItem:self.innerSlider attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];

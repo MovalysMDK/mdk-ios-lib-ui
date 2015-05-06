@@ -128,6 +128,7 @@
     [self addSubview:self.baseErrorButton];
     
     [self computeStyleClass];
+    [self applyStandardStyle];
 
 #endif
 }

@@ -71,6 +71,7 @@
 -(NSArray *)customButtonsForFixedList;
 -(void)addItemOnFixedList:(BOOL) reload;
 -(void) redrawSelfWithTableView:(UITableView *)tableView ;
+-(BOOL) addError:(id)error onComponent:(NSString *)bindingKey atIndexPath:(NSIndexPath *)indexPath;
 #pragma mark - Properties
 
 /**

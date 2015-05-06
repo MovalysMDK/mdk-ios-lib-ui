@@ -803,6 +803,14 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
     }
 }
 
+-(BOOL) addError:(id)error onComponent:(NSString *)bindingKey atIndexPath:(NSIndexPath *)indexPath {
+    //Cette méthode est automatiquement appelée par le Form Validation Delegate.
+    //Ici le binding est en mode liste (FixedList), et il n'y a pas à apposer d'erreurs sur l'un des composant
+    //de la FixedList car c'est celle qui porte l'erreur.
+    
+    //Il n'y a donc rien à faire ici.
+}
+
 
 
 #pragma mark - Forwarding FormBinding delegate - FormBinding protocol

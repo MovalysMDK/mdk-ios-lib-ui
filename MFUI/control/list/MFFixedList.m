@@ -81,9 +81,9 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 @synthesize cellContainer = _cellContainer;
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
 @synthesize groupDescriptor = _groupDescriptor;
-@synthesize isValid = _isValid;
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
+@synthesize mandatory = _mandatory;
 
 
 #pragma mark - Initializing
@@ -258,13 +258,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 -(MFUIBaseListViewModel *) getData {
     return self.data;
 }
-
-
--(void)setMandatory:(NSNumber *)mandatory {
-    //Non implémenté
-}
-
-
 
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];
@@ -471,6 +464,32 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 
 -(void)renderComponentFromInspectableAttributes {
     //TODO: Implémenter
+}
+
+
+#pragma mark - Validation
+-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+    int nbOfErrors = [super validateWithParameters:parameters];
+    NSError *error = nil;
+    
+    // We search the component's errors
+    if([self.mandatory isEqualToValue:@1] && (((MFUIBaseListViewModel *)[self getData]).viewModels.count == 0))
+    {
+        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        [self addErrors:@[error]];
+        nbOfErrors++;
+    }
+    return nbOfErrors;
+}
+
+
+-(CGRect)getErrorButtonFrameForInvalid {
+    CGFloat errorButtonSize = MIN(MIN(self.topBarView.bounds.size.width, self.topBarView.bounds.size.height), ERROR_BUTTON_SIZE);
+    
+    return CGRectMake(0,
+                      (self.topBarView.bounds.size.height - errorButtonSize)/2.0f,
+                      errorButtonSize,
+                      errorButtonSize);
 }
 
 @end

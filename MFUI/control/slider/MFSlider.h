@@ -23,7 +23,6 @@
 #import "MFUIConversion.h"
 #import "MFUIOldBaseComponent.h"
 
-IB_DESIGNABLE
 @interface MFSlider : MFUIOldBaseComponent
 
 

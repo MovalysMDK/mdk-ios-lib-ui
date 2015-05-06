@@ -31,6 +31,7 @@
  * style class in an error state
  * @param component The component that is in an error state.
  */
+@required
 -(void) applyErrorStyleOnComponent:(id)component;
 
 /**
@@ -38,6 +39,7 @@
  * style class in an valid state
  * @param component The component that is in an valid state.
  */
+@required
 -(void) applyValidStyleOnComponent:(id)component;
 
 /**
@@ -48,6 +50,7 @@
  * This method should be always called before any method that applies a style,
  * even if the component has a valid or an invalid state.
  */
+@required
 -(void) applyStandardStyleOnComponent:(id)component;
 
 @end

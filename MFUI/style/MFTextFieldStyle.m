@@ -31,7 +31,9 @@ NSInteger DEFAULT_ACCESSORIES_MARGIN = 2;
 -(void)applyStandardStyleOnComponent:(MFTextField *)component {
     [super applyStandardStyleOnComponent:component];
     if([component.editable isEqualToNumber:@1]) {
-        component.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1];
+        if(!component.backgroundColor) {
+            component.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1];
+        }
     }
 }
 

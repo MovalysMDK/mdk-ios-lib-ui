@@ -29,7 +29,6 @@ const NSString * BACKGROUND_VIEW_LEFT_CONSTRAINT = @"BACKGROUND_VIEW_LEFT_CONSTR
     self.backgroundView = [[UIView alloc] init];
     self.backgroundView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.backgroundView.layer.borderWidth = 1.0f;
-    self.backgroundView.backgroundColor = [UIColor whiteColor];
     self.backgroundView.userInteractionEnabled = NO;
     self.backgroundView.layer.cornerRadius = 5.0f;
     
@@ -67,7 +66,6 @@ const NSString * BACKGROUND_VIEW_LEFT_CONSTRAINT = @"BACKGROUND_VIEW_LEFT_CONSTR
 
 -(void)removeBackgroundViewOnComponent:(MFTextField *)component {
     if(self.backgroundView) {
-        component.backgroundColor = self.backgroundView.backgroundColor;
         [self.backgroundView removeFromSuperview];
         self.backgroundView = nil;
     }

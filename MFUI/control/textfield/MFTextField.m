@@ -32,7 +32,6 @@
 @end
 
 @implementation MFTextField
-@synthesize borderStyle = _borderStyle;
 @synthesize styleClass = _styleClass;
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath = _componentInCellAtIndexPath;
@@ -128,23 +127,6 @@
 
 
 #pragma mark - MDK
-
-//-(void)setCustomStyleClass:(Class)customStyleClass {
-//    _customStyleClass = customStyleClass;
-//    self.styleClass = [customStyleClass new];
-//}
-
--(void)setBorderStyle:(UITextBorderStyle)borderStyle {
-    if(borderStyle == UITextBorderStyleRoundedRect) {
-        _borderStyle = UITextBorderStyleNone;
-        [self.styleClass performSelector:@selector(displayBackgroundViewOnComponent:) withObject:self];
-    }
-    else {
-        [self.styleClass performSelector:@selector(removeBackgroundViewOnComponent:) withObject:self];
-        
-    }
-}
-
 
 
 -(void) addAccessories:(NSDictionary *) accessoryViews {
@@ -275,6 +257,16 @@
     }
     else {
         [self applyValidStyle];
+    }
+}
+
+-(void)setUseCustomBackgroundView_MDK:(BOOL)useCustomBackgroundView_MDK {
+    _useCustomBackgroundView_MDK = useCustomBackgroundView_MDK;
+    if(_useCustomBackgroundView_MDK) {
+        [self.styleClass performSelector:@selector(displayBackgroundViewOnComponent:) withObject:self];
+    }
+    else {
+        [self.styleClass performSelector:@selector(removeBackgroundViewOnComponent:) withObject:self];
     }
 }
 

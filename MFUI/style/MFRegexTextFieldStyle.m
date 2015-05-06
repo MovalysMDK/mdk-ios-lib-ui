@@ -21,6 +21,12 @@
 
 @implementation MFRegexTextFieldStyle
 
+-(void)applyStandardStyleOnComponent:(MFRegexTextField *)component {
+    [super applyStandardStyleOnComponent:component];
+    if(self.hasAccessoryButton && self.backgroundView) {
+        component.backgroundColor = [UIColor whiteColor];
+    }
+}
 
 -(NSDictionary *)customizeErrorViewConstraints:(NSDictionary *)errorViewConstraints onComponent:(MFTextField *)component {
     NSMutableDictionary *constraints = [errorViewConstraints mutableCopy];
@@ -69,6 +75,7 @@
         NSLayoutConstraint *width = backgroundViewConstraints[BACKGROUND_VIEW_WIDTH_CONSTRAINT];
         width.constant -= (REGEX_BUTTON_SQUARE_SIZE + 2*DEFAULT_ACCESSORIES_MARGIN);
         dictionary[BACKGROUND_VIEW_WIDTH_CONSTRAINT] = width;
+        [self.backgroundView setBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
     }
     return dictionary;
 }

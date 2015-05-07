@@ -101,7 +101,7 @@
         sender.title = @"+";
     }
     else {
-        if([[self getData] containsString:@"-"]) {
+        if([[self getData] rangeOfString:@"-"].location != NSNotFound) {
             [self setData:[[self getData] substringFromIndex:1]];
         }
         sender.title = @"—";

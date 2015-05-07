@@ -90,7 +90,10 @@
     [self selfCustomization];
     
     locationManager = [[CLLocationManager alloc] init];
-    [locationManager requestWhenInUseAuthorization];
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        [locationManager requestWhenInUseAuthorization];
+    }
     
 }
 
@@ -311,7 +314,7 @@
         error = [[MFInvalidLocationValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
         [self addErrors:@[error]];
         nbOfErrors++;
-   
+        
     }
     return nbOfErrors;
     

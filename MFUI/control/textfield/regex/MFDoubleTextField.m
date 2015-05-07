@@ -70,7 +70,7 @@
         
         toolBar.translucent = NO;
         
-        self.minusButton = [[UIBarButtonItem alloc] initWithTitle:[self.text containsString:@"-"] ? @"+" :@"—"
+        self.minusButton = [[UIBarButtonItem alloc] initWithTitle:([self.text rangeOfString:@"-"].location != NSNotFound) ? @"+" :@"—"
                                                                         style:UIBarButtonItemStylePlain
                                                                        target:self
                                                                        action:@selector(signButtonClick:)];
@@ -101,7 +101,7 @@
         sender.title = @"+";
     }
     else {
-        if([[self getData] containsString:@"-"]) {
+        if([[self getData] rangeOfString:@"-"].location != NSNotFound) {
             [self setData:[[self getData] substringFromIndex:1]];
         }
         sender.title = @"—";
@@ -158,12 +158,11 @@
 
 -(void)setData:(id)data {
     [super setData:data];
-    if([data containsString:@"-"]) {
+    if([data rangeOfString:@"-"].location != NSNotFound) {
         [self.minusButton setTitle:@"+"];
     }
     else {
         [self.minusButton setTitle:@"—"];
-
     }
 }
 

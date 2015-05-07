@@ -25,7 +25,7 @@
  */
 
 IB_DESIGNABLE
-@interface MFTextField : UITextField <MFUIComponentProtocol, UITextFieldDelegate>
+@interface MFTextField : UITextField <MFUIComponentProtocol>
 
 #pragma mark - Properties
 
@@ -66,3 +66,4 @@ IB_DESIGNABLE
 
 -(void) setSender:(id<MFUIComponentProtocol>)sender ;
 @end
+

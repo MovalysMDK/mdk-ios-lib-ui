@@ -57,21 +57,15 @@ NSString * ERROR_VIEW_RIGHT_CONSTRAINT = @"ERROR_VIEW_RIGHT_CONSTRAINT";
         [component addConstraints:errorViewConstraints.allValues];
         
     }
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         self.errorView.alpha = 1.0;
-                     }];
-
+    [component layoutIfNeeded];
+    
+    self.errorView.alpha = 1.0;
+    
 }
 
 -(void) removeErrorViewOnComponent:(MFTextField *)component {
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         self.errorView.alpha = 0.0;
-                     } completion:^(BOOL finished) {
-                         [self.errorView removeFromSuperview];
-                         self.errorView = nil;
-                     }];
+    [self.errorView removeFromSuperview];
+    self.errorView = nil;
 }
 
 
@@ -99,7 +93,7 @@ NSString * ERROR_VIEW_RIGHT_CONSTRAINT = @"ERROR_VIEW_RIGHT_CONSTRAINT";
 
 
 #pragma mark - Public Methods
-                                                
+
 
 -(NSDictionary *) customizeErrorViewConstraints:(NSDictionary *)errorViewConstraints onComponent:(MFTextField *)component{
     return errorViewConstraints;

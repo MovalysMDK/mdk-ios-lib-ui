@@ -39,14 +39,14 @@ IB_DESIGNABLE
 #pragma mark - Methods
 -(void)setIsValid:(BOOL) isValid;
 
-/**
+/*!
  * @brief A method that is called at the initialization of the component
  * to do some treatments.
  */
 -(void) initializeComponent;
 
 
-/**
+/*!
  * @brief This method allows to add some views to the TextField
  * @param accessoryViews A dictionary that contains key/value pairs as follow :
  * key is a NSString  custom identifier object that correspond to a

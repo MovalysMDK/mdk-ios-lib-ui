@@ -16,7 +16,7 @@
 
 #import <Foundation/Foundation.h>
 
-/**
+/*!
  * @protocol MFComponentBindingProtocol
  * @brief This protocol defines the necessary methods and properties for a MDK component
  * to be binded by the framework (to a View Model property). For example, a Text Field 
@@ -26,19 +26,19 @@
 @protocol MFComponentBindingProtocol <NSObject>
 
 #pragma mark - Properties
-/**
+/*!
  * @brief The data that is managed by the component.
  */
 @property (nonatomic, strong) id privateData;
 
 #pragma mark - Methods
-/**
+/*!
  * @brief Set the data to the component
  * @param data The data to set to the component
  */
 -(void)setData:(id)data;
 
-/**
+/*!
  * @brief Get the data of the component
  * @return The data of the component
  * @discussion Be careful : depending on the component behaviour, the result
@@ -49,7 +49,7 @@
 -(id)getData;
 
 
-/**
+/*!
  * @brief Returns the data-type managed by the component
  * @return A string of the data-type managed by the component
  */

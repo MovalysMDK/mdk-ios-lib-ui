@@ -29,7 +29,7 @@
 
 @protocol MFContentDelegate;
 
-/**
+/*!
  * @brief This class is used as the Delegate and DataSource of a MFPicker.
  * This component can indeed be declared in any kinf of cells that inherits from MFCellAbstract.
  * Its more convenient to manages data of the picker here.
@@ -39,17 +39,17 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The picker we want to manage data in this delegate
  */
 @property (nonatomic, weak) MFPickerList *picker;
 
-/**
+/*!
  * @brief Form Binding Delegate. This delegate allow to bind a ViewModel to a Form easily
  */
 @property(nonatomic, strong) id<MFBindingFormDelegate> formBindingDelegate ;
 
-/**
+/*!
  * @brief Le ViewModel associé à ce formulaire. il peut s'agir d'un ViewModel simple contenant différents
  * types de champs( => viewModel de type MFUIBaseViewModel) ou un ViewModel de type "liste" qui contient une liste
  * d'autres viewModels ( => viewModel de type MFUIBaseListViewModel ).
@@ -59,31 +59,31 @@
 
 #pragma mark - Methods 
 
-/**
+/*!
  * @brief Custom constructor
  * @param pickerList The MFPickerList component from which this class will manage data
  * @return The built MFPickerControllerDelegate object
  */
 -(id) initWithPickerList:(MFPickerList *)pickerList;
 
-/**
+/*!
  * @brief An empty itemView of the PickerList
  */
 -(MFBindingViewAbstract *)itemView;
 
-/**
+/*!
  * @see MFSearchDelegate
  */
 -(BOOL)filterViewModel:(MFUIBaseViewModel *)viewModel withCurrentSearch:(NSString *)searchText;
 
-/**
+/*!
  * @brief Fills the selected view with the data of the given viewModelk
  * @param viewModel The viewModel to use to fill the selected view
  */
 -(void) fillSelectedViewWithViewModel:(MFUIBaseViewModel *)viewModel;
 
 -(void) reinitBinding;
-/**
+/*!
  * Select view model with the position in parameter
  */
 -(void) selectViewModel:(NSInteger)row ;

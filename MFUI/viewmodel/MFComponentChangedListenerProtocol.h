@@ -19,7 +19,7 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief This methods is called when the value of a component has changed on the form implementing this protocol. 
  * @param bindingKey The key used in the binding to bind the component that has changed to a binded property on a ViewModel
  * @param indexPath the indexPath of the cell container of the component that has changed, used to identify which viewModel

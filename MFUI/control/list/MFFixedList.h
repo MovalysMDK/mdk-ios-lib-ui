@@ -20,7 +20,7 @@
 #import "MFUIOldBaseComponent.h"
 #import "MFFixedListDataDelegate.h"
 
-/**
+/*!
  * @class MFFixedList
  * @brief A default component framework that represents an editable list of an element.
  * @discussion This components presents a list of an element of the same type (same ViewModel). 
@@ -30,7 +30,7 @@
 @interface MFFixedList : MFUIOldBaseComponent
 
 #pragma mark - Custom enumeration (edit mode options)
-/**
+/*!
  * @typedef MFFixedListEditMode
  * @brief Cette structure définit le mode d'édition de la liste
  * @constant MFFixedListEditModePopup La liste est éditable via une popup
@@ -42,7 +42,7 @@ typedef enum {
 } MFFixedListEditMode;
 
 
-/**
+/*!
  * @typedef MFFixedListAlignment
  * @brief Cette structure définit le mode d'édition de la liste
  * @constant MFFixedListEditModeNone : La liste n'est pas éditable
@@ -58,47 +58,47 @@ typedef enum {
 
 #pragma mark - Propriétés
 
-/** 
+/*! 
  * @brief l'extension du controlleur, l'extension contient des paramètres qui peuvent être définis dans le storyboard 
  */
 @property(nonatomic, strong) MFFormExtend *mf;
 
-/**
+/*!
  * @brief Le tableau contenant les données de la Liste éditable
  */
 @property (nonatomic, strong) MFFixedListDataDelegate* dataDelegate;
 
-/**
+/*!
  * @brief La liste éditable
  */
 @property (nonatomic, strong) UITableView *tableView;
 
-/**
+/*!
  * @brief La liste éditable
  */
 @property (nonatomic, strong) UILabel *titleLabel;
 
-/**
+/*!
  * @brief bouton d'ajout d'item
  */
 @property (nonatomic, strong) UIButton *addButton;
 
-/**
+/*!
  * @brief Le mode d'édition de cette liste (@see MFFixedListEditMode)
  */
 @property (nonatomic) MFFixedListEditMode editMode;
 
-/**
+/*!
  * @brief La hauteur d'une cellule de la liste éditable (définie dans le storyboard).
  */
 @property (nonatomic) int rowHeight;
 
-/**
+/*!
  * @brief Le nom de la classe à utiliser pour construire un nouvel item de liste
  */
 @property (nonatomic, strong) NSString *itemClassName;
 
-/**
+/*!
  * @brief The topBarView of the component
  */
 @property (nonatomic, strong) UIView *topBarView;
@@ -106,7 +106,7 @@ typedef enum {
 
 #pragma mark - Méthodes
 
-/**
+/*!
  * @brief Constructeur d'une tableView avec Style
  * @param frame La Frame de la TableView
  * @param tableViewStyle Le style de la TableView
@@ -115,99 +115,99 @@ typedef enum {
 //non implemented
 //-(id)initWithFrame:(CGRect)frame  style:(UITableViewStyle)tableViewStyle;
     
-/**
+/*!
  * @brief Set value of the field
  * @param value the value of the string
  */
 //-(void) setValue:(NSString *) value;
 
-/**
+/*!
  * @brief Returns the value of the field
  * @return the value of the field
  */
 //-(NSString *) getValue;
 
-/**
+/*!
  * @brief Set data in a the list after a cell has been edited
  * @param data the new data to set in the list
  */
 -(void) setDataAfterEdition:(id)data;
 
 
-/**
+/*!
  * @brief Allows to add a custom button on the top of the list
  * @param button The button to add
  */
 -(void) addCustomButton:(UIButton *)button;
 
-/**
+/*!
  * @brief Allows to remove a custom button from the top of the list
  * @param index The index of the button to remove
  */
 -(void) removeCustomButtonAtIndex:(int) index;
 
 
-/**
+/*!
  * @brief Allows to remove a custom button from the top of the list
  * @param button The button to remove
  */
 -(void) removeCustomButton:(UIButton *) button;
 
-/**
+/*!
  * @brief This metohd allows the user to actualize custom methods display
  */
 -(void) refreshCustomButtons;
 
-/**
+/*!
  * @brief This metohd allows the user to reset the buttons
  */
 -(void) resetCustomButtons;
 
-/** 
+/*! 
  * @brief This shows the waiting view when the list is not loaded and the main form controller is scrolling
  * @param contentSize The size of the content of the list, to fill it
  */
 //non implemented
 //-(void) showLoadingView;
 
-/**
+/*!
  * @brief This dissmisses the waiting view (this must be called when the main controller of this list
  * stops to scroll
  */
 //non implemented
 //-(void) dismissLoadingView;
 
-/**
+/*!
  * @brief Specifies the heigh of the top bar view
  * @return The height of the top bar view
  */
 -(NSInteger) topBarViewHeight;
 
-/**
+/*!
  * @brief Indicates if the buttons should be shown
  * @return YES to display buttons, NO otherwhise
  */
 -(BOOL) showButtons;
 
-/**
+/*!
  * @brief Indicates if the title should be shown
  * @return YES to display title, NO otherwhise
  */
 -(BOOL) showTitle;
 
-/**
+/*!
  * @brief Indicates the buttons alignement
  * @return A MFFixedListAlignment value
  */
 -(MFFixedListAlignment) buttonsAlignment;
 
-/**
+/*!
  * @brief Change dynamically the height of the fixed list
  * @param newHeight The new height to set
  */
 -(void) changeDynamicHeight:(int)newHeight;
 
-/**
+/*!
  * @brief Indicates if the component is a simple FixedList or a PhotoFixedList
  * @return YES if the component is a PhotoFixedList, NO otherwise
  */

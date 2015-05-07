@@ -28,7 +28,7 @@
 @property (nonatomic, strong) NSString *latitude;
 @property (nonatomic, strong) NSString *longitude;
 
-/**
+/*!
  * @brief convert MFPositionVoProtocol to MFPositionViewModel instance
  * @param vo position value
  * @param parentVm parent viewmodel

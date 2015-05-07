@@ -20,14 +20,14 @@
 #import "MFBarCodeScannerDelegate.h"
 
 
-/**
+/*!
  * @brief This ViewController allows the user to capture a QRCode/BarCode from camera
  */
 @interface MFBarCodeScanViewController : UIViewController <MFBarCodeScannerProtocol>
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The MFBarCodeScanTextField source component that pushed this ViewController.
  */
 @property (nonatomic, strong) MFBarCodeScanTextField *sourceComponent;
@@ -35,7 +35,7 @@
 
 
 #pragma mark - Custom Methods
-/**
+/*!
  * @brief Custom constructor. This constructor take as unique parameter the source component that pushed
  * this ViewController
  * @param sourceComponent The source component that pushed this ViewController.

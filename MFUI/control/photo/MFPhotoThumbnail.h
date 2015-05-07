@@ -28,34 +28,34 @@
 
 #pragma mark - Constants
 
-/**
+/*!
  * @brief Le nom par défaut du story board utilisé pour la gestion de la photo
  */
 FOUNDATION_EXPORT NSString *const  DEFAUT_PHOTO_STORYBOARD_NAME;
 
-/**
+/*!
  * @brief Le nom du contrôleur par défaut utilisé pour la gestion de la photo
  */
 FOUNDATION_EXPORT NSString *const  DEFAUT_PHOTO_MANAGER_CONTROLLER_NAME;
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The image view  that displays the photo
  */
 @property (nonatomic, strong) UIImageView *photoImageView;
 
-/**
+/*!
  * @brief The label that displays the date of the photo
  */
 @property (nonatomic, strong) UILabel *dateLabel;
 
-/**
+/*!
  * @brief The label that displays the titre of the photo
  */
 @property (nonatomic, strong) UILabel *titreLabel;
 
-/**
+/*!
  * @brief The label that displays the description of the photo
  */
 @property (nonatomic, strong) UILabel *descriptionLabel;
@@ -64,13 +64,13 @@ FOUNDATION_EXPORT NSString *const  DEFAUT_PHOTO_MANAGER_CONTROLLER_NAME;
 
 
 #pragma mark - Methods
-/**
+/*!
  * @brief Affiche la vue de modification de la photo
  * @param sender
  */
 - (void) displayManagePhotoView: (id)sender;
 
-/**
+/*!
  * @brief Set data in a the list after a cell has been edited
  * @param data the new data to set in the list
  */

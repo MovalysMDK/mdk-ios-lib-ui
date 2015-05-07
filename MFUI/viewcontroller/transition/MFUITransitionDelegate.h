@@ -21,7 +21,7 @@
 
 
 
-/**
+/*!
  * @class MFUITransitionDelegate
  * @brief This protocol defines the Movalys transition delegate
  * @discussion
@@ -29,14 +29,14 @@
 @protocol MFUITransitionDelegate <NSObject>
 
 @optional
-/**
+/*!
  * @brief Navigates to a specified UIViewController
  * @param toController The ViewController to navigate to.
  */
 -(void) navigateTo:(UIViewController *) toController;
 
 @required
-/**
+/*!
  * @brief Shows a specified UIViewController
  * @param  viewControllerToPresent The UIViewController to show
  * @param  flag YES if the viewControllerToPresent should be displayed animated, NO otherwhise

@@ -21,21 +21,21 @@
 
 
 
-/**
+/*!
  Protocol shared by all UI elements (Cell, Control, Controller, ...)
  **/
 @protocol MFUIElementCommonProtocol <NSObject>
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Set the main value for this component
  * @param value The value to set
  */
 @optional
 -(void) setValue:(NSString *) value;
 
-/**
+/*!
  * @brief Returns the main value of this component
  * @return The value of the component
  */

@@ -16,7 +16,7 @@
 
 #import "MFRegexTextField.h"
 
-/**
+/*!
  * @class MFDoubleTextField
  * @brief This class represents the Double Text Field component.
  * @discussion This component inherits from MFRegexTextField and must contains

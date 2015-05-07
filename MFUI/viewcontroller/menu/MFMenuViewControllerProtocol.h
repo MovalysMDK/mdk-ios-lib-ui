@@ -15,7 +15,7 @@
  */
 
 
-/**
+/*!
  * @brief Protocol that indicates that the controller implementing this protocol can be displayed on
  * the right sliding menu.
  */

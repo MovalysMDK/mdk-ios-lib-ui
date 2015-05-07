@@ -22,12 +22,12 @@
 
 #import <MessageUI/MFMailComposeViewController.h>
 
-/**
+/*!
  * Help developer to manipulate application's logs.
  */
 @interface MFUILoggingHelper : NSObject//<MFCreateEmailViewControllerDelegate>
 
-/**
+/*!
  * Open two email creation screen with the two last log files.
  *
  * @param fromController : Current view controller.

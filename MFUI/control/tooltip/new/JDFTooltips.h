@@ -17,12 +17,12 @@
 #import "JDFTooltipManager.h"
 
 
-/**
+/*!
  Todo (high priority):
  - Empty. Woo!
  */
 
-/**
+/*!
  Todo (low priority):
  - Check the managers - will the view that is initially supplied as the hostView for a tooltip be superceded by the hostView on the manager? Is this correct?
  - If, for example, being shown from a non-full-screen modal on iPad, make sure it can overflow outside of the modal itself.

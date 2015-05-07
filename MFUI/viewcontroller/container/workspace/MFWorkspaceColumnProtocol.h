@@ -30,7 +30,7 @@
 #pragma mark - Methods
 
 @required
-/**
+/*!
  * @brief Returns the workspace view controller that manages this master view controller
  * @return A MFWorkspaceViewController
  */

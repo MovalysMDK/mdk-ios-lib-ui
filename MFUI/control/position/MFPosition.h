@@ -29,7 +29,7 @@
 #import "MFDoubleTextField.h"
 
 
-/**
+/*!
  * @class MFPosition
  * @brief Custom control to display geo-position (latitude and longitude).
  * @discussion
@@ -37,17 +37,17 @@
 @interface MFPosition : MFUIOldBaseComponent<MFUIComponentProtocol, CLLocationManagerDelegate>
 
 #pragma mark - Properties
-/**
+/*!
  * @brief The location property of the position component
  */
 @property(nonatomic, strong) CLLocation *location;
 
-/**
+/*!
  * @brief The textfield to display latitude
  */
 @property(nonatomic, strong) MFDoubleTextField *latitude;
 
-/**
+/*!
  * @brief The textfield to display longitude
  */
 @property(nonatomic, strong) MFDoubleTextField *longitude;

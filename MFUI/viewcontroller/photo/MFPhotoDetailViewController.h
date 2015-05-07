@@ -50,38 +50,38 @@
 @property (nonatomic, strong) MFFixedList *fixedList;
 @property (nonatomic, strong) MFCellPhotoFixedList *cellPhotoFixedList;
 
-/**
+/*!
  * @brief Méthode appelée lorsqu'on quitte la vue sans sauvegarder
  */
 
 
 - (IBAction)back:(id)sender;
 
-/**
+/*!
  * @brief Méthode appelée lorsqu'on quitte la vue en sauvegardant
  */
 
 - (IBAction)save:(id)sender;
 
-/**
+/*!
  * @brief Clic sur le bouton d'affichage des infos
  */
 
 - (IBAction)afficherInfos:(id)sender;
 
-/**
+/*!
  * @brief Clic sur le bouton pour prendre une photo
  */
 
 - (IBAction)takePhoto:(id)sender;
 
-/**
+/*!
 * @brief Clic sur le bouton pour choisir une photo dans la galerie
 */
 
 - (IBAction)selectPhoto:(id)sender;
 
-/**
+/*!
  * @brief Clic sur le bouton de suppression de la photo courante
  */
 

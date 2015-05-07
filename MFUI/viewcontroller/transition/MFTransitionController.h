@@ -24,26 +24,26 @@
 @interface MFTransitionController : UIViewController
 
 #pragma mark - Properties
-/**
+/*!
  * @brief La vue principale container
  */
 @property (nonatomic, strong) UIView *containerView;
 
-/**
+/*!
  * @brief viecontroller
  */
 @property (nonatomic, strong) UIViewController *viewController;
 
 
 #pragma mark - Methods
-/**
+/*!
  * @brief Constructeur prenant en paramètre un objet UIViewController
  * @param viewController L'objet UIViewController à ajouter au transitionController
  * @return L'instance de l'objet construite
  */
 - (id)initWithViewController:(UIViewController *)viewController;
 
-/**
+/*!
  * @brief Permet de faire une transition du ViewController courant au ViewController
  * passé en paramètre
  * @param newViewController Le ViewController vers lequel la transitions era faite
@@ -54,18 +54,18 @@
 
 @end
 
-/**
+/*!
  * @brief Catégorie de MFTransitionController qui rajoute des méthodes utilitaires sur 
  * le UIViewController iOS.
  */
 @interface UIViewController (MFTransitionController)
 
-/**
+/*!
  * @brief Le transition controller qui permet l'affichage de l'écran principal (central)
  */
 @property(nonatomic, strong, readonly) MFTransitionController *transitionController;
 
-/**
+/*!
  * @brief Cette méthode permet de pousser un nouveau controller dans le navigationController de 
  * l'écran central. 
  * @param viewController L'objet UIViewController à pousser sur l'écran central

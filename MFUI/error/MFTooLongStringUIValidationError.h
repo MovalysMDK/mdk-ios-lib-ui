@@ -19,7 +19,7 @@
 //
 //
 
-/**
+/*!
  * Report a too long user data keyboarding.
  * An instance of this error type must be associateËd with a field name.
  **/
@@ -39,7 +39,7 @@ extern NSInteger const TOO_LONG_STRING_UI_VALIDATION_ERROR_CODE;
  */
 extern NSString *const TOO_LONG_STRING_UI_VALIDATION_ERROR_LOCALIZED_DESCRIPTION_KEY;
 
-/**
+/*!
  * Init new instance.
  *
  * @param fieldName - Associated displayed field name.

@@ -21,7 +21,7 @@
 
 #import <MFCore/MFCoreError.h>
 
-/**
+/*!
  * Business error associated with a specific field.
  * This error type must be thrown from business layer.
  **/

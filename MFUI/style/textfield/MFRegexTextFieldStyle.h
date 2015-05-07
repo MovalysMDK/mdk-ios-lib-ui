@@ -19,7 +19,7 @@
 #import "MFTextFieldStyle+TextLayouting.h"
 #import "MFTextFieldStyle+ErrorView.h"
 
-/**
+/*!
  * @class MFRegexTextFieldStyle
  * @brief The style class of a MFRegexTextField component
  */

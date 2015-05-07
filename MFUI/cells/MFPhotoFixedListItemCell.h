@@ -27,7 +27,7 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The MFPhotoThumbnail component of this framework cell
  */
 @property (weak, nonatomic) IBOutlet MFPhotoThumbnail *photoValue;

@@ -51,47 +51,47 @@ FOUNDATION_EXPORT const int PICKER_VIEW_TAG;
 
 #pragma mark -  Properties - Graphics
 
-/**
+/*!
  * @brief l'extension du controlleur, l'extension contient des paramètres qui peuvent être définis dans le storyboard
  */
 @property(nonatomic, strong) MFFormExtend *mf;
 
-/**
+/*!
  * @brief The button which displays the selected item and which displays the pickerView (onClick)
  */
 @property (nonatomic, weak) MFBindingViewAbstract *staticView;
 
-/**
+/*!
  * @brief The binded view displayed when no data is selected in the picker.
  */
 @property (nonatomic, strong) MFBindingViewAbstract *emptyStaticView;
 
-/**
+/*!
  * @brief The name of the XIB that represents the empty view
  */
 @property (nonatomic, strong) NSString *emptyViewNibName;
 
-/**
+/*!
  * @brief The pickerView whichi displays the items
  */
 @property (nonatomic, strong) UIPickerView *pickerView;
 
-/**
+/*!
  * @brief The view container of the pickerView
  */
 @property (nonatomic, strong) UIScrollView *modalPickerView;
 
-/**
+/*!
  * @brief The button to confirm the current choice
  */
 @property (nonatomic, strong) UISegmentedControl *confirmButton;
 
-/**
+/*!
  * @brief The button to cancel the current choice
  */
 @property (nonatomic, strong) UISegmentedControl *cancelButton;
 
-/**
+/*!
  * @brief The search bar
  */
 @property (nonatomic, strong) UISearchBar *searchBar;
@@ -100,12 +100,12 @@ FOUNDATION_EXPORT const int PICKER_VIEW_TAG;
 
 #pragma mark - Properties - Others
 
-/**
+/*!
  * @brief Indicates if th pickerView is currently showing
  */
 @property (nonatomic) BOOL isShowing;
 
-/**
+/*!
  * @brief Le tableau contenant les données de la Liste éditable
  */
 @property (nonatomic, strong) MFOrientationChangedDelegate *orientationChangedDelegate;
@@ -114,41 +114,41 @@ FOUNDATION_EXPORT const int PICKER_VIEW_TAG;
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Returns the frame of the pickerView
  * @returns the frame of the pickerView
  */
 -(CGRect) pickerFrame;
 
-/**
+/*!
  * @brief Builds and displays the pickerView
  */
 -(void) displayPickerView;
 
-/**
+/*!
  * @brief The values to display in pickerView
  * @return A MFUIBaseListViewModel object that is used to display datas of the PickerView
  */
 -(id) getValues;
 
-/**
+/*!
  * @brief Get the name of the formDescriptor used to load the selected view
  * @return The name of the PLIST form descriptor that describes the selected view
  */
 -(NSString *)selectedViewFormDescriptorName;
 
-/**
+/*!
  * @brief Get the name of the formDescriptor used to load the list item view of the picker
  * @return The name of the PLIST form descriptor that describes the list item view of the picker
  */
 -(NSString *)lstItemViewFormDescriptorName;
 
-/**
+/*!
  * @brief Dismiss the picker view and save its current data to set in the static view.
  */
 -(void) dismissPickerViewAndSave;
 
-/**
+/*!
  * @brief Dismiss the picker view and don't save the current data. The old data will be kept in the static view.
  */
 -(void) dismissPickerViewAndCancel;
@@ -161,7 +161,7 @@ FOUNDATION_EXPORT const int PICKER_VIEW_TAG;
 @protocol MFSearchDelegate <NSObject>
 
 @required
-/**
+/*!
  * @brief Filter to search.
  * @param viewModel A viewModel
  * @param searchText The current text to search in ViewModel
@@ -169,7 +169,7 @@ FOUNDATION_EXPORT const int PICKER_VIEW_TAG;
  */
 - (BOOL) filterViewModel:(MFUIBaseViewModel *)viewModel withCurrentSearch:(NSString *)searchText;
 
-/**
+/*!
  * @brief This method will be called in order to update the result with a new search
  * @param searchText The new search to use
  */

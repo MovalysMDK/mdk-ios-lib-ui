@@ -23,14 +23,14 @@
 
 @interface MFHelperIndexPath : NSObject
 
-/**
+/*!
  * @brief Converts and returns an object into an indexpath
  * @param value an object to convert as an NSIndexPath.
  * @return An NSIndexPath
  */
 +(NSIndexPath *)indexPathValue:(id) value;
 
-/**
+/*!
  * @brief Converts and returns a NSIndexPath into a NSString
  * @param indexPath a NSIndexPath to convert as an NSString.
  * @return An NSString corresponding to the givent NSSindexPath

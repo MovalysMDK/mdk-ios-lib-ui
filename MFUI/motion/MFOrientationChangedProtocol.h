@@ -25,7 +25,7 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The property used to save the current orientation of the device
  */
 @property (nonatomic) UIDeviceOrientation currentOrientation;
@@ -33,14 +33,14 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief The method that should be used to register the orientation changes using a @class(MFOrientationChangedDelegate). 
  * This method in required.
  */
 @required
 -(void) registerOrientationChange;
 
-/**
+/*!
  * @brief The method that should be used to register the orientation changes using a @class(MFOrientationChangedDelegate).
  * This method in required.
  */
@@ -48,7 +48,7 @@
 -(void) unregisterOrientationChange;
 
 
-/**
+/*!
  * @brief The selector that should be called by a @class(MFOrientationChangedDelegate) when orientation changed?.
  * This method in required.
  * @param The notification associated to an orientation change

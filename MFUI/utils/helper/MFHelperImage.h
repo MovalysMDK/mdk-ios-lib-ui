@@ -23,13 +23,13 @@
 
 #import <MFCore/MFCoreFoundationExt.h>
 
-/**
+/*!
  * Help developer to process or load image.
  *
  */
 @interface MFHelperImage : NSObject
 
-/**
+/*!
  * Load an image from a string URL.
  *
  * @see UIImage for more information about image
@@ -38,7 +38,7 @@
  */
 +(UIImage *) loadImageFromString:(NSString *) url;
 
-/**
+/*!
  * Load an image from a MFURL URL.
  *
  * @see UIImage for more information about image

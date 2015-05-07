@@ -20,17 +20,17 @@
 
 
 #pragma mark - Properties
-/**
+/*!
  Descriptor of form which contains this view
  */
 @property(nonatomic, strong) MFFormDescriptor *formDescriptor;
 
-/**
+/*!
  * @brief Indicates if this view has changed (and need to register components).
  */
 @property(nonatomic) BOOL hasChanged;
 
-/**
+/*!
  * @brief This is the controller of this view. This controller contains a forms.
  */
 @property (nonatomic, weak) id<MFBindingFormDelegate> formController;
@@ -39,7 +39,7 @@
 @required
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Cette méthode prend en paramètre un composant de la viewule qui doit être bindé.
  * Le composant est ajouté au dictionnaire de binding du formulaire si celui-ci n'a pas déjà été ajouté
  * Cette méthode est spécifique à cette viewule car elle suppose une viewule composé d'un champ principal et d'un label
@@ -50,7 +50,7 @@
 -(NSMutableDictionary *) addComponent:(id<MFUIComponentProtocol>) component
                   toBindingOnForm:(id<MFBindingFormDelegate>) formController;
 
-/**
+/*!
  * @brief Cette méthode enregistrer pour le champ passé en paramètre, ses propriétés bindables.
  * @param le composant dont on souhaite enregistrer des propriétrés dans le bindingProperties
  * @param formController Le formulaire contenant les binding entre des propriétés du ViewModel
@@ -59,7 +59,7 @@
 -(void) registerBindablePropertiesFromComponent:(id<MFUIComponentProtocol>) component
                       toPropertiesBindingOnForm: (id<MFBindingFormDelegate>) formController;
 
-/**
+/*!
  * @brief Cette méthode permet de valider ou non la valeur d'une propriété bindable.
  * @example la propriété bindable "mandatory" peut valoir YES, NO ou le nom d'une propriété
  * à binder sur le ViewModel. Si elle vaut YES ou NO, on la considère comme non valide pôur le binding
@@ -70,12 +70,12 @@
  */
 -(BOOL) isBindablePropertyValueCorrect:(NSString *) valueOfBindableProperty forProperty:(NSString *) property fromFormController:(id<MFBindingFormDelegate>) formController;
 
-/**
+/*!
  * @brief This method refresh the view graphically by resetting the fields
  */
 -(void) refreshComponents;
 
-/**
+/*!
  * @brief Allows to remove all components from the binding of the givent formController of this view
  * @param formController The form controller in which the components will be removed
  */
@@ -86,17 +86,17 @@
 
 #pragma mark - MFBindingComponentDescriptor Class
 
-/**
+/*!
  * @brief Cette classe est un descripteur pôur le binding des propriétés/composants.
  */
 @interface MFBindingComponentDescriptor : NSObject
 
-/**
+/*!
  * @brief La bindableProperty concernée
  */
 @property (nonatomic, strong) NSString * bindableProperty;
 
-/**
+/*!
  * @brief Le descripteur du composant associé à la bindable property
  */
 @property (nonatomic, strong) MFFieldDescriptor * componentDescriptor;

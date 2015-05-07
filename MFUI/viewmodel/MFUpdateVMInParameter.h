@@ -21,17 +21,17 @@
 
 @interface MFUpdateVMInParameter : NSObject
 
-/**
+/*!
  * @brief dataloader name
  */
 @property (strong, nonatomic) NSString *dataLoaderName;
 
-/**
+/*!
  * @brief viewmodel name
  */
 @property (strong, nonatomic) NSString *viewModelName ;
 
-/**
+/*!
  * @brief update viewmodel with dataloader
  * @param dataLoaderName dataloader name
  * @param viewModelName viewmodel name

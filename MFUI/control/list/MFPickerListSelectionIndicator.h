@@ -20,7 +20,7 @@
 //
 
 
-/**
+/*!
  * @class MFPickerListSelectionIndicator
  * @brief An UIView to indicate the selected row in MFPickerList
  * @discussion Should be non-ARC
@@ -29,7 +29,7 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Custom init
  * @param  frame the Frame of the viex
  * @param mainColor The color that should have the indicator view

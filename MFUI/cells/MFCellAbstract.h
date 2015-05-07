@@ -21,14 +21,14 @@
 #import "MFUIComponents.h"
 
 
-/**
+/*!
  * @brief The class is an abstract class for framework cells.
  * @discussion It does some basic treatments common to all framework cells. Basically, it allows to bind some properties to a ViewModel.
  */
 @interface MFCellAbstract : UITableViewCell<MFFormCellProtocol, MFBindingViewProtocol, MFDefaultConstraintsProtocol>
 
 #pragma mark - Properties
-/**
+/*!
  * @brief The Storyboard extension for this cell
  */
 @property (nonatomic, strong) MFFormExtend *mf;
@@ -36,12 +36,12 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief this common methods allows to do some treatment on this cell before using it
  */
 -(void) initialize;
 
-/**
+/*!
  * @brief Callback called after the cell is configured by its form controller.
  */
 -(void) cellIsConfigured;

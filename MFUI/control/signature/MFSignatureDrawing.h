@@ -25,7 +25,7 @@ typedef struct Line {
     CGPoint from, to;
 } Line;
 
-/**
+/*!
  * @class MFSignatureDrawing
  * @brief A view that allows the user to draw a signature
  * @discussion
@@ -38,24 +38,24 @@ typedef struct Line {
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The line width of the signature
  */
 @property(nonatomic, assign) float lineWidth;
 
-/**
+/*!
  * @brief The stroke color of the signature
  */
 @property(nonatomic, strong) UIColor *strokeColor;
 
-/**
+/*!
  * @brief An array describing the path of the signature
  */
 @property(nonatomic, strong) NSMutableArray *signaturePath;
 
 
 #pragma mark - Methods
-/**
+/*!
  * @brief Clears the current signature
  */
 - (void) clear;

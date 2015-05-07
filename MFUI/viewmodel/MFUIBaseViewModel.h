@@ -30,7 +30,7 @@
 
 #pragma mark - Types définis
 
-/**
+/*!
  * @brief Type de callback appelé lorsque l'appli sait combien elle possède de classe de démarrage
  * @param 1er paramètre le nom de classe ou l'étape lancée
  * @param 2eme paramètre l'état du lancement (START, STOP)
@@ -39,19 +39,19 @@ typedef BOOL (^MFValueChangedFilter)(NSString *, id<MFUIBaseViewModelProtocol>, 
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief Cette propriété définit le ViewModel Parent. Si cette propriété reste nulle, 
  * alors ce ViewModel est le plus haut parent
  */
 @property (nonatomic, weak) id<MFUIBaseViewModelProtocol> parentViewModel;
 
-/**
+/*!
  * @brief Cette propriété indique si un changement a eu lieu. Cette propriété est nécessaire
  * pour savoir s'il faut sauvegarder de nouvelles données.
  */
 @property (nonatomic, strong) NSString *parentViewModelPrefix;
 
-/**
+/*!
  * @brief A dictionary containing as key/value pair : 
  * key : the name of a viewModel
  * value : the value of the filter to apply on a property of the viewModel
@@ -62,13 +62,13 @@ typedef BOOL (^MFValueChangedFilter)(NSString *, id<MFUIBaseViewModelProtocol>, 
 
 //non implemented
 //-(id)initWithForm:(id<MFViewModelChangedListenerProtocol>) form;
-/**
+/*!
  * @brief Définir ici les actions à effectuer lorsque l'un des champs synchronizables du ViewModel a été modifié
  * @see NSKeyValueObserving.h
  */
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 
-/**
+/*!
  * @brief Cette méthode doit être implémentée dans les classes héritées de @MFUIBaseViewModel seulement.
  * Elle permet de définir les propriétés qui sepont bindées au formulaire.
  * @return Un tableau comporant le nom des propriétés de la classe candidates au bind avec le formulaire.
@@ -76,7 +76,7 @@ typedef BOOL (^MFValueChangedFilter)(NSString *, id<MFUIBaseViewModelProtocol>, 
  */
 -(NSArray*)getBindedProperties;
 
-/**
+/*!
  * @brief Cette méthode doit être implémentée dans les classes héritées de @MFUIBaseViewModel seulement.
  * Elle permet de définir les propriétés personnalisées qui seront bindées au formulaire.
  * @return Un tableau comporant le nom des propriétés de la classe candidates au bind avec le formulaire.
@@ -84,29 +84,29 @@ typedef BOOL (^MFValueChangedFilter)(NSString *, id<MFUIBaseViewModelProtocol>, 
  */
 -(NSArray*)getCustomBindedProperties;
 
-/**
+/*!
  * @brief get child viewmodels (property names)
  */
 -(NSArray *) getChildViewModels;
 
-/**
+/*!
  * @brief Cette méthode renvoie la liste des propriétés à copier lors de la copie du ViewModel
  * Par défaut il s'agit des bindedProperties et des customBindedProperties
  */
 -(NSArray *)getCopyProperties;
 
-/**
+/*!
  * @brief Clear this view model.
  */
 - (void) clear;
 
-/**
+/*!
  * @brief update viewmodel with entity
  * @param entity
  */
 -(void) updateFromIdentifiable:(id) entity ;
 
-/**
+/*!
  * @brief update entity with viewmodel
  * @param entity
  */

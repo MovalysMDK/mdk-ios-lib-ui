@@ -29,7 +29,7 @@
 #import "MFFormViewControllerValidationDelegate.h"
 
 
-/**
+/*!
  * MFFormViewControllerProtocol
  */
 @protocol MFFormViewControllerProtocol <MFViewControllerProtocol, MFViewModelChangedListenerProtocol, MFComponentChangedListenerProtocol>
@@ -47,31 +47,31 @@ typedef enum {
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Cette méthode permet de faire les initialisations nécessaires au bon fonctionnement du controller
  * Cette méthode devra notamment être implémentée par l'utilisateur dans son propre FormViewController afin qu'il
  * définisse le viewModel associé à son propre FormViewcontroller.
  */
 -(void) initialize;
 
-/**
+/*!
  * @brief Permet de lancer l'action de chargement des données
  */
 -(void) doFillAction;
 
-/**
+/*!
  * @brief Create/Get the view model
  */
 -(id<MFUIBaseViewModelProtocol>) createViewModel;
 
-/**
+/*!
  * @brief Cette méthode est appelée lorsque l'un des composants graphiques présents dans le dictionnaire "mapping"
  * a été modifié. La méthode met alors à jour les champs associés dans le ViewModel
  * @param bindingKey La clé de mapping qui identifie le ou les composants concernés
  */
 -(void) dispatchEventOnComponentValueChangedWithKey:(NSString *)bindingKey atIndexPath:(NSIndexPath *)indexPath valid:(BOOL)valid;
 
-/**
+/*!
  * @brief Indique si le bouton de sauvegarde doit être affiché ou non. 
  * Par défaut, le framework affiche le bouton si au moins un composant du formulaire est éditable
  * @return YES si le bouton doit être affiché, NO sinon

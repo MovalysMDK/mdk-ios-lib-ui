@@ -18,52 +18,52 @@
 
 #import "MFFormSearchExtend.h"
 
-/**
+/*!
  * @brief Classe d'extension du formulaire
  */
 @interface MFFormExtend : NSObject
 
-/**
+/*!
  * @brief Extension de formulaire pour les formulaires de recherche
  */
 @property (nonatomic, weak) MFFormSearchExtend *search;
 
-/**
+/*!
  * @brief Le nom du descripteur du formulaire
  */
 @property(nonatomic, strong) NSString *formDescriptorName;
 
-/**
+/*!
  * @brief Le nom du descripteur de la vue statique (PickerList uniquement)
  */
 @property(nonatomic, strong) NSString *sectionFormDescriptorName;
 
-/**
+/*!
  * @brief Le nom du descripteur de la vue statique (PickerList uniquement)
  */
 @property(nonatomic, strong) NSString *headerFormDescriptorName;
 
-/**
+/*!
  * @brief La hauteur d'une cellule du formulaire
  */
 @property(nonatomic) int editMode;
 
-/**
+/*!
  * @brief La hauteur d'une cellule du formulaire
  */
 @property(nonatomic) int rowHeight;
 
-/**
+/*!
  * @brief Définit si ue item peut être ajouté au formulaire
  */
 @property(nonatomic) BOOL canAddItem;
 
-/**
+/*!
  * @brief Définit si un item peut être édité
  */
 @property(nonatomic) BOOL canEditItem;
 
-/**
+/*!
  * @brief Définit si un item peut être supprimmé
  */
 @property(nonatomic) BOOL canDeleteItem;

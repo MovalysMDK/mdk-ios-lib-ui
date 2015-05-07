@@ -23,14 +23,14 @@
 #import "MFUIComponentProtocol.h"
 #import "MFUIBaseViewModelProtocol.h"
 
-/**
+/*!
  * @brief Ce protocole permet de traiter des actions spéciales pour un type donnée
  */
 @protocol MFTypeValueProcessingProtocol <NSObject>
 
 
 @required
-/**
+/*!
  * @brief Cette méthode permet de récupérer la valeur d'une propriété d'un composant graphique, à partir de sa description
  * dans le fichier PLIST ou de sa valeur dans le ViewModel. La méthode est liée au bindableProperties, des propriétés qui peuvent
  * être bindées à un ViewModel ou contenir des valeurs par défaut.

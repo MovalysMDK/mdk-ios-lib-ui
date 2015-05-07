@@ -28,7 +28,7 @@
 //ViewController
 #import "MFFormViewController.h"
 
-/**
+/*!
  * @class MFFormDetailViewController
  * @brief The Movalys View Controller is aimed to display a detail form.
  * @discussion This is a classic Movalys Form View Controller that have added methods and properties due to its detail behaviour.

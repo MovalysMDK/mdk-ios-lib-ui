@@ -19,7 +19,7 @@
 
 @interface MFFormViewControllerValidationDelegate : MFFormValidationDelegate
 
-/**
+/*!
  * @brief validation on form close
  * @param isAlert display an alert if vm has changes
  * @param autoSave automatic save if viewmodel has changes

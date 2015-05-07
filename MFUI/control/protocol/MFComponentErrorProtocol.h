@@ -21,37 +21,37 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The array of the errors of the component.
  */
 @property (nonatomic, strong) NSMutableArray *errors;
 
 
-/**
+/*!
  * @brief The tooltip displayed when the user taps on the buttonError of the errorView
  */
 @property (nonatomic, strong) JDFTooltipView *tooltipView;
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Clean all component errors
  */
 -(void) clearErrors;
 
-/**
+/*!
  * @brief Returns a array containing the error(s) of the component
  * @return  An array containing the error(s) of the component 
  */
 -(NSArray *) getErrors;
 
-/**
+/*!
  * @brief Adds an array of errors to the component
  * @param errors An array of errors 
  */
 -(void) addErrors:(NSArray *) errors;
 
-/**
+/*!
  * @brief Shows or hides the error view of the component
  * @param showError BOOL that is YES to show the error view, or NO to hide it.
  */

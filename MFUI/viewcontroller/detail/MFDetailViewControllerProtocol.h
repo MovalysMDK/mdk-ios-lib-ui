@@ -20,7 +20,7 @@
 @protocol MFUIBaseViewModelProtocol;
 
 
-/**
+/*!
  * @brief Doit être implémenté par les contrôleurs des vues dites de détail (idétails d'un item de liste, détails d'une photo, etc)
  */
 @protocol MFDetailViewControllerProtocol <NSObject>
@@ -28,22 +28,22 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief This attribute is the parent controller which opens this detailController
  */
 @property (nonatomic, weak) id<MFFormWithDetailViewControllerProtocol> parentFormController;
 
-/**
+/*!
  * @brief This attribute is the indexPath of the current editing cell
  */
 @property (nonatomic, strong) NSIndexPath *indexPath;
 
-/**
+/*!
  * @brief Indicates if the components of this detail are editable or not.
  */
 @property (nonatomic, strong) NSNumber *editable;
 
-/**
+/*!
  * @brief The original view model used to display detail data
  */
 @property id<MFUIBaseViewModelProtocol> originalViewModel;

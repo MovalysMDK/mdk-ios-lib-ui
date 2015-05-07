@@ -38,17 +38,17 @@
 
 -(IBAction)genericButtonPressed:(id)sender;
 
-/**
+/*!
  * Show the waiting view in order to block UI
  */
 -(void) showWaitingView;
 
-/**
+/*!
  * Dismiss the waiting view if it's displayed
  */
 -(void) dismissWaitingView;
 
-/**
+/*!
  * Show the waiting view in order to block UI during a given time (in seconds)
  * @param seconds The number of seconds for displaying waiting view
  */

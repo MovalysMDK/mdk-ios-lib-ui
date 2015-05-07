@@ -24,7 +24,7 @@
 
 
 @optional
-/**
+/*!
  * @brief Cette méthode convertit un objet définit par la classe implémentant ce protocole en NSString
  * @param la valeur à convertir.
  * @return la valeur convertie en NSString
@@ -32,7 +32,7 @@
 + (NSString *)toString:(id)value;
 
 @optional
-/**
+/*!
  * @brief Cette méthode convertit un objet définit par la classe implémentant ce protocole en NSString
  * @param la valeur à convertir.
  * @return la valeur convertie en NSString
@@ -41,7 +41,7 @@
 
 
 @optional
-/**
+/*!
  * @brief Cette méthode convertit un objet définit par la classe implémentant ce protocole en NSString
  * @param la valeur à convertir.
  * @return la valeur convertie en NSString
@@ -49,7 +49,7 @@
 + (NSString *)toNumber:(id)value;
 
 @optional
-/**
+/*!
  * @brief Cette méthode convertit un objet définit par la classe implémentant ce protocole en NSString
  * @param la valeur à convertir.
  * @return la valeur convertie en NSString

@@ -20,7 +20,7 @@
 //
 
 #import <MFCore/MFCoreAction.h>
-/**
+/*!
  * @class MFUpdateVMWithDataLoaderAction
  * @brief An action to update a ViewModel from a dataloader
  * @discussion
@@ -31,7 +31,7 @@ FOUNDATION_EXPORT NSString *const MFAction_MFUpdateVMWithDataLoaderAction ;
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The filters parameters
  */
 @property (nonatomic, strong) NSDictionary *filterParameters;

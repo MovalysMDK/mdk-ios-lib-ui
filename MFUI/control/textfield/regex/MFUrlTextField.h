@@ -16,7 +16,7 @@
 
 #import "MFRegexTextField.h"
 
-/**
+/*!
  * @class MFUrlTextField
  * @brief This class represents the URL Text Field component.
  * @discussion This component inherits from MFRegexTextField and must contains

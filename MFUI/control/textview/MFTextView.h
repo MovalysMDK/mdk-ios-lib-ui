@@ -32,7 +32,7 @@
 #import "MFUIBaseComponent.h"
 
 
-/**
+/*!
  * TextView component permit the input of a multiline text
  */
 
@@ -45,13 +45,13 @@
  */
 @property(nonatomic, strong) NSObject<MFBaseTextExtensionProtocol> *mf;
 
-/**
+/*!
  Underlying component.
  */
 
 @property (nonatomic, strong) UITextView *textView;
 
-/**
+/*!
  * @brief the delegate that manages orientation changes
  */
 @property (nonatomic, strong) MFOrientationChangedDelegate *orientationChangedDelegate;
@@ -59,19 +59,19 @@
 
 #pragma mark - Specific TextField method implementation
 
-/**
+/*!
  * @brief Set the type keyboard which will be displayed.
  * @param type The type of the keyboard
  */
 -(void) setKeyboardType:(UIKeyboardType) type;
 
-/**
+/*!
  * @brief Set the main value for this component
  * @param value The value to set
  */
 -(void) setValue:(NSString *) value;
 
-/**
+/*!
  * @brief Returns the main value of this component
  * @return The value of the component
  */

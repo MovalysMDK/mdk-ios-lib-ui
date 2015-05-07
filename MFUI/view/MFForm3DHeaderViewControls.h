@@ -18,7 +18,7 @@
 #import "MFBindingViewAbstract.h"
 
 
-/**
+/*!
  * @brief This protocol should be implement by a 3D List Controller.
  * It allows the controller to navigate between the different pages 
  * of the 3D List
@@ -27,12 +27,12 @@
 
 @required
 
-/**
+/*!
  * @brief Method called when the user tap on the next arrow
  */
 -(void) onNext;
 
-/**
+/*!
  * @brief Method called when the user tap on the previous arrow
  */
 -(void) onPrevious;
@@ -43,22 +43,22 @@
 
 @interface MFForm3DHeaderViewControls : UIView
 
-/**
+/*!
  * @brief The 'next' arrow
  */
 @property (nonatomic, strong) UIButton *arrowNext;
 
-/**
+/*!
  * @brief The 'previous' arrow
  */
 @property (nonatomic, strong) UIButton *arrowPrevious;
 
-/**
+/*!
  * @brief The contentView of the control. It's the view where is displayed the binded components.
  */
 @property (nonatomic, strong) MFBindingViewAbstract *contentView;
 
-/**
+/*!
  * @brief The delegate on which will be performed 'onNext' and 'onPrevious' events.
  */
 @property (nonatomic, weak) id<MFForm3DControlsDelegate> delegate;

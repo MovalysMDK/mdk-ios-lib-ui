@@ -16,7 +16,7 @@
 
 #import "MFRegexTextField.h"
 
-/**
+/*!
  * @class MFEmailTextField
  * @brief This class represents the Email Text Field component.
  * @discussion This component inherits from MFRegexTextField and must contains

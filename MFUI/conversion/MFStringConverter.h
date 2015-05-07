@@ -25,7 +25,7 @@
 //Converter protocol
 #import "MFConverterProtocol.h"
 
-/**
+/*!
  * @class MFStringConverter
  * @brief Class of static methods used to convert string into other types, or other types into a string
  */
@@ -33,14 +33,14 @@
 
 #pragma  mark - Methods
 
-/**
+/*!
  * @brief Convert a string to a date.
  * @param value The string to convert as a date
  * @return The date retrieved from the given string
  */
 + (NSDate *)toDate:(id)value;
 
-/**
+/*!
  * @brief Convert a string to a date.
  * @param value The string to convert as a date
  * @param dateFormatter The dateFormatter to use to voncert the given string as a date
@@ -48,14 +48,14 @@
  */
 + (NSDate *)toDate:(id)value withFormatter:(NSDateFormatter *)dateFormatter;
 
-/**
+/*!
  * @brief Convert a string to a number.
  * @param value The string to convert as a number
  * @return The number retrieved from the given string
  */
 + (NSNumber *)toNumber:(id)value;
 
-/**
+/*!
  * @brief Convert an object to a string.
  * @param dateFormatter The dateFormatter to use to voncert the given string as a date
  * @return The string retrieved from the given object

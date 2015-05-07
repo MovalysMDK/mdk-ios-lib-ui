@@ -21,7 +21,7 @@
 
 #import "MFViewControllerDelegate.h"
 
-/**
+/*!
  * @brief permet de définir l'attribut privé du delegate
  */
 @interface MFViewControllerUtils_Private : NSObject
@@ -39,7 +39,7 @@
 
 
 
-/**
+/*!
  * @brief ajoute des méthodes utilitaire sur le UIViewController, entre autre une méthode permettant de savoir quel est le view controller courant
  */
 @interface UIViewController (MFViewControllerUtils)

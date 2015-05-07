@@ -18,7 +18,7 @@
 #import "MFFormViewController.h"
 
 
-/**
+/*!
  * @class MFFormSearchViewController
  * @brief The form controller for the search view controller
  * @discussion To complete
@@ -26,28 +26,28 @@
 @interface MFFormSearchViewController : MFFormViewController
 
 #pragma mark - Properties
-/**
+/*!
  * @brief The navigation Bar
  */
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
-/**
+/*!
  * @brief The left button of the navigation bar
  */
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *navigationBarLeftButton;
 
 
-/**
+/*!
  * @brief The right button of the navigation bar
  */
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *navigationBarRightButton;
 
-/**
+/*!
  * @brief The clear button of the toolBar
  */
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *toolBarClearButton;
 
-/**
+/*!
  * @brief The formController on which will be applied the search
  */
 @property (nonatomic, weak) MFFormBaseViewController *targetFormController;
@@ -55,24 +55,24 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief This method is called when the leftButton of the navigationBar is tapped.
  * You can customize the action of this button here
  */
 -(void)navigationBarLeftButtonAction;
 
-/**
+/*!
  * @brief This method is called when the rightButton of the navigationBar is tapped.
  * You can customize the action of this button here
  */
 -(void)navigationBarRightButtonAction;
 
-/**
+/*!
  * @brief Valids the current form and search
  */
 -(void) validFormAndSearch;
 
-/**
+/*!
  * @brief Cancel the search
  */
 -(void) cancelSearch;

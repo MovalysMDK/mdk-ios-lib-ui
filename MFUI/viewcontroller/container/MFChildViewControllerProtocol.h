@@ -22,7 +22,7 @@
 #pragma mark - Methods
 
 @required
-/**
+/*!
  * @brief Returns the parent view controller
  * @return the instance of the parentViewController
  */

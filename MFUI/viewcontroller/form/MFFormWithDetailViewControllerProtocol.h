@@ -23,7 +23,7 @@
 @protocol MFFormWithDetailViewControllerProtocol <NSObject>
 
 @required
-/**
+/*!
  * @brief This method should be implemented to update the components in a cell of a form with the values changed in detailController
  * @param indexPath The indexPath of the cell in which the components will be updated
  * @param valuesForComponents A dictionary containing the name of the component to update as key, and the new Value for the component as value (or entry).
@@ -31,7 +31,7 @@
 -(void) updateChangesFromDetailControllerOnCellAtIndexPath:(NSIndexPath *)indexPath withViewModel:(id<MFUIBaseViewModelProtocol>)viewModel;
 
 @required
-/**
+/*!
  * @brief The method should return the detail view controller to use to edit an item
  * @returns A MFFormDetailViewController object.
  */

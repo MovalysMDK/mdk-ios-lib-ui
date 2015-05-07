@@ -22,7 +22,7 @@
 #import "MFUIOldBaseComponent.h"
 #import "MFSignatureDrawing.h"
 
-/**
+/*!
  * @class MFSignature
  * @brief The framework Signature component
  * @discussion This component display a view that allows the user to draw a signature.
@@ -30,32 +30,32 @@
 @interface MFSignature : MFUIOldBaseComponent
 
 #pragma mark - Properties
-/**
+/*!
  * @brief The data managed by the component
  */
 @property (nonatomic, strong) NSString *data;
 
-/**
+/*!
  * @brief The custom signature drawing object that allows the user to draw a signature
  */
 @property (nonatomic, strong) MFSignatureDrawing *signature;
 
-/**
+/*!
  * @brief The view to display allowing the user to draw a signature
  */
 @property (nonatomic, strong) UIView *modalSignatureDrawingView;
 
-/**
+/*!
  * @brief The line width of the signature
  */
 @property(nonatomic, assign) float lineWidth;
 
-/**
+/*!
  * @brief The stroke color of the signature
  */
 @property(nonatomic, strong) UIColor *strokeColor;
 
-/**
+/*!
  * @brief An array describing the signature path
  */
 @property(nonatomic, strong) NSMutableArray *signaturePath;

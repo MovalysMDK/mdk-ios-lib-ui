@@ -19,7 +19,7 @@
 
 FOUNDATION_EXPORT const NSString *PARAMETER_REGULAREXPRESSIONTEXTFIELD_PATTERN_KEY;
 
-/**
+/*!
  * @class MFRegularExpressionTextFieldExtension
  * @brief This class represents the parameters the framework can manage on a MFUIRegularExpressionTextField
  */

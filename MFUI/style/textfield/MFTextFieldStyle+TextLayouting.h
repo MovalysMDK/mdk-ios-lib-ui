@@ -17,7 +17,7 @@
 
 #import "MFTextFieldStyle.h"
 
-/**
+/*!
  * @class MFTextFieldStyle+TextLayouting
  * @brief This category on MFTextFieldStyle defines the necessary methods to
  * customize the text rects of the Text Field component following its states.
@@ -26,7 +26,7 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Defines the text rect for the given component
  * @param bounds The original bounds of the Text Field component
  * @param component The Text Field component you want to defines the text rect
@@ -34,7 +34,7 @@
  */
 -(CGRect) textRectForBounds:(CGRect)bounds onComponent:(MFTextField *)component;
 
-/**
+/*!
  * @brief Defines the editing rect for the given component
  * @param bounds The original bounds of the Text Field component
  * @param component The Text Field component you want to defines the editing rect
@@ -42,7 +42,7 @@
  */
 -(CGRect) editingRectForBounds:(CGRect)bounds onComponent:(MFTextField *)component;
 
-/**
+/*!
  * @brief Defines the clear button rect for the given component
  * @param bounds The original bounds of the Text Field component
  * @param component The Text Field component you want to defines the clear button rect
@@ -50,7 +50,7 @@
  */
 -(CGRect) clearButtonRectForBounds:(CGRect)bounds onComponent:(MFTextField *)component;
 
-/**
+/*!
  * @brief Defines the placeholder rect for the given component
  * @param bounds The original bounds of the Text Field component
  * @param component The Text Field component you want to defines the placeholder rect
@@ -59,7 +59,7 @@
 -(CGRect) placeholderRectForBounds:(CGRect)bounds onComponent:(MFTextField *)component;
 
 
-/**
+/*!
  * @brief Defines the border rect for the given component
  * @param bounds The original bounds of the Text Field component
  * @param component The Text Field component you want to defines the border rect

@@ -21,7 +21,7 @@
 //Protocol
 #import "MFConverterProtocol.h"
 
-/**
+/*!
  * @class MFNumberConverter
  * @brief Class of static methods to convert number into other types and other types into number
  */
@@ -30,7 +30,7 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Converts a number into a string
  * @param value The value to convert
  * @param numberFormatter The numberFormatter to use to convert the given number

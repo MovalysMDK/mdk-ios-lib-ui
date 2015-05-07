@@ -28,17 +28,17 @@
 
 
 #pragma mark - Properties
-/**
+/*!
  * @brief The inner UISlider component
  */
 @property (nonatomic, strong) UISlider *innerSlider;
 
-/**
+/*!
  * @brief The inner MFLabel component that displays the value of the slider.
  */
 @property (nonatomic, strong) UILabel *innerSliderValueLabel;
 
-/**
+/*!
  * @brief The setp of the slider
  */
 @property (nonatomic) float step;
@@ -46,20 +46,20 @@
 
 
 #pragma mark - Methods
-/** 
+/*! 
  * @brief Set a value to the slider
  * @param value The value to set
  */
 - (void) setValue:(float)value;
 
-/**
+/*!
  * @brief Set a value to the slider specifying animation or not
  * @param value The value to set
  * @param animated A BOOL that indicates if setting the value should be animated or not
  */
 - (void)setValue:(float)value animated:(BOOL)animated;
 
-/**
+/*!
  * @brief Gets the current value of the slider
  * @return The float value of the slider
  */

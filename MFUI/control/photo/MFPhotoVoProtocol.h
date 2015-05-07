@@ -22,37 +22,37 @@
 @protocol MFPhotoVoProtocol <NSObject>
 
 
-/**
+/*!
  * @brief identifier
  */
 
 @property (nonatomic, strong) NSNumber *identifier;
 
-/**
+/*!
  * @brief name (title)
  */
 
 @property (nonatomic, strong) NSString *titre;
 
-/**
+/*!
  * @brief description
  */
 
 @property (nonatomic, strong) NSString *desc;
 
-/**
+/*!
  * @brief URI of remote or local photo
  */
 
 @property (nonatomic, strong) NSString *uri;
 
-/**
+/*!
  * @brief date
  */
 
 @property (nonatomic, strong) NSDate *date;
 
-/**
+/*!
  * @brief state
  */
 

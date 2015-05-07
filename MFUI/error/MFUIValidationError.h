@@ -21,18 +21,18 @@
 
 #import <MFCore/MFCoreError.h>
 
-/**
+/*!
  User data keyboarding error.
  This error must be thrown from UI layer and must be associated with a field name.
  **/
 @interface MFUIValidationError : MFError
 
-/**
+/*!
  Displayed field name : field name displayed to user.
  */
 @property(nonatomic, strong, readonly) NSString *localizedFieldName;
 
-/**
+/*!
  Technical field name: name used by system to workwith the field.
  */
 @property(nonatomic, strong, readonly) NSString *technicalFieldName;

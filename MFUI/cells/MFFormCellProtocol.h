@@ -22,7 +22,7 @@
 
 @protocol MFUIComponentProtocol;
 
-/**
+/*!
  * @brief A protocol defining some basic methods and attributes for framework cells.
  * @discussion This protocol should be used by any cell that should be binded or used by the framework
  */
@@ -37,12 +37,12 @@
  */
 @property(nonatomic, weak) id<MFUITransitionDelegate> transitionDelegate;
 
-/**
+/*!
  * @brief L'indexPath de cette cellule
  */
 @property (nonatomic, strong) NSIndexPath *cellIndexPath;
 
-/**
+/*!
  Configure cell according to group descriptor's information and form descriptor's information.
  @param groupDescriptor : group descriptor used to display cell.
  @param formDescriptor: form which contains the group which contains cell.
@@ -54,14 +54,14 @@
 #pragma mark - Methods
 
 @required
-/**
+/*!
  * @brief Permet d'enregistrer la liste des composants graphiques concernés par la synchronisation des données
  * @param dictionnary La liste des composants actuellement enregistrés dans le formulaire 
  * @return La liste des nouveaux composants ajoutés à la liste passée en paramètre
  */
 -(NSMutableDictionary *)registerComponent:(id<MFBindingFormDelegate>)formController;
 
-/**
+/*!
  * @brief Unregisters components from binding of a specific formController
  * @param The form controller in which this cell should unregister its components from the binding
 */

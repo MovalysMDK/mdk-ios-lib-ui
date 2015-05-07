@@ -27,7 +27,7 @@ FOUNDATION_EXPORT NSInteger DEFAULT_CLEAR_BUTTON_CONTAINER;
 FOUNDATION_EXPORT NSInteger DEFAULT_ERROR_VIEW_SQUARE_SIZE;
 
 @class MFTextField;
-/**
+/*!
  * @class MFTextFieldStyle+ErrorView
  * @brief This category on MFTextFieldStyle defines the necessary methods
  * to customize the errorView of the Text Field component.
@@ -37,7 +37,7 @@ FOUNDATION_EXPORT NSInteger DEFAULT_ERROR_VIEW_SQUARE_SIZE;
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief This method allows to customize the framework-defined constraints for
  * the errorView in the MFTextField component.
  * @param errorViewConstraints A dictionary that contains key/value pair as following :

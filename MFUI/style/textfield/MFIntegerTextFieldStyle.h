@@ -16,7 +16,7 @@
  */
 #import "MFRegexTextFieldStyle.h"
 
-/**
+/*!
  * @class MFIntegerTextField
  * @brief This class manages the syle of a MFIntegerTextField component
  */

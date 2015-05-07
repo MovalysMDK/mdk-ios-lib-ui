@@ -25,28 +25,28 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The image view that displays the image of an enum
  */
 @property (nonatomic, strong) UIImageView *imageView;
 
-/**
+/*!
  * @brief The label that displays a text if no image is found
  */
 @property (nonatomic, strong) UILabel *label;
 
-/**
+/*!
  * @brief The image that illustrates an enum
  */
 @property (nonatomic) UIImage *image;
 
 
-/**
+/*!
  * @brief the manipuled data of the component
  */
 @property (nonatomic, strong) NSNumber *data;
 
-/**
+/*!
  * @brief The delegate used when orientation change
  */
 @property (nonatomic, strong) MFOrientationChangedDelegate *orientationChangedDelegate;

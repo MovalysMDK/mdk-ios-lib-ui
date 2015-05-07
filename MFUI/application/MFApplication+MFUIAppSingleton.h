@@ -20,7 +20,7 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Get an instance of MFApplication
  * @return The singleton instance of MFApplication
  */

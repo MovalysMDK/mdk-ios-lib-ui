@@ -29,35 +29,35 @@
 @interface MFUIApplication : MFApplication<MFMailComposeViewControllerDelegate>
 
 #pragma mark - Properties
-/**
+/*!
  * @brief donne le dernier view controller apparu à l'écran
  */
 @property (nonatomic, weak) UIViewController *lastAppearViewController;
 
-/**
+/*!
  * @brief indique si le traitement de l'erreur est terminée
  */
 @property (nonatomic) int openPopup;
 
-/**
+/*!
  * @brief la queue d'execution des notifications
  */
 @property (nonatomic, readonly) dispatch_queue_t updateVMtoControllerQueue;
 
-/**
+/*!
  *  @brief donne l'exception courante
  */
 @property (nonatomic, weak) NSException *currentException;
 
 
 #pragma mark - Methods
-/**
+/*!
  *  @brief traitement des erreurs générales
  *  @param exception l'exception à logger
  */
 -(void) treatUnhandledException: (NSException *) exception;
 
-/**
+/*!
  * @brief Method called to push a report
  */
 -(void) doOnPushReport;

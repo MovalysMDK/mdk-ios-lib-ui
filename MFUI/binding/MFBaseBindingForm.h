@@ -21,34 +21,34 @@
 
 #pragma mark - Propriétés
 
-/**
+/*!
  * @brief Le tableau des ressources bloquées par mutex
  */
 @property(nonatomic, weak) UIControl *activeField;
 
-/**
+/*!
  * @brief Le tableau des ressources bloquées par mutex
  */
 @property(nonatomic, strong) NSArray *mutexPropertiesName;
 
-/**
+/*!
  * @brief Le parent tenant ce delegate
  */
 @property (nonatomic, weak) id<MFBindingFormDelegate> parent;
 
-/**
+/*!
  * @brief Cette propriété liste l'ensemble des composants de ce formumaire candidats au binding
  * avec un ViewModel
  */
 @property(nonatomic, strong) MFBinding *binding;
 
-/**
+/*!
  * @brief Cette propriété définit un dictionnaire des propriétés qui sont bindables,
  * et leur valeurpar défaut possibles
  */
 @property(nonatomic, strong) NSMutableDictionary *bindableProperties;
 
-/**
+/*!
  * @brief Cette propriété liste les un ensemble de propriétés des champs qui doivent être écoutés.
  * Chacune de ces propriétés "bindable" est liée à un ensemble de champs qui l'écoute.
  * @example : la propriété "champAMandatory" a été renseigné dans un PLIST d'un formulaire comme propriété
@@ -59,7 +59,7 @@
  */
 @property(nonatomic, strong) NSMutableDictionary * propertiesBinding;
 
-/**
+/*!
  * @brief Cette propriété contient un dictionnaire de block contenant des actions à effectuer pour
  * continuer ou non la mise à jour d'un champ graphique depuis le modèle. Ces blocks sont de type
  * MFValueChangedFilter et renvoient un booléen pour annoncer si la synchronisation de ce champ doit
@@ -67,7 +67,7 @@
  */
 @property (nonatomic, strong) NSDictionary* filtersFromViewModelToForm;
 
-/**
+/*!
  * @brief Cette propriété contient un dictionnaire de block contenant des actions à effectuer pour
  * continuer ou non la mise à jour d'un champ graphique depuis le formulaire. Ces blocks sont de type
  * @see(MFValueChangedFilter) et renvoient un booléen pour annoncer si la synchronisation de ce champ doit
@@ -77,14 +77,14 @@
 
 #pragma mark - Méthodes
 
-/**
+/*!
  * @brief Cette méthode construit cette classe avec un parent
  * @param Le parent de ce delegate
  * @return Une instance de ce delegate
  */
 -(id)initWithParent:(id<MFBindingFormDelegate>) parent;
 
-/**
+/*!
  * @brief Cette méthode permet de réinitialiser les propriétés dynamiques du binding telles que binding ou bindingProperties.
  */
 -(void) reinit;

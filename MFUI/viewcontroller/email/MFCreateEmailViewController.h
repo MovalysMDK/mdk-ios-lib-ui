@@ -20,7 +20,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "MFCreateEmailViewControllerDelegate.h"
 
-/**
+/*!
  * Controller which allow user to write new email.
  *
  */

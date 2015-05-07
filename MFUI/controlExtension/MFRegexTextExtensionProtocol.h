@@ -26,7 +26,7 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The regular expression pattern that a component that use an extension implementing 
  * this protocol can manage
  */

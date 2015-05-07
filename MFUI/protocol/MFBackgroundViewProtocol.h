@@ -16,7 +16,7 @@
 
 #import <Foundation/Foundation.h>
 
-/**
+/*!
  * @protocol MFBackgroundViewProtocol
  * @brief This protocol declares a backgroundView property
  */
@@ -24,7 +24,7 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief A view that should be used as background
  */
 @property (nonatomic, strong) UIView *backgroundView;

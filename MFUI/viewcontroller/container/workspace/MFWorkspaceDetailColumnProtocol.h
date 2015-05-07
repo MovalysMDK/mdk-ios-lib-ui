@@ -22,7 +22,7 @@
 
 #import "MFWorkspaceColumnProtocol.h"
 
-/**
+/*!
  * @brief This protocol defines the properties and methods that each detail ViewController of a
  * MFWorkspaceViewController should use.
  */
@@ -31,7 +31,7 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The index of this detail in the workspace
  */
 @property (nonatomic) NSInteger columnIndex;

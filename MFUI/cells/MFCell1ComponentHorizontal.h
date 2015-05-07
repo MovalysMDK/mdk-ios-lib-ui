@@ -22,7 +22,7 @@
 #import "MFCellAbstract.h"
 
 
-/**
+/*!
  * @brief Main default framework cell.
  * @discussion It is used to display a component with a label.
  * @discussion The component must be an MFUIComponentProtocol inherited object.
@@ -35,13 +35,13 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The label at the top of the cell
  */
 @property(nonatomic, strong) IBOutlet MFLabel *label;
 
 
-/**
+/*!
  * @brief The main Movalys component for this cell
  */
 @property(nonatomic, strong) IBOutlet UIView<MFUIComponentProtocol> *componentView;

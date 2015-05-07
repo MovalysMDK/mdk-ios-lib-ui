@@ -44,7 +44,7 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * The collection of buttons of the HomeScreen
  */
 @property (strong, nonatomic) IBOutletCollection(MFButton) NSArray *buttons;
@@ -54,40 +54,40 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Initialize is called to initialize the view controller
  */
 -(void)initialize;
 
-/**
+/*!
  * @brief Action called when a button of the screen is called
  * @param sender The sender of the action
  */
 - (IBAction)genericButtonPressed:(id)sender;
 
-/**
+/*!
  * Show the waiting view in order to block UI
  */
 -(void) showWaitingView;
 
-/**
+/*!
  * Show the waiting view in order to block UI, with a custom waiting message
  */
 
 -(void) showWaitingViewWithMessageKey:(NSString *) key;
 
-/**
+/*!
  * Dismiss the waiting view if it's displayed
  */
 -(void) dismissWaitingView;
 
-/**
+/*!
  * Show the waiting view in order to block UI during a given time (in seconds)
  * @param seconds The number of seconds for displaying waiting view
  */
 -(void) showWaitingViewDuring:(int)seconds;
 
-/**
+/*!
 * @brief Initialization of the menu with buttons
 *
 */

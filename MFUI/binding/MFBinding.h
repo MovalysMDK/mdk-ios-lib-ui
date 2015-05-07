@@ -15,7 +15,7 @@
  */
 
 
-/**
+/*!
  * @brief This structure defines the mode of the binding
  * MFBindingModeForm : The binding will register all components in with a fake indexPath [0;0]
  * MFBindingModeList : The binding will register all components with thier given binding and indexPath
@@ -31,7 +31,7 @@ typedef enum {
 
 #pragma mark - Properties
 
-/**
+/*!
  * Defines the current binding mode.
  * The values must be : 
  * MFBindingModeForm : The binding binds components of a simple form. All the binding will be in a dictionary pointed with a fake indexpath.
@@ -42,7 +42,7 @@ typedef enum {
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Returns a dictionary of binded components for a given indexPath
  * @param indexPath The indexPath of the binded cell or view we want to retrieve components
  * @return A dictionary of binded components for the given indexPath or nil if no components have already been registered
@@ -50,7 +50,7 @@ typedef enum {
  */
 -(NSDictionary *) componentsDictionaryAtIndexPath:(NSIndexPath *)indexPath;
 
-/**
+/*!
  * @brief Returns an array of binded components for a given indexPath
  * @param indexPath The indexPath of the binded cell or view we want to retrieve components
  * @return An array of binded components for the given indexPath or nil if no components have already been registered
@@ -58,7 +58,7 @@ typedef enum {
  */
 -(NSArray *) componentsArrayAtIndexPath:(NSIndexPath *)indexPath;
 
-/**
+/*!
  * @brief Returns  an array of binded components given by their cellContainer indexPath and  binding key
  * @param indexPath The indexPath of the binded cell or view we want to retrieve components
  * @param bindingKey The binding key of the components to retrieve
@@ -67,7 +67,7 @@ typedef enum {
  */
 -(NSArray *) componentsAtIndexPath:(NSIndexPath *)indexPath withBindingKey:(NSString *)bindingKey;
 
-/**
+/*!
  * @brief Returns  an array of binded components given by thier binding key. This method must be used in MFBindingModeForm ONLY.
  * @param bindingKey The binding key of the components to retrieve
  * @return Binded components for the given bindingKey, or nil if no components have already been registered
@@ -75,7 +75,7 @@ typedef enum {
  */
 -(NSArray *) componentsWithBindingKey:(NSString *)bindingKey;
 
-/**
+/*!
  * @brief Registers a an array of components with given indexPath and bindingKeys
  * @param componentList The list of components to register in the binding
  * @param indexPath The indexPath used to register the components in the binding
@@ -86,14 +86,14 @@ typedef enum {
 -(NSArray *) registerComponents:(NSArray *)componentList atIndexPath:(NSIndexPath *)indexPath withBindingKey:(NSString *)bindingKey;
 
 
-/**
+/*!
  * @brief Removes all registered components from the binding for a specified indexPath or bindingKey
  * @param indexPath The indexPath we will remove components
  * @param bindingKey The bindingKey we will remove components
  */
 -(void) unregisterComponentsAtIndexPath:(NSIndexPath *)indexPath withBindingKey:(NSString *)bindingKey;
 
-/**
+/*!
  * @brief Remove all objects in the binding
  */
 -(void) clear;

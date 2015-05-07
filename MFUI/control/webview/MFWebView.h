@@ -23,7 +23,7 @@
 
 #import "MFUIOldBaseComponent.h"
 
-/**
+/*!
  * @class MFWebView
  * @brief The base Movalys webview component
  */
@@ -32,12 +32,12 @@
 
 #pragma mark - Propriétés
 
-/**
+/*!
  * @brief La webview
  */
 @property (strong, nonatomic) IBOutlet UIWebView *webview;
 
-/**
+/*!
  * @brief The spinner taht indicates an activity
  */
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;

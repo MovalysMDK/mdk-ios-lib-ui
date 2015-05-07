@@ -21,12 +21,12 @@
 
 
 
-/**
+/*!
  * @brief Indicates if the section is in a opened or closed state
  */
 @property (nonatomic) BOOL isOpened;
 
-/**
+/*!
  * @brief The disclosure indicator button
  */
 @property (nonatomic, strong) UIButton *disclosureIndicator;
@@ -34,7 +34,7 @@
 -(void)reinit;
 -(void)initialize;
 
-/**
+/*!
  * @brief Callback called when the opened state of the section has changed
  */
 -(void)openedStateChanged;

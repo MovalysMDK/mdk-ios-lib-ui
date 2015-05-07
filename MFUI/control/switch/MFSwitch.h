@@ -23,7 +23,7 @@
 
 IB_DESIGNABLE
 
-/**
+/*!
  * @class MFSwitch
  * @brief The MDK iOS Switch component
  * @discussion This components allows two states : enabled or disabled. It is similar
@@ -33,7 +33,7 @@ IB_DESIGNABLE
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief Underlying component.
  */
 @property (nonatomic, strong) UISwitch *innerSwitch;

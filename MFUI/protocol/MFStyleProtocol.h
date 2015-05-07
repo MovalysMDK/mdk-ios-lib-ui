@@ -17,7 +17,7 @@
 #import <Foundation/Foundation.h>
 
 
-/**
+/*!
  * @protocol MFStyleProtocol
  * @brief This protocol declares standars methods for MDK style classes
  * @discussion This protocol should be used to identy a style class.
@@ -26,7 +26,7 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief This method should be called when the component that uses this
  * style class in an error state
  * @param component The component that is in an error state.
@@ -34,7 +34,7 @@
 @required
 -(void) applyErrorStyleOnComponent:(id)component;
 
-/**
+/*!
  * @brief This method should be called when the component that uses this
  * style class in an valid state
  * @param component The component that is in an valid state.
@@ -42,7 +42,7 @@
 @required
 -(void) applyValidStyleOnComponent:(id)component;
 
-/**
+/*!
  * @brief This method should be called when the component that uses this
  * style class in an standard state
  * @param component The component that is in an standard state.

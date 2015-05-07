@@ -24,29 +24,29 @@
 @protocol MFViewControllerProtocol <NSObject>
 
 #pragma mark - MEthods
-/**
+/*!
  * @brief Generic action called when a button is pressed on a mains creen
  * @param the sender of the action
  * @return the associated IBAction 
  */
 -(IBAction)genericButtonPressed:(id)sender;
 
-/**
+/*!
  * Show the waiting view in order to block UI
  */
 -(void) showWaitingView;
 
-/**
+/*!
  * Show the waiting view in order to block UI
  */
 -(void) showWaitingViewWithMessageKey:(NSString *)key;
 
-/**
+/*!
  * Dismiss the waiting view if it's displayed
  */
 -(void) dismissWaitingView;
 
-/**
+/*!
  * Show the waiting view in order to block UI during a given time (in seconds)
  * @param seconds The number of seconds for displaying waiting view
  */

@@ -21,7 +21,7 @@
 
 
 IB_DESIGNABLE
-/**
+/*!
  * @class MFDatePicker
  * @brief The date framework component
  * @discussion This components allows to choose and display a date, a time, or a datetime.
@@ -30,7 +30,7 @@ IB_DESIGNABLE
 
 
 #pragma mark - Custom enumeration (edit mode options)
-/**
+/*!
  * @brief This structure defines the mode of the date Picker
  * MFDatePickerModeDate : The view displayed is a date Picker
  * MFDatePickerModeTime : The view displayed is a time Picker
@@ -44,52 +44,52 @@ typedef enum {
 
 
 #pragma mark - Properties
-/**
+/*!
  * @brief The picker that allows to choose a date
  */
 @property (nonatomic, strong) UIDatePicker *datePicker;
 
-/**
+/*!
  * @brief The button displays a selected date and allow to display the picker to choose another one
  */
 @property (nonatomic, strong) UIButton *dateButton;
 
-/**
+/*!
  * @brief The current selected date
  */
 @property (nonatomic, strong) NSDate *currentDate;
 
-/**
+/*!
  * @brief The view container of the pickerView
  */
 @property (nonatomic, strong) UIScrollView *modalPickerView;
 
-/**
+/*!
  * @brief The button to confirm the current choice
  */
 @property (nonatomic, strong) UISegmentedControl *confirmButton;
 
-/**
+/*!
  * @brief The button to cancel the current choice
  */
 @property (nonatomic, strong) UISegmentedControl *cancelButton;
 
-/**
+/*!
  * @brief Indicates if th pickerView is currently showing
  */
 @property (nonatomic) BOOL isShowing;
 
-/**
+/*!
  * @brief Defines the mode of the picker to display
  */
 @property (nonatomic) MFDatePickerMode datePickerMode;
 
-/**
+/*!
  * @brief the manipuled data of the component
  */
 @property (nonatomic, strong) NSDate *data;
 
-/**
+/*!
  * @brief The delegate used when orientation change
  */
 @property (nonatomic, strong) MFOrientationChangedDelegate *orientationChangedDelegate;

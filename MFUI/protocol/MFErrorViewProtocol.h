@@ -18,7 +18,7 @@
 #import <UIKit/UIKit.h>
 
 
-/**
+/*!
  * @protocol MFErrorViewProtocol
  * @brief This protocol declares a errorView property
  */
@@ -26,7 +26,7 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief A view that should be used as error indicator/button
  */
 @property (nonatomic, strong) UIView *errorView;

@@ -22,7 +22,7 @@ FOUNDATION_EXPORT const NSString * BACKGROUND_VIEW_HEIGHT_CONSTRAINT;
 FOUNDATION_EXPORT const NSString * BACKGROUND_VIEW_CENTER_Y_CONSTRAINT;
 FOUNDATION_EXPORT const NSString * BACKGROUND_VIEW_LEFT_CONSTRAINT;
 
-/**
+/*!
  * @class MFTextFieldStyle+BackgroundView
  * @brief This category on MFTextFieldStyle defines the necessary methods 
  * to customize the backgroundView of the Text Field component.
@@ -31,7 +31,7 @@ FOUNDATION_EXPORT const NSString * BACKGROUND_VIEW_LEFT_CONSTRAINT;
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief This method allows to customize the framework-defined constraints for
  * the backgroundView in the MFTextField component.
  * @param backgroundViewConstraints A dictionary that contains key/value pair as following :

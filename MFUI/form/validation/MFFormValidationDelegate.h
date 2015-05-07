@@ -28,17 +28,17 @@ FOUNDATION_EXPORT const int kSaveChangesAlert;
 
 @interface MFFormValidationDelegate : NSObject
 
-/**
+/*!
  * @brief The formViewController associated to this delegate
  */
 @property (nonatomic, weak) id<MFBindingFormDelegate> formController ;
 
-/**
+/*!
  * @brief A dictionary containing the list of invalid inputs
  */
 @property (nonatomic, strong) NSMutableDictionary *invalidInputs ;
 
-/**
+/*!
  * @brief A dictionary containing the errors for the invalid inputs
  */
 @property (nonatomic, strong) NSMutableDictionary *errorForInvalidInputs ;
@@ -51,14 +51,14 @@ FOUNDATION_EXPORT const int kSaveChangesAlert;
 
 
 
-/**
+/*!
  * @brief validate viewmodel
  * @param vm viewmodel
  * @return true if viewmodel is valid
  */
 -(BOOL) validateViewModel:(id<MFUIBaseViewModelProtocol>)vm ;
 
-/**
+/*!
  * @brief validate new value on component
  * @param newValue new value
  * @param component component
@@ -66,47 +66,47 @@ FOUNDATION_EXPORT const int kSaveChangesAlert;
  */
 -(BOOL) validateNewValue:(id)newValue onComponent:(id<MFUIComponentProtocol>)component withFullBindingKey:(NSString *)bindingFullKey ;
 
-/**
+/*!
  * @brief is invalid value of component with keyPath
  * @param fullBindingKey key path of component
  * @return true if component has invalid value
  */
 -(BOOL) hasInvalidValueForFullBindingKey:(NSString *)fullBindingKey ;
 
-/**
+/*!
  * @brief get invalid value of component with keyPath
  * @param fullBindingKey key path of component
  * @return invalid value of component
  */
 -(id) getInvalidValueForFullBindingKey:(NSString *)fullBindingKey ;
 
-/**
+/*!
  * @brief get errors of component with full binding key
  * @param fullBindingKey full binding key
  * @return array of errors
  */
 -(NSArray *) getErrorsForFullBindingKey:(NSString *)fullBindingKey;
 
-/**
+/*!
  * @brief get deferred error for binding key
  * @param bindingKey binding key of component
  * @return deferred error for binding key if exists, else nil
  */
 -(id) getDeferredErrorForFullBindingKey:(NSString *)fullBindingKey ;
 
-/**
+/*!
  * @brief add deferred errors on component
  * @param component
  */
 -(void) addDeferredErrorsOnComponent:(id<MFUIComponentProtocol>)component withFullBindingKey:(NSString *)fullBindingKey;
 
-/**
+/*!
  * @brief Indicates if the current form validation delegate has invalid values
  * @return YES if the validation form delegate has invalid value(s), NO otherwhise.
  */
 -(BOOL) hasInvalidValues;
 
-/**
+/*!
  * @brief Reset all dictionaries used to validate
  */
 -(void) resetValidation ;

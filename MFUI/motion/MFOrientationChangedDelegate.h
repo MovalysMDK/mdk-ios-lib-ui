@@ -26,31 +26,31 @@
 
 #pragma  mark - Properties
 
-/**
+/*!
  * @brief The object that declares a MFOrientationChangedDelegate
  */
 @property (nonatomic, weak) id<MFOrientationChangedProtocol> listener;
 
 #pragma mark - Methods 
 
-/**
+/*!
  * @brief Custom contrcuteur with listener initialization
  * @param The listener of the orientation change
  * @return the built object
  */
 -(id) initWithListener:(id<MFOrientationChangedProtocol>) listener;
 
-/**
+/*!
  * @brief A common block of code that register the orientation changes on the listener
  */
 -(void)registerOrientationChanges;
 
-/**
+/*!
  * @brief A common block of code that unregister the orientation changes on the listener
  */
 -(void)unregisterOrientationChanges;
 
-/**
+/*!
  * @brief Indicates if the current orientation change is a change of type : Portrait <--> Landscape.
  * @return YES if the orientation change is of type Portrait <--> Landscape
  */

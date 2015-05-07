@@ -22,12 +22,12 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The main window
  */
 @property (strong, nonatomic) UIWindow *window;
 
-/**
+/*!
  * @brief The transitionController used to display the menu and the central ViewController
  */
 @property (strong, nonatomic) MFTransitionController *transitionController;
@@ -35,7 +35,7 @@
 
 
 #pragma mark - Methods
-/**
+/*!
  * @brief This method should return a ViewController that will be displayed in
  * the menu on the left
  * @param customMenuViewController A UIViewController object that implements MFMenuViewControllerProtocol

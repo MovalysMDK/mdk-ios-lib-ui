@@ -23,18 +23,18 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The controller to display to make a new search
  */
 @property (nonatomic, strong) MFFormViewController *searchFormController;
 
-/**
+/*!
  * @brief Indicates if the search is a simple search. 
  * In that case, the searchFormController should not be shown.
  */
 @property (nonatomic) BOOL isSimpleSearch;
 
-/**
+/*!
  * @brief Indicates if the search is a live search.
  * This property doesn't make sense if the search is not a simple search.
  * It the value is YES, the results will be displayed instantly to ther user.
@@ -42,7 +42,7 @@
  */
 @property (nonatomic) BOOL isLiveSearch;
 
-/**
+/*!
  * @brief Indicates if the number of results should be displayed
  */
 @property (nonatomic) BOOL displayNumberOfResults;
@@ -52,14 +52,14 @@
 #pragma mark - Methods
 
 @optional
-/**
+/*!
  * @brief Shows the showFormController if needed, or a top searchBar.
  */
 -(void) showSearchFormController;
 
 
 @optional
-/**
+/*!
  * @brief Add a search icon to he navigationItem of the FormViewController
  */
 -(void) addSearchIcon;

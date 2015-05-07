@@ -20,7 +20,7 @@
 #pragma mark - Methods
 
 @required
-/**
+/*!
  * @brief Returns the name of the action to save the viewModel associated to this controller master view controller
  * @return A NSString* corresponding to the name of the action to launch to save the content of this controller.M
  */

@@ -18,7 +18,7 @@
 #import "MFConverterProtocol.h"
 #import "MFDatePicker.h"
 
-/**
+/*!
  * @class MFDateConverter
  * @brief Class of static methods to convert a date into other types and other types into a date
  */
@@ -26,21 +26,21 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Convert a time to a string
  * @param value The time value to convert as a string
  * @return The string converted value
  */
 +(NSString *)fromTimeToString:(id)value;
 
-/**
+/*!
  * @brief Convert a datetime to a string
  * @param value The datetime value to convert as a string
  * @return The string converted value
  */
 +(NSString *)fromDateTimeToString:(id)value;
 
-/**
+/*!
  * @brief Convert a datetime to a string
  * @param value The datetime value to convert as a string
  * @param mode The MFDatePickerMode to use to format the converted string value
@@ -48,7 +48,7 @@
  */
 +(NSString *)toString:(id)value withMode:(MFDatePickerMode)mode;
 
-/**
+/*!
  * @brief Convert a datetime to a string
  * @param value The datetime value to convert as a string
  * @param customFormat The custom format to use to format the converted string value

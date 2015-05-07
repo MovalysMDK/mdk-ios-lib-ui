@@ -17,7 +17,7 @@
 
 #import "MFRegexTextFieldStyle.h"
 
-/**
+/*!
  * @class MFDoubleTextFieldStyle
  * @brief This class manages the syle of a MFDoubleTextField component
  */

@@ -23,32 +23,32 @@
 #import "MFUIBaseViewModel.h"
 
 #pragma mark - Propriétés
-/**
+/*!
  * @brief Cette classe est ConverunViewModel contenant une liste de ViewModel
  */
 @interface MFUIBaseListViewModel : NSObject <MFUIBaseViewModelProtocol>
 
-/**
+/*!
  * @brief Cette propriété définit le nom du ViewModel que cette liste utilise
  */
 @property (nonatomic, strong) NSString *viewModelName;
 
-/**
+/*!
  * @brief La liste des ViewModel
  */
 @property (nonatomic, strong) NSMutableArray *viewModels;
 
-/**
+/*!
  * Controller for fetched results
  */
 @property (nonatomic, strong) NSFetchedResultsController *fetch;
 
-/**
+/*!
  * @brief Le nombre d'items de la liste
  */
 @property (nonatomic) int numberOfItems;
 
-/**
+/*!
  * @brief Cette propriété définit le ViewModel Parent. Si cette propriété reste nulle,
  * alors ce ViewModel est le plus haut parent
  */
@@ -56,35 +56,35 @@
 
 #pragma mark - Méhodes à implémenter dans les fils 
 
-/**
+/*!
  * @brief Définit le nombre d'items à afficher dans la liste
  * @return le nombre d'élément de la liste
  */
 -(NSUInteger) defineNumberOfItems;
 
-/**
+/*!
  * @brief Définit le nom du ViewModel à lister
  * @return le nom du ViewModel à lister
  */
 -(NSString *)defineViewModelName;
 
-/**
+/*!
  * @brief Initialisation
  */
 -(void) initialize;
 
-/**
+/*!
  * @brief clear
  */
 -(void)clear;
 
-/**
+/*!
  * @brief add an item viewmodel
  * @param itemVm item viewmodel
  */
 -(void) add:(MFUIBaseViewModel *)itemVm ;
 
-/**
+/*!
  * @brief add item at index
  * @param itemVm item vm
  * @param index index

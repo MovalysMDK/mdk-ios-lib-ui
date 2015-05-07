@@ -24,32 +24,32 @@
 
 @interface MFTestHelper : NSObject
 
-/**
+/*!
  * @brief donne l'unique instance du starter
  */
 +(MFTestHelper *)getInstance;
 
-/**
+/*!
  * @brief run once, before tests of the classes
  */
 - (void) setUpOnce;
 
-/**
+/*!
  * @brief run once, after tests of the classes
  */
 - (void) tearDownOnce;
 
-/**
+/*!
  * @brief create a mfcontext
  */
 - (id<MFContextProtocol>) createContext;
 
-/**
+/*!
  * @brief rollback mfcontext
  */
 - (void) rollbackContext:(id<MFContextProtocol>) mfContext;
 
-/**
+/*!
  * @brief use this method to start an action in an unit test
  */
 - (id) launchAction:(NSString *) actionName withInParameter:(id) parameterIn andContext:(id<MFContextProtocol>) mfContext;

@@ -376,6 +376,7 @@ const int kMasterSelectSaveChangesAlert = 12 ;
             return columnViewcontroller;
         }
     }
+    return nil;
 }
 
 /**

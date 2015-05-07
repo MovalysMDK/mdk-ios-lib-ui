@@ -16,7 +16,7 @@
 
 #import "MFTextField.h"
 
-/**
+/*!
  * @class MFRegexTextField
  * @brief The MFRegexTextField component.
  * @discussion This component inherits from MFNewTextField component.
@@ -27,13 +27,13 @@
  */
 @interface MFRegexTextField : MFTextField
 
-/**
+/*!
  * @brief Returns the regular expression that controls this component
  * @return The regular expression that controls this component
  */
 -(NSString *) regex;
 
-/**
+/*!
  * @brief Indicates if the Regex Component match the given pattern
  * @param checkString The pattern to match
  * @return A BOOL value that is YES if the component is matching the pattern, NO otherwhise.

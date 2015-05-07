@@ -24,7 +24,7 @@
 
 FOUNDATION_EXPORT NSInteger DEFAULT_ACCESSORIES_MARGIN;
 
-/**
+/*!
  * @class MFTextFieldStyle
  * @brief This class manages the syle of a MFUrlTextField component
  */
@@ -32,7 +32,7 @@ FOUNDATION_EXPORT NSInteger DEFAULT_ACCESSORIES_MARGIN;
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief This methods allows to define constraints that will be applied on 
  * custom accessory view added to the component.
  * @param accessoryView The Accessory View added to the component on that the 

@@ -33,47 +33,47 @@ FOUNDATION_EXPORT NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY;
 @interface MFSimplePickerList : MFUIOldBaseComponent <UIGestureRecognizerDelegate, MFOrientationChangedProtocol, UIPickerViewDataSource, UIPickerViewDelegate>
 
 #pragma mark - Properties
-/**
+/*!
  * @brief The picker that allows to choose an enum
  */
 @property (nonatomic, strong) UIPickerView *pickerView;
 
-/**
+/*!
  * @brief The button displays a selected date and allow to display the picker to choose another one
  */
 @property (nonatomic, strong) MFButton *pickerButton;
 
-/**
+/*!
  * @brief The current selected date
  */
 @property (nonatomic) int currentEnumValue;
 
-/**
+/*!
  * @brief The view container of the pickerView
  */
 @property (nonatomic, strong) UIScrollView *modalPickerView;
 
-/**
+/*!
  * @brief The button to confirm the current choice
  */
 @property (nonatomic, strong) UISegmentedControl *confirmButton;
 
-/**
+/*!
  * @brief The button to cancel the current choice
  */
 @property (nonatomic, strong) UISegmentedControl *cancelButton;
 
-/**
+/*!
  * @brief Indicates if th pickerView is currently showing
  */
 @property (nonatomic) BOOL isShowing;
 
-/**
+/*!
  * @brief the manipuled data of the component
  */
 @property (nonatomic, strong) id<MFEnumHelperProtocol> data;
 
-/**
+/*!
  * @brief The delegate used when orientation change
  */
 @property (nonatomic, strong) MFOrientationChangedDelegate *orientationChangedDelegate;

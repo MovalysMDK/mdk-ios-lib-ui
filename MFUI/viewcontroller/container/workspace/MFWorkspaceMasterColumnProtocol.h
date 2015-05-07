@@ -23,13 +23,13 @@
 #import "MFWorkspaceColumnProtocol.h"
 #import "MFUIBaseViewModelProtocol.h"
 
-/**
+/*!
  * @brief This protocol defines the properties and methods that each master ViewController of a
  * MFWorkspaceViewController should use.
  */
 @protocol MFWorkspaceMasterColumnProtocol <MFWorkspaceColumnProtocol>
 
-/**
+/*!
  * @brief Returns the viewModel corresponding to the selected item in the master column
  * @param indexPath, The indexpath of the current selected item in the master column
  * @return The view model associated to the current selected item in the master column

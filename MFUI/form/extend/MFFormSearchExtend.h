@@ -16,23 +16,23 @@
 
 
 
-/**
+/*!
  * @brief Classe d'extension pour formulaire avec recherche
  */
 
 @interface MFFormSearchExtend : NSObject 
 
-/**
+/*!
  * @brief Définit si la recherche est simple (sur un seul élément)
  */
 @property (nonatomic) BOOL simpleSearch;
 
-/**
+/*!
  * @brief Définit si la recherche doit être faite en direct (uniquement pour le cas d'une recherche simple).
  */
 @property (nonatomic) BOOL liveSearch;
 
-/**
+/*!
  * @brief Définit si le nombre de résultats doit être affiché.
  */
 @property (nonatomic) BOOL displayNumberOfResults;

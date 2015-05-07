@@ -25,17 +25,17 @@
 @interface MFViewControllerDelegate : NSObject<MFViewControllerProtocol>
 
 #pragma mark - Properties
-/**
+/*!
  * @brief The ViewController associated to this delegate
  */
 @property (nonatomic, weak) UIViewController *viewController;
 
-/**
+/*!
  * @brief The full Frame of the controller
  */
 @property (nonatomic) CGRect fullFrame;
 
-/**
+/*!
  * @brief The waiting view used during loading
  */
 @property (nonatomic, strong) MBProgressHUD *waitingView;
@@ -43,7 +43,7 @@
 
 
 #pragma mark - Methods
-/**
+/*!
  * @brief Custom initializer
  * @param the viewcontroller associated to this delegate
  * @return The create object

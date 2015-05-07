@@ -16,20 +16,20 @@
 
 
 
-/**
+/*!
  * @protocol MFDefaultConstraintsProtocol
  * @brief A protocol to apply on class that needs to apply default constraints or manage some speicific constraints
  */
 @protocol MFDefaultConstraintsProtocol <NSObject>
 
 #pragma mark - Properties
-/**
+/*!
  * @brief Default constraints to apply
  */
 @property (nonatomic, weak) NSArray *defaultConstraints;
 
 
-/**
+/*!
  * @brief Default constraints to apply
  */
 @property (nonatomic, strong) NSMutableDictionary *savedConstraints;
@@ -38,7 +38,7 @@
 #pragma mark - Methods
 
 @optional
-/**
+/*!
  * @brief Apply some default constraints for this object
  */
 -(void)applyDefaultConstraints;

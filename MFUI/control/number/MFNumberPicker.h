@@ -21,7 +21,7 @@
 
 #import "MFUIOldBaseComponent.h"
 
-/**
+/*!
  * @class MFNumberPicker
  * @brief The framework number picker component
  * @discussion This component display a picker aimed to select a n interger value.
@@ -30,22 +30,22 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief The current selected value
  */
 @property (nonatomic) NSInteger currentValue;
 
-/**
+/*!
  * @brief The minimal value
  */
 @property (nonatomic) NSInteger minimalValue;
 
-/**
+/*!
  * @brief The maximal value
  */
 @property (nonatomic) NSInteger maximalValue;
 
-/**
+/*!
  * @brief The step betweens two values
  */
 @property (nonatomic) NSInteger step;

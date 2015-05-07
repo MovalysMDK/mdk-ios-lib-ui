@@ -22,17 +22,17 @@
 
 
 #pragma mark - Properties
-/**
+/*!
  * @brief The identifier of this section
  */
 @property (nonatomic) NSNumber *identifier;
 
-/**
+/*!
  * @brief The identifier of this section
  */
 @property (nonatomic, weak) id<MFFormViewControllerProtocol> sender;
 
-/**
+/*!
  * @brief Indicated the editable state of the parent.
  */
 @property (nonatomic, strong) NSNumber *parentEditable;
@@ -41,7 +41,7 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Common method to initialize some objects of the class
  */
 -(void)initialize;

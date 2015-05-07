@@ -16,7 +16,7 @@
  */
 #import "MFRegexTextFieldStyle.h"
 
-/**
+/*!
  * @class MFEmailTextFieldStyle
  * @brief This class manages the syle of a MFEmailTextField component
  */

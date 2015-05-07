@@ -31,7 +31,7 @@
 @interface MFVersionManager : NSObject
 
 #pragma mark - Methods
-/**
+/*!
  * @brief indicates if the current device is an iPhone (if NO we consider that the current device is an iPad)
  * @return YES if the current device is an iPhone, NO otherwise.
  */

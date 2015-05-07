@@ -28,7 +28,7 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief This method is called when a binded property has changed on a View Model
  * @param keyPath The keyPath of the changed property 
  * @param sender The ViewModel on which the property with the given keyPath has changed

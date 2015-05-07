@@ -16,7 +16,7 @@
 
 #import "MFRegexTextField.h"
 
-/**
+/*!
  * @class MFPhoneTextField
  * @brief This class represents the Phone Text Field component.
  * @discussion This component inherits from MFRegexTextField and must contains

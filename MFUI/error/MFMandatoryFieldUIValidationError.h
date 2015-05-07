@@ -15,7 +15,7 @@
  */
 
 
-/**
+/*!
  * Report an empty mandatory field.
  * An instance of this error type must be associated with a field name.
  **/
@@ -34,7 +34,7 @@ extern NSInteger const MANDATORY_FIELD_UI_VALIDATION_ERROR_CODE;
  */
 extern NSString *const MANDATORY_FIELD_UI_VALIDATION_ERROR_LOCALIZED_DESCRIPTION_KEY;
 
-/**
+/*!
  * Init new instance.
  *
  * @param fieldName - Associated field name.

@@ -46,7 +46,7 @@
 
 //Framework constants
 
-/**
+/*!
  * @class MFUIOldBaseComponent
  * @brief The main class for all framework components
  * @discussion It represents a base framework component.
@@ -60,42 +60,42 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * Bouton indiquant une erreur
  */
 @property (nonatomic, strong) UIButton *baseErrorButton;
 
-/**
+/*!
  * @brief The component that holds or has created this component
  */
 @property (nonatomic, weak) MFUIOldBaseComponent *sender;
 
-/**
+/*!
  * Info-bulle affichant la liste des erreurs
  */
 @property (nonatomic, strong) TooltipView *baseTooltipView;
 
-/**
+/*!
  * Liste des erreurs du composant
  */
 @property (nonatomic, strong) NSMutableArray *baseErrors;
 
-/**
+/*!
  * MF Parent Composant
  */
 @property (nonatomic, weak) MFUIOldBaseComponent *mfParent;
 
-/**
+/*!
  * initialisation
  */
 @property (nonatomic) BOOL applySelfStyle;
 
-/**
+/*!
  * initialisation
  */
 @property (nonatomic, strong) NSNumber *parentEditable;
 
-/**
+/*!
  * @brief The class abstract object this component should used to apply style.
  * @discussion This property is computed at runtime following the style's priority.
  */
@@ -103,7 +103,7 @@
 
 
 #pragma mark - Inspectable Methods
-/**
+/*!
  * @brief This property enables or disables the override of the IB Style on the code style
  * @discussion This property is used both on InterfaceBuilder and on execution
  */
@@ -112,7 +112,7 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Custom init that initialize the component with a specified frame, on set another sender component.
  * @param frame The frame opf the created componenty
  * @param sender The component that holds this component
@@ -120,109 +120,109 @@
  */
 - (instancetype)initWithFrame:(CGRect)frame withSender:(MFUIOldBaseComponent *)sender;
 
-/**
+/*!
  * @brief Initialise certains propriétés de la classe
  */
 -(void) initialize;
 
-/**
+/*!
  * @brief Permet de masquer le bouton baseErrorButton
  */
 -(void)hideErrorButtons;
 
-/**
+/*!
  * @brief Permet d'afficher le bouton baseErrorButton
  */
 -(void)showErrorButtons;
 
-/**
+/*!
  * @brief Permet de redimensionner le composant après avoir affiché le bouton baseErrorButton
  */
 -(void)modifyComponentAfterShowErrorButtons;
 
-/**
+/*!
  * @brief Permet de redimensionner le composant après avoir masqué le bouton baseErrorButton
  */
 -(void)modifyComponentAfterHideErrorButtons;
 
-/**
+/*!
  * @brief Affiche l'info-bulle contenant la liste des erreurs
  */
 -(void)showErrorTooltips;
 
-/**
+/*!
  * @brief Masque l'info-bulle contenant la liste des erreurs
  */
 -(void)hideErrorTooltips;
 
-/**
+/*!
  * @brief Permet de vider la liste des erreurs
  */
 -(void) clearErrors;
 
-/**
+/*!
  * @brief Permet d'ajouter des erreurs à la liste des erreurs
  * @param errors Une liste d'erreurs à ajouter
  */
 -(void) addErrors:(NSArray *) errors;
 
-/**
+/*!
  * @brief Action appelée lorsque l'utilisateur tape sur le bouton indiquant qu'il y a des erreurs sur le composant
  */
 -(void)toggleErrorInfo;
 
-/**
+/*!
  * @brief Chargement des configurations
  * @param Le nom de la configuration à charger
  * @return Une configuration
  */
 -(MFConfigurationUIComponent *) loadConfiguration:(NSString *) configurationName;
 
-/**
+/*!
  * @brief Cette méthode est appelée dès que la valeur du composant est modifiée.
  * Elle permet la synchronisation du formulaire avec le ViewModel
  * @return Un block dont le code est exécuté dès que la valeur du champ est modifiée
  */
 -(void)updateValue:(id) newValue;
 
-/**
+/*!
  * @brief This method is called after the STYLE has been applied to the component and the subcomponents of its method.
  * You can do some customizations here on the component
  */
 -(void) selfCustomization;
 
-/**
+/*!
  * @brief This method is called after the selfDescriptor has been set
  */
 -(void) didFinishLoadDescriptor __attribute__((deprecated("Use method didLoadFieldDescriptor: instead")));
 
-/**
+/*!
  * @brief This method is called after the selfDescriptor has been set
  * @param fieldDescriptor The complete fieldDescriptor of this component
  */
 -(void) didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor;
 
-/**
+/*!
  * @brief Set the parameters for this component
  */
 -(void) setComponentParameters:(NSDictionary *)parameters;
 
 #pragma mark - Live Rendering Methods
 
-/**
+/*!
  * @brief Add views to this components and static attributes of those views.
  * @discussion This method is mandatory
  */
 -(void) buildDesignableComponentView;
 
-/**
+/*!
  * @brief Implement here the behaviour of the inspectable attributes in order to
  * render the component dynamically in InterfaceBuilder
  * @discussion This method is mandatory.
  */
 -(void) renderComponentFromInspectableAttributes;
 
-/**
+/*!
  * @brief Before to implement the behaviour of the inspectables attributes on this component,
  * you should define here some default values for these inspectable attributes.
  * @discussion This method is mandatory. Be careful, if no value is specified, the component should
@@ -231,7 +231,7 @@
  */
 -(void) initializeInspectableAttributes;
 
-/**
+/*!
  * @brief Implement here some treatment you would do in layoutSubviews but you
  * wish not that it will be rendered on InterfaceBuilder. This method is called before
  * parent layoutSubviews method.
@@ -239,7 +239,7 @@
  */
 -(void) willLayoutSubviewsNoDesignable;
 
-/**
+/*!
  * @brief Implement here some treatment you would do in layoutSubviews but you
  * wish not that it will be rendered on InterfaceBuilder. This method is called after
  * parent layoutSubviews method.
@@ -247,7 +247,7 @@
  */
 -(void) didLayoutSubviewsNoDesignable;
 
-/**
+/*!
  * @brief Implement here some treatment you would do in layoutSubviews but you
  * wish not that it will be rendered on InterfaceBuilder. This method is called before
  * parent layoutSubviews method.
@@ -255,7 +255,7 @@
  */
 -(void) willLayoutSubviewsDesignable;
 
-/**
+/*!
  * @brief Implement here some treatment you would do in layoutSubviews but you
  * wish not that it will be rendered on InterfaceBuilder. This method is called after
  * parent layoutSubviews method.
@@ -265,7 +265,7 @@
 
 #pragma mark - Static methods
 
-/**
+/*!
  * @brief Cette méthode réalise le merge entre les valeurs de configuration et de base du storyboard
  * @param configurationValue La valeur booléenne de base en configuration
  * @param defaultValue La valeur par défaut dans le storyboard
@@ -273,7 +273,7 @@
  */
 +(NSNumber *) getBoolConfigurationWithValue:(NSNumber *)configurationValue andDefaultValue:(NSNumber *)defaultValue;
 
-/**
+/*!
  * @brief Cette méthode réalise le merge entre les valeurs de configuration et de base du storyboard
  * @param configurationValue La valeur numérique de base en configuration
  * @param defaultValue La valeur par défaut dans le storyboard
@@ -281,7 +281,7 @@
  */
 +(NSNumber *) getNumberConfigurationWithValue:(NSNumber *)configurationValue andDefaultValue:(NSNumber *)defaultValue;
 
-/**
+/*!
  * @brief Cette méthode réalise le merge entre les valeurs de configuration et de base du storyboard
  * @param configurationValue La chaîne de caractères de base en configuration
  * @param defaultValue La valeur par défaut dans le storyboard

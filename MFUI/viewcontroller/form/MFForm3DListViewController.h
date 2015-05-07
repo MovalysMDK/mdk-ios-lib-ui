@@ -24,7 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet MFForm3DHeaderViewControls *headerView;
 
-/**
+/*!
  * @brief Define the title of the screen
  */
 -(void)setScreenTitle;

@@ -18,22 +18,22 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief This protocol provides some attributes to manage a FormListviewController
  */
 @protocol MFListViewControllerProtocol <NSObject>
 
-/**
+/*!
  * @brief Indicates if an add button button should be shown
  */
 @property (nonatomic) BOOL showAddItemButton;
 
-/**
+/*!
  * @brief Indicates if the long press to delete gesture is enabled
  */
 @property (nonatomic) BOOL longPressToDelete;
 
-/**
+/*!
  * @brief The name of the storyboard of the detail
  */
 @property (nonatomic,strong) NSString *detailStoryboardName;
@@ -42,18 +42,18 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief This method creates a new item of the list. 
  * It is called when the user press the "add item" button
  */
 - (void) doOnCreateItem;
 
-/**
+/*!
  * @brief Add a toolbar to the controller with given items
  */
 -(void) addToolBarWithItems:(NSArray *)items;
 
-/**
+/*!
  * @brief Add a button bar item to the toolbar
  */
 //-(void) addToolbarItem:(UIBarButtonItem *)item;

@@ -27,43 +27,43 @@
 
 #pragma mark - Properties
 
-/**
+/*!
  * @brief identifier
  */
 
 @property (nonatomic, strong) NSNumber *identifier;
 
-/**
+/*!
  * @brief name (title)
  */
 
 @property (nonatomic, strong) NSString *titre;
 
-/**
+/*!
  * @brief description
  */
 
 @property (nonatomic, strong) NSString *descr;
 
-/**
+/*!
  * @brief URI of remote or local photo
  */
 
 @property (nonatomic, strong) NSString *uri;
 
-/**
+/*!
  * @brief date
  */
 
 @property (nonatomic, strong) NSDate *date;
 
-/**
+/*!
  * @brief state
  */
 
 @property (nonatomic, strong) MFPhotoState *photoState;
 
-/**
+/*!
  * @brief photo position
  */
 
@@ -72,13 +72,13 @@
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief Retourne la date du view model en string au format dd/MM/yyyy hh:mm
  */
 
 - (NSString *) getDateStringFormat:(NSString *)dateFormat;
 
-/**
+/*!
  * @brief convert MFPhotoVoProtocol to MFPhotoViewModel instance
  * @param vo position value
  * @param parentVm parent viewmodel

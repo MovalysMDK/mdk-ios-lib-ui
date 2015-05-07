@@ -21,13 +21,13 @@
 
 @protocol MFPositionVoProtocol <NSObject>
 
-/**
+/*!
  * @brief latitude property
  */
 @required
 @property (nonatomic, retain) NSNumber *latitude;
 
-/**
+/*!
  * @brief longitude property
  */
 @required

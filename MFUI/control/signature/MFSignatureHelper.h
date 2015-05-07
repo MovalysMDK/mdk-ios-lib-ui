@@ -22,7 +22,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-/**
+/*!
  * @class MFSignatureHelper
  * @brief An helper to the signature component
  * @discussion This helper converts a graphical signature into a NSMutableArray path and vice versa
@@ -30,7 +30,7 @@
 @interface MFSignatureHelper : NSObject
 
 #pragma mark - Static methods
-/**
+/*!
  * @brief Converts a given path as an array into a string
  * @param lines An array containing lines descriptions
  * @param width The width of lines
@@ -43,7 +43,7 @@
 
 + (NSMutableArray *) convertFromStringToLines:(NSString *) string width:(float) width originX:(float) x0 originY:(float) y0;
 
-/**
+/*!
  * Save the context
  * @param context context to save
  * @return NSError if save technical failed

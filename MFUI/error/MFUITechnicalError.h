@@ -21,7 +21,7 @@
 
 #import <MFCore/MFCoreError.h>
 
-/**
+/*!
  * Technical error thrown from UI layer.
  **/
 @interface MFUITechnicalError : MFTechnicalError

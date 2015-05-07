@@ -29,12 +29,12 @@
 @protocol MFUIBaseViewModelProtocol <NSObject>
 
 #pragma mark - Properties
-/**
+/*!
  * @brief This property is the ViewController that manages the binding between the ViewModel and the components owned by this form.
  */
 @property (nonatomic, strong) id<MFViewModelChangedListenerProtocol, MFBindingFormDelegate> form;
 
-/**
+/*!
  * @brief Indicates this ViewModel has changed. It's necessary to know if it should be saved.
  */
 @property (nonatomic) BOOL hasChanged;
@@ -43,24 +43,24 @@
 #pragma mark - Methods
 
 
-/**
+/*!
  * @brief Returns the form associa  ted to this ViewModel
  * @return A id<MFFormViewControllerProtocol> object.
  */
 -(id<MFFormViewControllerProtocol>) getForm;
 
-/**
+/*!
  * @brief get child viewmodels (property names)
  */
 -(NSArray *)getChildViewModels;
 
-/**
+/*!
  * @brief Indicates if this ViewModel is valid
  * @return YES if the view model is considered valid, NO otherwise
  */
 -(BOOL) validate ;
 
-/**
+/*!
  * @brief Indicates that this ViewModel has no more changes
  */
 -(void) resetChanged;

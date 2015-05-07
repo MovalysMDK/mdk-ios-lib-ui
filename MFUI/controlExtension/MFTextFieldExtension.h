@@ -20,7 +20,7 @@
 FOUNDATION_EXPORT const NSString *PARAMETER_TEXTFIELD_MAXLENGTH_KEY;
 FOUNDATION_EXPORT const NSString *PARAMETER_TEXTFIELD_MINLENGTH_KEY;
 
-/**
+/*!
  * @class MFTextFieldExtension
  * @brief This class represents the parameters the framework can manage on a MFUITextField
  */

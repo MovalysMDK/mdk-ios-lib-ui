@@ -17,7 +17,7 @@
 
 #import "MFRegexTextFieldStyle.h"
 
-/**
+/*!
  * @class MFUrlTextFieldStyle
  * @brief This class manages the syle of a MFUrlTextField component
  */

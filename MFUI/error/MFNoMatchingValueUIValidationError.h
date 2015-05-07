@@ -29,7 +29,7 @@ extern NSInteger const NO_MATCHING_VALUE_UI_VALIDATION_ERROR_CODE;
  */
 extern NSString *const NO_MATCHING_VALUE_UI_VALIDATION_ERROR_LOCALIZED_DESCRIPTION_KEY;
 
-/**
+/*!
  * Init new instance.
  *
  * @param fieldName : Associated field name.

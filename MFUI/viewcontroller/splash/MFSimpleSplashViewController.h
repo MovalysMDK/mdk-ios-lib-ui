@@ -19,7 +19,7 @@
 //
 //
 
-/**
+/*!
  * @class MFSimpleSplashViewController
  * @brief This is the application splash screen view controller class
  * @discussion You can customize it by inheriting this class
@@ -27,11 +27,11 @@
 @interface MFSimpleSplashViewController : UIViewController
 
 #pragma mark - Properties
-/**
+/*!
  * @brief The outlet to the progressView
  */
 @property(nonatomic, strong) IBOutlet UIProgressView *progressView;
-/**
+/*!
  * @brief The outlet to the indicatorView
  */
 @property(nonatomic, strong) IBOutlet UIActivityIndicatorView *indicatorView;

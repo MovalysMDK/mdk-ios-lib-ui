@@ -25,7 +25,7 @@ static const int ACTION_RESULT_PENDING = INT32_MIN+1;
 static const int ACTION_RESULT_FAIL = INT32_MIN+2;
 
 
-/**
+/*!
  * @class MFContainerViewController
  * @brief This contraoller is a container. 
  * It can be used to display a WorkspaceViewController or a MultiPanelViewController
@@ -35,19 +35,19 @@ static const int ACTION_RESULT_FAIL = INT32_MIN+2;
 
 #pragma mark - Methods
 
-/**
+/*!
  * @brief  Register the children controller actions
  */
 -(void) registerChildrenActions;
 
-/**
+/*!
  * @brief  This method check if the children controllers have changed or have invalid values
  * @return YES if one or more of the childrens have changed or has invalid value, NO otherwise.
  */
 -(BOOL) checkHasChangedOrAsInvalidValues;
 
 
-/**
+/*!
  * @brief Callback called when the save action has succeeded
  * @param context The context used by the action
  * @param caller The caller object of the action
@@ -56,7 +56,7 @@ static const int ACTION_RESULT_FAIL = INT32_MIN+2;
  */
 - (void) succeedSaveAction:(id<MFContextProtocol>)context withCaller:(id)caller andResult:(id)result;
 
-/**
+/*!
  * @brief Callback called when the save action has failed
  * @param context The context used by the action
  * @param caller The caller object of the action
@@ -66,24 +66,24 @@ static const int ACTION_RESULT_FAIL = INT32_MIN+2;
 - (void) failedSaveAction:(id<MFContextProtocol>)context withCaller:(id)caller andResult:(id)result;
 
 
-/**
+/*!
  * @brief CallBack when back button is pressed
  * @param sender The sender of the event
  */
 -(void)onBackPressed:(id)sender;
 
-/**
+/*!
  * @brief CallBack when save button is pressed
  * @param sender The sender of the event
  */
 -(void)onSavePressed:(id)sender;
 
-/**
+/*!
  * @brief Updates the controller
  */
 -(void) updateController;
 
-/**
+/*!
  * @brief Returns the back button title of the workspace.
  * You can specify a different title when master is visible or no by checking its visibility
  * with the method "isMasterVisible" of the class MFWorkspaceView
@@ -91,7 +91,7 @@ static const int ACTION_RESULT_FAIL = INT32_MIN+2;
  */
 -(NSString *) backButtonTitle;
 
-/**
+/*!
  * @brief Returns the save button title of the workspace.
  * You can specify a different title when master is visible or no by checking its visibility
  * with the method "isMasterVisible" of the class MFWorkspaceView
@@ -99,12 +99,12 @@ static const int ACTION_RESULT_FAIL = INT32_MIN+2;
  */
 -(NSString *) saveButtonTitle;
 
-/**
+/*!
  * @brief Release all retained objects
  */
 -(void)releaseRetainedObjects;
 
-/**
+/*!
  * @brief 
  * @param 
  * @return 

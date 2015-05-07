@@ -13,11 +13,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFContainerViewController.h
-//  MFUI
-//
-//
 
 #import <MFCore/MFCoreContext.h>
 #import "MFViewController.h"
@@ -60,6 +55,16 @@ static const int ACTION_RESULT_FAIL = INT32_MIN+2;
  * @return 
  */
 - (void) succeedSaveAction:(id<MFContextProtocol>)context withCaller:(id)caller andResult:(id)result;
+
+/**
+ * @brief Callback called when the save action has failed
+ * @param context The context used by the action
+ * @param caller The caller object of the action
+ * @param result The result of the action
+ * @return
+ */
+- (void) failedSaveAction:(id<MFContextProtocol>)context withCaller:(id)caller andResult:(id)result;
+
 
 /**
  * @brief CallBack when back button is pressed

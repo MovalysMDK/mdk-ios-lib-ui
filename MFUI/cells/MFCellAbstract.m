@@ -14,12 +14,6 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-//
-//  MFCellAbstract.m
-//  MFUI
-//
-//
-
 #import <MFCore/MFCoreFoundationExt.h>
 #import <MFCore/MFCoreError.h>
 #import <MFCore/MFCoreConfig.h>

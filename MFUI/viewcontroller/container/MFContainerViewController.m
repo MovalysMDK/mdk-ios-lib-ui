@@ -13,11 +13,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFContainerViewController.m
-//  MFUI
-//
-//
 
 //MFCore imports
 #import <MFCore/MFCoreBean.h>
@@ -171,7 +166,7 @@ MFRegister_ActionListenerOnSuccess(MFAction_MFChainSaveDetailAction, succeedSave
     
     if(!isExiting && [self isKindOfClass:[MFWorkspaceViewController class]]) {
         for(MFFormBaseViewController *baseViewController in self.childViewControllers) {
-            
+            [baseViewController.formValidation resetValidation];
             //refresh content
             if([baseViewController conformsToProtocol:@protocol(MFWorkspaceMasterColumnProtocol)] &&
                [baseViewController respondsToSelector:@selector(doFillAction)]) {

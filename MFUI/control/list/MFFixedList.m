@@ -13,11 +13,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFFixedList.m
-//  MFUI
-//
-//
 
 #import <MFCore/MFCoreFoundationExt.h>
 #import <MFCore/MFCoreError.h>

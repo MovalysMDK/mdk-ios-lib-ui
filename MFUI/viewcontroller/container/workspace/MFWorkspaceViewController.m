@@ -50,6 +50,8 @@ const int kMasterSelectSaveChangesAlert = 12 ;
 
 @property BOOL isChangingMasterIndex;
 
+@property (nonatomic, strong) MFWorkspaceViewControllerState *workspaceState;
+
 @end
 
 
@@ -87,7 +89,7 @@ const int kMasterSelectSaveChangesAlert = 12 ;
 - (void) initialize {
     [super initialize];
     self.isChangingMasterIndex = NO;
-    
+    self.workspaceState = [MFWorkspaceViewControllerState new];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(updateController) name:WORKSPACE_VIEW_DID_SCROLL_NOTIFICATION_KEY object:nil];
 }
@@ -96,7 +98,7 @@ const int kMasterSelectSaveChangesAlert = 12 ;
     [super updateController];
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL isTopController = NO;
-
+        
         UIViewController *topController  = self;
         if(self.navigationController.viewControllers.count > 0 ) {
             topController = [self.navigationController.viewControllers objectAtIndex:0];
@@ -176,7 +178,13 @@ const int kMasterSelectSaveChangesAlert = 12 ;
 
 #pragma mark - Workspace management
 
-- (void) didSelectMasterIndex:(NSIndexPath *) indexPath from:(id<MFWorkspaceMasterColumnProtocol>) sourceController {
+- (void) didSelectMasterIndex:(NSIndexPath *)indexPath from:(id<MFWorkspaceMasterColumnProtocol>)sourceController {
+    
+    if(!self.workspaceState.lastSelectedIndexPath) {
+        self.workspaceState.lastSelectedIndexPath = indexPath;
+    }
+    
+    self.workspaceState.currentSelectedIndexPath = indexPath;
     MFUIBaseViewModel *selectedViewModel = (MFUIBaseViewModel *)[sourceController viewModelAtIndexPath:indexPath];
     // if the view model is the same to nothing
     if (![selectedViewModel isEqual:self.currentMasterViewModel]) {
@@ -208,12 +216,13 @@ const int kMasterSelectSaveChangesAlert = 12 ;
 
 - (void) changeViewModelInColumns:(MFUIBaseViewModel*) selectedViewModel
 {
+    
     for(MFWorkspaceColumnSegue *segue in self.segueColumns) {
         if([segue.destinationViewController conformsToProtocol:@protocol(MFWorkspaceDetailColumnProtocol) ]) {
             MFFormViewController *detailViewController = (MFFormViewController *)segue.destinationViewController;
 #pragma clang diagnostic push
 #pragma GCC diagnostic ignored "-Wundeclared-selector"
-
+            
             if(selectedViewModel && [selectedViewModel respondsToSelector:@selector(id_identifier)]) {
                 detailViewController.ids = @[[selectedViewModel performSelector:@selector(id_identifier) withObject:nil]];
             }
@@ -221,7 +230,7 @@ const int kMasterSelectSaveChangesAlert = 12 ;
                 detailViewController.ids = @[];
             }
 #pragma clang diagnostic pop
-
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [detailViewController doFillAction];
             });
@@ -251,22 +260,11 @@ const int kMasterSelectSaveChangesAlert = 12 ;
 }
 
 
--(void) refreshSubViews {
-    for(MFWorkspaceColumnSegue *segue in self.segueColumns) {
-        if([segue.destinationViewController conformsToProtocol:@protocol(MFWorkspaceDetailColumnProtocol) ]) {
-            MFFormBaseViewController *detailColumn = (MFFormBaseViewController *) segue.destinationViewController;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [detailColumn.tableView reloadData];
-            });
-        }
-    }
-}
+
 
 -(void) createMasterItem {
     [self changeViewModelInColumns:nil];
 }
-
-
 
 #pragma mark - Resgister Actions
 
@@ -294,18 +292,17 @@ const int kMasterSelectSaveChangesAlert = 12 ;
     }
 }
 
-
-
-#pragma mark - UI management
-
-/**
- * @brief Returns the view of this controller as a MFWorkspaceView
- * @return the MFWorkspaceView that is the main view of the WorkspaceViewController
- */
--(MFWorkspaceView *)getWorkspaceView {
-    return (MFWorkspaceView *)self.view;
+-(void)failedSaveAction:(id<MFContextProtocol>)context withCaller:(id)caller andResult:(id)result {
+    [super failedSaveAction:context withCaller:caller andResult:result];
+    
+    [[self masterColumnViewcontroller].tableView selectRowAtIndexPath:self.workspaceState.lastSelectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+    self.workspaceState.currentSelectedIndexPath = self.workspaceState.lastSelectedIndexPath;
+    [[self getWorkspaceView] scrollToDetailColumnWithIndex:1];
 }
 
+
+
+#pragma mark - UIBarButtonItem events
 /**
  * @brief Action called when the back button is pressed
  * @param sender The sender of the action
@@ -320,6 +317,85 @@ const int kMasterSelectSaveChangesAlert = 12 ;
     [[self getWorkspaceView] hideAnyModalInput];
 }
 
+-(void)onSavePressed:(id)sender {
+    [super onSavePressed:sender];
+    if(![sender isEqual:self]) {
+        self.workspaceState.currentSelectedIndexPath = [[self masterColumnViewcontroller].tableView indexPathForSelectedRow];
+    }
+}
+
+
+
+#pragma mark - Dialogs method
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    [super alertView:alertView clickedButtonAtIndex:buttonIndex];
+    
+    if (alertView.tag == kMasterSelectSaveChangesAlert) {
+        if (buttonIndex == 0) { //Don't save
+            [self resetDetailFormValidation];
+            // forward selected ViewModel
+            [self changeViewModelInColumns:self.currentMasterViewModel];
+        }
+        else { //OK save
+            self.isChangingMasterIndex = YES;
+            [self onSavePressed:self];
+            // forward after saving
+        }
+    }
+}
+
+
+#pragma mark - Validation
+/**
+ * @brief Resets the details form validation in order to show a new item
+ * @discussion This method shouyld be called when an invalid item is not saved, and that a new item
+ * is requested. This case need to reset the validation state of the form.
+ */
+-(void) resetDetailFormValidation {
+    for(MFWorkspaceColumnSegue *segue in self.segueColumns) {
+        if([segue.destinationViewController conformsToProtocol:@protocol(MFWorkspaceDetailColumnProtocol) ]) {
+            MFFormViewController *detailViewController = (MFFormViewController *)segue.destinationViewController;
+            [detailViewController.formValidation resetValidation];
+        }
+    }
+}
+
+
+# pragma mark - Utils
+
+/**
+ * @brief Returns the ViewController that corresponds to the master View Controller of this worksapce
+ * @return A MFFormBaseviewController that is the master view controller of this workspace
+ */
+-(MFFormBaseViewController<MFWorkspaceMasterColumnProtocol> *) masterColumnViewcontroller {
+    for(UIStoryboardSegue *segue in self.segueColumns) {
+        MFFormBaseViewController *columnViewcontroller = (MFFormBaseViewController *)segue.destinationViewController;
+        if([columnViewcontroller conformsToProtocol:@protocol(MFWorkspaceMasterColumnProtocol)]) {
+            return columnViewcontroller;
+        }
+    }
+}
+
+/**
+ * @brief Returns the view of this controller as a MFWorkspaceView
+ * @return the MFWorkspaceView that is the main view of the WorkspaceViewController
+ */
+-(MFWorkspaceView *)getWorkspaceView {
+    return (MFWorkspaceView *)self.view;
+}
+
+-(void) refreshSubViews {
+    for(MFWorkspaceColumnSegue *segue in self.segueColumns) {
+        if([segue.destinationViewController conformsToProtocol:@protocol(MFWorkspaceDetailColumnProtocol) ]) {
+            MFFormBaseViewController *detailColumn = (MFFormBaseViewController *) segue.destinationViewController;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [detailColumn.tableView reloadData];
+            });
+        }
+    }
+}
 
 -(void) releaseRetainedObjects {
     [[self getWorkspaceView] unregisterColumnsReferences];
@@ -327,7 +403,7 @@ const int kMasterSelectSaveChangesAlert = 12 ;
     for(UIStoryboardSegue *segue in self.segueColumns) {
         MFFormBaseViewController *columnViewcontroller = (MFFormBaseViewController *)segue.destinationViewController;
         [[MFActionLauncher getInstance] MF_unregister:columnViewcontroller];
-
+        
         [columnViewcontroller removeFromParentViewController];
         [columnViewcontroller unregisterAllComponents];
         columnViewcontroller.formBindingDelegate = nil;
@@ -337,22 +413,23 @@ const int kMasterSelectSaveChangesAlert = 12 ;
     [self.segueColumns removeAllObjects];
 }
 
+@end
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    [super alertView:alertView clickedButtonAtIndex:buttonIndex];
-    
-    if (alertView.tag == kMasterSelectSaveChangesAlert) {
-        if (buttonIndex == 0) {
-            // forward selected ViewModel
-            [self changeViewModelInColumns:self.currentMasterViewModel];
-        }
-        else {
-            self.isChangingMasterIndex = YES;
-            [self onSavePressed:self.navigationItem.rightBarButtonItem];
-            // forward after saving
-        }
-    }
+
+
+
+
+@implementation MFWorkspaceViewControllerState
+
+/**
+ * @brief Sets the current selected indexPath of the master view controller
+ * @discussion This methods allows to update the current selected indexPath, after
+ * updating the last selected index Path
+ * @param currentSelectedIndexPath The new current selected indexPath of the master view controller.
+ */
+-(void)setCurrentSelectedIndexPath:(NSIndexPath *)currentSelectedIndexPath {
+    self.lastSelectedIndexPath = _currentSelectedIndexPath;
+    _currentSelectedIndexPath = currentSelectedIndexPath;
 }
 
 @end

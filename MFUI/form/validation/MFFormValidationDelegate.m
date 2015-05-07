@@ -13,11 +13,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFFormValidationDelegate.m
-//  MFUI
-//
-//
+
 
 #import <MFCore/MFCoreFoundationExt.h>
 #import <MFCore/MFCoreI18n.h>
@@ -206,6 +202,12 @@ const int kSaveChangesAlert = 11 ;
     if ( errors != nil ) {
         [component addErrors:errors];
     }
+}
+
+-(void) resetValidation {
+    [self.errorForInvalidInputs removeAllObjects];
+    [self.deferredErrors removeAllObjects];
+    [self.invalidInputs removeAllObjects];
 }
 
 @end

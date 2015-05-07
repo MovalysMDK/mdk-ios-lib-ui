@@ -13,11 +13,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFWorkspaceViewController.h
-//  MFUI
-//
-//
+
 
 
 
@@ -35,7 +31,6 @@
  * @brief An array that contains the different columns managed by this Workspace View Controller
  */
 @property (nonatomic, strong) NSMutableArray *segueColumns;
-
 
 
 #pragma mark - Methods
@@ -58,6 +53,30 @@
  */
 -(void) createMasterItem;
 
+/**
+ * @brief This method performs a memory clean of the retained objects by the workspace
+ */
 -(void) releaseRetainedObjects;
+
+@end
+
+
+/**
+ * @class MFWorkspaceViewControllerState
+ * @brief This class allows to save some data about the state of the worksapce at a given time
+ * @discussion This class should be used to save and restore the state of the worksapce in case
+ * of validation error.
+ */
+@interface MFWorkspaceViewControllerState : NSObject
+
+/**
+ * @brief The current selected indexPath on the master view controller
+ */
+@property (nonatomic, strong) NSIndexPath *currentSelectedIndexPath;
+
+/**
+ * @brief The last selected indexPath on the master view controller
+ */
+@property (nonatomic, strong) NSIndexPath *lastSelectedIndexPath;
 
 @end

@@ -13,11 +13,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFFormValidationDelegate.h
-//  MFUI
-//
-//
+
 
 
 
@@ -109,5 +105,10 @@ FOUNDATION_EXPORT const int kSaveChangesAlert;
  * @return YES if the validation form delegate has invalid value(s), NO otherwhise.
  */
 -(BOOL) hasInvalidValues;
+
+/**
+ * @brief Reset all dictionaries used to validate
+ */
+-(void) resetValidation ;
 
 @end

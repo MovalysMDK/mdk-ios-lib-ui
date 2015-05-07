@@ -13,11 +13,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFMenuViewControllerProtocol.h
-//  MFUI
-//
-//
+
 
 /**
  * @brief Protocol that indicates that the controller implementing this protocol can be displayed on

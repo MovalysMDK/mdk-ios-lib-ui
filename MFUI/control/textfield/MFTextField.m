@@ -83,7 +83,6 @@
     if(!self.sender) {
         self.sender = self;
     }
-    self.delegate = self;
     self.componentValidation = YES;
     [self addTarget:self action:@selector(textDidChange) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
 }

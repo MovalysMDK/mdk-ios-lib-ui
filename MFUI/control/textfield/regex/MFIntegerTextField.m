@@ -97,12 +97,12 @@
 
 -(void) signButtonClick:(UIBarButtonItem *)sender {
     if([sender.title isEqualToString:@"—"]) {
-        [self setData:[NSString stringWithFormat:@"-%@", [self getData]]];
+        [self.sender setData:[NSString stringWithFormat:@"-%@", [self getData]]];
         sender.title = @"+";
     }
     else {
         if([[self getData] rangeOfString:@"-"].location != NSNotFound) {
-            [self setData:[[self getData] substringFromIndex:1]];
+            [self.sender setData:[[self getData] substringFromIndex:1]];
         }
         sender.title = @"—";
     }

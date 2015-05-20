@@ -32,4 +32,5 @@
 -(void)setIsValid:(BOOL)isValid;
 -(void)setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor;
 -(void) onErrorButtonClick:(id)sender;
+-(void)setVisible:(NSNumber *)visible;
 @end

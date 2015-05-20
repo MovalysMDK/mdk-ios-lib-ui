@@ -275,5 +275,10 @@
     }
 }
 
+-(void)setVisible:(NSNumber *)visible {
+    _visible = visible;
+    [self.bindingDelegate setVisible:visible];
+}
+
 
 @end

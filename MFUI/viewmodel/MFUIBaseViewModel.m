@@ -77,11 +77,11 @@
 - (void)setValue:(id)value forKey:(NSString *)key
 {
     [super setValue:value forKey:key];
-
+    
     if (![value isEqual:self] && [value isKindOfClass:[MFUIBaseViewModel class]]) {
         ((MFUIBaseViewModel *) value).parentViewModel = self;
     }
-
+    
     self.hasChanged = YES;
 }
 
@@ -90,13 +90,13 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-
+    
     //    MFCoreLogVerbose(@"Les changements qui ont eu lieu sur le champ %@ sont les suivants : \n %@",keyPath,change);
-
+    
     //Vérification de la nouvelle valeur par rapport à l'ancienne avant de propager l'évènement
     id oldValue = [change objectForKey:@"old"];
     id newValue = [change objectForKey:@"new"];
-
+    
     if (oldValue != nil || newValue != nil) {
         if (oldValue != nil && newValue != nil) {
             if ([oldValue respondsToSelector:@selector(isEqualToString:)]) {
@@ -184,8 +184,10 @@
 - (void) setForm:(id<MFViewModelChangedListenerProtocol, MFBindingFormDelegate>)form
 {
     _form = form;
-    for (MFUIBaseViewModel *childViewModel in [self getChildViewModels]) {
-        childViewModel.form = form;
+    if(![self conformsToProtocol:@protocol(MFUIWorkspaceViewModelProtocol)]) {
+        for (MFUIBaseViewModel *childViewModel in [self getChildViewModels]) {
+            childViewModel.form = form;
+        }
     }
 }
 
@@ -214,12 +216,11 @@
 {
     BOOL isValid = YES;
     id<MFViewModelChangedListenerProtocol,
-       MFBindingFormDelegate> formController = (id<MFViewModelChangedListenerProtocol, MFBindingFormDelegate>) [self getForm];
+    MFBindingFormDelegate> formController = (id<MFViewModelChangedListenerProtocol, MFBindingFormDelegate>) [self getForm];
     if (formController) {
         isValid = [formController.formValidation validateViewModel:self];
     }
     for (MFUIBaseViewModel *childViewModel in [self getChildViewModels]) {
-        //        childViewModel.form = formController;
         isValid = isValid && [childViewModel validate];
     }
     return isValid;

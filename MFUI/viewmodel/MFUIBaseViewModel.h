@@ -113,3 +113,11 @@ typedef BOOL (^MFValueChangedFilter)(NSString *, id<MFUIBaseViewModelProtocol>, 
 -(void) modifyToIdentifiable:(id)entity inContext:(id<MFContextProtocol>)context ;
 
 @end
+
+/**
+ * @protocol MFUIWorkspaceViewModelProtocol
+ * @brief This protocol identifies when a ViewModel is a Workspace View Model
+ */
+@protocol MFUIWorkspaceViewModelProtocol <NSObject>
+
+@end

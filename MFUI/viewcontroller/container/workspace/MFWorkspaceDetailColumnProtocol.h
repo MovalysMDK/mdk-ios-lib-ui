@@ -28,14 +28,11 @@
  */
 @protocol MFWorkspaceDetailColumnProtocol <MFWorkspaceColumnProtocol>
 
-
 #pragma mark - Properties
 
 /*!
  * @brief The index of this detail in the workspace
  */
 @property (nonatomic) NSInteger columnIndex;
-
-
 
 @end

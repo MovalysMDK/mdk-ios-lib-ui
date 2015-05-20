@@ -236,5 +236,10 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
     [self setData:[self getData]];
 }
 
+-(void)setVisible:(NSNumber *)visible {
+    _visible = visible;
+    [self.bindingDelegate setVisible:visible];
+}
+
 
 @end

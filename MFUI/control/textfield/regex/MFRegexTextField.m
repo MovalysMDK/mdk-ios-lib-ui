@@ -44,7 +44,7 @@
 -(NSInteger)validateWithParameters:(NSDictionary *)parameters {
     NSInteger nbOfErrors = [super validateWithParameters:parameters];
     
-    if(![self matchPattern:[self getData]]) {
+    if(![self matchPattern:[self getData]] && !([[self getData] length] == 0)) {
         NSError *error = [[MFNoMatchingValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
         [self addErrors:@[error]];
         nbOfErrors++;

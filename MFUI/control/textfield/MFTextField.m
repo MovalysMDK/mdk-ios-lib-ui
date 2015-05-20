@@ -221,6 +221,7 @@
 -(void)setEditable:(NSNumber *)editable {
     _editable = editable;
     self.userInteractionEnabled = [editable boolValue];
+    [self applyStandardStyle];
 }
 
 #pragma mark - Forwarding to binding delegate

@@ -187,4 +187,13 @@
         self.component.styleClass = [NSClassFromString(@"MFDefaultStyle") new];
     }
 }
+
+-(void)setVisible:(NSNumber *)visible {
+    if([visible integerValue] == 1) {
+        self.component.hidden = NO;
+    }
+    else {
+        self.component.hidden = YES;
+    }
+}
 @end

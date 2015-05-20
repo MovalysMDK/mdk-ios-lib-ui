@@ -227,6 +227,14 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 //    self.backgroundColor = [UIColor clearColor];
 }
 
+-(void)setMandatory:(NSNumber *)mandatory {
+    _mandatory = mandatory;
+    [self postInvalidate];
+}
+
+-(void) postInvalidate {
+    [self setData:[self getData]];
+}
 
 
 @end

@@ -184,7 +184,7 @@
 -(NSInteger) validateWithParameters:(NSDictionary *)parameters
 {
     NSInteger nbOfErrors = [super validateWithParameters:parameters];
-    if([[self getData] isEqualToString:@"-"]) {
+    if([self.mandatory isEqualToNumber:@1] && [[self getData] isEqualToString:@"-"]) {
         NSError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
         [self addErrors:@[error]];
         nbOfErrors++;

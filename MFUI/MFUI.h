@@ -26,6 +26,7 @@ FOUNDATION_EXPORT const unsigned char MFUIVersionString[];
 
 
 #import <MFUI/MFUIAction.h>
+#import <MFUI/MFUIAlertView.h>
 #import <MFUI/MFUIApplication.h>
 #import <MFUI/MFUIBinding.h>
 #import <MFUI/MFUICell.h>

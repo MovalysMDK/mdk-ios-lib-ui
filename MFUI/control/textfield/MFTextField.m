@@ -22,6 +22,7 @@
 #import "MFUIError.h"
 #import "MFUIControlExtension.h"
 #import "MFFormBaseViewController.h"
+#import "MFAlertViewManager.h"
 
 @interface MFTextField ()
 
@@ -85,8 +86,14 @@
     }
     self.componentValidation = YES;
     [self addTarget:self action:@selector(textDidChange) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resignFirstResponder) name:ALERTVIEW_FAILED_SAVE_ACTION object:nil];
+    
 }
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 #pragma mark - TextField Methods
 

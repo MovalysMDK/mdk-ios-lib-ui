@@ -29,6 +29,10 @@
 		B0289F291AA892A8007A2E75 /* MFUIBaseRenderableComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B0289F271AA892A8007A2E75 /* MFUIBaseRenderableComponent.m */; };
 		B032D0D71AB188CE001C114F /* MFUIErrorView.h in Headers */ = {isa = PBXBuildFile; fileRef = B032D0D51AB188CE001C114F /* MFUIErrorView.h */; };
 		B032D0D81AB188CE001C114F /* MFUIErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B032D0D61AB188CE001C114F /* MFUIErrorView.m */; };
+		B037F8CA1B0DC839005C12F2 /* MFAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = B037F8C81B0DC839005C12F2 /* MFAlertView.h */; };
+		B037F8CB1B0DC839005C12F2 /* MFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B037F8C91B0DC839005C12F2 /* MFAlertView.m */; };
+		B037F8CE1B0DC84D005C12F2 /* MFAlertViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B037F8CC1B0DC84D005C12F2 /* MFAlertViewManager.h */; };
+		B037F8CF1B0DC84D005C12F2 /* MFAlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B037F8CD1B0DC84D005C12F2 /* MFAlertViewManager.m */; };
 		B06730521AE6833900CB0900 /* MFComponentErrorProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730511AE6833900CB0900 /* MFComponentErrorProtocol.h */; };
 		B06730541AE6857D00CB0900 /* MFComponentPropertiesProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730531AE6857D00CB0900 /* MFComponentPropertiesProtocol.h */; };
 		B06730561AE685B600CB0900 /* MFComponentValidationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730551AE685B600CB0900 /* MFComponentValidationProtocol.h */; };
@@ -480,6 +484,11 @@
 		B0289F271AA892A8007A2E75 /* MFUIBaseRenderableComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUIBaseRenderableComponent.m; sourceTree = "<group>"; };
 		B032D0D51AB188CE001C114F /* MFUIErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIErrorView.h; sourceTree = "<group>"; };
 		B032D0D61AB188CE001C114F /* MFUIErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUIErrorView.m; sourceTree = "<group>"; };
+		B037F8C81B0DC839005C12F2 /* MFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAlertView.h; sourceTree = "<group>"; };
+		B037F8C91B0DC839005C12F2 /* MFAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAlertView.m; sourceTree = "<group>"; };
+		B037F8CC1B0DC84D005C12F2 /* MFAlertViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAlertViewManager.h; sourceTree = "<group>"; };
+		B037F8CD1B0DC84D005C12F2 /* MFAlertViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAlertViewManager.m; sourceTree = "<group>"; };
+		B037F8D01B0DD673005C12F2 /* MFUIAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFUIAlertView.h; sourceTree = "<group>"; };
 		B06730511AE6833900CB0900 /* MFComponentErrorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentErrorProtocol.h; sourceTree = "<group>"; };
 		B06730531AE6857D00CB0900 /* MFComponentPropertiesProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentPropertiesProtocol.h; sourceTree = "<group>"; };
 		B06730551AE685B600CB0900 /* MFComponentValidationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentValidationProtocol.h; sourceTree = "<group>"; };
@@ -994,6 +1003,18 @@
 			path = error;
 			sourceTree = "<group>";
 		};
+		B037F8C71B0DC81F005C12F2 /* alertview */ = {
+			isa = PBXGroup;
+			children = (
+				B037F8C81B0DC839005C12F2 /* MFAlertView.h */,
+				B037F8C91B0DC839005C12F2 /* MFAlertView.m */,
+				B037F8CC1B0DC84D005C12F2 /* MFAlertViewManager.h */,
+				B037F8CD1B0DC84D005C12F2 /* MFAlertViewManager.m */,
+				B037F8D01B0DD673005C12F2 /* MFUIAlertView.h */,
+			);
+			path = alertview;
+			sourceTree = "<group>";
+		};
 		B08AAC521AE91C500029EC88 /* textview */ = {
 			isa = PBXGroup;
 			children = (
@@ -1171,6 +1192,7 @@
 		B0D4551B1A5ED26A00C6D376 /* MFUI */ = {
 			isa = PBXGroup;
 			children = (
+				B037F8C71B0DC81F005C12F2 /* alertview */,
 				B0D45B6C1A5ED2F300C6D376 /* action */,
 				B0D45B8D1A5ED2F300C6D376 /* application */,
 				B0D45B941A5ED2F300C6D376 /* binding */,
@@ -2119,6 +2141,7 @@
 				B0D45D741A5ED2F400C6D376 /* MFUIControlNumber.h in Headers */,
 				B099BE6A1AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.h in Headers */,
 				B0D45E3C1A5ED2F400C6D376 /* MFWorkspaceColumnSegue.h in Headers */,
+				B037F8CE1B0DC84D005C12F2 /* MFAlertViewManager.h in Headers */,
 				B0D45D751A5ED2F400C6D376 /* MFPhotoPropertiesViewController.h in Headers */,
 				B0D45D1B1A5ED2F400C6D376 /* MFDeleteDetailActionParamIn.h in Headers */,
 				B0D45E4B1A5ED2F400C6D376 /* MFForm2DListViewController.h in Headers */,
@@ -2142,6 +2165,7 @@
 				B0D45D8C1A5ED2F400C6D376 /* MFUIControlScanner.h in Headers */,
 				B0C9B2DB1AFA21E700FC9665 /* MFRegexTextFieldStyle.h in Headers */,
 				B0D45E3A1A5ED2F400C6D376 /* MFUIViewControllerContainerWorkspace.h in Headers */,
+				B037F8CA1B0DC839005C12F2 /* MFAlertView.h in Headers */,
 				B0D45E531A5ED2F400C6D376 /* MFFormListViewController.h in Headers */,
 				B0C9B2D71AFA21E700FC9665 /* MFPhoneTextFieldStyle.h in Headers */,
 				B0D45E5F1A5ED2F400C6D376 /* MFMenuViewControllerProtocol.h in Headers */,
@@ -2444,6 +2468,7 @@
 				B0D45E311A5ED2F400C6D376 /* MFWorkspaceView.m in Sources */,
 				B0D45E7F1A5ED2F400C6D376 /* MFPositionViewModel.m in Sources */,
 				B08AAC4D1AE919F30029EC88 /* MFIntegerTextField.m in Sources */,
+				B037F8CF1B0DC84D005C12F2 /* MFAlertViewManager.m in Sources */,
 				B0C9B2E01AFA21E700FC9665 /* MFTextFieldStyle+ErrorView.m in Sources */,
 				B0D45DCF1A5ED2F400C6D376 /* MFDateConverter.m in Sources */,
 				B0D45D8B1A5ED2F400C6D376 /* MFScanner.m in Sources */,
@@ -2471,6 +2496,7 @@
 				B0D45D381A5ED2F400C6D376 /* MFUIApplication.m in Sources */,
 				B0C9B2D21AFA21E700FC9665 /* MFDoubleTextFieldStyle.m in Sources */,
 				B0D45DED1A5ED2F400C6D376 /* MFUIValidationBusinessError.m in Sources */,
+				B037F8CB1B0DC839005C12F2 /* MFAlertView.m in Sources */,
 				B0D45DE81A5ED2F400C6D376 /* MFTooShortStringUIValidationError.m in Sources */,
 				B08AAC491AE919410029EC88 /* MFDoubleTextField.m in Sources */,
 				B0D45DDA1A5ED2F400C6D376 /* MFInvalidEmailValueUIValidationError.m in Sources */,

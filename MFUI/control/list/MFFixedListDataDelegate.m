@@ -425,8 +425,9 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
         MFUIBaseViewModel *tempViewModel = [[((MFUIBaseListViewModel *)self.viewModel).viewModels objectAtIndex:indexPath.row] copy];
         tempViewModel.parentViewModel = self.viewModel;
         //Displaying the detail controller
-        [((UIViewController *)parentController).navigationController pushViewController:nextController animated:YES];
         [nextController setOriginalViewModel:tempViewModel];
+
+        [((UIViewController *)parentController).navigationController pushViewController:nextController animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     

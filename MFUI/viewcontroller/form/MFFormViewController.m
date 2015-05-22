@@ -120,7 +120,9 @@ NSString *const MFPROP_FORM_ONUNSAVEDCHANGES = @"FormOnUnsavedChanges";
         [self processControllerChanges];
         
         //Setup bar items (back, save...)
-        [self setupBarItems];
+        if(![self isKindOfClass:[MFFormDetailViewController class]]) {
+            [self setupBarItems];
+        }
     }
     else {
         MFUILogError(@"mf.formDescriptorName is missing");

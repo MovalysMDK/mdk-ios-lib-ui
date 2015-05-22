@@ -33,6 +33,7 @@
 		B037F8CB1B0DC839005C12F2 /* MFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B037F8C91B0DC839005C12F2 /* MFAlertView.m */; };
 		B037F8CE1B0DC84D005C12F2 /* MFAlertViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B037F8CC1B0DC84D005C12F2 /* MFAlertViewManager.h */; };
 		B037F8CF1B0DC84D005C12F2 /* MFAlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B037F8CD1B0DC84D005C12F2 /* MFAlertViewManager.m */; };
+		B051A3C41B0F5E2800F4F99C /* MFUIAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = B037F8D01B0DD673005C12F2 /* MFUIAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B06730521AE6833900CB0900 /* MFComponentErrorProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730511AE6833900CB0900 /* MFComponentErrorProtocol.h */; };
 		B06730541AE6857D00CB0900 /* MFComponentPropertiesProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730531AE6857D00CB0900 /* MFComponentPropertiesProtocol.h */; };
 		B06730561AE685B600CB0900 /* MFComponentValidationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730551AE685B600CB0900 /* MFComponentValidationProtocol.h */; };
@@ -2182,6 +2183,7 @@
 				B0D45DEC1A5ED2F400C6D376 /* MFUIValidationBusinessError.h in Headers */,
 				B0D45E331A5ED2F400C6D376 /* MFContainerViewController.h in Headers */,
 				B0D45D791A5ED2F400C6D376 /* MFPhotoThumbnail.h in Headers */,
+				B051A3C41B0F5E2800F4F99C /* MFUIAlertView.h in Headers */,
 				B0D45DE91A5ED2F400C6D376 /* MFUIError.h in Headers */,
 				B0D45D171A5ED2F400C6D376 /* MFAbstractDeleteDetailAction.h in Headers */,
 				B0D45D9D1A5ED2F400C6D376 /* MFUIControlSwitch.h in Headers */,

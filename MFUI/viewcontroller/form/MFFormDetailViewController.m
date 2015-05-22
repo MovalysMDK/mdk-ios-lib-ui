@@ -52,20 +52,24 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:MFLocalizedStringFromKey(@"form_cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelAction)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                             initWithTitle:MFLocalizedStringFromKey(@"form_back") style: UIBarButtonItemStyleBordered
-                                             target:self action:@selector(dismissDetail)];
+    self.shouldUpdateSender = NO;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:MFLocalizedStringFromKey(@"form_cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelAction)];
+    
+    
+    UIBarButtonItem *right = [[UIBarButtonItem alloc]
+                                              initWithTitle:MFLocalizedStringFromKey(@"form_save") style: UIBarButtonItemStyleBordered
+                                              target:self action:@selector(dismissDetail)];
+    
+    self.navigationItem.leftBarButtonItem = left;
+    self.navigationItem.rightBarButtonItem = right;
     
     // Si le contrôleur n'est pas surchargé par défaut, on met le nom du storyboard qui le contient.
     NSString *screenTitleLocalized = [NSString stringWithFormat:@"screen_title_%@", self.class] ;
     self.title = MFLocalizedStringFromKey( screenTitleLocalized );
-    
-    self.shouldUpdateSender = NO;
-}
-
--(void) initialize {
-    [super initialize];
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,11 +109,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-//-(void)setViewModel:(id<MFUIBaseViewModelProtocol>)viewModel {
-//    _viewModel = viewModel;
-//    self.originalViewModel = viewModel;
-//    [self.tableView reloadData];
-//}
 
 -(void)setOriginalViewModel:(id<MFUIBaseViewModelProtocol>)originalViewModel {
     self.viewModel = originalViewModel;

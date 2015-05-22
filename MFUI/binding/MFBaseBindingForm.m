@@ -78,7 +78,7 @@ NSString *const MF_BINDABLE_PROPERTIES = @"BindableProperties";
     self.registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
     
     self.binding = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_BINDING];
-
+    
     if([self.parent isKindOfClass:[MFFormViewController class]]) {
         //MF%FormViewController
         self.binding.bindingMode = MFBindingModeForm;
@@ -145,31 +145,36 @@ NSString *const MF_BINDABLE_PROPERTIES = @"BindableProperties";
 #pragma mark - BINDING : exclusion mutuelle
 
 -(BOOL)mutexForProperty:(NSString *)propertyName {
-    NSMutableArray *tempArray = [NSMutableArray array];
-    if(self.mutexPropertiesName != nil) {
-        if([self.mutexPropertiesName containsObject:propertyName]) {
-            return NO;
+    
+    @synchronized(mutexPropertiesName) {
+        NSMutableArray *tempArray = [NSMutableArray array];
+        if(self.mutexPropertiesName != nil) {
+            if([self.mutexPropertiesName containsObject:propertyName]) {
+                return NO;
+            }
+            else {
+                tempArray = [self.mutexPropertiesName mutableCopy];
+                [tempArray addObject:propertyName];
+                self.mutexPropertiesName = tempArray;
+                return YES;
+            }
         }
         else {
-            tempArray = [self.mutexPropertiesName mutableCopy];
             [tempArray addObject:propertyName];
             self.mutexPropertiesName = tempArray;
             return YES;
         }
     }
-    else {
-        [tempArray addObject:propertyName];
-        self.mutexPropertiesName = tempArray;
-        return YES;
-    }
 }
 
 
 -(void)releasePropertyFromMutex:(NSString *)propertyName {
-    if(self.mutexPropertiesName) {
-        NSMutableArray *tempArray = [self.mutexPropertiesName mutableCopy];
-        [tempArray removeObject:propertyName];
-        self.mutexPropertiesName = tempArray;
+    @synchronized(mutexPropertiesName) {
+        if(self.mutexPropertiesName) {
+            NSMutableArray *tempArray = [self.mutexPropertiesName mutableCopy];
+            [tempArray removeObject:propertyName];
+            self.mutexPropertiesName = tempArray;
+        }
     }
 }
 
@@ -270,7 +275,7 @@ NSString *const MF_BINDABLE_PROPERTIES = @"BindableProperties";
     if([component respondsToSelector:selector]) {
         //        dispatch_async(dispatch_get_main_queue(), ^{
         [component performSelector:selector withObject:([object isKindOfClass:[MFKeyNotFound class]] ? nil : object)];
-
+        
         //        });
     }
     
@@ -382,7 +387,7 @@ NSString *const MF_BINDABLE_PROPERTIES = @"BindableProperties";
         }
         
         SEL convertSelector = NSSelectorFromString(targetDataTypeSelector);
-
+        
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         if ([converter respondsToSelector:convertSelector]) {
@@ -395,7 +400,7 @@ NSString *const MF_BINDABLE_PROPERTIES = @"BindableProperties";
         }
 #pragma clang diagnostic pop
     }
-
+    
     return returnValue;
 }
 

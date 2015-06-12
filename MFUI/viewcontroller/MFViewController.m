@@ -74,6 +74,8 @@
     
     self.view.autoresizesSubviews = YES;
     
+    [self performSelector:@selector(checkIfComment) withObject:nil afterDelay:0.5];
+    
 }
 
 
@@ -258,6 +260,40 @@
 -(NSString *) customTitle {
     return nil;
 }
+
+
+- (void) seeScreenInfo
+{
+    UIViewController *screenInfoController = [[UIViewController alloc] init];
+    screenInfoController.title = @"Info";
+    [screenInfoController setEdgesForExtendedLayout:UIRectEdgeNone];
+    [self.navigationController pushViewController:screenInfoController animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:screenInfoController.view.frame];
+        [screenInfoController.view addSubview:webView];
+        NSString *htmlString =
+        [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:self.mf.commentHTMLFileName ofType:@"html"] encoding:
+         NSUTF8StringEncoding            error:nil];
+        [webView loadHTMLString:htmlString baseURL:nil];
+    });
+    
+}
+
+-(void) checkIfComment {
+    BOOL fileExists = self.mf.commentHTMLFileName && [[NSFileManager defaultManager] fileExistsAtPath:[[NSBundle mainBundle] pathForResource:self.mf.commentHTMLFileName  ofType:@"html"] ];
+    if(fileExists) {
+        UIBarButtonItem *infoItem =
+        [[UIBarButtonItem alloc] initWithTitle:@"   ?   " style:UIBarButtonItemStyleBordered target:self action:@selector(seeScreenInfo)];
+        infoItem.tintColor = [UIColor redColor];
+        NSMutableArray *rbbi = [self.navigationItem.rightBarButtonItems mutableCopy];
+        if(!rbbi) {
+            rbbi = [NSMutableArray array];
+        }
+        [rbbi addObject:infoItem];
+        self.navigationItem.rightBarButtonItems = rbbi;
+    }
+}
+
 
 
 @end

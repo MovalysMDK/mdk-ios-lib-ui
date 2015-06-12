@@ -44,6 +44,12 @@
 @property(nonatomic, strong) NSString *headerFormDescriptorName;
 
 /*!
+ * @brief Le nom du descripteur de la vue statique (PickerList uniquement)
+ */
+@property(nonatomic, strong) NSString *commentHTMLFileName;
+
+
+/*!
  * @brief La hauteur d'une cellule du formulaire
  */
 @property(nonatomic) int editMode;

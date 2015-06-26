@@ -59,42 +59,6 @@
 
 #pragma mark - Méthodes
 
-/*!
- * @brief Cette méthode met à jour un composant graphique depuis les données du ViewModel associé au formulaire.
- * @param bindingKey La clé associée à un ou plusieurs composants dont on souhaite affecter une valeur depuis le ViewModel
- */
--(void) dispatchEventOnViewModelPropertyValueChangedWithKey:(NSString *)bindingKey sender:(MFUIBaseViewModel *)viewModelSender;
-
-
-/*!
- * @brief Cette méthode permet à l'utilisateur d'ajouter des filtres pour la synchronisation des données
- * depuis le formulaire vers le ViewModel
- * @param filters Les filtres sous forme d'un dictionnaire contenant des @see(MFValueChangedFilter)
- */
--(void) completeFiltersFromFormToViewModel:(NSDictionary*)filters;
-
-/*!
- * @brief Cette méthode permet à l'utilisateur d'ajouter des filtres pour la synchronisation des données
- * depuis le ViewModel vers le formulaire
- * @param filters Les filtres sous forme d'un dictionnaire contenant des @see(MFValueChangedFilter)
- */
--(void) completeFiltersFromViewModelToForm:(NSDictionary*)filters;
-
-/*!
- * @brief Cette méthode doit définir et retourner une liste de filtres à appliquer lorsque
- * la synchronisation d'une donnée se fait depuis le ViewModel vers le formulaire. La clé du dictionnaire
- * est le keyPath du champ, et sa valeur est un ^MFValueChangedFilter
- * @return Un dictionnaire contenant des définitions de filtres pour certains champs
- */
--(NSDictionary*) getFiltersFromViewModelToForm;
-
-/*!
- * @brief Cette méthode doit définir et retourner une liste de filtres à appliquer lorsque
- * la synchronisation d'une donnée se fait depuis le Formulaire vers le ViewModel. La clé du dictionnaire
- * est le keyPath du champ, et sa valeur est un ^MFValueChangedFilter
- * @return Un dictionnaire contenant des définitions de filtres pour certains champs
- */
--(NSDictionary*) getFiltersFromFormToViewModel;
 
 /*!
  * @brief Get viewmodel at indexPath

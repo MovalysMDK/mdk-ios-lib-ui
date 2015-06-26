@@ -24,7 +24,6 @@
 
 
 //MFCore
-#import <MFCore/MFCoreFormDescriptor.h>
 #import <MFCore/MFCoreBean.h>
 #import <MFCore/MFCoreError.h>
 
@@ -34,8 +33,6 @@
 //Cell
 #import "MFFormCellProtocol.h"
 
-//Components
-#import "MFUIComponentProtocol.h"
 
 //Tags
 #import "MFViewTags.h"
@@ -43,6 +40,11 @@
 //Tooltip
 #import "MFUIControlTooltip.h"
 #import "MFUIError.h"
+
+#import "MFUIComponentProtocol.h"
+
+@protocol MFFormCellProtocol;
+@protocol MFComponentAssociatedLabelProtocol;
 
 //Framework constants
 FOUNDATION_EXPORT NSTimeInterval const ERROR_BUTTON_ANIMATION_DURATION;
@@ -57,7 +59,7 @@ IB_DESIGNABLE
  * @discussion This class allows to add an error button associated to a tooltip when the error button is clicked.
  * @warning If you need to create a custom component binded with the framework, you ALWAYS should inherits this class. If your custom component have some basic methods of another basic iOS component, you can combine with a category that forwards needed methods and properties
  */
-@interface MFUIBaseComponent : UIControl<MFUIComponentProtocol>
+@interface MFUIBaseComponent : UIControl<MFUIComponentProtocol, MFComponentAssociatedLabelProtocol>
 
 
 #pragma mark - Properties
@@ -127,28 +129,11 @@ IB_DESIGNABLE
 
 
 /*!
- * @brief Cette méthode est appelée dès que la valeur du composant est modifiée. 
- * Elle permet la synchronisation du formulaire avec le ViewModel
- * @return Un block dont le code est exécuté dès que la valeur du champ est modifiée
- */
--(void)updateValue:(id) newValue;
-
-/*!
  * @brief This method is called after the STYLE has been applied to the component and the subcomponents of its method.
  * You can do some customizations here on the component
  */
 -(void) selfCustomization;
 
-/*!
- * @brief This method is called after the selfDescriptor has been set
- */
--(void) didFinishLoadDescriptor __attribute__((deprecated("Use method didLoadFieldDescriptor: instead")));
-
-/*!
- * @brief This method is called after the selfDescriptor has been set
- * @param fieldDescriptor The complete fieldDescriptor of this component
- */
--(void) didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor;
 
 /*!
  * @brief Set the parameters for this component

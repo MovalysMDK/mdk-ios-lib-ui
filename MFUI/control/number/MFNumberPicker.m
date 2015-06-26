@@ -59,11 +59,11 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 @implementation MFNumberPicker
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
 @synthesize transitionDelegate = _transitionDelegate;
-@synthesize groupDescriptor = _groupDescriptor;
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize defaultConstraints = _defaultConstraints;
 @synthesize savedConstraints= _savedConstraints;
+@synthesize targetDescriptors = _targetDescriptors;
 
 
 
@@ -77,6 +77,7 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
     self.innerTextField.sender = self;
     self.innerStepper = [[UIStepper alloc] init];
     
+    
     //Add inner components
     [self addSubview:self.innerStepper];
     [self addSubview:self.innerTextField];
@@ -88,8 +89,9 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
     self.minimalValue = INT32_MIN;
     self.maximalValue = INT32_MAX;
     
-    [self.innerTextField addTarget:self action:@selector(updateValue) forControlEvents:UIControlEventEditingChanged];
-    [self.innerStepper addTarget:self action:@selector(stepperValueChanged) forControlEvents:UIControlEventValueChanged];
+    [self.innerStepper addTarget:self  action:@selector(stepperValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.innerTextField addTarget:self  action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventValueChanged|UIControlEventEditingChanged];
+    
 }
 
 
@@ -106,7 +108,6 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
         self.innerTextField.text = @"";
         //Mise à jour du view modèle car la méthode de delegate textViewDidChange n'est pas appelée lorsque la valeur du texte
         //est modifiée programmaticallement
-        [self updateValue];
     }
 }
 
@@ -161,23 +162,11 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 
 #pragma mark - MFUIComponentProtocol inherited methods
 
--(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
-    NSNumber *minValueNumber = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:NUMBER_PICKER_PARAMETER_MIN_VALUE_KEY];
-    NSNumber *maxValueNumber = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:NUMBER_PICKER_PARAMETER_MAX_VALUE_KEY];
-    NSNumber *stepNumber = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:NUMBER_PICKER_PARAMETER_STEP_KEY];
-    
-    if(minValueNumber) {
-        self.minimalValue = minValueNumber.integerValue;
-    }
-    
-    if(maxValueNumber) {
-        self.maximalValue = maxValueNumber.integerValue;
-    }
-    
-    if(stepNumber) {
-        self.step = stepNumber.integerValue;
-    }
-}
+//PROTODO :
+//NUMBER_PICKER_PARAMETER_MIN_VALUE_KEY
+//NUMBER_PICKER_PARAMETER_MAX_VALUE_KE
+//NUMBER_PICKER_PARAMETER_STEP_KEY
+
 
 -(void)setData:(id)data {
     self.currentValue = [data integerValue];
@@ -195,16 +184,12 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 
 #pragma mark - InnerTextField events
 
--(void) updateValue {
-    self.currentValue = [[self.innerTextField getData] integerValue];
-    [self validateWithParameters:nil];
-    [self updateValue:[self getData]];
-}
 
 
 
 
 -(void)setCurrentValue:(NSInteger)currentValue {
+    NSLog(@"CURRENT VALUE : %@", @(currentValue));
     _currentValue = currentValue;
     self.innerStepper.value = currentValue;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -229,11 +214,14 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 
 #pragma mark - Inner Stepper events
 
--(void) stepperValueChanged {
-    [self.innerTextField setData:[NSString stringWithFormat:@"%@", @(self.innerStepper.value)]];
-    [self becomeFirstResponder];
-    [self.innerTextField resignFirstResponder];
-    [self updateValue];
+-(void) stepperValueChanged:(UIStepper *)stepper {
+    self.currentValue = stepper.value;
+    [self valueChanged:stepper];
+}
+
+-(void)textFieldValueChanged:(MFIntegerTextField *)integerTextfield {
+    self.currentValue = [integerTextfield.text doubleValue];
+    [self valueChanged:integerTextfield];
 }
 
 
@@ -245,7 +233,7 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
     NSInteger nbOfErrors = [super validateWithParameters:parameters];
     
     if ([self number:@(self.currentValue) isEqualToString:[self.innerTextField getData]]) {
-        NSError *error = [[MFInvalidIntegerValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        NSError *error = [[MFInvalidIntegerValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         [self addErrors:@[error]];
         nbOfErrors++;
     }
@@ -283,6 +271,20 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
     }
     return result;
 }
+
+
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+    commonCCTD.target = target;
+    commonCCTD.action = action;
+    self.targetDescriptors = @{@(self.innerStepper.hash) : commonCCTD, @(self.innerTextField.hash) : commonCCTD};
+}
+
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
+}
+
 
 @end
 

@@ -116,12 +116,6 @@
 }
 
 
--(void)initComponent:(id<MFUIComponentProtocol>)component atIndexPath:(NSIndexPath *)indexPath {
-    [super initComponent:component atIndexPath:indexPath];
-    if([self.editable isEqualToNumber:@0]) {
-        [component setEditable:@0];
-    }
-}
 
 - (void)dismissDetail {
     

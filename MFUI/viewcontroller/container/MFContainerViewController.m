@@ -20,7 +20,6 @@
 #import <MFCore/MFCoreAction.h>
 #import <MFCore/MFCoreApplication.h>
 #import <MFCore/MFCoreConfig.h>
-#import <MFCore/MFCoreFormConfig.h>
 
 
 //ViewModel
@@ -231,8 +230,8 @@ MFRegister_ActionListenerOnFailed(MFAction_MFChainSaveDetailAction, failedSaveAc
                 hasChanged = YES;
                 break;
             }
-            if([childViewController conformsToProtocol:@protocol(MFBindingFormDelegate)]) {
-                id<MFBindingFormDelegate> chilFormBindingDelegate = (id<MFBindingFormDelegate>)childViewController;
+            if([childViewController conformsToProtocol:@protocol(MFCommonFormProtocol)]) {
+                id<MFCommonFormProtocol> chilFormBindingDelegate = (id<MFCommonFormProtocol>)childViewController;
                 if(chilFormBindingDelegate.formValidation && [chilFormBindingDelegate.formValidation hasInvalidValues]) {
                     hasInvalidValues = YES;
                 }

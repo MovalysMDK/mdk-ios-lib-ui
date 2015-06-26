@@ -16,25 +16,61 @@
 
 #import <MFCore/MFCoreBean.h>
 
-#import "MFUIApplication.h"
 #import "MFEmailTextField.h"
 #import "MFInvalidEmailValueUIValidationError.h"
 #import "MFCreateEmailViewController.h"
+#import "MFUICommand.h"
+#import "UIView+ViewController.h"
+#import "MFEmail.h"
+#import "MFUIFieldValidator.h"
+
+
+@interface MFEmailTextField ()
+
+@end
 
 @implementation MFEmailTextField
+
+-(void)initializeComponent {
+    [super initializeComponent];
+    [self addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+}
 
 -(NSString *)regex {
     return @"^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-z]{2,6})$";
 }
 
 -(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-    NSInteger numberOfErrors = [super validateWithParameters:parameters];
-    if(![self matchPattern:[self text]]) {
-        NSError *error = [[MFInvalidEmailValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
-        [self addErrors:@[error]];
-        numberOfErrors++;
-        
+    [self clearErrors];
+    NSArray *validators = [MFFieldValidatorHandler fieldValidatorsForAttributes:self.controlAttributes.allKeys forControl:self];
+    NSMutableDictionary *validationState = [NSMutableDictionary dictionary];
+    for(id<MFFieldValidatorProtocol> fieldValidator in validators) {
+        if(validationState[NSStringFromClass([fieldValidator class])]) {
+            continue;
+        }
+        NSMutableDictionary *validatorParameters = [NSMutableDictionary dictionary];
+        for(NSString *recognizedAttribute in [fieldValidator recognizedAttributes]) {
+            validatorParameters[recognizedAttribute] = self.controlAttributes[recognizedAttribute];
+        }
+        id errorResult = [fieldValidator validate:[self getData] withCurrentState:validationState withParameters:validatorParameters];
+        if(errorResult) {
+            validationState[NSStringFromClass([fieldValidator class])] = errorResult;
+        }
+        else {
+            validationState[NSStringFromClass([fieldValidator class])] = [NSNull null];
+        }
     }
+    
+    int numberOfErrors = 0;
+    for(id result in validationState.allValues) {
+        if(![result isKindOfClass:[NSNull class]]) {
+            numberOfErrors++;
+            [self addErrors:@[result]];
+        }
+    }
+    
+    NSLog(@"ERRORS : %@", validationState);
     return numberOfErrors;
 }
 
@@ -42,23 +78,24 @@
     BOOL canSendMail = NO;
     if ([MFMailComposeViewController canSendMail]){
         // Create and show composer
-        MFCreateEmailViewController *emailController = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_CREATE_EMAIL_VIEW_CONTROLLER];
-        if(nil != emailController)
-        {
-            [emailController setToRecipients:@[[self getData]]];
-            //[self.transitionDelegate showViewController:emailController animated:YES completion:nil];
-            [[MFUIApplication getInstance].lastAppearViewController presentViewController:emailController animated:YES completion:nil];
-            canSendMail = YES;
-        }
+        MFEmail *email = [MFEmail new];
+        email.to = [self getData];
+        [[MFCommandHandler commandWithKey:@"SendEmailCommand" withQualifier:nil] executeFromViewController:[self parentViewController] withParameters:email, nil];
+        
     }
     if(!canSendMail)
     {
-        [self addErrors:@[[[MFUIValidationError alloc] initWithCode:500 localizedDescriptionKey:@"MFCantSendMailTechnicalError"localizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name]]];
+        [self addErrors:@[[[MFUIValidationError alloc] initWithCode:500 localizedDescriptionKey:@"MFCantSendMailTechnicalError"localizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)]]];
     }
 }
 
 -(UIKeyboardType)keyboardType {
     return UIKeyboardTypeEmailAddress;
 }
+
+-(void)textDidChange:(id)object {
+    [self validateWithParameters:nil];
+}
+
 
 @end

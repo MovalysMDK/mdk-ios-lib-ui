@@ -25,13 +25,7 @@
  * @brief The class is an abstract class for framework cells.
  * @discussion It does some basic treatments common to all framework cells. Basically, it allows to bind some properties to a ViewModel.
  */
-@interface MFCellAbstract : UITableViewCell<MFFormCellProtocol, MFBindingViewProtocol, MFDefaultConstraintsProtocol>
-
-#pragma mark - Properties
-/*!
- * @brief The Storyboard extension for this cell
- */
-@property (nonatomic, strong) MFFormExtend *mf;
+@interface MFCellAbstract : UITableViewCell<MFFormCellProtocol, MFFormViewProtocol, MFDefaultConstraintsProtocol>
 
 
 #pragma mark - Methods

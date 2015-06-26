@@ -18,8 +18,7 @@
 
 
 // Protocols and delegates
-//#import "MFUIBinding.h"
-#import "MFBindingFormDelegate.h"
+#import "MFFormCommonDelegate.h"
 
 
 @protocol MFFormWithDetailViewControllerProtocol;
@@ -35,7 +34,7 @@
  * @discussion This delegate acts as a specific controller to bind FixedList component and its data.
  * This class is also a UITableView DataSource & Delegate.
  */
-@interface MFFixedListDataDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, MFBindingFormDelegate, MFFormWithDetailViewControllerProtocol, MFContentDelegate>
+@interface MFFixedListDataDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, MFCommonFormProtocol, MFFormWithDetailViewControllerProtocol, MFContentDelegate>
 
 #pragma mark - Methods
 
@@ -77,7 +76,7 @@
 /*!
  * @brief Form Binding Delegate. This delegate allow to bind a ViewModel to a Form easily
  */
-@property(nonatomic, strong) id<MFBindingFormDelegate> formBindingDelegate ;
+@property(nonatomic, strong) id<MFCommonFormProtocol> formBindingDelegate ;
 /*!
  * @brief The fixedList that used this data delegate
  */

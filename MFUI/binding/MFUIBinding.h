@@ -13,18 +13,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUIBinding.h
-//  MFUI
-//
-//
+
 
 #ifndef MFUI_MFUIBinding_h
 #define MFUI_MFUIBinding_h
 
-#import "MFBaseBindingForm.h"
 #import "MFBinding.h"
-#import "MFBindingFormDelegate.h"
-#import "MFBindingViewProtocol.h"
+#import "MFBinding+Dispatcher.h"
+#import "MFBindingCellDescriptor.h"
+#import "MFBindingViewDescriptor.h"
+#import "MFBindingDelegate.h"
+#import "MFBindingDictionary.h"
+#import "MFObjectWithBindingProtocol.h"
 
 #endif

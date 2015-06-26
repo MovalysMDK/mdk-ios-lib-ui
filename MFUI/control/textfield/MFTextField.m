@@ -23,6 +23,7 @@
 #import "MFUIControlExtension.h"
 #import "MFFormBaseViewController.h"
 #import "MFAlertViewManager.h"
+#import "MFLabel.h"
 
 @interface MFTextField ()
 
@@ -39,9 +40,8 @@
 @synthesize transitionDelegate = _transitionDelegate;
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
 @synthesize selfDescriptor = _selfDescriptor;
-@synthesize groupDescriptor = _groupDescriptor;
 @synthesize inInitMode = _inInitMode;
-@synthesize bindingDelegate = _bindingDelegate;
+@synthesize controlDelegate = _bindingDelegate;
 @synthesize isValid = _isValid;
 @synthesize mandatory = _mandatory;
 @synthesize visible = _visible;
@@ -50,6 +50,9 @@
 @synthesize cellContainer = _cellContainer;
 @synthesize styleClassName = _styleClassName;
 @synthesize componentValidation = _componentValidation;
+@synthesize controlAttributes = _controlAttributes;
+@synthesize associatedLabel = _associatedLabel;
+@synthesize targetDescriptors = _targetDescriptors;
 
 
 #pragma mark - Initialization
@@ -78,14 +81,14 @@
 }
 
 -(void) initializeComponent {
-    self.bindingDelegate = [[MFComponentBindingDelegate alloc] initWithComponent:self];
+    self.controlDelegate = [[MFCommonControlDelegate alloc] initWithComponent:self];
     self.errors = [NSMutableArray new];
     self.extension = [[MFTextFieldExtension alloc] init];
     if(!self.sender) {
         self.sender = self;
     }
     self.componentValidation = YES;
-    [self addTarget:self action:@selector(textDidChange) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
+    [self addTarget:self action:@selector(innerTextDidChange:) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resignFirstResponder) name:ALERTVIEW_FAILED_SAVE_ACTION object:nil];
     
@@ -98,7 +101,7 @@
 #pragma mark - TextField Methods
 
 -(void)setIsValid:(BOOL) isValid {
-    [self.bindingDelegate setIsValid:isValid];
+    [self.controlDelegate setIsValid:isValid];
 }
 
 -(CGRect)textRectForBounds:(CGRect)bounds {
@@ -129,10 +132,13 @@
 
 
 #pragma mark - Target Actions
--(void)textDidChange {
-    [self.sender performSelector:@selector(updateValue)];
+-(void)textDidChange:(id)sender {
+    [self valueChanged:sender];
 }
 
+-(void)innerTextDidChange:(id)sender {
+    [self valueChanged:sender];
+}
 
 #pragma mark - MDK
 
@@ -200,30 +206,32 @@
     // We search the component's errors
     if(self.extension.minLength != nil && [self.extension.minLength integerValue] > length)
     {
-        error = [[MFTooShortStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        error = [[MFTooShortStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         [self addErrors:@[error]];
         nbOfErrors++;
     }
     if(self.extension.maxLength != nil && [self.extension.maxLength integerValue] != 0 && [self.extension.maxLength integerValue] < length)
     {
-        error = [[MFTooLongStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        error = [[MFTooLongStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         [self addErrors:@[error]];
         nbOfErrors++;
     }
     if(self.mandatory != nil && [self.mandatory integerValue] == 1 && ((NSString *)[self displayComponentValue]).length == 0){
-        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         [self addErrors:@[error]];
         nbOfErrors++;
     }
     
     return nbOfErrors;
-
+    
 }
 
--(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
-    self.extension.maxLength = [fieldDescriptor.parameters objectForKey:PARAMETER_TEXTFIELD_MAXLENGTH_KEY];
-    self.extension.minLength = [fieldDescriptor.parameters objectForKey:PARAMETER_TEXTFIELD_MINLENGTH_KEY];
-}
+//PROTODO :
+//PARMETERS :
+// PARAMETER_TEXTFIELD_MAXLENGTH_KEY
+// PARAMETER_TEXTFIELD_MINLENGTH_KEY
+
+
 
 -(void)setEditable:(NSNumber *)editable {
     _editable = editable;
@@ -233,37 +241,34 @@
 
 #pragma mark - Forwarding to binding delegate
 
--(void) updateValue {
-    [self.bindingDelegate performSelectorOnMainThread: @selector(updateValue:) withObject:[self displayComponentValue] waitUntilDone:YES];
-}
 
 -(BOOL) isValid {
     return ([self validateWithParameters:nil] == 0);
 }
 
 -(NSArray *)getErrors {
-    return [self.bindingDelegate getErrors];
+    return [self.controlDelegate getErrors];
 }
 
 -(void)addErrors:(NSArray *)errors {
-    [self.bindingDelegate addErrors:errors];
+    [self.controlDelegate addErrors:errors];
 }
 
 -(void)clearErrors {
-    [self.bindingDelegate clearErrors];
+    [self.controlDelegate clearErrors];
 }
 
 -(void)showError:(BOOL)showError {
-    [self.bindingDelegate setIsValid:!showError];
+    [self.controlDelegate setIsValid:!showError];
 }
 
 -(void) onErrorButtonClick:(id)sender {
-    [self.bindingDelegate onErrorButtonClick:sender];
+    [self.controlDelegate onErrorButtonClick:sender];
 }
 
 -(void)prepareForInterfaceBuilder {
     [self applyStandardStyle];
-
+    
     if(self.onError_MDK) {
         [self applyErrorStyle];
     }
@@ -284,7 +289,47 @@
 
 -(void)setVisible:(NSNumber *)visible {
     _visible = visible;
-    [self.bindingDelegate setVisible:visible];
+    [self.controlDelegate setVisible:visible];
+}
+
+-(void)setControlAttributes:(NSDictionary *)controlAttributes {
+    _controlAttributes = controlAttributes;
+    self.mandatory = controlAttributes[@"mandatory"] ? controlAttributes[@"mandatory"] : @1;
+    if(self.associatedLabel) {
+        self.associatedLabel.mandatory = self.mandatory;
+    }
+    self.editable = controlAttributes[@"editable"] ? controlAttributes[@"editable"] : @1;
+    self.visible = controlAttributes[@"visible"] ? controlAttributes[@"visible"] : @1;
+}
+
+-(void)setMandatory:(NSNumber *)mandatory {
+    _mandatory = mandatory;
+    if(self.associatedLabel) {
+        self.associatedLabel.mandatory = _mandatory;
+    }
+}
+
+
+-(void)setAssociatedLabel:(MFLabel *)associatedLabel {
+    _associatedLabel = associatedLabel;
+    self.associatedLabel.mandatory = self.mandatory;
+}
+
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    if(![self isEqual:target]) {
+        MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+        commonCCTD.target = target;
+        commonCCTD.action = action;
+        self.targetDescriptors = @{@(self.hash) : commonCCTD};
+    }
+    else {
+        [super addTarget:target action:action forControlEvents:controlEvents];
+    }
+}
+
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
 }
 
 

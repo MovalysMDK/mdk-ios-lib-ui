@@ -28,9 +28,8 @@
 #import "MFViewControllerProtocol.h"
 #import "MFDefaultConstraintsProtocol.h"
 #import "MFViewControllerObserverProtocol.h"
+#import "MFViewControllerAttributes.h"
 
-//Form extension
-#import "MFFormExtend.h"
 
 //Menu
 #import "UIViewController+MFMenuManager.h"
@@ -49,8 +48,7 @@
  */
 @property (strong, nonatomic) IBOutletCollection(MFButton) NSArray *buttons;
 
-@property (nonatomic, strong) MFFormExtend *mf;
-
+@property(strong, nonatomic) MFViewControllerAttributes *mf;
 
 #pragma mark - Methods
 
@@ -110,3 +108,6 @@
                            
 
 @end
+
+
+

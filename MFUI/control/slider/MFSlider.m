@@ -25,6 +25,7 @@
 #include <math.h>
 
 @implementation MFSlider
+@synthesize targetDescriptors = _targetDescriptors;
 
 //Parameters keys
 NSString *const SLIDER_PARAMETER_MAX_VALUE_KEY = @"maxValue";
@@ -45,14 +46,9 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     
     [super initialize];
     
-    
-    [self buildDesignableComponentView];
-    
-    [self.innerSlider addTarget:self action:@selector(sliderValueChangedAction) forControlEvents:UIControlEventValueChanged];
-    [self setAllTags];
-    
-    
 
+    [self buildDesignableComponentView];
+    [self setAllTags];
 }
 
 
@@ -67,7 +63,6 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     //self.sliderValue.text = [NSString stringWithFormat:@"%d", (int)self.slider.value];
     //[self setValue:self.slider.value];
     [self setValue:self.innerSlider.value];
-    [self updateValue];
 }
 
 /**
@@ -100,27 +95,32 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 
 #pragma mark - Binding
 
--(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
-    
-    [super didLoadFieldDescriptor:fieldDescriptor];
-    
-    //Biding des propriétés
-    
-    //Les bornes doivent toujours être entières (partie entière récupérée si nombre décimal)
-    NSNumber *minValue = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"minValue"];
-    self.innerSlider.minimumValue = [minValue intValue];
-    
-    NSNumber *maxValue = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"maxValue"];
-    self.innerSlider.maximumValue = [maxValue intValue];
-    
-    NSNumber *step = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"step"];
-    self.step = [step floatValue];
-    
-    if (self.step == 0) {
-        self.step = 1;
-    }
-    
-}
+//PROTODO : parameters
+//minValue
+//maxValue
+//step
+
+//-(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
+//    
+//    [super didLoadFieldDescriptor:fieldDescriptor];
+//    
+//    //Biding des propriétés
+//    
+//    //Les bornes doivent toujours être entières (partie entière récupérée si nombre décimal)
+//    NSNumber *minValue = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"minValue"];
+//    self.innerSlider.minimumValue = [minValue intValue];
+//    
+//    NSNumber *maxValue = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"maxValue"];
+//    self.innerSlider.maximumValue = [maxValue intValue];
+//    
+//    NSNumber *step = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"step"];
+//    self.step = [step floatValue];
+//    
+//    if (self.step == 0) {
+//        self.step = 1;
+//    }
+//    
+//}
 
 
 #pragma mark - Tags for automatic testing
@@ -197,9 +197,6 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     return [NSNumber numberWithFloat: [self getValue]];
 }
 
--(void) updateValue {
-    [self performSelectorOnMainThread: @selector(updateValue:) withObject:[self getData] waitUntilDone:YES];
-}
 
 
 -(BOOL) isActive
@@ -290,4 +287,30 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 -(void)willLayoutSubviewsNoDesignable {
     self.innerSliderValueLabel.textAlignment = NSTextAlignmentCenter;
 }
+
+-(void)setControlAttributes:(NSDictionary *)controlAttributes {
+    [super setControlAttributes:controlAttributes];
+    self.maximumValue = self.controlAttributes[SLIDER_PARAMETER_MAX_VALUE_KEY] ? [self.controlAttributes[SLIDER_PARAMETER_MAX_VALUE_KEY] integerValue] : 100;
+    self.minimumValue = self.controlAttributes[SLIDER_PARAMETER_MIN_VALUE_KEY] ? [self.controlAttributes[SLIDER_PARAMETER_MIN_VALUE_KEY] integerValue] : 0;
+    self.step = self.controlAttributes[SLIDER_PARAMETER_STEP_KEY] ? [self.controlAttributes[SLIDER_PARAMETER_STEP_KEY] integerValue] : 1;
+}
+
+
+#pragma mark - Control changes
+
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    [self.innerSlider addTarget:self action:@selector(valueChanged:) forControlEvents:controlEvents];
+    [self.innerSlider addTarget:self action:@selector(valueChanged:) forControlEvents:controlEvents];
+    MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+    commonCCTD.target = target;
+    commonCCTD.action = action;
+    self.targetDescriptors = @{@(self.innerSlider.hash) : commonCCTD};
+}
+
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
+}
+
+
 @end

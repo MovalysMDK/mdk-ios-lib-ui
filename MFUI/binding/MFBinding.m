@@ -15,178 +15,141 @@
  */
 
 
-//Main interface
 #import "MFBinding.h"
+#import "MFAbstractComponentWrapper.h"
 
-//Helpers
-#import "MFHelperIndexPath.h"
 
-//Components
-#import  <MFCore/MFCoreError.h>
-#import "MFUILogging.h"
-#import "MFUIComponentProtocol.h"
-
-@interface MFBinding()
-
-/**
- * @brief The dictionnary used to bind ViewModels and components.
- * The binding is a 2 levels dictionary
- *
- * A dictionary that uses as key/value pair
- * "key" : the indexpath of the cell we want to binds components
- * "value' : a dictionary.
- *
- * That second dictionary uses as key/value pair :
- * "key" : the bindingKey of a component
- * "value" : the component
- */
-@property (nonatomic, strong) NSMutableDictionary *binding;
-
-@end
 
 @implementation MFBinding
 
-
-#pragma mark - Initialization
--(id)init {
+-(instancetype) init {
     self = [super init];
     if(self) {
-        self.binding = [[NSMutableDictionary alloc] init];
+        _bindingByViewModelKeys = [NSMutableDictionary new];
+        _bindingByComponents = [NSMutableDictionary new];
+        _bindingByBindingKeys = [NSMutableDictionary new];
     }
     return self;
 }
 
-#pragma mark - Manage binding
 
--(void)clear {
-    [self.binding removeAllObjects];
-}
+#pragma mark - Binding Management
 
--(NSDictionary *) componentsDictionaryAtIndexPath:(NSIndexPath *)indexPath {
-    indexPath = [self indexPathForCurrentBindingModeFromIndexPath:indexPath];
-    NSDictionary *componentsDictionary = [self.binding objectForKey:[MFHelperIndexPath toString:indexPath]];
-    return componentsDictionary;
-}
-
--(NSArray *) componentsArrayAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableArray *componentsList = [NSMutableArray array];
-    NSDictionary *componentsDictionary = [self componentsDictionaryAtIndexPath:indexPath];
-    for(NSString *key in componentsDictionary.allKeys) {
-        NSArray *componentsListForKey = (NSArray *)[componentsDictionary objectForKey:key];
-        if(componentsListForKey) {
-            componentsList = [[componentsList arrayByAddingObjectsFromArray:componentsListForKey] mutableCopy];
+-(void)registerBindingValue:(MFBindingValue *)bindingValue {
+    //1 : Register in bindingByViewModelKeys
+    NSMutableArray *registeredValues = [self.bindingByViewModelKeys[bindingValue.abstractBindedPropertyName] mutableCopy];
+    if(!registeredValues) {
+        registeredValues = [NSMutableArray new];
+    }
+    [registeredValues addObject:bindingValue];
+    [self.bindingByViewModelKeys setObject:registeredValues forKey:bindingValue.abstractBindedPropertyName];
+    
+    //2 : Register in bindingByComponents
+    if(bindingValue.bindingMode == MFBindingValueModeTwoWays) {
+        NSNumber *key = @([bindingValue.wrapper.component hash]);
+        if(!self.bindingByComponents[key]) {
+            MFOneWayBindingValue *oneWayBindingValue = (MFOneWayBindingValue *)bindingValue;
+            //Par précaution et souci de compréhension, inutile dans ce sens
+            [self.bindingByComponents setObject:oneWayBindingValue forKey:key];
         }
     }
-    return componentsList;
 }
 
--(NSArray *) componentsAtIndexPath:(NSIndexPath *)indexPath withBindingKey:(NSString *)bindingKey {
-    indexPath = [self indexPathForCurrentBindingModeFromIndexPath:indexPath];
-    NSDictionary *indexPathComponents = [self componentsDictionaryAtIndexPath:indexPath];
-    NSArray *componentsForBindingKey= nil;
-    if(indexPathComponents) {
-        componentsForBindingKey = [indexPathComponents objectForKey:bindingKey];
+-(void)registerBindingValue:(MFBindingValue *)bindingValue forBindingKey :(NSString *)bindingKey {
+    NSMutableArray *bindingValuesforKey = _bindingByBindingKeys[bindingKey];
+    if(!bindingValuesforKey) {
+        bindingValuesforKey = [NSMutableArray array];
     }
-    return componentsForBindingKey;
+    [bindingValuesforKey addObject:bindingValue];
+    _bindingByBindingKeys[bindingKey] = bindingValuesforKey;
 }
 
--(NSArray *) componentsWithBindingKey:(NSString *)bindingKey {
-    NSArray *registeredComponents = nil;
-    if(self.bindingMode == MFBindingModeForm) {
-        registeredComponents = [self componentsAtIndexPath:nil withBindingKey:bindingKey];
+
+
+-(void) clearBindingValuesForBindingKey:(NSString *)bindingKey {
+    NSArray *bindingValues = _bindingByBindingKeys[bindingKey];
+    for(MFBindingValue *bindingValueToRemove in bindingValues) {
+        _bindingByComponents = [self clearBindingValue:bindingValueToRemove inDictionary:_bindingByComponents];
+        _bindingByViewModelKeys = [self clearBindingValue:bindingValueToRemove inDictionary:_bindingByViewModelKeys];
     }
-    else {
-        registeredComponents = nil;
-        [MFException throwExceptionWithName:@"Binding mode error" andReason:@"The method \"(NSArray *) componentsWithBindingKey:(NSString *)bindingKey\" must not be called in MFBindingModeList mode" andUserInfo:nil];
-    }
-    return registeredComponents;
+    [_bindingByBindingKeys removeObjectForKey:bindingKey];
 }
 
--(NSArray *) registerComponents:(NSArray *)componentList atIndexPath:(NSIndexPath *)indexPath withBindingKey:(NSString *)bindingKey {
-    //Récupération des composants déja enregistrés pour ce binding
-    if ([bindingKey isEqualToString:@"AgencyPanel-agencypanel-notation-label"]) {
-        MFUILogInfo(@"bindingKey: %@", bindingKey);
-    }
-    indexPath = [self indexPathForCurrentBindingModeFromIndexPath:indexPath];
-    NSMutableArray *registeredComponents = [[self componentsAtIndexPath:indexPath withBindingKey:bindingKey] mutableCopy];
-    NSMutableArray *componentsToRegister = [componentList mutableCopy];
-    if(!componentsToRegister) {
-        return @[];
-    }
-    
-    //S'il y a déja des composant enregistrés pour ce binding
-    if(registeredComponents) {
-        //On élimine les doublons à enregistrer
-        for(id<MFUIComponentProtocol> component in componentList) {
-            if([registeredComponents containsObject:component]) {
-                [componentsToRegister removeObject:component];
+-(void) clearBindingValuesForComponentHash:(NSNumber *)componentHash {
+    [_bindingByComponents removeObjectForKey:componentHash];
+    NSMutableDictionary *mutableCopy = [_bindingByViewModelKeys mutableCopy];
+    for(NSString *key in _bindingByViewModelKeys) {
+        NSMutableArray *bindingValues = _bindingByViewModelKeys[key];
+        MFBindingValue *bindingValueToRemove = nil;
+        for(MFBindingValue *bindingValue in bindingValues) {
+            if([@(bindingValue.wrapper.component.hash) isEqualToNumber:componentHash]) {
+                bindingValueToRemove = bindingValue;
+                break;
             }
         }
-        //On ajoute les nouveaux composants à enregistrer dans ce binding
-        registeredComponents = [[registeredComponents arrayByAddingObjectsFromArray:componentsToRegister] mutableCopy];
+        if(bindingValueToRemove) {
+            [bindingValues removeObject:bindingValueToRemove];
+        }
+        mutableCopy[key] = bindingValues;
     }
-    else {
-        registeredComponents = componentsToRegister;
-    }
-    
-    //Avant d'ajouter les composants au binding, on vérifie si des composants on déja été ajoutés pour cet indexPath
-    NSMutableDictionary *registeredComponentAtIndexPath = [[self componentsDictionaryAtIndexPath:indexPath] mutableCopy];
-    if(!registeredComponentAtIndexPath) {
-        //S'il n'y avait pas de composants enregistrés pour cet indexPath on crée un nouveau dictionnaire pour cet indexPath
-        registeredComponentAtIndexPath = [NSMutableDictionary dictionary];
-    }
-    //On ajoute au dictionnaire les nouveaux composants à enregistrer
-    [registeredComponentAtIndexPath setObject:registeredComponents forKey:bindingKey];
-    
-    //On ajoute au binding les nouveaux composants à enregistrer avec l'indexPath et la bindingKey spécifiés.
-    [self.binding setObject:registeredComponentAtIndexPath forKey:[MFHelperIndexPath toString:indexPath]];
-    
-    return componentsToRegister;
+    _bindingByViewModelKeys = mutableCopy;
 }
 
--(void) unregisterComponentsAtIndexPath:(NSIndexPath *)indexPath withBindingKey:(NSString *)bindingKey {
-    if(self.bindingMode == MFBindingModeForm) {
-        if(bindingKey) {
-            [self unregisterComponentsWithBindingKey:bindingKey];
+
+
+-(NSMutableDictionary *) clearBindingValue:(MFBindingValue *) bindingValue inDictionary:(NSDictionary *)dictionary {
+    NSMutableDictionary *copy = [dictionary mutableCopy];
+    for(NSString *key in dictionary.allKeys) {
+        id bindingValues = dictionary[key];
+        if([bindingValues isKindOfClass:[MFBindingValue class]]) {
+            int objectPosition = [dictionary.allValues indexOfObject:bindingValue];
+            if(objectPosition != NSNotFound && objectPosition != -1) {
+                [copy removeObjectForKey:dictionary.allKeys[objectPosition]];
+            }
+            break;
+        }
+        else {
+            if([bindingValues containsObject:bindingValue]) {
+                [bindingValues removeObject:bindingValue];
+            }
+            [copy setObject:bindingValues forKey:key];
         }
     }
-    else {
-        if(indexPath) {
-            [self.binding removeObjectForKey:[MFHelperIndexPath toString:indexPath]];
-        }
-    }
+    return copy;
 }
 
-
-
-
-#pragma mark - Private methods
-
-/**
- * @brief Returns an indexPath following the current bindingMode,
- * @param indexPath The original indexPath
- * @return An indexPath that depends on the current BindingMode
- */
--(NSIndexPath *) indexPathForCurrentBindingModeFromIndexPath:(NSIndexPath *)indexPath {
-    NSIndexPath *bindingModeIndexPath = indexPath;
-    //Si on est dans un formulaire, on enregistre tout les composants sous le même indexPath
-    if(!bindingModeIndexPath || self.bindingMode == MFBindingModeForm) {
-        bindingModeIndexPath = [NSIndexPath indexPathForItem:NSIntegerMax inSection:NSIntegerMax];
-    }
-    return bindingModeIndexPath;
+-(NSString *) description {
+    return [NSString stringWithFormat:@"BY VIEW MODEL PROPERTY NAME : %@ \n\n BY COMPONENTS HASH : %@ \n\n BY BINDING KEY : %@", self.bindingByViewModelKeys.description, self.bindingByComponents.description, self.bindingByBindingKeys.description];
 }
-
-
--(void) unregisterComponentsWithBindingKey:(NSString *)bindingKey {
-    if(self.bindingMode == MFBindingModeForm) {
-        NSMutableDictionary *allRegisteredComponents = [[self componentsDictionaryAtIndexPath:[self indexPathForCurrentBindingModeFromIndexPath:nil]] mutableCopy];
-        [allRegisteredComponents removeObjectForKey:bindingKey];
-        [self.binding setObject:allRegisteredComponents forKey:[MFHelperIndexPath toString:[self indexPathForCurrentBindingModeFromIndexPath:nil]]];
-    }
-    else {
-        [MFException throwExceptionWithName:@"Binding mode error" andReason:@"The method \"(void) unregisterComponentsWithBindingKey:(NSString *)bindingKey\" must not be called in MFBindingModeList mode" andUserInfo:nil];
-    }
-}
-
 
 @end
+
+
+@implementation MFBindingValue
+
+-(instancetype)initWithWrapper:(MFAbstractComponentWrapper *)componentWrapper withBindingMode:(MFBindingValueMode)bindingMode withVmBindedPropertyName:(NSString *)vmBindedPropertyName withComponentBindedPropertyName:(NSString *)componentBindedPropertyName withComponentOutletName:(NSString *)componentOutletName fromSource:(MFBindingSource)bindingSource{
+    self = [self initWithWrapper:componentWrapper withBindingMode:bindingMode withVmBindedPropertyName:vmBindedPropertyName withComponentOutletName:componentOutletName fromSource:bindingSource];
+    if(self) {
+        self.componentBindedPropertyName = componentBindedPropertyName;
+    }
+    return self;
+}
+
+-(instancetype)initWithWrapper:(MFAbstractComponentWrapper *)componentWrapper withBindingMode:(MFBindingValueMode)bindingMode withVmBindedPropertyName:(NSString *)vmBindedPropertyName withComponentOutletName:(NSString *)componentOutletName  fromSource:(MFBindingSource)bindingSource{
+    self = [super init];
+    if(self) {
+        self.wrapper = componentWrapper;
+        self.bindingMode = bindingMode;
+        self.abstractBindedPropertyName = vmBindedPropertyName;
+        self.componentOutletName = componentOutletName;
+        self.bindingSource = bindingSource;
+    }
+    return self;
+}
+
+-(NSString *)description {
+    return [NSString stringWithFormat:@"Wrapper : %@\rBindingMode : %@\rViewModel Property Name : %@\rComponent Property Name : %@\rComponent Outlet Name : %@", self.wrapper, (self.bindingMode == MFBindingValueModeOneWay) ? @"One Way" : @"Two ways", self.abstractBindedPropertyName, self.componentBindedPropertyName, self.componentOutletName];
+}
+
+@end
+

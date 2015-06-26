@@ -53,7 +53,6 @@ NSString *const ENUMIMAGE_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 @implementation MFEnumImage
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
 @synthesize transitionDelegate = _transitionDelegate;
-@synthesize groupDescriptor = _groupDescriptor;
 @synthesize selfDescriptor = _selfDescriptor;
 @synthesize isValid = _isValid;
 @synthesize form = _form;
@@ -133,7 +132,10 @@ NSString *const ENUMIMAGE_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     if(self.orientationChangedDelegate && [self.orientationChangedDelegate checkIfOrientationChangeIsAScreenNormalRotation]) {
         
         // Au changement d'orientation, on effectue à nouveau le rendu de l'enum car la dimension du composant à changée
-        NSString *sEnumClassName = [((MFFieldDescriptor *) self.selfDescriptor).parameters objectForKey:(ENUMIMAGE_PARAMETER_ENUM_CLASS_NAME_KEY)]; // Nom de la classe Enum utilisée par le composant
+        NSString *sEnumClassName = nil;
+        //PROTODO : au dessus, retrouver nom enum ENUMIMAGE_PARAMETER_ENUM_CLASS_NAME_KEY
+        
+        
         NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:sEnumClassName]; // Nom de la classe Helper de l'Enum
         Class cEnumHelper = NSClassFromString(sEnumClassHelperName); // Classe Helper de l'Enum
         NSNumber *nsnEnum = (NSNumber *)_data; // Conversion objet pour utilisation avec @selector
@@ -162,7 +164,10 @@ NSString *const ENUMIMAGE_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 -(void)setData:(id)data {
     _data = data;
     
-    NSString *sEnumClassName = [((MFFieldDescriptor *) self.selfDescriptor).parameters objectForKey:(ENUMIMAGE_PARAMETER_ENUM_CLASS_NAME_KEY)]; // Nom de la classe Enum utilisée par le composant
+    NSString *sEnumClassName = nil;
+    //PROTODO : idem mais essayer de centraliser
+    
+    
     NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:sEnumClassName]; // Nom de la classe Helper de l'Enum
     Class cEnumHelper = NSClassFromString(sEnumClassHelperName); // Classe Helper de l'Enum
     NSNumber *nsnEnum = data; // Conversion objet pour utilisation avec @selector
@@ -175,9 +180,7 @@ NSString *const ENUMIMAGE_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     return self.data;
 }
 
--(void) updateValue {
-    [self performSelectorOnMainThread: @selector(updateValue:) withObject:self.data waitUntilDone:YES];
-}
+
 
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];
@@ -189,7 +192,10 @@ NSString *const ENUMIMAGE_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 -(void) renderEnumFromText:(NSString *)sText {
     
     // Tente de charger l'image à partir du fichier
-    NSString *sEnumClassName = [((MFFieldDescriptor *) self.selfDescriptor).parameters objectForKey:(ENUMIMAGE_PARAMETER_ENUM_CLASS_NAME_KEY)]; // Nom de la classe Enum utilisée par le composant
+    NSString *sEnumClassName = nil;
+    
+    //PROTODO : idem
+    
     NSString *sImageName = [[NSString stringWithFormat:@"enum_%@_%@", sEnumClassName, sText] lowercaseString];
 
     dispatch_async(dispatch_get_main_queue(), ^{

@@ -75,7 +75,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 
 @synthesize cellContainer = _cellContainer;
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize groupDescriptor = _groupDescriptor;
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize mandatory = _mandatory;
@@ -92,7 +91,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
         self.tableView.backgroundColor = [UIColor clearColor];
         self.titleLabel = [[UILabel alloc] init];
     }
-    self.mf = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_FORM_EXTEND];
     
     self.customButtonsArray = [NSArray array];
     
@@ -216,14 +214,14 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     //Set Data
     _data= data;
     if(data && ![data isKindOfClass:[MFKeyNotFound class]]) {
-        [self updateValue:data];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
     
     
-    self.tableView.editing = self.mf.canDeleteItem;
+//    self.tableView.editing = self.mf.canDeleteItem;
+    //PROTODO : mode edit ?
 }
 
 -(BOOL) dataDifferentFrom:(id) data
@@ -243,7 +241,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 
 -(void) setDataAfterEdition:(id)data {
     _data= data;
-    [self updateValue:data];
 }
 
 /**
@@ -256,13 +253,15 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];
-    if([self.editable isEqualToNumber:@0]) {
-        self.mf.canAddItem = NO;
-        self.mf.canDeleteItem = NO;
-        if(self.mf.canEditItem) {
-            self.editMode = MFFixedListEditModePopup;
-        }
-    }
+//    if([self.editable isEqualToNumber:@0]) {
+//        self.mf.canAddItem = NO;
+//        self.mf.canDeleteItem = NO;
+//        if(self.mf.canEditItem) {
+//            self.editMode = MFFixedListEditModePopup;
+//        }
+//    }
+    
+    //PROTODO : mode ?
 }
 
 
@@ -390,14 +389,15 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     for(UIView *button in self.buttonsView.subviews) {
         [button removeFromSuperview];
     }
-    if(self.mf.canAddItem) {
-        self.addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-        self.customButtonsArray = @[self.addButton];
-        [self.addButton addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
-    }
-    else {
-        self.customButtonsArray = @[];
-    }
+//    if(self.mf.canAddItem) {
+//        self.addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+//        self.customButtonsArray = @[self.addButton];
+//        [self.addButton addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    else {
+//        self.customButtonsArray = @[];
+//    }
+    //PROTODO : add ?
     [self.buttonsView removeConstraints:[self.buttonsView constraints]];
 }
 
@@ -426,20 +426,19 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     return MFFixedListAlignmentRight;
 }
 
--(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
-    [super didLoadFieldDescriptor:fieldDescriptor];
-    NSDictionary *componentParameters = ((MFFieldDescriptor *)self.selfDescriptor).parameters;
-    Class dataDelegateClass = NSClassFromString([componentParameters objectForKey:FIXED_LIST_PARAMETER_DATA_DELEGATE_NAME]);
-    self.dataDelegate = [[dataDelegateClass alloc] initWithFixedList:self];
-    self.mf.canAddItem =[[componentParameters objectForKey:FIXED_LIST_PARAMETER_CAN_ADD_ITEM] boolValue];
-    self.mf.canEditItem =[[componentParameters objectForKey:FIXED_LIST_PARAMETER_CAN_EDIT_ITEM] boolValue];
-    self.mf.canDeleteItem =[[componentParameters objectForKey:FIXED_LIST_PARAMETER_CAN_DELETE_ITEM] boolValue];
-    self.mf.rowHeight = [[componentParameters objectForKey:FIXED_LIST_PARAMETER_ROW_HEIGHT] intValue];
-    self.mf.editMode = [[componentParameters objectForKey:FIXED_LIST_PARAMETER_EDIT_MODE] intValue];
-    self.mf.formDescriptorName = [componentParameters objectForKey:FIXED_LIST_PARAMETER_FORM_DESCRIPTOR_NAME];
-    
-    [self.dataDelegate setContent];
-}
+
+
+//PROTODO : PArameters
+//FIXED_LIST_PARAMETER_CAN_ADD_ITEM
+//FIXED_LIST_PARAMETER_CAN_EDIT_ITEM
+//FIXED_LIST_PARAMETER_CAN_DELETE_ITEM
+//FIXED_LIST_PARAMETER_ROW_HEIGHT
+//FIXED_LIST_PARAMETER_EDIT_MODE
+//FIXED_LIST_PARAMETER_FORM_DESCRIPTOR_NAME
+//[self.dataDelegate setContent];
+//
+
+
 
 -(void)setDataDelegate:(MFFixedListDataDelegate *)dataDelegate {
     _dataDelegate = dataDelegate;
@@ -448,7 +447,8 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 }
 
 -(BOOL)isPhotoFixedList {
-    return [[((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:FIXED_LIST_PARAMETER_IS_PHOTO] boolValue];
+    //PROTODO : PhotoFixedList ?
+    return NO;
 }
 
 #pragma mark  - LiveRendering methods
@@ -470,7 +470,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     // We search the component's errors
     if([self.mandatory isEqualToValue:@1] && (((MFUIBaseListViewModel *)[self getData]).viewModels.count == 0))
     {
-        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         [self addErrors:@[error]];
         nbOfErrors++;
     }

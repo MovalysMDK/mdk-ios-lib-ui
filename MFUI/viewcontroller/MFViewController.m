@@ -34,6 +34,8 @@
 #import "MFFormDetailViewController.h"
 #import  <MFCore/MFCoreError.h>
 
+#import "MFConfigurationHandler.h"
+
 
 @interface MFViewController()
 @property (nonatomic, strong) NSMutableArray *observers;
@@ -41,17 +43,10 @@
 @end
 
 @implementation MFViewController
-
-@synthesize mf = _mf;
 @synthesize defaultConstraints = _defaultConstraints;
+@synthesize savedConstraints = _savedConstraints;
 
--(id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if(self) {
-        _mf = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_FORM_EXTEND];
-    }
-    return self;
-}
+
 
 #pragma mark - button methods
 

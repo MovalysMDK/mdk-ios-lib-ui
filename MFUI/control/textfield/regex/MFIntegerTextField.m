@@ -106,7 +106,7 @@
         }
         sender.title = @"—";
     }
-    [self performSelector:@selector(updateValue)];
+    [self valueChanged:self];
 }
 
 
@@ -114,18 +114,7 @@
     [self resignFirstResponder];
 }
 
--(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
-    
-    [super didLoadFieldDescriptor:fieldDescriptor];
-    
-    //Biding des propriétés
-    self.minDigits = [fieldDescriptor.parameters objectForKey:@"minDigits"];
-    self.maxDigits = [fieldDescriptor.parameters objectForKey:@"maxDigits"];
-    
-    //La regex de vérification est créée en prenant compte les valeurs spécifiées dans le PLIST
-    [self createPattern];
-    
-}
+//PROTODO : maxDigits, minDigits parameters
 
 - (void)createPattern {
     
@@ -164,18 +153,26 @@
     NSInteger nbOfErrors = [super validateWithParameters:parameters];
     
     if([[self getData] isEqualToString:@"-"]) {
-        NSError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        NSError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         [self addErrors:@[error]];
         nbOfErrors++;
     }
     
     if ([[self getData] longLongValue] > INT32_MAX || [[self getData] longLongValue] < INT32_MIN) {
-        NSError *error = [[MFInvalidIntegerValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        NSError *error = [[MFInvalidIntegerValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         [self addErrors:@[error]];
         nbOfErrors++;
     }
     
     return nbOfErrors;
 }
+
+
+
+#pragma mark - Control changes
+
+
+
+
 
 @end

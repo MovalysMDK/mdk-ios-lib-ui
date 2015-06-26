@@ -27,10 +27,20 @@
 #import "MFUILogging.h"
 #import "MFFormViewController.h"
 #import "MFFormValidationDelegate.h"
+#import "MFObjectWithBindingProtocol.h"
+#import "MFListenerDescriptorManager.h"
+
+@interface MFUIBaseViewModel ()
+
+@property (nonatomic, strong) NSMutableArray *synchronizedProperties;
+
+@end
 
 @implementation MFUIBaseViewModel
 @synthesize form = _form;
 @synthesize hasChanged = _hasChanged;
+@synthesize listenerDecriptorManager = _listenerDecriptorManager;
+@synthesize objectWithBinding = _objectWithBinding;
 
 #pragma mark - Constructeurs
 
@@ -63,11 +73,13 @@
  */
 - (void) addListenerForSyncProperties
 {
-    
+    self.listenerDecriptorManager = [MFListenerDescriptorManager new];
     NSArray * allProperties = [[self getBindedProperties] arrayByAddingObjectsFromArray:[self getCustomBindedProperties]];
     for (NSString *key in allProperties) {
         [self addObserver:self forKeyPath:key options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew) context:nil];
     }
+    
+    [self createViewModelConfiguration];
 }
 
 
@@ -90,10 +102,8 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    
-    //    MFCoreLogVerbose(@"Les changements qui ont eu lieu sur le champ %@ sont les suivants : \n %@",keyPath,change);
-    
-    //Vérification de la nouvelle valeur par rapport à l'ancienne avant de propager l'évènement
+    if([self.synchronizedProperties containsObject:keyPath])
+        return;
     id oldValue = [change objectForKey:@"old"];
     id newValue = [change objectForKey:@"new"];
     
@@ -101,18 +111,48 @@
         if (oldValue != nil && newValue != nil) {
             if ([oldValue respondsToSelector:@selector(isEqualToString:)]) {
                 if (![oldValue isEqualToString:newValue]) {
-                    self.hasChanged = YES;
-                    [[self getForm] dispatchEventOnViewModelPropertyValueChangedWithKey:keyPath sender:self];
+                    [self dispatchValue:newValue fromPropertyName:keyPath];
                 }
             }else {
                 if (![oldValue isEqual:newValue]) {
-                    self.hasChanged = YES;
-                    [[self getForm] dispatchEventOnViewModelPropertyValueChangedWithKey:keyPath sender:self];
+                    [self dispatchValue:newValue fromPropertyName:keyPath];
                 }
             }
         }else {
-            self.hasChanged = YES;
-            [self.form dispatchEventOnViewModelPropertyValueChangedWithKey:keyPath sender:self];
+            [self dispatchValue:newValue fromPropertyName:keyPath];
+        }
+    }
+}
+
+-(void)dispatchValue:(id)newValue fromPropertyName:(NSString *)keyPath {
+    
+    NSMutableArray *recursiveKeyPathes = [NSMutableArray array];
+    MFUIBaseViewModel *currentViewModel = self;
+    [recursiveKeyPathes addObject:keyPath];
+    while (currentViewModel.parentViewModel) {
+        [recursiveKeyPathes addObject:[NSString stringWithFormat:@"%@.%@", [self propertyNameInParentViewModel], [recursiveKeyPathes lastObject]]];
+        currentViewModel = currentViewModel.parentViewModel;
+    }
+    
+    for(NSString *recursiveKeyPath in recursiveKeyPathes) {
+        if([self conformsToProtocol:@protocol(ITEMVM)] && ((id<ITEMVM>)self).bindAsITEMVM) {
+            if([((id<ITEMVM>)self) parentViewModel]) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[((id<ITEMVM>)self) indexOfItem] inSection:0];
+                [self.objectWithBinding.bindingDelegate.binding dispatchValue:newValue fromPropertyName:recursiveKeyPath atIndexPath:indexPath fromSource:MFBindingSourceViewModel];
+            }
+        }
+        else {
+            [self.objectWithBinding.bindingDelegate.binding dispatchValue:newValue fromPropertyName:recursiveKeyPath fromSource:MFBindingSourceViewModel];
+        }
+        [self callCallbackForKeypath:recursiveKeyPath];
+    }
+}
+
+-(void) callCallbackForKeypath:(NSString *)keyPath {
+    for(MFListenerDescriptor *descriptor in [self.listenerDecriptorManager listenerDescriptorsForEventType:MFListenerEventTypeViewModelPropertyChanged]) {
+        NSArray *callBacksForProperty = [descriptor callbackForKeyPath:keyPath];
+        for(NSString *aMethodName in callBacksForProperty) {
+            [self performSelector:NSSelectorFromString(aMethodName)];
         }
     }
 }
@@ -181,7 +221,7 @@
 }
 
 
-- (void) setForm:(id<MFViewModelChangedListenerProtocol, MFBindingFormDelegate>)form
+- (void) setForm:(id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol>)form
 {
     _form = form;
     if(![self conformsToProtocol:@protocol(MFUIWorkspaceViewModelProtocol)]) {
@@ -192,7 +232,7 @@
 }
 
 
-- (id<MFViewModelChangedListenerProtocol, MFBindingFormDelegate>) getForm
+- (id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol>) getForm
 {
     if (self.form) {
         return self.form;
@@ -216,7 +256,7 @@
 {
     BOOL isValid = YES;
     id<MFViewModelChangedListenerProtocol,
-    MFBindingFormDelegate> formController = (id<MFViewModelChangedListenerProtocol, MFBindingFormDelegate>) [self getForm];
+    MFCommonFormProtocol> formController = (id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol>) [self getForm];
     if (formController) {
         isValid = [formController.formValidation validateViewModel:self];
     }
@@ -256,6 +296,20 @@
     MFCoreLogVerbose(@"MFUIBaseViewModel modifyToIdentifiable does nothing");
 }
 
+-(void)createViewModelConfiguration {
+    
+}
+
+-(void)setObjectWithBinding:(NSObject<MFObjectWithBindingProtocol> *)objectWithBinding {
+    _objectWithBinding = objectWithBinding;
+    for(MFUIBaseViewModel *subViewModel in [self getChildViewModels]) {
+        subViewModel.objectWithBinding = objectWithBinding;
+    }
+}
+
+-(NSString *)propertyNameInParentViewModel {
+    return nil;
+}
 
 @end
 

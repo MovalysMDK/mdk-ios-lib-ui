@@ -15,8 +15,8 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "MFStyleProtocol.h"
 #import "MFUIComponentProtocol.h"
+#import "MFControlChangesProtocol.h"
 
 /*!
  * @class MFTextField
@@ -25,7 +25,7 @@
  */
 
 IB_DESIGNABLE
-@interface MFTextField : UITextField <MFUIComponentProtocol>
+@interface MFTextField : UITextField <MFUIComponentProtocol, MFControlChangesProtocol>
 
 #pragma mark - Properties
 

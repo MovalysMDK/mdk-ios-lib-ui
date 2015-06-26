@@ -16,8 +16,9 @@
 
 
 #import "MFUIViewController.h"
+#import "MFComponentApplicationProtocol.h"
 
-@interface MFAppDelegate :  UIResponder <UIApplicationDelegate>
+@interface MFAppDelegate :  UIResponder <UIApplicationDelegate, MFComponentApplicationProtocol>
 
 
 #pragma mark - Properties

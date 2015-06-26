@@ -41,9 +41,8 @@
 @synthesize transitionDelegate = _transitionDelegate;
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
 @synthesize selfDescriptor = _selfDescriptor;
-@synthesize groupDescriptor = _groupDescriptor;
 @synthesize inInitMode = _inInitMode;
-@synthesize bindingDelegate = _bindingDelegate;
+@synthesize controlDelegate = _bindingDelegate;
 @synthesize isValid = _isValid;
 @synthesize mandatory = _mandatory;
 @synthesize visible = _visible;
@@ -51,6 +50,8 @@
 @synthesize tooltipView= _tooltipView;
 @synthesize cellContainer = _cellContainer;
 @synthesize styleClassName = styleClassName;
+@synthesize controlAttributes = _controlAttributes;
+@synthesize associatedLabel = _associatedLabel;
 
 NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 
@@ -80,7 +81,7 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 }
 
 -(void) initializeComponent {
-    self.bindingDelegate = [[MFComponentBindingDelegate alloc] initWithComponent:self];
+    self.controlDelegate = [[MFCommonControlDelegate alloc] initWithComponent:self];
 //    [self.baseStyleClass applyStandardStyleOnComponent:self];
     self.errors = [NSMutableArray new];
     if(!self.sender) {
@@ -95,7 +96,7 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 
 
 -(void)setIsValid:(BOOL) isValid {
-    [self.bindingDelegate setIsValid:isValid];
+    [self.controlDelegate setIsValid:isValid];
 }
 
 
@@ -110,11 +111,6 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
     [self setData:defaultValue];
 }
 
--(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
-    _selfDescriptor = fieldDescriptor;
-}
-
-
 +(NSString *)getDataType {
     return @"NSString";
 }
@@ -126,10 +122,8 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
         fixedData = data;
     }
     else {
-        NSString *defaultValue = self.selfDescriptor.name;
-        if(((MFFieldDescriptor *)self.selfDescriptor).i18nKey) {
-            defaultValue = MFLocalizedStringFromKey(((MFFieldDescriptor *)self.selfDescriptor).i18nKey);
-        }
+        NSString *defaultValue = NSStringFromClass(self.class);
+        //PROTODO : Valeur par défaut i18n
         fixedData = defaultValue;
     }
     fixedData = [self insertOrRemoveMandatoryIndicator:fixedData];
@@ -190,28 +184,25 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 
 #pragma mark - Forwarding to binding delegate
 
--(void) updateValue {
-    [self.bindingDelegate performSelectorOnMainThread: @selector(updateValue:) withObject:[self displayComponentValue] waitUntilDone:YES];
-}
 
 -(BOOL) isValid {
     return ([self validateWithParameters:nil] == 0);
 }
 
 -(NSArray *)getErrors {
-    return [self.bindingDelegate getErrors];
+    return [self.controlDelegate getErrors];
 }
 
 -(void)addErrors:(NSArray *)errors {
-    [self.bindingDelegate addErrors:errors];
+    [self.controlDelegate addErrors:errors];
 }
 
 -(void)clearErrors {
-    [self.bindingDelegate clearErrors];
+    [self.controlDelegate clearErrors];
 }
 
 -(void)showError:(BOOL)showError {
-    [self.bindingDelegate setIsValid:!showError];
+    [self.controlDelegate setIsValid:!showError];
 }
 
 -(void)prepareForInterfaceBuilder {
@@ -238,7 +229,7 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 
 -(void)setVisible:(NSNumber *)visible {
     _visible = visible;
-    [self.bindingDelegate setVisible:visible];
+    [self.controlDelegate setVisible:visible];
 }
 
 

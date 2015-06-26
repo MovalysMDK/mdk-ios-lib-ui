@@ -21,23 +21,8 @@
 
 
 -(id)processTreatmentOnComponent:(id<MFUIComponentProtocol>)component withViewModel:(id<MFUIBaseViewModelProtocol>)viewModel forProperty:(NSString *)property fromBindableProperties:(NSDictionary *)bindableProperties {
-    NSString *alignValue = [((MFFieldDescriptor *)component.selfDescriptor) valueForKey:property];
-    NSTextAlignment textAlignmentValue = NSTextAlignmentLeft;
-    if([alignValue isEqualToString:@"left"]) {
-        textAlignmentValue = NSTextAlignmentLeft;
-    }
-    else if([alignValue isEqualToString:@"center"]) {
-        textAlignmentValue = NSTextAlignmentCenter;
-    }
-    else if([alignValue isEqualToString:@"right"]) {
-        textAlignmentValue = NSTextAlignmentRight;
-    }
-    else if([alignValue isEqualToString:@"justified"]) {
-        textAlignmentValue = NSTextAlignmentJustified;
-    }
-    else if([alignValue isEqualToString:@"natural"]) {
-        textAlignmentValue = NSTextAlignmentNatural;
-    }
-    return [NSNumber numberWithInt:textAlignmentValue];
+    return nil;
+    
+    //PROTODO : intéret de la classe ?
 }
 @end

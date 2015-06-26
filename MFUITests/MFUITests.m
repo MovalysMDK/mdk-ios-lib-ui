@@ -1,4 +1,4 @@
-/*!
+/**
  * Copyright (C) 2010 Sopra (support_movalys@sopra.com)
  *
  * This file is part of Movalys MDK.
@@ -26,10 +26,7 @@
 #import <MFCore/MFCoreFoundationExt.h>
 
 //Converters
-#import "MFStringConverter.h"
-#import "MFDateConverter.h"
-#import "MFNumberConverter.h"
-#import "MFHelperBOOL.h"
+#import <MFUI/MFUI.h>
 
 @interface MFUITests : XCTestCase
 

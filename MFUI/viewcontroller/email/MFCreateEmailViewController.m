@@ -14,11 +14,9 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import <MFCore/MFCoreI18n.h>
-#import <MFCore/MFApplication.h>
-
 #import "MFCreateEmailViewController.h"
 #import "MFUILogging.h"
+#import "MFLocalizedString.h"
 
 @implementation MFCreateEmailViewController
 
@@ -48,15 +46,15 @@
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            MFUILogVerbose(@"'Send mail' action result: canceled");
+            NSLog(@"'Send mail' action result: canceled");
             if(self.createMailDelegate == nil
                || (self.createMailDelegate != nil && [self.createMailDelegate mailComposeController:controller didCancelWithError:error]))
             {
-                MFUILogInfo(@"%@: %@", MFLocalizedStringFromKey(@"SendMailCancelledInfoTitle"), MFLocalizedStringFromKey(@"SendMailCancelledInfoMessage"));
+                NSLog(@"%@: %@", MFLocalizedStringFromKey(@"SendMailCancelledInfoTitle"), MFLocalizedStringFromKey(@"SendMailCancelledInfoMessage"));
             }
             break;
         case MFMailComposeResultSaved:
-            MFUILogVerbose(@"'Send mail' action result: saved");
+            NSLog(@"'Send mail' action result: saved");
             if(self.createMailDelegate == nil
                || (self.createMailDelegate != nil && [self.createMailDelegate mailComposeController:controller didSaveWithError:error]))
             {
@@ -64,7 +62,7 @@
             }
             break;
         case MFMailComposeResultSent:
-            MFUILogVerbose(@"'Send mail' action result: Sent");
+            NSLog(@"'Send mail' action result: Sent");
             if(self.createMailDelegate == nil
                || (self.createMailDelegate != nil && [self.createMailDelegate mailComposeController:controller didSendWithError:error]))
             {
@@ -72,7 +70,7 @@
             }
             break;
         case MFMailComposeResultFailed:
-            MFUILogError(@"'Send mail' action result: failed. Error : %@", error);
+            NSLog(@"'Send mail' action result: failed. Error : %@", error);
             if(self.createMailDelegate == nil
                || (self.createMailDelegate != nil && [self.createMailDelegate mailComposeController:controller didFailWithError:error]))
             {
@@ -80,7 +78,7 @@
             }
             break;
         default:
-            MFUILogVerbose(@"'Send mail' action result: not sent");
+            NSLog(@"'Send mail' action result: not sent");
             if(self.createMailDelegate == nil
                || (self.createMailDelegate != nil && [self.createMailDelegate mailComposeController:controller didNotSendWithError:error]))
             {

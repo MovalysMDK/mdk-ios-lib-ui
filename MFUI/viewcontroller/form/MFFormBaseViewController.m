@@ -20,7 +20,6 @@
 
 // MFCore imports
 #import <MFCore/MFCoreFoundationExt.h>
-#import <MFCore/MFCoreFormDescriptor.h>
 #import <MFCore/MFCoreLog.h>
 #import <MFCore/MFCoreI18n.h>
 #import <MFCore/MFCoreBean.h>
@@ -28,7 +27,6 @@
 #import <MFCore/MFCoreError.h>
 #import <MFCore/MFCoreConfig.h>
 #import <MFCore/MFCoreDataloader.h>
-#import <MFCore/MFCoreFormConfig.h>
 
 // Interface
 #import "MFFormBaseViewController.h"
@@ -53,8 +51,6 @@
 #import "MFWorkspaceViewController.h"
 #import "MFForm3DListViewController.h"
 
-//Binding
-#import "MFBaseBindingForm.h"
 
 //Converter
 #import "MFConverterProtocol.h"
@@ -83,12 +79,10 @@
 #pragma mark - Constructeurs et initialisation
 
 @implementation MFFormBaseViewController
-
-@synthesize  viewModel = _viewModel;
-@synthesize formDescriptor =_formDescriptor;
+@synthesize viewModel = _viewModel;
 @synthesize formValidation = _formValidation;
 @synthesize searchDelegate =_searchDelegate;
-@synthesize mf = _mf;
+@synthesize bindingDelegate = _bindingDelegate;
 
 #pragma mark - Initialization
 -(id) init{
@@ -119,16 +113,12 @@
 -(void)initialize {
     //Initialisation des principaux composant du controller.
     
-    self.formBindingDelegate = [[MFBaseBindingForm alloc] initWithParent:self];
-    
     self.applicationContext = [MFApplication getInstance];
-    self.reusableBindingViews = [NSMutableArray array];
     
     
     self.viewModel = [self createViewModel];
     self.viewModel.form = self;
-    
-    self.mf = [[MFFormExtend alloc] init];
+
     
     self.isPickerDisplayed = NO;
     self.needDoFillAction = YES;
@@ -143,10 +133,10 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    if(self.mf.formDescriptorName) {
-        MFConfigurationHandler *configurationHandlerInstance = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
-        [configurationHandlerInstance loadFormWithName:self.mf.formDescriptorName];
-    }
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self initializeBinding];
+    [self initializeModel];
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(displayBackButton:)
@@ -161,9 +151,11 @@
     if ([self hasSearchForm]) {
         self.searchDelegate = [self.applicationContext getBeanWithKey:BEAN_KEY_FORM_SEARCH_DELEGATE];
         self.searchDelegate.baseController = self;
-        self.searchDelegate.isSimpleSearch = self.mf.search.simpleSearch;
-        self.searchDelegate.isLiveSearch = self.mf.search.liveSearch;
-        self.searchDelegate.displayNumberOfResults = self.mf.search.displayNumberOfResults;
+        
+        //PROTODO : Refaire la recherche.
+//        self.searchDelegate.isSimpleSearch = self.mf.search.simpleSearch;
+//        self.searchDelegate.isLiveSearch = self.mf.search.liveSearch;
+//        self.searchDelegate.displayNumberOfResults = self.mf.search.displayNumberOfResults;
     }
     
     
@@ -209,8 +201,6 @@
          ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound))) {
         // back button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
-        [self unregisterAllComponents];
-        self.formBindingDelegate = nil;
         ((id<MFUIBaseViewModelProtocol>)self.viewModel).form = nil;
     }
 }
@@ -227,146 +217,61 @@
 }
 
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    //Child classes must implement this method
-    return 0;
-}
 
 
 
 #pragma mark - Table view delegate
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(![self isKindOfClass:[MFForm2DListViewController class]] && indexPath.section >= self.formDescriptor.sections.count) {
-        return nil;
+    NSString *sectionIdentifier = self.bindingDelegate.structure[SECTION_ORDER_KEY][indexPath.section];
+    MFBindingCellDescriptor *bindingData = ((NSArray *)self.bindingDelegate.structure[sectionIdentifier])[indexPath.row];
+    NSString *identifier = bindingData.cellIdentifier;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    if(!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    MFSectionDescriptor *currentSection = nil;
-    MFGroupDescriptor *currentGd = nil;
+    bindingData.cellIndexPath = indexPath;
+    [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
+    [self updateCellFromBindingData:bindingData];
     
-    if([self.viewModel isKindOfClass:[MFUIBaseListViewModel class]]) {
-        currentSection = self.formDescriptor.sections[0];
-        currentGd = nil;
-        currentGd = currentSection.orderedGroups[0];
-    }
-    else {
-       currentSection = self.formDescriptor.sections[indexPath.section];
-        currentGd = nil;
-        currentGd = currentSection.orderedGroups[indexPath.row];
-    }
-
-    
-//    MFCellAbstract *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%@%@", [self cellIdentifierAtIndexPath:indexPath withGroupDescriptor:currentGd], ([MFHelperBOOL booleanValue:currentGd.noLabel] ? @"-noLabel" : @"")] forIndexPath:indexPath];
-    MFCellAbstract *cell = [self retrieveCellAtIndexPath:indexPath fromCurrentGroupDescriptor:currentGd];
-    // We check if it's a framework cell
-    if ([cell conformsToProtocol:@protocol(MFFormCellProtocol)]) {
-        // Si c'est une cellule que l'on a deja instancié, on désenregistre ses composants précédents, sinon on l'ajoute
-        // à notre tableau de cellules déja instanciées.
-        id<MFFormCellProtocol> formCell = (id<MFFormCellProtocol>)cell;
-        ((MFCellAbstract *)formCell).formController = self;
-        ((MFCellAbstract *)formCell).cellIndexPath = indexPath;
-        if(![self.reusableBindingViews containsObject:formCell]) {
-            [self.reusableBindingViews addObject:formCell];
-        }
-        else {
-            [formCell unregisterComponents:self];
-        }
-        
-        [self.binding unregisterComponentsAtIndexPath:indexPath withBindingKey:nil];
-        [formCell setCellIndexPath:indexPath];
-        formCell.transitionDelegate = self;
-
-        [formCell configureByGroupDescriptor:currentGd andFormDescriptor:self.formDescriptor];
-        
-        
-        //Enregistrement des composants graphiques du formulaire pour les cellules visibles
-        NSDictionary *newRegisteredComponents = [self registerComponentsFromCell:formCell];
-        
-        for(NSString *key in [newRegisteredComponents allKeys]) {
-            //Récupération de la liste des composants associé à ce keyPath
-            
-            NSMutableArray *componentList = [[self.binding componentsAtIndexPath:indexPath withBindingKey:key] mutableCopy];
-            if(componentList) {
-                for(id<MFUIComponentProtocol> component in componentList)
-                {
-                    //Initialisation des composants
-                    //                    if(![self isKindOfClass:[MFForm2DListViewController class]] && ![self isKindOfClass:[MFForm3DListViewController class]]) {
-                    [self initComponent:component atIndexPath:indexPath];
-                    //                    }
-                }
-            }
-        }
-    }
-    
-    if([cell conformsToProtocol:@protocol(MFContentDelegate) ]) {
-        [(id<MFContentDelegate>)cell setContent];
-    }
-    
-    [cell cellIsConfigured];
-    
-    if(![MFHelperBOOL booleanValue:currentGd.visible]) {
-        cell.hidden = YES;
-    }
     return cell;
 }
 
 
--(UITableViewCell<MFFormCellProtocol> *) retrieveCellAtIndexPath:(NSIndexPath *)indexPath fromCurrentGroupDescriptor:(MFGroupDescriptor *)currentGd {
-    MFCellAbstract * cell = [self.tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%@%@", [self cellIdentifierAtIndexPath:indexPath withGroupDescriptor:currentGd], ([MFHelperBOOL booleanValue:currentGd.noLabel] ? @"-noLabel" : @"")] forIndexPath:indexPath];
-    return cell;
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //Child classes must implement this method
-    return 0;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    MFSectionDescriptor *sectionDescriptor = self.formDescriptor.sections[section];
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    if(sectionDescriptor.titled) { return UITableViewAutomaticDimension; } // Si Mm_title est présent, titre de section avec hauteur par défaut
-    else                         { return 0.01f;                         } // Sinon titre de section avec taille égale à zéro
+    return ((NSArray *)self.bindingDelegate.structure[SECTION_ORDER_KEY]).count;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    MFSectionDescriptor *sectionDescriptor = self.formDescriptor.sections[section];
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if(sectionDescriptor.titled) { return MFLocalizedStringFromKey(sectionDescriptor.name); } // Si Mm_title est présent, titre la section avec le nom du panel
-    else                         { return nil;                                              } // Sinon pas de titre
+    NSString *sectionIdentifier = self.bindingDelegate.structure[SECTION_ORDER_KEY][section];
+    return ((NSArray *)self.bindingDelegate.structure[sectionIdentifier]).count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MFGroupDescriptor *group = [self getGroupDescriptor:indexPath];
-    BOOL noLabel = [MFHelperBOOL booleanValue:group.noLabel];
-    CGFloat value = (noLabel ? [group.heightNoLabel floatValue] : [group.height floatValue]);
-    
-    if(value == 0 ) {
-        value = self.tableView.frame.size.height;
-        if(!SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-            value -= self.navigationController.navigationBar.frame.size.height;
-        }
+-(void) updateCellFromBindingData:(MFBindingCellDescriptor *)bindingData {
+    NSArray *bindingValues = [self.bindingDelegate bindingValuesForCellBindingKey:[bindingData generatedBindingKey]];
+    for(MFBindingValue *bindingValue in bindingValues) {
+        [self.bindingDelegate.binding dispatchValue:[self.viewModel valueForKeyPath:bindingValue.abstractBindedPropertyName] fromPropertyName:bindingValue.abstractBindedPropertyName fromSource:bindingValue.bindingSource];
     }
-    for (MFFieldDescriptor *componentDescriptor in group.fields) {
-        if ([componentDescriptor.uitype isEqualToString:@"MFFixedList"]) {
-            //            hasFixedList = YES;
-            
-            id valueForKeyPath = [self.viewModel valueForKeyPath:componentDescriptor.bindingKey];
-            NSUInteger num = 1;
-            if ([valueForKeyPath isKindOfClass:[MFUIBaseListViewModel class]]){
-                num = [(MFUIBaseListViewModel*)valueForKeyPath viewModels].count;
-            } else if (valueForKeyPath == nil) {
-                num = 0;
-            }
-            value = [group.height floatValue] * num + (!noLabel ? ([group.heightNoLabel floatValue] ? [group.height floatValue] - [group.heightNoLabel floatValue] : 62) : 41); // 62 : label + boutons + 2 * marge ; 41 : boutons + 2 * marge
-        }
-    }
-    
-    return value;
+}
+
+-(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *sectionIdentifier = self.bindingDelegate.structure[SECTION_ORDER_KEY][indexPath.section];
+    MFBindingCellDescriptor *bindingData = ((NSArray *)self.bindingDelegate.structure[sectionIdentifier])[indexPath.row];
+    [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingData generatedBindingKey]];
+}
+
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return self.bindingDelegate.structure[SECTION_ORDER_KEY][section];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *sectionIdentifier = self.bindingDelegate.structure[SECTION_ORDER_KEY][indexPath.section];
+    MFBindingCellDescriptor *bindingData = ((NSArray *)self.bindingDelegate.structure[sectionIdentifier])[indexPath.row];
+    return [bindingData.cellHeight floatValue];
 }
 
 
@@ -401,139 +306,6 @@
 }
 
 
-#pragma mark - Méthode de MFFormBaseViewController
-
--(MFGroupDescriptor *) getGroupDescriptor:(NSIndexPath *)indexPath {
-    @throw([NSException exceptionWithName:@"Not Implemented" reason:@"Method is not implemented" userInfo:nil]);
-}
-
-
-/**
- * @brief Cette méthode enregistre dans le mapping les composants principaux de
- * la cellule
- * @param cell La cellule dont on souhaite enregisrer les composants
- */
--(NSDictionary *)registerComponentsFromCell:(id<MFFormCellProtocol>) cell {
-    return [cell registerComponent:self];
-}
-
-
-#pragma mark - Forwarding getters - MFBindingFormDelegate
-
--(MFBinding *)binding {
-    return self.formBindingDelegate.binding;
-}
-
--(NSDictionary *)filtersFromViewModelToForm {
-    return self.formBindingDelegate.filtersFromViewModelToForm;
-}
-
--(NSDictionary *)filtersFromFormToViewModel {
-    return self.formBindingDelegate.filtersFromFormToViewModel;
-}
-
--(NSDictionary *)bindableProperties {
-    return self.formBindingDelegate.bindableProperties;
-}
-
--(NSMutableDictionary *)propertiesBinding {
-    return self.formBindingDelegate.propertiesBinding;
-}
-
--(NSMutableArray *)reusableBindingViews {
-    return self.formBindingDelegate.reusableBindingViews;
-}
-
-
-#pragma mark - Forwarding setters - MFBindingFormDelegate
-
--(void)setBinding:(NSMutableDictionary *)mB {
-    [self.formBindingDelegate setBinding:mB];
-}
-
--(void)setFiltersFromFormToViewModel:(NSDictionary *)filters {
-    [self.formBindingDelegate setFiltersFromFormToViewModel:filters];
-}
-
--(void)setFiltersFromViewModelToForm:(NSDictionary *)filters {
-    [self.formBindingDelegate setFiltersFromViewModelToForm:filters];
-}
-
--(void)setPropertiesBinding:(NSMutableDictionary *)propertiesBinding {
-    [self.formBindingDelegate setPropertiesBinding:propertiesBinding];
-}
-
--(void)setBindableProperties:(NSDictionary *)bindableProperties {
-    [self.formBindingDelegate setBindableProperties:bindableProperties];
-}
-
--(void) setReusableBindingViews:(NSMutableArray *)reusableBindingViews {
-    [self.formBindingDelegate setReusableBindingViews:reusableBindingViews];
-}
-
-#pragma mark - Forwarding methods - MFBindingFormDelegate
-
--(BOOL)mutexForProperty:(NSString *)propertyName {
-    return  [self.formBindingDelegate mutexForProperty:propertyName];
-}
-
--(void)releasePropertyFromMutex:(NSString *)propertyName {
-    [self.formBindingDelegate releasePropertyFromMutex:propertyName];
-}
-
--(NSString *)bindingKeyWithIndexPathFromKey:(NSString *)key andIndexPath:(NSIndexPath *)indexPath {
-    return [self.formBindingDelegate bindingKeyWithIndexPathFromKey:key andIndexPath:indexPath];
-}
-
--(NSString *)bindingKeyFromBindingKeyWithIndexPath:(NSString *)key {
-    return [self.formBindingDelegate bindingKeyFromBindingKeyWithIndexPath:key];
-}
-
--(NSIndexPath *)indexPathFromBindingKeyWithIndexPath:(NSString *)key {
-    return [self.formBindingDelegate indexPathFromBindingKeyWithIndexPath:key];
-}
-
--(void)unregisterAllComponents {
-    [self.formBindingDelegate unregisterAllComponents];
-}
-
--(NSString *)generateSetterFromProperty:(NSString *)propertyName {
-    return [self.formBindingDelegate generateSetterFromProperty:propertyName];
-}
-
--(void)initComponent:(id<MFUIComponentProtocol>)component atIndexPath:(NSIndexPath *)indexPath {
-    [self.formBindingDelegate initComponent:component atIndexPath:indexPath];
-}
-
--(void)performSelector:(SEL)selector onComponent:(id<MFUIComponentProtocol>)component withObject:(id)object {
-    [self.formBindingDelegate performSelector:selector onComponent:component withObject:object];
-}
-
--(id)applyConverterOnComponent:(id<MFUIComponentProtocol>)component forValue:(id)value isFormToViewModel:(BOOL)formToViewModel {
-    return [self.formBindingDelegate applyConverterOnComponent:component forValue:value isFormToViewModel:formToViewModel];
-}
-
--(id) applyConverterOnComponent:(id<MFUIComponentProtocol>)component forValue:(id) value isFormToViewModel:(BOOL)formToViewModel withViewModel:(id<MFUIBaseViewModelProtocol>)viewModel
-{
-    return [self.formBindingDelegate applyConverterOnComponent:component forValue:value isFormToViewModel:formToViewModel withViewModel:viewModel];
-}
-
--(id<MFUIBaseViewModelProtocol>)getViewModel {
-    return self.viewModel;
-}
-
-
-
-#pragma mark - Scrolling methods
-
-
-
--(void)setActiveField:(UIControl *)field {
-    ((MFBaseBindingForm *)self.formBindingDelegate).activeField = field;
-}
-
-
-
 #pragma mark - Observers selectors
 
 -(void)displayBackButton:(NSNotification *)notification  {
@@ -544,23 +316,6 @@
 
 - (void)reloadDataWithAnimationFromRight:(BOOL)fromRight
 {
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        
-//        CATransition *animation = [CATransition animation];
-//        [animation setType:kCATransitionPush];
-//        if (fromRight) {
-//            [animation setSubtype:kCATransitionFromRight];
-//        }
-//        else {
-//            [animation setSubtype:kCATransitionFromLeft];
-//        }
-//        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-//        [animation setFillMode:kCAFillModeBoth];
-//        [animation setDuration:.3];
-//        [[self.tableView layer] addAnimation:animation forKey:@"UITableViewReloadDataAnimationKey"];
-//    });
-    
-    
     [self.tableView reloadData];
 }
 
@@ -593,18 +348,6 @@
     return nil;
 }
 
--(void)dispatchEventOnComponentValueChangedWithKey:(NSString *)bindingKey atIndexPath:(NSIndexPath *)indexPath {
-    //TODO QLA : Tenter de factoriser du code commun ici
-}
-
--(void)dispatchEventOnComponentValueChangedWithKey:(NSString *)bindingKey atIndexPath:(NSIndexPath *)indexPath valid:(BOOL)valid {
-    //TODO QLA : Tenter de factoriser du code commun ici
-}
-
--(void)dispatchEventOnViewModelPropertyValueChangedWithKey:(NSString *)keyPath sender:(MFUIBaseViewModel *)sender {
-    //TODO QLA : Tenter de factoriser du code commun ici
-}
-
 -(void)doFillAction {
     //Do some base treatments here
 }
@@ -621,20 +364,28 @@
     return [self conformsToProtocol:@protocol(MFWorkspaceColumnProtocol)];
 }
 
--(NSDictionary*) getFiltersFromViewModelToForm {
-    MFCoreLogVerbose(@"MFFormBaseViewController getFiltersFromViewModelToForm does nothing return empty dictionary");
-    return @{};
+-(id<MFUIBaseViewModelProtocol>)getViewModel {
+    return _viewModel;
 }
 
 
--(NSDictionary*) getFiltersFromFormToViewModel {
-    MFCoreLogVerbose(@"MFFormBaseViewController getFiltersFromFormToViewModel does nothing return empty dictionary");
-    return @{};
+#pragma mark - New Binding
+-(void)setBindingDelegate:(MFBindingDelegate *)bindingDelegate {
+    _bindingDelegate = bindingDelegate;
+    [self createBindingStructure];
 }
 
-#pragma mark - Custom methods
+-(void)createBindingStructure {
+    for(MFBindingValue *bindingValue in [self.bindingDelegate allBindingValues]) {
+        [self.bindingDelegate.binding dispatchValue:[self.viewModel valueForKey:bindingValue.abstractBindedPropertyName] fromPropertyName:bindingValue.abstractBindedPropertyName fromSource:bindingValue.bindingSource];
+    }
+}
 
--(NSString *) cellIdentifierAtIndexPath:(NSIndexPath *)indexPath withGroupDescriptor:(MFGroupDescriptor *)groupDescriptor {
-    return groupDescriptor.uitype;
+-(void) initializeBinding {
+    self.bindingDelegate = [[MFBindingDelegate alloc] initWithObject:self];
+    [self.tableView reloadData];
+}
+-(void) initializeModel {
+    self.viewModel.objectWithBinding = self;
 }
 @end

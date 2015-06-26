@@ -51,10 +51,6 @@ FOUNDATION_EXPORT const int PICKER_VIEW_TAG;
 
 #pragma mark -  Properties - Graphics
 
-/*!
- * @brief l'extension du controlleur, l'extension contient des paramètres qui peuvent être définis dans le storyboard
- */
-@property(nonatomic, strong) MFFormExtend *mf;
 
 /*!
  * @brief The button which displays the selected item and which displays the pickerView (onClick)

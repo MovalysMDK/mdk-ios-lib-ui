@@ -42,6 +42,7 @@
 @end
 
 @implementation MFAppDelegate
+@synthesize fieldValidatorsByAttributes = _fieldValidatorsByAttributes;
 
 #ifdef DEBUG
 /**
@@ -148,6 +149,9 @@ void ApplicationExceptionHandler(NSException *exception)
     return [MFMenuViewController getInstance];
 }
 
+-(id<MFComponentProviderProtocol>)componentProvider {
+    return [NSClassFromString(@"MFBeanComponentProvider") new];
+}
 
 
 @end

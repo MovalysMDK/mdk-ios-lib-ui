@@ -58,12 +58,13 @@
 @implementation MFDatePicker
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
 @synthesize transitionDelegate = _transitionDelegate;
-@synthesize groupDescriptor = _groupDescriptor;
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize data =_data;
 @synthesize currentOrientation = _currentOrientation;
 @synthesize defaultConstraints = _defaultConstraints;
+@synthesize savedConstraints = _savedConstraints;
+@synthesize targetDescriptors = _targetDescriptors;
 
 #pragma mark - Initializing
 - (id)initWithFrame:(CGRect)frame
@@ -80,9 +81,6 @@
 
     
 #if !TARGET_INTERFACE_BUILDER
-    
-    
-    
     
     self.isShowing = NO;
     self.isModalPickerViewDisplayed = NO;
@@ -222,12 +220,8 @@
                                           PICKER_TOP_BAR_ITEMS_HEIGHT);
     
     self.confirmButton.segmentedControlStyle = UISegmentedControlStyleBar;
-    
-    UIColor *okButtonColor = [MFColorValueProcessing processColorFromString:[[((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_OK_BUTTON_COLOR_KEY] stringByAppendingString:@"Color"]];
-    if(!okButtonColor) {
-        okButtonColor = [UIColor blackColor];
-    }
-    self.confirmButton.tintColor = okButtonColor;
+
+    self.confirmButton.tintColor = [UIColor blackColor];
     [self.confirmButton addTarget:self action:@selector(dismissPickerViewAndSave) forControlEvents:UIControlEventValueChanged];
     
     //Build and initialize the topBar of the pickerView
@@ -238,11 +232,8 @@
                                          PICKER_TOP_BAR_ITEMS_HEIGHT);
     
     self.cancelButton.segmentedControlStyle = UISegmentedControlStyleBar;
-    UIColor *cancelButtonColor = [MFColorValueProcessing processColorFromString:[[((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_CANCEL_BUTTON_COLOR_KEY] stringByAppendingString:@"Color"]];
-    if(!cancelButtonColor) {
-        cancelButtonColor = [UIColor blueColor];
-    }
-    self.cancelButton.tintColor = cancelButtonColor;
+
+    self.cancelButton.tintColor = [UIColor blueColor];
     
     [self.cancelButton addTarget:self action:@selector(dismissPickerViewAndCancel) forControlEvents:UIControlEventValueChanged];
     
@@ -354,7 +345,6 @@
  */
 -(void) dismissPickerViewAndSave {
     self.data = self.datePicker.date;
-    [self updateValue];
     
     if([MFVersionManager isCurrentDeviceOfTypePhone])
     {
@@ -366,6 +356,8 @@
         }
     }
     [self setButtonDateTitle:self.currentDate];
+    [self valueChanged:self.dateButton];
+
     
 }
 
@@ -382,21 +374,25 @@
 #pragma mark - Date Changed Event
 
 -(void) dateChanged:(id)sender {
+
     self.currentDate = self.datePicker.date;
     [self setButtonDateTitle:self.datePicker.date];
 }
 
 -(void) setButtonDateTitle:(NSDate *)date {
-    NSDictionary *customParameters = ((MFFieldDescriptor *)self.selfDescriptor).parameters;
     NSString *buttonTitle = nil;
-    if(customParameters && [customParameters objectForKey:@"dateFormat"]) {
-        buttonTitle = [MFDateConverter toString:date withCustomFormat:[customParameters objectForKey:@"dateFormat"]];
-    }
-    else {
-        buttonTitle = [MFDateConverter toString:date withMode:self.datePickerMode];
-    }
+    //PROTODO
+//    if(customParameters && [customParameters objectForKey:@"dateFormat"]) {
+//        buttonTitle = [MFDateConverter toString:date withCustomFormat:[customParameters objectForKey:@"dateFormat"]];
+//    }
+//    else {
+//        buttonTitle = [MFDateConverter toString:date withMode:self.datePickerMode];
+//    }
+            buttonTitle = [MFDateConverter toString:date withMode:self.datePickerMode];
+
     [self.dateButton setTitle:buttonTitle forState:UIControlStateNormal];
     [self.dateButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+
 }
 
 
@@ -416,20 +412,6 @@
     self.currentOrientation = [[UIDevice currentDevice] orientation];
     self.orientationChangedDelegate = [[MFOrientationChangedDelegate alloc] initWithListener:self];
     [self.orientationChangedDelegate registerOrientationChanges];
-}
-
-
-#pragma mark - Picker mode binding from PLIST property
-
--(void) didFinishLoadDescriptor {
-    
-    [super didFinishLoadDescriptor];
-    
-    //Biding de la propriété qui spécifie le type de picker (date, datetime ou time)
-    NSNumber *pickerMode = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"datePickerMode"];
-    //Récupération du type de picker
-    self.datePickerMode = [pickerMode intValue];
-    
 }
 
 #pragma mark - Custom setters for class properties
@@ -477,9 +459,6 @@
     return @"NSDate";
 }
 
--(void) updateValue {
-    [self performSelectorOnMainThread: @selector(updateValue:) withObject:self.data waitUntilDone:YES];
-}
 
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];
@@ -498,10 +477,19 @@
     }
 }
 
-#pragma mark - LiveRendering Methods
 
 
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+    commonCCTD.target = target;
+    commonCCTD.action = action;
+    self.targetDescriptors = @{@(self.dateButton.hash) : commonCCTD};
+}
 
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
+}
 
 
 

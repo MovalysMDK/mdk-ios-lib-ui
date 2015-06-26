@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "MFUI"
-  s.version      = "1.3.0"
+  s.version      = "1.5.0"
   s.summary      = "Movalys Framework MFUI."
   s.homepage     = "http://nansrvintc1.adeuza.fr/mfdocs-4.3.0/"
   s.license      = {
@@ -11,13 +11,13 @@ Pod::Spec.new do |s|
   }
   s.author       = "Sopra Steria"
   s.requires_arc = true
-  s.source       = { :git => "gitmovalys@git.ptx.fr.sopra:mfui.git", :tag => "1.3.0" }
+  s.source       = { :git => "gitmovalys@git.ptx.fr.sopra:mfui.git", :tag => "1.5.0" }
   s.platform     = :ios, '6.0'
 
   s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore'
   s.header_mappings_dir = '.'
   s.source_files = 'MFUI/**/*.{h,m}'
-  s.resources = 'MFUI/**/*.xib', "MFUI/resources/**/*.png"
+  s.resources = 'MFUI/**/*.xib', "MFUI/resources/**/*.png", "MFUI/resources/**/*.plist"
 
   s.subspec 'Dependencies' do|dep| 
     dep.dependency 'MBProgressHUD', '~>0.8'

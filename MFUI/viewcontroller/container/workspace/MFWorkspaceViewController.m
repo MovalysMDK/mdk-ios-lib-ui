@@ -19,14 +19,12 @@
 //
 //
 
-//#import <MFCore/form/config/MFCoreFormConfig.h>
 #import <MFCore/MFCoreBean.h>
 #import <MFCore/MFCoreI18n.h>
 #import <MFCore/MFCoreAction.h>
 #import <MFCore/MFCoreConfig.h>
 #import <MFCore/MFCoreError.h>
 #import <MFCore/MFCoreApplication.h>
-#import <MFCore/MFCoreFormConfig.h>
 
 #import "MFUILog.h"
 
@@ -35,6 +33,7 @@
 #import "MFUIBaseViewModel.h"
 #import "MFChildSaveProtocol.h"
 #import "MFFormViewController.h"
+#import "MFViewController.h"
 
 #define POR_IDAP_COLUMN_NUMBER 2
 #define PAY_IDAP_COLUMN_NUMBER 4
@@ -57,6 +56,7 @@ const int kMasterSelectSaveChangesAlert = 12 ;
 
 
 @implementation MFWorkspaceViewController
+@synthesize mf = _mf;
 
 #pragma mark - Initialization
 
@@ -92,6 +92,7 @@ const int kMasterSelectSaveChangesAlert = 12 ;
     self.workspaceState = [MFWorkspaceViewControllerState new];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(updateController) name:WORKSPACE_VIEW_DID_SCROLL_NOTIFICATION_KEY object:nil];
+    self.mf = [MFViewControllerAttributes_Workspace new];
 }
 
 -(void)updateController {
@@ -118,23 +119,24 @@ const int kMasterSelectSaveChangesAlert = 12 ;
     [super viewDidLoad];
     
     
-    if (self.mf.formDescriptorName) {
+    if (self.workspaceAttributes.formDescriptorName) {
         
         NSString *localizedControllerKey = [NSString stringWithFormat:@"workspace_title_%@", [self.storyboard valueForKey:@"name"]];
         self.title = MFLocalizedStringFromKey(localizedControllerKey);
-        MFUILogInfo(@"formDescName : %@", self.mf.formDescriptorName.description);
+        MFUILogInfo(@"formDescName : %@", self.workspaceAttributes.formDescriptorName.description);
         
         MFConfigurationHandler *registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
-        NSString *propertyName = [CONST_WORK_RESOURCE_PREFIX stringByAppendingString:self.mf.formDescriptorName];
-        MFWorkspaceDescriptor *localWorkspaceDescriptor = [registry getWorkspaceDescriptorProperty:propertyName];
+        NSString *plistFileName = [@"work-" stringByAppendingString:self.workspaceAttributes.formDescriptorName];
+        NSDictionary *workspaceDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:plistFileName ofType:@"plist"]];
         
-        MFUILogInfo(@"formDesc : %@", localWorkspaceDescriptor.description);
         
-        for (MFColumnDescriptor *columnDesc in localWorkspaceDescriptor.columns) {
+        MFUILogInfo(@"formDesc : %@", workspaceDictionary[@"description"]);
+        
+        for (NSDictionary *columnDictionary in workspaceDictionary[@"columns"]) {
             
-            [self performSegueWithIdentifier:columnDesc.segueIdentifier sender:self];
+            [self performSegueWithIdentifier:columnDictionary[@"segueIdentifier"] sender:self];
             
-            MFUILogVerbose(@"perform segue : %@", columnDesc.segueIdentifier);
+            MFUILogVerbose(@"perform segue : %@", columnDictionary[@"segueIdentifier"]);
             
         }
         if(self.segueColumns) {
@@ -406,12 +408,15 @@ const int kMasterSelectSaveChangesAlert = 12 ;
         [[MFActionLauncher getInstance] MF_unregister:columnViewcontroller];
         
         [columnViewcontroller removeFromParentViewController];
-        [columnViewcontroller unregisterAllComponents];
         columnViewcontroller.formBindingDelegate = nil;
         ((id<MFUIBaseViewModelProtocol>)columnViewcontroller.viewModel).form = nil;
         columnViewcontroller.onDestroy = NO;
     }
     [self.segueColumns removeAllObjects];
+}
+
+-(MFViewControllerAttributes_Workspace *) workspaceAttributes {
+    return _mf;
 }
 
 @end

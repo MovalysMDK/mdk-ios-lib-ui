@@ -14,10 +14,10 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFBindingViewProtocol.h"
+#import "MFViewProtocol.h"
 #import "MFFormViewControllerProtocol.h"
 
-@interface MFBindingViewAbstract : UIView <MFBindingViewProtocol, MFFormCellProtocol>
+@interface MFBindingViewAbstract : UIView <MFFormViewProtocol, MFFormCellProtocol>
 
 
 

@@ -17,7 +17,6 @@
 
 #import <MFCore/MFCoreFoundationExt.h>
 #import <MFCore/MFCoreI18n.h>
-#import <MFCore/MFCoreFormDescriptor.h>
 
 #import "MFUILog.h"
 
@@ -30,7 +29,7 @@ const int kSaveChangesAlert = 11 ;
 
 @implementation MFFormValidationDelegate
 
--(id) initWithFormController:(id<MFBindingFormDelegate>)formController {
+-(id) initWithFormController:(id<MFCommonFormProtocol>)formController {
     self = [super init];
     if (self) {
         [self initialize:formController];
@@ -38,7 +37,7 @@ const int kSaveChangesAlert = 11 ;
     return self;
 }
 
--(void) initialize:(id<MFBindingFormDelegate>)formController {
+-(void) initialize:(id<MFCommonFormProtocol>)formController {
     self.formController = formController ;
     self.invalidInputs = [[NSMutableDictionary alloc] init];
     self.errorForInvalidInputs = [[NSMutableDictionary alloc] init];
@@ -48,114 +47,9 @@ const int kSaveChangesAlert = 11 ;
 -(BOOL) validateViewModel:(id<MFUIBaseViewModelProtocol>)vm {
     BOOL valid = YES;
     
-    // Check form has no invalid input
-    if ( [self.invalidInputs count] != 0 ) {
-        valid = NO;
-    }
-    
-    
-    // Check mandatory fields
-    int sectionNr = 0 ;
-    for( MFSectionDescriptor *sectionDesc in self.formController.formDescriptor.sections ) {
-        int groupNr = 0 ;
-        NSInteger groupSize = [sectionDesc orderedGroups].count;
-        if([self.formController isKindOfClass:[MFFixedListDataDelegate class]]) {
-            MFUIBaseListViewModel *parentViewModel = (MFUIBaseListViewModel *)((MFFixedListDataDelegate*)self.formController).viewModel;
-            groupSize = parentViewModel.viewModels.count;
-        }
-        for(int groupIndex = 0 ; groupIndex < groupSize ; groupIndex++) {
-           
-            MFGroupDescriptor *groupDesc = nil;
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:groupNr inSection:sectionNr];
-            if([self.formController isKindOfClass:[MFFixedListDataDelegate class]]) {
-                MFUIBaseListViewModel *parentViewModel = (MFUIBaseListViewModel *)((MFFixedListDataDelegate*)self.formController).viewModel;
-                indexPath = [NSIndexPath indexPathForRow:[parentViewModel.viewModels indexOfObject:vm] inSection:0];
-                groupDesc = [[sectionDesc orderedGroups] objectAtIndex:0];
-            }
-            else {
-                groupDesc = [[sectionDesc orderedGroups] objectAtIndex:groupIndex];
-            }
-            
-            for( MFFieldDescriptor *fieldDesc in [groupDesc fields]) {
-                
-                NSString *fullBindingKey  = [self.formController bindingKeyWithIndexPathFromKey:fieldDesc.bindingKey andIndexPath:indexPath];
-                
-                // tests mandatory only if no other error before.
-                if ( ![self hasInvalidValueForFullBindingKey:fullBindingKey]) {
-                    
-                    //TODO: mandatory peut etre une methode
-                    if ( [fieldDesc.mandatory isEqualToString:@"YES"] ) {
-                        id value = nil ;
-                        if(self.formController.viewModel) {
-                            if([self.formController.viewModel isKindOfClass:[MFUIBaseListViewModel class]]) {
-                                if(indexPath.row < ((MFUIBaseListViewModel *)self.formController.viewModel).viewModels.count) {
-                                    value = [[((MFUIBaseListViewModel *)self.formController.viewModel).viewModels objectAtIndex:indexPath.row] valueForKeyPath:fieldDesc.bindingKey];
-                                }
-                                else {
-                                    value = [NSNull null];
-                                }
-                            }
-                            else {
-                                value = [self.formController.viewModel valueForKeyPath:fieldDesc.bindingKey];
-                            }
-                        }
-                        if (!value  || [value isEqual:[NSNull null]]) {
-                            
-                            NSString *errorText = [NSString stringWithFormat:@"Champs obligatoire"];
-                            NSError *error = [[NSError alloc] initWithDomain:@"Champs obligatoire"
-                                                                        code:2 userInfo:@{NSLocalizedDescriptionKey : errorText}];
-                            if (! [self.formController addError:@[error] onComponent:fieldDesc.bindingKey atIndexPath:indexPath]) {
-                                [self.deferredErrors setObject:@[error] forKey:fullBindingKey];
-                            }
-                            MFUILogError(@"*******************************************");
-                            MFUILogError(@"ERREUR : %@ on FIELD : %@", error, fieldDesc.bindingKey);
-                            MFUILogError(@"*******************************************");
-                            valid = NO;
-                        }
-                        else {
-                            if ( [[value class] conformsToProtocol:@protocol(MFUIBaseViewModelProtocol)] ){
-                                id<MFUIBaseViewModelProtocol> subVm = (id<MFUIBaseViewModelProtocol> )value;
-                                if ( ![subVm validate]) {
-                                    NSString *errorText = [NSString stringWithFormat:@"Champs obligatoire"];
-                                    NSError *error = [[NSError alloc] initWithDomain:@"Champs obligatoire"
-                                                                                code:2 userInfo:@{NSLocalizedDescriptionKey : errorText}];
-                                    MFUILogError(@"*******************************************");
-                                    MFUILogError(@"ERREUR : %@ on FIELD : %@", error, fieldDesc.bindingKey);
-                                    MFUILogError(@"*******************************************");
-                                    
-                                    [self.formController addError:@[error] onComponent:fieldDesc.bindingKey atIndexPath:indexPath];
-                                    valid = NO;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            groupNr++;
-        }
-        sectionNr++;
-    }
     return valid;
 }
 
-
--(BOOL) validateNewValue:(id)newValue onComponent:(id<MFUIComponentProtocol>)component withFullBindingKey:(NSString *)fullBindingKey {
-    BOOL valid = YES ;
-    
-    // remove from deferred errors because component is visible
-    [self.deferredErrors removeObjectForKey:fullBindingKey];
-    
-    if ( [component isValid] ) {
-        [self.invalidInputs removeObjectForKey:fullBindingKey];
-        [self.errorForInvalidInputs removeObjectForKey:fullBindingKey];
-    }
-    else {
-        [self.invalidInputs setObject:newValue forKey:fullBindingKey];
-        [self.errorForInvalidInputs setObject:[component getErrors] forKey:fullBindingKey];
-        valid = NO ;
-    }
-    return valid;
-}
 
 -(BOOL) hasInvalidValues {
     BOOL response = NO;
@@ -165,7 +59,7 @@ const int kSaveChangesAlert = 11 ;
     MFUIBaseViewModel *viewModel = (MFUIBaseViewModel*)self.formController.viewModel;
     for(MFUIBaseViewModel *childViewModel in [viewModel getChildViewModels]) {
         if([childViewModel getForm]) {
-            id<MFBindingFormDelegate> childFormController = [childViewModel getForm];
+            id<MFCommonFormProtocol> childFormController = [childViewModel getForm];
             if(childFormController && childFormController.formValidation && ![childFormController.formValidation isEqual:self]) {
                 response = response || [childFormController.formValidation hasInvalidValues];
             }
@@ -175,33 +69,6 @@ const int kSaveChangesAlert = 11 ;
         }
     }
     return response;
-}
-
-
--(BOOL) hasInvalidValueForFullBindingKey:(NSString *)fullBindingKey {
-    BOOL hasInvalidValue = [[self.invalidInputs allKeys] containsObject:fullBindingKey];
-    return hasInvalidValue;
-}
-
--(id) getInvalidValueForFullBindingKey:(NSString *)fullBindingKey {
-    id invalidValue = [self.invalidInputs objectForKey:fullBindingKey];
-    return invalidValue;
-}
-
--(NSArray *) getErrorsForFullBindingKey:(NSString *)fullBindingKey {
-    NSArray *errors = [self.errorForInvalidInputs objectForKey:fullBindingKey];
-    return errors;
-}
-
--(id) getDeferredErrorForFullBindingKey:(NSString *)fullBindingKey {
-    return [self.deferredErrors objectForKey:fullBindingKey];
-}
-
--(void) addDeferredErrorsOnComponent:(id<MFUIComponentProtocol>)component withFullBindingKey:(NSString *)fullBindingKey{
-    NSArray *errors = [self getDeferredErrorForFullBindingKey:fullBindingKey];
-    if ( errors != nil ) {
-        [component addErrors:errors];
-    }
 }
 
 -(void) resetValidation {

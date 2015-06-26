@@ -35,7 +35,7 @@
         MFUIBaseViewModel *viewModel = [mainViewModel valueForKey:viewModelKey];
         for(MFUIBaseViewModel *childViewModel in [viewModel getChildViewModels]) {
             if([childViewModel getForm]) {
-                id<MFBindingFormDelegate> childFormController = [childViewModel getForm];
+                id<MFCommonFormProtocol> childFormController = [childViewModel getForm];
                 if(childFormController && childFormController.formValidation && ![childFormController.formValidation isEqual:self]) {
                     response = response || [childFormController.formValidation hasInvalidValues];
                 }

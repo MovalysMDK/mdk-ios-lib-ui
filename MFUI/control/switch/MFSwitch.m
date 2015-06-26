@@ -22,6 +22,7 @@
 #import "MFSwitch.h"
 
 @implementation MFSwitch
+@synthesize targetDescriptors = _targetDescriptors;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -35,6 +36,7 @@
 -(void)initialize {
     
     [super initialize];
+    
     self.innerSwitch = [[UISwitch alloc] initWithFrame:self.frame];
     [self addSubview:self.innerSwitch];
 #if !TARGET_INTERFACE_BUILDER
@@ -46,7 +48,6 @@
 
 - (void) switchValueChanged:(id)sender {
     
-    [self updateValue];
 }
 
 
@@ -74,9 +75,6 @@
     return [NSNumber numberWithBool:self.innerSwitch.on];
 }
 
--(void) updateValue {
-    [self performSelectorOnMainThread: @selector(updateValue:) withObject:[self getData] waitUntilDone:YES];
-}
 
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];
@@ -90,6 +88,17 @@
 
 
 #pragma mark - LiveRendering methods
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    [self.innerSwitch addTarget:self action:@selector(valueChanged:) forControlEvents:controlEvents];
+    MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+    commonCCTD.target = target;
+    commonCCTD.action = action;
+    self.targetDescriptors = @{@(self.innerSwitch.hash) : commonCCTD};
+}
 
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
+}
 
 @end

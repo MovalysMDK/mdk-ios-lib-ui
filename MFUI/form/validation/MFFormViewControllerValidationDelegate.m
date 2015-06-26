@@ -19,7 +19,6 @@
 //MFCore imports
 #import <MFCore/MFCoreFoundationExt.h>
 #import <MFCore/MFCoreI18n.h>
-#import <MFCore/MFCoreFormDescriptor.h>
 
 //Main interface
 #import "MFFormViewControllerValidationDelegate.h"

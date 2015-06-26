@@ -22,8 +22,6 @@
 #ifndef MFUI_MFUIProtocol_h
 #define MFUI_MFUIProtocol_h
 
-#import "MFUIGroupedElementCommonProtocol.h"
-#import "MFUIElementCommonProtocol.h"
 #import "MFDefaultConstraintsProtocol.h"
 
 #endif

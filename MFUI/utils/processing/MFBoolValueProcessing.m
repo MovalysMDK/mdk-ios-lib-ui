@@ -20,42 +20,11 @@
 @implementation MFBoolValueProcessing
 
 
-/**
- * @see MFTypeValueProcessingProtocol.h
- */
--(id)processTreatmentOnComponent:(id<MFUIComponentProtocol>)component withViewModel:(id<MFUIBaseViewModelProtocol>)viewModel forProperty:(NSString *)property fromBindableProperties:(NSDictionary *)bindableProperties {
-    id value = [((MFFieldDescriptor *)component.selfDescriptor) valueForKey:property];;
-    
-    NSNumber *returnValue = @0;
-    
-    if(value) {
-        if([value isKindOfClass:[NSString class]]) {
-            //Vérification si la valeur est une valeur autorisée ou une valeur personnalisée
-            BOOL isAuthorizedValue = [[[[bindableProperties objectForKey:property] objectForKey:MFATTR_RECOGNIZED_VALUES] componentsSeparatedByString:@";"] containsObject:value];
-            
-            if(isAuthorizedValue) {
-                if([value isEqualToString:@"YES"] || [value isEqualToString:@"1"] || [value isEqualToString:@"true"]) {
-                    returnValue = @1;
-                }
-                else if ([value isEqualToString:@"NO"] || [value isEqualToString:@"0"] || [value isEqualToString:@"false"]) {
-                    returnValue = @0;
-                }
-            }
-            else {
-                returnValue = ([[(id)viewModel valueForKey:value] boolValue]) ? (returnValue = @1) : (returnValue = @0);
-            }
-        }
-        else if([value isKindOfClass:[NSNumber class]]) {
-            returnValue = value;
-        }
-        else if (value) {
-            
-        }
-    }
-    
-    return returnValue;
-}
+//PROTODO : Intérêt de ces classes ?
 
+-(id)processTreatmentOnComponent:(id<MFUIComponentProtocol>)component withViewModel:(id<MFUIBaseViewModelProtocol>)viewModel forProperty:(NSString *)property fromBindableProperties:(NSDictionary *)bindableProperties {
+    return nil;
+}
 
 
 @end

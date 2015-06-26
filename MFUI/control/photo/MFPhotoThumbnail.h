@@ -23,8 +23,9 @@
 //iOS imports
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "MFUIOldBaseComponent.h"
+#import "MFControlChangesProtocol.h"
 
-@interface MFPhotoThumbnail : MFUIOldBaseComponent
+@interface MFPhotoThumbnail : MFUIOldBaseComponent <MFControlChangesProtocol>
 
 #pragma mark - Constants
 

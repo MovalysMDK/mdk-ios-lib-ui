@@ -18,8 +18,6 @@
 //Parent ViewController
 #import "MFViewController.h"
 
-//Binding
-#import "MFBindingFormDelegate.h"
 
 //Search Delegate
 #import "MFFormSearchDelegate.h"
@@ -28,6 +26,9 @@
 #import "MFFormViewControllerProtocol.h"
 #import "MFUIForm.h"
 #import "MFUITransitionDelegate.h"
+#import "MFViewControllerAttributes.h"
+#import "MFTableConfiguration.h"
+#import "UITableViewCell+Binding.h"
 
 @protocol MFFormCellProtocol;
 @class MFFormSearchViewController;
@@ -38,7 +39,7 @@ FOUNDATION_EXPORT NSString *const MF_BINDABLE_PROPERTIES;
  * @brief This class is the base class of a Movalys Form View Controller
  * @discussion It creates cells with appropriates components, bind them to a ViewModel and manage the lifecycle of the controller.
  */
-@interface MFFormBaseViewController : MFViewController <MFUITransitionDelegate, MFFormViewControllerProtocol, UITableViewDelegate, UITableViewDataSource, MFBindingFormDelegate>
+@interface MFFormBaseViewController : MFViewController <MFUITransitionDelegate, MFFormViewControllerProtocol, UITableViewDelegate, UITableViewDataSource, MFCommonFormProtocol>
 
 
 #pragma mark - Properties
@@ -59,14 +60,9 @@ FOUNDATION_EXPORT NSString *const MF_BINDABLE_PROPERTIES;
 @property (nonatomic, strong) UISearchDisplayController *searchController;
 
 /*!
- * @brief L'extension de ce formulaire contenant des données écrites dans le StoryBoard associé 
- */
-@property(nonatomic, strong) MFFormExtend *mf;
-
-/*!
  * @brief Le delegate permettant le binding Formulaire<->ViewModel
  */
-@property(nonatomic, strong) id<MFBindingFormDelegate> formBindingDelegate ;
+@property(nonatomic, strong) id<MFCommonFormProtocol> formBindingDelegate ;
 
 /*!
  *  @brief la table associée
@@ -90,12 +86,6 @@ FOUNDATION_EXPORT NSString *const MF_BINDABLE_PROPERTIES;
 
 #pragma mark - Methods
 
-/*!
- * @brief Cette méthode renvoie un objet MFGroupDescriptor correspondant à une cellule du formulaire
- * @param indexPath La position (@see NSIndexPath) de la cellule dont on souhiate récupérer le groupDescriptor.
- * @return Le descripteur de la cellule dont la position est passée en paramètre
- */
--(MFGroupDescriptor *) getGroupDescriptor:(NSIndexPath *)indexPath;
 
 /*!
  * @brief Reload the data of the main tableView and performs a sliding an animation to the right or to the left
@@ -124,43 +114,12 @@ FOUNDATION_EXPORT NSString *const MF_BINDABLE_PROPERTIES;
 -(void)simpleSearchActionWithText:(NSString *)text;
 
 /*!
- * @brief Returns a specified cell identifier depending on given indexPath or current GroupDescriptor
- * @param indexPath The indexPath we will to give a cell identifier to try to reuse it.
- * @param groupDescriptor The current group descriptor for the cell at this indexPath
- * @return A cell identifier as a (NSString *) object
- */
--(NSString *) cellIdentifierAtIndexPath:(NSIndexPath *)indexPath withGroupDescriptor:(MFGroupDescriptor *)groupDescriptor;
-
-/*!
  * @brief Get the main dataLoader name associated to this controller
  * @return An NSString containing the dataloaderName associated to this controller
  */
 -(NSString *)dataLoaderName;
 
-/*!
- * @brief Cette méthode doit définir et retourner une liste de filtres à appliquer lorsque
- * la synchronisation d'une donnée se fait depuis le ViewModel vers le formulaire. La clé du dictionnaire
- * est le keyPath du champ, et sa valeur est un ^MFValueChangedFilter
- * @return Un dictionnaire contenant des définitions de filtres pour certains champs
- */
--(NSDictionary*) getFiltersFromViewModelToForm;
-
-/*!
- * @brief Cette méthode doit définir et retourner une liste de filtres à appliquer lorsque
- * la synchronisation d'une donnée se fait depuis le Formulaire vers le ViewModel. La clé du dictionnaire
- * est le keyPath du champ, et sa valeur est un ^MFValueChangedFilter
- * @return Un dictionnaire contenant des définitions de filtres pour certains champs
- */
--(NSDictionary*) getFiltersFromFormToViewModel;
-
-/*!
- * @brief Returns the cell at the specified indexPath for the specified GroupDescriptor
- * @param indexPath The indexPath of the cell to retrieve
- * @param currentGd The group descriptor that configured the cell
- * @return A Movalys MFCellAbstract object
- * @see MFCellAbstract
- */
--(UITableViewCell<MFFormCellProtocol> *) retrieveCellAtIndexPath:(NSIndexPath *)indexPath fromCurrentGroupDescriptor:(MFGroupDescriptor *)currentGd;
+-(void) createBindingStructure;
 
 
 @end
@@ -177,5 +136,26 @@ FOUNDATION_EXPORT NSString *const MF_BINDABLE_PROPERTIES;
  * @brief Permet d'initialiser du contenu avant le chargement des DataSource et Delegate
  */
 -(void)setContent;
+
+@end
+
+@interface MFViewControllerAttributes (Search)
+
+@property (nonatomic, strong) NSString *commentHTMLFileName;
+
+/*!
+ * @brief Définit si la recherche est simple (sur un seul élément)
+ */
+@property (nonatomic) BOOL simpleSearch;
+
+/*!
+ * @brief Définit si la recherche doit être faite en direct (uniquement pour le cas d'une recherche simple).
+ */
+@property (nonatomic) BOOL liveSearch;
+
+/*!
+ * @brief Définit si le nombre de résultats doit être affiché.
+ */
+@property (nonatomic) BOOL displayNumberOfResults;
 
 @end

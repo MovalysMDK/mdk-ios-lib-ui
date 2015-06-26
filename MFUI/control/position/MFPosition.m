@@ -51,7 +51,7 @@
     CLLocationManager *locationManager;
     int positionUpdates;
 }
-
+@synthesize targetDescriptors = _targetDescriptors;
 -(void)initialize {
     
     [super initialize];
@@ -179,7 +179,8 @@
     
     [self.latitude setData:[MFNumberConverter  toString:[NSNumber numberWithFloat:location.coordinate.latitude] withFormatter:numberFormatter]];
     [self.longitude setData:[MFNumberConverter  toString:[NSNumber numberWithFloat:location.coordinate.longitude] withFormatter:numberFormatter]];
-    [self updateValue];
+    [self valueChanged:self.latitude];
+    [self valueChanged:self.longitude];
     
 }
 
@@ -289,10 +290,6 @@
     }
 }
 
--(void) updateValue {
-    [self performSelectorOnMainThread: @selector(updateValue:) withObject:[self getData] waitUntilDone:YES];
-}
-
 
 -(NSInteger)validateWithParameters:(NSDictionary *)parameters {
     int nbOfErrors = 0;
@@ -301,7 +298,7 @@
     if(self.mandatory)
     {
         if(self.latitude.text.length == 0 || self.longitude.text.length == 0) {
-            error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+            error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
             [self addErrors:@[error]];
             nbOfErrors++;
             
@@ -311,13 +308,26 @@
        [[self.latitude getData] doubleValue] < -90 ||
        [[self.longitude getData] doubleValue] > 180 ||
        [[self.longitude getData] doubleValue] < -180) {
-        error = [[MFInvalidLocationValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        error = [[MFInvalidLocationValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         [self addErrors:@[error]];
         nbOfErrors++;
-        
     }
     return nbOfErrors;
-    
+}
+
+
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    [self.latitude addTarget:self action:@selector(valueChanged:) forControlEvents:controlEvents];
+    [self.longitude addTarget:self action:@selector(valueChanged:) forControlEvents:controlEvents];
+    MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+    commonCCTD.target = target;
+    commonCCTD.action = action;
+    self.targetDescriptors = @{@(self.latitude.hash) : commonCCTD, @(self.longitude.hash) : commonCCTD};
+}
+
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
 }
 
 @end

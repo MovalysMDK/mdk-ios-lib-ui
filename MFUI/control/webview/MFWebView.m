@@ -105,7 +105,8 @@ NSTimer *timer =nil;
     NSURL *url =nil;
     BOOL isLocalSource = NO;
     NSString *baseStringUrl = nil;
-    NSDictionary *componentParameters = ((MFFieldDescriptor *)self.selfDescriptor).parameters;
+    NSDictionary *componentParameters =  nil;
+    //PROTODO : parametres du composants ?
     
     //Vérification de la data et si la source est locale ou externe
     if(data && ![data isKindOfClass:[MFKeyNotFound class]]){

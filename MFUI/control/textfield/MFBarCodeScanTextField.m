@@ -39,7 +39,6 @@
 
 -(void) updateValueFromExternalSource:(NSString *)value {
     [self setText:value];
-    [self performSelector:@selector(updateValue)];
 }
 
 

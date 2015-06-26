@@ -22,11 +22,13 @@
 #ifndef MFUI_MFUIForm_h
 #define MFUI_MFUIForm_h
 
-#import "MFFormExtend.h"
-#import "MFFormSearchExtend.h"
 #import "MFFormSearchDelegate.h"
 #import "MFFormValidationDelegate.h"
 #import "MFFormViewControllerPartialValidationDelegate.h"
 #import "MFFormViewControllerValidationDelegate.h"
 
+
+#import "MFCommonFormDelegate.h"
+#import "MFFormCommonDelegate.h"
+#import "MFViewProtocol.h"
 #endif

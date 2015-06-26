@@ -19,8 +19,6 @@
 
 #import <MFCore/MFCoreFoundationExt.h>
 #import <MFCore/MFCoreBean.h>
-#import <MFCore/MFCoreFormDescriptor.h>
-#import <MFCore/MFCoreFormConfig.h>
 #import <MFCore/MFCoreAction.h>
 #import <MFCore/MFCoreLog.h>
 
@@ -33,7 +31,6 @@
 #import "MFUIBaseViewModel.h"
 #import "MFCellAbstract.h"
 #import "MFTypeValueProcessingProtocol.h"
-#import "MFBaseBindingForm.h"
 #import "MFWorkspaceViewController.h"
 #import "MFAppDelegate.h"
 #import "MFDeleteDetailActionParamIn.h"
@@ -62,7 +59,6 @@
 }
 
 @synthesize viewModel = _viewModel;
-@synthesize formDescriptor = _formDescriptor;
 @synthesize showAddItemButton = _showAddItemButton;
 @synthesize longPressToDelete = _longPressToDelete;
 @synthesize detailStoryboardName = _detailStoryboardName;
@@ -91,35 +87,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    if (self.mf.formDescriptorName) {
+    [self setupBarItems];
 
-        MFAppDelegate *mfDelegate = nil;
-        id<UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
-        if([appDelegate isKindOfClass:[MFAppDelegate class]]){
-            mfDelegate = (MFAppDelegate *) appDelegate;
-        }
-        // Chameleon support for framework style system management.
-        
-        
-        //Récupération des formDescriptor mise en cache
-        MFConfigurationHandler *registry = [_applicationContext getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
-        MFFormDescriptor *localFormDescriptor = [registry getFormDescriptorProperty:[CONST_FORM_RESOURCE_PREFIX stringByAppendingString:self.mf.formDescriptorName]];
-        
-        self.formDescriptor = localFormDescriptor;
-        
-        [self setupBarItems];
-        
-    }
-    else {
-        MFUILogError(@"mf.formDescriptorName is missing");
-        @throw [NSException exceptionWithName:@"MissingFormDescriptorName" reason:@"The form descriptor name is missing" userInfo:nil];
-    }
     
     // fix separator display at the bottom of the tableview
-    UIView *f = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 0)];
-    f.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [self.tableView setTableFooterView:f];
+    UIView *tableViewFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 0)];
+    tableViewFooter.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.tableView setTableFooterView:tableViewFooter];
 }
 
 
@@ -128,7 +102,6 @@
 #ifdef DEBUG
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 #endif
-    self.formDescriptor = nil;
     self.mf = nil;
 }
 
@@ -198,7 +171,6 @@
     }
     
     //Mise à jour des données des composants de la cellule
-    [self setDataOnView:formCell];
     return (UITableViewCell *)formCell;
 }
 
@@ -284,159 +256,6 @@
 }
 
 
-
-
-#pragma mark  - Binding Form/ViewModel : évènements de binding
-
-/**
- * @see MFFormListViewController.h
- */
--(void) dispatchEventOnComponentValueChangedWithKey:(NSString *)bindingKey atIndexPath:(NSIndexPath *)indexPath
-{
-    if([self.formBindingDelegate mutexForProperty:bindingKey]) {
-        
-        //Récupération et application du filtre ppour ce composant
-        MFValueChangedFilter applyFilter = [[self filtersFromFormToViewModel] objectForKey:bindingKey];
-        BOOL continueDispatch = YES;
-        if(applyFilter)
-            continueDispatch = applyFilter(bindingKey, [((MFUIBaseListViewModel *)[self getViewModel]).viewModels objectAtIndex:indexPath.row], self.binding);
-        
-        //Si la mise a jour n'est pas bloquée par le filtre
-        NSMutableArray *componentList = [[self.binding componentsAtIndexPath:indexPath withBindingKey:bindingKey] mutableCopy];
-        if(continueDispatch && componentList) {
-            for(id<MFUIComponentProtocol> component in componentList) {
-                [[self viewModelAtIndexPath:indexPath] setValue:[component getData] forKeyPath:bindingKey];
-            }
-        }
-    }
-    else {
-        [self releasePropertyFromMutex:bindingKey];
-    }
-}
-
-
-/**
- * @see MFFormListViewController.h
- */
--(void) dispatchEventOnViewModelPropertyValueChangedWithKey:(NSString *)bindingKey sender:(MFUIBaseViewModel *)viewModelSender
-{
-    //Récupération de la liste des composants associé à ce keyPath
-    NSIndexPath *componentIndexPath = [NSIndexPath indexPathForRow:[((MFUIBaseListViewModel *)[self getViewModel]).viewModels indexOfObject:viewModelSender] inSection:0];
-    
-    NSMutableArray *componentList = [[self.binding componentsAtIndexPath:componentIndexPath withBindingKey:bindingKey] mutableCopy];
-    
-    //Si la ressource n'est pas déja tenue par un autre évènement
-    if([self.formBindingDelegate mutexForProperty:bindingKey]) {
-        
-        //Récupération et application du filtre ppour ce composant
-        MFValueChangedFilter applyFilter = [[self filtersFromViewModelToForm] objectForKey:bindingKey];
-        BOOL continueDispatch = YES;
-        if(applyFilter)
-            continueDispatch = applyFilter(bindingKey, viewModelSender, self.binding);
-        
-        
-        //Si la mise a jour n'est pas bloquée par le filtre
-        if(continueDispatch) {
-            if(componentList) {
-                for(id<MFUIComponentProtocol> component in componentList) {
-                    id oldValue = [component getData];
-                    id newValue =[viewModelSender valueForKeyPath:bindingKey];
-                    newValue = [self applyConverterOnComponent:(id<MFUIComponentProtocol>)component forValue:newValue isFormToViewModel:NO];
-                    MFNonEqual(oldValue, newValue, ^{
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [component setData:newValue];
-                        });
-                    });
-                    
-                }
-            }
-            else {
-                [self performSelectorForPropertyBinding:bindingKey onViewModel:viewModelSender withIndexPath:componentIndexPath];
-            }
-        }
-        // On lâche la ressource à la fin du traitement
-        [self releasePropertyFromMutex:bindingKey];
-    }
-    else {
-        // Si on passe ici, c'est que le champ vient d'être modifié dans le viewModel suite à une modif du formulaire.
-        // On peut donc maintenant appliquer la modification la m"thode custom appelée quand le champ est modifié dans le modèle
-        [self applyCustomValueChangedMethodForComponents:componentList atIndexPath:componentIndexPath];
-        [self releasePropertyFromMutex:bindingKey];
-    }
-}
-
-
-
-/**
- * @brief Cette méthode applique un traitement particulier lorsque la valeur du champ correspondant dans le ViewModel
- * à la liste des composants passée en paramètres est modifiée.
- * @param componentList Une liste de composants (définis dans les formulaires PLIST) dont on souhaite écouter les modifications
- * de valeur dans le ViewModel
- */
--(void) applyCustomValueChangedMethodForComponents:(NSArray *)componentList atIndexPath:(NSIndexPath *)indexPath
-{
-    //Application des méthodes spécifiés pour le changement de cette valeur, s'il y en a dans le PLIST
-    if(componentList) {
-        for(id<MFUIComponentProtocol> component in componentList) {
-            NSString *customValuechangedMethod = ((MFFieldDescriptor *)[component selfDescriptor]).vmValueChangedMethodName;
-            customValuechangedMethod = [customValuechangedMethod stringByAppendingString:@"AtIndexPath:"];
-            
-            //Si une custom method est définie
-            if(customValuechangedMethod) {
-                //et qu'elle est implémentée, on l'exécute, sinon on informe l'utilisateur
-                if([self respondsToSelector:NSSelectorFromString(customValuechangedMethod)]){
-                    
-                    // Par défaut le compilateur affiche un warning indiquant que performSelector avec un NSSelectorFromString
-                    // peut causer des fuites mémoire car il ne sait pas vérifier que le sélecteur existe réellement.
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                    [self performSelector:NSSelectorFromString(customValuechangedMethod) withObject:indexPath];
-                }
-                else {
-                    @throw([NSException exceptionWithName:@"Not Implemented" reason:[NSString stringWithFormat:@"You should implement the custom value changed method %@ defined in PLIST file on %@", customValuechangedMethod, self.class] userInfo:nil]);
-                }
-                
-            }
-        }
-    }
-}
-
-/**
- * @brief Cette méthode réalise les actions demandées d'après le changement de valeur d'une propriété
- * du ViewModel. D'après le nom de la propriété qui a changé, la méthode va vérifier dans son dictionnaire
- * de propriétés bindées, les composant et leur champs à modifier.
- * @param propertyBindingKey Le nom de la propriété qui a changé
- */
--(void) performSelectorForPropertyBinding:(NSString *) propertyBindingKey onViewModel:(MFUIBaseViewModel *)viewModel withIndexPath:(NSIndexPath *)indexPath
-{
-    
-    NSDictionary * listeners = [self.propertiesBinding objectForKey:propertyBindingKey];
-    
-    //S'il y a des champs qui écoutent le changement de la propriété propertyBindingKey
-    if(listeners) {
-        for(NSString * componentName in [listeners allKeys]) {
-            //Récupération du nom du champ qui écoute la propriété et de la propriété du champ à modifier
-            
-            NSString *listenerName = componentName;
-            MFBindingComponentDescriptor * bindingDescriptor = [listeners objectForKey:componentName];
-            MFFieldDescriptor * componentDescriptor = bindingDescriptor.componentDescriptor;
-            NSString *property = bindingDescriptor.bindableProperty;
-            // Si on a toutes les informations, on modifie la propriété récupérée sur le champs récupéré
-            // avec la nouvelle valeur
-            if(listenerName && property) {
-                NSArray * componentList = [self.binding componentsAtIndexPath:indexPath withBindingKey:componentDescriptor.bindingKey];
-                for(id<MFUIComponentProtocol> listener in componentList) {
-                    NSString * selectorName = [self generateSetterFromProperty:property];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [listener performSelector:NSSelectorFromString(selectorName) withObject:[viewModel valueForKey:propertyBindingKey]];
-                    });
-                }
-            }
-        }
-    }
-}
-
-
-
 #pragma mark - ViewModels management
 
 -(id<MFUIBaseViewModelProtocol>) viewModelAtIndexPath:(NSIndexPath *)indexPath
@@ -484,64 +303,6 @@
     ((MFUIBaseListViewModel *)[self getViewModel]).viewModels = listViewModel.viewModels;
 }
 
-
-
-#pragma mark - Gestion des composants graphiques
-/**
- * @brief Cette méthode permet d'initialiser  (graphiquement) le composant passé en paramètre
- * à partir des données du PLIST du formulaire
- * @param component Le composant à initialiser
- */
--(void) initComponent:(id<MFUIComponentProtocol>) component atIndexPath:(NSIndexPath *)indexPath
-{
-    
-    //Initialize Data
-    MFFieldDescriptor * componentDescriptor = (MFFieldDescriptor *) component.selfDescriptor;
-    
-    id vmItem = [self viewModelAtIndexPath: indexPath];
-    [vmItem valueForKeyPath:componentDescriptor.bindingKey];
-    [component clearErrors];
-    
-    //Initializing each bindableProperty if defined
-    for(NSString *bindablePropertyName in [self.bindableProperties allKeys]) {
-        NSString *valueType = [[self.bindableProperties objectForKey:bindablePropertyName] objectForKey:@"type"];
-        NSString *processingClass = [NSString stringWithFormat:@"MF%@ValueProcessing", [valueType capitalizedString]];
-        
-        id object = [((id<MFTypeValueProcessingProtocol>)[[NSClassFromString(processingClass) alloc] init]) processTreatmentOnComponent:component withViewModel:vmItem forProperty:bindablePropertyName fromBindableProperties:self.bindableProperties];
-        
-        NSString *selector = [self generateSetterFromProperty:bindablePropertyName];
-        
-        if(object) {
-            [self performSelector:NSSelectorFromString(selector) onComponent:component withObject:object];
-        }
-    }
-}
-
-
-
-/**
- * @brief Cette méthode met à jour les données de la cellule selon son indexPath
- * @param cell La cellule
- */
--(void) setDataOnView:(id<MFFormCellProtocol>)cell
-{
-    
-    NSMutableArray *cellComponents = [NSMutableArray array];
-    NSIndexPath *indexPath = cell.cellIndexPath;
-    
-    cellComponents = [[self.binding componentsArrayAtIndexPath:indexPath] mutableCopy];
-    
-    for(id<MFUIComponentProtocol> component in cellComponents) {
-        MFFieldDescriptor *componentDescriptor = (MFFieldDescriptor *)component.selfDescriptor;
-        id<MFUIBaseViewModelProtocol> itemVm = [self viewModelAtIndexPath:indexPath];
-        id value = [itemVm valueForKeyPath:componentDescriptor.bindingKey];
-        value = [self applyConverterOnComponent:(id<MFUIComponentProtocol>)component forValue:value isFormToViewModel:NO];
-        [component performSelector:@selector(setData:) withObject:value];
-    }
-    
-}
-
-
 -(void) refresh
 {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -551,19 +312,6 @@
         }
     });
     
-}
-
--(void)unregisterAllComponents
-{
-    [super unregisterAllComponents];
-    [((MFUIBaseListViewModel *)self.viewModel) clear];
-    
-}
-
-
--(MFGroupDescriptor *) getGroupDescriptor:(NSIndexPath *)indexPath
-{
-    return ((MFSectionDescriptor *)self.formDescriptor.sections[0]).orderedGroups[0];
 }
 
 - (void) doOnCreateItem
@@ -618,11 +366,6 @@
         NSMutableArray *tempData = nil;
         
         switch(type) {
-                
-                //        case NSFetchedResultsChangeInsert:
-                //            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-                //            break;
-                
             case NSFetchedResultsChangeDelete:
                 
                 listViewmodel = (MFUIBaseListViewModel *) [self getViewModel];
@@ -633,17 +376,7 @@
                 
                 [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 break;
-                
-                //        case NSFetchedResultsChangeUpdate:
-                //            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-                //            break;
-                
-                //        case NSFetchedResultsChangeMove:
-                //          [tableView deleteRowsAtIndexPaths:[NSArray
-                //                                               arrayWithObject:indexPath] //withRowAnimation:UITableViewRowAnimationFade];
-                //            [tableView insertRowsAtIndexPaths:[NSArray
-                //                                             arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-                //        break;
+
         }
         
     }];
@@ -672,35 +405,13 @@
     // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
     [[MFApplication getInstance] execInMainQueue:^{
         [self.tableView endUpdates];
-        [self.binding clear];
-        [self.propertiesBinding removeAllObjects];
         [self.tableView reloadData];
     }];
 }
 
 
 #pragma mark - Unimplemented methods
--(NSDictionary *)getFiltersFromFormToViewModel
-{
-    return [NSDictionary dictionary];
-}
 
--(NSDictionary *)getFiltersFromViewModelToForm
-{
-    return [NSDictionary dictionary];
-}
-
--(void)completeFiltersFromFormToViewModel:(NSDictionary *)filters
-{
-    //The method is declared to avoid warnings of unimplemented methods.
-    //The method coulb be implemented in child classes.
-}
-
--(void)completeFiltersFromViewModelToForm:(NSDictionary *)filters
-{
-    //The method is declared to avoid warnings of unimplemented methods.
-    //The method coulb be implemented in child classes.
-}
 
 -(void)doFillAction
 {

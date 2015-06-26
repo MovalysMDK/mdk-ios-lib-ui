@@ -58,11 +58,6 @@ typedef enum {
 
 #pragma mark - Propriétés
 
-/*! 
- * @brief l'extension du controlleur, l'extension contient des paramètres qui peuvent être définis dans le storyboard 
- */
-@property(nonatomic, strong) MFFormExtend *mf;
-
 /*!
  * @brief Le tableau contenant les données de la Liste éditable
  */

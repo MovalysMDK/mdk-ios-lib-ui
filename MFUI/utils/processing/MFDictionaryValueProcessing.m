@@ -21,14 +21,8 @@
 
 -(id)processTreatmentOnComponent:(id<MFUIComponentProtocol>)component withViewModel:(id<MFUIBaseViewModelProtocol>)viewModel forProperty:(NSString *)property fromBindableProperties:(NSDictionary *)bindableProperties {
     
-    id value = [((MFFieldDescriptor *)component.selfDescriptor) valueForKey:property];;
+    return nil;
     
-    if(!value) {
-        return nil;
-    }
-    
-    NSDictionary *returnValue = nil;
-    returnValue = [(id)viewModel valueForKey:value];
-    return returnValue;
+    //PROTODO : intéret de la classe ?
 }
 @end

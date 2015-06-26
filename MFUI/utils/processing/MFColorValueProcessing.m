@@ -29,22 +29,9 @@
  * @see MFTypeValueProcessingProtocol.h
  */
 -(id)processTreatmentOnComponent:(id<MFUIComponentProtocol>)component withViewModel:(id<MFUIBaseViewModelProtocol>)viewModel forProperty:(NSString *)property fromBindableProperties:(NSDictionary *)bindableProperties {
+    //PROTODO ? intéret de la méthode
     
-    NSString *colorValue = [((MFFieldDescriptor *)component.selfDescriptor) valueForKey:property];
-    if([[[[bindableProperties objectForKey:property] objectForKey:MFATTR_RECOGNIZED_VALUES] componentsSeparatedByString:@";"] containsObject:colorValue]) {
-        colorValue = [colorValue stringByAppendingString:@"Color"];
-        return   (UIColor *)[[UIColor class] performSelector:NSSelectorFromString(colorValue)];
-    }
-    else {
-        id returnValue  = nil;
-        if(colorValue) {
-            returnValue = [(id)viewModel valueForKey:colorValue];
-        }
-        if(!returnValue && colorValue) {
-            MFUILogInfo(@"Bindable property %@ was not found on %@", colorValue, [viewModel class]);
-        }
-        return returnValue;
-    }
+    return nil;
 }
 
 

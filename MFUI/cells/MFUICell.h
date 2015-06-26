@@ -27,5 +27,6 @@
 #import "MFCell1ComponentHorizontal.h"
 #import "MFFormCellProtocol.h"
 #import "MFCellAbstract.h"
+#import "UITableViewCell+Binding.h"
 
 #endif

@@ -34,5 +34,6 @@
 #import "MFDictionaryValueProcessing.h"
 #import "MFStringValueProcessing.h"
 #import "MFTypeValueProcessingProtocol.h"
+#import "NSString+Utils.h"
 
 #endif

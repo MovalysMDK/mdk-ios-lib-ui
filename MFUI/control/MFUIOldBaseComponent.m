@@ -24,7 +24,6 @@
 #import <MFCore/MFCoreBean.h>
 #import <MFCore/MFCoreLog.h>
 #import <MFCore/MFCoreError.h>
-#import <MFCore/MFCoreFormConfig.h>
 
 #import "MFUIOldBaseComponent.h"
 #import "MFFormCellProtocol.h"
@@ -32,9 +31,7 @@
 #import "MFUILogging.h"
 #import "MFConstants.h"
 #import "MFBindingViewAbstract.h"
-
-
-
+#import "MFComponentAssociatedLabelProtocol.h"
 
 @interface MFUIOldBaseComponent()
 
@@ -54,7 +51,6 @@
 @synthesize visible = _visible;
 @synthesize componentInCellAtIndexPath = _componentInCellAtIndexPath;
 @synthesize editable = _editable;
-@synthesize groupDescriptor = _groupDescriptor;
 @synthesize mfParent = _mfParent;
 @synthesize lastUpdateSender = _lastUpdateSender;
 @synthesize cellContainer = _cellContainer;
@@ -62,6 +58,8 @@
 @synthesize styleClass = _styleClass;
 @synthesize styleClassName = styleClassName;
 @synthesize componentValidation = _componentValidation;
+@synthesize controlAttributes = _controlAttributes;
+@synthesize associatedLabel = _associatedLabel;
 
 #pragma mark - Constructeurs et initialisation
 -(id)init {
@@ -114,6 +112,7 @@
         [self performSelector:@selector(applyDefaultConstraints) withObject:nil
          ];
     }
+    
 #if !TARGET_INTERFACE_BUILDER
     
     //Récupération du contexte
@@ -174,26 +173,6 @@
 }
 
 #pragma mark - Méthodes communes à tous les composants
-
-
--(void)setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor {
-    _selfDescriptor = selfDescriptor;
-    
-#warning TODO: This call should be removed
-    [self didFinishLoadDescriptor];
-    [self didLoadFieldDescriptor:self.selfDescriptor];
-    
-    
-}
-
--(void) didFinishLoadDescriptor __attribute__((deprecated("Use method didLoadFieldDescriptor: instead"))){
-    //Default : nothing
-}
-
--(void) didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
-    //Default : nothing
-}
-
 
 
 -(void)setIsValid:(BOOL)isValid {
@@ -462,17 +441,6 @@
     }
 }
 
--(MFConfigurationUIComponent *) loadConfiguration:(NSString *) configurationName {
-    MFConfigurationUIComponent *config = nil;
-    if(![NSString isNilOrEmpty:configurationName]){
-        MFConfigurationHandler* registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
-        config = [registry getVisualConfiguration:configurationName];
-    }
-    return config;
-}
-
-
-
 
 #pragma mark - Merge des configurations
 
@@ -514,48 +482,6 @@
     return returnValue;
 }
 
--(void)dispatchEventOnValueChanged {
-    NSString *bindingKey = ((MFFieldDescriptor *)self.sender.selfDescriptor).bindingKey;
-    if(self.form && bindingKey) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.form dispatchEventOnComponentValueChangedWithKey:bindingKey atIndexPath:self.componentInCellAtIndexPath];
-        });
-    }
-}
-
--(void) onChildValueChanged:(MFUIOldBaseComponent *) child {
-    [self updateValue:[self getData]];
-}
-
--(void)updateValue:(id) newValue {
-    [self onUpdate](newValue);
-}
-
--(void (^)(id x))onUpdate {
-    __weak MFUIOldBaseComponent *weakSelf = self;
-    return  ^(id x) {
-        if(x){
-            MFUIOldBaseComponent *strongSelf = weakSelf;
-            id value = (NSString *) x;
-            if (value) {
-                // We validate the value
-                if(![strongSelf validateWithParameters:nil]) {
-                    // If there aren't any errors, we clean all component's errors
-                    [strongSelf clearErrors];
-                }
-            } else {
-                [strongSelf clearErrors];
-            }
-            if (strongSelf.mfParent) {
-                [strongSelf.mfParent onChildValueChanged:strongSelf];
-            } else {
-                if (![self inInitMode]) {
-                    [strongSelf dispatchEventOnValueChanged];
-                }
-            }
-        }
-    };
-}
 
 -(void)setVisible:(NSNumber *)visible {
     //    dispatch_async(dispatch_get_main_queue(), ^{
@@ -582,7 +508,6 @@
         [self setData:data];
     }
     if(shouldUpdateAfterSettingData) {
-        [self updateValue:data];
     }
 }
 
@@ -619,11 +544,6 @@
     _transitionDelegate = transitionDelegate;
 }
 
--(void)setComponentParameters:(NSDictionary *)parameters {
-    if(self.selfDescriptor) {
-        [((MFFieldDescriptor *)self.selfDescriptor).parameters addEntriesFromDictionary:parameters];
-    }
-}
 
 
 #pragma mark - Live Rendering Default Implementation
@@ -643,9 +563,6 @@
     //Default : nothing
 }
 
--(void)setMandatory:(NSNumber *)mandatory {
-    _mandatory = mandatory;
-}
 
 -(void)initializeInspectableAttributes {
     self.IB_enableIBStyle = NO;
@@ -654,6 +571,28 @@
 -(void)prepareForInterfaceBuilder {
     [self computeStyleClass];
 //    self.backgroundColor = [UIColor clearColor];
+}
+
+-(void)setControlAttributes:(NSDictionary *)controlAttributes {
+    _controlAttributes = controlAttributes;
+    self.mandatory = controlAttributes[@"mandatory"] ? controlAttributes[@"mandatory"] : @1;
+    if(self.associatedLabel) {
+        self.associatedLabel.mandatory = self.mandatory;
+    }
+    self.editable = controlAttributes[@"editable"] ? controlAttributes[@"editable"] : @1;
+    self.visible = controlAttributes[@"visible"] ? controlAttributes[@"visible"] : @1;
+}
+
+-(void)setMandatory:(NSNumber *)mandatory {
+    _mandatory = mandatory;
+    if(self.associatedLabel) {
+        self.associatedLabel.mandatory = _mandatory;
+    }
+}
+
+-(void)setAssociatedLabel:(MFLabel *)associatedLabel {
+    _associatedLabel = associatedLabel;
+    self.associatedLabel.mandatory = self.mandatory;
 }
 
 @end

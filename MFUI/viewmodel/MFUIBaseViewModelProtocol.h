@@ -23,7 +23,8 @@
 #import "MFViewModelChangedListenerProtocol.h"
 
 @protocol MFFormViewControllerProtocol;
-@protocol MFBindingFormDelegate;
+@protocol MFObjectWithBindingProtocol;
+@protocol MFCommonFormProtocol;
 
 
 @protocol MFUIBaseViewModelProtocol <NSObject>
@@ -32,12 +33,15 @@
 /*!
  * @brief This property is the ViewController that manages the binding between the ViewModel and the components owned by this form.
  */
-@property (nonatomic, strong) id<MFViewModelChangedListenerProtocol, MFBindingFormDelegate> form;
+@property (nonatomic, strong) id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol> form;
 
 /*!
  * @brief Indicates this ViewModel has changed. It's necessary to know if it should be saved.
  */
 @property (nonatomic) BOOL hasChanged;
+
+
+@property (nonatomic, weak) NSObject<MFObjectWithBindingProtocol> *objectWithBinding;
 
 
 #pragma mark - Methods

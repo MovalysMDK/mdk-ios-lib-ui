@@ -21,13 +21,14 @@
 
 #import "MFUIOldBaseComponent.h"
 #import "MFSignatureDrawing.h"
+#import "MFControlChangesProtocol.h"
 
 /*!
  * @class MFSignature
  * @brief The framework Signature component
  * @discussion This component display a view that allows the user to draw a signature.
  */
-@interface MFSignature : MFUIOldBaseComponent
+@interface MFSignature : MFUIOldBaseComponent <MFControlChangesProtocol>
 
 #pragma mark - Properties
 /*!

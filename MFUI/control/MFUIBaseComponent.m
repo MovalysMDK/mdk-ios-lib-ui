@@ -24,16 +24,17 @@
 #import <MFCore/MFCoreBean.h>
 #import <MFCore/MFCoreLog.h>
 #import <MFCore/MFCoreError.h>
-#import <MFCore/MFCoreFormConfig.h>
 
 #import "MFUIBaseComponent.h"
 #import "MFFormCellProtocol.h"
+#import "MFUIComponentProtocol.H"
 #import "MFCellAbstract.h"
 #import "MFUILogging.h"
 #import "MFConstants.h"
 #import "MFBindingViewAbstract.h"
 #import "MFErrorViewProtocol.h"
 #import "MFUIBaseRenderableComponent.h"
+#import "MFComponentAssociatedLabelProtocol.h"
 
 /**
  * Constante indiquant la durée de l'animation du bouton d'erreur
@@ -63,13 +64,14 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 @synthesize visible = _visible;
 @synthesize componentInCellAtIndexPath = _componentInCellAtIndexPath;
 @synthesize editable = _editable;
-@synthesize groupDescriptor = _groupDescriptor;
 @synthesize lastUpdateSender = _lastUpdateSender;
 @synthesize errors = _errors;
 @synthesize inInitMode = _inInitMode;
 @synthesize cellContainer = _cellContainer;
 @synthesize styleClass = _styleClass;
 @synthesize styleClassName = styleClassName;
+@synthesize controlAttributes = _controlAttributes;
+@synthesize associatedLabel = _associatedLabel;
 
 #pragma mark - Constructeurs et initialisation
 -(id)init {
@@ -143,26 +145,6 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 }
 
 #pragma mark - Méthodes communes à tous les composants
-
-
--(void)setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor {
-    _selfDescriptor = selfDescriptor;
-    
-#warning TODO: This call should be removed
-    [self didLoadFieldDescriptor:self.selfDescriptor];
-    
-    
-}
-
--(void) didFinishLoadDescriptor __attribute__((deprecated("Use method didLoadFieldDescriptor: instead"))){
-    [self didLoadFieldDescriptor:((MFFieldDescriptor *)self.selfDescriptor)];
-}
-
--(void) didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
-    //Default : nothing
-}
-
-
 
 -(void)setIsValid:(BOOL)isValid {
     if (self.isValid != isValid) {
@@ -260,62 +242,10 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
     }
 }
 
--(void)dispatchEventOnValueChanged {
-    NSString *bindingKey = ((MFFieldDescriptor *)self.sender.selfDescriptor).bindingKey;
-    if(self.form && bindingKey) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.form dispatchEventOnComponentValueChangedWithKey:bindingKey atIndexPath:self.componentInCellAtIndexPath];
-        });
-    }
-}
-
--(void) onChildValueChanged:(MFUIBaseComponent *) child {
-    [self updateValue:[self getData]];
-}
-
--(void)updateValue:(id) newValue {
-    [self onUpdate](newValue);
-}
-
--(void (^)(id x))onUpdate {
-    __weak MFUIBaseComponent *weakSelf = self;
-    return  ^(id x) {
-        if(x){
-            MFUIBaseComponent *strongSelf = weakSelf;
-            id value = (NSString *) x;
-            if (value) {
-                // We validate the value
-                if([strongSelf validateWithParameters:nil] == 0) {
-                    // If there aren't any errors, we clean all component's errors
-                    [strongSelf clearErrors];
-                }
-                else {
-                    [strongSelf showError:YES];
-                }
-            } else {
-                [strongSelf clearErrors];
-            }
-            if (strongSelf.mfParent) {
-                [strongSelf.mfParent onChildValueChanged:strongSelf];
-            } else {
-                if (![self inInitMode]) {
-                    [strongSelf dispatchEventOnValueChanged];
-                }
-            }
-        }
-    };
-}
-
 -(void)setVisible:(NSNumber *)visible {
-    //    dispatch_async(dispatch_get_main_queue(), ^{
     [self setHidden:[visible isEqual:@0]];
     [self setNeedsDisplay];
-    //    });
 }
-
-//-(NSString *)description{
-//    return [self.selfDescriptor description];
-//}
 
 - (void)dealloc
 {
@@ -324,12 +254,6 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 
 - (void)setI18nKey:(NSString *) defaultValue {
     [self setData:defaultValue];
-}
-
--(void)setComponentParameters:(NSDictionary *)parameters {
-    if(self.selfDescriptor) {
-        [((MFFieldDescriptor *)self.selfDescriptor).parameters addEntriesFromDictionary:parameters];
-    }
 }
 
 
@@ -423,6 +347,28 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 
 -(UIView *) baseErrorButton {
     return ((id<MFErrorViewProtocol>)self.styleClass).errorView;
+}
+
+-(void)setControlAttributes:(NSDictionary *)controlAttributes {
+    _controlAttributes = controlAttributes;
+    self.mandatory = controlAttributes[@"mandatory"] ? controlAttributes[@"mandatory"] : @1;
+    if(self.associatedLabel) {
+        self.associatedLabel.mandatory = self.mandatory;
+    }
+    self.editable = controlAttributes[@"editable"] ? controlAttributes[@"editable"] : @1;
+    self.visible = controlAttributes[@"visible"] ? controlAttributes[@"visible"] : @1;
+}
+
+-(void)setMandatory:(NSNumber *)mandatory {
+    _mandatory = mandatory;
+    if(self.associatedLabel) {
+        self.associatedLabel.mandatory = _mandatory;
+    }
+}
+
+-(void)setAssociatedLabel:(MFLabel *)associatedLabel {
+    _associatedLabel = associatedLabel;
+    self.associatedLabel.mandatory = self.mandatory;
 }
 
 

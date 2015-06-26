@@ -20,6 +20,7 @@
 #import "MFContainerViewController.h"
 #import "MFWorkspaceDetailColumnProtocol.h"
 #import "MFWorkspaceMasterColumnProtocol.h"
+#import "MFViewControllerAttributes_Workspace.h"
 
 @class MFWorkspaceView;
 
@@ -80,3 +81,10 @@
 @property (nonatomic, strong) NSIndexPath *lastSelectedIndexPath;
 
 @end
+
+
+
+
+
+
+

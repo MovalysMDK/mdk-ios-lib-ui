@@ -34,7 +34,7 @@
  * This component can indeed be declared in any kinf of cells that inherits from MFCellAbstract.
  * Its more convenient to manages data of the picker here.
  */
-@interface MFPickerControllerDelegate : NSObject <UIPickerViewDataSource, UIPickerViewDelegate, MFBindingFormDelegate, MFSearchDelegate, MFViewModelChangedListenerProtocol, MFContentDelegate>
+@interface MFPickerControllerDelegate : NSObject <UIPickerViewDataSource, UIPickerViewDelegate, MFCommonFormProtocol, MFSearchDelegate, MFViewModelChangedListenerProtocol, MFContentDelegate>
 
 
 #pragma mark - Properties
@@ -47,7 +47,7 @@
 /*!
  * @brief Form Binding Delegate. This delegate allow to bind a ViewModel to a Form easily
  */
-@property(nonatomic, strong) id<MFBindingFormDelegate> formBindingDelegate ;
+@property(nonatomic, strong) id<MFCommonFormProtocol> formBindingDelegate ;
 
 /*!
  * @brief Le ViewModel associé à ce formulaire. il peut s'agir d'un ViewModel simple contenant différents
@@ -82,7 +82,6 @@
  */
 -(void) fillSelectedViewWithViewModel:(MFUIBaseViewModel *)viewModel;
 
--(void) reinitBinding;
 /*!
  * Select view model with the position in parameter
  */

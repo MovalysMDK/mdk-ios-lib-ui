@@ -22,7 +22,6 @@
 //MFCore imports
 #import <MFCore/MFCoreConfig.h>
 #import <MFCore/MFCoreError.h>
-#import <MFCore/MFCoreFormConfig.h>
 
 
 //Main intrface
@@ -38,6 +37,7 @@
 #import "MFUILogging.h"
 #import "MFUILoggingHelper.h"
 #import "MFUIBaseListViewModel.h"
+
 
 
 int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
@@ -56,16 +56,6 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
 @property (nonatomic, strong) NSString *staticViewNibName;
 
 /**
- * @brief The Form descriptor corresponding to the static view
- */
-@property (nonatomic, strong) MFFormDescriptor *selectedViewFormDescriptor;
-
-/**
- * @brief The Form descriptor corresponding to the static view
- */
-@property (nonatomic, strong) MFFormDescriptor *itemViewFormDescriptor;
-
-/**
  * @brief Indicates if this component should set the cell height to its form container
  */
 @property (nonatomic) BOOL shouldSetCellHeight;
@@ -80,9 +70,6 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
 
 @implementation MFPickerControllerDelegate
 
-
-@synthesize reusableBindingViews = _reusableBindingViews;
-@synthesize formDescriptor = _formDescriptor;
 @synthesize viewModel =_viewModel;
 @synthesize formValidation =_formValidation;
 
@@ -100,14 +87,8 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
 
 -(void) initialize {
     self.registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
-    self.formBindingDelegate = [[MFBaseBindingForm alloc] initWithParent:self];
-    [self reinitBinding];
     self.filteredViewModels = [self initializeFilteredViewModels];
     self.shouldSetCellHeight = YES;
-}
-
--(void) reinitBinding {
-    [((MFBaseBindingForm *)self.formBindingDelegate) reinit];
 }
 
 -(void)setContent {
@@ -117,34 +98,6 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
     
     self.viewModel.form = self;
     
-    [self initDescriptors];
-    //Récupération des descripteurs des vues à créer
-    MFSectionDescriptor *currentSection = self.selectedViewFormDescriptor.sections[0];
-    MFGroupDescriptor *currentGd = nil;
-    currentGd = currentSection.orderedGroups[0];
-    self.staticViewNibName = currentGd.uitype;
-    
-    
-    //Création de la vue statique
-    [self.picker didLoadFieldDescriptor:self.picker.selfDescriptor];
-
-    MFBindingViewAbstract * view = nil;
-    if(self.staticViewNibName) {
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:self.staticViewNibName owner:self options:nil];
-        if(topLevelObjects && topLevelObjects.count >0) {
-            view = [topLevelObjects objectAtIndex:0];
-        }
-        
-    }
-    else {
-        [MFException throwExceptionWithName:@"Missing property" andReason:[NSString stringWithFormat:@"The property typeName must be filled on %@%@.plist (group)",CONST_FORM_RESOURCE_PREFIX, [self.picker selectedViewFormDescriptorName]] andUserInfo:nil];
-    }
-    
-    [self.picker.staticView  configureByGroupDescriptor:currentGd andFormDescriptor:self.selectedViewFormDescriptor];
-    
-    if(!self.picker.emptyViewNibName) {
-        self.picker.staticView = view;
-    }
     
     
     //    [self.pickerList.staticView registerComponent:self];
@@ -171,19 +124,7 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
     [self.picker.staticView viewIsConfigured];
 }
 
--(void) initDescriptors {
-    if(![self.registry getFormDescriptorProperty:[CONST_FORM_RESOURCE_PREFIX stringByAppendingString:[self.picker lstItemViewFormDescriptorName]]]) {
-        [self.registry loadFormWithName:[self.picker lstItemViewFormDescriptorName]];
-    }
-    self.itemViewFormDescriptor = [self.registry getFormDescriptorProperty:[CONST_FORM_RESOURCE_PREFIX stringByAppendingString:[self.picker lstItemViewFormDescriptorName]]];
-    
-    //Récupération du descripteur du formulaire de la vue statique
-    if(![self.registry getFormDescriptorProperty:[CONST_FORM_RESOURCE_PREFIX stringByAppendingString:[self.picker selectedViewFormDescriptorName]]]) {
-        [self.registry loadFormWithName:[self.picker selectedViewFormDescriptorName]];
-    }
-    self.selectedViewFormDescriptor = [self.registry getFormDescriptorProperty:[CONST_FORM_RESOURCE_PREFIX stringByAppendingString:[self.picker selectedViewFormDescriptorName]]];
-    
-}
+
 
 -(void)dealloc {
     if(self.picker) {
@@ -200,19 +141,9 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     NSIndexPath *virtualIndexPath = [NSIndexPath indexPathForItem:row inSection:component];
-    MFGroupDescriptor *currentGd = nil;
-    
-    //Récupération du NIB à utiliser pour dessiner la vue
-    if(!self.itemViewFormDescriptor) {
-        [self initDescriptors];
-    }
-    MFSectionDescriptor *currentSection = self.itemViewFormDescriptor.sections[0];
-    //        if([[self viewModel] isKindOfClass:[MFUIBaseViewModel class]]) {
-    currentGd = currentSection.orderedGroups[0];
-    //        }
-    self.itemViewNibName = currentGd.uitype;
     
     
+    //PROTODO : Mécanisme binding ici
     MFBindingViewAbstract *pickerItemView = (MFBindingViewAbstract *)view;
     
     //Création de la vue
@@ -225,45 +156,6 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
     pickerItemView.frame = itemFrame;
     
     
-    if([pickerItemView conformsToProtocol:@protocol(MFBindingViewProtocol)]) {
-        
-        MFBindingViewAbstract *formView = (MFBindingViewAbstract *) pickerItemView;
-        //        [((MFBindingViewAbstract *)formView) refreshComponents];
-        
-        //Enregistrement et désenregistrement des vues déja créées.
-        if(![self.reusableBindingViews containsObject:formView]) {
-            [self.reusableBindingViews addObject:formView];
-        }
-        else {
-            [formView unregisterComponents:self];
-        }
-        [self.binding unregisterComponentsAtIndexPath:virtualIndexPath withBindingKey:nil];
-        
-        //Réinitialisation de la vue
-        ((MFCellAbstract *)formView).formController = self;
-        [formView setCellIndexPath:virtualIndexPath];
-        
-        //Style de la cellule
-        [formView configureByGroupDescriptor:currentGd andFormDescriptor:self.itemViewFormDescriptor];
-        
-        //Enregistrement des composants graphiques de la vue
-        NSDictionary *newRegisteredComponents = [self registerComponentsFromCell:formView];
-        for(NSString *key in [newRegisteredComponents allKeys]) {
-            //Récupération de la liste des composants associé à ce keyPath
-            
-            NSMutableArray *componentList = [[self.binding componentsAtIndexPath:virtualIndexPath withBindingKey:key] mutableCopy];
-            if(componentList) {
-                for(UIView<MFUIComponentProtocol> *component in componentList) {
-                    //Initialisation des composants
-                    [self initComponent:component atIndexPath:virtualIndexPath];
-                }
-            }
-        }
-        [self setDataOnView:formView withOptionalViewModel:nil];
-    }
-    else {
-        MFUILogWarn(@"The picker view item is not a MFBindingViewProtocol");
-    }
     [pickerItemView viewIsConfigured];
     return pickerItemView;
 }
@@ -273,13 +165,7 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
     return self.filteredViewModels.count;
 }
 
--(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-    //Récupération de la taille dans la configuration
-    NSIndexPath *virtualIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-    MFGroupDescriptor *group = [self getGroupDescriptorAtIndexPath:virtualIndexPath];
-    CGFloat value = [group.height floatValue];
-    return value;
-}
+//PROTODO : Nimber of section
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if(self.filteredViewModels.count == 0) {
@@ -297,105 +183,6 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
     [self fillSelectedViewWithViewModel:[self.filteredViewModels objectAtIndex:row]];
 }
 
-#pragma mark - Gestion des données des cellules
-/**
- * @brief Cette méthode permet d'initialiser  (graphiquement) le composant passé en paramètre
- * à partir des données du PLIST du formulaire
- * @param component Le composant à initialiser
- */
--(void) initComponent:(id<MFUIComponentProtocol>) component atIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    //Initialize Data
-    MFFieldDescriptor * componentDescriptor = (MFFieldDescriptor *) component.selfDescriptor;
-    
-    [[self.filteredViewModels objectAtIndex:indexPath.row] valueForKeyPath:componentDescriptor.bindingKey];
-    
-    [component clearErrors];
-    
-    //Initializing each bindableProperty if defined
-    for(NSString *bindablePropertyName in [self.bindableProperties allKeys]) {
-        NSString *valueType = [[self.bindableProperties objectForKey:bindablePropertyName] objectForKey:@"type"];
-        NSString *processingClass = [NSString stringWithFormat:@"MF%@ValueProcessing", [valueType capitalizedString]];
-        
-        id object = [((id<MFTypeValueProcessingProtocol>)[[NSClassFromString(processingClass) alloc] init]) processTreatmentOnComponent:component withViewModel:[self.filteredViewModels objectAtIndex:indexPath.row] forProperty:bindablePropertyName fromBindableProperties:self.bindableProperties];
-        
-        NSString *selector = [self generateSetterFromProperty:bindablePropertyName];
-        
-        if(object) {
-            [self performSelector:NSSelectorFromString(selector) onComponent:component withObject:object];
-        }
-    }
-}
-
-/**
- * @brief Cette méthode enregistre dans le mapping les composants principaux de
- * la cellule
- * @param cell La cellule dont on souhaite enregisrer les composants
- */
--(NSDictionary *)registerComponentsFromCell:(id<MFFormCellProtocol>) cell {
-    return [cell registerComponent:self];
-}
-
--(void)unregisterComponents:(id<MFBindingFormDelegate>)formController {
-    [self.picker.staticView unregisterComponents:self];
-    [self.picker.cellContainer unregisterComponents:formController];
-}
-
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-/**
- * @brief Cette méthode met à jour les données de la cellule selon son indexPath
- * @param cell La cellule
- */
--(void) setDataOnView:(id<MFFormCellProtocol>)cell withOptionalViewModel:(MFUIBaseViewModel *)viewModel{
-    
-    NSMutableArray *cellComponents = [NSMutableArray array];
-    NSIndexPath *indexPath = cell.cellIndexPath;
-    
-    cellComponents = [[self.binding componentsArrayAtIndexPath:indexPath] mutableCopy];
-    for(id<MFUIComponentProtocol> component in cellComponents) {
-        MFFieldDescriptor *componentDescriptor = (MFFieldDescriptor *)component.selfDescriptor;
-        
-        
-        if(!viewModel) {
-            //Si la liste est plein, on récupère un object directement via sa clé, qui est sa position dans la liste
-            if(self.filteredViewModels.count == [self pickerListViewModel].viewModels.count) {
-                viewModel = [self.filteredViewModels objectAtIndex:indexPath.row];
-            }
-            //Sinon on parcourt la liste des résultats (le dictionnaire filteredViewModels n'étant pas ordonné).
-            else {
-                viewModel = [self.filteredViewModels objectAtIndex:indexPath.row];
-            }
-        }
-        
-        id componentData = [viewModel valueForKeyPath:componentDescriptor.bindingKey];
-        
-        
-        if(componentData) {
-            componentData = [self applyConverterOnComponent:component forValue:componentData isFormToViewModel:NO];
-            //            dispatch_async(dispatch_get_main_queue(),  ^{
-            [self performSelector:@selector(setData:) onComponent:component withObject:componentData];
-            //            });
-        }
-        else {
-            MFUILogInfo(@"Binding Key \"%@\" was not found on %@",componentDescriptor.bindingKey, [self.viewModel class]);
-        }
-        
-        //Set parameters for this component if exist
-        if(componentDescriptor.parameters) {
-            for(NSString *key in componentDescriptor.parameters.allKeys) {
-                if([component respondsToSelector:NSSelectorFromString([self generateSetterFromProperty:key])]) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [component performSelector:NSSelectorFromString([self generateSetterFromProperty:key]) withObject:[componentDescriptor.parameters objectForKey:key]];
-                    });
-                }
-            }
-            
-        }
-    }
-}
 
 /**
  * @brief Creates and returns the view of an item of the pickerView
@@ -411,39 +198,6 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
         topLevelObjects = nil;
     }
     return returnView;
-}
-
-#pragma  mark - MFViewModelChangedListenerProtocol methods
-
--(void)dispatchEventOnViewModelPropertyValueChangedWithKey:(NSString *)keyPath sender:(MFUIBaseViewModel *)sender {
-    [self fillSelectedViewWithViewModel:[self getSelectedViewModel]];
-    
-}
-
-/**
- * @see MFFormListViewController.h
- */
--(void) dispatchEventOnComponentValueChangedWithKey:(NSString *)bindingKey atIndexPath:(NSIndexPath *)indexPath
-{
-    if([self.formBindingDelegate mutexForProperty:bindingKey]) {
-        
-        //Récupération et application du filtre ppour ce composant
-        MFValueChangedFilter applyFilter = [[self filtersFromFormToViewModel] objectForKey:bindingKey];
-        BOOL continueDispatch = YES;
-        if(applyFilter)
-            continueDispatch = applyFilter(bindingKey, [((MFUIBaseListViewModel *)[self getViewModel]).viewModels objectAtIndex:indexPath.row], self.binding);
-        
-        //Si la mise a jour n'est pas bloquée par le filtre
-        NSMutableArray *componentList = [[self.binding componentsAtIndexPath:indexPath withBindingKey:bindingKey] mutableCopy];
-        if(continueDispatch && componentList) {
-            for(id<MFUIComponentProtocol> component in componentList) {
-                [[self viewModelAtIndexPath:indexPath] setValue:[component getData] forKeyPath:bindingKey];
-            }
-        }
-    }
-    else {
-        [self releasePropertyFromMutex:bindingKey];
-    }
 }
 
 #pragma mark - ViewModels management
@@ -553,45 +307,6 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
         self.picker.staticView = self.picker.emptyStaticView ? self.picker.emptyStaticView : [[MFBindingViewAbstract alloc] init];
         [self.picker setNeedsDisplay];
     }
-    
-    //Récupération de la configuration de la vue
-    MFSectionDescriptor *currentSection = self.selectedViewFormDescriptor.sections[UNIQUE_PICKER_LIST_SECTION_INDEX];
-    MFGroupDescriptor *currentGd = nil;
-    if([viewModel isKindOfClass:[MFUIBaseViewModel class]]) {
-        currentGd = currentSection.orderedGroups[UNIQUE_PICKER_LIST_SECTION_INDEX];
-    }
-    
-    
-    //Réinitialisation de la vue
-    id<MFFormCellProtocol> formView = (id<MFFormCellProtocol>)self.picker.staticView;
-    ((MFBindingViewAbstract *)formView).formController = self;
-    //Style de la cellule
-    [formView configureByGroupDescriptor:currentGd andFormDescriptor:self.selectedViewFormDescriptor];
-    //    [((MFBindingViewAbstract *)formView) refreshComponents];
-    
-    //Traitement des champs de la vue statique
-    for( NSString *fieldName in self.picker.staticView.groupDescriptor.fieldNames) {
-        UIView<MFUIComponentProtocol> *component = [self.picker.staticView valueForKey:fieldName];
-        
-        id componentData =[(MFUIBaseViewModel *)viewModel valueForKey:((MFFieldDescriptor *)component.selfDescriptor).bindingKey];
-        componentData = [self applyConverterOnComponent:component forValue:componentData isFormToViewModel:NO];
-        
-        [component performSelector:@selector(setData:) withObject:componentData];
-        
-        //Traitement de chaque bindableProperties
-        for(NSString *bindablePropertyName in [self.bindableProperties allKeys]) {
-            NSString *valueType = [[self.bindableProperties objectForKey:bindablePropertyName] objectForKey:@"type"];
-            NSString *processingClass = [NSString stringWithFormat:@"MF%@ValueProcessing", [valueType capitalizedString]];
-            
-            id object = [((id<MFTypeValueProcessingProtocol>)[[NSClassFromString(processingClass) alloc] init]) processTreatmentOnComponent:component withViewModel:viewModel forProperty:bindablePropertyName fromBindableProperties:self.bindableProperties];
-            
-            NSString *selector = [self generateSetterFromProperty:bindablePropertyName];
-            
-            if(object) {
-                [self performSelector:NSSelectorFromString(selector) onComponent:component withObject:object];
-            }
-        }
-    }
 }
 
 
@@ -611,112 +326,6 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
 -(MFUIBaseViewModel *) getSelectedViewModel {
     MFUIBaseViewModel *selectedViewModel = [self.picker getData];
     return selectedViewModel;
-}
-
--(MFGroupDescriptor *) getGroupDescriptorAtIndexPath:(NSIndexPath *)indexPath {
-    return ((MFSectionDescriptor *)self.itemViewFormDescriptor.sections[indexPath.section]).orderedGroups[indexPath.row];
-}
-
-
-
-#pragma mark - Forwarding methods of Binding Form protocol
--(MFBinding *)binding {
-    return self.formBindingDelegate.binding;
-}
-
--(NSDictionary *)filtersFromViewModelToForm {
-    return self.formBindingDelegate.filtersFromViewModelToForm;
-}
-
--(NSDictionary *)filtersFromFormToViewModel {
-    return self.formBindingDelegate.filtersFromFormToViewModel;
-}
-
--(NSDictionary *)bindableProperties {
-    return self.formBindingDelegate.bindableProperties;
-}
-
--(NSMutableDictionary *)propertiesBinding {
-    return self.formBindingDelegate.propertiesBinding;
-}
-
--(void)setViewModel:(id<MFUIBaseViewModelProtocol>)viewModel {
-    self.formBindingDelegate.viewModel = viewModel;
-}
-
--(id<MFUIBaseViewModelProtocol>)viewModel {
-    return self.formBindingDelegate.viewModel;
-}
-
--(void)setBinding:(NSMutableDictionary *)mB {
-    [self.formBindingDelegate setBinding:mB];
-}
-
--(void)setFiltersFromFormToViewModel:(NSDictionary *)filters {
-    [self.formBindingDelegate setFiltersFromFormToViewModel:filters];
-}
-
--(void)setFiltersFromViewModelToForm:(NSDictionary *)filters {
-    [self.formBindingDelegate setFiltersFromViewModelToForm:filters];
-}
-
--(void)setPropertiesBinding:(NSMutableDictionary *)propertiesBinding {
-    [self.formBindingDelegate setPropertiesBinding:propertiesBinding];
-}
-
--(void)setBindableProperties:(NSDictionary *)bindableProperties {
-    [self.formBindingDelegate setBindableProperties:bindableProperties];
-}
-
-
-
-
--(BOOL)mutexForProperty:(NSString *)propertyName {
-    return  [self.formBindingDelegate mutexForProperty:propertyName];
-}
-
--(void)releasePropertyFromMutex:(NSString *)propertyName {
-    [self.formBindingDelegate releasePropertyFromMutex:propertyName];
-}
-
--(NSString *)bindingKeyWithIndexPathFromKey:(NSString *)key andIndexPath:(NSIndexPath *)indexPath {
-    return [self.formBindingDelegate bindingKeyWithIndexPathFromKey:key andIndexPath:indexPath];
-}
-
--(NSString *)bindingKeyFromBindingKeyWithIndexPath:(NSString *)key {
-    return [self.formBindingDelegate bindingKeyFromBindingKeyWithIndexPath:key];
-}
-
--(NSIndexPath *)indexPathFromBindingKeyWithIndexPath:(NSString *)key {
-    return [self.formBindingDelegate indexPathFromBindingKeyWithIndexPath:key];
-}
-
--(void)unregisterAllComponents {
-    return [self.formBindingDelegate unregisterAllComponents];
-}
-
--(NSString *)generateSetterFromProperty:(NSString *)propertyName {
-    return [self.formBindingDelegate generateSetterFromProperty:propertyName];
-}
-
--(void)performSelector:(SEL)selector onComponent:(UIView<MFUIComponentProtocol> *)component withObject:(id)object {
-    [self.formBindingDelegate performSelector:selector onComponent:component withObject:object];
-}
-
--(id)applyConverterOnComponent:()component forValue:(id)value isFormToViewModel:(BOOL)formToViewModel {
-    return [self.formBindingDelegate applyConverterOnComponent:component forValue:value isFormToViewModel:formToViewModel];
-}
-
--(id)applyConverterOnComponent:()component forValue:(id)value isFormToViewModel:(BOOL)formToViewModel withViewModel:(id<MFUIBaseViewModelProtocol>)viewModel {
-    return [self.formBindingDelegate applyConverterOnComponent:component forValue:value isFormToViewModel:formToViewModel withViewModel:viewModel];
-}
-
--(NSDictionary *)getFiltersFromViewModelToForm {
-    return [NSDictionary dictionary];
-}
-
--(NSDictionary *)getFiltersFromFormToViewModel {
-    return [NSDictionary dictionary];
 }
 
 -(MFUIBaseListViewModel *) pickerListViewModel {

@@ -14,89 +14,147 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#import <Foundation/Foundation.h>
+#import "MFBindingDictionary.h"
+
+@class MFOneWayBindingValue;
+@class MFBindingValue;
+@class MFAbstractComponentWrapper;
+
 
 /*!
- * @brief This structure defines the mode of the binding
- * MFBindingModeForm : The binding will register all components in with a fake indexPath [0;0]
- * MFBindingModeList : The binding will register all components with thier given binding and indexPath
+ * @class MFBinding
+ * @brief This class is the main structure of binding. It is used each time a controller, a component
+ * or another object need binding.
+ * @discussion It registers binding pairs called MFBindingValue in 3 different dictionaries : 
+ * The first one sort binding values on ViewModel properties name, the second on components hash
+ * and the third on cell string-format binding keys.
+ * @discussion This structure is necessary to get binding values faster following the object
+ * that needs it to do the binding.
+ * @see MFBindingValue
  */
-typedef enum {
-    MFBindingModeForm = 0,
-    MFBindingModeList =1
-} MFBindingMode;
-
-
-
 @interface MFBinding : NSObject
 
 #pragma mark - Properties
+/*!
+ * @brief The dictionary that sort binding values of the binding on ViewModel properties names.
+ */
+@property (nonatomic, strong, readonly) NSMutableDictionary *bindingByViewModelKeys;
 
 /*!
- * Defines the current binding mode.
- * The values must be : 
- * MFBindingModeForm : The binding binds components of a simple form. All the binding will be in a dictionary pointed with a fake indexpath.
- * MFBindingModeList : The binding is classic (A dictionary for the indexPath, another one for the bindingKeys).
+ * @brief the dictionary that sort binding values on components hash
  */
-@property (nonatomic) MFBindingMode bindingMode;
+@property (nonatomic, strong, readonly) NSMutableDictionary *bindingByComponents;
 
+/*!
+ * @brief The binding dictionary that sort binding values on cell string-format binding keys
+ */
+@property (nonatomic, strong, readonly) NSMutableDictionary *bindingByBindingKeys;
 
 #pragma mark - Methods
 
 /*!
- * @brief Returns a dictionary of binded components for a given indexPath
- * @param indexPath The indexPath of the binded cell or view we want to retrieve components
- * @return A dictionary of binded components for the given indexPath or nil if no components have already been registered
- * for this indexPath
+ * @brief Register a new binding value
+ * @discussion The binding value is registered in the 2 first dictionaries 
+ * (by ViewModel properties names and by component hash)
+ * @param bindingValue the new Binding value to register
  */
--(NSDictionary *) componentsDictionaryAtIndexPath:(NSIndexPath *)indexPath;
+-(void) registerBindingValue:(MFBindingValue *)bindingValue;
 
 /*!
- * @brief Returns an array of binded components for a given indexPath
- * @param indexPath The indexPath of the binded cell or view we want to retrieve components
- * @return An array of binded components for the given indexPath or nil if no components have already been registered
- * for this indexPath
+ * @brief Register a new binding value
+ * @discussion The binding value is registered in the 3 dictionaries
+ * @param bindingValue the new Binding value to register
+ * @param bindingKey The cell string-format binding key to use to register the given binding value
  */
--(NSArray *) componentsArrayAtIndexPath:(NSIndexPath *)indexPath;
+-(void) registerBindingValue:(MFBindingValue *)bindingValue forBindingKey:(NSString *)bindingKey;
 
 /*!
- * @brief Returns  an array of binded components given by their cellContainer indexPath and  binding key
- * @param indexPath The indexPath of the binded cell or view we want to retrieve components
- * @param bindingKey The binding key of the components to retrieve
- * @return Binded components for the given indexPath and bindingKey, or nil if no components have already been registered
- * for this bindingKey or indexPath
- */
--(NSArray *) componentsAtIndexPath:(NSIndexPath *)indexPath withBindingKey:(NSString *)bindingKey;
+* @brief Clears a binding value following the given cell string-format binding key
+* @discussion The binding value is removed from all dictionarires
+* @param bindingKey A cell string-format binding key
+*/
+-(void) clearBindingValuesForBindingKey:(NSString *)bindingKey;
 
 /*!
- * @brief Returns  an array of binded components given by thier binding key. This method must be used in MFBindingModeForm ONLY.
- * @param bindingKey The binding key of the components to retrieve
- * @return Binded components for the given bindingKey, or nil if no components have already been registered
- * for this bindingKey
+ * @brief Clears a binding value following the given component has
+ * @discussion The binding value is removed from all dictionarires
+ * @param bindingKey An existing component hash
  */
--(NSArray *) componentsWithBindingKey:(NSString *)bindingKey;
+-(void) clearBindingValuesForComponentHash:(NSNumber *)componentHash;
 
-/*!
- * @brief Registers a an array of components with given indexPath and bindingKeys
- * @param componentList The list of components to register in the binding
- * @param indexPath The indexPath used to register the components in the binding
- * @param bindingKey The bindingKey to use to register the components in the binding
- * @return The list of the new registered components. This list could be different of the given "componentList" if some of
- * components were alreadey registered in the binding.
- */
--(NSArray *) registerComponents:(NSArray *)componentList atIndexPath:(NSIndexPath *)indexPath withBindingKey:(NSString *)bindingKey;
+@end
+
+
+
 
 
 /*!
- * @brief Removes all registered components from the binding for a specified indexPath or bindingKey
- * @param indexPath The indexPath we will remove components
- * @param bindingKey The bindingKey we will remove components
+ * @class MFBindingValue
+ * @brief An object that represents a binding value
  */
--(void) unregisterComponentsAtIndexPath:(NSIndexPath *)indexPath withBindingKey:(NSString *)bindingKey;
+@interface MFBindingValue : NSObject
+
+#pragma mark - Properties
+/*!
+ * @brief The indexPath to the component to bind.
+ * @brief A component has not direclty an indexPath property, but it is considered that a component
+ * has the same indexPath that the cell that declare it. If the component is not in a cell (like in 
+ * NoTableView forms), MDK iOS generates a fake indexPath for this component.
+ */
+@property (nonatomic, strong) NSIndexPath *bindingIndexPath;
 
 /*!
- * @brief Remove all objects in the binding
+ * @brief The property name of the component to bind
  */
--(void) clear;
+@property (nonatomic, strong) NSString *componentBindedPropertyName;
 
+/*!
+ * @brief The wrapper of the component to bind
+ */
+@property (nonatomic, strong) MFAbstractComponentWrapper *wrapper;
+
+/*!
+ * @brief The binding mode for this binding value
+ */
+@property (nonatomic) MFBindingValueMode bindingMode;
+
+/*!
+ * @brief The View Model property name to bind
+ */
+@property (nonatomic, strong) NSString *abstractBindedPropertyName;
+
+/*!
+ * @brief The component outlet name to bind
+ */
+@property (nonatomic, strong) NSString *componentOutletName;
+
+/*!
+ * @brief The source of binding
+ */
+@property (nonatomic) MFBindingSource bindingSource;
+
+#pragma mark - Methods
+
+/*!
+ * @brief Initializes a new binding filled with the given parameters and returns it to the caller
+ * @param componentWrapper The wrapper of the component to bind
+ * @param bindingMode The binding mode that is used for this binding value
+ * @param vmBindedPropertyName the View Model property name to bind to a component
+ * @param componentOutletName The Outlet name of the component to bien
+ * @return The new MFOneWayBindingValue built instance
+ */
+-(instancetype) initWithWrapper:(MFAbstractComponentWrapper *)componentWrapper withBindingMode:(MFBindingValueMode)bindingMode withVmBindedPropertyName:(NSString *)vmBindedPropertyName withComponentOutletName:(NSString *)componentOutletName fromSource:(MFBindingSource)bindingSource;
+
+/*!
+ * @brief Initializes a new binding filled with the given parameters and returns it to the caller
+ * @param componentWrapper The wrapper of the component to bind
+ * @param bindingMode The binding mode that is used for this binding value
+ * @param vmBindedPropertyName the View Model property name to bind to a component
+ * @param componentBindedPropertyName The property name of the component to bind
+ * @param componentOutletName The Outlet name of the component to bien
+ * @return The new MFOneWayBindingValue built instance
+ */
+-(instancetype) initWithWrapper:(MFAbstractComponentWrapper *)componentWrapper withBindingMode:(MFBindingValueMode)bindingMode withVmBindedPropertyName:(NSString *)vmBindedPropertyName withComponentBindedPropertyName:(NSString *)componentBindedPropertyName withComponentOutletName:(NSString *)componentOutletName fromSource:(MFBindingSource)bindingSource;
 
 @end

@@ -49,6 +49,7 @@
 @synthesize currentOrientation = _currentOrientation;
 @synthesize mandatory = _mandatory;
 @synthesize textView = _textView;
+@synthesize targetDescriptors = _targetDescriptors;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -67,7 +68,6 @@
     self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
     self.textView.delegate = self;
     self.textView.userInteractionEnabled = YES;
-
     self.textView.keyboardType = UIKeyboardTypeDefault;
     
     self.isValid = YES;
@@ -157,7 +157,6 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
     
-    [self updateValue];
     
     //Correction d'un bug sur iOS 7 : la text view ne scroll pas jusqu'à la dernière ligne lorsqu'on insère
     //une nouvelle ligne et que la hauteur du bloc de texte dépasse la hauteur de la zone de saisie (le texte qui est
@@ -177,6 +176,7 @@
             [textView setContentOffset:offset];
         }];
     }
+    [self valueChanged:textView];
 }
 
 
@@ -193,7 +193,6 @@
         self.textView.text = @"";
         //Mise à jour du view modèle car la méthode de delegate textViewDidChange n'est pas appelée lorsque la valeur du texte
         //est modifiée programmaticallement
-        [self updateValue];
     }
 }
 
@@ -211,10 +210,6 @@
     }
 }
 
-
--(void) updateValue {
-    [self.sender performSelectorOnMainThread: @selector(updateValue:) withObject:self.textView.text waitUntilDone:YES];
-}
 
 -(void)layoutSubviews {
     [super layoutSubviews];
@@ -285,18 +280,18 @@
     // We search the component's errors
     if(self.mf.minLength != nil && [self.mf.minLength integerValue] > length)
     {
-        error = [[MFTooShortStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        error = [[MFTooShortStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         [self addErrors:@[error]];
         nbOfErrors++;
     }
     if(self.mf.maxLength != nil && [self.mf.maxLength integerValue] != 0 && [self.mf.maxLength integerValue] < length)
     {
-        error = [[MFTooLongStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        error = [[MFTooLongStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         [self addErrors:@[error]];
         nbOfErrors++;
     }
     if(self.mandatory != nil && [self.mandatory integerValue] == 1 && [self getValue].length == 0){
-        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         [self addErrors:@[error]];
         nbOfErrors++;
     }
@@ -429,7 +424,6 @@
     if(self.form && self.keyboardHeight != 0) {
         CGFloat offset = 0;
         
-        [((MFBaseBindingForm *)self.form) setActiveField:self];
         while( currentView && ![@(currentView.tag) isEqualToNumber:@(FORM_BASE_TABLEVIEW_TAG)]) {
             
             offset += currentView.frame.origin.y;
@@ -504,6 +498,19 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - Value Changed targets
 
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+    commonCCTD.target = target;
+    commonCCTD.action = action;
+    self.targetDescriptors = @{@(self.textView.hash) : commonCCTD};
+}
+
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
+}
 
 @end
+

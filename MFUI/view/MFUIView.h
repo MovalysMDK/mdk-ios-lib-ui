@@ -26,5 +26,6 @@
 #import "MFBindingViewAbstract.h"
 #import "MFFormSectionHeaderView.h"
 #import "MFForm3DHeaderViewControls.h"
+#import "UIView+ViewController.h"
 
 #endif

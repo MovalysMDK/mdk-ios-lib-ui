@@ -32,9 +32,7 @@
 
 // Synthesizing protocols properties (Auto synthesizing will not work for protocol properties)
 @synthesize transitionDelegate = _transitionDelegate;
-@synthesize formDescriptor = _formDescriptor;
 @synthesize cellIndexPath = _cellIndexPath;
-@synthesize groupDescriptor = _groupDescriptor;
 @synthesize formController = _formController;
 @synthesize hasChanged = _hasChanged;
 @synthesize defaultConstraints = _defaultConstraints;
@@ -112,47 +110,7 @@
 -(void) initialize {
     self.hasChanged = NO;
     self.translatesAutoresizingMaskIntoConstraints = YES;
-    self.mf = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_FORM_EXTEND];
 //    self.contentView.userInteractionEnabled = NO;
-}
-
-
-#pragma mark - Not implemented
-
-
-/**
- * Don't implement this function here.
- * Create a new class which inherites this class and implements this function.
- */
--(void)configureByGroupDescriptor:(MFGroupDescriptor*) groupDescriptor
-                andFormDescriptor:(MFFormDescriptor *) formDescriptor
-
-{
-    
-    //Comparaison du groupDescriptor actuel avec celui passé en paramètre.
-    if(![self.groupDescriptor.name isEqual:groupDescriptor.name])
-    {
-        self.hasChanged = YES;
-    }
-    
-    self.hasChanged = YES;
-    // Cell
-    self.groupDescriptor = groupDescriptor;
-    
-    for( MFFieldDescriptor *fieldDesc in self.groupDescriptor.fields) {
-        id<MFUIComponentProtocol> field =  [self valueForKey:fieldDesc.cellPropertyBinding];
-        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-            [((UIView<MFUIComponentProtocol> *)field) setTranslatesAutoresizingMaskIntoConstraints:YES];
-        }
-        field.localizedFieldDisplayName = groupDescriptor.getFieldDescriptorLabel.getLabel;
-        // Descriptor
-        field.selfDescriptor = fieldDesc;
-        //        field.formDescriptor = formDescriptor;
-        field.groupDescriptor = groupDescriptor;
-        
-    }
-    self.formDescriptor = formDescriptor;
-    
 }
 
 -(void) cellIsConfigured {
@@ -160,111 +118,8 @@
 }
 
 
--(NSMutableDictionary *)registerComponent:(id<MFBindingFormDelegate>)formController {
-    
-    //Enregistrement si le composant n'existe pas déja
-    if(self.hasChanged) {
-        self.hasChanged = NO;
-    }
-    else {
-        return nil;
-    }
-    
-    NSMutableDictionary *returnDictionary = [NSMutableDictionary dictionary];
-    
-    for( NSString *fieldName in self.groupDescriptor.fieldNames) {
-        id<MFUIComponentProtocol> field = [self valueForKey:fieldName];
-        if ( field != nil) {
-            [returnDictionary addEntriesFromDictionary:[self addComponent:field
-                                                          toBindingOnForm:formController]];
-            [self registerBindablePropertiesFromComponent:field
-                                toPropertiesBindingOnForm:formController];
-        }
-    }
-    
-    return returnDictionary;
-}
-
--(NSDictionary *) addComponent:(id<MFUIComponentProtocol>) component
-               toBindingOnForm:(id<MFBindingFormDelegate>) formController {
-    NSDictionary *result = [NSDictionary dictionary];
-    if(component) {
-        if([component conformsToProtocol:@protocol(MFUIComponentProtocol)]) {
-            [component setCellContainer:self];
-        }
-        
-        //Récupération de la bindingKey et paramétrage du composant
-        NSString *bindingKey = ((MFFieldDescriptor *) component.selfDescriptor).bindingKey;
-        [component setForm:(id<MFComponentChangedListenerProtocol>)formController];
-        [component setComponentInCellAtIndexPath:self.cellIndexPath];
-        
-        //Enregistrement du composant dans le binding
-        NSArray *newRegisteredComponents = [formController.binding registerComponents:@[component] atIndexPath:self.cellIndexPath withBindingKey:bindingKey];
-        
-        //On retourne le résultat
-        if(newRegisteredComponents) {
-            result = [NSDictionary dictionaryWithObject:newRegisteredComponents forKey:bindingKey];
-        }
-    }
-    return result;
-}
 
 
-
--(void) registerBindablePropertiesFromComponent:(id<MFUIComponentProtocol>) component
-                      toPropertiesBindingOnForm:(id<MFBindingFormDelegate>) formController {
-    
-    MFFieldDescriptor *componentDescriptor = ((MFFieldDescriptor *) component.selfDescriptor);
-    // On parcourt la liste des propriétés candidates au propertyBinding.
-    // Cette liste de propriétés bindables est définie dans le Framework.plist
-    for(NSString *bindableProperty in [formController.bindableProperties allKeys]) {
-        
-        NSString *bindablePropertyValue = [componentDescriptor valueForKey:bindableProperty];
-        if(bindablePropertyValue) {
-            
-            //Si la valeur de la propriété bindable est correcte
-            if([self isBindablePropertyValueCorrect:bindablePropertyValue forProperty:bindableProperty fromFormController:formController]) {
-                
-                // Récupération des champs actuellement bindés à cette propriété
-                NSMutableDictionary * registeredComponentsForThisProperty = [formController.propertiesBinding objectForKey:bindablePropertyValue];
-                
-                //S'il n'y en a pas on crée un nouveau dictionnaire
-                if(!registeredComponentsForThisProperty) {
-                    registeredComponentsForThisProperty = [NSMutableDictionary dictionary];
-                }
-                
-                if(bindableProperty && componentDescriptor) {
-                    MFBindingComponentDescriptor * bindingDescriptor = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_BINDING_COMPONENT_DESCRIPTOR];
-                    bindingDescriptor.bindableProperty = bindableProperty;
-                    bindingDescriptor.componentDescriptor = componentDescriptor;
-                    
-                    [registeredComponentsForThisProperty setObject:bindingDescriptor forKey:componentDescriptor.name];
-                }
-                
-                [formController.propertiesBinding setObject:registeredComponentsForThisProperty forKey:bindablePropertyValue];
-            }
-        }
-    }
-}
-
-
-
--(BOOL) isBindablePropertyValueCorrect:(NSString *) valueOfBindableProperty forProperty:(NSString *) property fromFormController:(id<MFBindingFormDelegate>) formController{
-    BOOL result = YES;
-    
-    NSArray * listOfAuthorizedValue = [[[formController.bindableProperties objectForKey:property]  objectForKey:MFATTR_RECOGNIZED_VALUES ] componentsSeparatedByString:@";"];
-    
-    if([listOfAuthorizedValue containsObject:valueOfBindableProperty])
-        result = NO;
-    
-    return result;
-}
-
--(void)unregisterComponents:(id<MFBindingFormDelegate>)formController {
-    for( MFFieldDescriptor *fieldDesc in self.groupDescriptor.fields) {
-        [formController.binding unregisterComponentsAtIndexPath:self.cellIndexPath withBindingKey:fieldDesc.bindingKey];
-    }
-}
 
 #pragma mark - MFUITransitionDelegate implementation
 
@@ -279,12 +134,6 @@
     return nil;
 }
 
--(void) refreshComponents {
-    for( NSString *fieldName in self.groupDescriptor.fieldNames) {
-       UIView<MFUIComponentProtocol> *component = [self valueForKey:fieldName];
-        [component setData:nil];
-    }
-}
 
 
 

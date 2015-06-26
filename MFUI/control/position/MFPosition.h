@@ -27,14 +27,14 @@
 #import "MFUIOldBaseComponent.h"
 #import "MFTextField.h"
 #import "MFDoubleTextField.h"
-
+#import "MFControlChangesProtocol.h"
 
 /*!
  * @class MFPosition
  * @brief Custom control to display geo-position (latitude and longitude).
  * @discussion
  */
-@interface MFPosition : MFUIOldBaseComponent<MFUIComponentProtocol, CLLocationManagerDelegate>
+@interface MFPosition : MFUIOldBaseComponent<MFUIComponentProtocol, CLLocationManagerDelegate, MFControlChangesProtocol>
 
 #pragma mark - Properties
 /*!
@@ -52,5 +52,6 @@
  */
 @property(nonatomic, strong) MFDoubleTextField *longitude;
 
-
 @end
+
+

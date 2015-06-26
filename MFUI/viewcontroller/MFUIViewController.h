@@ -39,5 +39,8 @@
 #import "MFUIViewControllerSplash.h"
 #import "MFUIViewControllerTransition.h"
 
+#import "MFViewControllerAttributes.h"
+
+
 
 #endif

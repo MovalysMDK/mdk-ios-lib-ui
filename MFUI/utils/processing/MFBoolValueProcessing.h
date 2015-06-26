@@ -16,6 +16,7 @@
 
 
 #import "MFTypeValueProcessingProtocol.h"
+@protocol MFTypeValueProcessingProtocol;
 
 @interface MFBoolValueProcessing : NSObject <MFTypeValueProcessingProtocol>
 

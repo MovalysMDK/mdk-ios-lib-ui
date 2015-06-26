@@ -57,6 +57,7 @@
 @implementation MFPhotoThumbnail
 
 @synthesize photoViewModel;
+@synthesize targetDescriptors = _targetDescriptors;
 
 /**
  * @brief Nom du storyboard à appeler pour afficher le composant Photo
@@ -83,6 +84,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 -(void)initialize {
     [super initialize];
     
+    
+    
+    
     //Ajout des éléments du composant
     self.isInitialized = NO;
     self.photoImageView = [[UIImageView alloc] init];
@@ -90,7 +94,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
     UIImage* image = [UIImage imageNamed:[self defaultImage]];
     self.photoImageView.image = image;
-    
     self.dateLabel = [[UILabel alloc] init];
     self.dateLabel.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -107,13 +110,20 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [self addSubview:self.dateLabel];
     [self addSubview:self.titreLabel];
     [self addSubview:self.descriptionLabel];
-        
+    
+    
     //Ajout de l'action de clic sur le composant
     [self addTarget:self action:@selector(displayManagePhotoView:) forControlEvents:(UIControlEventTouchUpInside)];
     
     
     //Empêche l'affichage de l'image "composant invalide" dans la liste
     self.isValid = YES;
+    
+    //        //Define constraints
+    [self definePhotoConstraints];
+    [self defineDateLabelConstraints];
+    [self defineDescriptionLabelConstraints];
+    [self defineTitreLabelConstraints];
 }
 
 #pragma mark - Define constraints
@@ -243,20 +253,21 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void) displayManagePhotoView: (id)sender
 {
     
+    //PROTODO : parameters stroyboard an dcontroller
     //Getting the descriptor
-    MFFieldDescriptor *mfFieldDescriptor = (MFFieldDescriptor *)self.selfDescriptor;
+    //    MFFieldDescriptor *mfFieldDescriptor = (MFFieldDescriptor *)self.selfDescriptor;
     
     NSString *storyboardName = nil;
     NSString *managePhotoControllerName = nil;
     
     //If the descriptor exists
-    if (mfFieldDescriptor)
-    {
-        //Getting the story board to display
-        storyboardName = [mfFieldDescriptor.parameters objectForKey:@"storyboard"];
-        //Getting the view controller name
-        managePhotoControllerName = [mfFieldDescriptor.parameters objectForKey:@"controller"];
-    }
+    //    if (mfFieldDescriptor)
+    //    {
+    //        //Getting the story board to display
+    //        storyboardName = [mfFieldDescriptor.parameters objectForKey:@"storyboard"];
+    //        //Getting the view controller name
+    //        managePhotoControllerName = [mfFieldDescriptor.parameters objectForKey:@"controller"];
+    //    }
     
     //If the storyboard isn't specified
     if (storyboardName == nil || storyboardName.length == 0)
@@ -301,12 +312,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     return newPhotoViewModel;
 }
 
-/**
- * Mise à jour de la valeur du composant
- */
--(void) updateValue {
-    [self performSelectorOnMainThread: @selector(updateValue:) withObject:self.photoViewModel waitUntilDone:YES];
-}
+
 
 #pragma mark - Inherited methods from MFUIComponentProtocol
 
@@ -324,7 +330,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             MFPhotoViewModel *viewModel = (MFPhotoViewModel *)data;
             self.dateLabel.text = [viewModel getDateStringFormat:@"dd/MM/yyyy HH:mm"];
             self.titreLabel.text = viewModel.titre;
-            self.descriptionLabel.text = viewModel.description;
+            self.descriptionLabel.text = viewModel.descr;
             
             //Si une URI de photo est spécifiée
             if (viewModel.uri != nil && ![viewModel.uri isEqualToString:@""])
@@ -407,7 +413,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 -(void)setDataAfterEdition:(id)data {
     [self setData:data];
-    [self updateValue];
+    [self valueChanged:self.photoImageView];
 }
 
 
@@ -432,7 +438,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     if([self.mandatory isEqualToNumber:@1] && !self.photoViewModel.uri) {
         
         NSError *error = [[MFMandatoryFieldUIValidationError alloc]
-                          initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+                          initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         
         [self addErrors:@[error]];
         nbOfErrors++;
@@ -441,29 +447,46 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 -(NSString *) defaultImage {
-    NSString *defaultImageName = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"defaultImage"];
-    return defaultImageName ? defaultImageName : DEFAUT_NO_PHOTO_IMAGE;
+    
+    //PROTODO : parameter defaultImage
+    return nil;
 }
 
 
-
--(void)setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor {
-    [super setSelfDescriptor:selfDescriptor];
-    if(!self.isInitialized) {
-        BOOL showDetails = [[((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"showDetails"] boolValue];
-        
-        self.dateLabel.hidden = !showDetails;
-        self.descriptionLabel.hidden = !showDetails;
-        self.titreLabel.hidden = !showDetails;
-        
-        //Define constraints
-        [self definePhotoConstraints];
-        [self defineDateLabelConstraints];
-        [self defineDescriptionLabelConstraints];
-        [self defineTitreLabelConstraints];
-        
-        self.isInitialized = YES;
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    if(![target isEqual:self]) {
+        MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+        commonCCTD.target = target;
+        commonCCTD.action = action;
+        self.targetDescriptors = @{@(self.photoImageView.hash) : commonCCTD};
+    }
+    else {
+        [super addTarget:target action:action forControlEvents:controlEvents];
     }
 }
+
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
+}
+
+
+
+//PROTODO : revoir selfdescriptor
+
+//-(void)setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor {
+//    [super setSelfDescriptor:selfDescriptor];
+//    if(!self.isInitialized) {
+//        BOOL showDetails = [[((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"showDetails"] boolValue];
+//
+//        self.dateLabel.hidden = !showDetails;
+//        self.descriptionLabel.hidden = !showDetails;
+//        self.titreLabel.hidden = !showDetails;
+//
+
+//
+//        self.isInitialized = YES;
+//    }
+//}
 
 @end

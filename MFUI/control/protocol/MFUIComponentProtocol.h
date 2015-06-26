@@ -26,26 +26,30 @@
 #import "MFFormCellProtocol.h"
 #import "MFComponentBindingProtocol.h"
 
-#import  "MFComponentBindingDelegate.h"
+#import "MFCommonControlDelegate.h"
+
 #import "MFComponentErrorProtocol.h"
 #import "MFComponentPropertiesProtocol.h"
 #import "MFComponentValidationProtocol.h"
+#import "MFComponentAttributesProtocol.h"
+#import "MFComponentAssociatedLabelProtocol.h"
+
 #import "UIView+Styleable.h"
 
-@protocol MFUIGroupedElementCommonProtocol;
-@protocol MFStyleProtocol;
-@protocol MFFormCellProtocol;
+#import "MFStyleProtocol.h"
+#import "MFFormCellProtocol.h"
+
 
 
 /*!
  * This protocol is used by the MOVALYS Generic Form to fit the process to the UI component.
  * All MOVALYS UI element must implement this protocol.
  */
-@protocol MFUIComponentProtocol <MFUIGroupedElementCommonProtocol, MFComponentBindingProtocol, MFComponentErrorProtocol, MFComponentPropertiesProtocol, MFComponentValidationProtocol>
+@protocol MFUIComponentProtocol < MFComponentBindingProtocol, MFComponentErrorProtocol, MFComponentPropertiesProtocol, MFComponentValidationProtocol, MFComponentAttributesProtocol, MFComponentAssociatedLabelProtocol>
 
 #pragma mark - Properties
 
-@property (nonatomic, strong) MFComponentBindingDelegate *bindingDelegate;
+@property (nonatomic, strong) MFCommonControlDelegate *controlDelegate;
 
 /*!
  * @brief UI control display name.
@@ -75,7 +79,7 @@
 /*!
  * @brief The instance of the style lass to use to render the component style.
  */
-@property (nonatomic, strong) id<MFStyleProtocol> styleClass;
+@property (nonatomic, strong) NSObject<MFStyleProtocol> *styleClass;
 
 /*!
  * @brief Indicates if the component self-validation is active
@@ -101,17 +105,6 @@
  * Cell container
  */
 @property (nonatomic, weak) id<MFFormCellProtocol> cellContainer;
-
-
-
-#pragma mark - Methods
-
-/*!
- * @brief Callback called when the Field Descriptor of the component has been loaded by the framework.
- * @discussion You should use this methods to be sure to have a full-initialized FieldDescriptor.
- * @param fieldDescriptor The FieldDescriptor of the component that has been loaded by the framework
- */
--(void) didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor;
 
 
 @end

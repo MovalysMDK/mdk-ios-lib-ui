@@ -30,13 +30,14 @@
 
 #import "MFUIOldBaseComponent.h"
 #import "MFUIBaseComponent.h"
+#import "MFControlChangesProtocol.h"
 
 
 /*!
  * TextView component permit the input of a multiline text
  */
 
-@interface MFTextView : MFUIOldBaseComponent<UITextViewDelegate, MFOrientationChangedProtocol>
+@interface MFTextView : MFUIOldBaseComponent<UITextViewDelegate, MFOrientationChangedProtocol, MFControlChangesProtocol>
 
 #pragma mark - Properties
 

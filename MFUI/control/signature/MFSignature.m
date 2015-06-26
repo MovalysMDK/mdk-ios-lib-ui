@@ -59,6 +59,7 @@
 @synthesize strokeColor = _strokeColor;
 @synthesize signaturePath = _signaturePath;
 @synthesize cellContainer = _cellContainer;
+@synthesize targetDescriptors = _targetDescriptors;
 #define SIGNATURE_DRAWING_WIDTH 240
 #define SIGNATURE_DRAWING_HEIGHT 160
 
@@ -74,6 +75,7 @@
     _strokeColor = [UIColor blackColor];
     
     self.isModalSignatureDrawingDisplayed = NO;
+    
     
     CGRect frame = CGRectMake(self.frame.origin.x, self.frame.origin.y,
                                SIGNATURE_DRAWING_WIDTH, SIGNATURE_DRAWING_HEIGHT);
@@ -343,8 +345,8 @@
     [self setData:[MFSignatureHelper convertFromLinesToString:self.signature.signaturePath
                                                         width:self.signature.bounds.size.width
                                                       originX:0 originY:0]];
-    [self updateValue];
     [self hideModalSignatureDrawingView];
+    [self valueChanged:self];
 }
 
 - (void) dismissSignatureViewAndCancel {
@@ -411,18 +413,29 @@
     return self.data;
 }
 
--(void) updateValue {
-    [self performSelectorOnMainThread: @selector(updateValue:) withObject:self.data waitUntilDone:YES];
-}
 
 -(NSInteger)validateWithParameters:(NSDictionary *)parameters {
     int numberOfErrors = [super validateWithParameters:parameters];
     if([self.mandatory isEqualToNumber:@1] && [[self getData] isEqualToString:[MFSignatureHelper convertFromLinesToString:@[] width:1 originX:0 originY:0]]) {
-        MFMandatoryFieldUIValidationError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+        MFMandatoryFieldUIValidationError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         [self addErrors:@[error]];
         numberOfErrors++;
     }
     return numberOfErrors;
+}
+
+#pragma mark - Value Changed targets
+
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+    commonCCTD.target = target;
+    commonCCTD.action = action;
+    self.targetDescriptors = @{@(self.hash) : commonCCTD};
+}
+
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
 }
 
 @end

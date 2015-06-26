@@ -24,7 +24,6 @@
 
 
 //MFCore
-#import <MFCore/MFCoreFormDescriptor.h>
 #import <MFCore/MFCoreBean.h>
 #import <MFCore/MFCoreError.h>
 
@@ -43,6 +42,9 @@
 //Tooltip
 #import "MFUIControlTooltip.h"
 #import "MFUIError.h"
+
+
+@protocol MFUIComponentProtocol;
 
 //Framework constants
 
@@ -172,35 +174,11 @@
 -(void)toggleErrorInfo;
 
 /*!
- * @brief Chargement des configurations
- * @param Le nom de la configuration à charger
- * @return Une configuration
- */
--(MFConfigurationUIComponent *) loadConfiguration:(NSString *) configurationName;
-
-/*!
- * @brief Cette méthode est appelée dès que la valeur du composant est modifiée.
- * Elle permet la synchronisation du formulaire avec le ViewModel
- * @return Un block dont le code est exécuté dès que la valeur du champ est modifiée
- */
--(void)updateValue:(id) newValue;
-
-/*!
  * @brief This method is called after the STYLE has been applied to the component and the subcomponents of its method.
  * You can do some customizations here on the component
  */
 -(void) selfCustomization;
 
-/*!
- * @brief This method is called after the selfDescriptor has been set
- */
--(void) didFinishLoadDescriptor __attribute__((deprecated("Use method didLoadFieldDescriptor: instead")));
-
-/*!
- * @brief This method is called after the selfDescriptor has been set
- * @param fieldDescriptor The complete fieldDescriptor of this component
- */
--(void) didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor;
 
 /*!
  * @brief Set the parameters for this component

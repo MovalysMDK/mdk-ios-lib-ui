@@ -17,10 +17,8 @@
 
 #import "MFFormWithDetailViewControllerProtocol.h"
 #import "MFUITransitionDelegate.h"
-#import "MFUIElementCommonProtocol.h"
 #import "MFUIBaseListViewModel.h"
 #import "MFFormViewController.h"
-#import "MFFormExtend.h"
 #import "MFDefaultViewModelCreator.h"
 #import "MFListViewControllerProtocol.h"
 
@@ -49,16 +47,6 @@
  * @brief The list of the section viewModels
  */
 @property (nonatomic, strong) NSArray *sectionsViewModelList;
-
-/*!
- * @brief The section descriptor used to inflate and bind the section view
- */
-@property (nonatomic, strong) MFFormDescriptor *sectionDescriptor;
-
-/*!
- * @brief The cellDescriptor used to inflate and bind a cell
- */
-@property (nonatomic, strong) MFFormDescriptor *cellDescriptor;
 
 /*!
  * @brief A dictionary containing the current state (opened or closed) for each section of the tableView
@@ -117,36 +105,6 @@
 -(void) setDataOnView:(id<MFFormCellProtocol>)cell withOptionalViewModel:(id<MFUIBaseViewModelProtocol>)viewModel;
 
 /*!
- * @brief Cette méthode permet à l'utilisateur d'ajouter des filtres pour la synchronisation des données
- * depuis le formulaire vers le ViewModel
- * @param filters Les filtres sous forme d'un dictionnaire contenant des @see(MFValueChangedFilter)
- */
--(void) completeFiltersFromFormToViewModel:(NSDictionary*)filters;
-
-/*!
- * @brief Cette méthode permet à l'utilisateur d'ajouter des filtres pour la synchronisation des données
- * depuis le ViewModel vers le formulaire
- * @param filters Les filtres sous forme d'un dictionnaire contenant des @see(MFValueChangedFilter)
- */
--(void) completeFiltersFromViewModelToForm:(NSDictionary*)filters;
-
-/*!
- * @brief Cette méthode doit définir et retourner une liste de filtres à appliquer lorsque
- * la synchronisation d'une donnée se fait depuis le ViewModel vers le formulaire. La clé du dictionnaire
- * est le keyPath du champ, et sa valeur est un ^MFValueChangedFilter
- * @return Un dictionnaire contenant des définitions de filtres pour certains champs
- */
--(NSDictionary*) getFiltersFromViewModelToForm;
-
-/*!
- * @brief Cette méthode doit définir et retourner une liste de filtres à appliquer lorsque
- * la synchronisation d'une donnée se fait depuis le Formulaire vers le ViewModel. La clé du dictionnaire
- * est le keyPath du champ, et sa valeur est un ^MFValueChangedFilter
- * @return Un dictionnaire contenant des définitions de filtres pour certains champs
- */
--(NSDictionary*) getFiltersFromFormToViewModel;
-
-/*!
  * @brief Cette méthode permet de faire les initialisations nécessaires au bon fonctionnement du controller
  * Cette méthode devra notamment être implémentée par l'utilisateur dans son propre FormViewController afin qu'il
  * définisse le viewModel associé à son propre FormViewcontroller.
@@ -181,11 +139,6 @@
  */
 -(void)closeSectionAtIndex:(NSNumber *)section;
 
-/*!
- * @brief Allow to laod a descriptor specified by its name
- * @param descriptorName The name to the descriptor to load
- */
--(MFFormDescriptor *) loadDescriptorWithName:(NSString *)descriptorName;
 
 @end
 

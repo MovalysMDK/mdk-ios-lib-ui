@@ -24,7 +24,6 @@
 #import <MFCore/MFCoreI18n.h>
 #import <MFCore/MFCoreBean.h>
 #import <MFCore/MFCoreConfig.h>
-#import <MFCore/MFCoreFormConfig.h>
 
 
 //Picker imports
@@ -269,16 +268,10 @@ const int NO_LAST_INDEX = -1;
         return;
     }
     
-    [self.controllerDelegate reinitBinding];
     
-    self.hasSearch = [[((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_SEARCH_KEY] boolValue];
+    self.hasSearch = //PROTODO : parameters hasSearch PICKER_PARAMETER_SEARCH_KEY
     
-    //Get FormViewController parent
-    //    UIView *topView = self;
-    //
-    //    while(topView.superview) {
-    //        topView = topView.superview;
-    //    }
+
     self.mainFormControllerView = self;
     if([self.form isKindOfClass:[MFFormSearchViewController class]]) {
         self.mainFormControllerView = ((UIViewController *)self.form).view;
@@ -329,12 +322,9 @@ const int NO_LAST_INDEX = -1;
                                           PICKER_TOP_BAR_ITEMS_HEIGHT);
     
     self.confirmButton.segmentedControlStyle = UISegmentedControlStyleBar;
-    
-    UIColor *okButtonColor = [MFColorValueProcessing processColorFromString:[[((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_OK_BUTTON_COLOR_KEY] stringByAppendingString:@"Color"]];
-    if(!okButtonColor) {
-        okButtonColor = [UIColor blackColor];
-    }
-    self.confirmButton.tintColor = okButtonColor;
+    //PROTODO : Couleur des boutons ?
+
+    self.confirmButton.tintColor = [UIColor blackColor];
     
     [self.confirmButton addTarget:self action:@selector(dismissPickerViewAndSave) forControlEvents:UIControlEventValueChanged];
     
@@ -346,12 +336,8 @@ const int NO_LAST_INDEX = -1;
                                          PICKER_TOP_BAR_ITEMS_HEIGHT);
     
     self.cancelButton.segmentedControlStyle = UISegmentedControlStyleBar;
-    UIColor *cancelButtonColor = [MFColorValueProcessing processColorFromString:[[((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_CANCEL_BUTTON_COLOR_KEY] stringByAppendingString:@"Color"]];
-    
-    if(!cancelButtonColor) {
-        cancelButtonColor = [UIColor blueColor];
-    }
-    self.cancelButton.tintColor = cancelButtonColor ;
+    //PROTODO : Couleur des boutons ?
+    self.cancelButton.tintColor = [UIColor blueColor] ;
     [self.cancelButton addTarget:self action:@selector(dismissPickerViewAndCancel) forControlEvents:UIControlEventValueChanged];
     
     //Show the actionSheet
@@ -454,7 +440,6 @@ const int NO_LAST_INDEX = -1;
     else {
         _data = nil;
     }
-    [self updateValue:_data];
     if([MFVersionManager isCurrentDeviceOfTypePhone])
     {
         [self hidePickerModalView];
@@ -527,31 +512,7 @@ const int NO_LAST_INDEX = -1;
     return 0;
 }
 
-/**
- * Adds a custom selection indicator to the pickerView
- */
--(void) addCustomSelectionIndicatorViewWithOffset:(int)offset {
-    CGFloat itemViewHeight = [self.controllerDelegate itemView].frame.size.height;
-    
-    UIColor *selectionIndicatorColor = [MFColorValueProcessing processColorFromString:[[((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_SELECTION_INDICATOR_COLOR_KEY] stringByAppendingString:@"Color"]];
-    if(!selectionIndicatorColor) {
-        selectionIndicatorColor = [UIColor blueColor];
-    }
-    MFPickerListSelectionIndicator *customSelectionIndicator =
-    [[MFPickerListSelectionIndicator alloc] initWithFrame:CGRectMake(self.pickerFrame.origin.x,
-                                                                     self.pickerFrame.size.height / 2 - itemViewHeight/2 + offset,
-                                                                     self.pickerFrame.size.width,
-                                                                     itemViewHeight) andColor:selectionIndicatorColor];
-    
-    customSelectionIndicator.userInteractionEnabled = NO;
-    if([MFVersionManager isCurrentDeviceOfTypePhone])
-    {
-        [self.modalPickerView addSubview:customSelectionIndicator];
-    }
-    else {
-        [self.popoverController.contentViewController.view addSubview:customSelectionIndicator];
-    }
-}
+
 
 
 /**
@@ -612,12 +573,6 @@ const int NO_LAST_INDEX = -1;
     
     self.isShowing = YES;
     
-    if(SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self addCustomSelectionIndicatorViewWithOffset:PICKER_TOP_BAR_HEIGHT];
-        });
-    }
-    
     if(self.hasSearch ) {
         [((id<MFSearchDelegate>)self.controllerDelegate) updateFilterWithText:@""];
     }
@@ -631,12 +586,16 @@ const int NO_LAST_INDEX = -1;
     self.lastIndex = [self selectCorrectRow];
 }
 
+
+//PROTODO :
+//PICKER_PARAMETER_VALUES_KEY
+
 -(id) getValues {
     MFUIBaseListViewModel *values = nil;
-    NSString *valuesPropertyName = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_VALUES_KEY];
+    NSString *valuesPropertyName = nil;//PROTODO retrouver les valleurs (LVM)
     if(!valuesPropertyName) {
         //                [MFException throwExceptionWithName:@"Missing field"
-        //                                          andReason:[NSString stringWithFormat:@"The field %@ is missing in the parameters of the PLIST for the component %@", PICKER_PARAMETER_VALUES_KEY, self.selfDescriptor.name]
+        //                                          andReason:[NSString stringWithFormat:@"The field %@ is missing in the parameters of the PLIST for the component %@", PICKER_PARAMETER_VALUES_KEY, NSStringFromClass(self.class)]
         //                                        andUserInfo:nil];
     }
     else {
@@ -650,16 +609,22 @@ const int NO_LAST_INDEX = -1;
 }
 
 -(NSString *)selectedViewFormDescriptorName {
-    NSString *localSelectedViewFormDescriptorName = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_SELECTED_VIEW_FORM_DESCRIPTOR_NAME_KEY];
-    if([self.configurationHandlerInstance getFormDescriptorProperty:localSelectedViewFormDescriptorName]) {
-        [self.configurationHandlerInstance loadFormWithName:localSelectedViewFormDescriptorName];
-    }
-    return localSelectedViewFormDescriptorName;
+//    NSString *localSelectedViewFormDescriptorName = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_SELECTED_VIEW_FORM_DESCRIPTOR_NAME_KEY];
+//    if([self.configurationHandlerInstance getFormDescriptorProperty:localSelectedViewFormDescriptorName]) {
+//        [self.configurationHandlerInstance loadFormWithName:localSelectedViewFormDescriptorName];
+//    }
+//    return localSelectedViewFormDescriptorName;
+    
+    //PROTODO : Retrouver le nom du selectedView
+    return nil;
 }
 
 -(NSString *)lstItemViewFormDescriptorName {
-    NSString *localLstItemViewFormDescriptorName = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_LIST_ITEM_VIEW_FORM_DESCRIPTOR_NAME_KEY];
-    return localLstItemViewFormDescriptorName;
+//    NSString *localLstItemViewFormDescriptorName = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_LIST_ITEM_VIEW_FORM_DESCRIPTOR_NAME_KEY];
+//    return localLstItemViewFormDescriptorName;
+    
+    //PROTODO : Retrouver le nom du listItemView
+    return nil;
 }
 
 
@@ -737,11 +702,8 @@ const int NO_LAST_INDEX = -1;
 }
 
 
--(void)didLoadFieldDescriptor:(MFFieldDescriptor *)fieldDescriptor {
-    [super didLoadFieldDescriptor:fieldDescriptor];
-    self.emptyViewNibName = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_EMPTY_VIEW_NIB_NAME];
-    [self.controllerDelegate fillSelectedViewWithViewModel:[[NSClassFromString(@"MFEmptyViewModel") alloc] init]];
-}
+//PROTODO : empty nib : PICKER_PARAMETER_EMPTY_VIEW_NIB_NAME
+
 
 -(MFUIBaseListViewModel *) pickerListViewModel {
     return (MFUIBaseListViewModel *)[self getValues];

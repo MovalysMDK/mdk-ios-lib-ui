@@ -22,11 +22,10 @@
 #import "MFDetailViewControllerProtocol.h"
 #import "MFFormWithDetailViewControllerProtocol.h"
 
-//Binding
-#import "MFBindingFormDelegate.h"
 
 //ViewController
 #import "MFFormViewController.h"
+#import "MFCommonFormDelegate.h"
 
 /*!
  * @class MFFormDetailViewController

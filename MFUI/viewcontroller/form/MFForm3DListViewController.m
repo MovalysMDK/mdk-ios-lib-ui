@@ -30,10 +30,6 @@
 
 @interface MFForm3DListViewController ()
 
-/**
- * @brief The descriptor of the header of this 3D List
- */
-@property (nonatomic, strong) MFFormDescriptor *headerDescriptor;
 
 /**
  * @brief The current displayedPage of the 3D List
@@ -65,8 +61,6 @@
     self.reusableHeaderViews = [NSMutableDictionary dictionary];
     self.headerView.delegate = self;
     
-    self.headerDescriptor = [self loadDescriptorWithName:@"headerFormDescriptorName"];
-    
 }
 
 
@@ -86,15 +80,10 @@
     if(!self.headerView.contentView) {
         self.headerView.contentView = [self buildHeaderView];
     }
-    
-    [self bindHeaderView];
-    dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
         [self.headerView.arrowPrevious setEnabled:(self.currentPage != 0)];
         [self.headerView.arrowNext setEnabled:!(self.currentPage+1 == [[[((MFUIBaseListViewModel *)self.viewModel).fetch sections] objectAtIndex:0] objects].count)];
     });
-        if(self.headerDescriptor) {
-        [self setScreenTitle];
-    }
     
 }
 
@@ -133,57 +122,11 @@
 -(MFBindingViewAbstract *) buildHeaderView {
     
     MFBindingViewAbstract * view = nil;
-    if(self.headerDescriptor) {
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:self.headerDescriptor.uitype owner:self options:nil];
-        if(topLevelObjects && topLevelObjects.count >0) {
-            view = [topLevelObjects objectAtIndex:0];
-        }
-    }
+    //PROTODO : Retrieve Header view
     
     return view;
 }
 
-
-/**
- * @brief Binds the headerView to ViewModel
- */
--(void) bindHeaderView {
-    [self.headerView.contentView unregisterComponents:self.formBindingDelegate];
-    
-    self.headerView.contentView.formController = self;
-    NSIndexPath *virtualIndexPath = [NSIndexPath indexPathForItem:self.currentPage inSection:HEADER_INDEXPATH_IDENTIFIER];
-    
-    MFSectionDescriptor *currentSection = self.headerDescriptor.sections[0];
-    MFGroupDescriptor *currentGd = nil;
-    currentGd = currentSection.orderedGroups[0];
-    
-    if([self.headerView.contentView conformsToProtocol:@protocol(MFBindingViewProtocol)]) {
-        
-        //Réinitialisation de la vue
-        id<MFFormCellProtocol> formView = (id<MFFormCellProtocol>)self.headerView.contentView;
-        ((MFBindingViewAbstract *)formView).formController = self;
-        [((MFBindingViewAbstract *)formView) refreshComponents];
-        
-        //Style de la cellule
-        [formView configureByGroupDescriptor:currentGd andFormDescriptor:self.sectionDescriptor];
-        [formView setCellIndexPath:virtualIndexPath];
-        //Enregistrement des composants graphiques de la vue
-        NSDictionary *newRegisteredComponents = [self registerComponentsFromCell:formView];
-
-        for(NSString *key in [newRegisteredComponents allKeys]) {
-            //Récupération de la liste des composants associé à ce keyPath
-            MFCoreLogVerbose(@" key : %@" , key);
-            NSMutableArray *componentList = [[self.binding componentsArrayAtIndexPath:virtualIndexPath] mutableCopy];
-            if(componentList) {
-                for( NSString *fieldName in currentGd.fieldNames) {
-                    UIView<MFUIComponentProtocol> *component = [self.headerView.contentView valueForKey:fieldName];
-                    [self initComponent:component atIndexPath:virtualIndexPath];
-                }
-            }
-        }
-        [self setDataOnView:formView withOptionalViewModel:(MFUIBaseViewModel *)[self viewModelAtIndexPath:virtualIndexPath]];
-    }
-}
 
 
 -(void)refreshWithParameters:(NSDictionary *)parameters {
@@ -265,7 +208,7 @@
 
 -(void)setScreenTitle {
     NSFetchedResultsController *fetchedController = ((MFUIBaseListViewModel *)self.viewModel).fetch;
-    self.navigationItem.title = [NSString stringWithFormat:@"%@ (%i/%lu)", self.headerDescriptor.name, self.currentPage+1, (unsigned long)[[fetchedController.sections objectAtIndex:0] objects].count ];
+    //PROTODO : Screen title
 }
 
 /**
@@ -344,62 +287,6 @@
 }
 
 
-
-/**
- * @see MFForm2DListViewController.h
- */
--(void) dispatchEventOnViewModelPropertyValueChangedWithKey:(NSString *)bindingKey sender:(MFUIBaseViewModel *)viewModelSender{
-    
-    if([((MFUIBaseListViewModel *)self.viewModel).viewModels containsObject:viewModelSender]) {
-        
-        NSIndexPath *componentIndexPath = [NSIndexPath indexPathForRow:self.currentPage inSection:HEADER_INDEXPATH_IDENTIFIER];
-
-        NSMutableArray *componentList = [[self.binding componentsAtIndexPath:componentIndexPath withBindingKey:bindingKey] mutableCopy];
-        
-        //Si la ressource n'est pas déja tenue par un autre évènement
-        if([self.formBindingDelegate mutexForProperty:bindingKey]) {
-            
-            //Récupération et application du filtre ppour ce composant
-            MFValueChangedFilter applyFilter = [[self filtersFromViewModelToForm] objectForKey:bindingKey];
-            BOOL continueDispatch = YES;
-            if(applyFilter)
-                continueDispatch = applyFilter(bindingKey, viewModelSender, self.binding);
-            
-            
-            //Si la mise a jour n'est pas bloquée par le filtre
-            if(continueDispatch) {
-                if(componentList) {
-                    for(id<MFUIComponentProtocol> component in componentList) {
-                        id oldValue = [component getData];
-                        id newValue =[viewModelSender valueForKeyPath:bindingKey];
-                        newValue = [self applyConverterOnComponent:(id<MFUIComponentProtocol>)component forValue:newValue isFormToViewModel:NO];
-                        MFNonEqual(oldValue, newValue, ^{
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [component setData:newValue];
-                            });
-                        });
-                        
-                    }
-                }
-                else {
-                    [self performSelectorForPropertyBinding:bindingKey onViewModel:viewModelSender withIndexPath:componentIndexPath];
-                }
-            }
-            // On lâche la ressource à la fin du traitement
-            [self releasePropertyFromMutex:bindingKey];
-        }
-        else {
-            // Si on passe ici, c'est que le champ vient d'être modifié dans le viewModel suite à une modif du formulaire.
-            // On peut donc maintenant appliquer la modification la m"thode custom appelée quand le champ est modifié dans le modèle
-            [self applyCustomValueChangedMethodForComponents:componentList atIndexPath:componentIndexPath];
-            [self releasePropertyFromMutex:bindingKey];
-        }
-    }
-    else {
-        [super dispatchEventOnViewModelPropertyValueChangedWithKey:bindingKey sender:viewModelSender];
-    }
-}
-
 -(void)setViewModel:(MFUIBaseListViewModel *)listViewModel {
     //dès lors que le ViewModel est mis, on force la première page pour afficher les premières données
     _viewModel.form = self;
@@ -410,16 +297,5 @@
     
 }
 
--(void)setHeaderDescriptor:(MFFormDescriptor *)headerDescriptor {
-    // dès lors que le headerDescriptor est mis, on rafraîchit la vue du header pour afficher ses données
-    _headerDescriptor = headerDescriptor;
-    [self refreshHeaderView];
-}
-
--(void)unregisterAllComponents {
-    [super unregisterAllComponents];
-    [self.reusableHeaderViews removeAllObjects];
-    self.reusableHeaderViews = nil;
-}
 
 @end

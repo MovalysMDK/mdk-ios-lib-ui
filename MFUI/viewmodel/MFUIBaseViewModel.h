@@ -25,17 +25,12 @@
 
 #import "MFUIBaseViewModelProtocol.h"
 #import "MFFormBaseViewController.h"
+#import "MFViewModelConfiguration.h"
+@protocol MFObjectWithBindingProtocol;
 
-@interface MFUIBaseViewModel : NSObject <MFUIBaseViewModelProtocol, NSCopying>
 
-#pragma mark - Types définis
+@interface MFUIBaseViewModel : NSObject <MFUIBaseViewModelProtocol, MFObjectWithListenerProtocol, NSCopying, MFObjectWithListenerProtocol>
 
-/*!
- * @brief Type de callback appelé lorsque l'appli sait combien elle possède de classe de démarrage
- * @param 1er paramètre le nom de classe ou l'étape lancée
- * @param 2eme paramètre l'état du lancement (START, STOP)
- */
-typedef BOOL (^MFValueChangedFilter)(NSString *, id<MFUIBaseViewModelProtocol>, MFBinding *);
 
 #pragma mark - Properties
 
@@ -57,6 +52,7 @@ typedef BOOL (^MFValueChangedFilter)(NSString *, id<MFUIBaseViewModelProtocol>, 
  * value : the value of the filter to apply on a property of the viewModel
  */
 @property (nonatomic, strong) NSDictionary *filterParameters;
+
 
 #pragma mark - Methods
 
@@ -90,6 +86,12 @@ typedef BOOL (^MFValueChangedFilter)(NSString *, id<MFUIBaseViewModelProtocol>, 
 -(NSArray *) getChildViewModels;
 
 /*!
+ * @brief Returns the property name of this ViewModel in its parent ViewModel
+ * @return The property name of this ViewModel in its parent if it exists, nil otherwhise
+ */
+- (NSString *)propertyNameInParentViewModel;
+
+/*!
  * @brief Cette méthode renvoie la liste des propriétés à copier lors de la copie du ViewModel
  * Par défaut il s'agit des bindedProperties et des customBindedProperties
  */
@@ -112,6 +114,10 @@ typedef BOOL (^MFValueChangedFilter)(NSString *, id<MFUIBaseViewModelProtocol>, 
  */
 -(void) modifyToIdentifiable:(id)entity inContext:(id<MFContextProtocol>)context ;
 
+-(void) createViewModelConfiguration;
+
+
+
 @end
 
 /**
@@ -121,3 +127,15 @@ typedef BOOL (^MFValueChangedFilter)(NSString *, id<MFUIBaseViewModelProtocol>, 
 @protocol MFUIWorkspaceViewModelProtocol <NSObject>
 
 @end
+
+
+
+@protocol ITEMVM <NSObject>
+
+-(int)indexOfItem;
+
+@property (nonatomic, weak) MFUIBaseListViewModel *parentViewModel;
+@property (nonatomic) BOOL bindAsITEMVM;
+
+@end
+

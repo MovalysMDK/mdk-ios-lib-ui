@@ -87,16 +87,12 @@ NSUInteger ERROR_BUTTON_RIGHT_MARGIN = 5;
 }
 
 
--(void) updateValue {
-    [self.sender performSelectorOnMainThread: @selector(updateValue:) withObject:_privateData waitUntilDone:YES];
-}
-
 -(NSInteger)validateWithParameters:(NSDictionary *)parameters {
     NSInteger nbOfErrors = [super validateWithParameters:parameters];
     if([self.mandatory isEqualToNumber:@1] && !_privateData) {
         
         NSError *error = [[MFMandatoryFieldUIValidationError alloc]
-                          initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+                          initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         
         [self addErrors:@[error]];
         nbOfErrors++;
@@ -105,7 +101,7 @@ NSUInteger ERROR_BUTTON_RIGHT_MARGIN = 5;
     if([self.mandatory isEqualToNumber:@1] && _privateData && [NIL_DEBUG_VALUE isEqualToString:_privateData]) {
         
         NSError *error = [[MFMandatoryFieldUIValidationError alloc]
-                          initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:self.selfDescriptor.name];
+                          initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
         
         [self addErrors:@[error]];
         nbOfErrors++;
@@ -171,7 +167,6 @@ NSUInteger ERROR_BUTTON_RIGHT_MARGIN = 5;
     if(![detectionString isEqualToString:_privateData]) {
         MFUILogInfo(@"Scan ok device with detection string = %@", detectionString);
         _privateData = detectionString;
-        [self updateValue];
     }
 }
 

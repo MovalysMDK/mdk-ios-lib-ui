@@ -30,9 +30,6 @@ FOUNDATION_EXPORT NSString *const MFPROP_FORM_ONUNSAVEDCHANGES;
 
 #pragma mark - Propriétés
 
-/*! l'extension du controlleur, l'extension contient des paramètres qui peuvent être définit dans le storyboard */
-@property(nonatomic, strong) MFFormExtend *mf;
-
 /*!
  * @brief Options fournies pour le chargement des données
  */
@@ -44,30 +41,6 @@ FOUNDATION_EXPORT NSString *const MFPROP_FORM_ONUNSAVEDCHANGES;
 
 
 #pragma mark - Méthodes
-
-
-/*!
- * @brief Cette méthode met à jour un composant graphique depuis les données du ViewModel associé au formulaire.
- * @param bindingKey La clé associée à un ou plusieurs composants dont on souhaite affecter une valeur depuis le ViewModel
- */
--(void) dispatchEventOnViewModelPropertyValueChangedWithKey:(NSString *)bindingKey sender:(id<MFUIBaseViewModelProtocol>)viewModelSender;
-
-
-/*!
- * @brief Cette méthode permet à l'utilisateur d'ajouter des filtres pour la synchronisation des données
- * depuis le formulaire vers le ViewModel
- * @param filters Les filtres sous forme d'un dictionnaire contenant des @see(MFValueChangedFilter)
- */
--(void) completeFiltersFromFormToViewModel:(NSDictionary*)filters;
-
-/*!
- * @brief Cette méthode permet à l'utilisateur d'ajouter des filtres pour la synchronisation des données
- * depuis le ViewModel vers le formulaire
- * @param filters Les filtres sous forme d'un dictionnaire contenant des @see(MFValueChangedFilter)
- */
--(void) completeFiltersFromViewModelToForm:(NSDictionary*)filters;
-
-
 
 /*!
  * @brief Cette méthode permet de faire les initialisations nécessaires au bon fonctionnement du controller

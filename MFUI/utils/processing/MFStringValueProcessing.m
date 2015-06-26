@@ -27,13 +27,9 @@
 
 -(id)processTreatmentOnComponent:(id<MFUIComponentProtocol>)component withViewModel:(id<MFUIBaseViewModelProtocol>)viewModel forProperty:(NSString *)property fromBindableProperties:(NSDictionary *)bindableProperties {
     
-    NSString *defaultValue = [((MFFieldDescriptor *)component.selfDescriptor) valueForKey:property];
-    if(defaultValue) {
-        return MFLocalizedStringFromKey(defaultValue);
-    }
-    else {
-        return nil;
-    }
+    return nil;
+    
+    //PROTODO : intéret de la classe ?
 }
 
 @end

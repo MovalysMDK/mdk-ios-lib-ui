@@ -21,6 +21,7 @@
 
 
 #import "MFUIBaseViewModel.h"
+#import "MFObjectWithBindingProtocol.h"
 
 #pragma mark - Propriétés
 /*!

@@ -26,7 +26,7 @@
 #import "MFUIBaseViewModelProtocol.h"
 #import "MFFormBaseViewController.h"
 #import "MFViewModelConfiguration.h"
-@protocol MFObjectWithBindingProtocol;
+#import "MFObjectWithBindingProtocol.h"
 
 
 @interface MFUIBaseViewModel : NSObject <MFUIBaseViewModelProtocol, MFObjectWithListenerProtocol, NSCopying, MFObjectWithListenerProtocol>

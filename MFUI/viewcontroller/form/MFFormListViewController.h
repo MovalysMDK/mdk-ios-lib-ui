@@ -65,7 +65,7 @@
  * @param indexPath indexPath
  * @return viewmodel
  */
--(id<MFUIBaseViewModelProtocol>) viewModelAtIndexPath:(NSIndexPath *)indexPath ;
+-(NSObject<MFUIBaseViewModelProtocol> *) viewModelAtIndexPath:(NSIndexPath *)indexPath ;
 
 /*!
  * @brief Cette méthode permet de faire les initialisations nécessaires au bon fonctionnement du controller

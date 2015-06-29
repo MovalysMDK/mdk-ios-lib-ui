@@ -38,6 +38,8 @@
 #import "MFUIBaseListViewModel.h"
 #import "MFFormViewController.h"
 #import "MFLocalizedString.h"
+#import "MFAbstractComponentWrapper.h"
+#import "MFObjectWithBindingProtocol.h"
 
 #pragma mark - Interface privée
 
@@ -160,18 +162,35 @@
     return value;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //Récupération de la cellule créée par le BaseFormController
-    id<MFFormCellProtocol> formCell = (id<MFFormCellProtocol>)[super tableView:tableView cellForRowAtIndexPath:indexPath];
-    
-    if ( self.deleteAction != nil && self.longPressToDelete ) {
-        UILongPressGestureRecognizer *longGestureRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(deleteCell:)];
-        [(UITableViewCell *)formCell addGestureRecognizer:longGestureRecognizer];
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_1D_DESCRIPTOR];
+    NSString *identifier = bindingData.cellIdentifier;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    if(!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    bindingData.cellIndexPath = indexPath;
+    [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
+    [self updateCellFromBindingData:bindingData atIndexPath:indexPath];
     
-    //Mise à jour des données des composants de la cellule
-    return (UITableViewCell *)formCell;
+    return cell;
+}
+
+-(void) updateCellFromBindingData:(MFBindingCellDescriptor *)bindingData atIndexPath:(NSIndexPath *)indexPath{
+    NSArray *bindingValues = [self.bindingDelegate bindingValuesForCellBindingKey:[bindingData generatedBindingKey]];
+    for(MFBindingValue *bindingValue in bindingValues) {
+        bindingValue.wrapper.wrapperIndexPath = indexPath;
+        [self.bindingDelegate.binding dispatchValue:[[self viewModelAtIndexPath:indexPath] valueForKeyPath:bindingValue.abstractBindedPropertyName] fromPropertyName:bindingValue.abstractBindedPropertyName atIndexPath:indexPath fromSource:bindingValue.bindingSource];
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_1D_DESCRIPTOR];
+    return [bindingData.cellHeight floatValue];
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return nil;
 }
 
 - (UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -234,7 +253,11 @@
     }
 }
 
-
+-(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_1D_DESCRIPTOR];
+    bindingData.cellIndexPath = indexPath;
+    [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingData generatedBindingKey]];
+}
 
 
 #pragma mark - Implémentation de  MFUITransitionDelegate
@@ -258,9 +281,9 @@
 
 #pragma mark - ViewModels management
 
--(id<MFUIBaseViewModelProtocol>) viewModelAtIndexPath:(NSIndexPath *)indexPath
+-(NSObject<MFUIBaseViewModelProtocol> *) viewModelAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<MFUIBaseViewModelProtocol> vmItem = nil;
+    NSObject<MFUIBaseViewModelProtocol> *vmItem = nil;
     MFUIBaseListViewModel *listVm = ((MFUIBaseListViewModel *)[self getViewModel]);
     
     

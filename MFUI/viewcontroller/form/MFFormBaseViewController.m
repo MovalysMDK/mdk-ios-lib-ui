@@ -118,12 +118,12 @@
     
     self.viewModel = [self createViewModel];
     self.viewModel.form = self;
-
+    
     
     self.isPickerDisplayed = NO;
     self.needDoFillAction = YES;
     self.onDestroy = NO;
-
+    
     
 }
 
@@ -137,7 +137,7 @@
     self.tableView.dataSource = self;
     [self initializeBinding];
     [self initializeModel];
-
+    
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(displayBackButton:)
                    name:PICKER_NOTIFICATION_SHOW object:nil];
@@ -153,13 +153,13 @@
         self.searchDelegate.baseController = self;
         
         //PROTODO : Refaire la recherche.
-//        self.searchDelegate.isSimpleSearch = self.mf.search.simpleSearch;
-//        self.searchDelegate.isLiveSearch = self.mf.search.liveSearch;
-//        self.searchDelegate.displayNumberOfResults = self.mf.search.displayNumberOfResults;
+        //        self.searchDelegate.isSimpleSearch = self.mf.search.simpleSearch;
+        //        self.searchDelegate.isLiveSearch = self.mf.search.liveSearch;
+        //        self.searchDelegate.displayNumberOfResults = self.mf.search.displayNumberOfResults;
     }
     
     
-
+    
     
 }
 

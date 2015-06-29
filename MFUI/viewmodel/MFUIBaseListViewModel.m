@@ -29,6 +29,7 @@
 @implementation MFUIBaseListViewModel
 @synthesize form = _form;
 @synthesize hasChanged = _hasChanged;
+@synthesize objectWithBinding = _objectWithBinding;
 
 -(id) init {
     self = [super init];

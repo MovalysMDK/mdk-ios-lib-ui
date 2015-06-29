@@ -13,19 +13,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUICell.h
-//  MFUI
-//
-//
 
-#ifndef MFUI_MFUICell_h
-#define MFUI_MFUICell_h
 
-#import "MFPhotoFixedListItemCell.h"
-#import "MFCellPhotoFixedList.h"
-#import "MFCell1ComponentHorizontal.h"
-#import "MFFormCellProtocol.h"
-#import "MFCellAbstract.h"
+#import <UIKit/UIKit.h>
+#import "MFObjectWithBindingProtocol.h"
+#import "MFBindingViewDescriptor.h"
+#import "MFBindingViewAbstract.h"
 
-#endif
+@interface UIView (Binding)
+
+/*!
+ * @brief Allows to bind this cell from a given descriptor to the given object
+ * @param bindingCellDescriptor The binding cell descriptor used to bind this cell
+ * @param objectWithBinding An object that conforms the MFObjectWithBindingProtocol protocol, this cell will be binded to
+ */
+-(void)bindViewFromDescriptor:(MFBindingViewDescriptor *)bindingViewDescriptor onObjectWithBinding:(id<MFObjectWithBindingProtocol>)objectWithBinding;
+@end

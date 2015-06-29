@@ -35,6 +35,21 @@
  */
 @property (nonatomic, strong) NSDictionary *associatedLabels;
 
+/*!
+ * @brief The height of the view described by this object
+ */
+@property (nonatomic, strong) NSNumber *viewHeight;
+
+/*!
+ * @brief The height of the view described by this object
+ */
+@property (nonatomic, strong) NSIndexPath *viewIndexPath;
+
+/*!
+ * @brief The height of the view described by this object
+ */
+@property (nonatomic, strong) NSString *viewIdentifier;
+
 #pragma mark - Methods
 
 /*!
@@ -45,6 +60,7 @@
  * It will be converted to this bindingDictionary property.
  * @return The built MFBindingCellDescriptor instance.
  */
-+(instancetype) viewDescriptorWithCellBindingFormat:(NSString *)format,... NS_REQUIRES_NIL_TERMINATION;
++(instancetype)viewDescriptorWithIdentifier:(NSString *)viewIdentifier withViewHeight:(NSNumber *)viewHeight withViewBindingFormat:(NSString *)format, ... NS_REQUIRES_NIL_TERMINATION;
 
+-(NSString *)generatedBindingKey;
 @end

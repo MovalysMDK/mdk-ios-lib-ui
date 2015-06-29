@@ -21,6 +21,7 @@
 #import "MFFormViewController.h"
 #import "MFDefaultViewModelCreator.h"
 #import "MFListViewControllerProtocol.h"
+#import "MFObjectWithBindingProtocol.h"
 
 /*!
  * @class MFForm2DListViewController
@@ -138,6 +139,12 @@
  * @param section The index of the section to close
  */
 -(void)closeSectionAtIndex:(NSNumber *)section;
+
+/*!
+ * @brief Indicates if all the sections must be opened or close on the first display
+ * @return Returns YES if all section must be opened first, NO otherwhise.
+ */
+-(BOOL) allSectionsOpenedFirst;
 
 
 @end

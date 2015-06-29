@@ -21,7 +21,8 @@
 
 const NSString *SECTION_ORDER_KEY = @"sectionOrder";
 const NSString *CURRENT_SECTION_KEY = @"currentSection";
-const NSString *CELL_1D_DESCRIPTOR = @"currentSection";
+const NSString *CELL_1D_DESCRIPTOR = @"CELL_1D_DESCRIPTOR";
+const NSString *SECTION_HEADER_VIEW_2D_DESCRIPTOR = @"SECTION_HEADER_VIEW_2D_DESCRIPTOR";
 
 @interface MFTableConfiguration ()
 
@@ -96,6 +97,10 @@ const NSString *CELL_1D_DESCRIPTOR = @"currentSection";
 
 -(void)create1DTableCellWithDescriptor:(MFBindingCellDescriptor *)cellDescriptor {
     [[self currentStructure] setObject:cellDescriptor forKey:CELL_1D_DESCRIPTOR];
+}
+
+-(void)create2DTableHeaderViewWithDescriptor:(MFBindingViewDescriptor *)viewDescriptor {
+    [[self currentStructure] setObject:viewDescriptor forKey:SECTION_HEADER_VIEW_2D_DESCRIPTOR];
 }
 
 #pragma mark - Utils

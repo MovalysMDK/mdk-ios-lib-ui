@@ -17,7 +17,7 @@
 
 #import "MFFormSectionHeaderView.h"
 
-#define MF_SECTION_DISCLOSURE_DETAIL_BUTTON_MARGIN 20
+#define MF_SECTION_DISCLOSURE_DETAIL_BUTTON_MARGIN 5
 
 #define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
@@ -37,19 +37,25 @@
 
 -(void) initialize {
     [super initialize];
-    self.isOpened = YES;
-        [self addDisclosureIndicator];
-    
+    self.backgroundColor = [UIColor groupTableViewBackgroundColor];
 }
 
+-(void)awakeFromNib {
+    [super awakeFromNib];
+}
 
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     
     self.userInteractionEnabled = NO;
+    [self animateDisclosurechanges];
+
+}
+
+-(void) animateDisclosurechanges {
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                         [self animateDisclosure];
+                         [self toogleDisclosureStateWithAction:YES];
                      }
                      completion:^(BOOL finished) {
                          self.isOpened = ! self.isOpened;
@@ -60,19 +66,19 @@
 
 #pragma clang diagnostic push
 #pragma GCC diagnostic ignored "-Wundeclared-selector"
--(void) animateDisclosure {
+-(void) toogleDisclosureStateWithAction:(BOOL)withAction {
     if(self.isOpened) {
-        if([self.sender respondsToSelector:@selector(closeSectionAtIndex:)]) {
+        if([self.sender respondsToSelector:@selector(closeSectionAtIndex:)] && withAction) {
             [self.sender performSelector:@selector(closeSectionAtIndex:) withObject:self.identifier];
-            self.disclosureIndicator.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
-            
         }
+        self.disclosureIndicator.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
+
     }
     else {
-        if([self.sender respondsToSelector:@selector(openSectionAtIndex:)]) {
+        if([self.sender respondsToSelector:@selector(openSectionAtIndex:)] && withAction) {
             [self.sender performSelector:@selector(openSectionAtIndex:) withObject:self.identifier];
-            self.disclosureIndicator.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(90));
         }
+        self.disclosureIndicator.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(90));
     }
 }
 #pragma clang diagnostic pop
@@ -81,13 +87,18 @@
     
     self.disclosureIndicator = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
     [self.disclosureIndicator setImage:[UIImage imageNamed:@"arrow"] forState:UIControlStateNormal];
-    self.disclosureIndicator.frame = CGRectMake(MF_SECTION_DISCLOSURE_DETAIL_BUTTON_MARGIN - self.disclosureIndicator.frame.size.width/2,
-                                                self.frame.size.height/2 - self.disclosureIndicator.frame.size.height/2,
-                                                self.disclosureIndicator.frame.size.width,
-                                                self.disclosureIndicator.frame.size.height);
+    
+    self.disclosureIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *disclosureCenterY = [NSLayoutConstraint constraintWithItem:self.disclosureIndicator attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    NSLayoutConstraint *disclosureHeight= [NSLayoutConstraint constraintWithItem:self.disclosureIndicator attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:32];
+    NSLayoutConstraint *disclosureWidth= [NSLayoutConstraint constraintWithItem:self.disclosureIndicator attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:32];
+    NSLayoutConstraint *disclosureLeftMargin = [NSLayoutConstraint constraintWithItem:self.disclosureIndicator attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:MF_SECTION_DISCLOSURE_DETAIL_BUTTON_MARGIN];
+    [self addSubview:self.disclosureIndicator];
+
+    [self addConstraints:@[disclosureCenterY, disclosureHeight, disclosureLeftMargin, disclosureWidth]];
+    
     [self.disclosureIndicator addTarget:self action:@selector(touchesEnded:withEvent:) forControlEvents:UIControlEventTouchDown];
     
-    [self addSubview:self.disclosureIndicator];
     if(self.isOpened) {
         self.disclosureIndicator.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(90));
     }
@@ -95,6 +106,9 @@
 
 -(void)setIsOpened:(BOOL)isOpened {
     _isOpened = isOpened;
+    if(!self.disclosureIndicator) {
+        [self addDisclosureIndicator];
+    }
 }
 
 -(void)reinit {

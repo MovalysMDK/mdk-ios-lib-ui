@@ -50,6 +50,9 @@
 #import <MFCore/MFCoreI18n.h>
 #import "MFConstants.h"
 #import "MFTypeValueProcessingProtocol.h"
+#import "MFAbstractComponentWrapper.h"
+#import "UIView+Binding.h"
+#import "MFObjectWithBindingProtocol.h"
 
 #pragma mark - Interface privée
 @interface MFForm2DListViewController ()
@@ -82,8 +85,9 @@
 @implementation MFForm2DListViewController {
     MFFormViewController *detailViewController;
 }
+@dynamic viewModel;
+@dynamic bindingDelegate;
 
-@synthesize viewModel = _viewModel;
 @synthesize showAddItemButton = _showAddItemButton;
 @synthesize longPressToDelete = _longPressToDelete;
 @synthesize detailStoryboardName = _detailStoryboardName;
@@ -96,7 +100,7 @@
  */
 -(void) initialize {
     [super initialize];
-    
+
     // Form's location manager init
     self.applicationContext = [MFApplication getInstance];
     self.viewModel.form = self;
@@ -199,7 +203,7 @@
         isOpened = [self.openedSectionStates objectForKey:[NSNumber numberWithInteger:section]];
     }
     else {
-        isOpened = @1;
+        isOpened = @([self allSectionsOpenedFirst]);
         [self.openedSectionStates setObject:isOpened forKey:[NSNumber numberWithInteger:section]];
     }
     
@@ -217,38 +221,69 @@
     return returnValue;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_1D_DESCRIPTOR];
+    NSString *identifier = bindingData.cellIdentifier;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    if(!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    bindingData.cellIndexPath = indexPath;
+    [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
+    [self updateCellFromBindingData:bindingData atIndexPath:indexPath];
     
-    //Récupération de la cellule créée par le BaseFormController
-    id<MFFormCellProtocol> formCell = (id<MFFormCellProtocol>)[super tableView:tableView cellForRowAtIndexPath:indexPath];
-        return (UITableViewCell *)formCell;
+    return cell;
 }
 
+-(void) updateCellFromBindingData:(MFBindingCellDescriptor *)bindingData atIndexPath:(NSIndexPath *)indexPath{
+    NSArray *bindingValues = [self.bindingDelegate bindingValuesForCellBindingKey:[bindingData generatedBindingKey]];
+    for(MFBindingValue *bindingValue in bindingValues) {
+        bindingValue.wrapper.wrapperIndexPath = indexPath;
+        [self.bindingDelegate.binding dispatchValue:[[self viewModelAtIndexPath:indexPath] valueForKeyPath:bindingValue.abstractBindedPropertyName] fromPropertyName:bindingValue.abstractBindedPropertyName atIndexPath:indexPath fromSource:bindingValue.bindingSource];
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_1D_DESCRIPTOR];
+    return [bindingData.cellHeight floatValue];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    MFBindingViewDescriptor *bindingData = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
+    return [bindingData.viewHeight floatValue];
+}
+
+-(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    MFBindingCellDescriptor *bindingDataCell = self.bindingDelegate.structure[CELL_1D_DESCRIPTOR];
+    bindingDataCell.cellIndexPath = indexPath;
+    [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingDataCell generatedBindingKey]];
+    
+    
+    MFBindingViewDescriptor *bindingDataSection = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
+    bindingDataSection.viewIndexPath = indexPath;
+    [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingDataSection generatedBindingKey]];
+}
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *reusableheaderView = [self.reusableSectionViews objectForKey:[NSNumber numberWithInteger:section]];
-    UIView *returnView = nil;
-    if(reusableheaderView) {
-        returnView = reusableheaderView;
-        ((MFFormSectionHeaderView *)returnView).identifier = [NSNumber numberWithInteger:section];
+    MFBindingViewDescriptor *bindingData = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
+    NSString *identifier = bindingData.viewIdentifier;
+    MFFormSectionHeaderView *view = nil;
+    if(!view) {
+        view = [self sectionView];
     }
-    else {
-        returnView = [self sectionView];
-        ((MFFormSectionHeaderView *)returnView).sender = self;
-        ((MFFormSectionHeaderView *)returnView).identifier = [NSNumber numberWithInteger:section];
-        [self.reusableSectionViews setObject:returnView forKey:[NSNumber numberWithInteger:section]];
-    }
-    
-    MFFormSectionHeaderView * view =  (MFFormSectionHeaderView *)returnView;
-
-    
-    NSIndexPath *virtualIndexPath = [NSIndexPath indexPathForItem:section inSection:SECTION_INDEXPATH_IDENTIFIER];
-    
-    [view openedStateChanged];
+    bindingData.viewIndexPath = [NSIndexPath indexPathForRow:section inSection:SECTION_INDEXPATH_IDENTIFIER];
+    [view bindViewFromDescriptor:bindingData onObjectWithBinding:self];
+    [self updateCellFromBindingData:bindingData atIndexPath:bindingData.viewIndexPath];
+    view.sender = self;
+    view.identifier = @(section);
+    view.isOpened = [self.openedSectionStates[@(section)] boolValue];
     return view;
-    
 }
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return nil;
+}
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -265,12 +300,6 @@
             [self.navigationController pushViewController:detailViewController animated:YES];
         }
     }
-}
-
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-   //PROTODO : A faire
-    return 40;
 }
 
 #pragma mark - Implémentation de  MFUITransitionDelegate
@@ -377,13 +406,6 @@
 
 
 
--(void)setViewModel:(MFUIBaseListViewModel *)listViewModel {
-    _viewModel.form = self;
-    _viewModel = listViewModel;
-    //    [self getListViewModel].viewModels = listViewModel.viewModels;
-}
-
-
 
 -(void) refresh {
     self.filterParameters = nil;
@@ -398,9 +420,8 @@
 
 
 -(MFFormSectionHeaderView *) sectionView {
-    
-    MFFormSectionHeaderView * view = nil;
-    //PROTODO : Retrouver la vue de section ;)
+    MFBindingViewDescriptor *bindingData = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
+    MFFormSectionHeaderView *view = [[[NSBundle mainBundle] loadNibNamed:bindingData.viewIdentifier owner:nil options:nil] firstObject];
     return view;
 }
 
@@ -613,6 +634,10 @@
 
 - (void) onObservedViewController: (MFViewController *) viewController didAppear: (NSDictionary *) parameters {
     
+}
+
+-(BOOL) allSectionsOpenedFirst {
+    return NO;
 }
 
 

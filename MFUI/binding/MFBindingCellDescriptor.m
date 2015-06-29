@@ -82,11 +82,19 @@
 +(instancetype) cellDescriptorWithIdentifier:(NSString *)identifier withCellHeight:(NSNumber *)cellHeight withCellBindingFormat:(NSString *)format, ... NS_REQUIRES_NIL_TERMINATION {
     MFBindingCellDescriptor *cellDescriptor = [MFBindingCellDescriptor cellDescriptorWithIdentifier:identifier withCellHeight:cellHeight];
     va_list args;
+    
     va_start(args, format);
     cellDescriptor.controlsAttributes = [MFBindingFormatParser buildControlsAttributesDictionary:cellDescriptor.controlsAttributes fromVaList:args withFirstArg:format];
+    va_end(args);
+    
+    va_start(args, format);
     cellDescriptor.associatedLabels = [MFBindingFormatParser buildAssociatedLabelsDictionary:cellDescriptor.associatedLabels fromVaList:args withFirstArg:format];
+    va_end(args);
+    
+    va_start(args, format);
     cellDescriptor.cellBinding = [MFBindingFormatParser bindingDictionaryFromVaList:args withFirstArg:format];
     va_end(args);
+
     return cellDescriptor;
 }
 

@@ -23,8 +23,6 @@
 
 @implementation UITableViewCell (Binding)
 
-
-
 -(void)bindCellFromDescriptor:(MFBindingCellDescriptor *)bindingCellDescriptor onObjectWithBinding:(id<MFObjectWithBindingProtocol>)objectWithBinding {
     MFBindingDictionary *bindingDictionary = bindingCellDescriptor.cellBinding;
     for(MFOutletBindingKey* outletBindingKey in bindingDictionary.allKeys) {

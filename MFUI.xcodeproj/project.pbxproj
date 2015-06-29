@@ -24,8 +24,6 @@
 		B006CEF21B32C1E700B78782 /* MFListenerDescriptorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B006CEDD1B32C1E700B78782 /* MFListenerDescriptorManager.m */; };
 		B006CEFA1B32C1E700B78782 /* MFAbstractComponentWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B006CEE71B32C1E700B78782 /* MFAbstractComponentWrapper.h */; };
 		B006CEFB1B32C1E700B78782 /* MFAbstractComponentWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B006CEE81B32C1E700B78782 /* MFAbstractComponentWrapper.m */; };
-		B006CEFE1B32C24600B78782 /* UITableViewCell+Binding.h in Headers */ = {isa = PBXBuildFile; fileRef = B006CEFC1B32C24600B78782 /* UITableViewCell+Binding.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B006CEFF1B32C24600B78782 /* UITableViewCell+Binding.m in Sources */ = {isa = PBXBuildFile; fileRef = B006CEFD1B32C24600B78782 /* UITableViewCell+Binding.m */; };
 		B006CF0C1B32C25800B78782 /* MFBinding+Dispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = B006CF011B32C25800B78782 /* MFBinding+Dispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B006CF0D1B32C25800B78782 /* MFBinding+Dispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B006CF021B32C25800B78782 /* MFBinding+Dispatcher.m */; };
 		B006CF0E1B32C25800B78782 /* MFBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = B006CF031B32C25800B78782 /* MFBinding.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -510,6 +508,10 @@
 		B0D4C4BF1B3816F60020ACF2 /* MFCommonFormDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D4C4BB1B3816F60020ACF2 /* MFCommonFormDelegate.m */; };
 		B0D4C4C01B3816F60020ACF2 /* MFFormCommonDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D4C4BC1B3816F60020ACF2 /* MFFormCommonDelegate.h */; };
 		B0D4C4C11B3816F60020ACF2 /* MFViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D4C4BD1B3816F60020ACF2 /* MFViewProtocol.h */; };
+		B0E155C01B414C8600D5A213 /* UITableViewCell+Binding.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E155BE1B414C8600D5A213 /* UITableViewCell+Binding.m */; };
+		B0E155C11B414C8600D5A213 /* UITableViewCell+Binding.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E155BF1B414C8600D5A213 /* UITableViewCell+Binding.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B0E155C41B414C9900D5A213 /* MFBindingViewAbstract+Binding.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E155C21B414C9900D5A213 /* MFBindingViewAbstract+Binding.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B0E155C51B414C9900D5A213 /* MFBindingViewAbstract+Binding.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E155C31B414C9900D5A213 /* MFBindingViewAbstract+Binding.m */; };
 		B0FC78E51B3A99EE00DD225F /* MFNumberPickerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78E31B3A99EE00DD225F /* MFNumberPickerWrapper.h */; };
 		B0FC78E61B3A99EE00DD225F /* MFNumberPickerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FC78E41B3A99EE00DD225F /* MFNumberPickerWrapper.m */; };
 		B0FC78E91B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78E71B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h */; };
@@ -563,8 +565,6 @@
 		B006CEDD1B32C1E700B78782 /* MFListenerDescriptorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFListenerDescriptorManager.m; sourceTree = "<group>"; };
 		B006CEE71B32C1E700B78782 /* MFAbstractComponentWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAbstractComponentWrapper.h; sourceTree = "<group>"; };
 		B006CEE81B32C1E700B78782 /* MFAbstractComponentWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAbstractComponentWrapper.m; sourceTree = "<group>"; };
-		B006CEFC1B32C24600B78782 /* UITableViewCell+Binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Binding.h"; sourceTree = "<group>"; };
-		B006CEFD1B32C24600B78782 /* UITableViewCell+Binding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Binding.m"; sourceTree = "<group>"; };
 		B006CF011B32C25800B78782 /* MFBinding+Dispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFBinding+Dispatcher.h"; sourceTree = "<group>"; };
 		B006CF021B32C25800B78782 /* MFBinding+Dispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFBinding+Dispatcher.m"; sourceTree = "<group>"; };
 		B006CF031B32C25800B78782 /* MFBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBinding.h; sourceTree = "<group>"; };
@@ -1053,6 +1053,10 @@
 		B0D4C4BB1B3816F60020ACF2 /* MFCommonFormDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCommonFormDelegate.m; sourceTree = "<group>"; };
 		B0D4C4BC1B3816F60020ACF2 /* MFFormCommonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFormCommonDelegate.h; sourceTree = "<group>"; };
 		B0D4C4BD1B3816F60020ACF2 /* MFViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFViewProtocol.h; sourceTree = "<group>"; };
+		B0E155BE1B414C8600D5A213 /* UITableViewCell+Binding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Binding.m"; sourceTree = "<group>"; };
+		B0E155BF1B414C8600D5A213 /* UITableViewCell+Binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Binding.h"; sourceTree = "<group>"; };
+		B0E155C21B414C9900D5A213 /* MFBindingViewAbstract+Binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFBindingViewAbstract+Binding.h"; sourceTree = "<group>"; };
+		B0E155C31B414C9900D5A213 /* MFBindingViewAbstract+Binding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFBindingViewAbstract+Binding.m"; sourceTree = "<group>"; };
 		B0FC78E31B3A99EE00DD225F /* MFNumberPickerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFNumberPickerWrapper.h; sourceTree = "<group>"; };
 		B0FC78E41B3A99EE00DD225F /* MFNumberPickerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFNumberPickerWrapper.m; sourceTree = "<group>"; };
 		B0FC78E71B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPhotoThumbnailWrapper.h; sourceTree = "<group>"; };
@@ -1206,6 +1210,10 @@
 				B09CAC481B3D7BB40067A8DE /* MFBindingViewDescriptor.m */,
 				B006CF0B1B32C25800B78782 /* MFObjectWithBindingProtocol.h */,
 				B006CF1B1B32C55600B78782 /* MFUIBinding.h */,
+				B0E155BF1B414C8600D5A213 /* UITableViewCell+Binding.h */,
+				B0E155BE1B414C8600D5A213 /* UITableViewCell+Binding.m */,
+				B0E155C21B414C9900D5A213 /* MFBindingViewAbstract+Binding.h */,
+				B0E155C31B414C9900D5A213 /* MFBindingViewAbstract+Binding.m */,
 			);
 			path = binding;
 			sourceTree = "<group>";
@@ -1621,8 +1629,6 @@
 		B0D45B9C1A5ED2F300C6D376 /* cells */ = {
 			isa = PBXGroup;
 			children = (
-				B006CEFC1B32C24600B78782 /* UITableViewCell+Binding.h */,
-				B006CEFD1B32C24600B78782 /* UITableViewCell+Binding.m */,
 				B0D45B9D1A5ED2F300C6D376 /* MFCell1ComponentHorizontal.h */,
 				B0D45B9E1A5ED2F300C6D376 /* MFCell1ComponentHorizontal.m */,
 				B0D45B9F1A5ED2F300C6D376 /* MFCellAbstract.h */,
@@ -2316,6 +2322,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0E155C11B414C8600D5A213 /* UITableViewCell+Binding.h in Headers */,
+				B0E155C41B414C9900D5A213 /* MFBindingViewAbstract+Binding.h in Headers */,
 				B0129F701B3334BE0090B0AF /* MFUICommand.h in Headers */,
 				B0FFDB001B343D3300CA6E5E /* MFUIComponentProvider.h in Headers */,
 				B0129F651B3323940090B0AF /* MFSendEmailCommand.h in Headers */,
@@ -2333,7 +2341,6 @@
 				B006CF0C1B32C25800B78782 /* MFBinding+Dispatcher.h in Headers */,
 				B006CF101B32C25800B78782 /* MFBindingCellDescriptor.h in Headers */,
 				B006CF161B32C25800B78782 /* MFObjectWithBindingProtocol.h in Headers */,
-				B006CEFE1B32C24600B78782 /* UITableViewCell+Binding.h in Headers */,
 				B006CF121B32C25800B78782 /* MFBindingDelegate.h in Headers */,
 				B006CF141B32C25800B78782 /* MFBindingDictionary.h in Headers */,
 				B0D45E321A5ED2F400C6D376 /* MFChildViewControllerProtocol.h in Headers */,
@@ -2836,6 +2843,7 @@
 				B06F3E181B3962AF005170FC /* MFSliderWrapper.m in Sources */,
 				B006CF1A1B32C26900B78782 /* NSString+Utils.m in Sources */,
 				B0D45E311A5ED2F400C6D376 /* MFWorkspaceView.m in Sources */,
+				B0E155C51B414C9900D5A213 /* MFBindingViewAbstract+Binding.m in Sources */,
 				B0D45E7F1A5ED2F400C6D376 /* MFPositionViewModel.m in Sources */,
 				B08AAC4D1AE919F30029EC88 /* MFIntegerTextField.m in Sources */,
 				B037F8CF1B0DC84D005C12F2 /* MFAlertViewManager.m in Sources */,
@@ -2908,7 +2916,6 @@
 				B0D4C4BF1B3816F60020ACF2 /* MFCommonFormDelegate.m in Sources */,
 				B0D45E6B1A5ED2F400C6D376 /* MFPhotoDetailViewController.m in Sources */,
 				B0D45D481A5ED2F400C6D376 /* MFPhotoFixedListItemCell.m in Sources */,
-				B006CEFF1B32C24600B78782 /* UITableViewCell+Binding.m in Sources */,
 				B0D45D5F1A5ED2F400C6D376 /* MFFixedList.m in Sources */,
 				B0D45D9C1A5ED2F400C6D376 /* MFSwitch.m in Sources */,
 				B0C9B2E21AFA21E700FC9665 /* MFTextFieldStyle+TextLayouting.m in Sources */,
@@ -2916,6 +2923,7 @@
 				B0129F621B3323850090B0AF /* MFCommandHandler.m in Sources */,
 				B0D45DEF1A5ED2F400C6D376 /* MFUIValidationError.m in Sources */,
 				B0C9B2DE1AFA21E700FC9665 /* MFTextFieldStyle+BackgroundView.m in Sources */,
+				B0E155C01B414C8600D5A213 /* UITableViewCell+Binding.m in Sources */,
 				B0D45D2D1A5ED2F400C6D376 /* MFChainSaveDetailAction.m in Sources */,
 				B0D45D731A5ED2F400C6D376 /* MFNumberPicker.m in Sources */,
 				B0D45DE01A5ED2F400C6D376 /* MFInvalidUrlValueUIValidationError.m in Sources */,

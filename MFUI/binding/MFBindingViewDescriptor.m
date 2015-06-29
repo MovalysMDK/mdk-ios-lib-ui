@@ -31,8 +31,10 @@
     return self;
 }
 
-+(instancetype)viewDescriptorWithCellBindingFormat:(NSString *)format, ... {
++(instancetype)viewDescriptorWithIdentifier:(NSString *)viewIdentifier withViewHeight:(NSNumber *)viewHeight withViewBindingFormat:(NSString *)format, ...  NS_REQUIRES_NIL_TERMINATION {
     MFBindingViewDescriptor *viewDescriptor = [MFBindingViewDescriptor new];
+    viewDescriptor.viewIdentifier = viewIdentifier;
+    viewDescriptor.viewHeight = viewHeight;
     va_list args;
     va_start(args, format);
     viewDescriptor.controlsAttributes = [MFBindingFormatParser buildControlsAttributesDictionary:viewDescriptor.controlsAttributes fromVaList:args withFirstArg:format];
@@ -48,7 +50,16 @@
     return viewDescriptor;
 }
 
+
+#pragma mark - Consistency protocol
 -(BOOL)isConsistent {
     return YES;
 }
+
+
+#pragma mark - Custom methods
+-(NSString *)generatedBindingKey {
+    return [NSString stringWithFormat:@"%@_%@_%@", self.viewIdentifier, @(self.viewIndexPath.section), @(self.viewIndexPath.row)];
+}
+
 @end

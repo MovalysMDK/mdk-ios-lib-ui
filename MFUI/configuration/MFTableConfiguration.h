@@ -16,12 +16,14 @@
 
 #import <Foundation/Foundation.h>
 #import "MFBindingCellDescriptor.h"
+#import "MFBindingViewDescriptor.h"
 
 @protocol MFObjectWithBindingProtocol;
 
 FOUNDATION_EXPORT const NSString *SECTION_ORDER_KEY;
 FOUNDATION_EXPORT const NSString *CURRENT_SECTION_KEY;
 FOUNDATION_EXPORT const NSString *CELL_1D_DESCRIPTOR;
+FOUNDATION_EXPORT const NSString *SECTION_HEADER_VIEW_2D_DESCRIPTOR;
 
 
 /*!
@@ -66,4 +68,13 @@ FOUNDATION_EXPORT const NSString *CELL_1D_DESCRIPTOR;
  * @see MFBindingCellDescriptor
  */
 -(void) create1DTableCellWithDescriptor:(MFBindingCellDescriptor *)cellDescriptor;
+
+/*!
+ * @brief Creates a headerView section in the TableView configured by this object.
+ * @discussion This method must not be called to configure a Simple TableView Form
+ * but only for a FormList (2D)
+ * @param viewDescriptor The descriptor that describes the view to add
+ * @see MFBindingViewDescriptor
+ */
+-(void)create2DTableHeaderViewWithDescriptor:(MFBindingViewDescriptor *)viewDescriptor;
 @end

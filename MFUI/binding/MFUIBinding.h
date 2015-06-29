@@ -25,5 +25,7 @@
 #import "MFBindingDelegate.h"
 #import "MFBindingDictionary.h"
 #import "MFObjectWithBindingProtocol.h"
+#import "UITableViewCell+Binding.h"
+#import "MFBindingViewAbstract+Binding.h"
 
 #endif

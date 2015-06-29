@@ -16,7 +16,6 @@
 
 
 #import "MFBindingViewAbstract.h"
-
 @interface MFFormSectionHeaderView : MFBindingViewAbstract
 
 

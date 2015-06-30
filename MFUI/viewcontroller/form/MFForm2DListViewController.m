@@ -44,8 +44,6 @@
 #import "MFFormSectionHeaderView.h"
 #import "MFMapViewController.h"
 
-
-
 //Utils
 #import <MFCore/MFCoreI18n.h>
 #import "MFConstants.h"

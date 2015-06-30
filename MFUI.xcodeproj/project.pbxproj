@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B000D5161B42793E0018281E /* UIView+Binding.h in Headers */ = {isa = PBXBuildFile; fileRef = B000D5141B42793E0018281E /* UIView+Binding.h */; };
+		B000D5171B42793E0018281E /* UIView+Binding.m in Sources */ = {isa = PBXBuildFile; fileRef = B000D5151B42793E0018281E /* UIView+Binding.m */; };
 		B002B9A31B39AC470079DB12 /* MFControlChangedTargetDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = B002B9A11B39AC470079DB12 /* MFControlChangedTargetDescriptor.h */; };
 		B002B9A41B39AC470079DB12 /* MFControlChangedTargetDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = B002B9A21B39AC470079DB12 /* MFControlChangedTargetDescriptor.m */; };
 		B002B9A61B39AC670079DB12 /* MFControlChangesProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B002B9A51B39AC670079DB12 /* MFControlChangesProtocol.h */; };
@@ -510,8 +512,6 @@
 		B0D4C4C11B3816F60020ACF2 /* MFViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D4C4BD1B3816F60020ACF2 /* MFViewProtocol.h */; };
 		B0E155C01B414C8600D5A213 /* UITableViewCell+Binding.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E155BE1B414C8600D5A213 /* UITableViewCell+Binding.m */; };
 		B0E155C11B414C8600D5A213 /* UITableViewCell+Binding.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E155BF1B414C8600D5A213 /* UITableViewCell+Binding.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0E155C41B414C9900D5A213 /* MFBindingViewAbstract+Binding.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E155C21B414C9900D5A213 /* MFBindingViewAbstract+Binding.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0E155C51B414C9900D5A213 /* MFBindingViewAbstract+Binding.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E155C31B414C9900D5A213 /* MFBindingViewAbstract+Binding.m */; };
 		B0FC78E51B3A99EE00DD225F /* MFNumberPickerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78E31B3A99EE00DD225F /* MFNumberPickerWrapper.h */; };
 		B0FC78E61B3A99EE00DD225F /* MFNumberPickerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FC78E41B3A99EE00DD225F /* MFNumberPickerWrapper.m */; };
 		B0FC78E91B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78E71B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h */; };
@@ -548,6 +548,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B000D5141B42793E0018281E /* UIView+Binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Binding.h"; sourceTree = "<group>"; };
+		B000D5151B42793E0018281E /* UIView+Binding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Binding.m"; sourceTree = "<group>"; };
 		B002B9A11B39AC470079DB12 /* MFControlChangedTargetDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFControlChangedTargetDescriptor.h; sourceTree = "<group>"; };
 		B002B9A21B39AC470079DB12 /* MFControlChangedTargetDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFControlChangedTargetDescriptor.m; sourceTree = "<group>"; };
 		B002B9A51B39AC670079DB12 /* MFControlChangesProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFControlChangesProtocol.h; sourceTree = "<group>"; };
@@ -1055,8 +1057,6 @@
 		B0D4C4BD1B3816F60020ACF2 /* MFViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFViewProtocol.h; sourceTree = "<group>"; };
 		B0E155BE1B414C8600D5A213 /* UITableViewCell+Binding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Binding.m"; sourceTree = "<group>"; };
 		B0E155BF1B414C8600D5A213 /* UITableViewCell+Binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Binding.h"; sourceTree = "<group>"; };
-		B0E155C21B414C9900D5A213 /* MFBindingViewAbstract+Binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFBindingViewAbstract+Binding.h"; sourceTree = "<group>"; };
-		B0E155C31B414C9900D5A213 /* MFBindingViewAbstract+Binding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFBindingViewAbstract+Binding.m"; sourceTree = "<group>"; };
 		B0FC78E31B3A99EE00DD225F /* MFNumberPickerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFNumberPickerWrapper.h; sourceTree = "<group>"; };
 		B0FC78E41B3A99EE00DD225F /* MFNumberPickerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFNumberPickerWrapper.m; sourceTree = "<group>"; };
 		B0FC78E71B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPhotoThumbnailWrapper.h; sourceTree = "<group>"; };
@@ -1194,6 +1194,8 @@
 		B006CF001B32C25800B78782 /* binding */ = {
 			isa = PBXGroup;
 			children = (
+				B000D5141B42793E0018281E /* UIView+Binding.h */,
+				B000D5151B42793E0018281E /* UIView+Binding.m */,
 				B006CF031B32C25800B78782 /* MFBinding.h */,
 				B006CF041B32C25800B78782 /* MFBinding.m */,
 				B006CF011B32C25800B78782 /* MFBinding+Dispatcher.h */,
@@ -1212,8 +1214,6 @@
 				B006CF1B1B32C55600B78782 /* MFUIBinding.h */,
 				B0E155BF1B414C8600D5A213 /* UITableViewCell+Binding.h */,
 				B0E155BE1B414C8600D5A213 /* UITableViewCell+Binding.m */,
-				B0E155C21B414C9900D5A213 /* MFBindingViewAbstract+Binding.h */,
-				B0E155C31B414C9900D5A213 /* MFBindingViewAbstract+Binding.m */,
 			);
 			path = binding;
 			sourceTree = "<group>";
@@ -2323,7 +2323,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0E155C11B414C8600D5A213 /* UITableViewCell+Binding.h in Headers */,
-				B0E155C41B414C9900D5A213 /* MFBindingViewAbstract+Binding.h in Headers */,
 				B0129F701B3334BE0090B0AF /* MFUICommand.h in Headers */,
 				B0FFDB001B343D3300CA6E5E /* MFUIComponentProvider.h in Headers */,
 				B0129F651B3323940090B0AF /* MFSendEmailCommand.h in Headers */,
@@ -2607,6 +2606,7 @@
 				B032D0D71AB188CE001C114F /* MFUIErrorView.h in Headers */,
 				B0D45D841A5ED2F400C6D376 /* MFBarCodeScannerDelegate.h in Headers */,
 				B08EF72D1AE5407E00F3754E /* MFCreateEmailViewControllerDelegate.h in Headers */,
+				B000D5161B42793E0018281E /* UIView+Binding.h in Headers */,
 				B0D45D561A5ED2F400C6D376 /* MFUIControlImage.h in Headers */,
 				B0D4C4C11B3816F60020ACF2 /* MFViewProtocol.h in Headers */,
 				B0D45E221A5ED2F400C6D376 /* MFColorValueProcessing.h in Headers */,
@@ -2843,7 +2843,7 @@
 				B06F3E181B3962AF005170FC /* MFSliderWrapper.m in Sources */,
 				B006CF1A1B32C26900B78782 /* NSString+Utils.m in Sources */,
 				B0D45E311A5ED2F400C6D376 /* MFWorkspaceView.m in Sources */,
-				B0E155C51B414C9900D5A213 /* MFBindingViewAbstract+Binding.m in Sources */,
+				B000D5171B42793E0018281E /* UIView+Binding.m in Sources */,
 				B0D45E7F1A5ED2F400C6D376 /* MFPositionViewModel.m in Sources */,
 				B08AAC4D1AE919F30029EC88 /* MFIntegerTextField.m in Sources */,
 				B037F8CF1B0DC84D005C12F2 /* MFAlertViewManager.m in Sources */,

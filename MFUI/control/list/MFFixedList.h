@@ -19,6 +19,7 @@
 
 #import "MFUIOldBaseComponent.h"
 #import "MFFixedListDataDelegate.h"
+#import "MFFixedListExtension.h"
 
 /*!
  * @class MFFixedList
@@ -30,16 +31,7 @@
 @interface MFFixedList : MFUIOldBaseComponent
 
 #pragma mark - Custom enumeration (edit mode options)
-/*!
- * @typedef MFFixedListEditMode
- * @brief Cette structure définit le mode d'édition de la liste
- * @constant MFFixedListEditModePopup La liste est éditable via une popup
- * @constant MFFixedListEditModeDirect La liste est directement éditable.
- */
-typedef enum {
-    MFFixedListEditModePopup=0,
-    MFFixedListEditModeDirect=1
-} MFFixedListEditMode;
+
 
 
 /*!
@@ -57,6 +49,8 @@ typedef enum {
 
 
 #pragma mark - Propriétés
+
+@property (nonatomic, strong) MFFixedListExtension *mf;
 
 /*!
  * @brief Le tableau contenant les données de la Liste éditable
@@ -77,6 +71,11 @@ typedef enum {
  * @brief bouton d'ajout d'item
  */
 @property (nonatomic, strong) UIButton *addButton;
+
+/*!
+ * @brief bouton d'édition
+ */
+@property (nonatomic, strong) UIButton *editButton;
 
 /*!
  * @brief Le mode d'édition de cette liste (@see MFFixedListEditMode)
@@ -212,4 +211,5 @@ typedef enum {
 
 /// !!! Doit être déclaré à la fin, ne pas bouger.
 #import "MFFixedList+UITableViewForwarding.h"
+
 

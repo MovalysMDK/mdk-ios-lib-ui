@@ -29,6 +29,7 @@
 #import "MFViewControllerAttributes.h"
 #import "MFTableConfiguration.h"
 #import "UITableViewCell+Binding.h"
+#import "NSIndexPath+Utils.h"
 
 @protocol MFFormCellProtocol;
 @class MFFormSearchViewController;
@@ -119,6 +120,10 @@ FOUNDATION_EXPORT NSString *const MF_BINDABLE_PROPERTIES;
  */
 -(NSString *)dataLoaderName;
 
+/*!
+ * @brief Used to create the binding structure of this object with binding
+ * @discussion Use a configuration to create the binding structure
+ */
 -(void) createBindingStructure;
 
 

@@ -56,11 +56,21 @@
  * @brief Initializes a new cell descriptor object with the given identifer and the given binding as format,
  * and returns it to the caller
  * @param identifier The storyboard-identifier of the TableViewCell described by this object.
+ * @param height The height of the view to bind
  * @param format,...  A variadic parameter that describes the binding of the TableViewCell described by this object.
  * It will be converted to this bindingDictionary property.
  * @return The built MFBindingCellDescriptor instance.
  */
 +(instancetype)viewDescriptorWithIdentifier:(NSString *)viewIdentifier withViewHeight:(NSNumber *)viewHeight withViewBindingFormat:(NSString *)format, ... NS_REQUIRES_NIL_TERMINATION;
+
+/*!
+ * @brief Initializes a new cell descriptor object with the given binding as format,
+ * and returns it to the caller
+ * @param format,...  A variadic parameter that describes the binding of the TableViewCell described by this object.
+ * It will be converted to this bindingDictionary property.
+ * @return The built MFBindingCellDescriptor instance.
+ */
++(instancetype)viewDescriptorWithBindingFormat:(NSString *)format, ... NS_REQUIRES_NIL_TERMINATION;
 
 -(NSString *)generatedBindingKey;
 @end

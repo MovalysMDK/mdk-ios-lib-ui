@@ -50,6 +50,23 @@
     return viewDescriptor;
 }
 
++(instancetype)viewDescriptorWithBindingFormat:(NSString *)format, ... NS_REQUIRES_NIL_TERMINATION {
+    MFBindingViewDescriptor *viewDescriptor = [MFBindingViewDescriptor new];
+    va_list args;
+    va_start(args, format);
+    viewDescriptor.controlsAttributes = [MFBindingFormatParser buildControlsAttributesDictionary:viewDescriptor.controlsAttributes fromVaList:args withFirstArg:format];
+    va_end(args);
+    
+    va_start(args, format);
+    viewDescriptor.associatedLabels = [MFBindingFormatParser buildAssociatedLabelsDictionary:viewDescriptor.associatedLabels fromVaList:args withFirstArg:format];
+    va_end(args);
+    
+    va_start(args, format);
+    viewDescriptor.viewBinding = [MFBindingFormatParser bindingDictionaryFromVaList:args withFirstArg:format];
+    va_end(args);
+    return viewDescriptor;
+}
+
 
 #pragma mark - Consistency protocol
 -(BOOL)isConsistent {

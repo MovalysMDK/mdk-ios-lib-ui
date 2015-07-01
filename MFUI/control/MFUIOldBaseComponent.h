@@ -42,6 +42,7 @@
 //Tooltip
 #import "MFUIControlTooltip.h"
 #import "MFUIError.h"
+#import "UIView+Binding.h"
 
 
 @protocol MFUIComponentProtocol;

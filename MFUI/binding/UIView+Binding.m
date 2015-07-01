@@ -49,4 +49,8 @@
         }
     }
 }
+
+-(void)didBinded {
+    //Does nothing
+}
 @end

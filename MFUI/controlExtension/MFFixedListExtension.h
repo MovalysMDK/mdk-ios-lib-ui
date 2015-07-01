@@ -14,23 +14,25 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-#import <UIKit/UIKit.h>
-#import "MFObjectWithBindingProtocol.h"
-#import "MFBindingViewDescriptor.h"
-#import "MFBindingViewAbstract.h"
-
-@interface UIView (Binding)
+#import <Foundation/Foundation.h>
 
 /*!
- * @brief Allows to bind this cell from a given descriptor to the given object
- * @param bindingCellDescriptor The binding cell descriptor used to bind this cell
- * @param objectWithBinding An object that conforms the MFObjectWithBindingProtocol protocol, this cell will be binded to
+ * @typedef MFFixedListEditMode
+ * @brief Cette structure définit le mode d'édition de la liste
+ * @constant MFFixedListEditModePopup La liste est éditable via une popup
+ * @constant MFFixedListEditModeDirect La liste est directement éditable.
  */
--(void)bindViewFromDescriptor:(MFBindingViewDescriptor *)bindingViewDescriptor onObjectWithBinding:(id<MFObjectWithBindingProtocol>)objectWithBinding;
+typedef enum {
+    MFFixedListEditModePopup=0,
+    MFFixedListEditModeDirect=1
+} MFFixedListEditMode;
 
-/*!
- * @brief Performs some treatments the view is binded
- */
--(void) didBinded;
+@interface MFFixedListExtension : NSObject
+
+@property (nonatomic) BOOL canAddItem;
+@property (nonatomic) BOOL canEditItem;
+@property (nonatomic) BOOL canDeleteItem;
+@property (nonatomic) BOOL isPhotoFixedList;
+@property (nonatomic) MFFixedListEditMode editMode;
+
 @end

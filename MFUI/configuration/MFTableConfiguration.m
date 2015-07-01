@@ -23,6 +23,7 @@ const NSString *SECTION_ORDER_KEY = @"sectionOrder";
 const NSString *CURRENT_SECTION_KEY = @"currentSection";
 const NSString *CELL_1D_DESCRIPTOR = @"CELL_1D_DESCRIPTOR";
 const NSString *SECTION_HEADER_VIEW_2D_DESCRIPTOR = @"SECTION_HEADER_VIEW_2D_DESCRIPTOR";
+const NSString *CELL_FIXEDLIST_DESCRIPTOR = @"CELL_FIXEDLIST_DESCRIPTOR";
 
 @interface MFTableConfiguration ()
 
@@ -97,6 +98,10 @@ const NSString *SECTION_HEADER_VIEW_2D_DESCRIPTOR = @"SECTION_HEADER_VIEW_2D_DES
 
 -(void)create1DTableCellWithDescriptor:(MFBindingCellDescriptor *)cellDescriptor {
     [[self currentStructure] setObject:cellDescriptor forKey:CELL_1D_DESCRIPTOR];
+}
+
+-(void)createFixedListTableCellWithDescriptor:(MFBindingCellDescriptor *)cellDescriptor {
+    [[self currentStructure] setObject:cellDescriptor forKey:CELL_FIXEDLIST_DESCRIPTOR];
 }
 
 -(void)create2DTableHeaderViewWithDescriptor:(MFBindingViewDescriptor *)viewDescriptor {

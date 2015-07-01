@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		B000D5161B42793E0018281E /* UIView+Binding.h in Headers */ = {isa = PBXBuildFile; fileRef = B000D5141B42793E0018281E /* UIView+Binding.h */; };
 		B000D5171B42793E0018281E /* UIView+Binding.m in Sources */ = {isa = PBXBuildFile; fileRef = B000D5151B42793E0018281E /* UIView+Binding.m */; };
+		B000D51A1B42837A0018281E /* MFFixedListWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B000D5181B42837A0018281E /* MFFixedListWrapper.h */; };
+		B000D51B1B42837A0018281E /* MFFixedListWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B000D5191B42837A0018281E /* MFFixedListWrapper.m */; };
+		B000D51E1B42B7420018281E /* NSIndexPath+Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = B000D51C1B42B7420018281E /* NSIndexPath+Utils.h */; };
+		B000D51F1B42B7420018281E /* NSIndexPath+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B000D51D1B42B7420018281E /* NSIndexPath+Utils.m */; };
 		B002B9A31B39AC470079DB12 /* MFControlChangedTargetDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = B002B9A11B39AC470079DB12 /* MFControlChangedTargetDescriptor.h */; };
 		B002B9A41B39AC470079DB12 /* MFControlChangedTargetDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = B002B9A21B39AC470079DB12 /* MFControlChangedTargetDescriptor.m */; };
 		B002B9A61B39AC670079DB12 /* MFControlChangesProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B002B9A51B39AC670079DB12 /* MFControlChangesProtocol.h */; };
@@ -65,6 +69,8 @@
 		B0129F701B3334BE0090B0AF /* MFUICommand.h in Headers */ = {isa = PBXBuildFile; fileRef = B0129F671B33239D0090B0AF /* MFUICommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0129F731B33362C0090B0AF /* MFEmail.h in Headers */ = {isa = PBXBuildFile; fileRef = B0129F711B33362C0090B0AF /* MFEmail.h */; };
 		B0129F741B33362C0090B0AF /* MFEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = B0129F721B33362C0090B0AF /* MFEmail.m */; };
+		B01461F61B4445DB00008874 /* MFPhotoFixedListWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B01461F41B4445DB00008874 /* MFPhotoFixedListWrapper.h */; };
+		B01461F71B4445DB00008874 /* MFPhotoFixedListWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B01461F51B4445DB00008874 /* MFPhotoFixedListWrapper.m */; };
 		B0183FFD1AB09E530081133F /* MFButton+MFButtonExt.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FF61AB09E530081133F /* MFButton+MFButtonExt.h */; };
 		B0183FFE1AB09E530081133F /* MFButton+MFButtonExt.m in Sources */ = {isa = PBXBuildFile; fileRef = B0183FF71AB09E530081133F /* MFButton+MFButtonExt.m */; };
 		B0183FFF1AB09E530081133F /* MFButton+UIButtonForwarding.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FF81AB09E530081133F /* MFButton+UIButtonForwarding.h */; };
@@ -107,6 +113,12 @@
 		B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */; };
 		B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */; };
 		B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */; };
+		B08528851B43F18A00B46194 /* MFDoubleTextFieldWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B08528831B43F18A00B46194 /* MFDoubleTextFieldWrapper.h */; };
+		B08528861B43F18A00B46194 /* MFDoubleTextFieldWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B08528841B43F18A00B46194 /* MFDoubleTextFieldWrapper.m */; };
+		B08528891B441EC400B46194 /* MFFixedListExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = B08528871B441EC400B46194 /* MFFixedListExtension.h */; };
+		B085288A1B441EC400B46194 /* MFFixedListExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B08528881B441EC400B46194 /* MFFixedListExtension.m */; };
+		B085288D1B44283200B46194 /* edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B085288B1B44283200B46194 /* edit@2x.png */; };
+		B085288E1B44283200B46194 /* no_edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B085288C1B44283200B46194 /* no_edit@2x.png */; };
 		B08AAC481AE919410029EC88 /* MFDoubleTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B08AAC461AE919410029EC88 /* MFDoubleTextField.h */; };
 		B08AAC491AE919410029EC88 /* MFDoubleTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B08AAC471AE919410029EC88 /* MFDoubleTextField.m */; };
 		B08AAC4C1AE919F30029EC88 /* MFIntegerTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B08AAC4A1AE919F30029EC88 /* MFIntegerTextField.h */; };
@@ -550,6 +562,10 @@
 /* Begin PBXFileReference section */
 		B000D5141B42793E0018281E /* UIView+Binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Binding.h"; sourceTree = "<group>"; };
 		B000D5151B42793E0018281E /* UIView+Binding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Binding.m"; sourceTree = "<group>"; };
+		B000D5181B42837A0018281E /* MFFixedListWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFixedListWrapper.h; sourceTree = "<group>"; };
+		B000D5191B42837A0018281E /* MFFixedListWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFixedListWrapper.m; sourceTree = "<group>"; };
+		B000D51C1B42B7420018281E /* NSIndexPath+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+Utils.h"; sourceTree = "<group>"; };
+		B000D51D1B42B7420018281E /* NSIndexPath+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+Utils.m"; sourceTree = "<group>"; };
 		B002B9A11B39AC470079DB12 /* MFControlChangedTargetDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFControlChangedTargetDescriptor.h; sourceTree = "<group>"; };
 		B002B9A21B39AC470079DB12 /* MFControlChangedTargetDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFControlChangedTargetDescriptor.m; sourceTree = "<group>"; };
 		B002B9A51B39AC670079DB12 /* MFControlChangesProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFControlChangesProtocol.h; sourceTree = "<group>"; };
@@ -605,6 +621,8 @@
 		B0129F6D1B332F630090B0AF /* UIView+ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ViewController.m"; sourceTree = "<group>"; };
 		B0129F711B33362C0090B0AF /* MFEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFEmail.h; sourceTree = "<group>"; };
 		B0129F721B33362C0090B0AF /* MFEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFEmail.m; sourceTree = "<group>"; };
+		B01461F41B4445DB00008874 /* MFPhotoFixedListWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPhotoFixedListWrapper.h; sourceTree = "<group>"; };
+		B01461F51B4445DB00008874 /* MFPhotoFixedListWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPhotoFixedListWrapper.m; sourceTree = "<group>"; };
 		B0183FF61AB09E530081133F /* MFButton+MFButtonExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFButton+MFButtonExt.h"; sourceTree = "<group>"; };
 		B0183FF71AB09E530081133F /* MFButton+MFButtonExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFButton+MFButtonExt.m"; sourceTree = "<group>"; };
 		B0183FF81AB09E530081133F /* MFButton+UIButtonForwarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFButton+UIButtonForwarding.h"; sourceTree = "<group>"; };
@@ -648,6 +666,12 @@
 		B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUIErrorView.xib; sourceTree = "<group>"; };
 		B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUILabel.xib; sourceTree = "<group>"; };
 		B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUITextField.xib; sourceTree = "<group>"; };
+		B08528831B43F18A00B46194 /* MFDoubleTextFieldWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDoubleTextFieldWrapper.h; sourceTree = "<group>"; };
+		B08528841B43F18A00B46194 /* MFDoubleTextFieldWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDoubleTextFieldWrapper.m; sourceTree = "<group>"; };
+		B08528871B441EC400B46194 /* MFFixedListExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFixedListExtension.h; sourceTree = "<group>"; };
+		B08528881B441EC400B46194 /* MFFixedListExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFixedListExtension.m; sourceTree = "<group>"; };
+		B085288B1B44283200B46194 /* edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@2x.png"; sourceTree = "<group>"; };
+		B085288C1B44283200B46194 /* no_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_edit@2x.png"; sourceTree = "<group>"; };
 		B08AAC461AE919410029EC88 /* MFDoubleTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDoubleTextField.h; sourceTree = "<group>"; };
 		B08AAC471AE919410029EC88 /* MFDoubleTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDoubleTextField.m; sourceTree = "<group>"; };
 		B08AAC4A1AE919F30029EC88 /* MFIntegerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFIntegerTextField.h; sourceTree = "<group>"; };
@@ -1187,6 +1211,12 @@
 				B0266AE41B3C07780007E1EA /* UISliderWrapper.m */,
 				B09CAC431B3D55F50067A8DE /* MFIntegerTextFieldWrapper.h */,
 				B09CAC441B3D55F50067A8DE /* MFIntegerTextFieldWrapper.m */,
+				B000D5181B42837A0018281E /* MFFixedListWrapper.h */,
+				B000D5191B42837A0018281E /* MFFixedListWrapper.m */,
+				B08528831B43F18A00B46194 /* MFDoubleTextFieldWrapper.h */,
+				B08528841B43F18A00B46194 /* MFDoubleTextFieldWrapper.m */,
+				B01461F41B4445DB00008874 /* MFPhotoFixedListWrapper.h */,
+				B01461F51B4445DB00008874 /* MFPhotoFixedListWrapper.m */,
 			);
 			path = wrapper;
 			sourceTree = "<group>";
@@ -1452,6 +1482,8 @@
 		B0D0EFF01AE78B250008C59A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B085288B1B44283200B46194 /* edit@2x.png */,
+				B085288C1B44283200B46194 /* no_edit@2x.png */,
 				B0C9B29E1AFA155200FC9665 /* browser_icon.png */,
 				B0C9B29F1AFA155200FC9665 /* mail_icon.png */,
 				B0C9B2A01AFA155200FC9665 /* phone_icon.png */,
@@ -1873,6 +1905,8 @@
 				B0D45C3B1A5ED2F300C6D376 /* MFRegularExpressionTextFieldExtension.m */,
 				B0D45C3C1A5ED2F300C6D376 /* MFRegexTextExtensionProtocol.h */,
 				B0D45C3E1A5ED2F300C6D376 /* MFUIControlExtension.h */,
+				B08528871B441EC400B46194 /* MFFixedListExtension.h */,
+				B08528881B441EC400B46194 /* MFFixedListExtension.m */,
 			);
 			path = controlExtension;
 			sourceTree = "<group>";
@@ -2031,6 +2065,8 @@
 				B0D45C9B1A5ED2F400C6D376 /* MFVersionManager.h */,
 				B0D45C9C1A5ED2F400C6D376 /* MFVersionManager.m */,
 				B0D45C9D1A5ED2F400C6D376 /* processing */,
+				B000D51C1B42B7420018281E /* NSIndexPath+Utils.h */,
+				B000D51D1B42B7420018281E /* NSIndexPath+Utils.m */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -2335,6 +2371,7 @@
 				B0D45D9B1A5ED2F400C6D376 /* MFSwitch.h in Headers */,
 				B0FFDB151B3470DD00CA6E5E /* MFLengthFieldValidator.h in Headers */,
 				B0C28DF91AE647BF00640748 /* MFComponentBindingProtocol.h in Headers */,
+				B01461F61B4445DB00008874 /* MFPhotoFixedListWrapper.h in Headers */,
 				B0AF66FD1AE64E1400A472FC /* MFCommonControlDelegate.h in Headers */,
 				B006CF0E1B32C25800B78782 /* MFBinding.h in Headers */,
 				B006CF0C1B32C25800B78782 /* MFBinding+Dispatcher.h in Headers */,
@@ -2346,6 +2383,7 @@
 				B0D45E661A5ED2F400C6D376 /* MFViewControllerDelegate.h in Headers */,
 				B0D45D191A5ED2F400C6D376 /* MFAbstractPersistentDeleteDetailAction.h in Headers */,
 				B0D45D7F1A5ED2F400C6D376 /* MFPosition.h in Headers */,
+				B08528851B43F18A00B46194 /* MFDoubleTextFieldWrapper.h in Headers */,
 				B006CF191B32C26900B78782 /* NSString+Utils.h in Headers */,
 				B0D45E7C1A5ED2F400C6D376 /* MFPhotoViewModel.h in Headers */,
 				B0D45E241A5ED2F400C6D376 /* MFDictionaryValueProcessing.h in Headers */,
@@ -2526,14 +2564,17 @@
 				B00787CA1AB1E37A009F6D95 /* JDFTooltipView.h in Headers */,
 				B0D45D251A5ED2F400C6D376 /* MFUIAction.h in Headers */,
 				B0D45D601A5ED2F400C6D376 /* MFFixedListDataDelegate.h in Headers */,
+				B08528891B441EC400B46194 /* MFFixedListExtension.h in Headers */,
 				B0266AE21B3BE7BA0007E1EA /* MFComponentAttributesProtocol.h in Headers */,
 				B0C9B2CD1AFA21E700FC9665 /* MFLabelStyle.h in Headers */,
 				B0FFDAFE1B343D3300CA6E5E /* MFSimpleComponentProvider.h in Headers */,
 				B0129F731B33362C0090B0AF /* MFEmail.h in Headers */,
+				B000D51A1B42837A0018281E /* MFFixedListWrapper.h in Headers */,
 				B006CEED1B32C1E700B78782 /* MFViewModelConfiguration.h in Headers */,
 				B0D45DEC1A5ED2F400C6D376 /* MFUIValidationBusinessError.h in Headers */,
 				B006CEEB1B32C1E700B78782 /* MFTableConfiguration.h in Headers */,
 				B0D45E331A5ED2F400C6D376 /* MFContainerViewController.h in Headers */,
+				B000D51E1B42B7420018281E /* NSIndexPath+Utils.h in Headers */,
 				B002B9A61B39AC670079DB12 /* MFControlChangesProtocol.h in Headers */,
 				B0D45D791A5ED2F400C6D376 /* MFPhotoThumbnail.h in Headers */,
 				B051A3C41B0F5E2800F4F99C /* MFUIAlertView.h in Headers */,
@@ -2725,7 +2766,9 @@
 				B0C9B2A21AFA155200FC9665 /* browser_icon.png in Resources */,
 				B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */,
 				B0D0EFF81AE7988F0008C59A /* phone_icon@2x.png in Resources */,
+				B085288D1B44283200B46194 /* edit@2x.png in Resources */,
 				B0CFEA771AEE6FF800279631 /* qrcode_icon@2x.png in Resources */,
+				B085288E1B44283200B46194 /* no_edit@2x.png in Resources */,
 				B076BEE01ABC565200756351 /* Pods.release.xcconfig in Resources */,
 				B0D0EFF41AE78B250008C59A /* browser_icon@2x.png in Resources */,
 				B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */,
@@ -2841,6 +2884,7 @@
 				B0D45E7B1A5ED2F400C6D376 /* MFDefaultViewModelCreator.m in Sources */,
 				B0D45DE41A5ED2F400C6D376 /* MFNoMatchingValueUIValidationError.m in Sources */,
 				B06F3E181B3962AF005170FC /* MFSliderWrapper.m in Sources */,
+				B01461F71B4445DB00008874 /* MFPhotoFixedListWrapper.m in Sources */,
 				B006CF1A1B32C26900B78782 /* NSString+Utils.m in Sources */,
 				B0D45E311A5ED2F400C6D376 /* MFWorkspaceView.m in Sources */,
 				B000D5171B42793E0018281E /* UIView+Binding.m in Sources */,
@@ -2940,6 +2984,7 @@
 				B0D45E431A5ED2F400C6D376 /* MFDeckViewController.m in Sources */,
 				B0D45DBB1A5ED2F400C6D376 /* InvalidTooltipView.m in Sources */,
 				B0D45DE61A5ED2F400C6D376 /* MFTooLongStringUIValidationError.m in Sources */,
+				B08528861B43F18A00B46194 /* MFDoubleTextFieldWrapper.m in Sources */,
 				B0D45D1A1A5ED2F400C6D376 /* MFAbstractPersistentDeleteDetailAction.m in Sources */,
 				B0D45D211A5ED2F400C6D376 /* MFEmailLogsAction.m in Sources */,
 				B0D45E411A5ED2F400C6D376 /* MFWorkspaceViewController.m in Sources */,
@@ -2981,6 +3026,7 @@
 				B0D45D321A5ED2F400C6D376 /* MFUpdateVMWithDataLoaderAction.m in Sources */,
 				B0D45E141A5ED2F400C6D376 /* MFHelperFile.m in Sources */,
 				B0D45E2A1A5ED2F400C6D376 /* MFBindingViewAbstract.m in Sources */,
+				B085288A1B441EC400B46194 /* MFFixedListExtension.m in Sources */,
 				B0C9B2CE1AFA21E700FC9665 /* MFLabelStyle.m in Sources */,
 				B0D45DD31A5ED2F400C6D376 /* MFNumberConverter.m in Sources */,
 				B0D45E1D1A5ED2F400C6D376 /* MFVersionManager.m in Sources */,
@@ -2994,6 +3040,7 @@
 				B0D45E4E1A5ED2F400C6D376 /* MFForm3DListViewController.m in Sources */,
 				B0D45DC91A5ED2F400C6D376 /* MFRegularExpressionTextFieldExtension.m in Sources */,
 				B00787C61AB1E37A009F6D95 /* JDFSequentialTooltipManager.m in Sources */,
+				B000D51F1B42B7420018281E /* NSIndexPath+Utils.m in Sources */,
 				B0D45E1F1A5ED2F400C6D376 /* MFAlignmentValueProcessing.m in Sources */,
 				B0D45D691A5ED2F400C6D376 /* MFSimplePickerList.m in Sources */,
 				B0D45D781A5ED2F400C6D376 /* MFPhotoState.m in Sources */,
@@ -3014,6 +3061,7 @@
 				B0D45E831A5ED2F400C6D376 /* MFUIBaseViewModel.m in Sources */,
 				B0D45E371A5ED2F400C6D376 /* MFMultiPanelViewController.m in Sources */,
 				B0D45D891A5ED2F400C6D376 /* MFBarCodeScanViewController.m in Sources */,
+				B000D51B1B42837A0018281E /* MFFixedListWrapper.m in Sources */,
 				B0D45D6C1A5ED2F400C6D376 /* MFUIBaseComponent.m in Sources */,
 				B0D45D711A5ED2F400C6D376 /* MFViewTags.m in Sources */,
 				B0D45D971A5ED2F400C6D376 /* MFSlider.m in Sources */,

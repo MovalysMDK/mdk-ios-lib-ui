@@ -64,4 +64,9 @@
  */
 -(NSDictionary *) nilValueBySelector;
 
+/*!
+ * @brief Dispatch to the view hold by the wrapper that its binded
+ */
+-(void) dispatchDidBinded;
+
 @end

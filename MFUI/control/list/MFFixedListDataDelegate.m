@@ -48,8 +48,12 @@
 #import "MFFormWithDetailViewControllerProtocol.h"
 #import "MFFormBaseViewController.h"
 
+
+#import "MFAbstractComponentWrapper.h"
+#import "MFObjectWithBindingProtocol.h"
+
 //FIXME : A supprimer ?
-const static int TABLEVIEW_RESIZE_OFFSET = 0;
+const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 
 
 @interface MFFixedListDataDelegate ()
@@ -66,6 +70,8 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
 @implementation MFFixedListDataDelegate
 @synthesize viewModel = _viewModel;
 @synthesize formValidation = _formValidation;
+@synthesize bindingDelegate = _bindingDelegate;
+
 
 
 #pragma mark - Initialization
@@ -81,62 +87,14 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
 
 -(void) initialize {
     self.formValidation = [[MFFormValidationDelegate alloc] initWithFormController:self];
+    [self initializeBinding];
+    [self initializeModel];
 }
 
 
 
 
 #pragma mark - Initialisation des composants graphiques
-
-/**
- * @brief Cette méthode permet de redessiner cette cellule pour l'adapter à la taille de la liste qu'elle contient
- * On calcule la taille totale du contenu de la liste éditable (contentSize), et on affecte au controller qui tient cette cellule
- * la nouvelle taille calculée de cette cellule. On redessine cette cellule et on rafraîchit la tableView qui contient cette cellule
- * pour obtenir la bonne taille
- * @param tableView La liste éditable dont on veut récupérer la taille du contenu
- */
--(void) redrawSelfWithTableView:(UITableView *)tableView {
-    
-    if(!self.hasBeenReload && self.fixedList.cellContainer) {
-        
-        //On récupère la taille actuelle de la liste interne de l'éditableList, et la taille de la cellule
-        CGRect fixedListViewframe = self.fixedList.frame;
-        fixedListViewframe.size.width = tableView.frame.size.width;
-        
-        CGRect cellFrame = ((MFCellAbstract *)self.fixedList.cellContainer).frame;
-        
-        //On enlève à la taille de la cellule la hauteur de la taille actuelle de la liste interne (cela afin
-        // d'avoir la taille de la cellule sans la liste).
-        cellFrame.size.height = cellFrame.size.height - fixedListViewframe.size.height;
-        
-        //On affecte la valeur de la taille totale du contenu à la taille de la liste interne.
-        // Ainsi la TableView a deja la bonne taille, tous les cellules de la liste interne seront forcément chargées et
-        // il n'y aura pas de scroll
-        fixedListViewframe.size.height = self.fixedList.tableView.contentSize.height + [self sizeForCustomButtons].height;
-        self.fixedList.frame = fixedListViewframe;
-        self.fixedList.contentSize = CGSizeMake(fixedListViewframe.size.width, fixedListViewframe.size.height);
-        
-        //On calcule alors la taille de cette cellule (self, cellule du FormViewController) en y ajoutant la taille
-        // de la liste interne précédement calculée, et on stocke la taille de self dans le controller parent.
-        // Ce dernier va être rechargé (tableView reloadData) et va ainsi attribuer la bonne hauteur à cette cellule.
-        int finalHeight = cellFrame.size.height + fixedListViewframe.size.height - TABLEVIEW_RESIZE_OFFSET;
-        [self.formController setCellHeight:finalHeight atIndexPath:((MFCellAbstract *)self.fixedList.cellContainer).cellIndexPath];
-        
-        //Après les modification faites, on recharge la liste interne (fixedList) de cette cellule et on indique
-        //au dataSource de cette liste interne (self) que la liste interne a déja été rechargée, afin de ne pas boucler.
-        self.hasBeenReload = YES;
-        
-    }
-    else {
-        int newHeight = self.fixedList.tableView.contentSize.height + [self sizeForCustomButtons].height;
-        [self.fixedList changeDynamicHeight:newHeight];
-    }
-    [self.fixedList updateConstraintsIfNeeded];
-    if(self.fixedList.cellContainer) {
-        [((MFCellAbstract *)self.fixedList.cellContainer) updateConstraintsIfNeeded];
-    }
-}
-
 
 #pragma mark - UITableViewDataSource & Delegate
 
@@ -160,50 +118,71 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell;
     
-    //Création ou récupération de la cellule
-//    [tableView registerNib:[UINib nibWithNibName:currentGd.uitype bundle:nil] forCellReuseIdentifier:currentGd.uitype];
+    if(!self.bindingDelegate.structure) {
+        return [[UITableViewCell alloc] init];
+    }
+    MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_FIXEDLIST_DESCRIPTOR];
+    NSString *identifier = bindingData.cellIdentifier;
+    [tableView registerNib:[UINib nibWithNibName:identifier bundle:nil] forCellReuseIdentifier:identifier];
     
-//       cell.selectionStyle =
-//    (self.fixedList.mf.editMode == MFFixedListEditModePopup && self.fixedList.mf.canEditItem) ? UITableViewCellSelectionStyleBlue :
-//    UITableViewCellSelectionStyleNone;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-//    if(self.fixedList.editMode == MFFixedListEditModePopup && self.fixedList.mf.canEditItem) {
-//        
-//        cell.accessoryType = [cell accessoryType];
-//        cell.editingAccessoryType = [cell accessoryType];
-//    }
+    
+    bindingData.cellIndexPath = indexPath;
+    [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
+    [self updateCellFromBindingData:bindingData atIndexPath:indexPath];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if(self.fixedList.cellContainer) {
             [((MFCellAbstract *)self.fixedList.cellContainer) updateConstraints];
         }
-        else {
-            [self redrawSelfWithTableView:tableView];
-        }
     });
     
-//    [cell cellIsConfigured];
+    if([cell isKindOfClass:[MFCellAbstract class]]) {
+        [(MFCellAbstract *)cell cellIsConfigured];
+    }
     return cell;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_FIXEDLIST_DESCRIPTOR];
+    return [bindingData.cellHeight floatValue];
+}
+
+-(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_FIXEDLIST_DESCRIPTOR];
+    if(bindingData) {
+        [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingData generatedBindingKey]];
+    }
+}
+
+
+-(void) updateCellFromBindingData:(MFBindingCellDescriptor *)bindingData atIndexPath:(NSIndexPath *)indexPath{
+    NSArray *bindingValues = [self.bindingDelegate bindingValuesForCellBindingKey:[bindingData generatedBindingKey]];
+    for(MFBindingValue *bindingValue in bindingValues) {
+        bindingValue.wrapper.wrapperIndexPath = indexPath;
+        [self.bindingDelegate.binding dispatchValue:[[self viewModelAtIndexPath:indexPath] valueForKeyPath:bindingValue.abstractBindedPropertyName] fromPropertyName:bindingValue.abstractBindedPropertyName atIndexPath:indexPath fromSource:bindingValue.bindingSource];
+    }
+    
 }
 
 /**
  * @brief Indique que cette cellule est éditable
  */
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return self.fixedList.mf.canDeleteItem;
-    
-    //PROTODO : Can edit
-    return YES;
+    return self.fixedList.mf.canDeleteItem;
 }
+
+
 
 
 /**
  * @brief Indique que cette cellule peut être déplacée
  */
 -(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    return NO;
 }
 
 
@@ -235,12 +214,12 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
         viewModel.hasChanged = YES ;
         [self.fixedList setDataAfterEdition:viewModel];
         self.hasBeenReload = NO;    //Permet de recharger les données lors de l'appel à reloadData dans le block
-                
+        
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
         //PROTODO
-//        NSString *deleteItemListenerName = ((MFFieldDescriptor *)self.fixedList.selfDescriptor).deleteItemListener;
-//        [self performSelectorFromMethodName:deleteItemListenerName onActionAtIndexPath:indexPath];
+        //        NSString *deleteItemListenerName = ((MFFieldDescriptor *)self.fixedList.selfDescriptor).deleteItemListener;
+        //        [self performSelectorFromMethodName:deleteItemListenerName onActionAtIndexPath:indexPath];
         
         
     }
@@ -249,17 +228,18 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
     // Exécution du block
     [CATransaction commit];
     [self.fixedList.tableView reloadData];
-    [self redrawSelfWithTableView:self.fixedList.tableView];
+    [self computeCellHeightAndDispatchToFormController];
+    
     [self.HUD hide:YES];
     
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if(!self.fixedList.mf.canEditItem)
-//        return;
-//    
-//    if(self.fixedList.mf.editMode == MFFixedListEditModePopup) {
-    //PROTODO : MF ?
+    if(!self.fixedList.mf.canEditItem)
+        return;
+    
+    if(self.fixedList.mf.editMode == MFFixedListEditModePopup) {
+        //PROTODO : MF ?
         
         
         // Getting the parent controller of this form which will push the detail controller in its navigationController.
@@ -274,9 +254,9 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
         tempViewModel.parentViewModel = self.viewModel;
         //Displaying the detail controller
         [nextController setOriginalViewModel:tempViewModel];
-
+        
         [((UIViewController *)parentController).navigationController pushViewController:nextController animated:YES];
-//    }
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
@@ -318,13 +298,13 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
 
 -(void) callEditItemListenerAtIndexPath:(NSIndexPath *)indexPath {
     //PROTODO
-//    NSString *customEditItemListener = ((MFFieldDescriptor *)self.fixedList.selfDescriptor).editItemListener;
-//    customEditItemListener = [customEditItemListener stringByAppendingString:@"AtIndexPath:"];
-//    if(customEditItemListener) {
-//        if( [self respondsToSelector:NSSelectorFromString(customEditItemListener)]) {
-//            [self performSelector:NSSelectorFromString(customEditItemListener) withObject:indexPath];
-//        }
-//    }
+    //    NSString *customEditItemListener = ((MFFieldDescriptor *)self.fixedList.selfDescriptor).editItemListener;
+    //    customEditItemListener = [customEditItemListener stringByAppendingString:@"AtIndexPath:"];
+    //    if(customEditItemListener) {
+    //        if( [self respondsToSelector:NSSelectorFromString(customEditItemListener)]) {
+    //            [self performSelector:NSSelectorFromString(customEditItemListener) withObject:indexPath];
+    //        }
+    //    }
 }
 
 -(void)addItemOnFixedList{
@@ -333,47 +313,46 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
 
 -(void)addItemOnFixedList:(BOOL) reload{
     
-        if (reload) {
-            self.HUD = [MBProgressHUD showHUDAddedTo:((UIViewController *)self.formController).view animated:YES];
-            self.HUD.mode = MBProgressHUDModeIndeterminate;
-            self.HUD.labelText = MFLocalizedStringFromKey(@"waiting.view.refreshing.list");
-        }
-        
-        //Retrieving ListviewModel and adding it an new item
-        MFUIBaseListViewModel *viewModel = [self.fixedList getData];
-        NSMutableArray *data = viewModel.viewModels;
-        MFUIBaseViewModel *newObject = [[NSClassFromString(self.fixedList.itemClassName) alloc] init];
-        newObject.parentViewModel = viewModel;
-        //TODO - PROVISOIRE.
-        //Cela doit faire l'objet d'une vraie correction
-        //Gestion de la mise à -1 de l'indentifiant du view model (valeur par défaut) au lieu de nil (empêche la sauvegarde
-        //lors de l'ajout d'un item)
-        [newObject updateFromIdentifiable:nil];
-        [data addObject:newObject];
-        viewModel.viewModels = data;
-        viewModel.hasChanged = YES ;
-        
-        self.hasBeenReload = NO;
-        
-        
-        if (reload) {
-            [self.fixedList setData:viewModel];
-        } else {
-            [self.fixedList setDataAfterEdition:viewModel];
-        }
-        
-        //Perform an action if exists
-//        NSString *addItemListenerName = ((MFFieldDescriptor *)self.fixedList.selfDescriptor).addItemListener;
-//        [self performSelectorFromMethodName:addItemListenerName onActionAtIndexPath:nil];
-        if (reload) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self redrawSelfWithTableView:self.fixedList.tableView];
-                [self.HUD hide:YES];
-            });
-        }
+    if (reload) {
+        self.HUD = [MBProgressHUD showHUDAddedTo:((UIViewController *)self.formController).view animated:YES];
+        self.HUD.mode = MBProgressHUDModeIndeterminate;
+        self.HUD.labelText = MFLocalizedStringFromKey(@"waiting.view.refreshing.list");
+    }
+    
+    //Retrieving ListviewModel and adding it an new item
+    MFUIBaseListViewModel *viewModel = [self.fixedList getData];
+    NSMutableArray *data = viewModel.viewModels;
+    MFUIBaseViewModel *newObject = [[NSClassFromString([self itemListViewModelName]) alloc] init];
+    newObject.parentViewModel = viewModel;
+    //TODO - PROVISOIRE.
+    //Cela doit faire l'objet d'une vraie correction
+    //Gestion de la mise à -1 de l'indentifiant du view model (valeur par défaut) au lieu de nil (empêche la sauvegarde
+    //lors de l'ajout d'un item)
+    [newObject updateFromIdentifiable:nil];
+    [data addObject:newObject];
+    viewModel.viewModels = data;
+    viewModel.hasChanged = YES ;
+    
+    self.hasBeenReload = NO;
+    
+    
+    if (reload) {
+        [self.fixedList setData:viewModel];
+    } else {
+        [self.fixedList setDataAfterEdition:viewModel];
+    }
+    
+    //Perform an action if exists
+    //        NSString *addItemListenerName = ((MFFieldDescriptor *)self.fixedList.selfDescriptor).addItemListener;
+    //        [self performSelectorFromMethodName:addItemListenerName onActionAtIndexPath:nil];
+    if (reload) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.HUD hide:YES];
+        });
+    }
     
     if([self.fixedList isPhotoFixedList]) {
-        id<MFCommonFormProtocol> parentController = self.fixedList.form;
+        id<MFCommonFormProtocol> parentController = self.fixedList.parentViewController;
         //On ajoute l'élément à la liste
         //On créé le contrôleur à afficher
         MFPhotoDetailViewController *managePhotoViewController = [[UIStoryboard storyboardWithName:DEFAUT_PHOTO_STORYBOARD_NAME bundle:nil] instantiateViewControllerWithIdentifier:DEFAUT_PHOTO_MANAGER_CONTROLLER_NAME];
@@ -397,6 +376,7 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
         
         [((UIViewController *)parentController).navigationController pushViewController:managePhotoViewController animated:YES];
     }
+    [self computeCellHeightAndDispatchToFormController];
 }
 
 #pragma mark - FixedList forwarding
@@ -407,7 +387,7 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
 
 
 -(id<MFCommonFormProtocol>) formController {
-    return (id<MFCommonFormProtocol>)_fixedList.form;
+    return (id<MFCommonFormProtocol>)_fixedList.parentViewController;
 }
 
 #pragma mark - FixedList utils
@@ -418,12 +398,9 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
 
 -(void) setContent{
     [self.fixedList setItemClassName:[self itemListViewModelName]];
-    if(self.fixedList.editMode == MFFixedListEditModePopup) {
-        self.fixedList.allowsSelectionDuringEditing = YES;
-    }
+
     self.viewModel = [self.fixedList getData];
-    if(self.viewModel)
-    {
+    if(self.viewModel) {
         self.viewModel.form = self;
     }
 }
@@ -456,6 +433,56 @@ const static int TABLEVIEW_RESIZE_OFFSET = 0;
 -(MFUIBaseListViewModel *)getViewModel {
     return [self viewModel];
 }
+
+-(MFUIBaseViewModel *)viewModelAtIndexPath:(NSIndexPath *)indexPath {
+    return ((MFUIBaseListViewModel *)[self getViewModel]).viewModels[indexPath.row];
+}
+
+-(void) initializeBinding {
+    self.bindingDelegate = [[MFBindingDelegate alloc] initWithObject:self];
+    [self.fixedList.tableView reloadData];
+}
+-(void) initializeModel {
+    self.viewModel.objectWithBinding = self;
+}
+
+-(void)setBindingDelegate:(MFBindingDelegate *)bindingDelegate {
+    _bindingDelegate = bindingDelegate;
+    [self createBindingStructure];
+}
+
+-(void) computeCellHeightAndDispatchToFormController {
+    
+    MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_FIXEDLIST_DESCRIPTOR];
+    float itemHeight = [bindingData.cellHeight floatValue];
+    
+    UIViewController *parent = self.fixedList.parentViewController;
+    if(parent && [parent conformsToProtocol:@protocol(MFObjectWithBindingProtocol)]) {
+        id<MFObjectWithBindingProtocol> parentObjectWithBinding = (id<MFObjectWithBindingProtocol>)parent;
+        MFBindingValue *selfBindingValue = parentObjectWithBinding.bindingDelegate.binding.bindingByComponents[@(self.fixedList.hash)];
+        if(selfBindingValue && [self getViewModel]) {
+            int numberOfItems = ((MFUIBaseListViewModel *)[self getViewModel]).viewModels.count;
+            float height = numberOfItems * itemHeight ;
+            height += (numberOfItems - 1) * TABLEVIEW_SEPARATOR_HEIGHT;
+            height += self.fixedList.topBarView.frame.size.height;
+            if(((MFUIBaseListViewModel *)[self getViewModel]).viewModels.count == 0) {
+                height = self.fixedList.topBarViewHeight;
+            }
+            
+            [self.fixedList changeDynamicHeight:height];
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"MDK_ComponentSize_%@", [selfBindingValue.bindingIndexPath stringIndexPath]] object:@(height)];
+        }
+    }
+}
+
+-(void)createBindingStructure {
+        MFTableConfiguration *tableConfiguration = [MFTableConfiguration createTableConfigurationForObjectWithBinding:self];
+        MFBindingCellDescriptor *photoCellDescriptor = [MFBindingCellDescriptor cellDescriptorWithIdentifier:@"PhotoFixedListItemCell" withCellHeight:@(123) withCellBindingFormat:@"outlet.photoValue.binding : vm.photo<->c.data", nil];
+        [tableConfiguration createFixedListTableCellWithDescriptor:photoCellDescriptor];
+}
+
 
 
 @end

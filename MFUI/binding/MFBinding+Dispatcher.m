@@ -25,7 +25,7 @@
 -(void)dispatchValue:(id)value fromComponent:(UIView *)component onObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
     MFBindingValue *bindingValue = self.bindingByComponents[@(component.hash)];
     if(bindingValue) {
-        if(indexPath) {
+        if([object isKindOfClass:[MFUIBaseListViewModel class]]) {
             //object is list ViewModel
             object = ((MFUIBaseListViewModel *)object).viewModels[indexPath.row];
         }

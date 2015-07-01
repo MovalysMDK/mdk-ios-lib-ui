@@ -62,6 +62,7 @@
     }
     [bindingValuesforKey addObject:bindingValue];
     _bindingByBindingKeys[bindingKey] = bindingValuesforKey;
+    [bindingValue.wrapper dispatchDidBinded];
 }
 
 
@@ -151,5 +152,9 @@
     return [NSString stringWithFormat:@"Wrapper : %@\rBindingMode : %@\rViewModel Property Name : %@\rComponent Property Name : %@\rComponent Outlet Name : %@", self.wrapper, (self.bindingMode == MFBindingValueModeOneWay) ? @"One Way" : @"Two ways", self.abstractBindedPropertyName, self.componentBindedPropertyName, self.componentOutletName];
 }
 
+-(void)setBindingIndexPath:(NSIndexPath *)bindingIndexPath {
+    _bindingIndexPath = bindingIndexPath;
+    self.wrapper.wrapperIndexPath = bindingIndexPath;
+}
 @end
 

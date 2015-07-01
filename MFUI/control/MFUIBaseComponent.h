@@ -42,6 +42,7 @@
 #import "MFUIError.h"
 
 #import "MFUIComponentProtocol.h"
+#import "UIView+Binding.h"
 
 @protocol MFFormCellProtocol;
 @protocol MFComponentAssociatedLabelProtocol;

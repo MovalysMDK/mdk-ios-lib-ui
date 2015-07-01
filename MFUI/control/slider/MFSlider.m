@@ -45,8 +45,6 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 -(void)initialize {
     
     [super initialize];
-    
-
     [self buildDesignableComponentView];
     [self setAllTags];
 }
@@ -299,6 +297,7 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 #pragma mark - Control changes
 
 -(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    
     [self.innerSlider addTarget:self action:@selector(valueChanged:) forControlEvents:controlEvents];
     [self.innerSlider addTarget:self action:@selector(valueChanged:) forControlEvents:controlEvents];
     MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
@@ -308,6 +307,7 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 }
 
 -(void) valueChanged:(UIView *)sender {
+    [self setData:@(((UISlider *)sender).value)];
     MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
     [cctd.target performSelector:cctd.action withObject:self];
 }

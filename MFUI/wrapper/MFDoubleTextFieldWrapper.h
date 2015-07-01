@@ -14,23 +14,8 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#import "MFTextFieldWrapper.h"
 
-#import <UIKit/UIKit.h>
-#import "MFObjectWithBindingProtocol.h"
-#import "MFBindingViewDescriptor.h"
-#import "MFBindingViewAbstract.h"
+@interface MFDoubleTextFieldWrapper : MFTextFieldWrapper
 
-@interface UIView (Binding)
-
-/*!
- * @brief Allows to bind this cell from a given descriptor to the given object
- * @param bindingCellDescriptor The binding cell descriptor used to bind this cell
- * @param objectWithBinding An object that conforms the MFObjectWithBindingProtocol protocol, this cell will be binded to
- */
--(void)bindViewFromDescriptor:(MFBindingViewDescriptor *)bindingViewDescriptor onObjectWithBinding:(id<MFObjectWithBindingProtocol>)objectWithBinding;
-
-/*!
- * @brief Performs some treatments the view is binded
- */
--(void) didBinded;
 @end

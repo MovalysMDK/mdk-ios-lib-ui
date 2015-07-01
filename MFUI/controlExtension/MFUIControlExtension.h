@@ -26,5 +26,6 @@
 #import "MFBaseTextExtensionProtocol.h"
 #import "MFRegularExpressionTextFieldExtension.h"
 #import "MFRegexTextExtensionProtocol.h"
+#import "MFFixedListExtension.h"
 
 #endif

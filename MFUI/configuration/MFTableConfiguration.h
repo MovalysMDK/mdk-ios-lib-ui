@@ -24,6 +24,7 @@ FOUNDATION_EXPORT const NSString *SECTION_ORDER_KEY;
 FOUNDATION_EXPORT const NSString *CURRENT_SECTION_KEY;
 FOUNDATION_EXPORT const NSString *CELL_1D_DESCRIPTOR;
 FOUNDATION_EXPORT const NSString *SECTION_HEADER_VIEW_2D_DESCRIPTOR;
+FOUNDATION_EXPORT const NSString *CELL_FIXEDLIST_DESCRIPTOR;
 
 
 /*!
@@ -77,4 +78,13 @@ FOUNDATION_EXPORT const NSString *SECTION_HEADER_VIEW_2D_DESCRIPTOR;
  * @see MFBindingViewDescriptor
  */
 -(void)create2DTableHeaderViewWithDescriptor:(MFBindingViewDescriptor *)viewDescriptor;
+
+/*!
+ * @brief Creates a cell in the TableView configured by this object.
+ * @discussion This method must be called by FixedList Data delegate
+ * @param cellDecriptor The descriptor that describes the cell to add
+ * @see MFBindingCellDescriptor
+ */
+-(void)createFixedListTableCellWithDescriptor:(MFBindingCellDescriptor *)cellDescriptor;
+
 @end

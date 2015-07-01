@@ -16,7 +16,7 @@
 
 
 #import "MFAbstractComponentWrapper.h"
-
+#import "UIView+Binding.h"
 @interface MFAbstractComponentWrapper ()
 
 
@@ -53,5 +53,9 @@
 
 -(NSDictionary *) nilValueBySelector {
 return @{};
+}
+
+-(void) dispatchDidBinded {
+    [self.component didBinded];
 }
 @end

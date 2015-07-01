@@ -14,23 +14,20 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#import <Foundation/Foundation.h>
 
-#import <UIKit/UIKit.h>
-#import "MFObjectWithBindingProtocol.h"
-#import "MFBindingViewDescriptor.h"
-#import "MFBindingViewAbstract.h"
-
-@interface UIView (Binding)
+@interface NSIndexPath (Utils)
 
 /*!
- * @brief Allows to bind this cell from a given descriptor to the given object
- * @param bindingCellDescriptor The binding cell descriptor used to bind this cell
- * @param objectWithBinding An object that conforms the MFObjectWithBindingProtocol protocol, this cell will be binded to
+ * @brief Returns an index path as string
+ * @return A string that represents this indexpath.
  */
--(void)bindViewFromDescriptor:(MFBindingViewDescriptor *)bindingViewDescriptor onObjectWithBinding:(id<MFObjectWithBindingProtocol>)objectWithBinding;
+-(NSString *)stringIndexPath;
 
 /*!
- * @brief Performs some treatments the view is binded
+ * @brief Returns an indexpath from a string representation of an indexpath
+ * @param stringIndexPath A MDK string representation of an indexPath
+ * @return An indexpath
  */
--(void) didBinded;
++(NSIndexPath *)indexPathFromString:(NSString *) stringIndexPath;
 @end

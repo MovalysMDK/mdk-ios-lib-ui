@@ -72,6 +72,8 @@
  */
 @property (nonatomic) BOOL isPickerDisplayed;
 
+@property (nonatomic, strong) NSMutableDictionary *cellSizes;
+
 @end
 
 
@@ -115,7 +117,7 @@
     
     self.applicationContext = [MFApplication getInstance];
     
-    
+    self.cellSizes = [NSMutableDictionary dictionary];
     self.viewModel = [self createViewModel];
     self.viewModel.form = self;
     
@@ -216,10 +218,6 @@
     [super viewDidDisappear:animated];
 }
 
-
-
-
-
 #pragma mark - Table view delegate
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -228,9 +226,9 @@
     MFBindingCellDescriptor *bindingData = ((NSArray *)self.bindingDelegate.structure[sectionIdentifier])[indexPath.row];
     NSString *identifier = bindingData.cellIdentifier;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-    if(!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
+//    if(!cell) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+//    }
     bindingData.cellIndexPath = indexPath;
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
     [self updateCellFromBindingData:bindingData];
@@ -269,41 +267,14 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     NSString *sectionIdentifier = self.bindingDelegate.structure[SECTION_ORDER_KEY][indexPath.section];
     MFBindingCellDescriptor *bindingData = ((NSArray *)self.bindingDelegate.structure[sectionIdentifier])[indexPath.row];
-    return [bindingData.cellHeight floatValue];
+    CGFloat height = [bindingData.cellHeight floatValue];
+    
+    return height;
 }
 
-
-
-/**
- * @brief Cette méthode permet à des cellules d'indiquer elles-mêmes leur hauteur. Cela permet d'adapter
- * la hauteur d'une cellule à son contenu. C'est par exemple le cas d'es cellules à listes éditales.
- * Après que la cellule ait annoncée sa hauteur, celle-ci est stockée dans un dictionnaire recensant les hauteurs
- * de toutes les cellules de la tableView, et la tableView est rechargée pour affecter directement la hauteur à la cellule
- * @param height La hauteur de la cellule
- * @param indexPath L'indexPath de la cellule qui annonce sa hauteur
- */
--(void) setCellHeight:(float)height atIndexPath:(NSIndexPath *)indexPath {
-    //    [self.cellSizes setObject:[NSNumber numberWithFloat:height] forKey:[MFHelperIndexPath toString:indexPath]];
-    // Animation du rechargement de la liste
-    [UIView transitionWithView: self.tableView
-                      duration: 0.20f
-                       options: UIViewAnimationOptionTransitionCrossDissolve
-                    animations: ^(void)
-     {
-         dispatch_async(dispatch_get_main_queue(), ^{
-             [self.tableView reloadData];
-         });
-     }
-                    completion: ^(BOOL isFinished)
-     {
-         //block de code à exécuter ici après l'animation
-     }];
-    
-    //On stocke la hauteur de la cellule avec comme clé, son indexPath
-    
-}
 
 
 #pragma mark - Observers selectors
@@ -387,5 +358,26 @@
 }
 -(void) initializeModel {
     self.viewModel.objectWithBinding = self;
+}
+
+-(void) cellSizeChanges:(NSNotification *)notification {
+    NSIndexPath *cellIndexPath = [NSIndexPath indexPathFromString:[[notification.name componentsSeparatedByString:@"_"] lastObject]];
+    if(cellIndexPath) {
+        NSString *sectionIdentifier = self.bindingDelegate.structure[SECTION_ORDER_KEY][cellIndexPath.section];
+        MFBindingCellDescriptor *cellDescriptor = ((MFBindingCellDescriptor *)((NSArray *)self.bindingDelegate.structure[sectionIdentifier])[cellIndexPath.row]);
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:cellIndexPath];
+        float height = cell.frame.size.height;
+        if([cell isKindOfClass:[MFCellAbstract class]]) {
+            UIView *componentView = [cell valueForKey:@"componentView"];
+            UIView *labelView = [cell valueForKey:@"label"];
+            height -= componentView.frame.size.height;
+            height += [notification.object floatValue];
+
+        }
+        cellDescriptor.cellHeight = @(height);
+        
+//        cellDescriptor.cellHeight = notification.object;
+        [self.tableView reloadData];
+    }
 }
 @end

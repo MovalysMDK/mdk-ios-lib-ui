@@ -19,7 +19,7 @@
 
 // Protocols and delegates
 #import "MFFormCommonDelegate.h"
-
+#import "MFTableConfiguration.h"
 
 @protocol MFFormWithDetailViewControllerProtocol;
 @protocol MFContentDelegate;
@@ -64,8 +64,19 @@
  */
 -(NSArray *)customButtonsForFixedList;
 -(void)addItemOnFixedList:(BOOL) reload;
--(void) redrawSelfWithTableView:(UITableView *)tableView ;
 -(BOOL) addError:(id)error onComponent:(NSString *)bindingKey atIndexPath:(NSIndexPath *)indexPath;
+
+
+
+/*!
+ * @brief Used to create the binding structure of this object with binding
+ * @discussion Use a configuration to create the binding structure
+ */
+-(void) createBindingStructure;
+
+-(void) computeCellHeightAndDispatchToFormController;
+
+
 #pragma mark - Properties
 
 /*!

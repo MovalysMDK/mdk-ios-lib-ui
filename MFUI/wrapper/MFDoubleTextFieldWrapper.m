@@ -14,23 +14,24 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#import "MFDoubleTextFieldWrapper.h"
+#import "MFKeyNotFound.h"
 
-#import <UIKit/UIKit.h>
-#import "MFObjectWithBindingProtocol.h"
-#import "MFBindingViewDescriptor.h"
-#import "MFBindingViewAbstract.h"
+@implementation MFDoubleTextFieldWrapper
 
-@interface UIView (Binding)
+-(id)convertValue:(id)value isFromViewModelToControl:(NSNumber *)isVmToControl {
+    id result = nil;
+    if(value && ![value isKindOfClass:[NSNull class]] && ![value isKindOfClass:[MFKeyNotFound class]]) {
+        if([isVmToControl integerValue] == 1) {
+            NSNumber *vmValue = (NSNumber *)value;
+            result = [NSString stringWithFormat:@"%@", vmValue];
+        }
+        else {
+            NSString *controlValue = (NSString *)value;
+            result = @([controlValue doubleValue]);
+        }
+    }
+    return result;
+}
 
-/*!
- * @brief Allows to bind this cell from a given descriptor to the given object
- * @param bindingCellDescriptor The binding cell descriptor used to bind this cell
- * @param objectWithBinding An object that conforms the MFObjectWithBindingProtocol protocol, this cell will be binded to
- */
--(void)bindViewFromDescriptor:(MFBindingViewDescriptor *)bindingViewDescriptor onObjectWithBinding:(id<MFObjectWithBindingProtocol>)objectWithBinding;
-
-/*!
- * @brief Performs some treatments the view is binded
- */
--(void) didBinded;
 @end

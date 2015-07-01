@@ -22,13 +22,12 @@
 #import "MFUIBaseListViewModel.h"
 
 
-
 @interface MFFixedList()
 
 /**
  * @brief An array containinig the custom buttons created by in the user project
  */
-@property (nonatomic, strong) NSArray *customButtonsArray;
+@property (nonatomic, strong) NSMutableArray *customButtonsArray;
 
 /**
  * @brief The buttons view container of this component
@@ -59,8 +58,6 @@
 
 //Parameters keys
 NSString *const FIXED_LIST_PARAMETER_DATA_DELEGATE_NAME = @"dataDelegateName";
-NSString *const FIXED_LIST_PARAMETER_ROW_HEIGHT = @"rowHeight";
-NSString *const FIXED_LIST_PARAMETER_FORM_DESCRIPTOR_NAME = @"formDescriptorName";
 NSString *const FIXED_LIST_PARAMETER_CAN_EDIT_ITEM = @"canEditItem";
 NSString *const FIXED_LIST_PARAMETER_CAN_ADD_ITEM = @"canAddItem";
 NSString *const FIXED_LIST_PARAMETER_CAN_DELETE_ITEM = @"canDeleteItem";
@@ -78,12 +75,14 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize mandatory = _mandatory;
-
+@synthesize controlAttributes = _controlAttributes;
 
 #pragma mark - Initializing
 
 -(void) initialize {
     [super initialize];
+    
+    self.mf = [MFFixedListExtension new];
     //self.hasBeenReload = NO;
     self.dismissWaitingView = NO;
     if(!self.tableView) {
@@ -92,7 +91,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
         self.titleLabel = [[UILabel alloc] init];
     }
     
-    self.customButtonsArray = [NSArray array];
+    self.customButtonsArray = [NSMutableArray array];
     
     // Nécessaire pour ne pas bloquer le "ScrollsToTop" du formulaire parent.
     [self.tableView setScrollsToTop:NO];
@@ -116,6 +115,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     self.tableView.scrollEnabled = NO;
     
     
+    
 }
 
 -(void)awakeFromNib {
@@ -137,7 +137,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     }
     
     [self.fixedListHeightConstraint setConstant:newHeight];
-    [self updateConstraints];
+    [self setNeedsLayout];
 }
 
 -(void)defineAndAddConstraint {
@@ -212,15 +212,15 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
  */
 -(void) setData:(id)data {
     //Set Data
-    _data= data;
-    if(data && ![data isKindOfClass:[MFKeyNotFound class]]) {
+    if(![_data isEqual:data] && ![data isKindOfClass:[MFKeyNotFound class]]) {
+        _data= data;
+        [self.dataDelegate computeCellHeightAndDispatchToFormController];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
     
-    
-//    self.tableView.editing = self.mf.canDeleteItem;
+    self.tableView.editing = YES;
     //PROTODO : mode edit ?
 }
 
@@ -253,15 +253,13 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];
-//    if([self.editable isEqualToNumber:@0]) {
-//        self.mf.canAddItem = NO;
-//        self.mf.canDeleteItem = NO;
-//        if(self.mf.canEditItem) {
-//            self.editMode = MFFixedListEditModePopup;
-//        }
-//    }
-    
-    //PROTODO : mode ?
+    if([self.editable isEqualToNumber:@0]) {
+        self.mf.canAddItem = NO;
+        self.mf.canDeleteItem = NO;
+        if(self.mf.canEditItem) {
+            self.editMode = MFFixedListEditModePopup;
+        }
+    }
 }
 
 
@@ -287,12 +285,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 #pragma mark - KVC magic forwarding
 
 -(id)valueForUndefinedKey:(NSString *)key {
-    if(![key isEqualToString:@"mf."]) {
-        return [self.tableView valueForKey:key];
-    }
-    else {
-        return [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_KEYNOTFOUND];
-    }
+    return [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_KEYNOTFOUND];
 }
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {
@@ -389,15 +382,17 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     for(UIView *button in self.buttonsView.subviews) {
         [button removeFromSuperview];
     }
-//    if(self.mf.canAddItem) {
-//        self.addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-//        self.customButtonsArray = @[self.addButton];
-//        [self.addButton addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
-//    }
-//    else {
-//        self.customButtonsArray = @[];
-//    }
-    //PROTODO : add ?
+    if(self.mf.canAddItem) {
+        self.addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        [self.customButtonsArray addObject:self.addButton];
+        [self.addButton addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if(self.mf.canDeleteItem) {
+        self.editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+        [self.editButton addTarget:self action:@selector(toogleEditMode) forControlEvents:UIControlEventTouchUpInside];
+        [self toogleEditMode];[self toogleEditMode];
+        [self.customButtonsArray addObject:self.editButton];
+    }
     [self.buttonsView removeConstraints:[self.buttonsView constraints]];
 }
 
@@ -426,19 +421,19 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     return MFFixedListAlignmentRight;
 }
 
+-(void) toogleEditMode {
+    self.mf.canDeleteItem = !self.mf.canDeleteItem;
+    NSString *imagePath = nil;
+    if(self.mf.canDeleteItem) {
+        imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"no_edit@2x" ofType:@"png"];
+    }
+    else {
+        imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"edit@2x" ofType:@"png"];
+    }
+    [self.editButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
 
-
-//PROTODO : PArameters
-//FIXED_LIST_PARAMETER_CAN_ADD_ITEM
-//FIXED_LIST_PARAMETER_CAN_EDIT_ITEM
-//FIXED_LIST_PARAMETER_CAN_DELETE_ITEM
-//FIXED_LIST_PARAMETER_ROW_HEIGHT
-//FIXED_LIST_PARAMETER_EDIT_MODE
-//FIXED_LIST_PARAMETER_FORM_DESCRIPTOR_NAME
-//[self.dataDelegate setContent];
-//
-
-
+    [self.tableView reloadData];
+}
 
 -(void)setDataDelegate:(MFFixedListDataDelegate *)dataDelegate {
     _dataDelegate = dataDelegate;
@@ -447,8 +442,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 }
 
 -(BOOL)isPhotoFixedList {
-    //PROTODO : PhotoFixedList ?
-    return NO;
+    return self.mf.isPhotoFixedList;
 }
 
 #pragma mark  - LiveRendering methods
@@ -486,5 +480,34 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
                       errorButtonSize,
                       errorButtonSize);
 }
+
+-(void)setControlAttributes:(NSDictionary *)controlAttributes {
+    _controlAttributes = controlAttributes;
+    NSString *dataDelegateName = controlAttributes[@"dataDelegateName"];
+    if(dataDelegateName && !self.dataDelegate) {
+        self.dataDelegate = [[NSClassFromString(dataDelegateName) alloc] initWithFixedList:self];
+    }
+    
+    NSNumber *canEditItem = controlAttributes[FIXED_LIST_PARAMETER_CAN_EDIT_ITEM];
+    if(canEditItem) {self.mf.canEditItem = [canEditItem boolValue];}
+    
+    NSNumber *canAddItem = controlAttributes[FIXED_LIST_PARAMETER_CAN_ADD_ITEM];
+    if(canAddItem) {self.mf.canAddItem = [canAddItem boolValue];}
+    
+    NSNumber *canDeleteItem = controlAttributes[FIXED_LIST_PARAMETER_CAN_DELETE_ITEM];
+    if(canDeleteItem) {self.mf.canDeleteItem = [canDeleteItem boolValue];}
+    
+    NSNumber *editMode = controlAttributes[FIXED_LIST_PARAMETER_EDIT_MODE];
+    if(editMode) {self.mf.editMode = [editMode integerValue];}
+    if(self.mf.editMode == MFFixedListEditModePopup) {
+        self.allowsSelectionDuringEditing = YES;
+    }
+
+    NSNumber *isPhotoFixedList = controlAttributes[FIXED_LIST_PARAMETER_IS_PHOTO];
+    if(isPhotoFixedList) {self.mf.isPhotoFixedList = [isPhotoFixedList boolValue];}
+    
+    [self.tableView reloadData];
+}
+
 
 @end

@@ -16,6 +16,10 @@
 
 #import "MFFixedListWrapper.h"
 
+/*!
+ * @class MFPhotoFixedListWrapper
+ * @brief The wrapper for the MFPhotoFixedList component.
+ */
 @interface MFPhotoFixedListWrapper : MFFixedListWrapper
 
 @end

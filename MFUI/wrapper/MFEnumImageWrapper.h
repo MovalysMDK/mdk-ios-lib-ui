@@ -13,13 +13,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-
 #import "MFAbstractComponentWrapper.h"
 
 /*!
- * @class MFFixedListWrapper
- * @brief The wrapper for the MFFixedList component.
+ * @class MFEnumImageWrapper
+ * @brief The wrapper for the component MFEnumImage
  */
-@interface MFFixedListWrapper : MFAbstractComponentWrapper
+@interface MFEnumImageWrapper : MFAbstractComponentWrapper
 
 @end

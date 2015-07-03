@@ -16,6 +16,10 @@
 
 #import "MFTextFieldWrapper.h"
 
+/*!
+ * @class MFDoubleTextFieldWrapper
+ * @brief The wrapper for the MFDoubleTextField component.
+ */
 @interface MFDoubleTextFieldWrapper : MFTextFieldWrapper
 
 @end

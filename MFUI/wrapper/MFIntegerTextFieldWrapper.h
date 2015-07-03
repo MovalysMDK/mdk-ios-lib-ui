@@ -16,6 +16,10 @@
 
 #import "MFTextFieldWrapper.h"
 
+/*!
+ * @class MFIntegerTextFieldWrapper
+ * @brief The wrapper for the MFIntegerTextField component.
+ */
 @interface MFIntegerTextFieldWrapper : MFTextFieldWrapper
 
 @end

@@ -100,6 +100,8 @@
 		B04D12991B453E3900B64421 /* MFPickerListConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = B04D12971B453E3900B64421 /* MFPickerListConfiguration.h */; };
 		B04D129A1B453E3900B64421 /* MFPickerListConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B04D12981B453E3900B64421 /* MFPickerListConfiguration.m */; };
 		B051A3C41B0F5E2800F4F99C /* MFUIAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = B037F8D01B0DD673005C12F2 /* MFUIAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B054860E1B46DC4A0094846E /* MFEnumImageWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B054860C1B46DC4A0094846E /* MFEnumImageWrapper.h */; };
+		B054860F1B46DC4A0094846E /* MFEnumImageWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B054860D1B46DC4A0094846E /* MFEnumImageWrapper.m */; };
 		B06730521AE6833900CB0900 /* MFComponentErrorProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730511AE6833900CB0900 /* MFComponentErrorProtocol.h */; };
 		B06730541AE6857D00CB0900 /* MFComponentPropertiesProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730531AE6857D00CB0900 /* MFComponentPropertiesProtocol.h */; };
 		B06730561AE685B600CB0900 /* MFComponentValidationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730551AE685B600CB0900 /* MFComponentValidationProtocol.h */; };
@@ -658,6 +660,8 @@
 		B04D12941B453E1500B64421 /* MFPickerListExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPickerListExtension.m; sourceTree = "<group>"; };
 		B04D12971B453E3900B64421 /* MFPickerListConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPickerListConfiguration.h; sourceTree = "<group>"; };
 		B04D12981B453E3900B64421 /* MFPickerListConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPickerListConfiguration.m; sourceTree = "<group>"; };
+		B054860C1B46DC4A0094846E /* MFEnumImageWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFEnumImageWrapper.h; sourceTree = "<group>"; };
+		B054860D1B46DC4A0094846E /* MFEnumImageWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFEnumImageWrapper.m; sourceTree = "<group>"; };
 		B06730511AE6833900CB0900 /* MFComponentErrorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentErrorProtocol.h; sourceTree = "<group>"; };
 		B06730531AE6857D00CB0900 /* MFComponentPropertiesProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentPropertiesProtocol.h; sourceTree = "<group>"; };
 		B06730551AE685B600CB0900 /* MFComponentValidationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentValidationProtocol.h; sourceTree = "<group>"; };
@@ -1233,6 +1237,8 @@
 				B0266AE41B3C07780007E1EA /* UISliderWrapper.m */,
 				B0E86BE01B452FFF00F5CB41 /* MFPickerListWrapper.h */,
 				B0E86BE11B452FFF00F5CB41 /* MFPickerListWrapper.m */,
+				B054860C1B46DC4A0094846E /* MFEnumImageWrapper.h */,
+				B054860D1B46DC4A0094846E /* MFEnumImageWrapper.m */,
 			);
 			path = wrapper;
 			sourceTree = "<group>";
@@ -2400,6 +2406,7 @@
 				B0D45E321A5ED2F400C6D376 /* MFChildViewControllerProtocol.h in Headers */,
 				B0D45E661A5ED2F400C6D376 /* MFViewControllerDelegate.h in Headers */,
 				B0D45D191A5ED2F400C6D376 /* MFAbstractPersistentDeleteDetailAction.h in Headers */,
+				B054860E1B46DC4A0094846E /* MFEnumImageWrapper.h in Headers */,
 				B0D45D7F1A5ED2F400C6D376 /* MFPosition.h in Headers */,
 				B08528851B43F18A00B46194 /* MFDoubleTextFieldWrapper.h in Headers */,
 				B006CF191B32C26900B78782 /* NSString+Utils.h in Headers */,
@@ -2892,6 +2899,7 @@
 				B0D45D611A5ED2F400C6D376 /* MFFixedListDataDelegate.m in Sources */,
 				B0D45DBE1A5ED2F400C6D376 /* TooltipView.m in Sources */,
 				B00787CF1AB1E37A009F6D95 /* UIView+JDFTooltips.m in Sources */,
+				B054860F1B46DC4A0094846E /* MFEnumImageWrapper.m in Sources */,
 				B0D45E581A5ED2F400C6D376 /* MFFormViewController.m in Sources */,
 				B08AAC5F1AE91C5D0029EC88 /* MFWebViewController.m in Sources */,
 				B0D45E5E1A5ED2F400C6D376 /* MFMenuViewController.m in Sources */,

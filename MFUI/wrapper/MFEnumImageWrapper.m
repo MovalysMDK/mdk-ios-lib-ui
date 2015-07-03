@@ -15,22 +15,29 @@
  */
 
 
-#ifndef MFUI_MFUIWrapper_h
-#define MFUI_MFUIWrapper_h
-
-#import "MFAbstractComponentWrapper.h"
-#import "MFDatePickerWrapper.h"
-#import "MFNumberPickerWrapper.h"
-#import "MFPhotoThumbnailWrapper.h"
-#import "MFPositionWrapper.h"
-#import "MFSignatureWrapper.h"
-#import "MFTextViewWrapper.h"
-#import "MFSliderWrapper.h"
-#import "MFSwitchWrapper.h"
-#import "MFTextFieldWrapper.h"
-#import "MFPhotoFixedListWrapper.h"
-#import "MFFixedListWrapper.h"
-#import "MFPickerListWrapper.h"
 #import "MFEnumImageWrapper.h"
+#import "MFEnumImage.h"
+#import "MFObjectWithBindingProtocol.h"
 
-#endif
+@implementation MFEnumImageWrapper
+@synthesize  wrapperIndexPath = _wrapperIndexPath;
+
+-(instancetype)initWithComponent:(UIControl *)component {
+    self = [super initWithComponent:component];
+    if(self) {
+        [[self typeComponent] addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
+    }
+    return self;
+}
+
+-(MFEnumImage *)typeComponent {
+    return (MFEnumImage *)self.component;
+}
+
+-(void)componentValueChanged:(MFEnumImage *)picker
+{
+    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[picker getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
+    
+}
+
+@end

@@ -95,6 +95,10 @@
 		B037F8CB1B0DC839005C12F2 /* MFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B037F8C91B0DC839005C12F2 /* MFAlertView.m */; };
 		B037F8CE1B0DC84D005C12F2 /* MFAlertViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B037F8CC1B0DC84D005C12F2 /* MFAlertViewManager.h */; };
 		B037F8CF1B0DC84D005C12F2 /* MFAlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B037F8CD1B0DC84D005C12F2 /* MFAlertViewManager.m */; };
+		B04D12951B453E1500B64421 /* MFPickerListExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = B04D12931B453E1500B64421 /* MFPickerListExtension.h */; };
+		B04D12961B453E1500B64421 /* MFPickerListExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B04D12941B453E1500B64421 /* MFPickerListExtension.m */; };
+		B04D12991B453E3900B64421 /* MFPickerListConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = B04D12971B453E3900B64421 /* MFPickerListConfiguration.h */; };
+		B04D129A1B453E3900B64421 /* MFPickerListConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B04D12981B453E3900B64421 /* MFPickerListConfiguration.m */; };
 		B051A3C41B0F5E2800F4F99C /* MFUIAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = B037F8D01B0DD673005C12F2 /* MFUIAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B06730521AE6833900CB0900 /* MFComponentErrorProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730511AE6833900CB0900 /* MFComponentErrorProtocol.h */; };
 		B06730541AE6857D00CB0900 /* MFComponentPropertiesProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730531AE6857D00CB0900 /* MFComponentPropertiesProtocol.h */; };
@@ -524,6 +528,8 @@
 		B0D4C4C11B3816F60020ACF2 /* MFViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D4C4BD1B3816F60020ACF2 /* MFViewProtocol.h */; };
 		B0E155C01B414C8600D5A213 /* UITableViewCell+Binding.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E155BE1B414C8600D5A213 /* UITableViewCell+Binding.m */; };
 		B0E155C11B414C8600D5A213 /* UITableViewCell+Binding.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E155BF1B414C8600D5A213 /* UITableViewCell+Binding.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B0E86BE21B452FFF00F5CB41 /* MFPickerListWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E86BE01B452FFF00F5CB41 /* MFPickerListWrapper.h */; };
+		B0E86BE31B452FFF00F5CB41 /* MFPickerListWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E86BE11B452FFF00F5CB41 /* MFPickerListWrapper.m */; };
 		B0FC78E51B3A99EE00DD225F /* MFNumberPickerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78E31B3A99EE00DD225F /* MFNumberPickerWrapper.h */; };
 		B0FC78E61B3A99EE00DD225F /* MFNumberPickerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FC78E41B3A99EE00DD225F /* MFNumberPickerWrapper.m */; };
 		B0FC78E91B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78E71B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h */; };
@@ -648,6 +654,10 @@
 		B037F8CC1B0DC84D005C12F2 /* MFAlertViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAlertViewManager.h; sourceTree = "<group>"; };
 		B037F8CD1B0DC84D005C12F2 /* MFAlertViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAlertViewManager.m; sourceTree = "<group>"; };
 		B037F8D01B0DD673005C12F2 /* MFUIAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFUIAlertView.h; sourceTree = "<group>"; };
+		B04D12931B453E1500B64421 /* MFPickerListExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPickerListExtension.h; sourceTree = "<group>"; };
+		B04D12941B453E1500B64421 /* MFPickerListExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPickerListExtension.m; sourceTree = "<group>"; };
+		B04D12971B453E3900B64421 /* MFPickerListConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPickerListConfiguration.h; sourceTree = "<group>"; };
+		B04D12981B453E3900B64421 /* MFPickerListConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPickerListConfiguration.m; sourceTree = "<group>"; };
 		B06730511AE6833900CB0900 /* MFComponentErrorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentErrorProtocol.h; sourceTree = "<group>"; };
 		B06730531AE6857D00CB0900 /* MFComponentPropertiesProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentPropertiesProtocol.h; sourceTree = "<group>"; };
 		B06730551AE685B600CB0900 /* MFComponentValidationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentValidationProtocol.h; sourceTree = "<group>"; };
@@ -1081,6 +1091,8 @@
 		B0D4C4BD1B3816F60020ACF2 /* MFViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFViewProtocol.h; sourceTree = "<group>"; };
 		B0E155BE1B414C8600D5A213 /* UITableViewCell+Binding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Binding.m"; sourceTree = "<group>"; };
 		B0E155BF1B414C8600D5A213 /* UITableViewCell+Binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Binding.h"; sourceTree = "<group>"; };
+		B0E86BE01B452FFF00F5CB41 /* MFPickerListWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPickerListWrapper.h; sourceTree = "<group>"; };
+		B0E86BE11B452FFF00F5CB41 /* MFPickerListWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPickerListWrapper.m; sourceTree = "<group>"; };
 		B0FC78E31B3A99EE00DD225F /* MFNumberPickerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFNumberPickerWrapper.h; sourceTree = "<group>"; };
 		B0FC78E41B3A99EE00DD225F /* MFNumberPickerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFNumberPickerWrapper.m; sourceTree = "<group>"; };
 		B0FC78E71B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPhotoThumbnailWrapper.h; sourceTree = "<group>"; };
@@ -1167,6 +1179,8 @@
 				B006CED71B32C1E700B78782 /* MFViewModelConfiguration.h */,
 				B006CED81B32C1E700B78782 /* MFViewModelConfiguration.m */,
 				B006CF1C1B32C5B600B78782 /* MFUIConfiguration.h */,
+				B04D12971B453E3900B64421 /* MFPickerListConfiguration.h */,
+				B04D12981B453E3900B64421 /* MFPickerListConfiguration.m */,
 			);
 			path = configuration;
 			sourceTree = "<group>";
@@ -1190,8 +1204,16 @@
 				B006CEE81B32C1E700B78782 /* MFAbstractComponentWrapper.m */,
 				B002B9A71B39B44C0079DB12 /* MFDatePickerWrapper.h */,
 				B002B9A81B39B44C0079DB12 /* MFDatePickerWrapper.m */,
+				B08528831B43F18A00B46194 /* MFDoubleTextFieldWrapper.h */,
+				B08528841B43F18A00B46194 /* MFDoubleTextFieldWrapper.m */,
+				B000D5181B42837A0018281E /* MFFixedListWrapper.h */,
+				B000D5191B42837A0018281E /* MFFixedListWrapper.m */,
+				B09CAC431B3D55F50067A8DE /* MFIntegerTextFieldWrapper.h */,
+				B09CAC441B3D55F50067A8DE /* MFIntegerTextFieldWrapper.m */,
 				B0FC78E31B3A99EE00DD225F /* MFNumberPickerWrapper.h */,
 				B0FC78E41B3A99EE00DD225F /* MFNumberPickerWrapper.m */,
+				B01461F41B4445DB00008874 /* MFPhotoFixedListWrapper.h */,
+				B01461F51B4445DB00008874 /* MFPhotoFixedListWrapper.m */,
 				B0FC78E71B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h */,
 				B0FC78E81B3AAE9200DD225F /* MFPhotoThumbnailWrapper.m */,
 				B06F3E1F1B39A550005170FC /* MFPositionWrapper.h */,
@@ -1209,14 +1231,8 @@
 				B006CF1E1B32C68200B78782 /* MFUIWrapper.h */,
 				B0266AE31B3C07780007E1EA /* UISliderWrapper.h */,
 				B0266AE41B3C07780007E1EA /* UISliderWrapper.m */,
-				B09CAC431B3D55F50067A8DE /* MFIntegerTextFieldWrapper.h */,
-				B09CAC441B3D55F50067A8DE /* MFIntegerTextFieldWrapper.m */,
-				B000D5181B42837A0018281E /* MFFixedListWrapper.h */,
-				B000D5191B42837A0018281E /* MFFixedListWrapper.m */,
-				B08528831B43F18A00B46194 /* MFDoubleTextFieldWrapper.h */,
-				B08528841B43F18A00B46194 /* MFDoubleTextFieldWrapper.m */,
-				B01461F41B4445DB00008874 /* MFPhotoFixedListWrapper.h */,
-				B01461F51B4445DB00008874 /* MFPhotoFixedListWrapper.m */,
+				B0E86BE01B452FFF00F5CB41 /* MFPickerListWrapper.h */,
+				B0E86BE11B452FFF00F5CB41 /* MFPickerListWrapper.m */,
 			);
 			path = wrapper;
 			sourceTree = "<group>";
@@ -1898,6 +1914,8 @@
 		B0D45C361A5ED2F300C6D376 /* controlExtension */ = {
 			isa = PBXGroup;
 			children = (
+				B04D12931B453E1500B64421 /* MFPickerListExtension.h */,
+				B04D12941B453E1500B64421 /* MFPickerListExtension.m */,
 				B0D45C371A5ED2F300C6D376 /* MFTextFieldExtension.h */,
 				B0D45C381A5ED2F300C6D376 /* MFTextFieldExtension.m */,
 				B0D45C391A5ED2F300C6D376 /* MFBaseTextExtensionProtocol.h */,
@@ -2420,6 +2438,7 @@
 				B0D45DC71A5ED2F400C6D376 /* MFBaseTextExtensionProtocol.h in Headers */,
 				B0D45D2F1A5ED2F400C6D376 /* MFUIActionSave.h in Headers */,
 				B0D45E361A5ED2F400C6D376 /* MFMultiPanelViewController.h in Headers */,
+				B0E86BE21B452FFF00F5CB41 /* MFPickerListWrapper.h in Headers */,
 				B0D45DBF1A5ED2F400C6D376 /* TooltipViewPrivate.h in Headers */,
 				B0C9B2D31AFA21E700FC9665 /* MFEmailTextFieldStyle.h in Headers */,
 				B08AAC5E1AE91C5D0029EC88 /* MFWebViewController.h in Headers */,
@@ -2489,6 +2508,7 @@
 				B0D45E591A5ED2F400C6D376 /* MFFormViewControllerProtocol.h in Headers */,
 				B0D45D511A5ED2F400C6D376 /* MFDatePicker.h in Headers */,
 				B0D45DF71A5ED2F400C6D376 /* MFFormSearchProtocol.h in Headers */,
+				B04D12991B453E3900B64421 /* MFPickerListConfiguration.h in Headers */,
 				B01840011AB09E530081133F /* MFButton.h in Headers */,
 				B0D45DC01A5ED2F400C6D376 /* ValidTooltipView.h in Headers */,
 				B0D45E851A5ED2F400C6D376 /* MFUIViewModel.h in Headers */,
@@ -2540,6 +2560,7 @@
 				B0D45E201A5ED2F400C6D376 /* MFBoolValueProcessing.h in Headers */,
 				B08EF6FA1AE53F8F00F3754E /* MFEmailTextField.h in Headers */,
 				B0D45E041A5ED2F400C6D376 /* MFUILoggingHelper.h in Headers */,
+				B04D12951B453E1500B64421 /* MFPickerListExtension.h in Headers */,
 				B0D45E6A1A5ED2F400C6D376 /* MFPhotoDetailViewController.h in Headers */,
 				B0D45D221A5ED2F400C6D376 /* MFUIActionEmail.h in Headers */,
 				B0FFDB111B346A4500CA6E5E /* MFFieldValidatorHandler.h in Headers */,
@@ -2894,6 +2915,7 @@
 				B0C9B2E01AFA21E700FC9665 /* MFTextFieldStyle+ErrorView.m in Sources */,
 				B0D45DCF1A5ED2F400C6D376 /* MFDateConverter.m in Sources */,
 				B0D45D8B1A5ED2F400C6D376 /* MFScanner.m in Sources */,
+				B04D12961B453E1500B64421 /* MFPickerListExtension.m in Sources */,
 				B0D45E181A5ED2F400C6D376 /* MFHelperIndexPath.m in Sources */,
 				B0D45DD81A5ED2F400C6D376 /* MFInvalidDoubleValueUIValidationError.m in Sources */,
 				B06F3E1A1B3962AF005170FC /* MFTextFieldWrapper.m in Sources */,
@@ -2934,6 +2956,7 @@
 				B08EF7011AE53F8F00F3754E /* MFUrlTextField.m in Sources */,
 				B006CF131B32C25800B78782 /* MFBindingDelegate.m in Sources */,
 				B002B9AA1B39B44C0079DB12 /* MFDatePickerWrapper.m in Sources */,
+				B04D129A1B453E3900B64421 /* MFPickerListConfiguration.m in Sources */,
 				B00787CB1AB1E37A009F6D95 /* JDFTooltipView.m in Sources */,
 				B0D45E631A5ED2F400C6D376 /* MFViewController.m in Sources */,
 				B006CEF01B32C1E700B78782 /* MFListenerDescriptor.m in Sources */,
@@ -3053,6 +3076,7 @@
 				B0D45E771A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.m in Sources */,
 				B0D45E811A5ED2F400C6D376 /* MFUIBaseListViewModel.m in Sources */,
 				B0D45DF61A5ED2F400C6D376 /* MFFormSearchDelegate.m in Sources */,
+				B0E86BE31B452FFF00F5CB41 /* MFPickerListWrapper.m in Sources */,
 				B0289F291AA892A8007A2E75 /* MFUIBaseRenderableComponent.m in Sources */,
 				B0D45E711A5ED2F400C6D376 /* MFTransitionController.m in Sources */,
 				B0D45DC11A5ED2F400C6D376 /* ValidTooltipView.m in Sources */,

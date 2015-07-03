@@ -13,16 +13,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFPickerControllerDelegate.h
-//  MFUI
-//
-//
+
 
 
 
 //Component import
 #import "MFPickerList.h"
+#import "MFPickerListConfiguration.h"
 
 //Binding imports
 #import "MFUIBinding.h"
@@ -34,7 +31,7 @@
  * This component can indeed be declared in any kinf of cells that inherits from MFCellAbstract.
  * Its more convenient to manages data of the picker here.
  */
-@interface MFPickerControllerDelegate : NSObject <UIPickerViewDataSource, UIPickerViewDelegate, MFCommonFormProtocol, MFSearchDelegate, MFViewModelChangedListenerProtocol, MFContentDelegate>
+@interface MFPickerControllerDelegate : NSObject <UIPickerViewDataSource, UIPickerViewDelegate, MFCommonFormProtocol, MFSearchDelegate, MFViewModelChangedListenerProtocol>
 
 
 #pragma mark - Properties
@@ -45,16 +42,12 @@
 @property (nonatomic, weak) MFPickerList *picker;
 
 /*!
- * @brief Form Binding Delegate. This delegate allow to bind a ViewModel to a Form easily
- */
-@property(nonatomic, strong) id<MFCommonFormProtocol> formBindingDelegate ;
-
-/*!
  * @brief Le ViewModel associé à ce formulaire. il peut s'agir d'un ViewModel simple contenant différents
  * types de champs( => viewModel de type MFUIBaseViewModel) ou un ViewModel de type "liste" qui contient une liste
  * d'autres viewModels ( => viewModel de type MFUIBaseListViewModel ).
  */
 @property(nonatomic, strong) NSMutableArray *filteredViewModels;
+
 
 
 #pragma mark - Methods 
@@ -77,14 +70,11 @@
 -(BOOL)filterViewModel:(MFUIBaseViewModel *)viewModel withCurrentSearch:(NSString *)searchText;
 
 /*!
- * @brief Fills the selected view with the data of the given viewModelk
- * @param viewModel The viewModel to use to fill the selected view
- */
--(void) fillSelectedViewWithViewModel:(MFUIBaseViewModel *)viewModel;
-
-/*!
  * Select view model with the position in parameter
  */
 -(void) selectViewModel:(NSInteger)row ;
+
+
+-(void) initialize;
 
 @end

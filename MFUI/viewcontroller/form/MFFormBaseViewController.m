@@ -335,10 +335,6 @@
     return [self conformsToProtocol:@protocol(MFWorkspaceColumnProtocol)];
 }
 
--(id<MFUIBaseViewModelProtocol>)getViewModel {
-    return _viewModel;
-}
-
 
 #pragma mark - New Binding
 -(void)setBindingDelegate:(MFBindingDelegate *)bindingDelegate {

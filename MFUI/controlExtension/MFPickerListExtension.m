@@ -14,27 +14,8 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import <Foundation/Foundation.h>
-#import "MFBindingDelegate.h"
-#import "MFUIBaseViewModelProtocol.h"
+#import "MFPickerListExtension.h"
 
-@class MFUIBaseViewModel;
-
-/*!
- * @protocol MFObjectWithBindingProtocol
- * @brief A protocol that specify an object that need binding.
- */
-@protocol MFObjectWithBindingProtocol <NSObject>
-
-#pragma mark - Properties
-/*!
- * @brief The binding delegate of the object that implments thus protocol.
- */
-@property (nonatomic, strong) MFBindingDelegate *bindingDelegate;
-
-/*!
- * @brief The View Model used to bind, of the object that need the binding
- */
-@property(nonatomic, strong, getter=getViewModel) NSObject<MFUIBaseViewModelProtocol> *viewModel;
+@implementation MFPickerListExtension
 
 @end

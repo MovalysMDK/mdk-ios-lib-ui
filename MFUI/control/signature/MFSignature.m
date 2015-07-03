@@ -58,7 +58,6 @@
 @synthesize lineWidth = _lineWidth;
 @synthesize strokeColor = _strokeColor;
 @synthesize signaturePath = _signaturePath;
-@synthesize cellContainer = _cellContainer;
 @synthesize targetDescriptors = _targetDescriptors;
 #define SIGNATURE_DRAWING_WIDTH 240
 #define SIGNATURE_DRAWING_HEIGHT 160
@@ -327,8 +326,7 @@
                                                       self.bounds.size.height + 50)];
         
         self.popoverController = [[UIPopoverController alloc] initWithContentViewController:vc];
-        MFCellAbstract *parentCell = (MFCellAbstract *)self.cellContainer;
-        UIViewController *parentForm = (UIViewController *)parentCell.formController;
+        UIViewController *parentForm = self.parentViewController;
         //CGRect parentCellRect = [parentForm.tableView rectForRowAtIndexPath:self.componentInCellAtIndexPath];
         
         CGRect modalSignatureDrawingViewFrame = CGRectMake((self.mainFormControllerView.frame.size.width - SIGNATURE_DRAWING_WIDTH - 50)/2,

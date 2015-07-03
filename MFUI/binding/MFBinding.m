@@ -85,6 +85,7 @@
         for(MFBindingValue *bindingValue in bindingValues) {
             if([@(bindingValue.wrapper.component.hash) isEqualToNumber:componentHash]) {
                 bindingValueToRemove = bindingValue;
+                bindingValue.wrapper = nil;
                 break;
             }
         }
@@ -111,6 +112,7 @@
         }
         else {
             if([bindingValues containsObject:bindingValue]) {
+                bindingValue.wrapper = nil;
                 [bindingValues removeObject:bindingValue];
             }
             [copy setObject:bindingValues forKey:key];

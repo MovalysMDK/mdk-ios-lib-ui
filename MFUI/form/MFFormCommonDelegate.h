@@ -35,13 +35,6 @@
 #pragma mark - Methods
 
 
-@required
-/*!
- * @brief renvoie le ViewModel associé à ce binding
- * @param Un ViewModel (simple ou de liste) associé à ce binding
- */
--(id<MFUIBaseViewModelProtocol>) getViewModel;
-
 @optional
 /*!
  * @brief Cette méthode permet de définir la hauteur d'une cellule du formulaire à une position donnée
@@ -52,5 +45,11 @@
  * @param indexPath La position de la cellule dont on souhaite déterminer une nouvelle taille
  */
 -(void) setCellHeight:(float)height atIndexPath:(NSIndexPath *)indexPath;
+
+
+/*!
+ * @brief Creates the binding structure for thix object with binding
+ */
+-(void) createBindingStructure;
 
 @end

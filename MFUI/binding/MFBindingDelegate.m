@@ -113,6 +113,9 @@
     return result;
 }
 
+-(void)clear {
+    [self.structure removeAllObjects];
+}
 
 
 

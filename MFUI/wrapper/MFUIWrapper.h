@@ -28,5 +28,8 @@
 #import "MFSliderWrapper.h"
 #import "MFSwitchWrapper.h"
 #import "MFTextFieldWrapper.h"
+#import "MFPhotoFixedListWrapper.h"
+#import "MFFixedListWrapper.h"
+#import "MFPickerListWrapper.h"
 
 #endif

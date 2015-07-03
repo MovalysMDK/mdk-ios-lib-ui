@@ -108,6 +108,8 @@ const NSString *CELL_FIXEDLIST_DESCRIPTOR = @"CELL_FIXEDLIST_DESCRIPTOR";
     [[self currentStructure] setObject:viewDescriptor forKey:SECTION_HEADER_VIEW_2D_DESCRIPTOR];
 }
 
+
+
 #pragma mark - Utils
 
 -(NSMutableDictionary *) currentStructure {

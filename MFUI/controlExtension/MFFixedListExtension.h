@@ -15,6 +15,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "MFFixedListDataDelegate.h"
 
 /*!
  * @typedef MFFixedListEditMode
@@ -27,12 +28,41 @@ typedef enum {
     MFFixedListEditModeDirect=1
 } MFFixedListEditMode;
 
+
+/*!
+ * @class MFFixedListExtension
+ * @brief This class is an extension of the FixedList
+ */
 @interface MFFixedListExtension : NSObject
 
+/*!
+ * @brief Indicates if the user can add item
+ */
 @property (nonatomic) BOOL canAddItem;
+
+/*!
+ * @brief Indicates if the user can edit the fixedList
+ */
 @property (nonatomic) BOOL canEditItem;
+
+/*!
+ * @brief Indicates if the user can delete item
+ */
 @property (nonatomic) BOOL canDeleteItem;
+
+/*!
+ * @brief Indicates it it is a PhotofixedList
+ */
 @property (nonatomic) BOOL isPhotoFixedList;
+
+/*!
+ * @brief The edition mode of the fixedList
+ */
 @property (nonatomic) MFFixedListEditMode editMode;
+
+/*!
+ * @brief Le tableau contenant les données de la Liste éditable
+ */
+@property (nonatomic, strong) MFFixedListDataDelegate* dataDelegate;
 
 @end

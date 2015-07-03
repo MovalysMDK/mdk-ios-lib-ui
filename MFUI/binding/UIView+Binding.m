@@ -47,6 +47,7 @@
         for(MFBindingDescriptor *itemDescriptor in bindingDictionary[outletBindingKey]) {
             [objectWithBinding.bindingDelegate registerComponentBindingProperty:itemDescriptor.componentProperty withViewModelProperty:[itemDescriptor abstractBindedProperty] forComponent:valueAsView withOutletName:outletBindingKey.outletName withMode:itemDescriptor.bindingMode withBindingKey:[bindingViewDescriptor generatedBindingKey] withIndexPath:[bindingViewDescriptor viewIndexPath] fromBindingSource:itemDescriptor.bindingSource];
         }
+        [valueAsView didBinded];
     }
 }
 

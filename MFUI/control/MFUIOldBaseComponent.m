@@ -53,7 +53,6 @@
 @synthesize editable = _editable;
 @synthesize mfParent = _mfParent;
 @synthesize lastUpdateSender = _lastUpdateSender;
-@synthesize cellContainer = _cellContainer;
 @synthesize inInitMode = _inInitMode;
 @synthesize styleClass = _styleClass;
 @synthesize styleClassName = styleClassName;

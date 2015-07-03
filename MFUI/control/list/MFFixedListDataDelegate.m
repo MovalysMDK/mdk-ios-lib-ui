@@ -65,6 +65,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
  */
 @property (nonatomic, strong) MBProgressHUD *HUD;
 
+
 @end
 
 @implementation MFFixedListDataDelegate
@@ -133,11 +134,11 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
     [self updateCellFromBindingData:bindingData atIndexPath:indexPath];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if(self.fixedList.cellContainer) {
-            [((MFCellAbstract *)self.fixedList.cellContainer) updateConstraints];
-        }
-    });
+    //    dispatch_async(dispatch_get_main_queue(), ^{
+    //        if(self.fixedList.cellContainer) {
+    //            [self. updateConstraints];
+    //        }
+    //    });
     
     if([cell isKindOfClass:[MFCellAbstract class]]) {
         [(MFCellAbstract *)cell cellIsConfigured];
@@ -398,7 +399,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 
 -(void) setContent{
     [self.fixedList setItemClassName:[self itemListViewModelName]];
-
+    
     self.viewModel = [self.fixedList getData];
     if(self.viewModel) {
         self.viewModel.form = self;
@@ -475,12 +476,13 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
             [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"MDK_ComponentSize_%@", [selfBindingValue.bindingIndexPath stringIndexPath]] object:@(height)];
         }
     }
+    
 }
 
 -(void)createBindingStructure {
-        MFTableConfiguration *tableConfiguration = [MFTableConfiguration createTableConfigurationForObjectWithBinding:self];
-        MFBindingCellDescriptor *photoCellDescriptor = [MFBindingCellDescriptor cellDescriptorWithIdentifier:@"PhotoFixedListItemCell" withCellHeight:@(123) withCellBindingFormat:@"outlet.photoValue.binding : vm.photo<->c.data", nil];
-        [tableConfiguration createFixedListTableCellWithDescriptor:photoCellDescriptor];
+    MFTableConfiguration *tableConfiguration = [MFTableConfiguration createTableConfigurationForObjectWithBinding:self];
+    MFBindingCellDescriptor *photoCellDescriptor = [MFBindingCellDescriptor cellDescriptorWithIdentifier:@"PhotoFixedListItemCell" withCellHeight:@(123) withCellBindingFormat:@"outlet.photoValue.binding : vm.photo<->c.data", nil];
+    [tableConfiguration createFixedListTableCellWithDescriptor:photoCellDescriptor];
 }
 
 

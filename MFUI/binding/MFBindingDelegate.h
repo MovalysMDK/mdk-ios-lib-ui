@@ -111,4 +111,10 @@
  */
 -(NSArray *) allBindingValues;
 
+
+/*!
+ * @brief Clears the binding structure
+ */
+-(void) clear;
+
 @end

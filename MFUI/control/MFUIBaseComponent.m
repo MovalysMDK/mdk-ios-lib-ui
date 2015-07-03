@@ -67,7 +67,6 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 @synthesize lastUpdateSender = _lastUpdateSender;
 @synthesize errors = _errors;
 @synthesize inInitMode = _inInitMode;
-@synthesize cellContainer = _cellContainer;
 @synthesize styleClass = _styleClass;
 @synthesize styleClassName = styleClassName;
 @synthesize controlAttributes = _controlAttributes;

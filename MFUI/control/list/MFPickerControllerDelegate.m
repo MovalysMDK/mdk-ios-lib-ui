@@ -20,7 +20,6 @@
 //
 
 //MFCore imports
-#import <MFCore/MFCoreConfig.h>
 #import <MFCore/MFCoreError.h>
 
 
@@ -38,32 +37,15 @@
 #import "MFUILoggingHelper.h"
 #import "MFUIBaseListViewModel.h"
 
+#import "MFAbstractComponentWrapper.h"
+
 
 
 int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
 
 
 @interface MFPickerControllerDelegate()
-
-/**
- * @brief The NIB name corresponding to the item view int the pickerList
- */
-@property (nonatomic, strong) NSString *itemViewNibName;
-
-/**
- * @brief The NIB name corresponding to the static view in this cell
- */
-@property (nonatomic, strong) NSString *staticViewNibName;
-
-/**
- * @brief Indicates if this component should set the cell height to its form container
- */
-@property (nonatomic) BOOL shouldSetCellHeight;
-
-/**
- * @brief Indicates if this component should set the cell height to its form container
- */
-@property (nonatomic, strong) MFConfigurationHandler *registry;
+@property (nonatomic) BOOL computeAlreadyDone;
 
 @end
 
@@ -72,6 +54,7 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
 
 @synthesize viewModel =_viewModel;
 @synthesize formValidation =_formValidation;
+@synthesize bindingDelegate = _bindingDelegate;
 
 
 #pragma mark - Initialization and lifecycle
@@ -86,86 +69,69 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
 }
 
 -(void) initialize {
-    self.registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
     self.filteredViewModels = [self initializeFilteredViewModels];
-    self.shouldSetCellHeight = YES;
+    
+    [self initializeBinding];
+    [self initializeModel];
+    [self.bindingDelegate clear];
+    [self createBindingStructure];
+    [self initializeStaticBinding];
 }
 
--(void)setContent {
-    
-    //Récupération des données
-    self.viewModel = [self.picker getData];
-    
-    self.viewModel.form = self;
-    
-    
-    
-    //    [self.pickerList.staticView registerComponent:self];
-    
-    //Calcul de la taille de la cellule en fonction de la taille de la vue statique
-    if(self.shouldSetCellHeight == YES) {
-        if([((MFCellAbstract *)self.picker.cellContainer).formController respondsToSelector:@selector(setCellHeight:atIndexPath:)]) {
-            int finalHeight = self.picker.frame.origin.y + self.picker.frame.size.height + 20;
-            [((MFCellAbstract *)self.picker.cellContainer).formController setCellHeight:finalHeight atIndexPath:self.picker.cellContainer.cellIndexPath];
-            self.shouldSetCellHeight = NO;
-        }
-    }
-    
-    // Remplissage de la vue statique au premier affichage (par défaut récupération du premier item
-    MFUIBaseViewModel *currentViewModel = [self getSelectedViewModel];
-    if(!currentViewModel && ([self pickerListViewModel].viewModels.count > 0)) {
-        currentViewModel = [[self pickerListViewModel].viewModels objectAtIndex:0];
-    }
-    if(currentViewModel) {
-        [self fillSelectedViewWithViewModel:currentViewModel];
-    }
-    
-    self.filteredViewModels = [self initializeFilteredViewModels];
-    [self.picker.staticView viewIsConfigured];
+-(void) initializeStaticBinding {
+    MFBindingViewDescriptor *bindingData = self.bindingDelegate.structure[SELECTEDITEM_PICKERLIST_DESCRIPTOR];
+    NSString *xibName = bindingData.viewIdentifier;
+    self.picker.staticView = [[[NSBundle mainBundle] loadNibNamed:xibName owner:nil options:nil] firstObject];
+    [self.picker.staticView bindViewFromDescriptor:bindingData onObjectWithBinding:self];
 }
-
-
-
--(void)dealloc {
-    if(self.picker) {
-        self.picker.cellContainer = nil;
-        self.picker.pickerView.dataSource = nil;
-        self.picker.pickerView.delegate = nil;
-    }
-}
-
-
-
 
 #pragma mark - UIPickerView DataSource & Delegate
 
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
-    NSIndexPath *virtualIndexPath = [NSIndexPath indexPathForItem:row inSection:component];
-    
-    
-    //PROTODO : Mécanisme binding ici
-    MFBindingViewAbstract *pickerItemView = (MFBindingViewAbstract *)view;
-    
-    //Création de la vue
-    if(pickerItemView == nil) {
-        pickerItemView = [self itemView];
-    }
-    CGRect itemFrame = pickerItemView.frame;
-    itemFrame.size.height = [self pickerView:pickerView rowHeightForComponent:component];
-    itemFrame.size.width = pickerView.frame.size.width;
-    pickerItemView.frame = itemFrame;
-    
-    
-    [pickerItemView viewIsConfigured];
-    return pickerItemView;
-}
 
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return self.filteredViewModels.count;
 }
 
-//PROTODO : Nimber of section
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:row inSection:component];
+    
+    MFBindingViewDescriptor *bindingData = self.bindingDelegate.structure[LISTITEM_PICKERLIST_DESCRIPTOR];
+    NSString *identifier = bindingData.viewIdentifier;
+    
+    MFBindingViewAbstract *pickerItemView = (MFBindingViewAbstract *)view;
+    if(!pickerItemView) {
+        pickerItemView = [self itemView];
+    }
+    
+    bindingData.viewIndexPath = indexPath;
+    
+    [pickerItemView bindViewFromDescriptor:bindingData onObjectWithBinding:self];
+    [self updateCellFromBindingData:bindingData atIndexPath:indexPath];
+    
+    CGRect pickerItemViewframe = pickerItemView.frame;
+    pickerItemViewframe.size.height = [self pickerView:pickerItemView rowHeightForComponent:component];
+    pickerItemViewframe.size.width = pickerView.frame.size.width;
+    pickerItemView.frame = pickerItemViewframe;
+    
+    return pickerItemView;
+}
+
+-(void) updateCellFromBindingData:(MFBindingCellDescriptor *)bindingData atIndexPath:(NSIndexPath *)indexPath{
+    NSArray *bindingValues = [self.bindingDelegate bindingValuesForCellBindingKey:[bindingData generatedBindingKey]];
+    for(MFBindingValue *bindingValue in bindingValues) {
+        bindingValue.wrapper.wrapperIndexPath = indexPath;
+        [self.bindingDelegate.binding dispatchValue:[[self viewModelAtIndexPath:indexPath] valueForKeyPath:bindingValue.abstractBindedPropertyName] fromPropertyName:bindingValue.abstractBindedPropertyName atIndexPath:indexPath fromSource:bindingValue.bindingSource];
+    }
+}
+
+
+-(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return [((MFBindingViewDescriptor *)self.bindingDelegate.structure[LISTITEM_PICKERLIST_DESCRIPTOR]).viewHeight floatValue];
+}
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if(self.filteredViewModels.count == 0) {
@@ -173,16 +139,13 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
     }
 }
 
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
 
--(void) selectViewModel:(NSInteger)row {
-    MFUIBaseViewModel *itemViewModel = [self.filteredViewModels objectAtIndex:row];
-    [self setSelectedViewModel:itemViewModel];
-    [self fillSelectedViewWithViewModel:[self.filteredViewModels objectAtIndex:row]];
+-(void) updateStaticView {
+    MFBindingViewDescriptor *bindingData = ((MFBindingViewDescriptor *)self.bindingDelegate.structure[SELECTEDITEM_PICKERLIST_DESCRIPTOR]);
+    for(MFBindingValue *bindingValue in [self.bindingDelegate bindingValuesForCellBindingKey:[bindingData generatedBindingKey]]) {
+        [self.bindingDelegate.binding dispatchValue:[[self getSelectedViewModel] valueForKey:bindingValue.abstractBindedPropertyName] fromPropertyName:bindingValue.abstractBindedPropertyName fromSource:bindingValue.bindingSource];
+    }
 }
-
 
 /**
  * @brief Creates and returns the view of an item of the pickerView
@@ -190,17 +153,23 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
  */
 -(MFBindingViewAbstract *)itemView {
     MFBindingViewAbstract *returnView = nil;
-    if(self.itemViewNibName) {
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:self.itemViewNibName owner:nil options:nil];
-        if(topLevelObjects && topLevelObjects.count > 0) {
-            returnView = [topLevelObjects objectAtIndex:0];
-        }
-        topLevelObjects = nil;
+    NSString *xibName = ((MFBindingViewDescriptor *)self.bindingDelegate.structure[LISTITEM_PICKERLIST_DESCRIPTOR]).viewIdentifier;
+    if(xibName) {
+        returnView = [[[NSBundle mainBundle] loadNibNamed:xibName owner:nil options:nil] firstObject];
+    }
+    else {
+        [MFException throwExceptionWithName:@"No View Identifier" andReason:@"You must define a ViewIdentifier for the item PickerList view" andUserInfo:nil];
     }
     return returnView;
 }
 
 #pragma mark - ViewModels management
+
+-(void) selectViewModel:(NSInteger)row {
+    MFUIBaseViewModel *itemViewModel = [self.filteredViewModels objectAtIndex:row];
+    [self setSelectedViewModel:itemViewModel];
+}
+
 
 -(id<MFUIBaseViewModelProtocol>) viewModelAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -214,8 +183,6 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
             vmItem = nil ;
         }
     }
-    
-    
     if (vmItem == nil ) {
         
         id vmCreator = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_VIEW_MODEL_CREATOR];
@@ -234,6 +201,34 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
     return vmItem;
 }
 
+/**
+ * @brief Initialize the dictionary of filtered view Models with all view models
+ * @return A dictionary containing the list of view models
+ */
+-(NSMutableArray *) initializeFilteredViewModels {
+    NSMutableArray *array = nil;
+    array = [self pickerListViewModel].viewModels;
+    return array;
+}
+
+
+-(id<MFUIBaseViewModelProtocol>)getViewModel {
+    id object = [self.picker getData];
+    return object;
+}
+
+-(MFUIBaseListViewModel *) pickerListViewModel {
+    return (MFUIBaseListViewModel *)[self.picker getValues];
+}
+
+-(MFUIBaseViewModel *) getSelectedViewModel {
+    return [self.picker getData];
+}
+
+
+-(void) setSelectedViewModel:(MFUIBaseViewModel *)viewModel {
+    [self.picker setData:viewModel];
+}
 
 #pragma mark - MFSearchDelegate
 
@@ -279,57 +274,32 @@ int static UNIQUE_PICKER_LIST_SECTION_INDEX = 0;
     }
 }
 
-/**
- * @brief Initialize the dictionary of filtered view Models with all view models
- * @return A dictionary containing the list of view models
- */
--(NSMutableArray *) initializeFilteredViewModels {
-    NSMutableArray *array = nil;
-    array = [self pickerListViewModel].viewModels;
-    return array;
+
+#pragma mark - Binding
+
+-(void) initializeBinding {
+    self.bindingDelegate = [[MFBindingDelegate alloc] initWithObject:self];
+}
+-(void) initializeModel {
+    self.viewModel.objectWithBinding = self;
 }
 
-/**
- * @brief Fill the staticView with the data of a viewModel
- * @param viewModel A View Model (should be the current selected ViewModel of the ListViewModel)
- */
--(void) fillSelectedViewWithViewModel:(MFUIBaseViewModel *)viewModel {
+-(void) computeCellHeightAndDispatchToFormController {
     
-    if([viewModel isKindOfClass:NSClassFromString(@"MFEmptyViewModel")]) {
-        MFBindingViewAbstract *emptyView = nil;
-        if(self.picker.emptyViewNibName) {
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:self.picker.emptyViewNibName owner:self options:nil];
-            if(topLevelObjects && topLevelObjects.count >0) {
-                emptyView = [topLevelObjects objectAtIndex:0];
+    if(!self.computeAlreadyDone) {
+        MFBindingViewDescriptor *bindingData = self.bindingDelegate.structure[SELECTEDITEM_PICKERLIST_DESCRIPTOR];
+        float itemHeight = [bindingData.viewHeight floatValue];
+        
+        UIViewController *parent = self.picker.parentViewController;
+        if(parent && [parent conformsToProtocol:@protocol(MFObjectWithBindingProtocol)]) {
+            id<MFObjectWithBindingProtocol> parentObjectWithBinding = (id<MFObjectWithBindingProtocol>)parent;
+            MFBindingValue *selfBindingValue = parentObjectWithBinding.bindingDelegate.binding.bindingByComponents[@(self.picker.hash)];
+            if(selfBindingValue) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"MDK_ComponentSize_%@", [selfBindingValue.bindingIndexPath stringIndexPath]] object:@(itemHeight)];
             }
-            self.picker.emptyStaticView = emptyView;
         }
-        self.picker.staticView = self.picker.emptyStaticView ? self.picker.emptyStaticView : [[MFBindingViewAbstract alloc] init];
-        [self.picker setNeedsDisplay];
+        self.computeAlreadyDone = YES;
     }
-}
-
-
-
-
-#pragma mark - Manage data
--(void) setSelectedViewModel:(MFUIBaseViewModel *)viewModel {
-    [self.picker setData:viewModel];
-}
-
-
--(id<MFUIBaseViewModelProtocol>)getViewModel {
-    id object = [self.picker getData];
-    return object;
-}
-
--(MFUIBaseViewModel *) getSelectedViewModel {
-    MFUIBaseViewModel *selectedViewModel = [self.picker getData];
-    return selectedViewModel;
-}
-
--(MFUIBaseListViewModel *) pickerListViewModel {
-    return (MFUIBaseListViewModel *)[self.picker getValues];
 }
 
 @end

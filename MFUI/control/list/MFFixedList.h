@@ -53,11 +53,6 @@ typedef enum {
 @property (nonatomic, strong) MFFixedListExtension *mf;
 
 /*!
- * @brief Le tableau contenant les données de la Liste éditable
- */
-@property (nonatomic, strong) MFFixedListDataDelegate* dataDelegate;
-
-/*!
  * @brief La liste éditable
  */
 @property (nonatomic, strong) UITableView *tableView;

@@ -48,7 +48,6 @@
 @synthesize visible = _visible;
 @synthesize editable = _editable;
 @synthesize tooltipView= _tooltipView;
-@synthesize cellContainer = _cellContainer;
 @synthesize styleClassName = styleClassName;
 @synthesize controlAttributes = _controlAttributes;
 @synthesize associatedLabel = _associatedLabel;

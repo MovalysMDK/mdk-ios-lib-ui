@@ -22,7 +22,7 @@
 #import "MFUIView.h"
 #import "MFUIMotion.h"
 #import "MFUIForm.h"
-
+#import "MFControlChangesProtocol.h"
 #import "MFUIOldBaseComponent.h"
 
 @class MFUIBaseListViewModel;
@@ -46,7 +46,7 @@ FOUNDATION_EXPORT NSString *const PICKER_PARAMETER_CANCEL_BUTTON_COLOR_KEY;
 FOUNDATION_EXPORT const int PICKER_VIEW_TAG;
 
 
-@interface MFPickerList : MFUIOldBaseComponent <UIGestureRecognizerDelegate, UISearchBarDelegate, MFOrientationChangedProtocol>
+@interface MFPickerList : MFUIOldBaseComponent <UIGestureRecognizerDelegate, UISearchBarDelegate, MFOrientationChangedProtocol, MFControlChangesProtocol>
 
 
 #pragma mark -  Properties - Graphics
@@ -91,7 +91,6 @@ FOUNDATION_EXPORT const int PICKER_VIEW_TAG;
  * @brief The search bar
  */
 @property (nonatomic, strong) UISearchBar *searchBar;
-
 
 
 #pragma mark - Properties - Others

@@ -70,7 +70,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 
 #pragma mark - Synthesizing
 
-@synthesize cellContainer = _cellContainer;
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
@@ -141,7 +140,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 }
 
 -(void)defineAndAddConstraint {
-    int customButtonsMargin = [self.dataDelegate marginForCustomButtons];
+    int customButtonsMargin = [self.mf.dataDelegate marginForCustomButtons];
     
     [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.topBarView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -214,7 +213,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     //Set Data
     if(![_data isEqual:data] && ![data isKindOfClass:[MFKeyNotFound class]]) {
         _data= data;
-        [self.dataDelegate computeCellHeightAndDispatchToFormController];
+        [self.mf.dataDelegate computeCellHeightAndDispatchToFormController];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
@@ -297,8 +296,8 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 -(void) addItem {
-    if([self.dataDelegate respondsToSelector:NSSelectorFromString(@"addItemOnFixedList")]) {
-        [self.dataDelegate performSelector:NSSelectorFromString(@"addItemOnFixedList")];
+    if([self.mf.dataDelegate respondsToSelector:NSSelectorFromString(@"addItemOnFixedList")]) {
+        [self.mf.dataDelegate performSelector:NSSelectorFromString(@"addItemOnFixedList")];
     }
 }
 #pragma clang diagnostic pop
@@ -329,12 +328,12 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 }
 
 -(void) refreshCustomButtons {
-    for(UIButton *button in [self.dataDelegate customButtonsForFixedList]) {
+    for(UIButton *button in [self.mf.dataDelegate customButtonsForFixedList]) {
         [self addCustomButton:button];
     }
     
-    int marginForCustomButtons = -[self.dataDelegate marginForCustomButtons];
-    CGSize sizeForCustomButtons = [self.dataDelegate sizeForCustomButtons];
+    int marginForCustomButtons = -[self.mf.dataDelegate marginForCustomButtons];
+    CGSize sizeForCustomButtons = [self.mf.dataDelegate sizeForCustomButtons];
     
     self.buttonsView.userInteractionEnabled = YES;
     [self.topBarView addSubview:self.buttonsView];
@@ -405,7 +404,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 }
 
 -(NSInteger) topBarViewHeight {
-    int customButtonsSize = [self.dataDelegate sizeForCustomButtons].height;
+    int customButtonsSize = [self.mf.dataDelegate sizeForCustomButtons].height;
     return customButtonsSize;
 }
 
@@ -433,12 +432,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     [self.editButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
 
     [self.tableView reloadData];
-}
-
--(void)setDataDelegate:(MFFixedListDataDelegate *)dataDelegate {
-    _dataDelegate = dataDelegate;
-    self.tableView.dataSource = _dataDelegate;
-    self.tableView.delegate =  _dataDelegate;
 }
 
 -(BOOL)isPhotoFixedList {
@@ -484,8 +477,10 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 -(void)setControlAttributes:(NSDictionary *)controlAttributes {
     _controlAttributes = controlAttributes;
     NSString *dataDelegateName = controlAttributes[@"dataDelegateName"];
-    if(dataDelegateName && !self.dataDelegate) {
-        self.dataDelegate = [[NSClassFromString(dataDelegateName) alloc] initWithFixedList:self];
+    if(dataDelegateName && !self.mf.dataDelegate) {
+        self.mf.dataDelegate = [[NSClassFromString(dataDelegateName) alloc] initWithFixedList:self];
+        self.tableView.dataSource = self.mf.dataDelegate;
+        self.tableView.delegate = self.mf.dataDelegate;
     }
     
     NSNumber *canEditItem = controlAttributes[FIXED_LIST_PARAMETER_CAN_EDIT_ITEM];

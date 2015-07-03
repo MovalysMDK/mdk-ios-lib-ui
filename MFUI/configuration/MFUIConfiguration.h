@@ -21,5 +21,6 @@
 #import "MFFormConfiguration.h"
 #import "MFTableConfiguration.h"
 #import "MFViewModelConfiguration.h"
+#import "MFPickerListConfiguration.h"
 
 #endif

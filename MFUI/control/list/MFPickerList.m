@@ -44,6 +44,7 @@
 //Import Exception
 #import  <MFCore/MFCoreError.h>
 #import "MFUIBaseListViewModel.h"
+#import "MFPickerListExtension.h"
 
 
 
@@ -84,6 +85,10 @@ const int NO_LAST_INDEX = -1;
 
 @interface MFPickerList()
 
+/**
+ * @brief The extension for PickerList
+ */
+@property (nonatomic, strong) MFPickerListExtension *mf;
 
 /**
  * @brief The index of the last selection state, needed to restore the value if the user
@@ -94,11 +99,6 @@ const int NO_LAST_INDEX = -1;
  * @brief The popover window to display the PickerList on iPad
  */
 @property (nonatomic, strong) UIPopoverController *popoverController;
-
-/**
- * @brief Indicates if the component shoul displaye the searchBar
- */
-@property (nonatomic) BOOL hasSearch;
 
 /**
  * @brief Indicates if the constraints between the storyboard and the pickerlist have been added
@@ -115,10 +115,6 @@ const int NO_LAST_INDEX = -1;
  */
 @property (nonatomic, strong) UIView *mainFormControllerView;
 
-/**
- * @brief The picker controller delegate that manages data of the inner pickerview
- */
-@property (nonatomic, strong) MFPickerControllerDelegate *controllerDelegate;
 
 /**
  * @brief An instance of the configurationHandler
@@ -136,14 +132,15 @@ const int NO_LAST_INDEX = -1;
 @synthesize data = _data;
 @synthesize  staticView = _staticView;
 @synthesize currentOrientation = _currentOrientation;
+@synthesize controlAttributes = _controlAttributes;
+@synthesize targetDescriptors = _targetDescriptors;
 
 #pragma mark - Initializing and view lifecycle
 
 -(void)initialize {
     [super initialize];
     
-    self.controllerDelegate = [[MFPickerControllerDelegate alloc] initWithPickerList:self];
-    
+    self.mf = [MFPickerListExtension new];
     //Initialize
     self.isShowing = NO;
     self.lastIndex = NO_LAST_INDEX;
@@ -219,9 +216,11 @@ const int NO_LAST_INDEX = -1;
 }
 
 -(void)setData:(MFUIBaseViewModel *)data {
-    _data = data;
-    [self.controllerDelegate setContent];
-}
+    if(![_data isEqual:data] && ![data isKindOfClass:[MFKeyNotFound class]]) {
+        _data= data;
+        [self.mf.dataDelegate performSelector:@selector(computeCellHeightAndDispatchToFormController)];
+        [self.mf.dataDelegate performSelector:@selector(updateStaticView)];
+    }}
 
 
 #pragma mark - GestureRecognizers methods
@@ -269,9 +268,6 @@ const int NO_LAST_INDEX = -1;
     }
     
     
-    self.hasSearch = //PROTODO : parameters hasSearch PICKER_PARAMETER_SEARCH_KEY
-    
-
     self.mainFormControllerView = self;
     if([self.form isKindOfClass:[MFFormSearchViewController class]]) {
         self.mainFormControllerView = ((UIViewController *)self.form).view;
@@ -298,7 +294,7 @@ const int NO_LAST_INDEX = -1;
     self.pickerView.showsSelectionIndicator = NO;
     
     //Build and initialize the searchBar if needed
-    if(self.hasSearch) {
+    if(self.mf.hasSearch) {
         self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(pickerListOriginX,
                                                                        PICKER_LIST_HEIGHT+PICKER_TOP_BAR_HEIGHT,
                                                                        pickerListWidth,
@@ -323,7 +319,7 @@ const int NO_LAST_INDEX = -1;
     
     self.confirmButton.segmentedControlStyle = UISegmentedControlStyleBar;
     //PROTODO : Couleur des boutons ?
-
+    
     self.confirmButton.tintColor = [UIColor blackColor];
     
     [self.confirmButton addTarget:self action:@selector(dismissPickerViewAndSave) forControlEvents:UIControlEventValueChanged];
@@ -368,12 +364,12 @@ const int NO_LAST_INDEX = -1;
     [self.modalPickerView setBackgroundColor:[UIColor colorWithWhite:whiteDegree alpha:0.9]];
     
     //Set pickerFrame
-    int pickerYHeight = self.hasSearch ? PICKER_SEARCH_BAR_HEIGHT : 0;
+    int pickerYHeight = self.mf.hasSearch ? PICKER_SEARCH_BAR_HEIGHT : 0;
     pickerYHeight += (PICKER_TOP_BAR_HEIGHT + PICKER_LIST_HEIGHT);
     [self.pickerView setFrame:CGRectMake(pickerListOriginX, PICKER_TOP_BAR_HEIGHT, pickerListWidth, PICKER_LIST_HEIGHT)];
     
     
-    if(self.hasSearch) {
+    if(self.mf.hasSearch) {
         [self.searchBar resignFirstResponder];
     }
     
@@ -400,19 +396,18 @@ const int NO_LAST_INDEX = -1;
     [view addSubview:self.pickerView];
     [view addSubview:self.cancelButton];
     [view addSubview:self.confirmButton];
-    if(self.hasSearch) {
+    if(self.mf.hasSearch) {
         [view addSubview:self.searchBar];
     }
     
     UIViewController *vc = [[UIViewController alloc] init];
     [vc setView:view];
-    int contentViewHeight = self.hasSearch ? PICKER_SEARCH_BAR_HEIGHT : 0;
+    int contentViewHeight = self.mf.hasSearch ? PICKER_SEARCH_BAR_HEIGHT : 0;
     contentViewHeight +=  self.pickerView.frame.size.height + PICKER_TOP_BAR_HEIGHT;
     [vc setContentSizeForViewInPopover:CGSizeMake(self.pickerView.frame.size.width,contentViewHeight)];
     
     self.popoverController = [[UIPopoverController alloc] initWithContentViewController:vc];
-    MFCellAbstract *parentCell = (MFCellAbstract *)self.cellContainer;
-    MFFormBaseViewController *parentForm = (MFFormBaseViewController *)parentCell.formController;
+    MFFormBaseViewController *parentForm = self.parentViewController;
     
     [self.popoverController presentPopoverFromRect:self.mainFormControllerView.frame inView:parentForm.view permittedArrowDirections:0 animated:YES];
     
@@ -433,13 +428,13 @@ const int NO_LAST_INDEX = -1;
     
     // Avant on sélectionne le vm
     NSInteger row = [self.pickerView selectedRowInComponent:0] ;
-    [self.controllerDelegate selectViewModel:row] ;
-    if([self pickerListViewModel].viewModels.count > 0) {
-        _data = [[self pickerListViewModel].viewModels objectAtIndex:[self.pickerView selectedRowInComponent:0]];
-    }
-    else {
-        _data = nil;
-    }
+    [self.mf.dataDelegate selectViewModel:row] ;
+//    if([self pickerListViewModel].viewModels.count > 0) {
+//        _data = [[self pickerListViewModel].viewModels objectAtIndex:[self.pickerView selectedRowInComponent:0]];
+//    }
+//    else {
+//        _data = nil;
+//    }
     if([MFVersionManager isCurrentDeviceOfTypePhone])
     {
         [self hidePickerModalView];
@@ -450,7 +445,7 @@ const int NO_LAST_INDEX = -1;
             [self.popoverController dismissPopoverAnimated:YES];
         }
     }
-    //    [self.controllerDelegate unregisterAllComponents];
+    [self valueChanged:self.staticView];
 }
 
 /**
@@ -462,12 +457,12 @@ const int NO_LAST_INDEX = -1;
     }
     
     //Obligation d'appeller l'évènement soi-même pour la mise à jour du VM car la méthode "selectRow" ne le fait pas (cf. doc Applle).
-    if(self.hasSearch) {
-        [((id<MFSearchDelegate>)self.controllerDelegate) updateFilterWithText:@""];
+    if(self.mf.hasSearch) {
+        [((id<MFSearchDelegate>)self.mf.dataDelegate) updateFilterWithText:@""];
     }
     
     if([self pickerListViewModel].viewModels.count > 0) {
-        [self.controllerDelegate pickerView:self.pickerView didSelectRow:self.lastIndex inComponent:0];
+        [self.mf.dataDelegate pickerView:self.pickerView didSelectRow:self.lastIndex inComponent:0];
     }
     [self performSelector:@selector(dismissPickerViewAndSave) withObject:nil afterDelay:0.35];
 }
@@ -566,16 +561,13 @@ const int NO_LAST_INDEX = -1;
     
     //init the PickerView
     NSUInteger currentSelectedRow = [self selectCorrectRow];
-    [self.controllerDelegate fillSelectedViewWithViewModel:_data];
     if(self.lastIndex == NO_LAST_INDEX) {
         self.lastIndex = currentSelectedRow;
     }
     
     self.isShowing = YES;
     
-    if(self.hasSearch ) {
-        [((id<MFSearchDelegate>)self.controllerDelegate) updateFilterWithText:@""];
-    }
+     [((id<MFSearchDelegate>)self.mf.dataDelegate) updateFilterWithText:@""];
     [self.pickerView selectRow:currentSelectedRow inComponent:0 animated:YES];
 }
 
@@ -587,20 +579,11 @@ const int NO_LAST_INDEX = -1;
 }
 
 
-//PROTODO :
-//PICKER_PARAMETER_VALUES_KEY
-
 -(id) getValues {
     MFUIBaseListViewModel *values = nil;
-    NSString *valuesPropertyName = nil;//PROTODO retrouver les valleurs (LVM)
-    if(!valuesPropertyName) {
-        //                [MFException throwExceptionWithName:@"Missing field"
-        //                                          andReason:[NSString stringWithFormat:@"The field %@ is missing in the parameters of the PLIST for the component %@", PICKER_PARAMETER_VALUES_KEY, NSStringFromClass(self.class)]
-        //                                        andUserInfo:nil];
-    }
-    else {
-        MFUIBaseViewModel *formViewModel = (MFUIBaseViewModel *)[((MFFormBaseViewController *)((MFCellAbstract *)self.form)) getViewModel];
-        id object = [formViewModel valueForKeyPath:valuesPropertyName];
+    if(self.mf.pickerValuesKey) {
+        MFUIBaseViewModel *formViewModel = [((MFFormViewController *)self.parentViewController) getViewModel];
+        id object = [formViewModel valueForKeyPath:self.mf.pickerValuesKey];
         if(object && [object isKindOfClass:[MFUIBaseListViewModel class]]) {
             values = (MFUIBaseListViewModel *) object;
         }
@@ -608,31 +591,11 @@ const int NO_LAST_INDEX = -1;
     return values;
 }
 
--(NSString *)selectedViewFormDescriptorName {
-//    NSString *localSelectedViewFormDescriptorName = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_SELECTED_VIEW_FORM_DESCRIPTOR_NAME_KEY];
-//    if([self.configurationHandlerInstance getFormDescriptorProperty:localSelectedViewFormDescriptorName]) {
-//        [self.configurationHandlerInstance loadFormWithName:localSelectedViewFormDescriptorName];
-//    }
-//    return localSelectedViewFormDescriptorName;
-    
-    //PROTODO : Retrouver le nom du selectedView
-    return nil;
-}
-
--(NSString *)lstItemViewFormDescriptorName {
-//    NSString *localLstItemViewFormDescriptorName = [((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:PICKER_PARAMETER_LIST_ITEM_VIEW_FORM_DESCRIPTOR_NAME_KEY];
-//    return localLstItemViewFormDescriptorName;
-    
-    //PROTODO : Retrouver le nom du listItemView
-    return nil;
-}
-
-
 
 #pragma mark - Search Bar Delegate
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [((id<MFSearchDelegate>)self.controllerDelegate) updateFilterWithText:searchText];
+    [((id<MFSearchDelegate>)self.mf.dataDelegate) updateFilterWithText:searchText];
 }
 
 
@@ -684,12 +647,10 @@ const int NO_LAST_INDEX = -1;
  * The method changes the position of the pickerView to be not hidden by the keyboard
  */
 - (void)keyboardWasShown:(NSNotification *)notification {
-    if(self.isModalPickerViewDisplayed && !self.hasSearch) {
+    if(self.isModalPickerViewDisplayed && !self.mf.hasSearch) {
         [self dismissPickerViewAndCancel];
     }
 }
-
-
 
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];
@@ -697,16 +658,45 @@ const int NO_LAST_INDEX = -1;
 
 -(void)setPickerView:(UIPickerView *)pickerView {
     _pickerView = pickerView;
-    _pickerView.delegate = self.controllerDelegate;
-    _pickerView.dataSource = self.controllerDelegate;
+    _pickerView.delegate = self.mf.dataDelegate;
+    _pickerView.dataSource = self.mf.dataDelegate;
 }
-
-
-//PROTODO : empty nib : PICKER_PARAMETER_EMPTY_VIEW_NIB_NAME
-
 
 -(MFUIBaseListViewModel *) pickerListViewModel {
     return (MFUIBaseListViewModel *)[self getValues];
+}
+
+-(void)setControlAttributes:(NSDictionary *)controlAttributes {
+    _controlAttributes = controlAttributes;
+    NSString *dataDelegateName = controlAttributes[@"dataDelegateName"];
+    if(dataDelegateName && !self.mf.dataDelegate) {
+        self.mf.dataDelegate = [[NSClassFromString(dataDelegateName) alloc] initWithPickerList:self];
+    }
+    else {
+        self.mf.dataDelegate.picker = self;
+    }
+    
+    NSString *pickerValuesKey = controlAttributes[@"pickerValuesKey"];
+    if(pickerValuesKey && !self.mf.pickerValuesKey) {
+        self.mf.pickerValuesKey = pickerValuesKey;
+    }
+    
+    NSNumber *hasSearch = controlAttributes[@"search"];
+    if(hasSearch) {
+        self.mf.hasSearch = [hasSearch boolValue];
+    }
+}
+
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+    commonCCTD.target = target;
+    commonCCTD.action = action;
+    self.targetDescriptors = @{@(self.staticView.hash) : commonCCTD};
+}
+
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
 }
 
 @end

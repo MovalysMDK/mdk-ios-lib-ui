@@ -14,27 +14,29 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 #import <Foundation/Foundation.h>
-#import "MFBindingDelegate.h"
-#import "MFUIBaseViewModelProtocol.h"
-
-@class MFUIBaseViewModel;
+#import "MFPickerControllerDelegate.h"
 
 /*!
- * @protocol MFObjectWithBindingProtocol
- * @brief A protocol that specify an object that need binding.
+ * @class MFPickerListExtention
+ * @brief This class is an extension for the PickerList component
  */
-@protocol MFObjectWithBindingProtocol <NSObject>
-
-#pragma mark - Properties
-/*!
- * @brief The binding delegate of the object that implments thus protocol.
- */
-@property (nonatomic, strong) MFBindingDelegate *bindingDelegate;
+@interface MFPickerListExtension : NSObject
 
 /*!
- * @brief The View Model used to bind, of the object that need the binding
+ * @brief The data delegate of the PickerList
  */
-@property(nonatomic, strong, getter=getViewModel) NSObject<MFUIBaseViewModelProtocol> *viewModel;
+@property (nonatomic, strong) MFPickerControllerDelegate* dataDelegate;
+
+/*!
+ * @brief The picker values key
+ */
+@property (nonatomic, strong) NSString* pickerValuesKey;
+
+/**
+ * @brief Indicates if the component should display the searchBar
+ */
+@property (nonatomic) BOOL hasSearch;
 
 @end

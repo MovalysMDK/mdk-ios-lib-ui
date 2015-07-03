@@ -156,8 +156,8 @@ NSTimer *timer =nil;
 {
     if(!self.isLoading) {
         self.isLoading = YES;
-        if((!self.HUD ||self.HUD.alpha==0) && self.cellContainer){
-            self.HUD = [MBProgressHUD showHUDAddedTo:((MFCellAbstract *)(self.cellContainer)) animated:YES];
+        if((!self.HUD ||self.HUD.alpha==0)){
+            self.HUD = [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
             self.HUD.mode = MBProgressHUDModeIndeterminate;
         }
         

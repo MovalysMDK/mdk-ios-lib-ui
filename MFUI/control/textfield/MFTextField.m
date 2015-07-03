@@ -47,7 +47,6 @@
 @synthesize visible = _visible;
 @synthesize editable = _editable;
 @synthesize tooltipView= _tooltipView;
-@synthesize cellContainer = _cellContainer;
 @synthesize styleClassName = _styleClassName;
 @synthesize componentValidation = _componentValidation;
 @synthesize controlAttributes = _controlAttributes;
@@ -96,6 +95,7 @@
 
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.targetDescriptors = nil;
 }
 
 #pragma mark - TextField Methods

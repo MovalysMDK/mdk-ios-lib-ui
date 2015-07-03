@@ -101,10 +101,5 @@
  */
 @property (nonatomic, weak) id lastUpdateSender;
 
-/*!
- * Cell container
- */
-@property (nonatomic, weak) id<MFFormCellProtocol> cellContainer;
-
 
 @end

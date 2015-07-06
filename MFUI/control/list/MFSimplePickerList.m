@@ -72,13 +72,14 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize data =_data;
 @synthesize currentOrientation = _currentOrientation;
-
+@synthesize controlAttributes = _controlAttributes;
+@synthesize targetDescriptors = _targetDescriptors;
 
 #pragma mark - Initializing
 
 -(void)initialize {
     [super initialize];
-    
+    self.mf = [MFEnumExtension new];
     self.pickerButton = [[MFButton alloc] init];
     self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     [self addSubview:self.pickerButton];
@@ -116,10 +117,8 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     if(!self.data) {
         // Initialise self.data avec la valeur par défaut de l'enum
         
-        NSString *sEnumClassName = nil;
-        //PROTODO :: retrouver nom Enum avec PICKER_PARAMETER_ENUM_CLASS_NAME_KEY
         
-        NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:sEnumClassName]; // Nom de la classe Helper de l'Enum
+        NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:self.mf.enumClassName]; // Nom de la classe Helper de l'Enum
         Class cEnumHelper = NSClassFromString(sEnumClassHelperName); // Classe Helper de l'Enum
         int idEnumValue = (int)[cEnumHelper performSelector:@selector(enumFromText:) withObject:@""]; // Enum de la valeur souhaitée l'Enum
         self.data = (id<MFEnumHelperProtocol>)[NSNumber numberWithInt:idEnumValue];
@@ -273,12 +272,8 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
         
         [self.popoverController presentPopoverFromRect:self.mainFormControllerView.frame inView:parentForm.view permittedArrowDirections:0 animated:YES];
     }
-    
-    //init the PickerView
-    NSString *sEnumClassName = nil;
-    //PROTODO :: retrouver nom Enum avec PICKER_PARAMETER_ENUM_CLASS_NAME_KEY
-    
-    NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:sEnumClassName]; // Nom de la classe Helper de l'Enum
+        
+    NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:self.mf.enumClassName]; // Nom de la classe Helper de l'Enum
     Class cEnumHelper = NSClassFromString(sEnumClassHelperName); // Classe Helper de l'Enum
     
     NSNumber *nsnEnum = [NSNumber numberWithInt:self.currentEnumValue]; // Conversion objet pour utilisation avec @selector
@@ -346,6 +341,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
             [self.popoverController dismissPopoverAnimated:YES];
         }
     }
+    [self valueChanged:self.pickerButton];
 }
 
 /**
@@ -356,10 +352,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     MFUILogVerbose(@"dismissPickerViewAndCancel - self.currentEnumValue=%i (avant)", self.currentEnumValue);
     self.currentEnumValue = [(NSNumber *) self.data intValue];
     
-    NSString *sEnumClassName = nil;
-    //PROTODO :: retrouver nom Enum avec PICKER_PARAMETER_ENUM_CLASS_NAME_KEY
-    
-    NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:sEnumClassName]; // Nom de la classe Helper de l'Enum
+    NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:self.mf.enumClassName]; // Nom de la classe Helper de l'Enum
     Class cEnumHelper = NSClassFromString(sEnumClassHelperName); // Classe Helper de l'Enum
     
     NSNumber *nsnEnum = [NSNumber numberWithInt:self.currentEnumValue]; // Conversion objet pour utilisation avec @selector
@@ -385,22 +378,12 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
         [self.pickerButton setTitle:@"NONE" forState:UIControlStateNormal];
         
     } else {
-        NSString *sEnumClassName = nil;
-        //PROTODO :: retrouver nom Enum avec PICKER_PARAMETER_ENUM_CLASS_NAME_KEY
-        
-        NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:sEnumClassName]; // Nom de la classe Helper de l'Enum
+        NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:self.mf.enumClassName]; // Nom de la classe Helper de l'Enum
         Class cEnumHelper = NSClassFromString(sEnumClassHelperName); // Classe Helper de l'Enum
         NSNumber *nsnEnum = [NSNumber numberWithInt:enumValue]; // Conversion objet pour utilisation avec @selector
         NSString *sEnumText = [cEnumHelper performSelector:@selector(textFromEnum:) withObject:nsnEnum]; // Texte de l'Enum
-        
         [self.pickerButton setTitle:sEnumText forState:UIControlStateNormal];
     }
-    
-    
-    //    dispatch_async(dispatch_get_main_queue(), ^{
-    //        [self.pickerButton setTitle:[MFDateConverter convertObjectToString:date withDatePickerMode:self.datePickerMode] forState:UIControlStateNormal];
-    //    });
-    
 }
 
 
@@ -468,10 +451,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     
-    NSString *sEnumClassName = nil;
-    //PROTODO :: retrouver nom Enum avec PICKER_PARAMETER_ENUM_CLASS_NAME_KEY
-    
-    NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:sEnumClassName]; // Nom de la classe Helper de l'Enum
+    NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:self.mf.enumClassName]; // Nom de la classe Helper de l'Enum
     Class cEnumHelper = NSClassFromString(sEnumClassHelperName); // Classe Helper de l'Enum
     
     // Appel méthode : valuesCount
@@ -490,10 +470,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     
     label.textAlignment = NSTextAlignmentCenter;
     
-    NSString *sEnumClassName = nil;
-    //PROTODO :: retrouver nom Enum avec PICKER_PARAMETER_ENUM_CLASS_NAME_KEY
-    
-    NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:sEnumClassName]; // Nom de la classe Helper de l'Enum
+    NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:self.mf.enumClassName]; // Nom de la classe Helper de l'Enum
     Class cEnumHelper = NSClassFromString(sEnumClassHelperName); // Classe Helper de l'Enum
     NSArray *aEnumValues = [cEnumHelper performSelector:@selector(valuesToTexts) withObject:nil]; // Valeurs de l'Enum
     label.text = [aEnumValues objectAtIndex:row]; // Utilisation de la valeur souhaitée de l'Enum
@@ -505,10 +482,8 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     
     // Mémorisation seulement, utilisation dans dismissPickerViewAndSave/dismissPickerViewAndCancel
     
-    NSString *sEnumClassName = nil;
-    //PROTODO :: retrouver nom Enum avec PICKER_PARAMETER_ENUM_CLASS_NAME_KEY
     
-    NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:sEnumClassName]; // Nom de la classe Helper de l'Enum
+    NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:self.mf.enumClassName]; // Nom de la classe Helper de l'Enum
     Class cEnumHelper = NSClassFromString(sEnumClassHelperName); // Classe Helper de l'Enum
     NSArray *aEnumTexts = [cEnumHelper performSelector:@selector(valuesToTexts) withObject:nil]; // Valeurs de l'Enum
     NSString *sEnumText = [aEnumTexts objectAtIndex:row]; // Texte de l'Enum
@@ -530,6 +505,27 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     }
 }
 
+#pragma mark - Set control attributes
+-(void)setControlAttributes:(NSDictionary *)controlAttributes {
+    _controlAttributes = controlAttributes;
+    
+    if(controlAttributes[PICKER_PARAMETER_ENUM_CLASS_NAME_KEY]) {
+        self.mf.enumClassName = controlAttributes[PICKER_PARAMETER_ENUM_CLASS_NAME_KEY];
+    }
+}
+
+#pragma mark - Override targets
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+    commonCCTD.target = target;
+    commonCCTD.action = action;
+    self.targetDescriptors = @{@(self.pickerButton.hash) : commonCCTD};
+}
+
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
+}
 
 
 @end

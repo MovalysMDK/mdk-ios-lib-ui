@@ -34,9 +34,9 @@
     return (MFEnumImage *)self.component;
 }
 
--(void)componentValueChanged:(MFEnumImage *)picker
+-(void)componentValueChanged:(MFEnumImage *)enumImage
 {
-    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[picker getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
+    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[enumImage getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
     
 }
 

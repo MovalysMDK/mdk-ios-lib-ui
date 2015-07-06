@@ -22,6 +22,7 @@
 FOUNDATION_EXPORT NSString * const MF_MANDATORY_INDICATOR;
 
 IB_DESIGNABLE
+
 @interface MFLabel : UILabel <MFUIComponentProtocol>
 
 #pragma mark - Properties

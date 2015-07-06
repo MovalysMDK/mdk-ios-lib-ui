@@ -66,8 +66,8 @@ NSTimer *timer =nil;
     
     [self addSubview:self.webview];
     
-    NSLayoutConstraint *insideLabelConstraintLeftMargin = [NSLayoutConstraint constraintWithItem:self.webview attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:0 constant:0];
-    NSLayoutConstraint *insideLabelConstraintTopMargin = [NSLayoutConstraint constraintWithItem:self.webview attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:0 constant:0];
+    NSLayoutConstraint *insideLabelConstraintLeftMargin = [NSLayoutConstraint constraintWithItem:self.webview attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
+    NSLayoutConstraint *insideLabelConstraintTopMargin = [NSLayoutConstraint constraintWithItem:self.webview attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
     NSLayoutConstraint *insideLabelConstraintHeight = [NSLayoutConstraint constraintWithItem:self.webview attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
     NSLayoutConstraint *insideLabelConstraintWidth = [NSLayoutConstraint constraintWithItem:self.webview attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
     

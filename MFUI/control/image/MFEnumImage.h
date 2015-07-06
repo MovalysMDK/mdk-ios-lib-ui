@@ -17,10 +17,16 @@
 
 #import "MFUIUtils.h"
 #import "MFUIMotion.h"
-
 #import "MFButton.h"
 
+#import "MFEnumExtension.h"
 
+FOUNDATION_EXPORT NSString *MF_ENUM_CLASS_NAME_PARAMETER_KEY;
+
+/*!
+ * @class MFEnumImage
+ * @brief The MFEnumImage component
+ */
 @interface MFEnumImage : MFUIOldBaseComponent <UIGestureRecognizerDelegate, MFOrientationChangedProtocol>
 
 #pragma mark - Properties
@@ -40,7 +46,6 @@
  */
 @property (nonatomic) UIImage *image;
 
-
 /*!
  * @brief the manipuled data of the component
  */
@@ -50,5 +55,10 @@
  * @brief The delegate used when orientation change
  */
 @property (nonatomic, strong) MFOrientationChangedDelegate *orientationChangedDelegate;
+
+/*!
+ * @brief The EnumExtension for this component
+ */
+@property (nonatomic, strong) MFEnumExtension *mf;
 
 @end

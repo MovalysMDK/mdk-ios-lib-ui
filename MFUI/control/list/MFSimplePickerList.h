@@ -24,13 +24,14 @@
 
 #import "MFUIOldBaseComponent.h"
 #import "MFButton.h"
-
+#import "MFEnumExtension.h"
+#import "MFControlChangesProtocol.h"
 
 #pragma mark - Constants
 FOUNDATION_EXPORT NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY;
 
 
-@interface MFSimplePickerList : MFUIOldBaseComponent <UIGestureRecognizerDelegate, MFOrientationChangedProtocol, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface MFSimplePickerList : MFUIOldBaseComponent <UIGestureRecognizerDelegate, MFOrientationChangedProtocol, UIPickerViewDataSource, UIPickerViewDelegate, MFControlChangesProtocol>
 
 #pragma mark - Properties
 /*!
@@ -77,6 +78,11 @@ FOUNDATION_EXPORT NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY;
  * @brief The delegate used when orientation change
  */
 @property (nonatomic, strong) MFOrientationChangedDelegate *orientationChangedDelegate;
+
+/*!
+ * @brief The enum extension for this component
+ */
+@property (nonatomic, strong) MFEnumExtension *mf;
 
 @end
 

@@ -14,13 +14,11 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFPickerList.h"
-#import "MFPickerListWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
-#import "NSIndexPath+Utils.h"
+#import "MFSimplePickerListWrapper.h"
+#import "MFSimplePickerList.h"
 
-@implementation MFPickerListWrapper
-@synthesize  wrapperIndexPath = _wrapperIndexPath;
+@implementation MFSimplePickerListWrapper
 
 -(instancetype)initWithComponent:(UIControl *)component {
     self = [super initWithComponent:component];
@@ -30,21 +28,14 @@
     return self;
 }
 
--(MFPickerList *)typeComponent {
-    return (MFPickerList *)self.component;
+-(MFSimplePickerList *)typeComponent {
+    return (MFSimplePickerList *)self.component;
 }
 
--(void)componentValueChanged:(MFPickerList *)picker
+-(void)componentValueChanged:(MFSimplePickerList *)simplePicker
 {
-    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[picker getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
+    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[simplePicker getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
     
 }
-
--(void)setWrapperIndexPath:(NSIndexPath *)wrapperIndexPath {
-    _wrapperIndexPath = wrapperIndexPath;
-    [[NSNotificationCenter defaultCenter] removeObserver:self.objectWithBinding name:[NSString stringWithFormat:@"MDK_ComponentSize_%@", [self.wrapperIndexPath stringIndexPath]] object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self.objectWithBinding selector:@selector(cellSizeChanges:) name:[NSString stringWithFormat:@"MDK_ComponentSize_%@", [self.wrapperIndexPath stringIndexPath]] object:nil];
-}
-
 
 @end

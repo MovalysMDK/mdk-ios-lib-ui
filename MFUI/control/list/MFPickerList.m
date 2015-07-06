@@ -46,6 +46,8 @@
 #import "MFUIBaseListViewModel.h"
 #import "MFPickerListExtension.h"
 
+#import "MFFormDetailViewController.h"
+
 
 
 #pragma mark - Define some constants
@@ -583,6 +585,15 @@ const int NO_LAST_INDEX = -1;
     MFUIBaseListViewModel *values = nil;
     if(self.mf.pickerValuesKey) {
         MFUIBaseViewModel *formViewModel = [((MFFormViewController *)self.parentViewController) getViewModel];
+        if([self.parentViewController respondsToSelector:@selector(partialViewModelKeys)]) {
+            MFFormViewController *controller = self.parentViewController;
+            for(NSString *key in [controller partialViewModelKeys]) {
+                if([formViewModel respondsToSelector:NSSelectorFromString(key)]) {
+                    formViewModel = [formViewModel valueForKey:key];
+                }
+            }
+        }
+        
         id object = [formViewModel valueForKeyPath:self.mf.pickerValuesKey];
         if(object && [object isKindOfClass:[MFUIBaseListViewModel class]]) {
             values = (MFUIBaseListViewModel *) object;

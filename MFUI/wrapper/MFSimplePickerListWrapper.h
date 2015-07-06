@@ -13,20 +13,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUIControlExtension.h
-//  MFUI
-//
-//
 
-#ifndef MFUI_MFUIControlExtension_h
-#define MFUI_MFUIControlExtension_h
+#import "MFAbstractComponentWrapper.h"
 
-#import "MFTextFieldExtension.h"
-#import "MFBaseTextExtensionProtocol.h"
-#import "MFRegularExpressionTextFieldExtension.h"
-#import "MFRegexTextExtensionProtocol.h"
-#import "MFFixedListExtension.h"
-#import "MFEnumExtension.h"
+/*!
+ * @class MFSimplePickerListWrapper
+ * @brief The wrapper for the MFSimplePickerList component.
+ */
+@interface MFSimplePickerListWrapper : MFAbstractComponentWrapper
 
-#endif
+@end

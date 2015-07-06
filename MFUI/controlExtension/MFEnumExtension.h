@@ -13,20 +13,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUIControlExtension.h
-//  MFUI
-//
-//
 
-#ifndef MFUI_MFUIControlExtension_h
-#define MFUI_MFUIControlExtension_h
+#import <Foundation/Foundation.h>
 
-#import "MFTextFieldExtension.h"
-#import "MFBaseTextExtensionProtocol.h"
-#import "MFRegularExpressionTextFieldExtension.h"
-#import "MFRegexTextExtensionProtocol.h"
-#import "MFFixedListExtension.h"
-#import "MFEnumExtension.h"
+/*!
+ * @class MFEnumImageExtension
+ * @brief This class is an extension of the EnumImage
+ */
+@interface MFEnumExtension : NSObject
 
-#endif
+/*!
+ * @brief The name of the class used to manage the enumeration.
+ */
+@property (nonatomic, strong) NSString *enumClassName;
+
+@end

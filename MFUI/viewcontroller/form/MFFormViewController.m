@@ -225,9 +225,9 @@ NSString *const MFPROP_FORM_ONUNSAVEDCHANGES = @"FormOnUnsavedChanges";
     return NO;
 }
 
--(NSArray *) partialViewModelKeys {
-    return  @[];
-}
+//-(NSArray *) partialViewModelKeys {
+//    return  @[];
+//}
 
 -(void)removeFromParentViewController {
     [super removeFromParentViewController];

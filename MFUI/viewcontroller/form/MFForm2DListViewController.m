@@ -407,7 +407,7 @@
 
 -(void) refresh {
     self.filterParameters = nil;
-    [self reloadDataWithAnimationFromRight:NO];
+    [self.tableView reloadData];
 }
 
 -(void) refreshWithParameters:(NSDictionary *)parameters {
@@ -636,6 +636,10 @@
 
 -(BOOL) allSectionsOpenedFirst {
     return NO;
+}
+
+-(void)setOpenedSectionStates:(NSMutableDictionary *)openedSectionStates {
+    _openedSectionStates = openedSectionStates;
 }
 
 

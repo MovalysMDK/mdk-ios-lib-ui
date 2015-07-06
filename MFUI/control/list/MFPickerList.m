@@ -431,12 +431,12 @@ const int NO_LAST_INDEX = -1;
     // Avant on sélectionne le vm
     NSInteger row = [self.pickerView selectedRowInComponent:0] ;
     [self.mf.dataDelegate selectViewModel:row] ;
-//    if([self pickerListViewModel].viewModels.count > 0) {
-//        _data = [[self pickerListViewModel].viewModels objectAtIndex:[self.pickerView selectedRowInComponent:0]];
-//    }
-//    else {
-//        _data = nil;
-//    }
+    //    if([self pickerListViewModel].viewModels.count > 0) {
+    //        _data = [[self pickerListViewModel].viewModels objectAtIndex:[self.pickerView selectedRowInComponent:0]];
+    //    }
+    //    else {
+    //        _data = nil;
+    //    }
     if([MFVersionManager isCurrentDeviceOfTypePhone])
     {
         [self hidePickerModalView];
@@ -569,7 +569,7 @@ const int NO_LAST_INDEX = -1;
     
     self.isShowing = YES;
     
-     [((id<MFSearchDelegate>)self.mf.dataDelegate) updateFilterWithText:@""];
+    [((id<MFSearchDelegate>)self.mf.dataDelegate) updateFilterWithText:@""];
     [self.pickerView selectRow:currentSelectedRow inComponent:0 animated:YES];
 }
 
@@ -585,12 +585,21 @@ const int NO_LAST_INDEX = -1;
     MFUIBaseListViewModel *values = nil;
     if(self.mf.pickerValuesKey) {
         MFUIBaseViewModel *formViewModel = [((MFFormViewController *)self.parentViewController) getViewModel];
+        
+        //SI le controller répond à partialViewModelKeys, on est dans le cas d'un controller conteneur
+        // et on prend du coup le ViewModel associé à l'une des clés qui nous est donnée,
+        //SINON on remontre dans les parentViewModel jusqu'à trouver le ListViewModel recherché.
         if([self.parentViewController respondsToSelector:@selector(partialViewModelKeys)]) {
             MFFormViewController *controller = self.parentViewController;
             for(NSString *key in [controller partialViewModelKeys]) {
                 if([formViewModel respondsToSelector:NSSelectorFromString(key)]) {
                     formViewModel = [formViewModel valueForKey:key];
                 }
+            }
+        }
+        else {
+            while(formViewModel && ![formViewModel respondsToSelector:NSSelectorFromString(self.mf.pickerValuesKey)]) {
+                formViewModel = formViewModel.parentViewModel;
             }
         }
         

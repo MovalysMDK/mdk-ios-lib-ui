@@ -77,11 +77,11 @@ NSString *MF_ENUM_CLASS_NAME_PARAMETER_KEY = @"enumClassName";
     
     self.mf = [MFEnumExtension new];
     
-    self.backgroundColor = [UIColor clearColor];
     self.imageView = [[UIImageView alloc] init];
     self.label = [[UILabel alloc] init];
     
-    
+    [self addSubview:self.imageView];
+    [self addSubview:self.label];
     NSLayoutConstraint *imageViewTop = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
     NSLayoutConstraint *imageViewLeft = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
     NSLayoutConstraint *imageViewBottom = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
@@ -95,8 +95,7 @@ NSString *MF_ENUM_CLASS_NAME_PARAMETER_KEY = @"enumClassName";
     NSLayoutConstraint *labelRight = [NSLayoutConstraint constraintWithItem:self.label attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0];
     [self addConstraints:@[labelTop, labelLeft, labelBottom, labelRight]];
     
-    [self addSubview:self.imageView];
-    [self addSubview:self.label];
+
     
     self.translatesAutoresizingMaskIntoConstraints = NO;
     self.imageView.translatesAutoresizingMaskIntoConstraints = NO;

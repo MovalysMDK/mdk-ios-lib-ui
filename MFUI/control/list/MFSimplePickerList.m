@@ -272,7 +272,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
         
         [self.popoverController presentPopoverFromRect:self.mainFormControllerView.frame inView:parentForm.view permittedArrowDirections:0 animated:YES];
     }
-        
+    
     NSString *sEnumClassHelperName = [MFHelperType getClassHelperOfClassWithKey:self.mf.enumClassName]; // Nom de la classe Helper de l'Enum
     Class cEnumHelper = NSClassFromString(sEnumClassHelperName); // Classe Helper de l'Enum
     

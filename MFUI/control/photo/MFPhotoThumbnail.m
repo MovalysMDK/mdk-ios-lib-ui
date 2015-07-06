@@ -433,18 +433,18 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 
--(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-    NSInteger nbOfErrors = [super validateWithParameters:parameters];
-    if([self.mandatory isEqualToNumber:@1] && !self.photoViewModel.uri) {
-        
-        NSError *error = [[MFMandatoryFieldUIValidationError alloc]
-                          initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    return nbOfErrors;
-}
+//-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+//    NSInteger nbOfErrors = [super validateWithParameters:parameters];
+//    if([self.mandatory isEqualToNumber:@1] && !self.photoViewModel.uri) {
+//        
+//        NSError *error = [[MFMandatoryFieldUIValidationError alloc]
+//                          initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
+//        
+//        [self addErrors:@[error]];
+//        nbOfErrors++;
+//    }
+//    return nbOfErrors;
+//}
 
 -(NSString *) defaultImage {
     

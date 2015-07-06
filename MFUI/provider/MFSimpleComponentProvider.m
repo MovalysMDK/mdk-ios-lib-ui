@@ -16,6 +16,7 @@
 
 #import "MFSimpleComponentProvider.h"
 #import "MFCommandProtocol.h"
+#import "MFFieldValidatorProtocol.h"
 
 @implementation MFSimpleComponentProvider
 
@@ -29,6 +30,19 @@
         @throw [NSException exceptionWithName:@"Command not found" reason:[NSString stringWithFormat:@"No command found for key %@", baseKey] userInfo:nil];
     }
     return command;
+}
+
+-(id<MFFieldValidatorProtocol>)fieldValidatorWithKey:(NSString *)baseKey {
+    id<MFFieldValidatorProtocol> fieldValidator = nil;
+    baseKey = [[[baseKey substringToIndex:1] uppercaseString] stringByAppendingString:[baseKey substringFromIndex:1]];
+    Class fieldValidatorClass = [self classWithKey:baseKey withQualifier:@""];
+    if(fieldValidatorClass) {
+        fieldValidator = [fieldValidatorClass sharedInstance];
+    }
+    else {
+        @throw [NSException exceptionWithName:@"Field validator not found" reason:[NSString stringWithFormat:@"No field validator found for key %@", baseKey] userInfo:nil];
+    }
+    return fieldValidator;
 }
 
 

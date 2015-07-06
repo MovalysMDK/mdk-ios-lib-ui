@@ -57,4 +57,7 @@ NSString *FIELD_VALIDATOR_MAX_LENGTH = @"maxLength";
     return canValid;
 }
 
+-(BOOL)isBlocking {
+    return NO;
+}
 @end

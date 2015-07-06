@@ -24,4 +24,9 @@
     return command;
 }
 
+-(id<MFFieldValidatorProtocol>)fieldValidatorWithKey:(NSString *)baseKey {
+    id<MFFieldValidatorProtocol> fieldValidator = [[MFBeanLoader getInstance] getBeanWithKey:baseKey];
+    return fieldValidator;
+}
+
 @end

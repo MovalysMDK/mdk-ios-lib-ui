@@ -450,19 +450,19 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 
 
 #pragma mark - Validation
--(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-    int nbOfErrors = [super validateWithParameters:parameters];
-    NSError *error = nil;
-    
-    // We search the component's errors
-    if([self.mandatory isEqualToValue:@1] && (((MFUIBaseListViewModel *)[self getData]).viewModels.count == 0))
-    {
-        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    return nbOfErrors;
-}
+//-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+//    int nbOfErrors = [super validateWithParameters:parameters];
+//    NSError *error = nil;
+//    
+//    // We search the component's errors
+//    if([self.mandatory isEqualToValue:@1] && (((MFUIBaseListViewModel *)[self getData]).viewModels.count == 0))
+//    {
+//        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
+//        [self addErrors:@[error]];
+//        nbOfErrors++;
+//    }
+//    return nbOfErrors;
+//}
 
 
 -(CGRect)getErrorButtonFrameForInvalid {

@@ -23,16 +23,16 @@
    return @"\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 }
 
--(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-    NSInteger numberOfErrors = [super validateWithParameters:parameters];
-    if(![self matchPattern:[self text]]) {
-        NSError *error = [[MFInvalidUrlValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        numberOfErrors++;
-        
-    }
-    return numberOfErrors;
-}
+//-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+//    NSInteger numberOfErrors = [super validateWithParameters:parameters];
+//    if(![self matchPattern:[self text]]) {
+//        NSError *error = [[MFInvalidUrlValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
+//        [self addErrors:@[error]];
+//        numberOfErrors++;
+//        
+//    }
+//    return numberOfErrors;
+//}
 
 -(UIKeyboardType)keyboardType {
     return UIKeyboardTypeURL;

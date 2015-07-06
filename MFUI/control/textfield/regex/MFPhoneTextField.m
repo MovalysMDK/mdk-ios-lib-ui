@@ -23,16 +23,16 @@
     return @"^(\\+[0-9]{1,3})?[ ]?(\\([0-9]{1,3}\\))?[0-9]([ \\.\\-]?[0-9]{1,3}){0,4}[0-9]$";
 }
 
--(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-    NSInteger numberOfErrors = [super validateWithParameters:parameters];
-    if(![self matchPattern:[self text]]) {
-        NSError *error = [[MFInvalidPhoneNumberValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        numberOfErrors++;
-        
-    }
-    return numberOfErrors;
-}
+//-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+//    NSInteger numberOfErrors = [super validateWithParameters:parameters];
+//    if(![self matchPattern:[self text]]) {
+//        NSError *error = [[MFInvalidPhoneNumberValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
+//        [self addErrors:@[error]];
+//        numberOfErrors++;
+//        
+//    }
+//    return numberOfErrors;
+//}
 
 -(UIKeyboardType)keyboardType {
     return UIKeyboardTypePhonePad;

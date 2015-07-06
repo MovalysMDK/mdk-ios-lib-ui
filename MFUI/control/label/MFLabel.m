@@ -146,22 +146,22 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
     }
 }
 
--(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-    
-    [self.errors removeAllObjects];
-    if(parameters) {
-        // Do some treatments with specific
-    }
-    NSInteger length = [[self displayComponentValue] length];
-    NSError *error = nil;
-    // Control's errros init or reinit
-    NSInteger nbOfErrors = 0;
-    
-
-    
-    return nbOfErrors;
-    
-}
+//-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+//    
+//    [self.errors removeAllObjects];
+//    if(parameters) {
+//        // Do some treatments with specific
+//    }
+//    NSInteger length = [[self displayComponentValue] length];
+//    NSError *error = nil;
+//    // Control's errros init or reinit
+//    NSInteger nbOfErrors = 0;
+//    
+//
+//    
+//    return nbOfErrors;
+//    
+//}
 
 -(void)setEditable:(NSNumber *)editable {
     _editable = editable;
@@ -185,7 +185,7 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 
 
 -(BOOL) isValid {
-    return ([self validateWithParameters:nil] == 0);
+    return ([self validate] == 0);
 }
 
 -(NSArray *)getErrors {

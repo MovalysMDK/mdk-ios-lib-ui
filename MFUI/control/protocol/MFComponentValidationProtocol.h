@@ -20,15 +20,20 @@
 
 
 /*!
- Indicate if the control is valid.
+ * Indicate if the control is valid.
  */
 @property(nonatomic, setter=setIsValid:) BOOL isValid;
 
 /*!
  * Validate the ui component value.
- * @param parameters - parameters from the page
  * @return Number of errors detected by the UI component
  */
--(NSInteger) validateWithParameters:(NSDictionary *)parameters;
+-(NSInteger) validate;
+
+/*!
+ * Returns an array of field validators specific to this control only.
+ * @return An array of field validators specific to this control only.
+ */
+-(NSArray *) controlValidators;
 
 @end

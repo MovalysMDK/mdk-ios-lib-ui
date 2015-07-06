@@ -24,6 +24,7 @@
 #import "MFFormBaseViewController.h"
 #import "MFAlertViewManager.h"
 #import "MFLabel.h"
+#import "MFUIFieldValidator.h"
 
 @interface MFTextField ()
 
@@ -90,7 +91,6 @@
     [self addTarget:self action:@selector(innerTextDidChange:) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resignFirstResponder) name:ALERTVIEW_FAILED_SAVE_ACTION object:nil];
-    
 }
 
 -(void)dealloc {
@@ -189,49 +189,6 @@
     }
 }
 
--(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-    
-    if(!self.componentValidation) {
-        return 0;
-    }
-    [self.errors removeAllObjects];
-    if(parameters) {
-        // Do some treatments with specific
-    }
-    NSInteger length = [[self displayComponentValue] length];
-    NSError *error = nil;
-    // Control's errros init or reinit
-    NSInteger nbOfErrors = 0;
-    
-    // We search the component's errors
-    if(self.extension.minLength != nil && [self.extension.minLength integerValue] > length)
-    {
-        error = [[MFTooShortStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    if(self.extension.maxLength != nil && [self.extension.maxLength integerValue] != 0 && [self.extension.maxLength integerValue] < length)
-    {
-        error = [[MFTooLongStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    if(self.mandatory != nil && [self.mandatory integerValue] == 1 && ((NSString *)[self displayComponentValue]).length == 0){
-        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    
-    return nbOfErrors;
-    
-}
-
-//PROTODO :
-//PARMETERS :
-// PARAMETER_TEXTFIELD_MAXLENGTH_KEY
-// PARAMETER_TEXTFIELD_MINLENGTH_KEY
-
-
 
 -(void)setEditable:(NSNumber *)editable {
     _editable = editable;
@@ -243,7 +200,7 @@
 
 
 -(BOOL) isValid {
-    return ([self validateWithParameters:nil] == 0);
+    return ([self validate] == 0);
 }
 
 -(NSArray *)getErrors {
@@ -328,8 +285,14 @@
 }
 
 -(void) valueChanged:(UIView *)sender {
-    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
-    [cctd.target performSelector:cctd.action withObject:self];
+    if([self.controlDelegate validate] == 0) {
+        MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+        [cctd.target performSelector:cctd.action withObject:self];
+    }
+}
+
+-(NSArray *)controlValidators {
+    return @[];
 }
 
 

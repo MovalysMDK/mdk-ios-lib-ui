@@ -41,39 +41,6 @@
     return @"^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-z]{2,6})$";
 }
 
--(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-    [self clearErrors];
-    NSArray *validators = [MFFieldValidatorHandler fieldValidatorsForAttributes:self.controlAttributes.allKeys forControl:self];
-    NSMutableDictionary *validationState = [NSMutableDictionary dictionary];
-    for(id<MFFieldValidatorProtocol> fieldValidator in validators) {
-        if(validationState[NSStringFromClass([fieldValidator class])]) {
-            continue;
-        }
-        NSMutableDictionary *validatorParameters = [NSMutableDictionary dictionary];
-        for(NSString *recognizedAttribute in [fieldValidator recognizedAttributes]) {
-            validatorParameters[recognizedAttribute] = self.controlAttributes[recognizedAttribute];
-        }
-        id errorResult = [fieldValidator validate:[self getData] withCurrentState:validationState withParameters:validatorParameters];
-        if(errorResult) {
-            validationState[NSStringFromClass([fieldValidator class])] = errorResult;
-        }
-        else {
-            validationState[NSStringFromClass([fieldValidator class])] = [NSNull null];
-        }
-    }
-    
-    int numberOfErrors = 0;
-    for(id result in validationState.allValues) {
-        if(![result isKindOfClass:[NSNull class]]) {
-            numberOfErrors++;
-            [self addErrors:@[result]];
-        }
-    }
-    
-    NSLog(@"ERRORS : %@", validationState);
-    return numberOfErrors;
-}
-
 -(void) doAction {
     BOOL canSendMail = NO;
     if ([MFMailComposeViewController canSendMail]){
@@ -93,9 +60,6 @@
     return UIKeyboardTypeEmailAddress;
 }
 
--(void)textDidChange:(id)object {
-    [self validateWithParameters:nil];
-}
 
 
 @end

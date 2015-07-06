@@ -20,6 +20,7 @@
 #import "MFConstants.h"
 #import "MFErrorViewProtocol.h"
 #import "UIView+Styleable.h"
+#import "MFUIFieldValidator.h"
 
 @interface MFCommonControlDelegate ()
 
@@ -54,9 +55,6 @@
     [self.component removeObserver:self forKeyPath:@"selfDescriptor"];
 }
 
--(NSInteger)validate {
-    return [self.component validateWithParameters:nil];
-}
 
 -(void)addErrors:(NSArray *)errors {
     if(errors) {
@@ -146,5 +144,57 @@
     else {
         self.component.hidden = YES;
     }
+}
+
+-(NSInteger)validate {
+    [self clearErrors];
+    NSMutableArray *validators = [NSMutableArray array];
+    NSMutableDictionary *validationState = [NSMutableDictionary dictionary];
+    
+    //Mandatory validator
+    id<MFFieldValidatorProtocol> mandatoryValidator = [[MFFieldValidatorHandler fieldValidatorsForAttributes:@[FIELD_VALIDATOR_ATTRIBUTE_MANDATORY] forControl:[self component]] firstObject];
+    id mandatoryError = [mandatoryValidator validate:[self.component getData] withCurrentState:validationState withParameters:@{FIELD_VALIDATOR_ATTRIBUTE_MANDATORY : self.component.mandatory}];
+    
+    if(!mandatoryError) {
+        
+        //Component Validators
+        [validators addObjectsFromArray:[self.component controlValidators]];
+        
+        //Other validatos
+        [validators addObjectsFromArray:[MFFieldValidatorHandler fieldValidatorsForAttributes:self.component.controlAttributes.allKeys forControl:[self component]]];
+        
+        
+        for(id<MFFieldValidatorProtocol> fieldValidator in validators) {
+            if(validationState[NSStringFromClass([fieldValidator class])]) {
+                continue;
+            }
+            NSMutableDictionary *validatorParameters = [NSMutableDictionary dictionary];
+            for(NSString *recognizedAttribute in [fieldValidator recognizedAttributes]) {
+                validatorParameters[recognizedAttribute] = self.component.controlAttributes[recognizedAttribute];
+            }
+            id errorResult = [fieldValidator validate:[self.component getData] withCurrentState:validationState withParameters:validatorParameters];
+            if(errorResult) {
+                validationState[NSStringFromClass([fieldValidator class])] = errorResult;
+                if([fieldValidator isBlocking]) { break; }
+            }
+            else {
+                validationState[NSStringFromClass([fieldValidator class])] = [NSNull null];
+            }
+        }
+    }
+    else {
+        validationState[NSStringFromClass([mandatoryValidator class])] = mandatoryError;
+    }
+    
+    int numberOfErrors = 0;
+    for(id result in validationState.allValues) {
+        if(![result isKindOfClass:[NSNull class]]) {
+            numberOfErrors++;
+            [self addErrors:@[result]];
+        }
+    }
+    NSLog(@"ERRORS : %@", validationState);
+    return numberOfErrors;
+    
 }
 @end

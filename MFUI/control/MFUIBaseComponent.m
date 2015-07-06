@@ -153,7 +153,7 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 }
 
 
--(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+-(NSInteger)validate {
     // We remove all control's errors
     [self.errors removeAllObjects];
     return 0;
@@ -370,5 +370,8 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
     self.associatedLabel.mandatory = self.mandatory;
 }
 
+-(NSArray *)controlValidators {
+    return @[];
+}
 
 @end

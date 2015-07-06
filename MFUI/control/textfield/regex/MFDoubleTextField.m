@@ -172,24 +172,6 @@
 //decimalPartMaxDigits
 
 
-#pragma mark - Validation
--(NSInteger) validateWithParameters:(NSDictionary *)parameters
-{
-    NSInteger nbOfErrors = [super validateWithParameters:parameters];
-    if([self.mandatory isEqualToNumber:@1] && [[self getData] isEqualToString:@"-"]) {
-        NSError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    double value = [[self getData] doubleValue];
-    if (value > DBL_MAX || value < -DBL_MAX) {
-        NSError *error = [[MFInvalidDoubleValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    
-    return nbOfErrors;
-}
 
 
 @end

@@ -32,7 +32,8 @@ NSString *BINDING_FORMAT_TYPE_ASSOCIATED_LABEL = @"associatedLabel";
 
 +(NSDictionary *)buildControlsAttributesDictionary:(NSDictionary *)controlAttributes fromVaList:(va_list)args withFirstArg:(NSString *)firstArg{
     NSMutableDictionary *cellAttributes = [controlAttributes mutableCopy];
-    return [MFBindingFormatParser fillObject:cellAttributes fromVaList:args withFirstArg:firstArg forType:BINDING_FORMAT_TYPE_ATTRIBUTES];
+    [MFBindingFormatParser fillObject:cellAttributes fromVaList:args withFirstArg:firstArg forType:BINDING_FORMAT_TYPE_ATTRIBUTES];
+    return cellAttributes;
 }
 
 +(MFBindingDictionary *) bindingDictionaryFromVaList:(va_list)args withFirstArg:(NSString *)firstArg {

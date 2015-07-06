@@ -269,35 +269,35 @@
 
 #pragma mark - Validation API
 
--(NSInteger) validateWithParameters:(NSDictionary *)parameters{
-    
-    [super validateWithParameters:parameters];
-    NSInteger length = [[self getValue] length];
-    NSError *error = nil;
-    // Control's errros init or reinit
-    NSInteger nbOfErrors = 0;
-    
-    // We search the component's errors
-    if(self.mf.minLength != nil && [self.mf.minLength integerValue] > length)
-    {
-        error = [[MFTooShortStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    if(self.mf.maxLength != nil && [self.mf.maxLength integerValue] != 0 && [self.mf.maxLength integerValue] < length)
-    {
-        error = [[MFTooLongStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    if(self.mandatory != nil && [self.mandatory integerValue] == 1 && [self getValue].length == 0){
-        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    
-    return nbOfErrors;
-}
+//-(NSInteger) validateWithParameters:(NSDictionary *)parameters{
+//    
+//    [super validateWithParameters:parameters];
+//    NSInteger length = [[self getValue] length];
+//    NSError *error = nil;
+//    // Control's errros init or reinit
+//    NSInteger nbOfErrors = 0;
+//    
+//    // We search the component's errors
+//    if(self.mf.minLength != nil && [self.mf.minLength integerValue] > length)
+//    {
+//        error = [[MFTooShortStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
+//        [self addErrors:@[error]];
+//        nbOfErrors++;
+//    }
+//    if(self.mf.maxLength != nil && [self.mf.maxLength integerValue] != 0 && [self.mf.maxLength integerValue] < length)
+//    {
+//        error = [[MFTooLongStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
+//        [self addErrors:@[error]];
+//        nbOfErrors++;
+//    }
+//    if(self.mandatory != nil && [self.mandatory integerValue] == 1 && [self getValue].length == 0){
+//        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
+//        [self addErrors:@[error]];
+//        nbOfErrors++;
+//    }
+//    
+//    return nbOfErrors;
+//}
 
 -(void) setValue:(NSString *) value{
     

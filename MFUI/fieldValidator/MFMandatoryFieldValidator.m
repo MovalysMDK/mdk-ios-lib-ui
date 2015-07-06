@@ -52,4 +52,8 @@ NSString *FIELD_VALIDATOR_ATTRIBUTE_MANDATORY = @"mandatory";
     return canValid;
 }
 
+-(BOOL)isBlocking {
+    return YES;
+}
+
 @end

@@ -219,14 +219,10 @@
     
 }
 
--(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+-(NSInteger)validate {
     // We remove all control's errors
     [self.baseErrors removeAllObjects];
     return 0;
-}
-
--(NSInteger) validate {
-    return [self validateWithParameters:nil];
 }
 
 
@@ -592,6 +588,10 @@
 -(void)setAssociatedLabel:(MFLabel *)associatedLabel {
     _associatedLabel = associatedLabel;
     self.associatedLabel.mandatory = self.mandatory;
+}
+
+-(NSArray *)controlValidators {
+    return @[];
 }
 
 @end

@@ -412,15 +412,15 @@
 }
 
 
--(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-    int numberOfErrors = [super validateWithParameters:parameters];
-    if([self.mandatory isEqualToNumber:@1] && [[self getData] isEqualToString:[MFSignatureHelper convertFromLinesToString:@[] width:1 originX:0 originY:0]]) {
-        MFMandatoryFieldUIValidationError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        numberOfErrors++;
-    }
-    return numberOfErrors;
-}
+//-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+//    int numberOfErrors = [super validateWithParameters:parameters];
+//    if([self.mandatory isEqualToNumber:@1] && [[self getData] isEqualToString:[MFSignatureHelper convertFromLinesToString:@[] width:1 originX:0 originY:0]]) {
+//        MFMandatoryFieldUIValidationError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
+//        [self addErrors:@[error]];
+//        numberOfErrors++;
+//    }
+//    return numberOfErrors;
+//}
 
 #pragma mark - Value Changed targets
 

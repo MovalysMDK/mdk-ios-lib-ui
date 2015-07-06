@@ -17,6 +17,7 @@
 #import "MFFieldValidatorHandler.h"
 #import "MFFieldValidatorProtocol.h"
 #import "MFComponentApplicationProtocol.h"
+#import "MFSimpleComponentProvider.h"
 
 @implementation MFFieldValidatorHandler
 
@@ -33,11 +34,10 @@
     }
     
     [attributes enumerateObjectsUsingBlock:^(NSString *attribute, NSUInteger idx, BOOL *stop) {
-        Class fieldValidatorClass = completeFieldValidatorDictionary[attribute];
-        if(fieldValidatorClass) {
-            id<MFFieldValidatorProtocol> fieldValidator = [fieldValidatorClass sharedInstance];
-            if([fieldValidator canValidControl:control]) {
-                [result addObject:fieldValidator];
+        id<MFFieldValidatorProtocol> fieldValidatorInstance = completeFieldValidatorDictionary[attribute];
+        if(fieldValidatorInstance) {
+            if([fieldValidatorInstance canValidControl:control]) {
+                [result addObject:fieldValidatorInstance];
             }
         }
         else {
@@ -52,34 +52,45 @@
     NSBundle *mdkControlBundle = [NSBundle bundleForClass:[MFFieldValidatorHandler class]];
     NSBundle *appBundle = [NSBundle bundleForClass:NSClassFromString(@"AppDelegate")];
     
-    NSMutableArray *completeValidatorList = [NSMutableArray array];
-    completeValidatorList = [[NSArray arrayWithContentsOfFile:[mdkControlBundle pathForResource:@"MDKFieldValidatorList" ofType:@"plist"]] mutableCopy];
+    NSMutableDictionary *completeValidatorList = [NSMutableDictionary dictionary];
+    completeValidatorList = [[NSDictionary dictionaryWithContentsOfFile:[mdkControlBundle pathForResource:@"MDKFieldValidatorList" ofType:@"plist"]] mutableCopy];
     
     NSString *appResourcePath = [appBundle pathForResource:@"AppFieldValidatorList" ofType:@"plist"];
     
     if(appResourcePath) {
-        completeValidatorList = [[completeValidatorList arrayByAddingObjectsFromArray:[NSArray arrayWithContentsOfFile:appResourcePath]] mutableCopy];
+        [completeValidatorList addEntriesFromDictionary:[[NSDictionary dictionaryWithContentsOfFile:appResourcePath] mutableCopy]];
     }
     
     NSMutableDictionary *result = [NSMutableDictionary dictionary];
-    for(NSString *fieldValidatorName in completeValidatorList) {
-        Class fieldValidatorClass = NSClassFromString(fieldValidatorName);
-        if(!fieldValidatorClass) {
-            @throw [NSException exceptionWithName:@"No FieldValidator Found" reason:[NSString stringWithFormat:@"No FieldValidator found with class: %@", fieldValidatorName]userInfo:nil];
+    for(NSString *fieldValidatorKey in completeValidatorList.allKeys) {
+        
+        id<MFFieldValidatorProtocol> fieldValidatorInstance = nil;
+        id<MFComponentProviderProtocol> componentProvider = nil;
+        id<UIApplicationDelegate> appDelegate =  [[UIApplication sharedApplication] delegate];
+        
+        if([appDelegate conformsToProtocol:@protocol(MFComponentApplicationProtocol)]) {
+            componentProvider = [((id<MFComponentApplicationProtocol>)appDelegate) componentProvider];
         }
         else {
-            if([fieldValidatorClass conformsToProtocol:@protocol(MFFieldValidatorProtocol)]) {
-                id<MFFieldValidatorProtocol> fieldValidator = [fieldValidatorClass sharedInstance];
-                
-                NSArray *validatorRecognizedAttributes = [fieldValidator recognizedAttributes];
+            componentProvider = [MFSimpleComponentProvider new];
+        }
+        fieldValidatorInstance = [componentProvider fieldValidatorWithKey:fieldValidatorKey];
+        
+        
+        if(!fieldValidatorInstance) {
+            @throw [NSException exceptionWithName:@"No FieldValidator Found" reason:[NSString stringWithFormat:@"No FieldValidator found with class: %@", fieldValidatorKey]userInfo:nil];
+        }
+        else {
+            if([fieldValidatorInstance conformsToProtocol:@protocol(MFFieldValidatorProtocol)]) {
+                NSArray *validatorRecognizedAttributes = [fieldValidatorInstance recognizedAttributes];
                 for(NSString *recognizedParameter in validatorRecognizedAttributes) {
                     if(!result[recognizedParameter]) {
-                        result[recognizedParameter] = fieldValidatorClass;
+                        result[recognizedParameter] = fieldValidatorInstance;
                     }
                 }
             }
             else {
-                @throw [NSException exceptionWithName:@"Incorrect FieldValidator" reason:[NSString stringWithFormat:@"The declared FieldValidator with name %@ does not conform MFFieldValidatorProtocol", fieldValidatorName]userInfo:nil];
+                @throw [NSException exceptionWithName:@"Incorrect FieldValidator" reason:[NSString stringWithFormat:@"The declared FieldValidator with key %@ does not conform MFFieldValidatorProtocol", fieldValidatorKey]userInfo:nil];
             }
         }
     }

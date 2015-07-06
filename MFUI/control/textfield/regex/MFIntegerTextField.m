@@ -145,27 +145,27 @@
 
 
 #pragma mark - Validation
--(NSInteger) validateWithParameters:(NSDictionary *)parameters
-{
-    if(!self.componentValidation) {
-        return 0;
-    }
-    NSInteger nbOfErrors = [super validateWithParameters:parameters];
-    
-    if([[self getData] isEqualToString:@"-"]) {
-        NSError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    
-    if ([[self getData] longLongValue] > INT32_MAX || [[self getData] longLongValue] < INT32_MIN) {
-        NSError *error = [[MFInvalidIntegerValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    
-    return nbOfErrors;
-}
+//-(NSInteger) validateWithParameters:(NSDictionary *)parameters
+//{
+//    if(!self.componentValidation) {
+//        return 0;
+//    }
+//    NSInteger nbOfErrors = [super validateWithParameters:parameters];
+//    
+//    if([[self getData] isEqualToString:@"-"]) {
+//        NSError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
+//        [self addErrors:@[error]];
+//        nbOfErrors++;
+//    }
+//    
+//    if ([[self getData] longLongValue] > INT32_MAX || [[self getData] longLongValue] < INT32_MIN) {
+//        NSError *error = [[MFInvalidIntegerValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
+//        [self addErrors:@[error]];
+//        nbOfErrors++;
+//    }
+//    
+//    return nbOfErrors;
+//}
 
 
 

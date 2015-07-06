@@ -290,30 +290,30 @@
     }
 }
 
-
--(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-    int nbOfErrors = 0;
-    NSError *error = nil;
-    
-    if(self.mandatory)
-    {
-        if(self.latitude.text.length == 0 || self.longitude.text.length == 0) {
-            error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-            [self addErrors:@[error]];
-            nbOfErrors++;
-            
-        }
-    }
-    if([[self.latitude getData] doubleValue] > 90 ||
-       [[self.latitude getData] doubleValue] < -90 ||
-       [[self.longitude getData] doubleValue] > 180 ||
-       [[self.longitude getData] doubleValue] < -180) {
-        error = [[MFInvalidLocationValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-        [self addErrors:@[error]];
-        nbOfErrors++;
-    }
-    return nbOfErrors;
-}
+//
+//-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
+//    int nbOfErrors = 0;
+//    NSError *error = nil;
+//    
+//    if(self.mandatory)
+//    {
+//        if(self.latitude.text.length == 0 || self.longitude.text.length == 0) {
+//            error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
+//            [self addErrors:@[error]];
+//            nbOfErrors++;
+//            
+//        }
+//    }
+//    if([[self.latitude getData] doubleValue] > 90 ||
+//       [[self.latitude getData] doubleValue] < -90 ||
+//       [[self.longitude getData] doubleValue] > 180 ||
+//       [[self.longitude getData] doubleValue] < -180) {
+//        error = [[MFInvalidLocationValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
+//        [self addErrors:@[error]];
+//        nbOfErrors++;
+//    }
+//    return nbOfErrors;
+//}
 
 
 -(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {

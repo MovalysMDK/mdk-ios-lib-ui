@@ -56,4 +56,12 @@
  */
 -(BOOL) canValidControl:(UIView *)control;
 
+/*!
+ * @brief Indicates if this validator is blocking.
+ * @discussion If this validator is blocking, the validators that should be applied after will
+ * not be applied.
+ * @return YES if this validor is blocking, NO otherwhise.
+ */
+-(BOOL) isBlocking;
+
 @end

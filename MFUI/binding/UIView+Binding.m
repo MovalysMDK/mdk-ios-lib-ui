@@ -23,6 +23,10 @@
 #import "MFComponentAttributesProtocol.h"
 #import "MFComponentAssociatedLabelProtocol.h"
 #import "MFBindingViewDescriptor.h"
+#import <objc/runtime.h>
+
+NSString const *bindedNameKey = @"bindedNameKey";
+
 
 @implementation UIView (Binding)
 
@@ -45,6 +49,7 @@
         }
         
         for(MFBindingDescriptor *itemDescriptor in bindingDictionary[outletBindingKey]) {
+            [self setBindedName:itemDescriptor.abstractBindedProperty];
             [objectWithBinding.bindingDelegate registerComponentBindingProperty:itemDescriptor.componentProperty withViewModelProperty:[itemDescriptor abstractBindedProperty] forComponent:valueAsView withOutletName:outletBindingKey.outletName withMode:itemDescriptor.bindingMode withBindingKey:[bindingViewDescriptor generatedBindingKey] withIndexPath:[bindingViewDescriptor viewIndexPath] fromBindingSource:itemDescriptor.bindingSource];
         }
         [valueAsView didBinded];
@@ -54,4 +59,13 @@
 -(void)didBinded {
     //Does nothing
 }
+
+- (void)setBindedName:(NSString *)bindedName {
+    objc_setAssociatedObject(self, &bindedNameKey, bindedName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSString *)bindedName {
+    return objc_getAssociatedObject(self, &bindedNameKey);
+}
+
 @end

@@ -25,33 +25,11 @@
 -(void)initializeComponent {
     [super initializeComponent];
     [self.styleClass performSelector:@selector(addButtonOnTextField:) withObject:self];
-}
-
--(BOOL) matchPattern:(NSString *)checkString
-{
-    NSString *regex = [self regex];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    return [predicate evaluateWithObject:checkString];
-}
-
--(NSString *) regex {
-    return nil;
+    [self addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 -(void) doAction {
     [MFException throwNotImplementedExceptionOfMethodName:@"doAction" inClass:[self class] andUserInfo:nil];
 }
-
-//-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-//    NSInteger nbOfErrors = [super validateWithParameters:parameters];
-//    
-//    if(![self matchPattern:[self getData]] && !([[self getData] length] == 0)) {
-//        NSError *error = [[MFNoMatchingValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-//        [self addErrors:@[error]];
-//        nbOfErrors++;
-//    }
-//    return nbOfErrors;
-//}
-
 
 @end

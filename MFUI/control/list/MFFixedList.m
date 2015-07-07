@@ -20,6 +20,7 @@
 
 #import "MFFixedList.h"
 #import "MFUIBaseListViewModel.h"
+#import "MFFixedListContentFieldValidator.h"
 
 
 @interface MFFixedList()
@@ -74,7 +75,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 @synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize mandatory = _mandatory;
-@synthesize controlAttributes = _controlAttributes;
 
 #pragma mark - Initializing
 
@@ -218,7 +218,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
-    
+    [self.mf.dataDelegate initializeModel];
     self.tableView.editing = YES;
     //PROTODO : mode edit ?
 }
@@ -450,19 +450,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 
 
 #pragma mark - Validation
-//-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-//    int nbOfErrors = [super validateWithParameters:parameters];
-//    NSError *error = nil;
-//    
-//    // We search the component's errors
-//    if([self.mandatory isEqualToValue:@1] && (((MFUIBaseListViewModel *)[self getData]).viewModels.count == 0))
-//    {
-//        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-//        [self addErrors:@[error]];
-//        nbOfErrors++;
-//    }
-//    return nbOfErrors;
-//}
 
 
 -(CGRect)getErrorButtonFrameForInvalid {
@@ -475,7 +462,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 }
 
 -(void)setControlAttributes:(NSDictionary *)controlAttributes {
-    _controlAttributes = controlAttributes;
+    [super setControlAttributes:controlAttributes];
     NSString *dataDelegateName = controlAttributes[@"dataDelegateName"];
     if(dataDelegateName && !self.mf.dataDelegate) {
         self.mf.dataDelegate = [[NSClassFromString(dataDelegateName) alloc] initWithFixedList:self];
@@ -502,6 +489,10 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     if(isPhotoFixedList) {self.mf.isPhotoFixedList = [isPhotoFixedList boolValue];}
     
     [self.tableView reloadData];
+}
+
+-(NSArray *)controlValidators {
+    return @[[MFFixedListContentFieldValidator sharedInstance]];
 }
 
 

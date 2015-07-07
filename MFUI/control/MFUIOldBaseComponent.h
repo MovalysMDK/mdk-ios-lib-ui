@@ -79,11 +79,6 @@
 @property (nonatomic, strong) TooltipView *baseTooltipView;
 
 /*!
- * Liste des erreurs du composant
- */
-@property (nonatomic, strong) NSMutableArray *baseErrors;
-
-/*!
  * MF Parent Composant
  */
 @property (nonatomic, weak) MFUIOldBaseComponent *mfParent;

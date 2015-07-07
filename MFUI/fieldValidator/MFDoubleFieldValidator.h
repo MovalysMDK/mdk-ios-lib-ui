@@ -14,25 +14,20 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFPhoneTextField.h"
-#import "MFInvalidPhoneNumberValueUIValidationError.h"
-#import "MFPhoneFieldValidator.h"
+#import <Foundation/Foundation.h>
+#import "MFFieldValidatorProtocol.h"
 
-@implementation MFPhoneTextField
+FOUNDATION_EXPORT NSString *FIELD_VALIDATOR_INTEGER_PART_MIN_DIGITS;
+FOUNDATION_EXPORT NSString *FIELD_VALIDATOR_INTEGER_PART_MAX_DIGITS;
+FOUNDATION_EXPORT NSString *FIELD_VALIDATOR_DECIMAL_PART_MIN_DIGITS;
+FOUNDATION_EXPORT NSString *FIELD_VALIDATOR_DECIMAL_PART_MAX_DIGITS;
 
+/*!
+ * @class MFDoubleFieldValidator
+ * @brief The FieldValidator for double
+ * @discussion This validator checks the valid double value
+ */
+@interface MFDoubleFieldValidator : NSObject <MFFieldValidatorProtocol>
 
-
--(UIKeyboardType)keyboardType {
-    return UIKeyboardTypePhonePad;
-}
-
--(void) doAction {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [self getData]]];
-    [[UIApplication sharedApplication] openURL:url];
-}
-
--(NSArray *)controlValidators {
-    return @[[MFPhoneFieldValidator sharedInstance]];
-}
 
 @end

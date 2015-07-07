@@ -20,7 +20,6 @@
 //
 
 #import "MFUIControlPhoto.h"
-
 #import "MFPositionViewModel.h"
 
 @interface MFPhotoViewModel : MFUIBaseViewModel
@@ -86,8 +85,18 @@
  */
 +(MFPhotoViewModel *) toViewModel:(id<MFPhotoVoProtocol>)vo parentVm:(id<MFUIBaseViewModelProtocol>)parentVm parentPropertyName:(NSString *)parentPropertyName;
 
-//+(void) convertViewModel:(MFPhotoViewModel *)vm toComponent:(id<MFPhotoVoProtocol>)vo;
+/*!
+ * @brief Converts a PhotoViewModel to a PhotoObject
+ * @param vm The PhotoViewModel to convert
+ * @return The Photo object 
+ */
 +(id<MFPhotoVoProtocol>) convertViewModel:(MFPhotoViewModel *)vm toComponent:(id<MFPhotoVoProtocol>)vo;
+
+/*!
+ * @brief Indicates if the PhotoViewModel is empty or not
+ * @return YES if the PhotoViewModel is empty, NO otherwhise.
+ */
+-(BOOL) isEmpty;
 
 
 @end

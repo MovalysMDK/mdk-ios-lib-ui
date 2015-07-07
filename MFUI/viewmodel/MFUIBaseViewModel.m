@@ -256,7 +256,7 @@
 {
     BOOL isValid = YES;
     id<MFViewModelChangedListenerProtocol,
-    MFCommonFormProtocol> formController = (id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol>) [self getForm];
+    MFCommonFormProtocol> formController = (id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol>) [self objectWithBinding];
     if (formController) {
         isValid = [formController.formValidation validateViewModel:self];
     }

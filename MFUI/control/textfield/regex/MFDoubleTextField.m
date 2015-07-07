@@ -18,6 +18,7 @@
 #import "MFDoubleTextField.h"
 #import "MFInvalidDoubleValueUIValidationError.h"
 #import "MFMandatoryFieldUIValidationError.h"
+#import "MFDoubleFieldValidator.h"
 
 @import MFCore.MFLocalizedString;
 
@@ -113,47 +114,6 @@
     [self resignFirstResponder];
 }
 
-- (void)createPattern {
-
-    //Construction de la regex de vérification en fonction des propriétés du PLIST
-    NSString *quantificateurPartieEntiere;
-    NSString *quantificateurPartieDecimale;
-    
-    //Génération des quantificateurs
-    
-    //Si un nombre minimum de chiffres pour la partie entière est spécifié (et différent de zéro)
-    if (self.integerPartMinDigits != nil && ![self.integerPartMinDigits isEqualToString:@""]
-        && [self.integerPartMinDigits intValue] != 0) {
-        quantificateurPartieEntiere = [NSString stringWithFormat:@"%@,", self.integerPartMinDigits];
-        //Autrement, il faudra saisir au moins un chiffre
-    } else {
-        quantificateurPartieEntiere = [NSString stringWithFormat:@"1,"];
-    }
-    
-    //Si un nombre maximum de chiffres pour la partie entière est spécifié (et différent de zéro) et qu'il est
-    //supérieur au nombre minimum
-    if (self.integerPartMaxDigits != nil && ![self.integerPartMaxDigits isEqualToString:@""]
-        && [self.integerPartMaxDigits intValue] != 0 && [self.integerPartMaxDigits intValue] >= [self.integerPartMinDigits intValue]) {
-        quantificateurPartieEntiere = [NSString stringWithFormat:@"%@%@", quantificateurPartieEntiere, self.integerPartMaxDigits];
-    }
-    
-    //Si un nombre minimum de chiffres pour la partie décimale est spécifié
-    if (self.decimalPartMinDigits != nil && ![self.decimalPartMinDigits isEqualToString:@""]) {
-        quantificateurPartieDecimale = [NSString stringWithFormat:@"%@,", self.decimalPartMinDigits];
-        //Autrement, il faudra saisir au moins un chiffre
-    } else {
-        quantificateurPartieDecimale = [NSString stringWithFormat:@"1,"];
-    }
-    
-    //Si un nombre maximum de chiffres pour la partie décimale est spécifié et qu'il est supérieur au nombre minimum
-    if (self.decimalPartMaxDigits != nil && ![self.decimalPartMaxDigits isEqualToString:@""]
-        && [self.decimalPartMaxDigits intValue] >= [self.decimalPartMinDigits intValue]) {
-        quantificateurPartieDecimale = [NSString stringWithFormat:@"%@%@", quantificateurPartieDecimale, self.decimalPartMaxDigits];
-    }
-    
-    //Génération de la regex de vérification
-    self.pattern = [NSString stringWithFormat:@"^-?[0-9]{%@}([,][0-9]{%@})?$", quantificateurPartieEntiere, quantificateurPartieDecimale];
-}
 
 -(void)setData:(id)data {
     [super setData:data];
@@ -165,13 +125,8 @@
     }
 }
 
-//PROTODO :
-//integerPartMinDigits
-//integerPartMaxDigits
-//decimalPartMinDigits
-//decimalPartMaxDigits
-
-
-
+-(NSArray *)controlValidators {
+    return @[[MFDoubleFieldValidator sharedInstance]];
+}
 
 @end

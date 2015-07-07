@@ -23,6 +23,7 @@
 #import "MFFormValidationDelegate.h"
 #import "MFUIBaseListViewModel.h"
 #import "MFUIControl.h"
+#import "MFAbstractComponentWrapper.h"
 
 const int kDiscardChangesAlert = 10 ;
 const int kSaveChangesAlert = 11 ;
@@ -46,6 +47,18 @@ const int kSaveChangesAlert = 11 ;
 
 -(BOOL) validateViewModel:(id<MFUIBaseViewModelProtocol>)vm {
     BOOL valid = YES;
+    if([vm isKindOfClass:[MFUIBaseViewModel class]]) {
+        id<MFObjectWithBindingProtocol> objectWithBinding = ((MFUIBaseViewModel *)vm).objectWithBinding;
+        NSDictionary *components = objectWithBinding.bindingDelegate.binding.bindingByComponents;
+        for(MFBindingValue *bindingValue in components.allValues) {
+            UIView *view = [bindingValue.wrapper component];
+            if([view conformsToProtocol:@protocol(MFComponentValidationProtocol)] && [view respondsToSelector:@selector(validate)]) {
+                //ATTENTION : c'est bien l'opérateur '&' et non '&&' afin de continuer la validation des autres
+                //composant même dans le cas ou la validation a déja échoué.
+                valid = valid & ([((id<MFComponentValidationProtocol>)view) validate] == 0);
+            }
+        }
+    }
     
     return valid;
 }

@@ -20,6 +20,9 @@
 
 #import "MFComponentAttributesProtocol.h"
 #import "MFComponentAssociatedLabelProtocol.h"
+#import "UIView+Binding.h"
+
+
 
 @implementation UITableViewCell (Binding)
 
@@ -27,9 +30,12 @@
     MFBindingDictionary *bindingDictionary = bindingCellDescriptor.cellBinding;
     for(MFOutletBindingKey* outletBindingKey in bindingDictionary.allKeys) {
         UIView *valueAsView = [self valueForKey:outletBindingKey.outletName];
-        
         if([valueAsView conformsToProtocol:@protocol(MFComponentAttributesProtocol)]) {
-            [((id<MFComponentAttributesProtocol>)valueAsView) setControlAttributes:bindingCellDescriptor.controlsAttributes[outletBindingKey.outletName]];
+            NSDictionary *controlAttributes = bindingCellDescriptor.controlsAttributes[outletBindingKey.outletName];
+            if(!controlAttributes) {
+                controlAttributes = @{};
+            }
+            [((id<MFComponentAttributesProtocol>)valueAsView) setControlAttributes:controlAttributes];
         }
         if([valueAsView conformsToProtocol:@protocol(MFComponentAssociatedLabelProtocol)]) {
             NSString *associatedLabelOutletName = bindingCellDescriptor.associatedLabels[outletBindingKey.outletName];
@@ -42,6 +48,7 @@
         }
         
         for(MFBindingDescriptor *itemDescriptor in bindingDictionary[outletBindingKey]) {
+            [valueAsView setBindedName:itemDescriptor.abstractBindedProperty];
             [objectWithBinding.bindingDelegate registerComponentBindingProperty:itemDescriptor.componentProperty withViewModelProperty:[itemDescriptor abstractBindedProperty] forComponent:valueAsView withOutletName:outletBindingKey.outletName withMode:itemDescriptor.bindingMode withBindingKey:[bindingCellDescriptor generatedBindingKey] withIndexPath:[bindingCellDescriptor cellIndexPath] fromBindingSource:itemDescriptor.bindingSource];
         }
     }

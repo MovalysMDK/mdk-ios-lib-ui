@@ -18,6 +18,12 @@
 		B002B9A61B39AC670079DB12 /* MFControlChangesProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B002B9A51B39AC670079DB12 /* MFControlChangesProtocol.h */; };
 		B002B9A91B39B44C0079DB12 /* MFDatePickerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B002B9A71B39B44C0079DB12 /* MFDatePickerWrapper.h */; };
 		B002B9AA1B39B44C0079DB12 /* MFDatePickerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B002B9A81B39B44C0079DB12 /* MFDatePickerWrapper.m */; };
+		B00630431B4C0849006D9668 /* MFFixedListContentFieldValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = B00630411B4C0849006D9668 /* MFFixedListContentFieldValidator.h */; };
+		B00630441B4C0849006D9668 /* MFFixedListContentFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = B00630421B4C0849006D9668 /* MFFixedListContentFieldValidator.m */; };
+		B00630471B4C12C2006D9668 /* MFDoubleFieldValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = B00630451B4C12C2006D9668 /* MFDoubleFieldValidator.h */; };
+		B00630481B4C12C2006D9668 /* MFDoubleFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = B00630461B4C12C2006D9668 /* MFDoubleFieldValidator.m */; };
+		B006304B1B4C207C006D9668 /* MFIntegerFieldValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = B00630491B4C207C006D9668 /* MFIntegerFieldValidator.h */; };
+		B006304C1B4C207C006D9668 /* MFIntegerFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = B006304A1B4C207C006D9668 /* MFIntegerFieldValidator.m */; };
 		B006CEE91B32C1E700B78782 /* MFFormConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = B006CED31B32C1E700B78782 /* MFFormConfiguration.h */; };
 		B006CEEA1B32C1E700B78782 /* MFFormConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B006CED41B32C1E700B78782 /* MFFormConfiguration.m */; };
 		B006CEEB1B32C1E700B78782 /* MFTableConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = B006CED51B32C1E700B78782 /* MFTableConfiguration.h */; };
@@ -97,6 +103,12 @@
 		B037F8CB1B0DC839005C12F2 /* MFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B037F8C91B0DC839005C12F2 /* MFAlertView.m */; };
 		B037F8CE1B0DC84D005C12F2 /* MFAlertViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B037F8CC1B0DC84D005C12F2 /* MFAlertViewManager.h */; };
 		B037F8CF1B0DC84D005C12F2 /* MFAlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B037F8CD1B0DC84D005C12F2 /* MFAlertViewManager.m */; };
+		B0390DDE1B4BD2B8007DB82B /* MFUrlFieldValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = B0390DDC1B4BD2B8007DB82B /* MFUrlFieldValidator.h */; };
+		B0390DDF1B4BD2B8007DB82B /* MFUrlFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = B0390DDD1B4BD2B8007DB82B /* MFUrlFieldValidator.m */; };
+		B0390DE21B4BD572007DB82B /* MFPhoneFieldValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = B0390DE01B4BD572007DB82B /* MFPhoneFieldValidator.h */; };
+		B0390DE31B4BD572007DB82B /* MFPhoneFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = B0390DE11B4BD572007DB82B /* MFPhoneFieldValidator.m */; };
+		B0390DE61B4BD673007DB82B /* MFEmailFieldValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = B0390DE41B4BD673007DB82B /* MFEmailFieldValidator.h */; };
+		B0390DE71B4BD673007DB82B /* MFEmailFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = B0390DE51B4BD673007DB82B /* MFEmailFieldValidator.m */; };
 		B04D12951B453E1500B64421 /* MFPickerListExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = B04D12931B453E1500B64421 /* MFPickerListExtension.h */; };
 		B04D12961B453E1500B64421 /* MFPickerListExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B04D12941B453E1500B64421 /* MFPickerListExtension.m */; };
 		B04D12991B453E3900B64421 /* MFPickerListConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = B04D12971B453E3900B64421 /* MFPickerListConfiguration.h */; };
@@ -583,6 +595,12 @@
 		B002B9A51B39AC670079DB12 /* MFControlChangesProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFControlChangesProtocol.h; sourceTree = "<group>"; };
 		B002B9A71B39B44C0079DB12 /* MFDatePickerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDatePickerWrapper.h; sourceTree = "<group>"; };
 		B002B9A81B39B44C0079DB12 /* MFDatePickerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDatePickerWrapper.m; sourceTree = "<group>"; };
+		B00630411B4C0849006D9668 /* MFFixedListContentFieldValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFixedListContentFieldValidator.h; sourceTree = "<group>"; };
+		B00630421B4C0849006D9668 /* MFFixedListContentFieldValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFixedListContentFieldValidator.m; sourceTree = "<group>"; };
+		B00630451B4C12C2006D9668 /* MFDoubleFieldValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDoubleFieldValidator.h; sourceTree = "<group>"; };
+		B00630461B4C12C2006D9668 /* MFDoubleFieldValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDoubleFieldValidator.m; sourceTree = "<group>"; };
+		B00630491B4C207C006D9668 /* MFIntegerFieldValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFIntegerFieldValidator.h; sourceTree = "<group>"; };
+		B006304A1B4C207C006D9668 /* MFIntegerFieldValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFIntegerFieldValidator.m; sourceTree = "<group>"; };
 		B006CED31B32C1E700B78782 /* MFFormConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFormConfiguration.h; sourceTree = "<group>"; };
 		B006CED41B32C1E700B78782 /* MFFormConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFormConfiguration.m; sourceTree = "<group>"; };
 		B006CED51B32C1E700B78782 /* MFTableConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTableConfiguration.h; sourceTree = "<group>"; };
@@ -662,6 +680,12 @@
 		B037F8CC1B0DC84D005C12F2 /* MFAlertViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAlertViewManager.h; sourceTree = "<group>"; };
 		B037F8CD1B0DC84D005C12F2 /* MFAlertViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAlertViewManager.m; sourceTree = "<group>"; };
 		B037F8D01B0DD673005C12F2 /* MFUIAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFUIAlertView.h; sourceTree = "<group>"; };
+		B0390DDC1B4BD2B8007DB82B /* MFUrlFieldValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUrlFieldValidator.h; sourceTree = "<group>"; };
+		B0390DDD1B4BD2B8007DB82B /* MFUrlFieldValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUrlFieldValidator.m; sourceTree = "<group>"; };
+		B0390DE01B4BD572007DB82B /* MFPhoneFieldValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPhoneFieldValidator.h; sourceTree = "<group>"; };
+		B0390DE11B4BD572007DB82B /* MFPhoneFieldValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPhoneFieldValidator.m; sourceTree = "<group>"; };
+		B0390DE41B4BD673007DB82B /* MFEmailFieldValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFEmailFieldValidator.h; sourceTree = "<group>"; };
+		B0390DE51B4BD673007DB82B /* MFEmailFieldValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFEmailFieldValidator.m; sourceTree = "<group>"; };
 		B04D12931B453E1500B64421 /* MFPickerListExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPickerListExtension.h; sourceTree = "<group>"; };
 		B04D12941B453E1500B64421 /* MFPickerListExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPickerListExtension.m; sourceTree = "<group>"; };
 		B04D12971B453E3900B64421 /* MFPickerListConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPickerListConfiguration.h; sourceTree = "<group>"; };
@@ -2375,6 +2399,18 @@
 				B0FFDB101B346A4500CA6E5E /* MFFieldValidatorHandler.m */,
 				B0FFDB131B3470DD00CA6E5E /* MFLengthFieldValidator.h */,
 				B0FFDB141B3470DD00CA6E5E /* MFLengthFieldValidator.m */,
+				B0390DDC1B4BD2B8007DB82B /* MFUrlFieldValidator.h */,
+				B0390DDD1B4BD2B8007DB82B /* MFUrlFieldValidator.m */,
+				B0390DE01B4BD572007DB82B /* MFPhoneFieldValidator.h */,
+				B0390DE11B4BD572007DB82B /* MFPhoneFieldValidator.m */,
+				B0390DE41B4BD673007DB82B /* MFEmailFieldValidator.h */,
+				B0390DE51B4BD673007DB82B /* MFEmailFieldValidator.m */,
+				B00630411B4C0849006D9668 /* MFFixedListContentFieldValidator.h */,
+				B00630421B4C0849006D9668 /* MFFixedListContentFieldValidator.m */,
+				B00630451B4C12C2006D9668 /* MFDoubleFieldValidator.h */,
+				B00630461B4C12C2006D9668 /* MFDoubleFieldValidator.m */,
+				B00630491B4C207C006D9668 /* MFIntegerFieldValidator.h */,
+				B006304A1B4C207C006D9668 /* MFIntegerFieldValidator.m */,
 			);
 			path = fieldValidator;
 			sourceTree = "<group>";
@@ -2414,10 +2450,13 @@
 				B006CF101B32C25800B78782 /* MFBindingCellDescriptor.h in Headers */,
 				B006CF161B32C25800B78782 /* MFObjectWithBindingProtocol.h in Headers */,
 				B006CF121B32C25800B78782 /* MFBindingDelegate.h in Headers */,
+				B0390DE21B4BD572007DB82B /* MFPhoneFieldValidator.h in Headers */,
 				B006CF141B32C25800B78782 /* MFBindingDictionary.h in Headers */,
 				B0D45E321A5ED2F400C6D376 /* MFChildViewControllerProtocol.h in Headers */,
+				B00630471B4C12C2006D9668 /* MFDoubleFieldValidator.h in Headers */,
 				B0D45E661A5ED2F400C6D376 /* MFViewControllerDelegate.h in Headers */,
 				B0D45D191A5ED2F400C6D376 /* MFAbstractPersistentDeleteDetailAction.h in Headers */,
+				B0390DDE1B4BD2B8007DB82B /* MFUrlFieldValidator.h in Headers */,
 				B054860E1B46DC4A0094846E /* MFEnumImageWrapper.h in Headers */,
 				B0D45D7F1A5ED2F400C6D376 /* MFPosition.h in Headers */,
 				B08528851B43F18A00B46194 /* MFDoubleTextFieldWrapper.h in Headers */,
@@ -2507,6 +2546,7 @@
 				B0D45DF81A5ED2F400C6D376 /* MFFormValidationDelegate.h in Headers */,
 				B0D45DF41A5ED2F400C6D376 /* MFUIForm.h in Headers */,
 				B0D45E7E1A5ED2F400C6D376 /* MFPositionViewModel.h in Headers */,
+				B0390DE61B4BD673007DB82B /* MFEmailFieldValidator.h in Headers */,
 				B0D45E6D1A5ED2F400C6D376 /* MFSimpleSplashViewController.h in Headers */,
 				B0D45DF51A5ED2F400C6D376 /* MFFormSearchDelegate.h in Headers */,
 				B0D4551F1A5ED26A00C6D376 /* MFUI.h in Headers */,
@@ -2522,6 +2562,7 @@
 				B0D45D911A5ED2F400C6D376 /* MFSignatureHelper.h in Headers */,
 				B0D45DC81A5ED2F400C6D376 /* MFRegularExpressionTextFieldExtension.h in Headers */,
 				B0D45DFC1A5ED2F400C6D376 /* MFFormViewControllerValidationDelegate.h in Headers */,
+				B006304B1B4C207C006D9668 /* MFIntegerFieldValidator.h in Headers */,
 				B0FFDAFD1B343D3300CA6E5E /* MFComponentProviderProtocol.h in Headers */,
 				B0CFEA701AEE6F5300279631 /* MFBarCodeScanTextField.h in Headers */,
 				B0D45DD01A5ED2F400C6D376 /* MFFloatConverter.h in Headers */,
@@ -2691,6 +2732,7 @@
 				B08EF72D1AE5407E00F3754E /* MFCreateEmailViewControllerDelegate.h in Headers */,
 				B000D5161B42793E0018281E /* UIView+Binding.h in Headers */,
 				B0D45D561A5ED2F400C6D376 /* MFUIControlImage.h in Headers */,
+				B00630431B4C0849006D9668 /* MFFixedListContentFieldValidator.h in Headers */,
 				B0D4C4C11B3816F60020ACF2 /* MFViewProtocol.h in Headers */,
 				B0D45E221A5ED2F400C6D376 /* MFColorValueProcessing.h in Headers */,
 				B0D45E191A5ED2F400C6D376 /* MFConstants.h in Headers */,
@@ -2978,6 +3020,7 @@
 				B08EF7011AE53F8F00F3754E /* MFUrlTextField.m in Sources */,
 				B006CF131B32C25800B78782 /* MFBindingDelegate.m in Sources */,
 				B002B9AA1B39B44C0079DB12 /* MFDatePickerWrapper.m in Sources */,
+				B00630481B4C12C2006D9668 /* MFDoubleFieldValidator.m in Sources */,
 				B04D129A1B453E3900B64421 /* MFPickerListConfiguration.m in Sources */,
 				B00787CB1AB1E37A009F6D95 /* JDFTooltipView.m in Sources */,
 				B0D45E631A5ED2F400C6D376 /* MFViewController.m in Sources */,
@@ -3011,6 +3054,7 @@
 				B0C9B2E21AFA21E700FC9665 /* MFTextFieldStyle+TextLayouting.m in Sources */,
 				B0D45E651A5ED2F400C6D376 /* MFViewControllerDelegate+MFUIViewControllerDelegate.m in Sources */,
 				B0129F621B3323850090B0AF /* MFCommandHandler.m in Sources */,
+				B0390DE71B4BD673007DB82B /* MFEmailFieldValidator.m in Sources */,
 				B0D45DEF1A5ED2F400C6D376 /* MFUIValidationError.m in Sources */,
 				B0C9B2DE1AFA21E700FC9665 /* MFTextFieldStyle+BackgroundView.m in Sources */,
 				B0E155C01B414C8600D5A213 /* UITableViewCell+Binding.m in Sources */,
@@ -3025,6 +3069,7 @@
 				B0D45E101A5ED2F400C6D376 /* MFTestHelper.m in Sources */,
 				B0D45E4C1A5ED2F400C6D376 /* MFForm2DListViewController.m in Sources */,
 				B0D45E341A5ED2F400C6D376 /* MFContainerViewController.m in Sources */,
+				B0390DE31B4BD572007DB82B /* MFPhoneFieldValidator.m in Sources */,
 				B0D45D1E1A5ED2F400C6D376 /* MFDeleteDetailActionParamOut.m in Sources */,
 				B0FC78EE1B3ACE1400DD225F /* MFSignatureWrapper.m in Sources */,
 				B0D45E431A5ED2F400C6D376 /* MFDeckViewController.m in Sources */,
@@ -3032,6 +3077,7 @@
 				B0D45DE61A5ED2F400C6D376 /* MFTooLongStringUIValidationError.m in Sources */,
 				B08528861B43F18A00B46194 /* MFDoubleTextFieldWrapper.m in Sources */,
 				B0D45D1A1A5ED2F400C6D376 /* MFAbstractPersistentDeleteDetailAction.m in Sources */,
+				B0390DDF1B4BD2B8007DB82B /* MFUrlFieldValidator.m in Sources */,
 				B0D45D211A5ED2F400C6D376 /* MFEmailLogsAction.m in Sources */,
 				B0D45E411A5ED2F400C6D376 /* MFWorkspaceViewController.m in Sources */,
 				B0D45E451A5ED2F400C6D376 /* MFDeckViewGestureDelegate.m in Sources */,
@@ -3081,11 +3127,13 @@
 				B0AF66FE1AE64E1400A472FC /* MFCommonControlDelegate.m in Sources */,
 				B0183FFE1AB09E530081133F /* MFButton+MFButtonExt.m in Sources */,
 				B0D45E501A5ED2F400C6D376 /* MFFormBaseViewController.m in Sources */,
+				B006304C1B4C207C006D9668 /* MFIntegerFieldValidator.m in Sources */,
 				B006CEEA1B32C1E700B78782 /* MFFormConfiguration.m in Sources */,
 				B0CFEA711AEE6F5300279631 /* MFBarCodeScanTextField.m in Sources */,
 				B09CAC461B3D55F50067A8DE /* MFIntegerTextFieldWrapper.m in Sources */,
 				B0D45E4E1A5ED2F400C6D376 /* MFForm3DListViewController.m in Sources */,
 				B0D45DC91A5ED2F400C6D376 /* MFRegularExpressionTextFieldExtension.m in Sources */,
+				B00630441B4C0849006D9668 /* MFFixedListContentFieldValidator.m in Sources */,
 				B00787C61AB1E37A009F6D95 /* JDFSequentialTooltipManager.m in Sources */,
 				B000D51F1B42B7420018281E /* NSIndexPath+Utils.m in Sources */,
 				B0D45E1F1A5ED2F400C6D376 /* MFAlignmentValueProcessing.m in Sources */,

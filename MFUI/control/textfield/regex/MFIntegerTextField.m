@@ -16,25 +16,13 @@
 
 #import "MFIntegerTextField.h"
 #import "MFInvalidIntegerValueUIValidationError.h"
-#import "MFMandatoryFieldUIValidationError.h"
+#import "MFIntegerFieldValidator.h"
 
 @import MFCore.MFLocalizedString;
 
-@interface MFIntegerTextField ()
 
-@property (nonatomic, strong) NSString *minDigits;
-@property (nonatomic, strong) NSString *maxDigits;
-
-@property (nonatomic, strong) NSString *pattern;
-
-@end
 
 @implementation MFIntegerTextField
-
--(NSString *)regex {
-    return self.pattern;
-}
-
 
 -(void)initializeComponent {
     [super initializeComponent];
@@ -114,65 +102,9 @@
     [self resignFirstResponder];
 }
 
-//PROTODO : maxDigits, minDigits parameters
-
-- (void)createPattern {
-    
-    //Construction de la regex de vérification en fonction des propriétés du PLIST
-    NSString *quantificateurPartieEntiere;
-    
-    //Génération des quantificateurs
-    
-    //Si un nombre minimum de chiffres pour la partie entière est spécifié (et différent de zéro)
-    if (self.minDigits != nil && ![self.minDigits isEqualToString:@""]
-        && [self.minDigits intValue] != 0) {
-        quantificateurPartieEntiere = [NSString stringWithFormat:@"%@,", self.minDigits];
-        //Autrement, il faudra saisir au moins un chiffre
-    } else {
-        quantificateurPartieEntiere = [NSString stringWithFormat:@"1,"];
-    }
-    
-    //Si un nombre maximum de chiffres pour la partie entière est spécifié (et différent de zéro) et qu'il est
-    //supérieur au nombre minimum
-    if (self.maxDigits != nil && ![self.maxDigits isEqualToString:@""]
-        && [self.maxDigits intValue] != 0 && [self.maxDigits intValue] >= [self.minDigits intValue]) {
-        quantificateurPartieEntiere = [NSString stringWithFormat:@"%@%@", quantificateurPartieEntiere, self.maxDigits];
-    }
-    
-    //Génération de la regex de vérification
-    self.pattern = [NSString stringWithFormat:@"^-?[0-9]{%@}$", quantificateurPartieEntiere];
+-(NSArray *)controlValidators {
+    return @[[MFIntegerFieldValidator sharedInstance]];
 }
-
-
-#pragma mark - Validation
-//-(NSInteger) validateWithParameters:(NSDictionary *)parameters
-//{
-//    if(!self.componentValidation) {
-//        return 0;
-//    }
-//    NSInteger nbOfErrors = [super validateWithParameters:parameters];
-//    
-//    if([[self getData] isEqualToString:@"-"]) {
-//        NSError *error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-//        [self addErrors:@[error]];
-//        nbOfErrors++;
-//    }
-//    
-//    if ([[self getData] longLongValue] > INT32_MAX || [[self getData] longLongValue] < INT32_MIN) {
-//        NSError *error = [[MFInvalidIntegerValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-//        [self addErrors:@[error]];
-//        nbOfErrors++;
-//    }
-//    
-//    return nbOfErrors;
-//}
-
-
-
-#pragma mark - Control changes
-
-
-
 
 
 @end

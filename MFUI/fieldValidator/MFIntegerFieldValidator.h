@@ -13,26 +13,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
+#import <Foundation/Foundation.h>
+#import "MFFieldValidatorProtocol.h"
 
-#import "MFPhoneTextField.h"
-#import "MFInvalidPhoneNumberValueUIValidationError.h"
-#import "MFPhoneFieldValidator.h"
+FOUNDATION_EXPORT NSString *FIELD_VALIDATOR_MIN_DIGITS;
+FOUNDATION_EXPORT NSString *FIELD_VALIDATOR_MAX_DIGITS;
 
-@implementation MFPhoneTextField
-
-
-
--(UIKeyboardType)keyboardType {
-    return UIKeyboardTypePhonePad;
-}
-
--(void) doAction {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [self getData]]];
-    [[UIApplication sharedApplication] openURL:url];
-}
-
--(NSArray *)controlValidators {
-    return @[[MFPhoneFieldValidator sharedInstance]];
-}
+/*!
+ * @class MFIntegerFieldValidator
+ * @brief The FieldValidator for integer
+ * @discussion This validator checks the valid integer value
+ */
+@interface MFIntegerFieldValidator : NSObject <MFFieldValidatorProtocol>
 
 @end

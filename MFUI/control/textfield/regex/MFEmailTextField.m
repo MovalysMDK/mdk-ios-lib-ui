@@ -22,7 +22,6 @@
 #import "MFUICommand.h"
 #import "UIView+ViewController.h"
 #import "MFEmail.h"
-#import "MFUIFieldValidator.h"
 
 
 @interface MFEmailTextField ()
@@ -31,16 +30,6 @@
 
 @implementation MFEmailTextField
 
--(void)initializeComponent {
-    [super initializeComponent];
-    [self addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
-    
-}
-
--(NSString *)regex {
-    return @"^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-z]{2,6})$";
-}
-
 -(void) doAction {
     BOOL canSendMail = NO;
     if ([MFMailComposeViewController canSendMail]){
@@ -48,7 +37,6 @@
         MFEmail *email = [MFEmail new];
         email.to = [self getData];
         [[MFCommandHandler commandWithKey:@"SendEmailCommand" withQualifier:nil] executeFromViewController:[self parentViewController] withParameters:email, nil];
-        
     }
     if(!canSendMail)
     {
@@ -61,5 +49,8 @@
 }
 
 
+-(NSArray *)controlValidators {
+    return @[[MFEmailFieldValidator sharedInstance]];
+}
 
 @end

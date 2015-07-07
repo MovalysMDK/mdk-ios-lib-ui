@@ -59,6 +59,8 @@
 @synthesize componentValidation = _componentValidation;
 @synthesize controlAttributes = _controlAttributes;
 @synthesize associatedLabel = _associatedLabel;
+@synthesize controlDelegate = _controlDelegate;
+@synthesize errors = _errors;
 
 #pragma mark - Constructeurs et initialisation
 -(id)init {
@@ -107,6 +109,7 @@
 
 -(void)initialize {
     
+    self.controlDelegate = [[MFCommonControlDelegate alloc] initWithComponent:self];
     if([self conformsToProtocol:@protocol(MFDefaultConstraintsProtocol)]) {
         [self performSelector:@selector(applyDefaultConstraints) withObject:nil
          ];
@@ -156,7 +159,7 @@
 
 -(void) initErrors {
     //Initialisation de la liste des erreurs et du bouton indiquant des erreurs sur le composant
-    self.baseErrors = [[NSMutableArray alloc] init];
+    self.errors = [[NSMutableArray alloc] init];
     self.baseErrorButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
     self.baseErrorButton.backgroundColor = [UIColor clearColor];
     self.baseErrorButton.alpha = 0.0;
@@ -164,12 +167,6 @@
     
 }
 
--(void)drawRect:(CGRect)rect {
-    [super drawRect:rect];
-    if(self.IB_enableIBStyle) {
-        [self renderComponentFromInspectableAttributes];
-    }
-}
 
 #pragma mark - Méthodes communes à tous les composants
 
@@ -178,14 +175,15 @@
     [self applyStandardStyle];
     if (self.isValid != isValid) {
         _isValid = isValid;
-        if (isValid) {
-            [self applyValidStyle];
-            [self hideErrorButtons];
-        } else {
-            [self applyErrorStyle];
-            [self showErrorButtons];
-        }
     }
+    if (isValid) {
+        [self applyValidStyle];
+        [self hideErrorButtons];
+    } else {
+        [self applyErrorStyle];
+        [self showErrorButtons];
+    }
+
 }
 
 
@@ -220,9 +218,7 @@
 }
 
 -(NSInteger)validate {
-    // We remove all control's errors
-    [self.baseErrors removeAllObjects];
-    return 0;
+    return [self.controlDelegate validate];
 }
 
 
@@ -349,7 +345,7 @@
 
 -(void)showErrorTooltips {
     
-    if( (self.baseErrors != nil) &&  [self.baseErrors count] >0) {
+    if( (self.errors != nil) &&  [self.errors count] >0) {
         if(nil == self.baseTooltipView.text){
             
             // We calculate the tooltip's anchor point
@@ -364,7 +360,7 @@
             
             // We build the tooltip's message : one message per line
             int errorNumber = 0;
-            for (NSError *error in self.baseErrors) {
+            for (NSError *error in self.errors) {
                 if(errorNumber > 0){
                     self.baseTooltipView.text = [self.baseTooltipView.text stringByAppendingString: @"\n"];
                 }
@@ -398,7 +394,7 @@
 }
 
 -(NSMutableArray *) getErrors {
-    return self.baseErrors;
+    return self.errors;
 }
 
 -(void) clearErrors{
@@ -406,7 +402,7 @@
 }
 
 -(void) clearErrors:(BOOL)anim {
-    [self.baseErrors removeAllObjects];
+    [self.errors removeAllObjects];
     [self hideErrorButtons:anim];
     [self hideErrorTooltips];
     [self setIsValid:YES];
@@ -418,11 +414,11 @@
         
         NSMutableArray *newErrors = [errors mutableCopy];
         for(NSError *error in errors) {
-            if([self.baseErrors containsObject:error]) {
+            if([self.errors containsObject:error]) {
                 [newErrors removeObject:error];
             }
         }
-        [self.baseErrors addObjectsFromArray:newErrors];
+        [self.errors addObjectsFromArray:newErrors];
     }
 }
 
@@ -592,6 +588,10 @@
 
 -(NSArray *)controlValidators {
     return @[];
+}
+
+-(void)addControlAttribute:(id)controlAttribute forKey:(NSString *)key {
+    [self.controlDelegate addControlAttribute:controlAttribute forKey:key];
 }
 
 @end

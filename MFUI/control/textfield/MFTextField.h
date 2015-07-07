@@ -34,8 +34,6 @@ IB_DESIGNABLE
 
 @property (nonatomic) Class customStyleClass;
 
-@property (nonatomic, strong) NSMutableArray *errors;
-
 
 @property (nonatomic, strong) id<MFUIComponentProtocol> sender;
 

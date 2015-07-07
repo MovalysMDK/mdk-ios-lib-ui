@@ -53,6 +53,7 @@
 @synthesize controlAttributes = _controlAttributes;
 @synthesize associatedLabel = _associatedLabel;
 @synthesize targetDescriptors = _targetDescriptors;
+@synthesize errors = _errors;
 
 
 #pragma mark - Initialization
@@ -133,7 +134,7 @@
 
 #pragma mark - Target Actions
 -(void)textDidChange:(id)sender {
-    [self valueChanged:sender];
+//    [self valueChanged:sender];
 }
 
 -(void)innerTextDidChange:(id)sender {
@@ -170,6 +171,7 @@
         fixedData = @"";
     }
     self.text = fixedData;
+    [self validate];
 }
 
 -(id)getData {
@@ -293,6 +295,14 @@
 
 -(NSArray *)controlValidators {
     return @[];
+}
+
+-(NSInteger)validate {
+    return [self.controlDelegate validate];
+}
+
+-(void)addControlAttribute:(id)controlAttribute forKey:(NSString *)key {
+    [self.controlDelegate addControlAttribute:controlAttribute forKey:key];
 }
 
 

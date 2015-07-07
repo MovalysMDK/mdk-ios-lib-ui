@@ -114,4 +114,8 @@
     _identifier = identifier;
 }
 
+-(BOOL) isEmpty {
+    return !self.titre && !self.descr && !self.uri && !self.date;
+}
+
 @end

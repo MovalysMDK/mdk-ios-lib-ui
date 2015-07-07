@@ -14,25 +14,14 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFPhoneTextField.h"
-#import "MFInvalidPhoneNumberValueUIValidationError.h"
-#import "MFPhoneFieldValidator.h"
+#import <Foundation/Foundation.h>
+#import "MFFieldValidatorProtocol.h"
 
-@implementation MFPhoneTextField
-
-
-
--(UIKeyboardType)keyboardType {
-    return UIKeyboardTypePhonePad;
-}
-
--(void) doAction {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [self getData]]];
-    [[UIApplication sharedApplication] openURL:url];
-}
-
--(NSArray *)controlValidators {
-    return @[[MFPhoneFieldValidator sharedInstance]];
-}
+/*!
+ * @class MFFixedListContentFieldValidator
+ * @brief The FieldValidator for FixedList content
+ * @discussion This validator checks the validity of the content of a FixedList
+ */
+@interface MFFixedListContentFieldValidator : NSObject <MFFieldValidatorProtocol>
 
 @end

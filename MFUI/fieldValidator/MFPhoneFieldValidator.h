@@ -14,25 +14,28 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFPhoneTextField.h"
-#import "MFInvalidPhoneNumberValueUIValidationError.h"
-#import "MFPhoneFieldValidator.h"
+#import <Foundation/Foundation.h>
+#import "MFFieldValidatorProtocol.h"
 
-@implementation MFPhoneTextField
+/*!
+ * @class MFPhoneFieldValidator
+ * @brief The FieldValidator for phone
+ * @discussion This validator checks the valid phone value
+ */
+@interface MFPhoneFieldValidator : NSObject <MFFieldValidatorProtocol>
 
+/*!
+ * @brief Returns the regular expression that should be matched
+ * @return The regular expression that should be matched
+ */
+-(NSString *) regex;
 
+/*!
+ * @brief Indicates if the value match the given pattern
+ * @param checkString The pattern to match
+ * @return A BOOL value that is YES if the component is matching the pattern, NO otherwhise.
+ */
+-(BOOL) matchPattern:(NSString *)checkString;
 
--(UIKeyboardType)keyboardType {
-    return UIKeyboardTypePhonePad;
-}
-
--(void) doAction {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [self getData]]];
-    [[UIApplication sharedApplication] openURL:url];
-}
-
--(NSArray *)controlValidators {
-    return @[[MFPhoneFieldValidator sharedInstance]];
-}
 
 @end

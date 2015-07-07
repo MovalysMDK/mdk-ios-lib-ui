@@ -67,7 +67,7 @@
 -(BOOL) addError:(id)error onComponent:(NSString *)bindingKey atIndexPath:(NSIndexPath *)indexPath;
 
 
-
+-(void)initializeModel;
 /*!
  * @brief Used to create the binding structure of this object with binding
  * @discussion Use a configuration to create the binding structure

@@ -21,6 +21,17 @@
  */
 @protocol MFComponentAttributesProtocol <NSObject>
 
+/*!
+ * @brief The control attributes property
+ */
 @property (nonatomic, strong) NSDictionary *controlAttributes;
+
+
+/*!
+ * @brief Adds a control attribute
+ * @param controlAttribute A control attribute to add
+ * @param key The key used to add the control attribute
+ */
+-(void)addControlAttribute:(id)controlAttribute forKey:(NSString *)key;
 
 @end

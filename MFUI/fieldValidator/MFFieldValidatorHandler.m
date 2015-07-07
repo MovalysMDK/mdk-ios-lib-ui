@@ -40,9 +40,6 @@
                 [result addObject:fieldValidatorInstance];
             }
         }
-        else {
-            @throw [NSException exceptionWithName:@"No FieldValidator Found" reason:[NSString stringWithFormat:@"No FieldValidator found for key: %@", attribute]userInfo:nil];
-        }
     }];
     
     return result;
@@ -77,10 +74,7 @@
         fieldValidatorInstance = [componentProvider fieldValidatorWithKey:fieldValidatorKey];
         
         
-        if(!fieldValidatorInstance) {
-            @throw [NSException exceptionWithName:@"No FieldValidator Found" reason:[NSString stringWithFormat:@"No FieldValidator found with class: %@", fieldValidatorKey]userInfo:nil];
-        }
-        else {
+        if(fieldValidatorInstance) {
             if([fieldValidatorInstance conformsToProtocol:@protocol(MFFieldValidatorProtocol)]) {
                 NSArray *validatorRecognizedAttributes = [fieldValidatorInstance recognizedAttributes];
                 for(NSString *recognizedParameter in validatorRecognizedAttributes) {

@@ -89,7 +89,6 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 -(void) initialize {
     self.formValidation = [[MFFormValidationDelegate alloc] initWithFormController:self];
     [self initializeBinding];
-    [self initializeModel];
 }
 
 
@@ -143,6 +142,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     if([cell isKindOfClass:[MFCellAbstract class]]) {
         [(MFCellAbstract *)cell cellIsConfigured];
     }
+    [self.fixedList validate];
     return cell;
 }
 
@@ -226,6 +226,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     }
     [tableView endUpdates];
     
+    [self.fixedList validate];
     // Exécution du block
     [CATransaction commit];
     [self.fixedList.tableView reloadData];
@@ -444,7 +445,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     [self.fixedList.tableView reloadData];
 }
 -(void) initializeModel {
-    self.viewModel.objectWithBinding = self;
+    [self getViewModel].objectWithBinding = self;
 }
 
 -(void)setBindingDelegate:(MFBindingDelegate *)bindingDelegate {

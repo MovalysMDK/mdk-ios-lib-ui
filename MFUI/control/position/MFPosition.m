@@ -38,7 +38,7 @@
 #define MFPOSITION_BUTTON_SIZE 44
 #define MFPOSITION_HPADDING 5
 #define MFPOSITION_WPADDING 5
-#define MFPOSITION_ANIMATION_DUR ATION .2f
+#define MFPOSITION_ANIMATION_DURATION .2f
 
 @interface MFPosition () <UITextFieldDelegate>
 
@@ -59,13 +59,13 @@
     // Latitude Field
     self.latitude = [[MFDoubleTextField alloc] initWithFrame:CGRectZero];
     
-    self.latitude.decimalPartMaxDigits = @"6";
+    [self.latitude addControlAttribute:@6 forKey:@"decimalPartMaxDigits"];
     self.latitude.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRW");
     [self.latitude setSender:self];
     
     // Longitude Field
     self.longitude = [[MFDoubleTextField alloc] initWithFrame:CGRectZero];
-    self.longitude.decimalPartMaxDigits = @"6";
+    [self.longitude addControlAttribute:@6 forKey:@"decimalPartMaxDigits"];
     self.longitude.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRW");
     [self.longitude setSender:self];
     self.backgroundColor = [UIColor clearColor];

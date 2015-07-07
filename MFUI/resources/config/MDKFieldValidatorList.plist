@@ -2,9 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>lengthFieldValidator</key>
-	<string>MFLengthValidator</string>
 	<key>mandatoryFieldValidator</key>
 	<string>MFMandatoryFieldValidator</string>
+	<key>lengthFieldValidator</key>
+	<string>MFLengthValidator</string>
+	<key>urlFieldValidator</key>
+	<string>MFUrlFieldValidator</string>
+	<key>emailFieldValidator</key>
+	<string>MFEmailFieldValidator</string>
+	<key>phoneFieldValidator</key>
+	<string>MFPhoneFieldValidator</string>
+	<key>fixedListContentFieldValidator</key>
+	<string>MFFixedListContentFieldValidator</string>
+	<key>doubleFieldValidator</key>
+	<string>MFDoubleFieldValidator</string>
+	<key>integerFieldValidator</key>
+	<string>MFIntegerFieldValidator</string>
 </dict>
 </plist>

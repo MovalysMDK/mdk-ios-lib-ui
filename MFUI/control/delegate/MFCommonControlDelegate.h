@@ -32,6 +32,6 @@
 -(void)setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor;
 -(void)onErrorButtonClick:(id)sender;
 -(void)setVisible:(NSNumber *)visible;
-
+-(void)addControlAttribute:(id)controlAttribute forKey:(NSString *)key;
 -(NSInteger)validate;
 @end

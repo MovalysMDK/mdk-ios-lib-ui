@@ -33,4 +33,16 @@
  * @brief Performs some treatments the view is binded
  */
 -(void) didBinded;
+
+/*!
+ * @brief Sets the binded name of the view
+ * @param bindedName the binded name of the component
+ */
+- (void)setBindedName:(NSString *)bindedName;
+
+/*!
+ * @brief Returns  the binded name of the view
+ * @return The binded name of the view.
+ */
+- (NSString *)bindedName;
 @end

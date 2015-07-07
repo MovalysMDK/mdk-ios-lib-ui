@@ -16,6 +16,8 @@
 
 #import "MFMandatoryFieldValidator.h"
 #import "MFMandatoryFieldUIValidationError.h"
+#import "MFUIBaseListViewModel.h"
+#import "MFPhotoViewModel.h"
 
 NSString *FIELD_VALIDATOR_ATTRIBUTE_MANDATORY = @"mandatory";
 
@@ -35,20 +37,35 @@ NSString *FIELD_VALIDATOR_ATTRIBUTE_MANDATORY = @"mandatory";
 }
 
 -(MFError *)validate:(id)value withCurrentState:(NSDictionary *)currentState withParameters:(NSDictionary *)parameters {
+    MFError *result = nil;
     if([parameters[FIELD_VALIDATOR_ATTRIBUTE_MANDATORY] boolValue]) {
         if([value isKindOfClass:[NSString class]]) {
             NSString *stringValue = (NSString *)value;
             if(!stringValue || stringValue.length == 0) {
-                return [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:@"Mandatory field" technicalFieldName:@"This component is mandatory"];
+                result = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:parameters[@"componentName"] technicalFieldName:parameters[@"componentName"]];
+            }
+        }
+        else if([value isKindOfClass:[MFUIBaseListViewModel class]]) {
+            MFUIBaseListViewModel *listViewModelValue = (MFUIBaseListViewModel *)value;
+            if(!listViewModelValue || listViewModelValue.viewModels.count == 0) {
+                result = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:parameters[@"componentName"] technicalFieldName:parameters[@"componentName"]];
+            }
+        }
+        else if([value isKindOfClass:[MFPhotoViewModel class]]) {
+            MFPhotoViewModel *valueAsPhotoViewModel = (MFPhotoViewModel *)value;
+            if([valueAsPhotoViewModel isEmpty]) {
+                result = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:parameters[@"componentName"] technicalFieldName:parameters[@"componentName"]];
             }
         }
     }
-    return nil;
+    return result;
 }
 
 -(BOOL)canValidControl:(UIView *)control {
     BOOL canValid = YES;
-    canValid = canValid && [control isKindOfClass:NSClassFromString(@"MFTextField")];
+    canValid = canValid && ([control isKindOfClass:NSClassFromString(@"MFTextField")] ||
+                            [control isKindOfClass:NSClassFromString(@"MFUIOldBaseComponent")] ||
+                            [control isKindOfClass:NSClassFromString(@"MFUIBaseComponent")]);
     return canValid;
 }
 

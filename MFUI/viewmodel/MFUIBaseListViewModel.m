@@ -72,6 +72,15 @@
     _form = form;
 }
 
+-(void)setObjectWithBinding:(NSObject<MFObjectWithBindingProtocol> * __nullable)objectWithBinding {
+    if(self.viewModels && objectWithBinding) {
+        for(id<MFUIBaseViewModelProtocol> viewModel in self.viewModels) {
+            [viewModel setObjectWithBinding:objectWithBinding];
+        }
+    }
+    _objectWithBinding = objectWithBinding;
+}
+
 - (id)valueForUndefinedKey:(NSString *)key{
     NSString* className = NSStringFromClass([self class]);
     if([className rangeOfString:@"-label"].location == NSNotFound) {

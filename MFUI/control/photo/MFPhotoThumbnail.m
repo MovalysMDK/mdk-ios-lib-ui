@@ -253,21 +253,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void) displayManagePhotoView: (id)sender
 {
     
-    //PROTODO : parameters stroyboard an dcontroller
-    //Getting the descriptor
-    //    MFFieldDescriptor *mfFieldDescriptor = (MFFieldDescriptor *)self.selfDescriptor;
-    
     NSString *storyboardName = nil;
     NSString *managePhotoControllerName = nil;
     
-    //If the descriptor exists
-    //    if (mfFieldDescriptor)
-    //    {
-    //        //Getting the story board to display
-    //        storyboardName = [mfFieldDescriptor.parameters objectForKey:@"storyboard"];
-    //        //Getting the view controller name
-    //        managePhotoControllerName = [mfFieldDescriptor.parameters objectForKey:@"controller"];
-    //    }
     
     //If the storyboard isn't specified
     if (storyboardName == nil || storyboardName.length == 0)
@@ -433,22 +421,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 
-//-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-//    NSInteger nbOfErrors = [super validateWithParameters:parameters];
-//    if([self.mandatory isEqualToNumber:@1] && !self.photoViewModel.uri) {
-//        
-//        NSError *error = [[MFMandatoryFieldUIValidationError alloc]
-//                          initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-//        
-//        [self addErrors:@[error]];
-//        nbOfErrors++;
-//    }
-//    return nbOfErrors;
-//}
 
 -(NSString *) defaultImage {
-    
-    //PROTODO : parameter defaultImage
     return nil;
 }
 
@@ -472,21 +446,5 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 
 
-//PROTODO : revoir selfdescriptor
-
-//-(void)setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor {
-//    [super setSelfDescriptor:selfDescriptor];
-//    if(!self.isInitialized) {
-//        BOOL showDetails = [[((MFFieldDescriptor *)self.selfDescriptor).parameters objectForKey:@"showDetails"] boolValue];
-//
-//        self.dateLabel.hidden = !showDetails;
-//        self.descriptionLabel.hidden = !showDetails;
-//        self.titreLabel.hidden = !showDetails;
-//
-
-//
-//        self.isInitialized = YES;
-//    }
-//}
 
 @end

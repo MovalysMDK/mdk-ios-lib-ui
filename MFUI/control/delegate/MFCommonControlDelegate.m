@@ -21,6 +21,8 @@
 #import "MFErrorViewProtocol.h"
 #import "UIView+Styleable.h"
 #import "MFUIFieldValidator.h"
+#import "MFUIOldBaseComponent.h"
+#import "UIView+Binding.h"
 
 @interface MFCommonControlDelegate ()
 
@@ -42,7 +44,7 @@
 
 
 -(void)clearErrors {
-    [self.component setIsValid:YES];
+        [self.component setIsValid:YES];
     self.component.errors = [@[] mutableCopy];
 }
 
@@ -51,27 +53,37 @@
 }
 
 
--(void)dealloc {
-    [self.component removeObserver:self forKeyPath:@"selfDescriptor"];
-}
-
 
 -(void)addErrors:(NSArray *)errors {
     if(errors) {
         [self.component.errors addObjectsFromArray:errors];
     }
-    [self.component showError:self.component.errors.count];
+    if([self.component isKindOfClass:[MFUIOldBaseComponent class]]) {
+        [self.component performSelector:@selector(showErrorButtons)];
+        
+    }else {
+        [self.component showError:self.component.errors.count];
+    }
+    [self setIsValid:(errors.count == 0)];
 }
 
 -(void)setIsValid:(BOOL)isValid {
+    dispatch_async(dispatch_get_main_queue(), ^{
+
     [self.component applyStandardStyle];
+    });
     if(isValid) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+
         [self.component applyValidStyle];
+        });
         [self.component.tooltipView hideAnimated:YES];
         
     }
     else{
-        [self.component applyErrorStyle];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.component applyErrorStyle];
+        });
     }
 }
 
@@ -152,10 +164,14 @@
     NSMutableDictionary *validationState = [NSMutableDictionary dictionary];
     
     //Mandatory validator
-    id<MFFieldValidatorProtocol> mandatoryValidator = [[MFFieldValidatorHandler fieldValidatorsForAttributes:@[FIELD_VALIDATOR_ATTRIBUTE_MANDATORY] forControl:[self component]] firstObject];
-    id mandatoryError = [mandatoryValidator validate:[self.component getData] withCurrentState:validationState withParameters:@{FIELD_VALIDATOR_ATTRIBUTE_MANDATORY : self.component.mandatory}];
-    
-    if(!mandatoryError) {
+    id mandatoryError = nil;
+    id<MFFieldValidatorProtocol> mandatoryValidator = nil;
+    if([self.component mandatory]) {
+        
+        mandatoryValidator = [[MFFieldValidatorHandler fieldValidatorsForAttributes:@[FIELD_VALIDATOR_ATTRIBUTE_MANDATORY] forControl:[self component]] firstObject];
+        mandatoryError = [mandatoryValidator validate:[self.component getData] withCurrentState:validationState withParameters:@{FIELD_VALIDATOR_ATTRIBUTE_MANDATORY : self.component.mandatory}];
+    }
+    if(!mandatoryError && self.component.controlAttributes) {
         
         //Component Validators
         [validators addObjectsFromArray:[self.component controlValidators]];
@@ -172,6 +188,9 @@
             for(NSString *recognizedAttribute in [fieldValidator recognizedAttributes]) {
                 validatorParameters[recognizedAttribute] = self.component.controlAttributes[recognizedAttribute];
             }
+            
+            //On ajoute le nom du composant
+            validatorParameters[@"componentName"] = [self.component bindedName];
             id errorResult = [fieldValidator validate:[self.component getData] withCurrentState:validationState withParameters:validatorParameters];
             if(errorResult) {
                 validationState[NSStringFromClass([fieldValidator class])] = errorResult;
@@ -183,7 +202,9 @@
         }
     }
     else {
-        validationState[NSStringFromClass([mandatoryValidator class])] = mandatoryError;
+        if(mandatoryError) {
+            validationState[NSStringFromClass([mandatoryValidator class])] = mandatoryError;
+        }
     }
     
     int numberOfErrors = 0;
@@ -195,6 +216,11 @@
     }
     NSLog(@"ERRORS : %@", validationState);
     return numberOfErrors;
-    
+}
+
+-(void)addControlAttribute:(id)controlAttribute forKey:(NSString *)key {
+    NSMutableDictionary *mutableControlAttributes = [self.component.controlAttributes mutableCopy];
+    mutableControlAttributes[key] = controlAttribute;
+    self.component.controlAttributes = mutableControlAttributes;
 }
 @end

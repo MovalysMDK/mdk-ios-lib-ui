@@ -36,6 +36,7 @@
 #import "MFUIBaseRenderableComponent.h"
 #import "MFComponentAssociatedLabelProtocol.h"
 
+
 /**
  * Constante indiquant la durée de l'animation du bouton d'erreur
  */
@@ -71,6 +72,8 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 @synthesize styleClassName = styleClassName;
 @synthesize controlAttributes = _controlAttributes;
 @synthesize associatedLabel = _associatedLabel;
+@synthesize controlDelegate = _controlDelegate;
+
 
 #pragma mark - Constructeurs et initialisation
 -(id)init {
@@ -119,6 +122,7 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 
 -(void)initialize {
     
+    self.controlDelegate = [[MFCommonControlDelegate alloc] initWithComponent:self];
     [self initializeInspectableAttributes];
     [self buildDesignableComponentView];
     if([self conformsToProtocol:@protocol(MFDefaultConstraintsProtocol)]) {
@@ -154,9 +158,7 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 
 
 -(NSInteger)validate {
-    // We remove all control's errors
-    [self.errors removeAllObjects];
-    return 0;
+    return [self.controlDelegate validate];
 }
 
 
@@ -374,4 +376,7 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
     return @[];
 }
 
+-(void)addControlAttribute:(id)controlAttribute forKey:(NSString *)key {
+    [self.controlDelegate addControlAttribute:controlAttribute forKey:key];
+}
 @end

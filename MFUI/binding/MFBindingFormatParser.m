@@ -26,6 +26,7 @@ NSString *BINDING_FORMAT_ATTRIBUTE_CAST_BOOL = @"@b_";
 NSString *BINDING_FORMAT_TYPE_BINDING = @"binding";
 NSString *BINDING_FORMAT_TYPE_ATTRIBUTES = @"attributes";
 NSString *BINDING_FORMAT_TYPE_ASSOCIATED_LABEL = @"associatedLabel";
+NSString *BINDING_FORMAT_TYPE_CONVERTER = @"converter";
 
 
 @implementation MFBindingFormatParser

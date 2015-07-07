@@ -72,7 +72,7 @@
     _form = form;
 }
 
--(void)setObjectWithBinding:(NSObject<MFObjectWithBindingProtocol> * __nullable)objectWithBinding {
+-(void)setObjectWithBinding:(NSObject<MFObjectWithBindingProtocol> *)objectWithBinding {
     if(self.viewModels && objectWithBinding) {
         for(id<MFUIBaseViewModelProtocol> viewModel in self.viewModels) {
             [viewModel setObjectWithBinding:objectWithBinding];

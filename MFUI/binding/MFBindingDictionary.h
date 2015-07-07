@@ -121,8 +121,17 @@ typedef NS_ENUM(NSInteger, MFBindingSource) {
 
 #pragma mark Methods
 
+/*!
+ * @brief Returns the binded property
+ * @discussion This could be a property from a ViewModel, a Strings file...
+ * @return The binded property
+ */
 -(NSString *)abstractBindedProperty;
 
+/*!
+ * @brief Returns the source of binding
+ * @return The source of binding
+ */
 -(MFBindingSource)bindingSource;
 
 @end

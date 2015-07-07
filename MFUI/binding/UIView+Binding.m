@@ -19,10 +19,10 @@
 
 #import "MFBindingDelegate.h"
 #import "MFObjectWithBindingProtocol.h"
-
 #import "MFComponentAttributesProtocol.h"
 #import "MFComponentAssociatedLabelProtocol.h"
 #import "MFBindingViewDescriptor.h"
+
 #import <objc/runtime.h>
 
 NSString const *bindedNameKey = @"bindedNameKey";

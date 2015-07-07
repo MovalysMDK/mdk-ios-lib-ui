@@ -90,6 +90,9 @@ NSString *FIELD_VALIDATOR_DECIMAL_PART_MAX_DIGITS = @"decimalPartMaxDigits";
         [parameters[FIELD_VALIDATOR_INTEGER_PART_MAX_DIGITS] intValue] >= [parameters[FIELD_VALIDATOR_INTEGER_PART_MIN_DIGITS] intValue]) {
         quantificateurPartieEntiere = [NSString stringWithFormat:@"%@%@", quantificateurPartieEntiere, parameters[FIELD_VALIDATOR_INTEGER_PART_MAX_DIGITS]];
     }
+    else {
+        quantificateurPartieEntiere = [NSString stringWithFormat:@"%@2", quantificateurPartieEntiere];
+    }
     
     //Si un nombre minimum de chiffres pour la partie décimale est spécifié
     if (parameters[FIELD_VALIDATOR_DECIMAL_PART_MIN_DIGITS] != nil) {
@@ -104,9 +107,12 @@ NSString *FIELD_VALIDATOR_DECIMAL_PART_MAX_DIGITS = @"decimalPartMaxDigits";
         && [parameters[FIELD_VALIDATOR_DECIMAL_PART_MAX_DIGITS] intValue] >= [parameters[FIELD_VALIDATOR_DECIMAL_PART_MIN_DIGITS] intValue]) {
         quantificateurPartieDecimale = [NSString stringWithFormat:@"%@%@", quantificateurPartieDecimale, parameters[FIELD_VALIDATOR_DECIMAL_PART_MAX_DIGITS]];
     }
+    else {
+        quantificateurPartieDecimale = [NSString stringWithFormat:@"%@2", quantificateurPartieDecimale];
+    }
     
     //Génération de la regex de vérification
-    return [NSString stringWithFormat:@"^-?[0-9]{%@}([,][0-9]{%@})?$", quantificateurPartieEntiere, quantificateurPartieDecimale];
+    return [NSString stringWithFormat:@"^-?[0-9]{%@}([,\.][0-9]{%@})?$", quantificateurPartieEntiere, quantificateurPartieDecimale];
 }
 
 @end

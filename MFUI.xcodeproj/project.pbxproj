@@ -520,8 +520,6 @@
 		B0D45E751A5ED2F400C6D376 /* UIViewController+MFMenuManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45D021A5ED2F400C6D376 /* UIViewController+MFMenuManager.m */; };
 		B0D45E761A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45D031A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E771A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45D041A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.m */; };
-		B0D45E781A5ED2F400C6D376 /* MFBaseViewModelWithSublistProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45D061A5ED2F400C6D376 /* MFBaseViewModelWithSublistProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45E791A5ED2F400C6D376 /* MFComponentChangedListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45D071A5ED2F400C6D376 /* MFComponentChangedListenerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E7A1A5ED2F400C6D376 /* MFDefaultViewModelCreator.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45D081A5ED2F400C6D376 /* MFDefaultViewModelCreator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E7B1A5ED2F400C6D376 /* MFDefaultViewModelCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45D091A5ED2F400C6D376 /* MFDefaultViewModelCreator.m */; };
 		B0D45E7C1A5ED2F400C6D376 /* MFPhotoViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45D0A1A5ED2F400C6D376 /* MFPhotoViewModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -536,7 +534,6 @@
 		B0D45E851A5ED2F400C6D376 /* MFUIViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45D131A5ED2F400C6D376 /* MFUIViewModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E861A5ED2F400C6D376 /* MFUpdateVMInParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45D141A5ED2F400C6D376 /* MFUpdateVMInParameter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E871A5ED2F400C6D376 /* MFUpdateVMInParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45D151A5ED2F400C6D376 /* MFUpdateVMInParameter.m */; };
-		B0D45E881A5ED2F400C6D376 /* MFViewModelChangedListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45D161A5ED2F400C6D376 /* MFViewModelChangedListenerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E8A1A5ED33900C6D376 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D45E891A5ED33900C6D376 /* UIKit.framework */; };
 		B0D45E8C1A5ED33F00C6D376 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D45E8B1A5ED33F00C6D376 /* Foundation.framework */; };
 		B0D4C4BE1B3816F60020ACF2 /* MFCommonFormDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D4C4BA1B3816F60020ACF2 /* MFCommonFormDelegate.h */; };
@@ -1102,8 +1099,6 @@
 		B0D45D021A5ED2F400C6D376 /* UIViewController+MFMenuManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFMenuManager.m"; sourceTree = "<group>"; };
 		B0D45D031A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFViewControllerUtils.h"; sourceTree = "<group>"; };
 		B0D45D041A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFViewControllerUtils.m"; sourceTree = "<group>"; };
-		B0D45D061A5ED2F400C6D376 /* MFBaseViewModelWithSublistProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBaseViewModelWithSublistProtocol.h; sourceTree = "<group>"; };
-		B0D45D071A5ED2F400C6D376 /* MFComponentChangedListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentChangedListenerProtocol.h; sourceTree = "<group>"; };
 		B0D45D081A5ED2F400C6D376 /* MFDefaultViewModelCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDefaultViewModelCreator.h; sourceTree = "<group>"; };
 		B0D45D091A5ED2F400C6D376 /* MFDefaultViewModelCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDefaultViewModelCreator.m; sourceTree = "<group>"; };
 		B0D45D0A1A5ED2F400C6D376 /* MFPhotoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPhotoViewModel.h; sourceTree = "<group>"; };
@@ -1118,7 +1113,6 @@
 		B0D45D131A5ED2F400C6D376 /* MFUIViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIViewModel.h; sourceTree = "<group>"; };
 		B0D45D141A5ED2F400C6D376 /* MFUpdateVMInParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUpdateVMInParameter.h; sourceTree = "<group>"; };
 		B0D45D151A5ED2F400C6D376 /* MFUpdateVMInParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUpdateVMInParameter.m; sourceTree = "<group>"; };
-		B0D45D161A5ED2F400C6D376 /* MFViewModelChangedListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFViewModelChangedListenerProtocol.h; sourceTree = "<group>"; };
 		B0D45E891A5ED33900C6D376 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B0D45E8B1A5ED33F00C6D376 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B0D4C4BA1B3816F60020ACF2 /* MFCommonFormDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCommonFormDelegate.h; sourceTree = "<group>"; };
@@ -2356,8 +2350,6 @@
 		B0D45D051A5ED2F400C6D376 /* viewmodel */ = {
 			isa = PBXGroup;
 			children = (
-				B0D45D061A5ED2F400C6D376 /* MFBaseViewModelWithSublistProtocol.h */,
-				B0D45D071A5ED2F400C6D376 /* MFComponentChangedListenerProtocol.h */,
 				B0D45D081A5ED2F400C6D376 /* MFDefaultViewModelCreator.h */,
 				B0D45D091A5ED2F400C6D376 /* MFDefaultViewModelCreator.m */,
 				B0D45D0A1A5ED2F400C6D376 /* MFPhotoViewModel.h */,
@@ -2372,7 +2364,6 @@
 				B0D45D131A5ED2F400C6D376 /* MFUIViewModel.h */,
 				B0D45D141A5ED2F400C6D376 /* MFUpdateVMInParameter.h */,
 				B0D45D151A5ED2F400C6D376 /* MFUpdateVMInParameter.m */,
-				B0D45D161A5ED2F400C6D376 /* MFViewModelChangedListenerProtocol.h */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
@@ -2504,7 +2495,6 @@
 				B0D45DBF1A5ED2F400C6D376 /* TooltipViewPrivate.h in Headers */,
 				B0C9B2D31AFA21E700FC9665 /* MFEmailTextFieldStyle.h in Headers */,
 				B08AAC5E1AE91C5D0029EC88 /* MFWebViewController.h in Headers */,
-				B0D45E791A5ED2F400C6D376 /* MFComponentChangedListenerProtocol.h in Headers */,
 				B0D45E1E1A5ED2F400C6D376 /* MFAlignmentValueProcessing.h in Headers */,
 				B08EF7051AE53F9E00F3754E /* MFBackgroundViewProtocol.h in Headers */,
 				B0D45E281A5ED2F400C6D376 /* MFTypeValueProcessingProtocol.h in Headers */,
@@ -2540,7 +2530,6 @@
 				B0D45E701A5ED2F400C6D376 /* MFTransitionController.h in Headers */,
 				B09CAC451B3D55F50067A8DE /* MFIntegerTextFieldWrapper.h in Headers */,
 				B0D45D811A5ED2F400C6D376 /* MFPositionDelegate.h in Headers */,
-				B0D45E781A5ED2F400C6D376 /* MFBaseViewModelWithSublistProtocol.h in Headers */,
 				B0D45D991A5ED2F400C6D376 /* MFSwitch+UISwitchForwarding.h in Headers */,
 				B0D45E0F1A5ED2F400C6D376 /* MFTestHelper.h in Headers */,
 				B0C9B2CF1AFA21E700FC9665 /* MFBarCodeScanTextFieldStyle.h in Headers */,
@@ -2718,7 +2707,6 @@
 				B0D45D5E1A5ED2F400C6D376 /* MFFixedList.h in Headers */,
 				B0D45E351A5ED2F400C6D376 /* MFUIViewControllerContainer.h in Headers */,
 				B0A0ED621AE8D578004F0FF7 /* MFUIOldBaseComponent.h in Headers */,
-				B0D45E881A5ED2F400C6D376 /* MFViewModelChangedListenerProtocol.h in Headers */,
 				B0D45D5C1A5ED2F400C6D376 /* MFFixedList+UITableViewForwarding.h in Headers */,
 				B08AAC591AE91C500029EC88 /* MFTextView.h in Headers */,
 				B0D45D771A5ED2F400C6D376 /* MFPhotoState.h in Headers */,

@@ -122,6 +122,7 @@
             [self dispatchValue:newValue fromPropertyName:keyPath];
         }
     }
+    NSLog(@"VALUE CHANGED : %@", newValue);
 }
 
 -(void)dispatchValue:(id)newValue fromPropertyName:(NSString *)keyPath {

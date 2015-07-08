@@ -31,7 +31,7 @@
  * This component can indeed be declared in any kinf of cells that inherits from MFCellAbstract.
  * Its more convenient to manages data of the picker here.
  */
-@interface MFPickerControllerDelegate : NSObject <UIPickerViewDataSource, UIPickerViewDelegate, MFCommonFormProtocol, MFSearchDelegate, MFViewModelChangedListenerProtocol>
+@interface MFPickerControllerDelegate : NSObject <UIPickerViewDataSource, UIPickerViewDelegate, MFCommonFormProtocol, MFSearchDelegate>
 
 
 #pragma mark - Properties

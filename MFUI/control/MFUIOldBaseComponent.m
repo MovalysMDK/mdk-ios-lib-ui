@@ -46,7 +46,6 @@
 @synthesize transitionDelegate = _transitionDelegate;
 @synthesize selfDescriptor = _selfDescriptor;
 @synthesize isValid = _isValid;
-@synthesize form = _form;
 @synthesize mandatory = _mandatory;
 @synthesize visible = _visible;
 @synthesize componentInCellAtIndexPath = _componentInCellAtIndexPath;
@@ -524,11 +523,6 @@
     self.userInteractionEnabled = [editable boolValue];
 }
 
-
-
--(void)setForm:(id<MFComponentChangedListenerProtocol>)form {
-    _form = form;
-}
 
 
 -(void) setTransitionDelegate:(id<MFUITransitionDelegate>)transitionDelegate {

@@ -29,6 +29,6 @@
 /*
  * 
  */
-- (MFMultiPanelViewController*) parentViewController;
+- (MFMultiPanelViewController*) multiPanelParentViewController;
 
 @end

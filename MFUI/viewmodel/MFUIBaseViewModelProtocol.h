@@ -20,8 +20,6 @@
 //
 
 
-#import "MFViewModelChangedListenerProtocol.h"
-
 @protocol MFFormViewControllerProtocol;
 @protocol MFObjectWithBindingProtocol;
 @protocol MFCommonFormProtocol;
@@ -33,7 +31,7 @@
 /*!
  * @brief This property is the ViewController that manages the binding between the ViewModel and the components owned by this form.
  */
-@property (nonatomic, strong) id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol> form;
+@property (nonatomic, strong) id<MFCommonFormProtocol> form;
 
 /*!
  * @brief Indicates this ViewModel has changed. It's necessary to know if it should be saved.

@@ -23,7 +23,6 @@
 #define MFUI_MFUIViewModel_h
 
 #import "MFBaseViewModelWithSublistProtocol.h"
-#import "MFComponentChangedListenerProtocol.h"
 #import "MFDefaultViewModelCreator.h"
 #import "MFPhotoViewModel.h"
 #import "MFPositionViewModel.h"
@@ -31,6 +30,5 @@
 #import "MFUIBaseViewModel.h"
 #import "MFUIBaseViewModelProtocol.h"
 #import "MFUpdateVMInParameter.h"
-#import "MFViewModelChangedListenerProtocol.h"
 
 #endif

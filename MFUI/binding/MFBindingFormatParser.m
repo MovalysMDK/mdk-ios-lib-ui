@@ -47,6 +47,10 @@ NSString *BINDING_FORMAT_TYPE_CONVERTER = @"converter";
     return [MFBindingFormatParser fillObject:mutableDictionary fromVaList:args withFirstArg:firstArg forType:BINDING_FORMAT_TYPE_ASSOCIATED_LABEL];
 }
 
++(NSDictionary *)buildConvertersDictionary:(NSDictionary *)convertersDictionary fromVaList:(va_list)args withFirstArg:(NSString *)firstArg{
+    NSMutableDictionary *mutableDictionary = [convertersDictionary mutableCopy];
+    return [MFBindingFormatParser fillObject:mutableDictionary fromVaList:args withFirstArg:firstArg forType:BINDING_FORMAT_TYPE_CONVERTER];
+}
 
 +(id) fillObject:(id)objectToFill fromVaList:(va_list)args withFirstArg:(NSString *)firstArg forType:(NSString *)type{
     for (NSString *arg = firstArg; arg != nil; arg = va_arg(args, NSString*))
@@ -67,6 +71,9 @@ NSString *BINDING_FORMAT_TYPE_CONVERTER = @"converter";
         }
         else if([type isEqualToString:BINDING_FORMAT_TYPE_ASSOCIATED_LABEL] && [[outletParts lastObject] isEqualToString:BINDING_FORMAT_TYPE_ASSOCIATED_LABEL]) {
             objectToFill = [MFBindingFormatParser fillAssociatedLabel:objectToFill forOutletName:outletName fromContent:bindingByOutlets[1]];
+        }
+        else if([type isEqualToString:BINDING_FORMAT_TYPE_CONVERTER] && [[outletParts lastObject] isEqualToString:BINDING_FORMAT_TYPE_CONVERTER]) {
+            objectToFill = [MFBindingFormatParser fillConverter:objectToFill forOutletName:outletName fromContent:bindingByOutlets[1]];
         }
         else {
             if(![[MFBindingFormatParser recognizedFormatTypes] containsObject:[outletParts lastObject]]) {
@@ -119,6 +126,14 @@ NSString *BINDING_FORMAT_TYPE_CONVERTER = @"converter";
     return associatedLabels;
 }
 
+
++(NSDictionary *) fillConverter:(NSMutableDictionary *)converters forOutletName:(NSString *)outletName fromContent:(NSString *)content {
+    outletName = [[outletName stringByReplacingOccurrencesOfString:@"outlet." withString:@""] stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@".%@", BINDING_FORMAT_TYPE_CONVERTER] withString:@""];
+    NSString *converterBeanName = [content trim];
+    converters[outletName] = converterBeanName;
+    return converters;
+}
+
 +(MFBindingDictionary *)fillBindingDictionary:(MFBindingDictionary *)bindingDictionary forOutletName:(NSString *)outletName fromContent:(NSString *)content {
     NSArray *bindingsPairs = [content componentsSeparatedByString:@","];
     for(NSString *bindingPair in bindingsPairs) {
@@ -128,7 +143,7 @@ NSString *BINDING_FORMAT_TYPE_CONVERTER = @"converter";
 }
 
 +(NSArray *) recognizedFormatTypes {
-    return @[BINDING_FORMAT_TYPE_BINDING, BINDING_FORMAT_TYPE_ATTRIBUTES, BINDING_FORMAT_TYPE_ASSOCIATED_LABEL];
+    return @[BINDING_FORMAT_TYPE_BINDING, BINDING_FORMAT_TYPE_ATTRIBUTES, BINDING_FORMAT_TYPE_ASSOCIATED_LABEL, BINDING_FORMAT_TYPE_CONVERTER];
 }
 
 +(id) parseAttributeValueFormat:(NSString *)attributeValue {

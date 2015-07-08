@@ -84,10 +84,10 @@
  * @param bindingMode The binding mode of the new binding value to create
  * @param bindingKey The cell string-format binding key of the component to bind
  * @param indexPath The fictive indexPath to the component to bind
+ * @param converterName The optional converter name
  * @return The new created binding value filled with the given parameters
  */
--(MFBindingValue *) registerComponentBindingProperty:(NSString *)componentBindingProperty withViewModelProperty:(NSString *) viewModelProperty forComponent:(UIView *)component withOutletName:(NSString *)outletName withMode:(MFBindingValueMode)bindingMode withBindingKey:(NSString *)bindingKey withIndexPath:(NSIndexPath *)indexPath fromBindingSource:(MFBindingSource)bindingSource;
-
+-(MFBindingValue *) registerComponentBindingProperty:(NSString *)componentBindingProperty withViewModelProperty:(NSString *) viewModelProperty forComponent:(UIView *)component withOutletName:(NSString *)outletName withMode:(MFBindingValueMode)bindingMode withBindingKey:(NSString *)bindingKey withIndexPath:(NSIndexPath *)indexPath fromBindingSource:(MFBindingSource)bindingSource withConverterName:(NSString *)converterName;
 
 #pragma mark - Binding accessors
 

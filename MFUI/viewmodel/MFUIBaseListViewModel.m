@@ -158,46 +158,4 @@
 {
     return [self viewModels];
 }
-/*
-# pragma mark Observe the change of data
-- (void) addListenerForSyncProperties
-{
-    //NSArray * allProperties = [[self getBindedProperties] arrayByAddingObjectsFromArray:[self getCustomBindedProperties]];
-    //for (NSString *key in allProperties) {
-        [self addObserver:self forKeyPath:@"viewModels" options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew) context:nil];
-    //}
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    //Vérification de la nouvelle valeur par rapport à l'ancienne avant de propager l'évènement
-    id oldValue = [change objectForKey:@"old"];
-    id newValue = [change objectForKey:@"new"];
-
-    if (oldValue != nil || newValue != nil) {
-        if (oldValue != nil && newValue != nil) {
-            if ([oldValue respondsToSelector:@selector(isEqualToString:)]) {
-                if (![oldValue isEqualToString:newValue]) {
-                    self.hasChanged = YES;
-                    //                   dispatch_async([MFUIApplication getInstance].updateVMtoControllerQueue, ^{
-                    [[self getForm] dispatchEventOnViewModelPropertyValueChangedWithKey:keyPath sender:self];
-                    //                   });
-                }
-            }else {
-                if (![oldValue isEqual:newValue]) {
-                    self.hasChanged = YES;
-                    //                    dispatch_async([MFUIApplication getInstance].updateVMtoControllerQueue, ^{
-                    [[self getForm] dispatchEventOnViewModelPropertyValueChangedWithKey:keyPath sender:self];
-                    //                    });
-                }
-            }
-        }else {
-            self.hasChanged = YES;
-            //            dispatch_async([MFUIApplication getInstance].updateVMtoControllerQueue, ^{
-            [self.form dispatchEventOnViewModelPropertyValueChangedWithKey:keyPath sender:self];
-            //            });
-        }
-    }
-}
-*/
 @end

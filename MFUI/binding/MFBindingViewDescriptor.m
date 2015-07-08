@@ -27,6 +27,7 @@
         self.viewBinding = [MFBindingDictionary new];
         self.controlsAttributes = [NSDictionary new];
         self.associatedLabels = [NSDictionary new];
+        self.converters = [NSDictionary new];
     }
     return self;
 }
@@ -38,6 +39,10 @@
     va_list args;
     va_start(args, format);
     viewDescriptor.controlsAttributes = [MFBindingFormatParser buildControlsAttributesDictionary:viewDescriptor.controlsAttributes fromVaList:args withFirstArg:format];
+    va_end(args);
+    
+    va_start(args, format);
+    viewDescriptor.converters = [MFBindingFormatParser buildConvertersDictionary:viewDescriptor.converters fromVaList:args withFirstArg:format];
     va_end(args);
     
     va_start(args, format);
@@ -55,6 +60,10 @@
     va_list args;
     va_start(args, format);
     viewDescriptor.controlsAttributes = [MFBindingFormatParser buildControlsAttributesDictionary:viewDescriptor.controlsAttributes fromVaList:args withFirstArg:format];
+    va_end(args);
+    
+    va_start(args, format);
+    viewDescriptor.converters = [MFBindingFormatParser buildConvertersDictionary:viewDescriptor.converters fromVaList:args withFirstArg:format];
     va_end(args);
     
     va_start(args, format);

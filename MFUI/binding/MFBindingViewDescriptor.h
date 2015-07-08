@@ -31,6 +31,11 @@
 @property (nonatomic, strong) NSDictionary *controlsAttributes;
 
 /*!
+ * @brief The converters to apply during binding events
+ */
+@property (nonatomic, strong) NSDictionary *converters;
+
+/*!
  * @brief The labels/controls associations
  */
 @property (nonatomic, strong) NSDictionary *associatedLabels;

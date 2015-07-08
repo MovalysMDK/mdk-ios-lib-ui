@@ -40,6 +40,7 @@
         self.cellBinding = [MFBindingDictionary new];
         self.controlsAttributes = [NSDictionary new];
         self.associatedLabels = [NSDictionary new];
+        self.converters = [NSDictionary new];
     }
     return self;
 }
@@ -88,13 +89,17 @@
     va_end(args);
     
     va_start(args, format);
+    cellDescriptor.converters = [MFBindingFormatParser buildConvertersDictionary:cellDescriptor.converters fromVaList:args withFirstArg:format];
+    va_end(args);
+    
+    va_start(args, format);
     cellDescriptor.associatedLabels = [MFBindingFormatParser buildAssociatedLabelsDictionary:cellDescriptor.associatedLabels fromVaList:args withFirstArg:format];
     va_end(args);
     
     va_start(args, format);
     cellDescriptor.cellBinding = [MFBindingFormatParser bindingDictionaryFromVaList:args withFirstArg:format];
     va_end(args);
-
+    
     return cellDescriptor;
 }
 

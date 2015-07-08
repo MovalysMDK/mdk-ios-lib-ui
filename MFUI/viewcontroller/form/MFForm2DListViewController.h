@@ -86,20 +86,6 @@
 -(id<MFUIBaseViewModelProtocol>) viewModelAtIndexPath:(NSIndexPath *)indexPath;
 
 /*!
- * @brief Cette méthode applique un traitement particulier lorsque la valeur du champ correspondant dans le ViewModel
- * à la liste des composants passée en paramètres est modifiée.
- * @param componentList Une liste de composants (définis dans les formulaires PLIST) dont on souhaite écouter les modifications
- * de valeur dans le ViewModel
- */
--(void) applyCustomValueChangedMethodForComponents:(NSArray *)componentList atIndexPath:(NSIndexPath *)indexPath;
-
-/*!
- * @brief Cette méthode met à jour un composant graphique depuis les données du ViewModel associé au formulaire.
- * @param bindingKey La clé associée à un ou plusieurs composants dont on souhaite affecter une valeur depuis le ViewModel
- */
--(void) dispatchEventOnViewModelPropertyValueChangedWithKey:(NSString *)bindingKey sender:(MFUIBaseViewModel *)viewModelSender;
-
-/*!
  * @brief Cette méthode met à jour les données de la cellule selon son indexPath
  * @param cell La cellule
  */

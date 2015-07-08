@@ -50,7 +50,7 @@ NSString const *bindedNameKey = @"bindedNameKey";
         
         for(MFBindingDescriptor *itemDescriptor in bindingDictionary[outletBindingKey]) {
             [self setBindedName:itemDescriptor.abstractBindedProperty];
-            [objectWithBinding.bindingDelegate registerComponentBindingProperty:itemDescriptor.componentProperty withViewModelProperty:[itemDescriptor abstractBindedProperty] forComponent:valueAsView withOutletName:outletBindingKey.outletName withMode:itemDescriptor.bindingMode withBindingKey:[bindingViewDescriptor generatedBindingKey] withIndexPath:[bindingViewDescriptor viewIndexPath] fromBindingSource:itemDescriptor.bindingSource];
+            [objectWithBinding.bindingDelegate registerComponentBindingProperty:itemDescriptor.componentProperty withViewModelProperty:[itemDescriptor abstractBindedProperty] forComponent:valueAsView withOutletName:outletBindingKey.outletName withMode:itemDescriptor.bindingMode withBindingKey:[bindingViewDescriptor generatedBindingKey] withIndexPath:[bindingViewDescriptor viewIndexPath] fromBindingSource:itemDescriptor.bindingSource withConverterName:bindingViewDescriptor.converters[outletBindingKey.outletName]];
         }
         [valueAsView didBinded];
     }

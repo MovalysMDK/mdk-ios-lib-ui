@@ -21,7 +21,6 @@
 #import "MFUIErrorView.h"
 #import "MFUIProtocol.h"
 
-#import "MFComponentChangedListenerProtocol.h"
 #import "MFUITransitionDelegate.h"
 #import "MFFormCellProtocol.h"
 #import "MFComponentBindingProtocol.h"
@@ -65,11 +64,6 @@
  * @brief Current component's descriptor.
  */
 @property(nonatomic, weak) NSObject<MFDescriptorCommonProtocol> *selfDescriptor;
-
-/*!
- * @brief Le formulaire qui contient ce composant
- */
-@property (nonatomic, weak) id<MFComponentChangedListenerProtocol> form;
 
 /*!
  * @brief The name of the custom class to use to render component style

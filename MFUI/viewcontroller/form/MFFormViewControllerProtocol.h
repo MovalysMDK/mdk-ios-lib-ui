@@ -21,9 +21,6 @@
 //Protocol
 #import "MFViewControllerProtocol.h"
 
-//Events Listener protocols
-#import "MFViewModelChangedListenerProtocol.h"
-#import "MFComponentChangedListenerProtocol.h"
 
 //Validation
 #import "MFFormViewControllerValidationDelegate.h"
@@ -32,7 +29,7 @@
 /*!
  * MFFormViewControllerProtocol
  */
-@protocol MFFormViewControllerProtocol <MFViewControllerProtocol, MFViewModelChangedListenerProtocol, MFComponentChangedListenerProtocol>
+@protocol MFFormViewControllerProtocol <MFViewControllerProtocol>
 
 typedef enum {
     MFFormTypeSimple = 0,

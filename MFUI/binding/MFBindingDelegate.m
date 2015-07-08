@@ -44,9 +44,10 @@
 
 #pragma mark - Components registering
 
--(MFBindingValue *) registerComponentBindingProperty:(NSString *)componentBindingProperty withViewModelProperty:(NSString *) viewModelProperty forComponent:(UIView *)component withOutletName:(NSString *)outletName withMode:(MFBindingValueMode)bindingMode withBindingKey:(NSString *)bindingKey withIndexPath:(NSIndexPath *)indexPath fromBindingSource:(MFBindingSource)bindingSource{
+-(MFBindingValue *) registerComponentBindingProperty:(NSString *)componentBindingProperty withViewModelProperty:(NSString *) viewModelProperty forComponent:(UIView *)component withOutletName:(NSString *)outletName withMode:(MFBindingValueMode)bindingMode withBindingKey:(NSString *)bindingKey withIndexPath:(NSIndexPath *)indexPath fromBindingSource:(MFBindingSource)bindingSource withConverterName:(NSString *)converterName{
     MFBindingValue *bindingValue =[self registerComponentBindingProperty:componentBindingProperty withViewModelProperty:viewModelProperty forComponent:component withOutletName:outletName withMode:bindingMode withBindingKey:bindingKey fromBindingSource:bindingSource];
     bindingValue.bindingIndexPath = indexPath;
+    bindingValue.converterName = converterName;
     [self.binding registerBindingValue:bindingValue forBindingKey:bindingKey];
     return bindingValue;
 }

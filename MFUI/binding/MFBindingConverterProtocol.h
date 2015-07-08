@@ -35,4 +35,5 @@
  * @return The converted value for ViewModel
  */
 -(id)convertValueFromControlToViewModel:(id)valueFromControl;
+
 @end

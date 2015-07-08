@@ -58,7 +58,6 @@
 @implementation MFDatePicker
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
 @synthesize transitionDelegate = _transitionDelegate;
-@synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize data =_data;
 @synthesize currentOrientation = _currentOrientation;
@@ -183,8 +182,8 @@
     
     //Get FormViewController parent
     self.mainFormControllerView = self;
-    if([self.form isKindOfClass:[MFFormSearchViewController class]]) {
-        self.mainFormControllerView = ((UIViewController *)self.form).view;
+    if([self.parentViewController isKindOfClass:[MFFormSearchViewController class]]) {
+        self.mainFormControllerView = ((UIViewController *)self.parentViewController).view;
     }
     else {
         while(self.mainFormControllerView.tag != NSIntegerMax) {

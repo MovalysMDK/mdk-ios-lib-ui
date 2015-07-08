@@ -14,11 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+#import <MFCore/MFCoreBean.h>
 #import "MFBinding+Dispatcher.h"
 #import "MFUIBaseListViewModel.h"
 #import "MFAbstractComponentWrapper.h"
 #import "MFLocalizedString.h"
+#import "MFBindingConverterProtocol.h"
 
 @implementation MFBinding (Dispatcher)
 
@@ -30,6 +31,7 @@
             object = ((MFUIBaseListViewModel *)object).viewModels[indexPath.row];
         }
         value = [self convertValue:value isFromViewModelToControl:NO withWrapper:bindingValue.wrapper];
+        value = [self applyCustomConverter:bindingValue.converterName onValue:value isFromViewModelToControl:NO];
         [object setValue:value forKeyPath:bindingValue.abstractBindedPropertyName];
         
     }
@@ -53,6 +55,7 @@
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 id convertedValue = [self convertValue:value isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
+                convertedValue = [self applyCustomConverter:bindingValue.converterName onValue:value isFromViewModelToControl:YES];
                 [bindingValue.wrapper.component setValue:convertedValue forKeyPath:bindingValue.componentBindedPropertyName];
             });
         }
@@ -74,6 +77,7 @@
                     value = [bindingValue.wrapper nilValueBySelector][stringSelector];
                 }
                 value = [self convertValue:value isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
+                value = [self applyCustomConverter:bindingValue.converterName onValue:value isFromViewModelToControl:YES];
                 [bindingValue.wrapper.component setValue:value forKeyPath:bindingValue.componentBindedPropertyName];
             }
         }
@@ -83,6 +87,20 @@
 -(id)convertValue:(id)value isFromViewModelToControl:(BOOL)isVmToControl withWrapper:(MFAbstractComponentWrapper *) wrapper{
     if([wrapper respondsToSelector:@selector(convertValue:isFromViewModelToControl:)]) {
         value = [wrapper performSelector:@selector(convertValue:isFromViewModelToControl:) withObject:value withObject:@(isVmToControl)];
+    }
+    return value;
+}
+
+-(id)applyCustomConverter:(NSString *)converterName onValue:(id)value isFromViewModelToControl:(BOOL)formViewModelToControl {
+    id result = value;
+    if(converterName) {
+        id<MFBindingConverterProtocol> converter = [[MFBeanLoader getInstance] getBeanWithKey:converterName];
+        if(formViewModelToControl) {
+            value = [converter convertValueFromViewModelToControl:value];
+        }
+        else {
+            value = [converter convertValueFromControlToViewModel:value];
+        }
     }
     return value;
 }

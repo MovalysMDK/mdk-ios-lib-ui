@@ -134,6 +134,11 @@
  */
 @property (nonatomic) MFBindingSource bindingSource;
 
+/*!
+ * @brief The name of a converter to use
+ */
+@property (nonatomic) NSString *converterName;
+
 #pragma mark - Methods
 
 /*!

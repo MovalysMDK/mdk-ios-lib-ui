@@ -72,7 +72,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 #pragma mark - Synthesizing
 
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize mandatory = _mandatory;
 

@@ -36,7 +36,6 @@
 
 @implementation MFTextField
 @synthesize styleClass = _styleClass;
-@synthesize form = _form;
 @synthesize componentInCellAtIndexPath = _componentInCellAtIndexPath;
 @synthesize transitionDelegate = _transitionDelegate;
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;

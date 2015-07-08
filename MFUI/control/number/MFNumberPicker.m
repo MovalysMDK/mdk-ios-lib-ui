@@ -59,7 +59,6 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 @implementation MFNumberPicker
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
 @synthesize transitionDelegate = _transitionDelegate;
-@synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize defaultConstraints = _defaultConstraints;
 @synthesize savedConstraints= _savedConstraints;

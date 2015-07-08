@@ -59,4 +59,14 @@ FOUNDATION_EXPORT NSString *BINDING_FORMAT_TYPE_CONVERTER;
  * @return A dictionary that contains associations labels/controls
  */
 +(NSDictionary *)buildAssociatedLabelsDictionary:(NSDictionary *)associatedLabels fromVaList:(va_list)args withFirstArg:(NSString *)firstArg;
+
+/*!
+ * @brief Builds and returns a converters dictionary from a variadic list of binding formats
+ * @param convertersDictionary The dictionary to fill
+ * @param valist The list of binding format to parse
+ * @param firstArg The first binding format to parse
+ * @return A dictionary that contains converters to apply during binding events
+ */
++(NSDictionary *)buildConvertersDictionary:(NSDictionary *)convertersDictionary fromVaList:(va_list)args withFirstArg:(NSString *)firstArg;
+
 @end

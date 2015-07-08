@@ -68,7 +68,6 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 @synthesize transitionDelegate = _transitionDelegate;
 @synthesize selfDescriptor = _selfDescriptor;
 @synthesize isValid = _isValid;
-@synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize data =_data;
 @synthesize currentOrientation = _currentOrientation;
@@ -170,8 +169,8 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     
     //Get FormViewController parent
     self.mainFormControllerView = self;
-    if([self.form isKindOfClass:[MFFormSearchViewController class]]) {
-        self.mainFormControllerView = ((UIViewController *)self.form).view;
+    if([self.parentViewController isKindOfClass:[MFFormSearchViewController class]]) {
+        self.mainFormControllerView = ((UIViewController *)self.parentViewController).view;
     }
     else {
         while(self.mainFormControllerView.tag != NSIntegerMax) {

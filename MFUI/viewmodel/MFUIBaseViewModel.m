@@ -222,7 +222,7 @@
 }
 
 
-- (void) setForm:(id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol>)form
+- (void) setForm:(id<MFCommonFormProtocol>)form
 {
     _form = form;
     if(![self conformsToProtocol:@protocol(MFUIWorkspaceViewModelProtocol)]) {
@@ -233,7 +233,7 @@
 }
 
 
-- (id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol>) getForm
+- (id<MFCommonFormProtocol>) getForm
 {
     if (self.form) {
         return self.form;
@@ -256,8 +256,7 @@
 - (BOOL) validate
 {
     BOOL isValid = YES;
-    id<MFViewModelChangedListenerProtocol,
-    MFCommonFormProtocol> formController = (id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol>) [self objectWithBinding];
+    id<MFCommonFormProtocol> formController = (id<MFCommonFormProtocol>) [self objectWithBinding];
     if (formController) {
         isValid = [formController.formValidation validateViewModel:self];
     }

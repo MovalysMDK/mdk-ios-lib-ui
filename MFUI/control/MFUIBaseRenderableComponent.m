@@ -493,12 +493,6 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
     return [UIColor colorWithRed:0.8 green:0.1 blue:0.1 alpha:1];
 }
 
--(void)setForm:(id<MFComponentChangedListenerProtocol>)form {
-    [super setForm:form];
-    if([self conformsToProtocol:@protocol(MFExternalComponent)]) {
-        [self.internalView setForm:form];
-    }
-}
 
 -(void)setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor {
     [super setSelfDescriptor:selfDescriptor];

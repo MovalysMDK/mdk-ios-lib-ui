@@ -66,17 +66,6 @@
 }
 
 /**
- * give the form controller to the component too
- */
--(void)setFormController:(id<MFFormViewControllerProtocol>)formController {
-    [super setFormController:formController];
-    if(self.componentView && [self.componentView conformsToProtocol:@protocol(MFUIComponentProtocol)])
-    {
-        id<MFUIComponentProtocol> component = (id<MFUIComponentProtocol>) self.componentView;
-        [component setForm:formController];
-    }
-}
-/**
  * give the index path to the component too
  */
 -(void)setCellIndexPath:(NSIndexPath *)cellIndexPath {

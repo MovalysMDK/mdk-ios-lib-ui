@@ -63,7 +63,7 @@
     return self.viewModels.count;
 }
 
--(void)setForm:(id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol>)form {
+-(void)setForm:(id<MFCommonFormProtocol>)form {
     if(self.viewModels && form) {
         for(id<MFUIBaseViewModelProtocol> viewModel in self.viewModels) {
             [viewModel setForm:form];
@@ -145,7 +145,7 @@
 
 -(BOOL) validate {
     BOOL validate = YES;
-    id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol> formController = (id<MFViewModelChangedListenerProtocol, MFCommonFormProtocol>) [self getForm];
+    id<MFCommonFormProtocol> formController = (id<MFCommonFormProtocol>) [self getForm];
     for(MFUIBaseViewModel *model in self.viewModels) {
         if(formController && [formController respondsToSelector:@selector(formValidation)]) {
             validate = validate && [formController.formValidation validateViewModel:model];

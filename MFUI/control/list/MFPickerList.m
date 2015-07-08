@@ -271,8 +271,8 @@ const int NO_LAST_INDEX = -1;
     
     
     self.mainFormControllerView = self;
-    if([self.form isKindOfClass:[MFFormSearchViewController class]]) {
-        self.mainFormControllerView = ((UIViewController *)self.form).view;
+    if([self.parentViewController isKindOfClass:[MFFormSearchViewController class]]) {
+        self.mainFormControllerView = ((UIViewController *)self.parentViewController).view;
     }
     else {
         while(self.mainFormControllerView.tag != NSIntegerMax) {

@@ -55,7 +55,6 @@ NSString *MF_ENUM_CLASS_NAME_PARAMETER_KEY = @"enumClassName";
 @synthesize transitionDelegate = _transitionDelegate;
 @synthesize selfDescriptor = _selfDescriptor;
 @synthesize isValid = _isValid;
-@synthesize form = _form;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize data =_data;
 @synthesize currentOrientation = _currentOrientation;

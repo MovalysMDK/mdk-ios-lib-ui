@@ -388,7 +388,6 @@
     self.keyboardHeight = MIN([[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height,
                               [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.width);
 
-    [self scrollIfNeeded];
 }
 
 
@@ -413,52 +412,6 @@
 
 #pragma mark - Scrolling
 
-/**
- * @brief Scroll if needed, the form controller of this component to show the component above the keyboard
- */
--(void) scrollIfNeeded {
-    
-    int scrollMargin = 0;
-    UIView *currentView = self;
-    //Getting the total offset for this component
-    if(self.form && self.keyboardHeight != 0) {
-        CGFloat offset = 0;
-        
-        while( currentView && ![@(currentView.tag) isEqualToNumber:@(FORM_BASE_TABLEVIEW_TAG)]) {
-            
-            offset += currentView.frame.origin.y;
-            currentView = currentView.superview;
-        }
-        if(!self.scrollingTableView) {
-            
-            //Get the tableView and apply scroll
-            self.scrollingTableView= (UITableView *)[currentView viewWithTag:FORM_BASE_TABLEVIEW_TAG];
-            self.originalFrame = self.scrollingTableView.frame;
-            self.originalContentSize = self.scrollingTableView.contentSize;
-            
-        }
-        
-        //Sur iPhone, en mode paysage : la textview est redimensionnée quand le clavier est affiché.
-        //Cela permet d'éviter qu'elle soit déplacée et que la partie du haut ne soit plus visible
-        //(dans le cas où l'utilisateur est en train de saisir du texte au début de la text view,
-        //il ne verrait plus ce qu'il écrit et serait obliger de défiler vers le haut)
-        if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) && UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
-            self.hauteurInitiale = self.frame.size.height;
-            self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, HEIGHT_WHEN_KEYBOARD);
-        }
-
-        offset -= self.scrollingTableView.frame.size.height;
-        offset += self.frame.size.height;
-        offset += self.keyboardHeight;
-        offset += scrollMargin;
-        CGSize newContentSize = self.originalContentSize;
-        newContentSize.height += self.keyboardHeight;
-        [self.scrollingTableView setContentSize:newContentSize];
-        [self.scrollingTableView scrollRectToVisible:CGRectMake(0, offset, currentView.frame.size.width, currentView.frame.size.height) animated:YES];
-        
-    }
-    
-}
 
 -(void)setEditable:(NSNumber *)editable {
     [super setEditable:editable];

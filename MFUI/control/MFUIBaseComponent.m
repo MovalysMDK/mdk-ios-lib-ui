@@ -60,7 +60,6 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 @synthesize transitionDelegate = _transitionDelegate;
 @synthesize selfDescriptor = _selfDescriptor;
 @synthesize isValid = _isValid;
-@synthesize form = _form;
 @synthesize mandatory = _mandatory;
 @synthesize visible = _visible;
 @synthesize componentInCellAtIndexPath = _componentInCellAtIndexPath;

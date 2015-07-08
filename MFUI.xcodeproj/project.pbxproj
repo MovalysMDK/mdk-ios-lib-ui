@@ -134,6 +134,7 @@
 		B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */; };
 		B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */; };
 		B07E794B1B4D1D1800822A1B /* MFBindingConverterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B07E794A1B4D1D1800822A1B /* MFBindingConverterProtocol.h */; };
+		B07E79501B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B07E794F1B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h */; };
 		B08528851B43F18A00B46194 /* MFDoubleTextFieldWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B08528831B43F18A00B46194 /* MFDoubleTextFieldWrapper.h */; };
 		B08528861B43F18A00B46194 /* MFDoubleTextFieldWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B08528841B43F18A00B46194 /* MFDoubleTextFieldWrapper.m */; };
 		B08528891B441EC400B46194 /* MFFixedListExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = B08528871B441EC400B46194 /* MFFixedListExtension.h */; };
@@ -709,6 +710,7 @@
 		B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUILabel.xib; sourceTree = "<group>"; };
 		B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUITextField.xib; sourceTree = "<group>"; };
 		B07E794A1B4D1D1800822A1B /* MFBindingConverterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBindingConverterProtocol.h; sourceTree = "<group>"; };
+		B07E794F1B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBaseViewModelWithSublistProtocol.h; sourceTree = "<group>"; };
 		B08528831B43F18A00B46194 /* MFDoubleTextFieldWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDoubleTextFieldWrapper.h; sourceTree = "<group>"; };
 		B08528841B43F18A00B46194 /* MFDoubleTextFieldWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDoubleTextFieldWrapper.m; sourceTree = "<group>"; };
 		B08528871B441EC400B46194 /* MFFixedListExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFixedListExtension.h; sourceTree = "<group>"; };
@@ -2350,6 +2352,7 @@
 		B0D45D051A5ED2F400C6D376 /* viewmodel */ = {
 			isa = PBXGroup;
 			children = (
+				B07E794F1B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h */,
 				B0D45D081A5ED2F400C6D376 /* MFDefaultViewModelCreator.h */,
 				B0D45D091A5ED2F400C6D376 /* MFDefaultViewModelCreator.m */,
 				B0D45D0A1A5ED2F400C6D376 /* MFPhotoViewModel.h */,
@@ -2703,6 +2706,7 @@
 				B0D45E131A5ED2F400C6D376 /* MFHelperFile.h in Headers */,
 				B0D45DBD1A5ED2F400C6D376 /* TooltipView.h in Headers */,
 				B0D45E071A5ED2F400C6D376 /* MFOrientationChangedDelegate.h in Headers */,
+				B07E79501B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h in Headers */,
 				B0D45D541A5ED2F400C6D376 /* MFEnumImage.h in Headers */,
 				B0D45D5E1A5ED2F400C6D376 /* MFFixedList.h in Headers */,
 				B0D45E351A5ED2F400C6D376 /* MFUIViewControllerContainer.h in Headers */,

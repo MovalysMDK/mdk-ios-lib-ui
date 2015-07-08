@@ -55,7 +55,7 @@
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 id convertedValue = [self convertValue:value isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
-                convertedValue = [self applyCustomConverter:bindingValue.converterName onValue:value isFromViewModelToControl:YES];
+                convertedValue = [self applyCustomConverter:bindingValue.converterName onValue:convertedValue isFromViewModelToControl:YES];
                 [bindingValue.wrapper.component setValue:convertedValue forKeyPath:bindingValue.componentBindedPropertyName];
             });
         }

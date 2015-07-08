@@ -322,11 +322,11 @@
         
         UIViewController *vc = [[UIViewController alloc] init];
         [vc setView:self.modalSignatureDrawingView];
-        [vc setContentSizeForViewInPopover:CGSizeMake(self.mainFormControllerView.frame.size.width,
+        [vc setPreferredContentSize:CGSizeMake(self.mainFormControllerView.frame.size.width,
                                                       self.bounds.size.height + 50)];
         
         self.popoverController = [[UIPopoverController alloc] initWithContentViewController:vc];
-        UIViewController *parentForm = self.parentViewController;
+        UIViewController *parentForm = self.topParentViewController;
         //CGRect parentCellRect = [parentForm.tableView rectForRowAtIndexPath:self.componentInCellAtIndexPath];
         
         CGRect modalSignatureDrawingViewFrame = CGRectMake((self.mainFormControllerView.frame.size.width - SIGNATURE_DRAWING_WIDTH - 50)/2,

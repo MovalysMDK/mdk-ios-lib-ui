@@ -314,13 +314,12 @@ const int NO_LAST_INDEX = -1;
     
     //Build and initialize the topBar of the pickerView
     self.confirmButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObject:MFLocalizedStringFromKey(PICKER_NOTIFICATION_BUTTON_SAVE_TITLE)]];
-    self.confirmButton.frame = CGRectMake(pickerListOriginX +pickerListWidth - PICKER_TOP_BAR_CONFIRM_WIDTH - PICKER_TOP_BAR_ITEMS_MARGIN,
+    self.confirmButton.frame = CGRectMake(PICKER_TOP_BAR_ITEMS_MARGIN,
                                           PICKER_TOP_BAR_ITEMS_MARGIN,
                                           PICKER_TOP_BAR_CONFIRM_WIDTH,
                                           PICKER_TOP_BAR_ITEMS_HEIGHT);
     
     self.confirmButton.segmentedControlStyle = UISegmentedControlStyleBar;
-    //PROTODO : Couleur des boutons ?
     
     self.confirmButton.tintColor = [UIColor blackColor];
     
@@ -328,13 +327,12 @@ const int NO_LAST_INDEX = -1;
     
     //Build and initialize the topBar of the pickerView
     self.cancelButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObject:MFLocalizedStringFromKey(PICKER_NOTIFICATION_BUTTON_CANCEL_TITLE)]];
-    self.cancelButton.frame = CGRectMake(pickerListOriginX + PICKER_TOP_BAR_ITEMS_MARGIN,
+    self.cancelButton.frame = CGRectMake(PICKER_TOP_BAR_ITEMS_MARGIN + PICKER_TOP_BAR_ITEMS_MARGIN + PICKER_TOP_BAR_CONFIRM_WIDTH,
                                          PICKER_TOP_BAR_ITEMS_MARGIN,
                                          PICKER_TOP_BAR_CANCEL_WIDTH,
                                          PICKER_TOP_BAR_ITEMS_HEIGHT);
     
     self.cancelButton.segmentedControlStyle = UISegmentedControlStyleBar;
-    //PROTODO : Couleur des boutons ?
     self.cancelButton.tintColor = [UIColor blueColor] ;
     [self.cancelButton addTarget:self action:@selector(dismissPickerViewAndCancel) forControlEvents:UIControlEventValueChanged];
     
@@ -406,10 +404,10 @@ const int NO_LAST_INDEX = -1;
     [vc setView:view];
     int contentViewHeight = self.mf.hasSearch ? PICKER_SEARCH_BAR_HEIGHT : 0;
     contentViewHeight +=  self.pickerView.frame.size.height + PICKER_TOP_BAR_HEIGHT;
-    [vc setContentSizeForViewInPopover:CGSizeMake(self.pickerView.frame.size.width,contentViewHeight)];
+    [vc setPreferredContentSize:CGSizeMake(self.pickerView.frame.size.width,contentViewHeight)];
     
     self.popoverController = [[UIPopoverController alloc] initWithContentViewController:vc];
-    MFFormBaseViewController *parentForm = self.parentViewController;
+    MFFormBaseViewController *parentForm = self.topParentViewController;
     
     [self.popoverController presentPopoverFromRect:self.mainFormControllerView.frame inView:parentForm.view permittedArrowDirections:0 animated:YES];
     

@@ -315,7 +315,7 @@
 
 -(MFUIBaseListViewModel *)getViewModel
 {
-    return (MFUIBaseListViewModel *)self.viewModel;
+    return (MFUIBaseListViewModel *)_viewModel;
 }
 
 

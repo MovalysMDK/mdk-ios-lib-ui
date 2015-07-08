@@ -35,4 +35,10 @@
  * @return The parent NavigationController of this view if exists, nil otherwhise
  */
 - (UIViewController *)parentNavigationController;
+
+/*!
+ * @brief Returns the parent top ViewController of this view
+ * @return The top parent ViewController of this view if exists, nil otherwhise
+ */
+- (UIViewController *)topParentViewController;
 @end

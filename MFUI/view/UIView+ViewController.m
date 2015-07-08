@@ -34,4 +34,12 @@
     return navigationController;
 }
 
+- (UIViewController *)topParentViewController {
+    UIViewController * topParentViewController = [self parentViewController];
+    while (topParentViewController.parentViewController) {
+        topParentViewController = topParentViewController.parentViewController;
+    }
+    return topParentViewController;
+}
+
 @end

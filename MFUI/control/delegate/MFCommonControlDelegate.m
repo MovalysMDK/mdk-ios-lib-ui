@@ -214,7 +214,6 @@
             [self addErrors:@[result]];
         }
     }
-    NSLog(@"ERRORS : %@", validationState);
     return numberOfErrors;
 }
 

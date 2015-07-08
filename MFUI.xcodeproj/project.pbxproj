@@ -133,6 +133,7 @@
 		B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */; };
 		B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */; };
 		B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */; };
+		B07E794B1B4D1D1800822A1B /* MFBindingConverterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B07E794A1B4D1D1800822A1B /* MFBindingConverterProtocol.h */; };
 		B08528851B43F18A00B46194 /* MFDoubleTextFieldWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B08528831B43F18A00B46194 /* MFDoubleTextFieldWrapper.h */; };
 		B08528861B43F18A00B46194 /* MFDoubleTextFieldWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B08528841B43F18A00B46194 /* MFDoubleTextFieldWrapper.m */; };
 		B08528891B441EC400B46194 /* MFFixedListExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = B08528871B441EC400B46194 /* MFFixedListExtension.h */; };
@@ -710,6 +711,7 @@
 		B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUIErrorView.xib; sourceTree = "<group>"; };
 		B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUILabel.xib; sourceTree = "<group>"; };
 		B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUITextField.xib; sourceTree = "<group>"; };
+		B07E794A1B4D1D1800822A1B /* MFBindingConverterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBindingConverterProtocol.h; sourceTree = "<group>"; };
 		B08528831B43F18A00B46194 /* MFDoubleTextFieldWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDoubleTextFieldWrapper.h; sourceTree = "<group>"; };
 		B08528841B43F18A00B46194 /* MFDoubleTextFieldWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDoubleTextFieldWrapper.m; sourceTree = "<group>"; };
 		B08528871B441EC400B46194 /* MFFixedListExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFixedListExtension.h; sourceTree = "<group>"; };
@@ -1300,6 +1302,7 @@
 				B006CF1B1B32C55600B78782 /* MFUIBinding.h */,
 				B0E155BF1B414C8600D5A213 /* UITableViewCell+Binding.h */,
 				B0E155BE1B414C8600D5A213 /* UITableViewCell+Binding.m */,
+				B07E794A1B4D1D1800822A1B /* MFBindingConverterProtocol.h */,
 			);
 			path = binding;
 			sourceTree = "<group>";
@@ -2680,6 +2683,7 @@
 				B08EF6FC1AE53F8F00F3754E /* MFPhoneTextField.h in Headers */,
 				B0D45D831A5ED2F400C6D376 /* MFUIControlPosition.h in Headers */,
 				B0D45DD91A5ED2F400C6D376 /* MFInvalidEmailValueUIValidationError.h in Headers */,
+				B07E794B1B4D1D1800822A1B /* MFBindingConverterProtocol.h in Headers */,
 				B06730561AE685B600CB0900 /* MFComponentValidationProtocol.h in Headers */,
 				B0D45E2D1A5ED2F400C6D376 /* MFFormSectionHeaderView.h in Headers */,
 				B0D45D301A5ED2F400C6D376 /* MFUIActionUpdate.h in Headers */,

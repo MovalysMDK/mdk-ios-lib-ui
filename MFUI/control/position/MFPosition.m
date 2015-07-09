@@ -89,11 +89,7 @@
     
     [self selfCustomization];
     
-    locationManager = [[CLLocationManager alloc] init];
-    
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
-        [locationManager requestWhenInUseAuthorization];
-    }
+
     
 }
 
@@ -193,6 +189,12 @@
 
 #pragma mark - geolocalisation
 -(void)gpsButtonPressed:(id)sender {
+    locationManager = [[CLLocationManager alloc] init];
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        [locationManager requestWhenInUseAuthorization];
+    }
+    
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     positionUpdates = 0;

@@ -44,7 +44,7 @@
 
 
 -(void)clearErrors {
-        [self.component setIsValid:YES];
+    [self.component setIsValid:YES];
     self.component.errors = [@[] mutableCopy];
 }
 
@@ -69,13 +69,13 @@
 
 -(void)setIsValid:(BOOL)isValid {
     dispatch_async(dispatch_get_main_queue(), ^{
-
-    [self.component applyStandardStyle];
+        
+        [self.component applyStandardStyle];
     });
     if(isValid) {
         dispatch_async(dispatch_get_main_queue(), ^{
-
-        [self.component applyValidStyle];
+            
+            [self.component applyValidStyle];
         });
         [self.component.tooltipView hideAnimated:YES];
         
@@ -186,11 +186,15 @@
             }
             NSMutableDictionary *validatorParameters = [NSMutableDictionary dictionary];
             for(NSString *recognizedAttribute in [fieldValidator recognizedAttributes]) {
-                validatorParameters[recognizedAttribute] = self.component.controlAttributes[recognizedAttribute];
+                if(self.component.controlAttributes[recognizedAttribute]) {
+                    validatorParameters[recognizedAttribute] = self.component.controlAttributes[recognizedAttribute];
+                }
             }
             
             //On ajoute le nom du composant
-            validatorParameters[@"componentName"] = [self.component bindedName];
+            if([self.component bindedName]) {
+                validatorParameters[@"componentName"] = [self.component bindedName];
+            }
             id errorResult = [fieldValidator validate:[self.component getData] withCurrentState:validationState withParameters:validatorParameters];
             if(errorResult) {
                 validationState[NSStringFromClass([fieldValidator class])] = errorResult;

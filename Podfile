@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '6.1'
+platform :ios, '7.0'
 
 source 'gitmovalys@git.ptx.fr.sopra:podspecs.git'
 source 'https://github.com/CocoaPods/Specs.git'
@@ -7,8 +7,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 pod 'MFCore', :path => '../mfcore'
-pod 'ViewDeck', '~>2.2.11'
-pod 'MBProgressHUD', '~> 0.8'
+pod 'ViewDeck', '2.2.11'
+pod 'MBProgressHUD', '0.8'
 
 post_install do |installer_representation|
   installer_representation.project.targets.each do |target|

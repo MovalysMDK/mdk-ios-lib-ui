@@ -40,6 +40,8 @@
     }
     if(!canSendMail)
     {
+        
+        [self clearErrors];
         [self addErrors:@[[[MFUIValidationError alloc] initWithCode:500 localizedDescriptionKey:@"MFCantSendMailTechnicalError"localizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)]]];
     }
 }

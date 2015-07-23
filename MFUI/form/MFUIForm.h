@@ -29,6 +29,6 @@
 
 
 #import "MFCommonFormDelegate.h"
-#import "MFFormCommonDelegate.h"
+#import "MFCommonFormProtocol.h"
 #import "MFViewProtocol.h"
 #endif

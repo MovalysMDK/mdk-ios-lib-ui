@@ -50,6 +50,15 @@
         self.mf.selectedItemBindingDelegate.picker = self;
     }
     
+    NSString *listItemBindingDelegate = controlAttributes[@"listItemBindingDelegate"];
+    if(listItemBindingDelegate && !self.mf.listItemBindingDelegate) {
+        self.mf.listItemBindingDelegate = [[NSClassFromString(listItemBindingDelegate) alloc] initWithPickerList:self];
+    }
+    else {
+        self.mf.listItemBindingDelegate.picker = self;
+    }
+    
+    
     NSString *pickerValuesKey = controlAttributes[@"pickerValuesKey"];
     if(pickerValuesKey && !self.mf.pickerValuesKey) {
         self.mf.pickerValuesKey = pickerValuesKey;

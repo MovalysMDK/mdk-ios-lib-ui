@@ -16,8 +16,10 @@
 
 #import "MFPickerListItemBindingDelegate.h"
 #import "MFPickerList.h"
+#import "MFCommonFormProtocol.h"
 
 @implementation MFPickerListItemBindingDelegate
+@synthesize bindingDelegate = _bindingDelegate;
 
 
 - (instancetype)initWithPickerList:(MFPickerList *)pickerList

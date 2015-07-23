@@ -15,7 +15,7 @@
  */
 
 
-#import "MFFormCommonDelegate.h"
+#import "MFCommonFormProtocol.h"
 
 @interface MFCommonFormDelegate : NSObject <MFCommonFormProtocol>
 

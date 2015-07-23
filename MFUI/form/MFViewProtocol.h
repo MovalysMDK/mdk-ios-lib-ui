@@ -15,7 +15,7 @@
  */
 
 #import "MFUIComponentProtocol.h"
-#import "MFFormCommonDelegate.h"
+#import "MFCommonFormProtocol.h"
 
 @protocol MFFormViewProtocol <NSObject>
 

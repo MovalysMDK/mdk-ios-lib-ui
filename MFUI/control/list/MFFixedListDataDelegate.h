@@ -18,7 +18,7 @@
 
 
 // Protocols and delegates
-#import "MFFormCommonDelegate.h"
+#import "MFCommonFormProtocol.h"
 #import "MFTableConfiguration.h"
 
 @protocol MFFormWithDetailViewControllerProtocol;

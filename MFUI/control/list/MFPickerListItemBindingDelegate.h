@@ -16,8 +16,9 @@
 
 #import <Foundation/Foundation.h>
 @class MFPickerList;
+@protocol MFCommonFormProtocol;
 
-@interface MFPickerListItemBindingDelegate : NSObject
+@interface MFPickerListItemBindingDelegate : NSObject <MFCommonFormProtocol>
 
 #pragma mark - Methods
 

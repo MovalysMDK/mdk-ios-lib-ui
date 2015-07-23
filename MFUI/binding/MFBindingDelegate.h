@@ -15,6 +15,7 @@
  */
 #import <Foundation/Foundation.h>
 #import "MFBinding.h"
+#import "MFBinding+Dispatcher.h"
 
 @protocol MFObjectWithBindingProtocol;
 

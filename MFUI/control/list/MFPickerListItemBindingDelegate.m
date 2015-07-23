@@ -30,4 +30,30 @@
     }
     return self;
 }
+
+
+#pragma mark - TableView DataSource & Delegate
+-(NSInteger)numberOfSectionsInTableView:(nonnull UITableView *)tableView {
+    return 1;
+}
+
+-(NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 78;
+}
+
+-(nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    NSString *identifier = @"identifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if(!cell) {
+        cell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    cell.textLabel.text = @"Lundi";
+    return cell;
+}
+
+-(void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.picker.pickerListTableView dismiss];
+}
+
 @end

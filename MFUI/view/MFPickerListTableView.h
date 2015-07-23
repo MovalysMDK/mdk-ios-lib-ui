@@ -13,28 +13,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
+#import <UIKit/UIKit.h>
 
-#import <Foundation/Foundation.h>
-@class MFPickerList;
-@protocol MFCommonFormProtocol;
+@interface MFPickerListTableView : UIView
 
-@interface MFPickerListItemBindingDelegate : NSObject <MFCommonFormProtocol, UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-#pragma mark - Methods
-
-/*!
- * @brief Initializes and returns an new instance of MFPickerListItemBindingDelegate
- * @param pickerList The pickerList reference to set to this bindingDelegate
- * @return A new instance of MFPickerListItemBindingDelegate
- */
-- (instancetype)initWithPickerList:(MFPickerList *)pickerList;
-
-
-#pragma mark - Properties
-
-/*!
- * @brief The pickerList to manage.
- */
-@property (nonatomic, weak) MFPickerList *picker;
+-(void)dismiss;
 
 @end

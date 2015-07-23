@@ -40,11 +40,11 @@ const NSString *LISTITEM_PICKERLIST_DESCRIPTOR = @"LISTITEM_PICKERLIST_DESCRIPTO
 }
 
 -(void)createPickerListItemWithDescriptor:(MFBindingViewDescriptor *)viewDescriptor {
-    [[self currentStructure] setObject:viewDescriptor forKey:SELECTEDITEM_PICKERLIST_DESCRIPTOR];
+    [[self currentStructure] setObject:viewDescriptor forKey:LISTITEM_PICKERLIST_DESCRIPTOR];
 }
 
 -(void)createPickerSelectedItemWithDescriptor:(MFBindingViewDescriptor *)viewDescriptor {
-    [[self currentStructure] setObject:viewDescriptor forKey:LISTITEM_PICKERLIST_DESCRIPTOR];
+    [[self currentStructure] setObject:viewDescriptor forKey:SELECTEDITEM_PICKERLIST_DESCRIPTOR];
 }
 
 

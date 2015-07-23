@@ -14,27 +14,26 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import <Foundation/Foundation.h>
-@class MFPickerList;
-@protocol MFCommonFormProtocol;
+#import "MFPickerListTableView.h"
 
-@interface MFPickerListItemBindingDelegate : NSObject <MFCommonFormProtocol, UITableViewDelegate, UITableViewDataSource>
+@implementation MFPickerListTableView
 
-#pragma mark - Methods
-
-/*!
- * @brief Initializes and returns an new instance of MFPickerListItemBindingDelegate
- * @param pickerList The pickerList reference to set to this bindingDelegate
- * @return A new instance of MFPickerListItemBindingDelegate
- */
-- (instancetype)initWithPickerList:(MFPickerList *)pickerList;
+-(void)drawRect:(CGRect)rect {
+    self.tableView.layer.cornerRadius = 10;
+    self.tableView.clipsToBounds = YES;
+}
 
 
-#pragma mark - Properties
+-(void)touchesEnded:(nonnull NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
+    [self dismiss];
+}
 
-/*!
- * @brief The pickerList to manage.
- */
-@property (nonatomic, weak) MFPickerList *picker;
+-(void) dismiss {
+    [UIView animateWithDuration:0.25 animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
+}
 
 @end

@@ -15,7 +15,13 @@
  */
 
 #import "MFUIOldBaseComponent.h"
+#import "MFBindingViewAbstract.h"
+#import "MFPickerListTableView.h"
 
-@interface MFPickerList : MFUIOldBaseComponent
+@interface MFPickerList : MFUIOldBaseComponent <UIGestureRecognizerDelegate>
+
+@property (nonatomic, strong) UIView *selectedView;
+
+@property (nonatomic, strong) MFPickerListTableView *pickerListTableView;
 
 @end

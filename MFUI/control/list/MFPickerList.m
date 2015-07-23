@@ -22,6 +22,7 @@
 //Delegates
 #import "MFPickerListItemBindingDelegate.h"
 #import "MFPickerSelectedItemBindingDelegate.h"
+#import "MFUIBaseViewModel.h"
 
 @interface MFPickerList ()
 
@@ -30,15 +31,56 @@
  */
 @property (nonatomic, strong) MFPickerListExtension *mf;
 
+/**
+ * @brief Le tableau contenant les données de la Liste éditable
+ */
+@property (nonatomic, strong) MFUIBaseViewModel *data;
+/**
+ * @brief Indicates if the constraints between the storyboard and the pickerlist have been added
+ */
+@property (nonatomic) BOOL constraintsAdded;
+
+
 @end
 
 @implementation MFPickerList
 @synthesize controlAttributes = _controlAttributes;
+@synthesize data = _data;
 
 -(void)initialize {
     [super initialize];
     self.mf = [MFPickerListExtension new];
+    
+    self.constraintsAdded = NO;
+    
+    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
+
+
+#pragma mark - MFUIComponentProtocol methods
+
++(NSString *)getDataType {
+    return @"MFUIBaseViewModel";
+}
+
+/**
+ * @brief Returns the value of the field
+ * @return the value of the field
+ */
+
+-(MFUIBaseViewModel *) getData {
+    return _data;
+}
+
+-(void)setData:(MFUIBaseViewModel *)data {
+    if(![_data isEqual:data] && ![data isKindOfClass:[MFKeyNotFound class]]) {
+        _data= data;
+        [self.mf.selectedItemBindingDelegate performSelector:@selector(computeCellHeightAndDispatchToFormController)];
+        [self.mf.selectedItemBindingDelegate performSelector:@selector(updateStaticView)];
+    }
+}
+
+
 
 -(void)setControlAttributes:(NSDictionary *)controlAttributes {
     _controlAttributes = controlAttributes;
@@ -69,5 +111,82 @@
         self.mf.hasSearch = [hasSearch boolValue];
     }
 }
+
+-(void)setSelectedView:(UIView *)selectedView {
+    if(!_selectedView || ![_selectedView isEqual:selectedView]) {
+        if(_selectedView) {
+            [_selectedView removeFromSuperview];
+        }
+        _selectedView = (MFBindingViewAbstract *)selectedView;
+        
+        [self setNeedsDisplay];
+        //Dans la vue sélectionnée, les champs ne sont pas éditables
+        for(UIView * view in selectedView.subviews) {
+            view.userInteractionEnabled = NO;
+        }
+        [self addSubview:_selectedView];
+        [_selectedView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        [self addCustomConstraints];
+        [self updateConstraints];
+    }
+}
+
+-(void) addCustomConstraints {
+    if(self.selectedView) {
+        
+        NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:self.selectedView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+        NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.selectedView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0];
+        NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:self.selectedView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
+        NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.selectedView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+        
+        [self addConstraints:@[topConstraint, leftConstraint, rightConstraint, bottomConstraint]];
+        self.constraintsAdded = YES;
+        
+    }
+}
+
+
+
+#pragma mark - GestureRecognizers methods
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [[event allTouches] anyObject];
+    
+    UIView *currentView = touch.view;
+    while (currentView) {
+        if([self.selectedView isEqual:touch.view]) {
+            if([self.editable isEqualToNumber:@1]) {
+                [self displayPickerView];
+                [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+            }
+            break;
+        }
+        currentView = currentView.superview;
+    }
+    
+}
+
+-(void) displayPickerView {
+    self.pickerListTableView = [[[NSBundle bundleForClass:[MFPickerListTableView class]] loadNibNamed:@"PickerListView" owner:self.mf.listItemBindingDelegate options:nil] firstObject];
+    self.pickerListTableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.parentNavigationController.view addSubview:self.pickerListTableView];
+    
+    
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.pickerListTableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.parentNavigationController.view attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.pickerListTableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.parentNavigationController.view  attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.pickerListTableView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.parentNavigationController.view  attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.pickerListTableView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.parentNavigationController.view  attribute:NSLayoutAttributeRight multiplier:1 constant:0];
+    
+    [self.parentNavigationController.view addConstraints:@[bottom, left, right, top]];
+    self.pickerListTableView.alpha = 0;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        self.pickerListTableView.alpha = 1;
+    }];
+}
+
+
 
 @end

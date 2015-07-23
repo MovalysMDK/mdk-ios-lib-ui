@@ -561,6 +561,9 @@
 		B0F896601B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F8965E1B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.m */; };
 		B0F896631B611291005C3AA7 /* MFPickerListItemBindingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0F896611B611291005C3AA7 /* MFPickerListItemBindingDelegate.h */; };
 		B0F896641B611291005C3AA7 /* MFPickerListItemBindingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F896621B611291005C3AA7 /* MFPickerListItemBindingDelegate.m */; };
+		B0F8966F1B614861005C3AA7 /* PickerListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F8966E1B614861005C3AA7 /* PickerListView.xib */; };
+		B0F896721B614909005C3AA7 /* MFPickerListTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = B0F896701B614909005C3AA7 /* MFPickerListTableView.h */; };
+		B0F896731B614909005C3AA7 /* MFPickerListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F896711B614909005C3AA7 /* MFPickerListTableView.m */; };
 		B0FC78E51B3A99EE00DD225F /* MFNumberPickerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78E31B3A99EE00DD225F /* MFNumberPickerWrapper.h */; };
 		B0FC78E61B3A99EE00DD225F /* MFNumberPickerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FC78E41B3A99EE00DD225F /* MFNumberPickerWrapper.m */; };
 		B0FC78E91B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78E71B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h */; };
@@ -1154,6 +1157,9 @@
 		B0F8965E1B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPickerSelectedItemBindingDelegate.m; sourceTree = "<group>"; };
 		B0F896611B611291005C3AA7 /* MFPickerListItemBindingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPickerListItemBindingDelegate.h; sourceTree = "<group>"; };
 		B0F896621B611291005C3AA7 /* MFPickerListItemBindingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPickerListItemBindingDelegate.m; sourceTree = "<group>"; };
+		B0F8966E1B614861005C3AA7 /* PickerListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerListView.xib; sourceTree = "<group>"; };
+		B0F896701B614909005C3AA7 /* MFPickerListTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPickerListTableView.h; sourceTree = "<group>"; };
+		B0F896711B614909005C3AA7 /* MFPickerListTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPickerListTableView.m; sourceTree = "<group>"; };
 		B0FC78E31B3A99EE00DD225F /* MFNumberPickerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFNumberPickerWrapper.h; sourceTree = "<group>"; };
 		B0FC78E41B3A99EE00DD225F /* MFNumberPickerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFNumberPickerWrapper.m; sourceTree = "<group>"; };
 		B0FC78E71B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPhotoThumbnailWrapper.h; sourceTree = "<group>"; };
@@ -1341,6 +1347,7 @@
 		B001B2541B5F87D80063F819 /* xib */ = {
 			isa = PBXGroup;
 			children = (
+				B0F8966E1B614861005C3AA7 /* PickerListView.xib */,
 				B001B2551B5F87D80063F819 /* PhotoFixedListItemCell.xib */,
 			);
 			path = xib;
@@ -2320,6 +2327,8 @@
 				B0D45CB01A5ED2F400C6D376 /* MFUIView.h */,
 				B0D45CB11A5ED2F400C6D376 /* MFWorkspaceView.h */,
 				B0D45CB21A5ED2F400C6D376 /* MFWorkspaceView.m */,
+				B0F896701B614909005C3AA7 /* MFPickerListTableView.h */,
+				B0F896711B614909005C3AA7 /* MFPickerListTableView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2743,6 +2752,7 @@
 				B0D45D8A1A5ED2F400C6D376 /* MFScanner.h in Headers */,
 				B0C9B2DF1AFA21E700FC9665 /* MFTextFieldStyle+ErrorView.h in Headers */,
 				B0D45E681A5ED2F400C6D376 /* MFViewControllerObserverProtocol.h in Headers */,
+				B0F896721B614909005C3AA7 /* MFPickerListTableView.h in Headers */,
 				B0D45D6B1A5ED2F400C6D376 /* MFUIBaseComponent.h in Headers */,
 				B06730541AE6857D00CB0900 /* MFComponentPropertiesProtocol.h in Headers */,
 				B0C9B2E51AFA21E700FC9665 /* MFUrlTextFieldStyle.h in Headers */,
@@ -2972,6 +2982,7 @@
 			files = (
 				B001B25F1B5F87D80063F819 /* ios_ic_mail_pressed@2x.png in Resources */,
 				B001B2661B5F87D80063F819 /* gps@2x.png in Resources */,
+				B0F8966F1B614861005C3AA7 /* PickerListView.xib in Resources */,
 				B001B26B1B5F87D80063F819 /* image_tooltip_invalid.png in Resources */,
 				B001B26E1B5F87D80063F819 /* image_tooltip_valid@2x.png in Resources */,
 				B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */,
@@ -3298,6 +3309,7 @@
 				B0D45DC11A5ED2F400C6D376 /* ValidTooltipView.m in Sources */,
 				B0D45DF91A5ED2F400C6D376 /* MFFormValidationDelegate.m in Sources */,
 				B0C9B2D41AFA21E700FC9665 /* MFEmailTextFieldStyle.m in Sources */,
+				B0F896731B614909005C3AA7 /* MFPickerListTableView.m in Sources */,
 				B0D45E831A5ED2F400C6D376 /* MFUIBaseViewModel.m in Sources */,
 				B0D45E371A5ED2F400C6D376 /* MFMultiPanelViewController.m in Sources */,
 				B0D45D891A5ED2F400C6D376 /* MFBarCodeScanViewController.m in Sources */,

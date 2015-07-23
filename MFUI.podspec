@@ -19,6 +19,9 @@ Pod::Spec.new do |s|
   s.source_files = 'MFUI/**/*.{h,m}'
   s.resources = 'MFUI/**/*.xib', "MFUI/resources/**/*.png", "MFUI/resources/**/*.plist", "MFUI/resources/**/*.txt",  "MFUI/resources/**/*.storyboard"
 
+  s.prefix_header_contents = '#import "MFUIUtils.h"
+    #import "UIView+ViewController.h"'
+
   s.subspec 'Dependencies' do|dep| 
     dep.dependency 'MBProgressHUD', '0.8'
     dep.dependency 'ViewDeck', '2.2.11'

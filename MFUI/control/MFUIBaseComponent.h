@@ -75,8 +75,6 @@ IB_DESIGNABLE
  */
 @property (nonatomic, strong) TooltipView *baseTooltipView;
 
-
-
 /*!
  * Cell container
  */

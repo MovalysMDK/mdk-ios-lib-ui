@@ -14,35 +14,8 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #import <Foundation/Foundation.h>
-#import "MFPickerListItemBindingDelegate.h"
-#import "MFPickerSelectedItemBindingDelegate.h"
 
-/*!
- * @class MFPickerListExtention
- * @brief This class is an extension for the PickerList component
- */
-@interface MFPickerListExtension : NSObject
-
-/*!
- * @brief The list item data delegate of the PickerList
- */
-@property (nonatomic, strong) MFPickerListItemBindingDelegate *listItemBindingDelegate;
-
-/*!
- * @brief The selected item data delegate of the PickerList
- */
-@property (nonatomic, strong) MFPickerSelectedItemBindingDelegate *selectedItemBindingDelegate;
-
-/*!
- * @brief The picker values key
- */
-@property (nonatomic, strong) NSString* pickerValuesKey;
-
-/**
- * @brief Indicates if the component should display the searchBar
- */
-@property (nonatomic) BOOL hasSearch;
+@interface MFPickerListItemBindingDelegate : NSObject
 
 @end

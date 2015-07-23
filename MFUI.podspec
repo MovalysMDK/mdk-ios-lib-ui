@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore'
   s.header_mappings_dir = '.'
   s.source_files = 'MFUI/**/*.{h,m}'
-  s.resources = 'MFUI/**/*.xib', "MFUI/resources/**/*.png", "MFUI/resources/**/*.plist"
+  s.resources = 'MFUI/**/*.xib', "MFUI/resources/**/*.png", "MFUI/resources/**/*.plist", "MFUI/resources/**/*.txt",  "MFUI/resources/**/*.storyboard"
 
   s.subspec 'Dependencies' do|dep| 
     dep.dependency 'MBProgressHUD', '0.8'

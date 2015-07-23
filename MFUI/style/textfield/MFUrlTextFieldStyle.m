@@ -21,7 +21,7 @@
 @implementation MFUrlTextFieldStyle
 
 -(NSString *)accessoryButtonImageName {
-    return @"browser_icon";
+    return @"nav";
 }
 
 @end

@@ -22,7 +22,12 @@
 
 #import "MFUIControl.h"
 #import "MFCellAbstract.h"
-
+#import "MFPhotoThumbnail.h"
+/*!
+ * @class <#Nom de la classe#>
+ * @brief <# Une brève description de ce que fait la classe #>
+ * @discussion <# Si nécessaire, ajouter des détails sur la classe #>
+ */
 @interface MFPhotoFixedListItemCell : MFCellAbstract
 
 #pragma mark - Properties

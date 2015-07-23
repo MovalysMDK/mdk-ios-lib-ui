@@ -29,7 +29,6 @@
 #import "MFMandatoryFieldUIValidationError.h"
 #import "MFFormSearchViewController.h"
 
-
 @interface MFSignature()
 
 /**

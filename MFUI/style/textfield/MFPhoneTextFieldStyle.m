@@ -21,7 +21,7 @@
 @implementation MFPhoneTextFieldStyle
 
 -(NSString *)accessoryButtonImageName {
-    return @"phone_icon";
+    return @"phone";
 }
 
 @end

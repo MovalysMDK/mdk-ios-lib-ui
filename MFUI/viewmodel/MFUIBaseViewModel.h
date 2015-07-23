@@ -130,6 +130,8 @@
 
 
 
+@class MFUIBaseListViewModel;
+
 @protocol ITEMVM <NSObject>
 
 -(int)indexOfItem;

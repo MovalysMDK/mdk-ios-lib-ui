@@ -17,23 +17,26 @@
 #import "MFViewProtocol.h"
 #import "MFFormViewControllerProtocol.h"
 
+
+/*!
+ * @class MFBindingViewAbstract
+ * @brief A specific view that can be binded to the MDK iOS Framework
+ */
 @interface MFBindingViewAbstract : UIView <MFFormViewProtocol, MFFormCellProtocol>
-
-
 
 #pragma mark - Properties
 /*!
- * @brief The identifier of this section
+ * @property identifier The identifier of this section
  */
-@property (nonatomic) NSNumber *identifier;
+@property (nonatomic, strong) NSNumber *identifier;
 
 /*!
- * @brief The identifier of this section
+ * @property sender The identifier of this section
  */
 @property (nonatomic, weak) id<MFFormViewControllerProtocol> sender;
 
 /*!
- * @brief Indicated the editable state of the parent.
+ * @property parentEditable Indicated the editable state of the parent.
  */
 @property (nonatomic, strong) NSNumber *parentEditable;
 

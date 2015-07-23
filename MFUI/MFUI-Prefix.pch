@@ -22,4 +22,5 @@
     #import <UIKit/UIKit.h>
     #import <MFCore/MFCore.h>
     #import "MFUIUtils.h"
+    #import "UIView+ViewController.h"
 #endif

@@ -25,9 +25,9 @@
 #import "MFFixedList.h"
 #import "MFFixedList+UITableViewForwarding.h"
 #import "MFFixedListDataDelegate.h"
-#import "MFPickerControllerDelegate.h"
+#import "MFPickerSelectedItemBindingDelegate.h"
+#import "MFPickerListItemBindingDelegate.h"
 #import "MFPickerList.h"
-#import "MFPickerListSelectionIndicator.h"
 #import "MFSimplePickerList.h"
 
 #endif

@@ -20,7 +20,6 @@
 #import "MFInvalidEmailValueUIValidationError.h"
 #import "MFCreateEmailViewController.h"
 #import "MFUICommand.h"
-#import "UIView+ViewController.h"
 #import "MFEmail.h"
 
 

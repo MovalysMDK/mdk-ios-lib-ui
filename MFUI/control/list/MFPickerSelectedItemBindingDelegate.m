@@ -13,28 +13,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  UIPickerListSelectionIndicator.h
-//  MFUI
-//
-//
 
+#import "MFPickerSelectedItemBindingDelegate.h"
 
-/*!
- * @class MFPickerListSelectionIndicator
- * @brief An UIView to indicate the selected row in MFPickerList
- * @discussion Should be non-ARC
- */
-@interface MFPickerListSelectionIndicator : UIView
-
-#pragma mark - Methods
-
-/*!
- * @brief Custom init
- * @param  frame the Frame of the viex
- * @param mainColor The color that should have the indicator view
- * @return The built view
- */
-- (id)initWithFrame:(CGRect)frame andColor:(UIColor *)mainColor;
+@implementation MFPickerSelectedItemBindingDelegate
 
 @end

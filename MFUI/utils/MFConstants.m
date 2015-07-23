@@ -39,3 +39,23 @@ NSInteger const SCREEN_INDEXPATH_SECTION_IDENTIFIER         =(long)&SCREEN_INDEX
 NSInteger const SCREEN_INDEXPATH_ROW_IDENTIFIER             =(long)&SCREEN_INDEXPATH_ROW_IDENTIFIER;
 
 NSString const *MDK_XIB_IDENTIFIER                          = @"MDK_";
+
+//Parameters keys
+NSString *const PICKER_PARAMETER_SEARCH_KEY = @"search";
+NSString *const PICKER_PARAMETER_VALUES_KEY= @"pickerValuesKey";
+NSString *const PICKER_PARAMETER_SELECTION_INDICATOR_COLOR_KEY = @"selectionIndicatorColor";
+NSString *const PICKER_PARAMETER_OK_BUTTON_COLOR_KEY = @"okButtonColor";
+NSString *const PICKER_PARAMETER_CANCEL_BUTTON_COLOR_KEY = @"cancelButtonColor";
+NSString *const PICKER_PARAMETER_SELECTED_VIEW_FORM_DESCRIPTOR_NAME_KEY = @"selectedViewFormDescriptorName";
+NSString *const PICKER_PARAMETER_LIST_ITEM_VIEW_FORM_DESCRIPTOR_NAME_KEY = @"lstItemViewFormDescriptorName";
+NSString *const PICKER_PARAMETER_EMPTY_VIEW_NIB_NAME = @"emptyViewNibName";
+
+//Notifications keys
+NSString *const PICKER_NOTIFICATION_FORCE_HIDE = @"pickerViewExternalForceHide";
+NSString *const PICKER_NOTIFICATION_SHOW = @"pickerViewShow";
+NSString *const PICKER_NOTIFICATION_HIDE = @"pickerViewHide";
+NSString *const PICKER_NOTIFICATION_BUTTON_SAVE_TITLE = @"MFPickerListSaveButtonTitle";
+NSString *const PICKER_NOTIFICATION_BUTTON_CANCEL_TITLE = @"MFPickerListCancelButtonTitle";
+
+//Constants
+const int PICKER_VIEW_TAG = INT16_MAX;

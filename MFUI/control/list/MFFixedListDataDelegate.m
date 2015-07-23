@@ -40,7 +40,6 @@
 #import "MFTypeValueProcessingProtocol.h"
 #import "MFUILog.h"
 
-
 //Binding
 #import "MFUIBaseListViewModel.h"
 

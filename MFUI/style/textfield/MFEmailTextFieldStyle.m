@@ -21,7 +21,7 @@
 @implementation MFEmailTextFieldStyle
 
 -(NSString *)accessoryButtonImageName {
-    return @"mail_icon@2x";
+    return @"mail";
 }
 
 @end

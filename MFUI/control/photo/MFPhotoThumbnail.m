@@ -270,7 +270,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     }
     
     //Getting the view controller to push
-    MFPhotoDetailViewController *managePhotoViewController = [[UIStoryboard storyboardWithName:storyboardName bundle:nil]
+    MFPhotoDetailViewController *managePhotoViewController = [[UIStoryboard storyboardWithName:storyboardName bundle:[NSBundle bundleForClass:[self class]]]
                                                               instantiateViewControllerWithIdentifier:managePhotoControllerName];
     
     // Récupération d'un photoViewModel initialisé

@@ -47,13 +47,25 @@ NSString * REGEX_BUTTON_RIGHT_CONSTRAINT = @"REGEX_BUTTON_RIGHT_CONSTRAINT";
 
 -(void)addButtonOnTextField:(MFRegexTextField *)component {
     NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"MFUIApplication")];
-    NSString *imagePath = [bundle pathForResource:[self accessoryButtonImageName] ofType:@"png"];
+    NSString *activeImageName = [NSString stringWithFormat:@"ios_ic_%@_active@2x", [self accessoryButtonImageName]];
+    NSString *unactiveImageName = [NSString stringWithFormat:@"ios_ic_%@_unactive@2x", [self accessoryButtonImageName]];
+    NSString *pressedImageName = [NSString stringWithFormat:@"ios_ic_%@_pressed@2x", [self accessoryButtonImageName]];
+    
+    NSString *activeImagePath = [bundle pathForResource:activeImageName ofType:@"png"];
+    NSString *unactiveImagePath = [bundle pathForResource:unactiveImageName ofType:@"png"];
+    NSString *pressedImagePath = [bundle pathForResource:pressedImageName ofType:@"png"];
     self.hasAccessoryButton = NO;
-    if([self accessoryButtonImageName]) {
+    
+    if(activeImagePath) {
         UIButton *button = [[UIButton alloc] init];
-        UIImage *btnImage = [UIImage imageWithContentsOfFile:imagePath];
+        UIImage *btnImageActive = [UIImage imageWithContentsOfFile:activeImagePath];
+        UIImage *btnImageUnactive = [UIImage imageWithContentsOfFile:unactiveImagePath];
+        UIImage *btnImagePressed = [UIImage imageWithContentsOfFile:pressedImagePath];
         
-        [button setImage:btnImage forState:UIControlStateNormal];
+        [button setImage:btnImageActive forState:UIControlStateNormal];
+        [button setImage:btnImageUnactive forState:UIControlStateDisabled];
+        [button setImage:btnImagePressed forState:UIControlStateHighlighted];
+        
         [component addSubview:button];
         
         [button addTarget:component action:@selector(doAction) forControlEvents:UIControlEventTouchUpInside];

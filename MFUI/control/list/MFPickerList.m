@@ -16,14 +16,49 @@
 
 #import "MFPickerList.h"
 
-@implementation MFPickerList
+//Extension
+#import "MFPickerListExtension.h"
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+//Delegates
+#import "MFPickerListItemBindingDelegate.h"
+#import "MFPickerSelectedItemBindingDelegate.h"
+
+@interface MFPickerList ()
+
+/**
+ * @brief The extension for PickerList
+ */
+@property (nonatomic, strong) MFPickerListExtension *mf;
+
+@end
+
+@implementation MFPickerList
+@synthesize controlAttributes = _controlAttributes;
+
+-(void)initialize {
+    [super initialize];
+    self.mf = [MFPickerListExtension new];
 }
-*/
+
+-(void)setControlAttributes:(NSDictionary *)controlAttributes {
+    _controlAttributes = controlAttributes;
+    NSString *selectedItemBindingDelegate = controlAttributes[@"selectedItemBindingDelegate"];
+    if(selectedItemBindingDelegate && !self.mf.selectedItemBindingDelegate) {
+        self.mf.selectedItemBindingDelegate = [[NSClassFromString(selectedItemBindingDelegate) alloc] initWithPickerList:self];
+    }
+    else {
+        self.mf.selectedItemBindingDelegate.picker = self;
+    }
+    
+    NSString *pickerValuesKey = controlAttributes[@"pickerValuesKey"];
+    if(pickerValuesKey && !self.mf.pickerValuesKey) {
+        self.mf.pickerValuesKey = pickerValuesKey;
+    }
+    
+    NSNumber *hasSearch = controlAttributes[@"search"];
+    if(hasSearch) {
+        self.mf.hasSearch = [hasSearch boolValue];
+    }
+}
 
 @end

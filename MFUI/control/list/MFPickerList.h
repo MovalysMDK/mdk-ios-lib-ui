@@ -14,8 +14,8 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFUIBaseComponent.h"
+#import "MFUIOldBaseComponent.h"
 
-@interface MFPickerList : MFUIBaseComponent
+@interface MFPickerList : MFUIOldBaseComponent
 
 @end

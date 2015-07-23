@@ -15,7 +15,25 @@
  */
 
 #import <Foundation/Foundation.h>
+@class MFPickerList;
 
 @interface MFPickerSelectedItemBindingDelegate : NSObject
+
+#pragma mark - Methods
+
+/*!
+ * @brief Initializes and returns an new instance of MFPickerSelectedItemBindingDelegate
+ * @param pickerList The pickerList reference to set to this bindingDelegate
+ * @return A new instance of MFPickerSelectedItemBindingDelegate
+ */
+- (instancetype)initWithPickerList:(MFPickerList *)pickerList;
+
+
+#pragma mark - Properties
+
+/*!
+ * @brief The pickerList to manage.
+ */
+@property (nonatomic, weak) MFPickerList *picker;
 
 @end

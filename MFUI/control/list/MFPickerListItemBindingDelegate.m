@@ -15,7 +15,17 @@
  */
 
 #import "MFPickerListItemBindingDelegate.h"
+#import "MFPickerList.h"
 
 @implementation MFPickerListItemBindingDelegate
 
+
+- (instancetype)initWithPickerList:(MFPickerList *)pickerList
+{
+    self = [super init];
+    if (self) {
+        self.picker = pickerList;
+    }
+    return self;
+}
 @end

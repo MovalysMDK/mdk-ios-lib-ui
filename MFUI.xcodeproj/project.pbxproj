@@ -413,10 +413,6 @@
 		B0D45DFB1A5ED2F400C6D376 /* MFFormViewControllerPartialValidationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45C731A5ED2F300C6D376 /* MFFormViewControllerPartialValidationDelegate.m */; };
 		B0D45DFC1A5ED2F400C6D376 /* MFFormViewControllerValidationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C741A5ED2F300C6D376 /* MFFormViewControllerValidationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45DFD1A5ED2F400C6D376 /* MFFormViewControllerValidationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45C751A5ED2F300C6D376 /* MFFormViewControllerValidationDelegate.m */; };
-		B0D45DFE1A5ED2F400C6D376 /* image_tooltip_invalid.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D45C771A5ED2F300C6D376 /* image_tooltip_invalid.png */; };
-		B0D45DFF1A5ED2F400C6D376 /* image_tooltip_invalid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D45C781A5ED2F300C6D376 /* image_tooltip_invalid@2x.png */; };
-		B0D45E001A5ED2F400C6D376 /* image_tooltip_valid.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D45C791A5ED2F300C6D376 /* image_tooltip_valid.png */; };
-		B0D45E011A5ED2F400C6D376 /* image_tooltip_valid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D45C7A1A5ED2F300C6D376 /* image_tooltip_valid@2x.png */; };
 		B0D45E021A5ED2F400C6D376 /* MFUILog.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C7C1A5ED2F300C6D376 /* MFUILog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E031A5ED2F400C6D376 /* MFUILogging.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C7D1A5ED2F300C6D376 /* MFUILogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E041A5ED2F400C6D376 /* MFUILoggingHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C7E1A5ED2F300C6D376 /* MFUILoggingHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1010,10 +1006,6 @@
 		B0D45C731A5ED2F300C6D376 /* MFFormViewControllerPartialValidationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFormViewControllerPartialValidationDelegate.m; sourceTree = "<group>"; };
 		B0D45C741A5ED2F300C6D376 /* MFFormViewControllerValidationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFormViewControllerValidationDelegate.h; sourceTree = "<group>"; };
 		B0D45C751A5ED2F300C6D376 /* MFFormViewControllerValidationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFormViewControllerValidationDelegate.m; sourceTree = "<group>"; };
-		B0D45C771A5ED2F300C6D376 /* image_tooltip_invalid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_tooltip_invalid.png; sourceTree = "<group>"; };
-		B0D45C781A5ED2F300C6D376 /* image_tooltip_invalid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_tooltip_invalid@2x.png"; sourceTree = "<group>"; };
-		B0D45C791A5ED2F300C6D376 /* image_tooltip_valid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_tooltip_valid.png; sourceTree = "<group>"; };
-		B0D45C7A1A5ED2F300C6D376 /* image_tooltip_valid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_tooltip_valid@2x.png"; sourceTree = "<group>"; };
 		B0D45C7C1A5ED2F300C6D376 /* MFUILog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUILog.h; sourceTree = "<group>"; };
 		B0D45C7D1A5ED2F300C6D376 /* MFUILogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUILogging.h; sourceTree = "<group>"; };
 		B0D45C7E1A5ED2F300C6D376 /* MFUILoggingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUILoggingHelper.h; sourceTree = "<group>"; };
@@ -1750,7 +1742,6 @@
 				B0D45C4A1A5ED2F300C6D376 /* error */,
 				B0FFDB041B34438600CA6E5E /* fieldValidator */,
 				B0D45C641A5ED2F300C6D376 /* form */,
-				B0D45C761A5ED2F300C6D376 /* graphics */,
 				B006CED91B32C1E700B78782 /* listener */,
 				B0D45C7B1A5ED2F300C6D376 /* log */,
 				B0D45C801A5ED2F300C6D376 /* MFUI-Prefix.pch */,
@@ -2219,17 +2210,6 @@
 				B0D45C751A5ED2F300C6D376 /* MFFormViewControllerValidationDelegate.m */,
 			);
 			path = validation;
-			sourceTree = "<group>";
-		};
-		B0D45C761A5ED2F300C6D376 /* graphics */ = {
-			isa = PBXGroup;
-			children = (
-				B0D45C771A5ED2F300C6D376 /* image_tooltip_invalid.png */,
-				B0D45C781A5ED2F300C6D376 /* image_tooltip_invalid@2x.png */,
-				B0D45C791A5ED2F300C6D376 /* image_tooltip_valid.png */,
-				B0D45C7A1A5ED2F300C6D376 /* image_tooltip_valid@2x.png */,
-			);
-			path = graphics;
 			sourceTree = "<group>";
 		};
 		B0D45C7B1A5ED2F300C6D376 /* log */ = {
@@ -3000,13 +2980,10 @@
 				B001B2731B5F87D80063F819 /* Photo.storyboard in Resources */,
 				B001B2761B5F87D80063F819 /* MBProgressHUD.txt in Resources */,
 				B001B2711B5F87D80063F819 /* ios_ic_nav_unactive@2x.png in Resources */,
-				B0D45DFF1A5ED2F400C6D376 /* image_tooltip_invalid@2x.png in Resources */,
 				B001B2681B5F87D80063F819 /* map@2x.png in Resources */,
 				B001B2611B5F87D80063F819 /* ios_ic_phone_active@2x.png in Resources */,
 				B001B26C1B5F87D80063F819 /* image_tooltip_invalid@2x.png in Resources */,
-				B0D45E001A5ED2F400C6D376 /* image_tooltip_valid.png in Resources */,
 				B001B2651B5F87D80063F819 /* gps.png in Resources */,
-				B0D45DFE1A5ED2F400C6D376 /* image_tooltip_invalid.png in Resources */,
 				B001B2741B5F87D80063F819 /* PhotoFixedListItemCell.xib in Resources */,
 				B001B25D1B5F87D80063F819 /* arrow.png in Resources */,
 				B001B25B1B5F87D80063F819 /* ios_ic_edit_pressed@2x.png in Resources */,
@@ -3025,7 +3002,6 @@
 				B001B26F1B5F87D80063F819 /* ios_ic_nav_active@2x.png in Resources */,
 				B001B26A1B5F87D80063F819 /* qrcode_icon@2x.png in Resources */,
 				B001B2631B5F87D80063F819 /* ios_ic_phone_unactive@2x.png in Resources */,
-				B0D45E011A5ED2F400C6D376 /* image_tooltip_valid@2x.png in Resources */,
 				B001B2751B5F87D80063F819 /* MDKFieldValidatorList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

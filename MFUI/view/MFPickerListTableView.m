@@ -24,7 +24,7 @@
 }
 
 
--(void)touchesEnded:(nonnull NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
+-(void)touchesEnded:(nonnull NSSet *)touches withEvent:(nullable UIEvent *)event {
     [self dismiss];
 }
 

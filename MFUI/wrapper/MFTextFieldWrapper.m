@@ -44,7 +44,7 @@
 }
 
 -(id)convertValue:(id)value isFromViewModelToControl:(NSNumber *)isVmToControl {
-    id result = nil;
+    id result = value;
     if(value && ![value isKindOfClass:[NSNull class]] && ![value isKindOfClass:[MFKeyNotFound class]]) {
         if([value isKindOfClass:[NSNumber class]]) {
             if([isVmToControl integerValue] == 1) {

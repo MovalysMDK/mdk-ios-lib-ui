@@ -16,6 +16,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MFBindingViewDescriptor.h"
+#import "MFBindingCellDescriptor.h"
 
 @protocol MFObjectWithBindingProtocol;
 
@@ -42,16 +43,16 @@ FOUNDATION_EXPORT const NSString *LISTITEM_PICKERLIST_DESCRIPTOR;
 /*!
  * @brief Creates a picker list item in the picker list configured by this object
  * @discussion This method must be called by PickerList Data delegate
- * @param viewDescriptor The descriptor that describes the view to add
+ * @param cellDescriptor The descriptor that describes the cell to add
  * @see MFBindingCellDescriptor
  */
--(void)createPickerListItemWithDescriptor:(MFBindingViewDescriptor *)viewDescriptor;
+-(void)createPickerListItemWithDescriptor:(MFBindingCellDescriptor *)cellDescriptor;
 
 /*!
  * @brief Creates the picker selected item in the picker list configured by this object
  * @discussion This method must be called by PickerList Data delegate
  * @param viewDescriptor The descriptor that describes the view to add
- * @see MFBindingCellDescriptor
+ * @see MFBindingViewDescriptor
  */
 -(void)createPickerSelectedItemWithDescriptor:(MFBindingViewDescriptor *)viewDescriptor;
     

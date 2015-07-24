@@ -22,7 +22,9 @@
 //Delegates
 #import "MFPickerListItemBindingDelegate.h"
 #import "MFPickerSelectedItemBindingDelegate.h"
-#import "MFUIBaseViewModel.h"
+#import "MFUIBaseListViewModel.h"
+
+#import "MFFormViewController.h"
 
 @interface MFPickerList ()
 
@@ -40,12 +42,12 @@
  */
 @property (nonatomic) BOOL constraintsAdded;
 
-
 @end
 
 @implementation MFPickerList
 @synthesize controlAttributes = _controlAttributes;
 @synthesize data = _data;
+@synthesize targetDescriptors = _targetDescriptors;
 
 -(void)initialize {
     [super initialize];
@@ -175,18 +177,70 @@
     
     
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.pickerListTableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.parentNavigationController.view attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.pickerListTableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.parentNavigationController.view  attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.pickerListTableView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.parentNavigationController.view  attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.pickerListTableView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.parentNavigationController.view  attribute:NSLayoutAttributeRight multiplier:1 constant:0];
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.pickerListTableView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.parentNavigationController.view  attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.pickerListTableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.parentNavigationController.view  attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
     
-    [self.parentNavigationController.view addConstraints:@[bottom, left, right, top]];
+    [self.parentNavigationController.view addConstraints:@[right, left, bottom, top]];
     self.pickerListTableView.alpha = 0;
     
     [UIView animateWithDuration:0.25 animations:^{
         self.pickerListTableView.alpha = 1;
+    } completion:^(BOOL finished) {
+        if(finished) {
+            int index = 0;
+            for(id object in [self getValues].viewModels) {
+                if([object isEqual:[self getData]]) {
+                    break;
+                }
+                index++;
+            }
+            [self.pickerListTableView.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        }
     }];
 }
 
+-(MFUIBaseListViewModel *) getValues {
+    MFUIBaseListViewModel *values = nil;
+    if(self.mf.pickerValuesKey) {
+        MFUIBaseViewModel *formViewModel = [((MFFormViewController *)self.parentViewController) getViewModel];
+        
+        //SI le controller répond à partialViewModelKeys, on est dans le cas d'un controller conteneur
+        // et on prend du coup le ViewModel associé à l'une des clés qui nous est donnée,
+        //SINON on remontre dans les parentViewModel jusqu'à trouver le ListViewModel recherché.
+        if([self.parentViewController respondsToSelector:@selector(partialViewModelKeys)]) {
+            MFFormViewController *controller = self.parentViewController;
+            for(NSString *key in [controller partialViewModelKeys]) {
+                if([formViewModel respondsToSelector:NSSelectorFromString(key)]) {
+                    formViewModel = [formViewModel valueForKey:key];
+                }
+            }
+        }
+        else {
+            while(formViewModel && ![formViewModel respondsToSelector:NSSelectorFromString(self.mf.pickerValuesKey)]) {
+                formViewModel = formViewModel.parentViewModel;
+            }
+        }
+        
+        id object = [formViewModel valueForKeyPath:self.mf.pickerValuesKey];
+        if(object && [object isKindOfClass:[MFUIBaseListViewModel class]]) {
+            values = (MFUIBaseListViewModel *) object;
+        }
+    }
+    return values;
+}
+
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+    commonCCTD.target = target;
+    commonCCTD.action = action;
+    self.targetDescriptors = @{@(self.hash) : commonCCTD};
+}
+
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
+}
 
 
 @end

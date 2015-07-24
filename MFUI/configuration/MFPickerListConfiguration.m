@@ -39,8 +39,8 @@ const NSString *LISTITEM_PICKERLIST_DESCRIPTOR = @"LISTITEM_PICKERLIST_DESCRIPTO
     return pickerListConfiguration;
 }
 
--(void)createPickerListItemWithDescriptor:(MFBindingViewDescriptor *)viewDescriptor {
-    [[self currentStructure] setObject:viewDescriptor forKey:LISTITEM_PICKERLIST_DESCRIPTOR];
+-(void)createPickerListItemWithDescriptor:(MFBindingCellDescriptor *)cellDescriptor {
+    [[self currentStructure] setObject:cellDescriptor forKey:LISTITEM_PICKERLIST_DESCRIPTOR];
 }
 
 -(void)createPickerSelectedItemWithDescriptor:(MFBindingViewDescriptor *)viewDescriptor {

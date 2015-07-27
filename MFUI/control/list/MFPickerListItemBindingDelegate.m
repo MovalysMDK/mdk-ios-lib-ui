@@ -137,7 +137,7 @@
     return [bindingData.cellHeight floatValue];
 }
 
--(void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.picker.pickerListTableView dismiss];
     [self.picker setData:[self viewModelAtIndexPath:indexPath]];

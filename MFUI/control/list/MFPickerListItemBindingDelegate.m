@@ -51,7 +51,8 @@
     [self createBindingStructure];
     self.hasComputeContentSize = NO;
      MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[LISTITEM_PICKERLIST_DESCRIPTOR];
-    [self.tableView registerNib:[UINib nibWithNibName:bindingData.cellIdentifier bundle:[NSBundle mainBundle]] forCellReuseIdentifier:bindingData.cellIdentifier];
+    UINib *cellNib = [UINib nibWithNibName:bindingData.cellIdentifier bundle:[NSBundle mainBundle]];
+    [self.tableView registerNib:cellNib forCellReuseIdentifier:bindingData.cellIdentifier];
 }
 
 -(void) initializeBinding {
@@ -66,8 +67,6 @@
 #pragma mark - TableView DataSource & Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
-
     return 1;
 }
 
@@ -101,7 +100,7 @@
     NSString *identifier = bindingData.cellIdentifier;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if(!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:nil options:nil] firstObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:tableView options:nil] firstObject];
     }
     bindingData.cellIndexPath = indexPath;
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];

@@ -172,6 +172,8 @@
 
 -(void) displayPickerView {
     self.pickerListTableView = [[[NSBundle bundleForClass:[MFPickerListTableView class]] loadNibNamed:@"PickerListView" owner:self.mf.listItemBindingDelegate options:nil] firstObject];
+    self.pickerListTableView.tableView.delegate = self.mf.listItemBindingDelegate;
+    self.pickerListTableView.tableView.dataSource = self.mf.listItemBindingDelegate;
     self.pickerListTableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.parentNavigationController.view addSubview:self.pickerListTableView];
     
@@ -195,6 +197,7 @@
                 }
                 index++;
             }
+            [self.pickerListTableView.tableView reloadData];
             [self.pickerListTableView.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
         }
     }];

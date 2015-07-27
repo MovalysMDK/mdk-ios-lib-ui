@@ -50,14 +50,20 @@
 
 #pragma mark - button methods
 
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if(self) {
+        self.mf = [MFViewControllerAttributes new];
+    }
+    return self;
+}
+
 - (IBAction)genericButtonPressed:(id)sender {
     [[self extendsMFViewController].viewControllerDelegate genericButtonPressed:sender];
 }
 
-
 -(void)viewDidLoad {
     [super viewDidLoad];
-    
     // Si le contrôleur n'est pas surchargé par défaut, on met le nom du storyboard qui le contient.
     dispatch_async(dispatch_get_main_queue(), ^{
         if(![self isKindOfClass:[MFWorkspaceViewController class]] &&

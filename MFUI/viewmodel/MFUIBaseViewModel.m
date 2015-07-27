@@ -107,8 +107,8 @@
     id oldValue = [change objectForKey:@"old"];
     id newValue = [change objectForKey:@"new"];
     
-    if (oldValue != nil || newValue != nil) {
-        if (oldValue != nil && newValue != nil) {
+    if (![self valueIsNull:oldValue] || ![self valueIsNull:newValue]) {
+        if (![self valueIsNull:oldValue] && ![self valueIsNull:newValue]) {
             if ([oldValue respondsToSelector:@selector(isEqualToString:)]) {
                 if (![oldValue isEqualToString:newValue]) {
                     [self dispatchValue:newValue fromPropertyName:keyPath];
@@ -308,6 +308,10 @@
 
 -(NSString *)propertyNameInParentViewModel {
     return nil;
+}
+
+-(BOOL) valueIsNull:(id)value {
+    return !value || [value isEqual:[NSNull null]];
 }
 
 @end

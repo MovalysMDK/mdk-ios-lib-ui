@@ -557,9 +557,9 @@
 		B0F474651B4A764600F20FEA /* MFSimplePickerListWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F474631B4A764600F20FEA /* MFSimplePickerListWrapper.m */; };
 		B0F8965B1B61122B005C3AA7 /* MFPickerList.h in Headers */ = {isa = PBXBuildFile; fileRef = B0F896591B61122B005C3AA7 /* MFPickerList.h */; };
 		B0F8965C1B61122B005C3AA7 /* MFPickerList.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F8965A1B61122B005C3AA7 /* MFPickerList.m */; };
-		B0F8965F1B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0F8965D1B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.h */; };
+		B0F8965F1B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0F8965D1B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0F896601B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F8965E1B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.m */; };
-		B0F896631B611291005C3AA7 /* MFPickerListItemBindingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0F896611B611291005C3AA7 /* MFPickerListItemBindingDelegate.h */; };
+		B0F896631B611291005C3AA7 /* MFPickerListItemBindingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0F896611B611291005C3AA7 /* MFPickerListItemBindingDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0F896641B611291005C3AA7 /* MFPickerListItemBindingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F896621B611291005C3AA7 /* MFPickerListItemBindingDelegate.m */; };
 		B0F8966F1B614861005C3AA7 /* PickerListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F8966E1B614861005C3AA7 /* PickerListView.xib */; };
 		B0F896721B614909005C3AA7 /* MFPickerListTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = B0F896701B614909005C3AA7 /* MFPickerListTableView.h */; };
@@ -2571,6 +2571,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0F8965F1B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.h in Headers */,
+				B0F896631B611291005C3AA7 /* MFPickerListItemBindingDelegate.h in Headers */,
 				B0E155C11B414C8600D5A213 /* UITableViewCell+Binding.h in Headers */,
 				B0129F701B3334BE0090B0AF /* MFUICommand.h in Headers */,
 				B0FFDB001B343D3300CA6E5E /* MFUIComponentProvider.h in Headers */,
@@ -2794,7 +2796,6 @@
 				B000D51A1B42837A0018281E /* MFFixedListWrapper.h in Headers */,
 				B006CEED1B32C1E700B78782 /* MFViewModelConfiguration.h in Headers */,
 				B0D45DEC1A5ED2F400C6D376 /* MFUIValidationBusinessError.h in Headers */,
-				B0F896631B611291005C3AA7 /* MFPickerListItemBindingDelegate.h in Headers */,
 				B006CEEB1B32C1E700B78782 /* MFTableConfiguration.h in Headers */,
 				B0D45E331A5ED2F400C6D376 /* MFContainerViewController.h in Headers */,
 				B000D51E1B42B7420018281E /* NSIndexPath+Utils.h in Headers */,
@@ -2887,7 +2888,6 @@
 				B0D4C4C01B3816F60020ACF2 /* MFCommonFormProtocol.h in Headers */,
 				B0D45E4F1A5ED2F400C6D376 /* MFFormBaseViewController.h in Headers */,
 				B0C9B2E91AFA220000FC9665 /* MFTextViewStyle.h in Headers */,
-				B0F8965F1B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.h in Headers */,
 				B06730521AE6833900CB0900 /* MFComponentErrorProtocol.h in Headers */,
 				B0D45DFA1A5ED2F400C6D376 /* MFFormViewControllerPartialValidationDelegate.h in Headers */,
 				B0D45E2F1A5ED2F400C6D376 /* MFUIView.h in Headers */,

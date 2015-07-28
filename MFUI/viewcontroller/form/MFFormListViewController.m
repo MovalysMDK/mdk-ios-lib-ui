@@ -117,7 +117,7 @@
     //vue sur laquelle retourner.
     if (![self isEqual:topController]) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                                 initWithTitle:MFLocalizedStringFromKey(@"form_back") style: UIBarButtonItemStyleBordered
+                                                 initWithTitle:MFLocalizedStringFromKey(@"form_back") style: UIBarButtonItemStylePlain
                                                  target:self action:@selector(dismissMyView)];
     }
     

@@ -14,8 +14,7 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-#import "MFUIForm.h"
+#import "MFFormValidationDelegate.h"
 #import "MFUIBaseViewModelProtocol.h"
 #import "MFObjectWithBindingProtocol.h"
 

@@ -206,7 +206,7 @@
 
 -(void) closeController:(id)sender {
     //On fait disparaître le formulaire.
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

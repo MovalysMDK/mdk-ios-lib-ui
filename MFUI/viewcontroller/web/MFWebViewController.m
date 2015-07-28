@@ -44,7 +44,7 @@
     [self.navigationBar pushNavigationItem:self.navigationItem animated:YES];
     UIBarButtonItem *closeButton = [[UIBarButtonItem alloc]
                                     initWithTitle: MFLocalizedStringFromKey(@"closeButton")
-                                    style:UIBarButtonItemStyleBordered
+                                    style:UIBarButtonItemStylePlain
                                     target:self
                                     action:@selector(closeViewController)];
     self.navigationItem.leftBarButtonItem = closeButton;

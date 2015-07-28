@@ -15,8 +15,13 @@
  */
 
 
-@protocol MFCommonFormProtocol;
+#import "MFCommonFormProtocol.h"
 
+/*!
+ * @class MFCommonFormDelegate
+ * @brief A common delegate to all forms on MDK iOS
+ * @discussion This class do some common treatments for all forms
+ */
 @interface MFCommonFormDelegate : NSObject <MFCommonFormProtocol>
 
 #pragma mark - Propriétés

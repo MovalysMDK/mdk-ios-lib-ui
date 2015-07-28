@@ -284,7 +284,7 @@
     BOOL fileExists = self.mf.commentHTMLFileName && [[NSFileManager defaultManager] fileExistsAtPath:[[NSBundle mainBundle] pathForResource:self.mf.commentHTMLFileName  ofType:@"html"] ];
     if(fileExists) {
         UIBarButtonItem *infoItem =
-        [[UIBarButtonItem alloc] initWithTitle:@"   ?   " style:UIBarButtonItemStyleBordered target:self action:@selector(seeScreenInfo)];
+        [[UIBarButtonItem alloc] initWithTitle:@"   ?   " style:UIBarButtonItemStylePlain target:self action:@selector(seeScreenInfo)];
         infoItem.tintColor = [UIColor redColor];
         NSMutableArray *rbbi = [self.navigationItem.rightBarButtonItems mutableCopy];
         if(!rbbi) {

@@ -26,9 +26,7 @@
 #import "MFFormValidationDelegate.h"
 #import "MFFormViewControllerPartialValidationDelegate.h"
 #import "MFFormViewControllerValidationDelegate.h"
-
-
-#import "MFCommonFormDelegate.h"
 #import "MFCommonFormProtocol.h"
+#import "MFCommonFormDelegate.h"
 #import "MFViewProtocol.h"
 #endif

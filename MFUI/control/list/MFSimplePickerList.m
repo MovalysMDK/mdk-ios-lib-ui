@@ -202,7 +202,6 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
                                           PICKER_TOP_BAR_CONFIRM_WIDTH,
                                           PICKER_TOP_BAR_ITEMS_HEIGHT);
     
-    self.confirmButton.segmentedControlStyle = UISegmentedControlStyleBar;
     self.confirmButton.tintColor = [UIColor blackColor];
     [self.confirmButton addTarget:self action:@selector(dismissPickerViewAndSave) forControlEvents:UIControlEventValueChanged];
     
@@ -213,7 +212,6 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
                                          PICKER_TOP_BAR_CANCEL_WIDTH,
                                          PICKER_TOP_BAR_ITEMS_HEIGHT);
     
-    self.cancelButton.segmentedControlStyle = UISegmentedControlStyleBar;
     self.cancelButton.tintColor = [UIColor blueColor];
     [self.cancelButton addTarget:self action:@selector(dismissPickerViewAndCancel) forControlEvents:UIControlEventValueChanged];
     

@@ -57,11 +57,11 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:MFLocalizedStringFromKey(@"form_cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelAction)];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:MFLocalizedStringFromKey(@"form_cancel") style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
     
     
     UIBarButtonItem *right = [[UIBarButtonItem alloc]
-                                              initWithTitle:MFLocalizedStringFromKey(@"form_save") style: UIBarButtonItemStyleBordered
+                                              initWithTitle:MFLocalizedStringFromKey(@"form_save") style: UIBarButtonItemStylePlain
                                               target:self action:@selector(dismissDetail)];
     
     self.navigationItem.leftBarButtonItem = left;

@@ -47,7 +47,7 @@ const void *transitionKey = &transitionKey;
 
 - (void)loadView
 {
-    self.wantsFullScreenLayout = YES;
+    self.edgesForExtendedLayout = UIRectEdgeAll;
     UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     self.view = view;

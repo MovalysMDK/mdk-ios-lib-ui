@@ -100,6 +100,7 @@
     [self.mapView setRegion:adjustedRegion animated:YES];
     self.mapView.userInteractionEnabled = YES;
     self.mapView.showsUserLocation = YES;
+    [super viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -102,6 +102,7 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [self viewDidAppear:animated withOberversParameters:nil];
+    [super viewDidAppear:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated withOberversParameters: (NSDictionary *) parameters {
@@ -147,6 +148,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     [self viewWillDisappear:animated withOberversParameters:nil];
+    [super viewWillDisappear:animated];
 }
 
 -(void)viewWillDisappear:(BOOL)animated withOberversParameters:(NSDictionary *) parameters {

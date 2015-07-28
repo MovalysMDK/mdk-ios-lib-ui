@@ -49,8 +49,7 @@
     NSBundle *mdkControlBundle = [NSBundle bundleForClass:[MFFieldValidatorHandler class]];
     NSBundle *appBundle = [NSBundle bundleForClass:NSClassFromString(@"AppDelegate")];
     
-    NSMutableDictionary *completeValidatorList = [NSMutableDictionary dictionary];
-    completeValidatorList = [[NSDictionary dictionaryWithContentsOfFile:[mdkControlBundle pathForResource:@"MDKFieldValidatorList" ofType:@"plist"]] mutableCopy];
+    NSMutableDictionary *completeValidatorList = [[NSDictionary dictionaryWithContentsOfFile:[mdkControlBundle pathForResource:@"MDKFieldValidatorList" ofType:@"plist"]] mutableCopy];
     
     NSString *appResourcePath = [appBundle pathForResource:@"AppFieldValidatorList" ofType:@"plist"];
     

@@ -197,8 +197,7 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm"];
-    NSDate *dateFromString = [[NSDate alloc] init];
-    dateFromString = [dateFormatter dateFromString:self.dateField.text];
+    NSDate *dateFromString = [dateFormatter dateFromString:self.dateField.text];
     
     self.photoViewModel.date = dateFromString;
     

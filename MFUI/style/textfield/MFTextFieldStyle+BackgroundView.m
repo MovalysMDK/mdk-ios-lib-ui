@@ -42,9 +42,7 @@ const NSString * BACKGROUND_VIEW_LEFT_CONSTRAINT = @"BACKGROUND_VIEW_LEFT_CONSTR
     [component addConstraints:backgroundViewConstraints.allValues];
 }
 
--(NSDictionary *)defineBackgroundViewConstraintsOnComponent:(UIView *)component {
-    NSDictionary *backgroundViewConstraints = [NSDictionary new];
-    
+-(NSDictionary *)defineBackgroundViewConstraintsOnComponent:(UIView *)component {    
     self.backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
     
     NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:self.backgroundView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:component attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
@@ -53,7 +51,7 @@ const NSString * BACKGROUND_VIEW_LEFT_CONSTRAINT = @"BACKGROUND_VIEW_LEFT_CONSTR
     NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.backgroundView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:component attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
     
     
-    backgroundViewConstraints = @{
+    NSDictionary *backgroundViewConstraints = @{
                              BACKGROUND_VIEW_WIDTH_CONSTRAINT:width,
                              BACKGROUND_VIEW_HEIGHT_CONSTRAINT:height,
                              BACKGROUND_VIEW_CENTER_Y_CONSTRAINT:centerY,

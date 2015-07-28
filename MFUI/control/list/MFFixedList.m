@@ -370,7 +370,10 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
         buttonWidth = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:sizeForCustomButtons.width];
         buttonHeight = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:sizeForCustomButtons.height];
         
-        [self.buttonsView addConstraints:@[rightButtonMargin, centerYButton, buttonHeight, buttonWidth ]];
+        [self.buttonsView addConstraints:@[centerYButton, buttonHeight, buttonWidth ]];
+        if(rightButtonMargin) {
+            [self.buttonsView addConstraint:rightButtonMargin];
+        }
         lasButtonReference = button;
     }
     

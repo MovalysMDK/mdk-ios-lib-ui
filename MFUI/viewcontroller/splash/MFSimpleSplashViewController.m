@@ -55,15 +55,11 @@
     [super viewDidLoad];
     
     [self initProgressBar];
-//
-//    // avoid to use the menu while loading
+
+    //    // avoid to use the menu while loading
     self.transitionController.viewDeckController.panningMode = IIViewDeckNoPanning;
 }
 
-
--(void)viewDidAppear:(BOOL)animated {
-
-}
 
 
 -(void) initProgressBar {

@@ -70,7 +70,6 @@ NSString * ERROR_VIEW_RIGHT_CONSTRAINT = @"ERROR_VIEW_RIGHT_CONSTRAINT";
 
 
 -(NSDictionary *)defineErrorViewConstraintsOnComponent:(UIView *)component {
-    NSDictionary *errorViewConstraints = [NSDictionary new];
     
     component.translatesAutoresizingMaskIntoConstraints = NO;
     self.errorView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -80,7 +79,7 @@ NSString * ERROR_VIEW_RIGHT_CONSTRAINT = @"ERROR_VIEW_RIGHT_CONSTRAINT";
     NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.errorView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:DEFAULT_ERROR_VIEW_SQUARE_SIZE];
     NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.errorView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:DEFAULT_ERROR_VIEW_SQUARE_SIZE];
     
-    errorViewConstraints = @{
+    NSDictionary *errorViewConstraints = @{
                              ERROR_VIEW_CENTER_Y_CONSTRAINT:centerY,
                              ERROR_VIEW_HEIGHT_CONSTRAINT:height,
                              ERROR_VIEW_RIGHT_CONSTRAINT:right,

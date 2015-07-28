@@ -139,6 +139,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	self.myWebView.delegate = self;	// setup the delegate as the web view is shown
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -152,6 +153,7 @@
     [self.myWebView stopLoading];	// in case the web view is still loading its content
 	self.myWebView.delegate = nil;	// disconnect the delegate as the webview is hidden
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [super viewWillDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

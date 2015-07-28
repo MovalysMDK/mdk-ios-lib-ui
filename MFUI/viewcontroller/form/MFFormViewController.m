@@ -97,14 +97,7 @@ NSString *const MFPROP_FORM_ONUNSAVEDCHANGES = @"FormOnUnsavedChanges";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //PROTODO : FAIRE CA + TARD ?
-    MFAppDelegate *mfDelegate = nil;
-    id<UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
-    if([appDelegate isKindOfClass:[MFAppDelegate class]]){
-        mfDelegate = (MFAppDelegate *) appDelegate;
-    }
-    
+
     //Setup bar items (back, save...)
     if(![self isKindOfClass:[MFFormDetailViewController class]]) {
         [self setupBarItems];

@@ -15,8 +15,9 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "MFCommonFormProtocol.h"
+
 @class MFPickerList;
-@protocol MFCommonFormProtocol;
 
 @interface MFPickerListItemBindingDelegate : NSObject <MFCommonFormProtocol, UITableViewDelegate, UITableViewDataSource>
 

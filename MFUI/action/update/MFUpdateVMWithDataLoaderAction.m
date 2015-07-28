@@ -20,6 +20,7 @@
 //
 
 #import <MFCore/MFCoreLog.h>
+#import <MFCore/MFCoreBean.h>
 #import <MFCore/MFCoreDataloader.h>
 
 #import "MFUpdateVMWithDataLoaderAction.h"

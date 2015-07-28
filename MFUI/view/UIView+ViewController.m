@@ -20,9 +20,13 @@
 
 - (UIViewController *)parentViewController {
     UIResponder *responder = self;
-    while ([responder isKindOfClass:[UIView class]])
+    while ([responder isKindOfClass:[UIView class]]) {
         responder = [responder nextResponder];
-    return responder;
+    }
+    if([responder isKindOfClass:[UIViewController class]]) {
+        return (UIViewController *)responder;
+    }
+    return nil;
 }
 
 - (UIViewController *)parentNavigationController {

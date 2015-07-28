@@ -23,7 +23,7 @@
 #define MFUI_MFUICell_h
 
 #import "MFPhotoFixedListItemCell.h"
-#import "MFCellPhotoFixedList.h"
+#import "MFPhotoFixedListDataDelegate.h"
 #import "MFCell1ComponentHorizontal.h"
 #import "MFFormCellProtocol.h"
 #import "MFCellAbstract.h"

@@ -20,9 +20,8 @@
 // Protocols and delegates
 #import "MFCommonFormProtocol.h"
 #import "MFTableConfiguration.h"
-
-@protocol MFFormWithDetailViewControllerProtocol;
-@protocol MFContentDelegate;
+#import "MFFormWithDetailViewControllerProtocol.h"
+#import "MFFormBaseViewController.h"
 
 @class MFFixedList;
 
@@ -64,7 +63,6 @@
  */
 -(NSArray *)customButtonsForFixedList;
 -(void)addItemOnFixedList:(BOOL) reload;
--(BOOL) addError:(id)error onComponent:(NSString *)bindingKey atIndexPath:(NSIndexPath *)indexPath;
 
 
 -(void)initializeModel;

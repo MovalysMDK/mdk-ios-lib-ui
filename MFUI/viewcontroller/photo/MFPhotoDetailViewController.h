@@ -24,7 +24,7 @@
 #import "MFPhotoViewModel.h"
 #import "MFPhotoThumbnail.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "MFCellPhotoFixedList.h"
+#import "MFPhotoFixedListDataDelegate.h"
 #import <CoreLocation/CoreLocation.h>
 #import "MFViewController.h"
 #import "MFDetailViewControllerProtocol.h"
@@ -48,7 +48,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *supprimerPhotoButton;
 
 @property (nonatomic, strong) MFFixedList *fixedList;
-@property (nonatomic, strong) MFCellPhotoFixedList *cellPhotoFixedList;
+@property (nonatomic, strong) MFPhotoFixedListDataDelegate *cellPhotoFixedList;
 
 /*!
  * @brief Méthode appelée lorsqu'on quitte la vue sans sauvegarder

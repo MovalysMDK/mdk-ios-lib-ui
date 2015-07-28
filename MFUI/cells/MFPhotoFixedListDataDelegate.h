@@ -13,15 +13,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFCellPhotoFixedList.h
-//  Pods
-//
-//
-//
+
 
 #import "MFFixedListDataDelegate.h"
 
-@interface MFCellPhotoFixedList : MFFixedListDataDelegate
+/*!
+ * @class MFPhotoFixedListDataDelegate
+ * @brief The data delegate for PhotoFixedList component
+ */
+@interface MFPhotoFixedListDataDelegate : MFFixedListDataDelegate
 
 @end

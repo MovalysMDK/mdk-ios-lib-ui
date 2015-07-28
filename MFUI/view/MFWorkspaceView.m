@@ -56,6 +56,7 @@ NSString *const WORKSPACE_VIEW_DID_SCROLL_NOTIFICATION_KEY = @"workspaceViewDidS
 @implementation MFWorkspaceView
 @synthesize currentOrientation = _currentOrientation;
 @synthesize defaultConstraints = _defaultConstraints;
+@synthesize savedConstraints = _savedConstraints;
 
 
 #pragma mark - Initialization

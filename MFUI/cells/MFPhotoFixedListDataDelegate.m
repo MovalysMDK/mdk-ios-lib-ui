@@ -21,12 +21,12 @@
 //
 //
 
-#import "MFCellPhotoFixedList.h"
+#import "MFPhotoFixedListDataDelegate.h"
 #import "MFPhotoDetailViewController.h"
 #import "MFPhotoFixedListItemCell.h"
 #import "MFUIBaseListViewModel.h"
 
-@implementation MFCellPhotoFixedList
+@implementation MFPhotoFixedListDataDelegate
 
 
 /**

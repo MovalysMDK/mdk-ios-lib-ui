@@ -278,8 +278,8 @@
 		B0D45D411A5ED2F400C6D376 /* MFCell1ComponentHorizontal.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45B9E1A5ED2F300C6D376 /* MFCell1ComponentHorizontal.m */; };
 		B0D45D421A5ED2F400C6D376 /* MFCellAbstract.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45B9F1A5ED2F300C6D376 /* MFCellAbstract.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45D431A5ED2F400C6D376 /* MFCellAbstract.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45BA01A5ED2F300C6D376 /* MFCellAbstract.m */; };
-		B0D45D441A5ED2F400C6D376 /* MFCellPhotoFixedList.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45BA11A5ED2F300C6D376 /* MFCellPhotoFixedList.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45D451A5ED2F400C6D376 /* MFCellPhotoFixedList.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45BA21A5ED2F300C6D376 /* MFCellPhotoFixedList.m */; };
+		B0D45D441A5ED2F400C6D376 /* MFPhotoFixedListDataDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45BA11A5ED2F300C6D376 /* MFPhotoFixedListDataDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B0D45D451A5ED2F400C6D376 /* MFPhotoFixedListDataDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45BA21A5ED2F300C6D376 /* MFPhotoFixedListDataDelegate.m */; };
 		B0D45D461A5ED2F400C6D376 /* MFFormCellProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45BA31A5ED2F300C6D376 /* MFFormCellProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45D471A5ED2F400C6D376 /* MFPhotoFixedListItemCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45BA41A5ED2F300C6D376 /* MFPhotoFixedListItemCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45D481A5ED2F400C6D376 /* MFPhotoFixedListItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45BA51A5ED2F300C6D376 /* MFPhotoFixedListItemCell.m */; };
@@ -874,8 +874,8 @@
 		B0D45B9E1A5ED2F300C6D376 /* MFCell1ComponentHorizontal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCell1ComponentHorizontal.m; sourceTree = "<group>"; };
 		B0D45B9F1A5ED2F300C6D376 /* MFCellAbstract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCellAbstract.h; sourceTree = "<group>"; };
 		B0D45BA01A5ED2F300C6D376 /* MFCellAbstract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCellAbstract.m; sourceTree = "<group>"; };
-		B0D45BA11A5ED2F300C6D376 /* MFCellPhotoFixedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCellPhotoFixedList.h; sourceTree = "<group>"; };
-		B0D45BA21A5ED2F300C6D376 /* MFCellPhotoFixedList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCellPhotoFixedList.m; sourceTree = "<group>"; };
+		B0D45BA11A5ED2F300C6D376 /* MFPhotoFixedListDataDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPhotoFixedListDataDelegate.h; sourceTree = "<group>"; };
+		B0D45BA21A5ED2F300C6D376 /* MFPhotoFixedListDataDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPhotoFixedListDataDelegate.m; sourceTree = "<group>"; };
 		B0D45BA31A5ED2F300C6D376 /* MFFormCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFormCellProtocol.h; sourceTree = "<group>"; };
 		B0D45BA41A5ED2F300C6D376 /* MFPhotoFixedListItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPhotoFixedListItemCell.h; sourceTree = "<group>"; };
 		B0D45BA51A5ED2F300C6D376 /* MFPhotoFixedListItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPhotoFixedListItemCell.m; sourceTree = "<group>"; };
@@ -1879,8 +1879,8 @@
 				B0D45B9E1A5ED2F300C6D376 /* MFCell1ComponentHorizontal.m */,
 				B0D45B9F1A5ED2F300C6D376 /* MFCellAbstract.h */,
 				B0D45BA01A5ED2F300C6D376 /* MFCellAbstract.m */,
-				B0D45BA11A5ED2F300C6D376 /* MFCellPhotoFixedList.h */,
-				B0D45BA21A5ED2F300C6D376 /* MFCellPhotoFixedList.m */,
+				B0D45BA11A5ED2F300C6D376 /* MFPhotoFixedListDataDelegate.h */,
+				B0D45BA21A5ED2F300C6D376 /* MFPhotoFixedListDataDelegate.m */,
 				B0D45BA31A5ED2F300C6D376 /* MFFormCellProtocol.h */,
 				B0D45BA41A5ED2F300C6D376 /* MFPhotoFixedListItemCell.h */,
 				B0D45BA51A5ED2F300C6D376 /* MFPhotoFixedListItemCell.m */,
@@ -2835,7 +2835,7 @@
 				B0D45DDB1A5ED2F400C6D376 /* MFInvalidIntegerValueUIValidationError.h in Headers */,
 				B0D45D721A5ED2F400C6D376 /* MFNumberPicker.h in Headers */,
 				B0D45E401A5ED2F400C6D376 /* MFWorkspaceViewController.h in Headers */,
-				B0D45D441A5ED2F400C6D376 /* MFCellPhotoFixedList.h in Headers */,
+				B0D45D441A5ED2F400C6D376 /* MFPhotoFixedListDataDelegate.h in Headers */,
 				B0D45E291A5ED2F400C6D376 /* MFBindingViewAbstract.h in Headers */,
 				B0D45E481A5ED2F400C6D376 /* MFCreateEmailViewController.h in Headers */,
 				B0C9B2CB1AFA21E700FC9665 /* UIView+Styleable.h in Headers */,
@@ -3256,7 +3256,7 @@
 				B0D45DEB1A5ED2F400C6D376 /* MFUITechnicalError.m in Sources */,
 				B0129F741B33362C0090B0AF /* MFEmail.m in Sources */,
 				B0D45D761A5ED2F400C6D376 /* MFPhotoPropertiesViewController.m in Sources */,
-				B0D45D451A5ED2F400C6D376 /* MFCellPhotoFixedList.m in Sources */,
+				B0D45D451A5ED2F400C6D376 /* MFPhotoFixedListDataDelegate.m in Sources */,
 				B0D45E751A5ED2F400C6D376 /* UIViewController+MFMenuManager.m in Sources */,
 				B0D45D8E1A5ED2F400C6D376 /* MFSignature.m in Sources */,
 				B0FC78F41B3AD22700DD225F /* MFTextViewWrapper.m in Sources */,

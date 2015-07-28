@@ -17,6 +17,7 @@
 #import "MFChainSaveDetailAction.h"
 #import "MFAbstractSaveDetailAction.h"
 #import "MFChainSaveActionDetailParameter.h"
+#import <MFcore/MFCoreBean.h>
 #import <MFCore/MFCoreApplication.h>
 #import <MFCore/MFCoreI18n.h>
 

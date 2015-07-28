@@ -247,7 +247,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         id<MFCommonFormProtocol> parentController = self.formController;
         
         // Getting the detailController to display
-        MFFormDetailViewController *nextController = [self detailController];
+        id<MFDetailViewControllerProtocol> nextController = [self detailController];
         [nextController setEditable:self.fixedList.editable];
         [nextController setParentFormController:self];
         [nextController setIndexPath:indexPath];
@@ -256,7 +256,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         //Displaying the detail controller
         [nextController setOriginalViewModel:tempViewModel];
         
-        [((UIViewController *)parentController).navigationController pushViewController:nextController animated:YES];
+        [((UIViewController *)parentController).navigationController pushViewController:(UIViewController *)nextController animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -353,7 +353,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     }
     
     if([self.fixedList isPhotoFixedList]) {
-        id<MFCommonFormProtocol> parentController = self.fixedList.parentViewController;
+        UIViewController *parentController = self.fixedList.parentViewController;
         //On ajoute l'élément à la liste
         //On créé le contrôleur à afficher
         MFPhotoDetailViewController *managePhotoViewController = [[UIStoryboard storyboardWithName:DEFAUT_PHOTO_STORYBOARD_NAME bundle:nil] instantiateViewControllerWithIdentifier:DEFAUT_PHOTO_MANAGER_CONTROLLER_NAME];
@@ -374,7 +374,6 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         managePhotoViewController.photoViewModel = newPhotoViewModel;
         
         //On affiche la vue
-        
         [((UIViewController *)parentController).navigationController pushViewController:managePhotoViewController animated:YES];
     }
     [self computeCellHeightAndDispatchToFormController];

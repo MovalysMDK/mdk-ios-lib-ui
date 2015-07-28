@@ -50,6 +50,7 @@
 
 @implementation JDFTooltipView
 
+
 #pragma mark - Setters
 
 - (void)setTooltipText:(NSString *)tooltipText

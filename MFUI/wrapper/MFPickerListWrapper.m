@@ -40,11 +40,15 @@
     
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void)setWrapperIndexPath:(NSIndexPath *)wrapperIndexPath {
     _wrapperIndexPath = wrapperIndexPath;
     [[NSNotificationCenter defaultCenter] removeObserver:self.objectWithBinding name:[NSString stringWithFormat:@"MDK_ComponentSize_%@", [self.wrapperIndexPath stringIndexPath]] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self.objectWithBinding selector:@selector(cellSizeChanges:) name:[NSString stringWithFormat:@"MDK_ComponentSize_%@", [self.wrapperIndexPath stringIndexPath]] object:nil];
 }
+#pragma clang diagnostic pop
 
 
 @end

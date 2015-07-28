@@ -50,7 +50,7 @@ NSString *const MF_BINDABLE_PROPERTIES = @"BindableProperties";
 @synthesize parent;
 @synthesize viewModel = _viewModel;
 @synthesize formValidation = _formValidation;
-
+@synthesize bindingDelegate = _bindingDelegate;
 
 #pragma mark - Initializing
 -(id)initWithParent:(id<MFCommonFormProtocol>) parentForm {
@@ -81,10 +81,7 @@ NSString *const MF_BINDABLE_PROPERTIES = @"BindableProperties";
 
 -(void) dealloc {
     self.parent = nil;
-
 }
-
-
 
 -(id<MFUIBaseViewModelProtocol>)getViewModel {
     return [self.parent getViewModel];

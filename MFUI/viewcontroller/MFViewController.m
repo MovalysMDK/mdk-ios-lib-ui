@@ -79,7 +79,9 @@
     
 }
 
-
+-(void)initialize {
+    //Nothing to do
+}
 
 
 - (void)applyDefaultConstraints {

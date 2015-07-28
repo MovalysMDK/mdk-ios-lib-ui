@@ -33,7 +33,7 @@
 @implementation MFCommonControlDelegate
 
 
--(instancetype)initWithComponent:(id<MFUIComponentProtocol>)component {
+-(instancetype)initWithComponent:(UIView<MFUIComponentProtocol> *)component {
     self = [super init];
     if(self) {
         self.component = component;

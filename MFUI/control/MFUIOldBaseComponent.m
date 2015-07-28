@@ -26,6 +26,7 @@
 #import <MFCore/MFCoreError.h>
 
 #import "MFUIOldBaseComponent.h"
+#import "MFUIBaseComponent.h"
 #import "MFFormCellProtocol.h"
 #import "MFCellAbstract.h"
 #import "MFUILogging.h"
@@ -60,6 +61,8 @@
 @synthesize associatedLabel = _associatedLabel;
 @synthesize controlDelegate = _controlDelegate;
 @synthesize errors = _errors;
+@synthesize privateData = _privateData;
+@synthesize tooltipView = _tooltipView;
 
 #pragma mark - Constructeurs et initialisation
 -(id)init {
@@ -586,6 +589,10 @@
 
 -(void)addControlAttribute:(id)controlAttribute forKey:(NSString *)key {
     [self.controlDelegate addControlAttribute:controlAttribute forKey:key];
+}
+
+-(void)showError:(BOOL)showError {
+    
 }
 
 @end

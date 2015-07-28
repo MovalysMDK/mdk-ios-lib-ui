@@ -46,7 +46,7 @@
 @interface MFFormListViewController () <CLLocationManagerDelegate>
 
 /**
- * @brief the application context 
+ * @brief the application context
  */
 @property(nonatomic, strong) MFApplication *applicationContext;
 
@@ -90,7 +90,7 @@
 {
     [super viewDidLoad];
     [self setupBarItems];
-
+    
     
     // fix separator display at the bottom of the tableview
     UIView *tableViewFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 0)];
@@ -134,7 +134,7 @@
             [self addToolBarWithItems:@[uiButton]];
         }
     }
-
+    
 }
 
 #pragma mark - TableView DataSource & Delegate
@@ -226,7 +226,7 @@
             id<MFContextProtocol> mfContext = [contextFactory createMFContextWithChildCoreDataContextWithParent:listViewmodel.fetch.managedObjectContext];
             
             [[MFActionLauncher getInstance] launchAction:
-            self.deleteAction withCaller:self withInParameter:paramIn andContext:mfContext];
+             self.deleteAction withCaller:self withInParameter:paramIn andContext:mfContext];
             
             
             if (self.longPressToDelete) [self.tableView setEditing:NO animated:YES];
@@ -300,12 +300,12 @@
         id vmCreator = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_VIEW_MODEL_CREATOR];
         if([[listVm.fetch.sections objectAtIndex:0] objects].count > indexPath.row) {
             id temp = [listVm.fetch objectAtIndexPath:indexPath];
-
+            
 #pragma clang diagnostic push
 #pragma GCC diagnostic ignored "-Wundeclared-selector"
             id tempVM =[vmCreator performSelector:@selector(createOrUpdateItemVM:withData:) withObject:[listVm defineViewModelName] withObject: temp];
 #pragma clang diagnostic pop
-
+            
             [listVm add:tempVM atIndex:indexPath.row];
             vmItem = tempVM ; //[listVm.viewModels objectAtIndex:indexPath.row];
         }
@@ -399,7 +399,9 @@
                 
                 [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 break;
-
+            default :
+                break;
+                
         }
         
     }];
@@ -418,6 +420,8 @@
                 
             case NSFetchedResultsChangeDelete:
                 [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+                break;
+            default:
                 break;
         }
     }];

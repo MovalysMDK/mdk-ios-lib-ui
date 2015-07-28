@@ -23,7 +23,8 @@
 #import "MFPosition.h"
 #import "MFMapViewController.h"
 #import "MFViewControllerProtocol.h"
-#import "MFUIBaseViewModel.h"
+@class MFPhotoViewModel;
+
 
 @interface MFPhotoPropertiesViewController : UIViewController<MFViewControllerProtocol>
 
@@ -114,7 +115,7 @@
  * @brief Met à jour le PhotoViewModel
  * @param photoViewModel le PHotoViewModel à mettre à jour
  */
--(void) setPhotoViewModel:(MFUIBaseViewModel *)photoViewModel;
+-(void) setPhotoViewModel:(MFPhotoViewModel *)photoViewModel;
 
 
 @end

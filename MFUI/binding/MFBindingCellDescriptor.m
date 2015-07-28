@@ -117,6 +117,6 @@
 #pragma mark - Description
 
 -(NSString *)description {
-    return [NSString stringWithFormat:@"IndexPath=[%d,%d], identifier=%@, height=%@\rBindingDictionary=%@", self.cellIndexPath.section, self.cellIndexPath.row, self.cellIdentifier, self.cellHeight, self.cellBinding];
+    return [NSString stringWithFormat:@"IndexPath=[%ld,%ld], identifier=%@, height=%@\rBindingDictionary=%@", self.cellIndexPath.section, self.cellIndexPath.row, self.cellIdentifier, self.cellHeight, self.cellBinding];
 }
 @end

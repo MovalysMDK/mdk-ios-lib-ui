@@ -28,6 +28,8 @@
 
 @implementation MFPickerSelectedItemBindingDelegate
 @synthesize bindingDelegate = _bindingDelegate;
+@synthesize viewModel = _viewModel;
+@synthesize formValidation = _formValidation;
 
 - (instancetype)initWithPickerList:(MFPickerList *)pickerList
 {

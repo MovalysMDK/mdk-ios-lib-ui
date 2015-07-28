@@ -74,6 +74,9 @@
     return _data;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void)setData:(MFUIBaseViewModel *)data {
     if(![_data isEqual:data] && ![data isKindOfClass:[MFKeyNotFound class]]) {
         _data= data;
@@ -81,7 +84,7 @@
         [self.mf.selectedItemBindingDelegate performSelector:@selector(updateStaticView)];
     }
 }
-
+#pragma clang diagnostic pop
 
 
 -(void)setControlAttributes:(NSDictionary *)controlAttributes {
@@ -206,13 +209,13 @@
 -(MFUIBaseListViewModel *) getValues {
     MFUIBaseListViewModel *values = nil;
     if(self.mf.pickerValuesKey) {
-        MFUIBaseViewModel *formViewModel = [((MFFormViewController *)self.parentViewController) getViewModel];
+        MFUIBaseViewModel *formViewModel = (MFUIBaseViewModel *)[((MFFormViewController *)self.parentViewController) getViewModel];
         
         //SI le controller répond à partialViewModelKeys, on est dans le cas d'un controller conteneur
         // et on prend du coup le ViewModel associé à l'une des clés qui nous est donnée,
         //SINON on remontre dans les parentViewModel jusqu'à trouver le ListViewModel recherché.
         if([self.parentViewController respondsToSelector:@selector(partialViewModelKeys)]) {
-            MFFormViewController *controller = self.parentViewController;
+            MFFormViewController *controller = (MFFormViewController *)self.parentViewController;
             for(NSString *key in [controller partialViewModelKeys]) {
                 if([formViewModel respondsToSelector:NSSelectorFromString(key)]) {
                     formViewModel = [formViewModel valueForKey:key];
@@ -221,7 +224,7 @@
         }
         else {
             while(formViewModel && ![formViewModel respondsToSelector:NSSelectorFromString(self.mf.pickerValuesKey)]) {
-                formViewModel = formViewModel.parentViewModel;
+                formViewModel = (MFUIBaseViewModel *)formViewModel.parentViewModel;
             }
         }
         
@@ -240,10 +243,15 @@
     self.targetDescriptors = @{@(self.hash) : commonCCTD};
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void) valueChanged:(UIView *)sender {
     MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
     [cctd.target performSelector:cctd.action withObject:self];
 }
+#pragma clang diagnostic pop
+
 
 
 @end

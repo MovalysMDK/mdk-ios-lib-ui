@@ -96,9 +96,14 @@
     self.targetDescriptors = @{@(self.innerSwitch.hash) : commonCCTD};
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void) valueChanged:(UIView *)sender {
     MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
     [cctd.target performSelector:cctd.action withObject:self];
 }
+#pragma clang diagnostic pop
+
 
 @end

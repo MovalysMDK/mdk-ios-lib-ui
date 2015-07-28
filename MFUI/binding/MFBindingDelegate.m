@@ -68,12 +68,12 @@
         wrapper = [[MFAbstractComponentWrapper alloc] initWithComponent:component];
         while(currentClass != nil) {
             if( (customWrapper = [self wrappersConfiguration][NSStringFromClass(currentClass)]) != nil) {
-                wrapper = [[NSClassFromString(customWrapper) alloc] initWithComponent:component];
+                wrapper = [[NSClassFromString(customWrapper) alloc] initWithComponent:(UIView<MFUIComponentProtocol> *)component];
                 break;
             }
             else if((NSClassFromString([NSString stringWithFormat:@"%@Wrapper", currentClass])) != nil) {
                 customWrapper = [NSString stringWithFormat:@"%@Wrapper", currentClass];
-                wrapper = [[NSClassFromString(customWrapper) alloc] initWithComponent:component];
+                wrapper = [[NSClassFromString(customWrapper) alloc] initWithComponent:(UIView<MFUIComponentProtocol> *)component];
                 break;
             }
             currentClass = [currentClass superclass];

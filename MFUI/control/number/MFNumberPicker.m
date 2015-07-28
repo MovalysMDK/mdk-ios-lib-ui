@@ -169,7 +169,7 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 
 -(void)setData:(id)data {
     self.currentValue = [data integerValue];
-    [self.innerTextField setData:[NSString stringWithFormat:@"%d", self.currentValue]];
+    [self.innerTextField setData:[NSString stringWithFormat:@"%ld", self.currentValue]];
 }
 
 -(id)getData {
@@ -279,10 +279,14 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
     self.targetDescriptors = @{@(self.innerStepper.hash) : commonCCTD, @(self.innerTextField.hash) : commonCCTD};
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void) valueChanged:(UIView *)sender {
     MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
     [cctd.target performSelector:cctd.action withObject:self];
 }
+#pragma clang diagnostic pop
 
 
 @end

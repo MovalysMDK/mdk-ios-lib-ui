@@ -53,6 +53,8 @@
 @synthesize associatedLabel = _associatedLabel;
 @synthesize targetDescriptors = _targetDescriptors;
 @synthesize errors = _errors;
+@synthesize lastUpdateSender = _lastUpdateSender;
+@synthesize privateData = _privateData;
 
 
 #pragma mark - Initialization
@@ -235,6 +237,9 @@
     }
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void)setUseCustomBackgroundView_MDK:(BOOL)useCustomBackgroundView_MDK {
     _useCustomBackgroundView_MDK = useCustomBackgroundView_MDK;
     if(_useCustomBackgroundView_MDK) {
@@ -244,6 +249,8 @@
         [self.styleClass performSelector:@selector(removeBackgroundViewOnComponent:) withObject:self];
     }
 }
+#pragma clang diagnostic pop
+
 
 -(void)setVisible:(NSNumber *)visible {
     _visible = visible;
@@ -285,12 +292,17 @@
     }
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void) valueChanged:(UIView *)sender {
     if([self.controlDelegate validate] == 0) {
         MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
         [cctd.target performSelector:cctd.action withObject:self];
     }
 }
+#pragma clang diagnostic pop
+
 
 -(NSArray *)controlValidators {
     return @[];

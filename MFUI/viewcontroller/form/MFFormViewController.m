@@ -239,5 +239,9 @@ NSString *const MFPROP_FORM_ONUNSAVEDCHANGES = @"FormOnUnsavedChanges";
     return YES;
 }
 
+-(NSArray *)partialViewModelKeys {
+    return @[];
+}
+
 
 @end

@@ -290,7 +290,7 @@ NSString *BINDING_OUTLET_SUFFFIX = @".binding";
 }
 
 -(void)setObject:(id)obj forKeyedSubscript:(id<NSCopying>)key {
-    [self addBindingDescriptor:[MFBindingDescriptor bindingDescriptorWithFormat:obj] forOutletBindingKey:[MFOutletBindingKey bindingKeyForOutletName:key]];
+    [self addBindingDescriptor:[MFBindingDescriptor bindingDescriptorWithFormat:obj] forOutletBindingKey:[MFOutletBindingKey bindingKeyForOutletName:(NSString *)key]];
 }
 
 -(NSString *)description {

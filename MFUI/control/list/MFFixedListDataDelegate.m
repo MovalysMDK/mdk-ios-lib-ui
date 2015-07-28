@@ -123,7 +123,11 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     }
     MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_FIXEDLIST_DESCRIPTOR];
     NSString *identifier = bindingData.cellIdentifier;
-    [tableView registerNib:[UINib nibWithNibName:identifier bundle:nil] forCellReuseIdentifier:identifier];
+    UINib *nib = [UINib nibWithNibName:identifier bundle:[NSBundle mainBundle]];
+    if([identifier isEqualToString:@"PhotoFixedListItemCell"]) {
+        nib = [UINib nibWithNibName:identifier bundle:[NSBundle bundleForClass:[MFCellAbstract class]]];
+    }
+    [tableView registerNib:nib forCellReuseIdentifier:identifier];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
@@ -131,12 +135,6 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     bindingData.cellIndexPath = indexPath;
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
     [self updateCellFromBindingData:bindingData atIndexPath:indexPath];
-    
-    //    dispatch_async(dispatch_get_main_queue(), ^{
-    //        if(self.fixedList.cellContainer) {
-    //            [self. updateConstraints];
-    //        }
-    //    });
     
     if([cell isKindOfClass:[MFCellAbstract class]]) {
         [(MFCellAbstract *)cell cellIsConfigured];
@@ -356,7 +354,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         UIViewController *parentController = self.fixedList.parentViewController;
         //On ajoute l'élément à la liste
         //On créé le contrôleur à afficher
-        MFPhotoDetailViewController *managePhotoViewController = [[UIStoryboard storyboardWithName:DEFAUT_PHOTO_STORYBOARD_NAME bundle:nil] instantiateViewControllerWithIdentifier:DEFAUT_PHOTO_MANAGER_CONTROLLER_NAME];
+        MFPhotoDetailViewController *managePhotoViewController = [[UIStoryboard storyboardWithName:DEFAUT_PHOTO_STORYBOARD_NAME bundle:[NSBundle bundleForClass:[MFPhotoDetailViewController class]]] instantiateViewControllerWithIdentifier:DEFAUT_PHOTO_MANAGER_CONTROLLER_NAME];
         
         //Récupération du view model créé lors de l'ajout de l'élément.
         //Il correspond au dernier élément ajouté au tableau des view models de la liste
@@ -370,7 +368,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         
         //Le contrôleur récupère la liste, la cellule et le view model créé.
         managePhotoViewController.fixedList = self.fixedList;
-        managePhotoViewController.cellPhotoFixedList = self;
+        managePhotoViewController.cellPhotoFixedList = (MFPhotoFixedListDataDelegate *)self;
         managePhotoViewController.photoViewModel = newPhotoViewModel;
         
         //On affiche la vue
@@ -405,6 +403,8 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     }
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 -(void) performSelectorFromMethodName:(NSString *)selectorName onActionAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath) {
         selectorName = [selectorName stringByAppendingString:@"AtIndexPath:"];
@@ -419,8 +419,8 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
             });
         }
     }
-    
 }
+#pragma clang diagnostic pop
 
 -(MFFormDetailViewController *)detailController {
     MFCoreLogError(@"MFFixedListDataDelegate : %@",[MFException getNotImplementedExceptionOfMethodName:@"detailController" inClass:self.class andUserInfo:nil]);
@@ -461,7 +461,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         id<MFObjectWithBindingProtocol> parentObjectWithBinding = (id<MFObjectWithBindingProtocol>)parent;
         MFBindingValue *selfBindingValue = parentObjectWithBinding.bindingDelegate.binding.bindingByComponents[@(self.fixedList.hash)];
         if(selfBindingValue && [self getViewModel]) {
-            int numberOfItems = ((MFUIBaseListViewModel *)[self getViewModel]).viewModels.count;
+            NSUInteger numberOfItems = ((MFUIBaseListViewModel *)[self getViewModel]).viewModels.count;
             float height = numberOfItems * itemHeight ;
             height += (numberOfItems - 1) * TABLEVIEW_SEPARATOR_HEIGHT;
             height += self.fixedList.topBarView.frame.size.height;

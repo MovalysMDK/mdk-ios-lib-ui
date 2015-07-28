@@ -82,8 +82,7 @@
     //On propage la valeur editable du parent sur les composant movalys fils de cette vue.
     for(UIView *subview in self.subviews) {
         if([subview conformsToProtocol:@protocol(MFUIComponentProtocol)]) {
-            id<MFUIComponentProtocol> subComponent = (id<MFUIComponentProtocol>)subview;
-//            subComponent.parentEditable = parentEditable;
+            //?
         }
     }
 }

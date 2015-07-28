@@ -45,6 +45,8 @@ NSString * REGEX_BUTTON_RIGHT_CONSTRAINT = @"REGEX_BUTTON_RIGHT_CONSTRAINT";
 
 @implementation MFRegexTextFieldStyle (Button)
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void)addButtonOnTextField:(MFRegexTextField *)component {
     NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"MFUIApplication")];
     NSString *activeImageName = [NSString stringWithFormat:@"ios_ic_%@_active@2x", [self accessoryButtonImageName]];
@@ -75,9 +77,9 @@ NSString * REGEX_BUTTON_RIGHT_CONSTRAINT = @"REGEX_BUTTON_RIGHT_CONSTRAINT";
         [component addConstraints:buttonConstraints.allValues];
         self.hasAccessoryButton = YES;
     }
-    
-    
 }
+#pragma clang diagnostic pop
+
 
 -(NSDictionary *)defineButton:(UIButton *)button constraintsOnComponent:(MFRegexTextField *)component {
     

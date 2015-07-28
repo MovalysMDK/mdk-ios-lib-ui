@@ -62,20 +62,6 @@
 
 #pragma mark - Methods
 
-/*!
- * @brief Performs a specified action on a ViewModel
- * @param bindingKey the binding key corresponding to a field of the specified ViewModel ; this key is also used to 
- * generate the selector of the action to perform.
- * @param viewModel the viewModel on which the selector will be performed
- */
--(void) performSelectorForPropertyBinding:(NSString *) propertyBindingKey onViewModel:(MFUIBaseViewModel *)viewModel withIndexPath:(NSIndexPath *)indexPath;
-
-/*!
- * @brief Registers the components of a cell (or a bindable view)
- * @param cell A cell or a bindableView 
- * @return A dictionnary of the new registered components from this cell/view
- */
--(NSDictionary *)registerComponentsFromCell:(id<MFFormCellProtocol>) cell;
 
 
 /*!
@@ -84,12 +70,6 @@
  * @return A viewModel corresponding to the passed indexPath
  */
 -(id<MFUIBaseViewModelProtocol>) viewModelAtIndexPath:(NSIndexPath *)indexPath;
-
-/*!
- * @brief Cette méthode met à jour les données de la cellule selon son indexPath
- * @param cell La cellule
- */
--(void) setDataOnView:(id<MFFormCellProtocol>)cell withOptionalViewModel:(id<MFUIBaseViewModelProtocol>)viewModel;
 
 /*!
  * @brief Cette méthode permet de faire les initialisations nécessaires au bon fonctionnement du controller

@@ -23,11 +23,7 @@ NSInteger DEFAULT_ACCESSORIES_MARGIN = 2;
 @synthesize errorView;
 @synthesize backgroundView;
 
--(void)applyErrorStyleOnComponent:(MFTextField *)component {
-    [super applyErrorStyleOnComponent:component];
-    [self performSelector:@selector(addErrorViewOnComponent:) withObject:component];
-}
-
+#pragma mark - Standard Style
 -(void)applyStandardStyleOnComponent:(MFTextField *)component {
     [super applyStandardStyleOnComponent:component];
     if([component.editable isEqualToNumber:@1]) {
@@ -37,10 +33,23 @@ NSInteger DEFAULT_ACCESSORIES_MARGIN = 2;
     }
 }
 
+#pragma mark - Error Style
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+-(void)applyErrorStyleOnComponent:(MFTextField *)component {
+    [super applyErrorStyleOnComponent:component];
+    [self performSelector:@selector(addErrorViewOnComponent:) withObject:component];
+}
+
 -(void)applyValidStyleOnComponent:(MFTextField *) component {
     [super applyValidStyleOnComponent:component];
     [self performSelector:@selector(removeErrorViewOnComponent:) withObject:component];
 }
+#pragma clang diagnostic pop
+
+
 
 -(NSArray *)defineConstraintsForAccessoryView:(UIView *)accessory withIdentifier:(NSString *)identifier onComponent:(MFTextField *)component {
     return @[];

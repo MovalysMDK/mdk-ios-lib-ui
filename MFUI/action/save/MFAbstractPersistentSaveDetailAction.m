@@ -16,7 +16,7 @@
 
 #import <MFCore/MFCoreBean.h>
 #import <MFCore/MFCoreAction.h>
-#import <MFCore/MFCoreCoreData.h>
+#import <MFCore/MFCoreCoredata.h>
 
 #import "MFAbstractPersistentSaveDetailAction.h"
 

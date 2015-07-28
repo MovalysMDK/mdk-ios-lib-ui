@@ -36,6 +36,7 @@
 @synthesize formController = _formController;
 @synthesize hasChanged = _hasChanged;
 @synthesize defaultConstraints = _defaultConstraints;
+@synthesize savedConstraints = _savedConstraints;
 
 
 #pragma mark - Initializing

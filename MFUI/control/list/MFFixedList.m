@@ -437,17 +437,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     return self.mf.isPhotoFixedList;
 }
 
-#pragma mark  - LiveRendering methods
-
--(void)buildDesignableComponentView {
-    //TODO: Implémenter
-}
-
--(void)renderComponentFromInspectableAttributes {
-    //TODO: Implémenter
-}
-
-
 #pragma mark - Validation
 
 
@@ -479,7 +468,9 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     if(canDeleteItem) {self.mf.canDeleteItem = [canDeleteItem boolValue];}
     
     NSNumber *editMode = controlAttributes[FIXED_LIST_PARAMETER_EDIT_MODE];
-    if(editMode) {self.mf.editMode = [editMode integerValue];}
+    if(editMode) {
+        self.mf.editMode = (MFFixedListEditMode)[editMode integerValue];
+    }
     if(self.mf.editMode == MFFixedListEditModePopup) {
         self.allowsSelectionDuringEditing = YES;
     }

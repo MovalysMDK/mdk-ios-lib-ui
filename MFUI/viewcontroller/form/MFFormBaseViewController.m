@@ -365,7 +365,6 @@
         float height = cell.frame.size.height;
         if([cell isKindOfClass:[MFCellAbstract class]]) {
             UIView *componentView = [cell valueForKey:@"componentView"];
-            UIView *labelView = [cell valueForKey:@"label"];
             height -= componentView.frame.size.height;
             height += [notification.object floatValue];
 

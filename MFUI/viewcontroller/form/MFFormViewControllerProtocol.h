@@ -62,13 +62,6 @@ typedef enum {
 -(id<MFUIBaseViewModelProtocol>) createViewModel;
 
 /*!
- * @brief Cette méthode est appelée lorsque l'un des composants graphiques présents dans le dictionnaire "mapping"
- * a été modifié. La méthode met alors à jour les champs associés dans le ViewModel
- * @param bindingKey La clé de mapping qui identifie le ou les composants concernés
- */
--(void) dispatchEventOnComponentValueChangedWithKey:(NSString *)bindingKey atIndexPath:(NSIndexPath *)indexPath valid:(BOOL)valid;
-
-/*!
  * @brief Indique si le bouton de sauvegarde doit être affiché ou non. 
  * Par défaut, le framework affiche le bouton si au moins un composant du formulaire est éditable
  * @return YES si le bouton doit être affiché, NO sinon

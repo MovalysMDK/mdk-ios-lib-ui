@@ -175,67 +175,8 @@
  */
 -(void) selfCustomization;
 
-
-/*!
- * @brief Set the parameters for this component
- */
--(void) setComponentParameters:(NSDictionary *)parameters;
-
 #pragma mark - Live Rendering Methods
 
-/*!
- * @brief Add views to this components and static attributes of those views.
- * @discussion This method is mandatory
- */
--(void) buildDesignableComponentView;
-
-/*!
- * @brief Implement here the behaviour of the inspectable attributes in order to
- * render the component dynamically in InterfaceBuilder
- * @discussion This method is mandatory.
- */
--(void) renderComponentFromInspectableAttributes;
-
-/*!
- * @brief Before to implement the behaviour of the inspectables attributes on this component,
- * you should define here some default values for these inspectable attributes.
- * @discussion This method is mandatory. Be careful, if no value is specified, the component should
- * have a wrong rendering. For example, nil value on an inspectable attribute of type (UIColor *)
- * will render a black color for this inspectable attribute.
- */
--(void) initializeInspectableAttributes;
-
-/*!
- * @brief Implement here some treatment you would do in layoutSubviews but you
- * wish not that it will be rendered on InterfaceBuilder. This method is called before
- * parent layoutSubviews method.
- * @discussion This method is optional;
- */
--(void) willLayoutSubviewsNoDesignable;
-
-/*!
- * @brief Implement here some treatment you would do in layoutSubviews but you
- * wish not that it will be rendered on InterfaceBuilder. This method is called after
- * parent layoutSubviews method.
- * @discussion This method is optional;
- */
--(void) didLayoutSubviewsNoDesignable;
-
-/*!
- * @brief Implement here some treatment you would do in layoutSubviews but you
- * wish not that it will be rendered on InterfaceBuilder. This method is called before
- * parent layoutSubviews method.
- * @discussion This method is optional;
- */
--(void) willLayoutSubviewsDesignable;
-
-/*!
- * @brief Implement here some treatment you would do in layoutSubviews but you
- * wish not that it will be rendered on InterfaceBuilder. This method is called after
- * parent layoutSubviews method.
- * @discussion This method is optional;
- */
--(void) didLayoutSubviewsDesignable;
 
 #pragma mark - Static methods
 

@@ -241,6 +241,14 @@
     }
 }
 
+-(void) updateViewFromBindingData:(MFBindingViewDescriptor *)bindingData atIndexPath:(NSIndexPath *)indexPath{
+    NSArray *bindingValues = [self.bindingDelegate bindingValuesForCellBindingKey:[bindingData generatedBindingKey]];
+    for(MFBindingValue *bindingValue in bindingValues) {
+        bindingValue.wrapper.wrapperIndexPath = indexPath;
+        [self.bindingDelegate.binding dispatchValue:[[self viewModelAtIndexPath:indexPath] valueForKeyPath:bindingValue.abstractBindedPropertyName] fromPropertyName:bindingValue.abstractBindedPropertyName atIndexPath:indexPath fromSource:bindingValue.bindingSource];
+    }
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_1D_DESCRIPTOR];
     return [bindingData.cellHeight floatValue];
@@ -264,14 +272,13 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MFBindingViewDescriptor *bindingData = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
-    NSString *identifier = bindingData.viewIdentifier;
     MFFormSectionHeaderView *view = nil;
     if(!view) {
         view = [self sectionView];
     }
     bindingData.viewIndexPath = [NSIndexPath indexPathForRow:section inSection:SECTION_INDEXPATH_IDENTIFIER];
     [view bindViewFromDescriptor:bindingData onObjectWithBinding:self];
-    [self updateCellFromBindingData:bindingData atIndexPath:bindingData.viewIndexPath];
+    [self updateViewFromBindingData:bindingData atIndexPath:bindingData.viewIndexPath];
     view.sender = self;
     view.identifier = @(section);
     view.isOpened = [self.openedSectionStates[@(section)] boolValue];

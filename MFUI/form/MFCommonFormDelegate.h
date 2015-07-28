@@ -42,9 +42,5 @@
  */
 -(id)initWithParent:(id<MFCommonFormProtocol>) parent;
 
-/*!
- * @brief Cette méthode permet de réinitialiser les propriétés dynamiques du binding telles que binding ou bindingProperties.
- */
--(void) reinit;
 
 @end

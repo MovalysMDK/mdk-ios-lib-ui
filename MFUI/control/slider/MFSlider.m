@@ -45,7 +45,7 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 -(void)initialize {
     
     [super initialize];
-    [self buildDesignableComponentView];
+    [self buildComponentView];
     [self setAllTags];
 }
 
@@ -220,7 +220,7 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 
 #pragma mark - IB_Designable methods
 
--(void)buildDesignableComponentView {
+-(void)buildComponentView {
     self.innerSlider = [[UISlider alloc] init];
     self.step = 1;
     self.innerSlider.minimumValue = 0;
@@ -270,10 +270,6 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     [self addConstraints:@[insideSliderConstraintLeftMargin, insideSliderConstraintWidth, insideSliderConstraintTopMargin, insideSlideCenterPosition, insideSliderValueConstraintLeftMargin, insideSliderValueConstraintTopMargin, insideSliderValueConstraintWidth, insideSliderValueConstraintHeight]];
 }
 
--(void)initializeInspectableAttributes {
-    [super initializeInspectableAttributes];
-
-}
 
 -(void)prepareForInterfaceBuilder {
     [super prepareForInterfaceBuilder];
@@ -306,11 +302,15 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
     self.targetDescriptors = @{@(self.innerSlider.hash) : commonCCTD};
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void) valueChanged:(UIView *)sender {
     [self setData:@(((UISlider *)sender).value)];
     MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
     [cctd.target performSelector:cctd.action withObject:self];
 }
+#pragma clang diagnostic pop
 
 
 @end

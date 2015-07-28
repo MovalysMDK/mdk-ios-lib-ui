@@ -125,7 +125,6 @@ const int kMasterSelectSaveChangesAlert = 12 ;
         self.title = MFLocalizedStringFromKey(localizedControllerKey);
         MFUILogInfo(@"formDescName : %@", self.workspaceAttributes.formDescriptorName.description);
         
-        MFConfigurationHandler *registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
         NSString *plistFileName = [@"work-" stringByAppendingString:self.workspaceAttributes.formDescriptorName];
         NSDictionary *workspaceDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:plistFileName ofType:@"plist"]];
         
@@ -375,7 +374,7 @@ const int kMasterSelectSaveChangesAlert = 12 ;
     for(UIStoryboardSegue *segue in self.segueColumns) {
         MFFormBaseViewController *columnViewcontroller = (MFFormBaseViewController *)segue.destinationViewController;
         if([columnViewcontroller conformsToProtocol:@protocol(MFWorkspaceMasterColumnProtocol)]) {
-            return columnViewcontroller;
+            return (MFFormBaseViewController<MFWorkspaceMasterColumnProtocol> *)columnViewcontroller;
         }
     }
     return nil;
@@ -416,7 +415,7 @@ const int kMasterSelectSaveChangesAlert = 12 ;
 }
 
 -(MFViewControllerAttributes_Workspace *) workspaceAttributes {
-    return _mf;
+    return (MFViewControllerAttributes_Workspace *)_mf;
 }
 
 @end

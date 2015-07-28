@@ -46,10 +46,10 @@
 
 
 /*!
- * @brief Returns the form associa  ted to this ViewModel
- * @return A id<MFFormViewControllerProtocol> object.
+ * @brief Returns the form associated to this ViewModel
+ * @return A id<MFCommonFormProtocol> object.
  */
--(id<MFFormViewControllerProtocol>) getForm;
+-(id<MFCommonFormProtocol>) getForm;
 
 /*!
  * @brief get child viewmodels (property names)

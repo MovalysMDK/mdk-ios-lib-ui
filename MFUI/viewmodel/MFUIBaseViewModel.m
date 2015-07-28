@@ -131,7 +131,7 @@
     [recursiveKeyPathes addObject:keyPath];
     while (currentViewModel.parentViewModel) {
         [recursiveKeyPathes addObject:[NSString stringWithFormat:@"%@.%@", [self propertyNameInParentViewModel], [recursiveKeyPathes lastObject]]];
-        currentViewModel = currentViewModel.parentViewModel;
+        currentViewModel = (MFUIBaseViewModel*)currentViewModel.parentViewModel;
     }
     
     for(NSString *recursiveKeyPath in recursiveKeyPathes) {
@@ -148,6 +148,9 @@
     }
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void) callCallbackForKeypath:(NSString *)keyPath {
     for(MFListenerDescriptor *descriptor in [self.listenerDecriptorManager listenerDescriptorsForEventType:MFListenerEventTypeViewModelPropertyChanged]) {
         NSArray *callBacksForProperty = [descriptor callbackForKeyPath:keyPath];
@@ -156,6 +159,7 @@
         }
     }
 }
+#pragma clang diagnostic pop
 
 
 - (NSArray *)getBindedProperties

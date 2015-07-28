@@ -265,7 +265,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
         [vc setPreferredContentSize:CGSizeMake(self.pickerView.frame.size.width,contentViewHeight)];
         
         self.popoverController = [[UIPopoverController alloc] initWithContentViewController:vc];
-        MFFormBaseViewController *parentForm = self.topParentViewController;
+        UIViewController *parentForm = self.topParentViewController;
         
         [self.popoverController presentPopoverFromRect:self.mainFormControllerView.frame inView:parentForm.view permittedArrowDirections:0 animated:YES];
     }
@@ -519,10 +519,15 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
     self.targetDescriptors = @{@(self.pickerButton.hash) : commonCCTD};
 }
 
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void) valueChanged:(UIView *)sender {
     MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
     [cctd.target performSelector:cctd.action withObject:self];
 }
+#pragma clang diagnostic pop
 
 
 @end

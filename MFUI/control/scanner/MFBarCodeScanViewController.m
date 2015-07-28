@@ -133,10 +133,16 @@
 
 
 #pragma mark - MFBarCodeScannerProtocol methods
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void) doActionOnDetectionOfString:(NSString *)detectionString {
     [self.sourceComponent performSelector:@selector(updateValueFromExternalSource:) withObject:detectionString];
     [self closeViewController];
 }
+#pragma clang diagnostic pop
+
 
 #pragma mark - Orientation changed protocol
 -(void)orientationDidChanged:(NSNotification *)notification {

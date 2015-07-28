@@ -72,6 +72,9 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 @synthesize controlAttributes = _controlAttributes;
 @synthesize associatedLabel = _associatedLabel;
 @synthesize controlDelegate = _controlDelegate;
+@synthesize tooltipView = _tooltipView;
+@synthesize privateData = _privateData;
+@synthesize componentValidation = _componentValidation;
 
 
 #pragma mark - Constructeurs et initialisation
@@ -122,8 +125,6 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 -(void)initialize {
     
     self.controlDelegate = [[MFCommonControlDelegate alloc] initWithComponent:self];
-    [self initializeInspectableAttributes];
-    [self buildDesignableComponentView];
     if([self conformsToProtocol:@protocol(MFDefaultConstraintsProtocol)]) {
         [self performSelector:@selector(applyDefaultConstraints) withObject:nil];
     }
@@ -254,40 +255,6 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 
 - (void)setI18nKey:(NSString *) defaultValue {
     [self setData:defaultValue];
-}
-
-
-#pragma mark - Live Rendering Default Implementation
-
--(void)willLayoutSubviewsNoDesignable {
-    //Default : nothing
-}
-
--(void)didLayoutSubviewsNoDesignable {
-    //Default : nothing
-}
-
--(void)willLayoutSubviewsDesignable {
-}
-
--(void)didLayoutSubviewsDesignable {
-    //Default : nothing
-}
-
--(void)initializeInspectableAttributes {
-    self.backgroundColor = [UIColor clearColor];
-}
-
--(void)prepareForInterfaceBuilder {
-    self.backgroundColor = [UIColor clearColor];
-}
-
--(void) buildDesignableComponentView {
-    
-}
-
--(void) renderComponentFromInspectableAttributes {
-    
 }
 
 

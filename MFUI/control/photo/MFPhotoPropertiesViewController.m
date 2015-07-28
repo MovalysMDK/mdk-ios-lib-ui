@@ -133,6 +133,7 @@
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
     }
+    [super viewWillAppear:animated];
 }
 
 
@@ -151,6 +152,7 @@
                                                         name:UIKeyboardWillHideNotification
                                                       object:nil];
     }
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - Keyboard management
@@ -280,7 +282,7 @@
                      location.coordinate.latitude , location.coordinate.longitude );
 }
 
--(void) setPhotoViewModel:(MFUIBaseViewModel *)photoViewModel {
+-(void) setPhotoViewModel:(MFPhotoViewModel *)photoViewModel {
     _photoViewModel = photoViewModel;
 }
 

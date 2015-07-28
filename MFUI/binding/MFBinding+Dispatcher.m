@@ -84,6 +84,10 @@
     }
 }
 
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(id)convertValue:(id)value isFromViewModelToControl:(BOOL)isVmToControl withWrapper:(MFAbstractComponentWrapper *) wrapper{
     if([wrapper respondsToSelector:@selector(convertValue:isFromViewModelToControl:)]) {
         value = [wrapper performSelector:@selector(convertValue:isFromViewModelToControl:) withObject:value withObject:@(isVmToControl)];
@@ -96,13 +100,16 @@
     if(converterName) {
         id<MFBindingConverterProtocol> converter = [[MFBeanLoader getInstance] getBeanWithKey:converterName];
         if(formViewModelToControl) {
-            value = [converter convertValueFromViewModelToControl:value];
+            result = [converter convertValueFromViewModelToControl:value];
         }
         else {
-            value = [converter convertValueFromControlToViewModel:value];
+            result = [converter convertValueFromControlToViewModel:value];
         }
     }
-    return value;
+    return result;
 }
+
+#pragma clang diagnostic pop
+
 
 @end

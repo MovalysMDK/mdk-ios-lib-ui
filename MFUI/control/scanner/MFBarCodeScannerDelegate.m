@@ -72,7 +72,7 @@
     
     self.sourceScanner.output = [[AVCaptureMetadataOutput alloc] init];
     [self.sourceScanner.output setMetadataObjectsDelegate:self.sourceScanner queue:dispatch_get_main_queue()];
-
+    
     [self.sourceScanner.session addOutput:self.sourceScanner.output];
     
     self.sourceScanner.output.metadataObjectTypes = [self.sourceScanner.output availableMetadataObjectTypes];
@@ -141,12 +141,38 @@
     AVCaptureConnection *videoConnection = self.sourceScanner.prevLayer.connection;
     if ([videoConnection isVideoOrientationSupported]) {
         if(UIDeviceOrientationIsValidInterfaceOrientation([UIDevice currentDevice].orientation)) {
-            [videoConnection setVideoOrientation:[UIDevice currentDevice].orientation];
+            [videoConnection setVideoOrientation:[self videoOrientation]];
         }
         if(self.sourceScanner.prevLayer) {
             self.sourceScanner.prevLayer.frame = self.sourceScanner.mainView.bounds;
         }
     }
+}
+
+-(AVCaptureVideoOrientation) videoOrientation {
+    AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortrait;
+    switch([UIDevice currentDevice].orientation) {
+        case UIDeviceOrientationLandscapeLeft:
+            orientation = AVCaptureVideoOrientationLandscapeLeft;
+            break;
+            
+        case UIDeviceOrientationLandscapeRight:
+            orientation = AVCaptureVideoOrientationLandscapeRight;
+            break;
+            
+        case UIDeviceOrientationPortrait:
+            orientation = AVCaptureVideoOrientationPortrait;
+            break;
+            
+        case UIDeviceOrientationPortraitUpsideDown:
+            orientation = AVCaptureVideoOrientationPortraitUpsideDown;
+            break;
+            
+        default:
+            orientation = AVCaptureVideoOrientationPortrait;
+            break;
+    }
+    return orientation;
 }
 
 @end

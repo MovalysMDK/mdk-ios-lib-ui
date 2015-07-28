@@ -22,11 +22,16 @@
 @implementation MFRegexTextField
 @synthesize customStyleClass;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void)initializeComponent {
     [super initializeComponent];
     [self.styleClass performSelector:@selector(addButtonOnTextField:) withObject:self];
     [self addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
+#pragma clang diagnostic pop
+
 
 -(void) doAction {
     [MFException throwNotImplementedExceptionOfMethodName:@"doAction" inClass:[self class] andUserInfo:nil];

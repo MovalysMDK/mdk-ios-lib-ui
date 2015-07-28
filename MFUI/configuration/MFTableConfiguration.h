@@ -87,13 +87,4 @@ FOUNDATION_EXPORT const NSString *CELL_FIXEDLIST_DESCRIPTOR;
  */
 -(void)createFixedListTableCellWithDescriptor:(MFBindingCellDescriptor *)cellDescriptor;
 
-
-/*!
- * @brief Creates a cell in the TableView configured by this object.
- * @discussion This method must be called by FixedList Data delegate
- * @param cellDecriptor The descriptor that describes the cell to add
- * @see MFBindingCellDescriptor
- */
--(void)createPickerListItemWithDescriptor:(MFBindingViewDescriptor *)viewDescriptor;
-
 @end

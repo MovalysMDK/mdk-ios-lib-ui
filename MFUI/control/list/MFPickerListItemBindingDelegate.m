@@ -32,7 +32,8 @@
 
 @implementation MFPickerListItemBindingDelegate
 @synthesize bindingDelegate = _bindingDelegate;
-
+@synthesize formValidation = _formValidation;
+@synthesize viewModel = _viewModel;
 
 - (instancetype)initWithPickerList:(MFPickerList *)pickerList
 {
@@ -87,7 +88,7 @@
     if(!self.hasComputeContentSize) {
         MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[LISTITEM_PICKERLIST_DESCRIPTOR];
         [self.tableView registerNib:[UINib nibWithNibName:bindingData.cellIdentifier bundle:[NSBundle mainBundle]] forCellReuseIdentifier:bindingData.cellIdentifier];
-        int contentSize = value * ([bindingData.cellHeight intValue]);
+        NSInteger contentSize = value * ([bindingData.cellHeight integerValue]);
         NSLayoutConstraint *realHeight = [NSLayoutConstraint constraintWithItem:self.picker.pickerListTableView.tableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:contentSize];
         realHeight.priority = UILayoutPriorityDefaultHigh;
         [self.picker.parentNavigationController.view addConstraint:realHeight];

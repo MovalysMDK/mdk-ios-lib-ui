@@ -50,6 +50,9 @@
 @synthesize styleClassName = styleClassName;
 @synthesize controlAttributes = _controlAttributes;
 @synthesize associatedLabel = _associatedLabel;
+@synthesize lastUpdateSender = _lastUpdateSender;
+@synthesize componentValidation = _componentValidation;
+@synthesize privateData = _privateData;
 
 NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
 
@@ -230,5 +233,23 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
     [self.controlDelegate setVisible:visible];
 }
 
+-(void)addControlAttribute:(id)controlAttribute forKey:(NSString *)key {
+    [self.controlDelegate addControlAttribute:controlAttribute forKey:key];
+}
 
+-(void)onErrorButtonClick:(id)sender {
+    [self.controlDelegate onErrorButtonClick:sender];
+}
+
+-(NSInteger)validate {
+    return [self.controlDelegate validate];
+}
+
+-(NSArray *)controlValidators {
+    return  @[];
+}
+
+-(void)addAccessories:(NSDictionary *)accessoryViews {
+    //nothing
+}
 @end

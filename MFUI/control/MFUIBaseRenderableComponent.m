@@ -26,10 +26,6 @@
  */
 @property (nonatomic, strong) MFUIErrorView *errorView;
 
-/**
- * @brief The tooltip displayed when the user taps on the buttonError of the errorView
- */
-@property (nonatomic, strong) JDFTooltipView *tooltipView;
 
 /**
  * @brief This dictionary contains the name of the XIBs used to load base MDK iOS components.
@@ -56,6 +52,7 @@
 @implementation MFUIBaseRenderableComponent
 @synthesize editable = _editable;
 @synthesize styleClass = _styleClass;
+@synthesize tooltipView = _tooltipView;
 
 const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
     .ErrorView = @"ErrorView",
@@ -336,12 +333,17 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
 }
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void)setStyleClass:(NSString *)styleClass {
     _styleClass = styleClass;
     if(_styleClass) {
         [[[NSClassFromString(self.styleClass) alloc] init] performSelector:@selector(applyStyleOnView:) withObject:self];
     }
 }
+#pragma clang diagnostic pop
+
 
 -(void)setEditable:(NSNumber *)editable {
     _editable = editable;
@@ -520,6 +522,13 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
     return NSStringFromClass(self.class);
 }
 
+-(void)setDisplayComponentValue:(id)value {
+    
+}
+
+-(void)definePositionOfErrorViewWithParameters:(NSDictionary *)parameters whenShown:(BOOL)isShown {
+    
+}
 #pragma mark - LiveRendering
 
 @end

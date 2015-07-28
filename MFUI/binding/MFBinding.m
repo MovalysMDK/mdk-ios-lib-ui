@@ -104,7 +104,7 @@
     for(NSString *key in dictionary.allKeys) {
         id bindingValues = dictionary[key];
         if([bindingValues isKindOfClass:[MFBindingValue class]]) {
-            int objectPosition = [dictionary.allValues indexOfObject:bindingValue];
+            NSUInteger objectPosition = [dictionary.allValues indexOfObject:bindingValue];
             if(objectPosition != NSNotFound && objectPosition != -1) {
                 [copy removeObjectForKey:dictionary.allKeys[objectPosition]];
             }

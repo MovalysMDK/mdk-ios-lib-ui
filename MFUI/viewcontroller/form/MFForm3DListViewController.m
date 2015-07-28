@@ -207,8 +207,7 @@
 }
 
 -(void)setScreenTitle {
-    NSFetchedResultsController *fetchedController = ((MFUIBaseListViewModel *)self.viewModel).fetch;
-    //PROTODO : Screen title
+    //PROTODO
 }
 
 /**

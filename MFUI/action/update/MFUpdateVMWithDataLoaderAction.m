@@ -63,8 +63,8 @@ NSString *const MFAction_MFUpdateVMWithDataLoaderAction = @"MFUpdateVMWithDataLo
 {
     //TODO FTO : On gère ici le cas des entités transient qui n'ont pas de DataLoader, donc pas d'action à lancer. il faut voir par la suite comment gérer ces entités.
     if(![dataLoaderName isEqualToString:@""]) {
-    	id<MFUIBaseViewModelProtocol> vm = [[MFApplication getInstance] getBeanWithKey:viewModelName];
-    	id<MFDataLoaderProtocol> dataLoader = (id<MFDataLoaderProtocol>) [[MFApplication getInstance] getBeanWithKey:dataLoaderName];
+    	id<MFUIBaseViewModelProtocol> vm = [[MFBeanLoader getInstance] getBeanWithKey:viewModelName];
+    	id<MFDataLoaderProtocol> dataLoader = (id<MFDataLoaderProtocol>) [[MFBeanLoader getInstance] getBeanWithKey:dataLoaderName];
     	self.filterParameters = [dataLoader getFilterParameters];
     	if ( [vm conformsToProtocol:@protocol(MFUpdatableFromDataLoaderProtocol)]) {
         	[vm performSelector:@selector(updateFromDataloader: inContext:) withObject:dataLoader withObject:context];

@@ -376,7 +376,7 @@
     
     //Si aucun ViewModel n'a été créé, on le créé via le ViewModelCreator
     if (!returnViewModel) {
-        MFDefaultViewModelCreator *vmCreator = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_VIEW_MODEL_CREATOR];
+        MFDefaultViewModelCreator *vmCreator = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_VIEW_MODEL_CREATOR];
         
         // On corrige l'indexPath transmis (dans le cas où l'on veut récupérer un ViewModel de section,
         // on a indexPath.section = SECTION_INDEXPATH_IDENTIFIER;

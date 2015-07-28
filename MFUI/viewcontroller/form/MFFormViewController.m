@@ -184,7 +184,7 @@ NSString *const MFPROP_FORM_ONUNSAVEDCHANGES = @"FormOnUnsavedChanges";
 
 - (void)dismissMyView {
     
-    MFConfigurationHandler *registry = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
+    MFConfigurationHandler *registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
     NSString *actionType = [registry getStringProperty:MFPROP_FORM_ONUNSAVEDCHANGES];
     bool doShowAlert = NO;
     bool doSave = NO;

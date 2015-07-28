@@ -45,7 +45,7 @@ NSString *const CONVERTER_FLOAT_NB_DIGITS_PARAMETER = @"numberOfDigits";
     float correctValue = [value floatValue];
 
     //Récupération des paramètres par défaut pour ce convertisseur
-    MFConfigurationHandler *registry = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
+    MFConfigurationHandler *registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
     NSDictionary *converters =[registry getDictionaryProperty:CONVERTER_LIST_REGISTRY_KEY];
     NSDictionary *floatConverter = [converters objectForKey:CONVERTER_FLOAT_DEFAULT_REGISTRY_KEY];
     int numberOfDigits = [[floatConverter objectForKey:CONVERTER_FLOAT_NB_DIGITS_PARAMETER] intValue];

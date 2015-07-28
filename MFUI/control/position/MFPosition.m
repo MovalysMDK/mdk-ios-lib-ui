@@ -225,7 +225,7 @@
     
     [self updateLocationProperty];
     
-    MFMapViewController *mapViewController = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_MAP_VIEW_CONTROLLER];
+    MFMapViewController *mapViewController = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_MAP_VIEW_CONTROLLER];
     mapViewController.location = self.location;
     
     [[MFUIApplication getInstance].lastAppearViewController.navigationController pushViewController:mapViewController animated:YES];
@@ -242,7 +242,7 @@
 }
 
 -(id)getData {
-    MFPositionViewModel *location = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_POSITION_VIEW_MODEL];
+    MFPositionViewModel *location = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_POSITION_VIEW_MODEL];
     location.longitude = self.longitude.text;
     location.latitude = self.latitude.text;
     return location;

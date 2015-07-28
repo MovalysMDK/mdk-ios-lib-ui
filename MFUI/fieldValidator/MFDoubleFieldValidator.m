@@ -112,7 +112,7 @@ NSString *FIELD_VALIDATOR_DECIMAL_PART_MAX_DIGITS = @"decimalPartMaxDigits";
     }
     
     //Génération de la regex de vérification
-    return [NSString stringWithFormat:@"^-?[0-9]{%@}([,\.][0-9]{%@})?$", quantificateurPartieEntiere, quantificateurPartieDecimale];
+    return [NSString stringWithFormat:@"^-?[0-9]{%@}([,\\.][0-9]{%@})?$", quantificateurPartieEntiere, quantificateurPartieDecimale];
 }
 
 @end

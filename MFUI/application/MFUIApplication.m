@@ -42,7 +42,7 @@ const int TAG_FOR_EXCEPTION_ALERT = 1 ;
 }
 
 -(void) doOnPushReport {
-    MFConfigurationHandler* registry = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
+    MFConfigurationHandler* registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
     if ([registry getBooleanProperty:MFPROP_PUSH_MAIL_ON_CRASH withDefault:NO]) {
         self.openPopup += [MFUILoggingHelper sendEmailFrom:self.lastAppearViewController To: [registry getArrayProperty:MFPROP_ADMIN_EMAILS] withDelegate:self];
     }

@@ -268,7 +268,7 @@ MFRegister_ActionListenerOnFailed(MFAction_MFChainSaveDetailAction, failedSaveAc
         self.hasRequestPopViewController = YES;;
     }
     
-    MFConfigurationHandler *registry = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
+    MFConfigurationHandler *registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
     NSString *actionType = [registry getStringProperty:MFPROP_FORM_ONUNSAVEDCHANGES];
     bool doShowAlert = NO;
     bool doSave = NO;

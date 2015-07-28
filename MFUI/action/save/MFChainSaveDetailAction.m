@@ -31,7 +31,7 @@ NSString *const MFAction_MFChainSaveDetailAction = @"MFChainSaveDetailAction";
     NSMutableArray *actions = [[NSMutableArray alloc] init];
     
     for ( NSString *saveAction in actionNames ) {
-        MFAbstractSaveDetailAction *action = [[MFApplication getInstance] getBeanWithKey:saveAction];
+        MFAbstractSaveDetailAction *action = [[MFBeanLoader getInstance] getBeanWithKey:saveAction];
         [actions addObject:action];
     }
     

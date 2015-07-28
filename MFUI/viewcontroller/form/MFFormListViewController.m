@@ -297,7 +297,7 @@
     
     if (vmItem == nil ) {
         
-        id vmCreator = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_VIEW_MODEL_CREATOR];
+        id vmCreator = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_VIEW_MODEL_CREATOR];
         if([[listVm.fetch.sections objectAtIndex:0] objects].count > indexPath.row) {
             id temp = [listVm.fetch objectAtIndexPath:indexPath];
 

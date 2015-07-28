@@ -151,7 +151,7 @@
     self.view.tag = FORM_BASE_VIEW_TAG;
     
     if ([self hasSearchForm]) {
-        self.searchDelegate = [self.applicationContext getBeanWithKey:BEAN_KEY_FORM_SEARCH_DELEGATE];
+        self.searchDelegate = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_FORM_SEARCH_DELEGATE];
         self.searchDelegate.baseController = self;
         
         //PROTODO : Refaire la recherche.

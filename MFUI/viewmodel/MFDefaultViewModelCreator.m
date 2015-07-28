@@ -24,7 +24,7 @@
 
 
 -(id) createVM:(NSString*) p_vmClassName {
-    return [[MFApplication getInstance] getBeanWithKey:p_vmClassName];
+    return [[MFBeanLoader getInstance] getBeanWithKey:p_vmClassName];
 }
 
 -(id) createVM:(NSString *)vmClassName withData:(NSFetchedResultsController *)data andItemVmClass:(NSString *)itemVmClass {

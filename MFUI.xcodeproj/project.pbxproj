@@ -156,8 +156,6 @@
 		B06F3E1E1B39973C005170FC /* MFSwitchWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F3E1C1B39973C005170FC /* MFSwitchWrapper.m */; };
 		B06F3E211B39A550005170FC /* MFPositionWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B06F3E1F1B39A550005170FC /* MFPositionWrapper.h */; };
 		B06F3E221B39A550005170FC /* MFPositionWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F3E201B39A550005170FC /* MFPositionWrapper.m */; };
-		B076BEDF1ABC565200756351 /* Pods.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B076BEDD1ABC565200756351 /* Pods.debug.xcconfig */; };
-		B076BEE01ABC565200756351 /* Pods.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B076BEDE1ABC565200756351 /* Pods.release.xcconfig */; };
 		B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */; };
 		B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */; };
 		B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */; };
@@ -2946,7 +2944,7 @@
 		B0D455101A5ED26A00C6D376 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Lagarde Quentin";
 				TargetAttributes = {
 					B0D455181A5ED26A00C6D376 = {
@@ -2998,12 +2996,10 @@
 				B001B2741B5F87D80063F819 /* PhotoFixedListItemCell.xib in Resources */,
 				B001B25D1B5F87D80063F819 /* arrow.png in Resources */,
 				B001B25B1B5F87D80063F819 /* ios_ic_edit_pressed@2x.png in Resources */,
-				B076BEDF1ABC565200756351 /* Pods.debug.xcconfig in Resources */,
 				B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */,
 				B001B25A1B5F87D80063F819 /* ios_ic_edit_active@2x.png in Resources */,
 				B001B2621B5F87D80063F819 /* ios_ic_phone_pressed@2x.png in Resources */,
 				B001B2641B5F87D80063F819 /* no_photo.png in Resources */,
-				B076BEE01ABC565200756351 /* Pods.release.xcconfig in Resources */,
 				B001B26D1B5F87D80063F819 /* image_tooltip_valid.png in Resources */,
 				B001B25E1B5F87D80063F819 /* ios_ic_mail_active@2x.png in Resources */,
 				B001B2671B5F87D80063F819 /* map.png in Resources */,
@@ -3370,6 +3366,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$PODS_FRAMEWORK_BUILD_PATH\"",
 					"\"$(CONFIGURATION_BUILD_DIR)\"/**",
@@ -3389,7 +3386,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)/**",
+					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3440,7 +3437,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)/**",
+					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3482,6 +3479,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_LIBTOOLFLAGS = "${inherited}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sopragroup.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -3515,6 +3513,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_LIBTOOLFLAGS = "${inherited}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sopragroup.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -3538,6 +3537,7 @@
 				);
 				INFOPLIST_FILE = MFUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sopragroup.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -3556,6 +3556,7 @@
 				);
 				INFOPLIST_FILE = MFUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sopragroup.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

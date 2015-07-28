@@ -87,7 +87,7 @@ NSString * const MF_MANDATORY_INDICATOR = @"MandatoryIndicator";
     }
     
 #if !TARGET_INTERFACE_BUILDER
-    MFConfigurationHandler *registry = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
+    MFConfigurationHandler *registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
     self.mandatoryIndicator = [registry getStringProperty:MF_MANDATORY_INDICATOR];
 #endif
 }

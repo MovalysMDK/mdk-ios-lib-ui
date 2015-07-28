@@ -47,7 +47,7 @@ static NSString *const LOG_FILE_MIME_TYPE = @"text/plain";
 +(MFCreateEmailViewController*) buildEmailTo:(NSArray *)recipients
 {
     NSString *applicationName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-    MFCreateEmailViewController *emailController = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_CREATE_EMAIL_VIEW_CONTROLLER];
+    MFCreateEmailViewController *emailController = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CREATE_EMAIL_VIEW_CONTROLLER];
     [emailController setSubject:[NSString stringWithFormat:MFLocalizedStringFromKey(@"DebugLogEmailTitle"), applicationName]];
     [emailController setToRecipients:recipients];
     NSData *attachment1 = [MFLoggingHelper retrieveLastLogFileWithPosition:1];

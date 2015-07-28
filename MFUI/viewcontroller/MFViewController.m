@@ -116,7 +116,7 @@
 - (NSArray *) getOptionMenuIds {
     MFUILogVerbose(@"getOptionMenuIds: %@", [self.storyboard valueForKey:@"name"]);
     
-    MFConfigurationHandler *registry = [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
+    MFConfigurationHandler *registry = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
     NSArray *commonMenuActions = [registry getArrayProperty:@"Menu_common"];
     NSString *screenMenuActionsTitle = [NSString stringWithFormat:@"%@%@", @"Menu_", [self.storyboard valueForKey:@"name"]];
     NSArray *screenMenuActions = [registry getArrayProperty:screenMenuActionsTitle];

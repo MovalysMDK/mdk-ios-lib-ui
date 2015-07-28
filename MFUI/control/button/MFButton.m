@@ -101,7 +101,7 @@
         return [self.button valueForKey:key];
     }
     else {
-        return [[MFApplication getInstance] getBeanWithKey:BEAN_KEY_KEYNOTFOUND];
+        return [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_KEYNOTFOUND];
     }
 }
 

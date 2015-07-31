@@ -129,8 +129,10 @@
 }
 
 -(void)selfCustomization {
-    [self.gpsButton setImage:[UIImage imageNamed:@"gps.png"] forState:UIControlStateNormal];
-    [self.mapButton setImage:[UIImage imageNamed:@"map.png"] forState:UIControlStateNormal];
+    UIImage *gpsImg = [UIImage imageWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"gps" ofType:@"png"]];
+    [self.gpsButton setImage:gpsImg forState:UIControlStateNormal];
+    UIImage *mapImg = [UIImage imageWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"map" ofType:@"png"]];
+    [self.mapButton setImage:mapImg forState:UIControlStateNormal];
 }
 
 

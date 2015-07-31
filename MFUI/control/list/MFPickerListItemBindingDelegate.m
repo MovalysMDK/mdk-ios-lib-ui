@@ -188,7 +188,7 @@ NSString *tableViewHeightConstraintIdentifier = @"realHeightConstraintIdentifier
 
 #pragma mark - Search Bar Delegate
 
--(void)searchBar:(nonnull UISearchBar *)searchBar textDidChange:(nonnull NSString *)searchText {
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [self checkFilter];
     if(searchText && searchText.length > 0) {
         self.filteredViewModels = [self.filter filterItems:[self getViewModels] withString:searchText];

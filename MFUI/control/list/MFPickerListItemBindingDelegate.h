@@ -18,8 +18,9 @@
 #import "MFCommonFormProtocol.h"
 
 @class MFPickerList;
+@protocol MFPickerListFilterProtocol;
 
-@interface MFPickerListItemBindingDelegate : NSObject <MFCommonFormProtocol, UITableViewDelegate, UITableViewDataSource>
+@interface MFPickerListItemBindingDelegate : NSObject <MFCommonFormProtocol, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 #pragma mark - Methods
 
@@ -37,5 +38,18 @@
  * @brief The pickerList to manage.
  */
 @property (nonatomic, weak) MFPickerList *picker;
+
+/*!
+ * @brief Indicates if the picker has search
+ */
+@property (nonatomic) BOOL hasSearch;
+
+
+/*!
+ * @brief Indicates if the picker has search
+ */
+@property (nonatomic, strong) id<MFPickerListFilterProtocol> filter;
+
+-(void) willDisplayPickerListView;
 
 @end

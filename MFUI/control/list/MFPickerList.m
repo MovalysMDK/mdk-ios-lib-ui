@@ -111,9 +111,16 @@
         self.mf.pickerValuesKey = pickerValuesKey;
     }
     
+    NSString *filter = controlAttributes[@"filter"];
+    if(filter && !self.mf.filter) {
+        self.mf.filter = [NSClassFromString(filter) new];
+        self.mf.listItemBindingDelegate.filter = self.mf.filter;
+    }
+    
     NSNumber *hasSearch = controlAttributes[@"search"];
     if(hasSearch) {
         self.mf.hasSearch = [hasSearch boolValue];
+        self.mf.listItemBindingDelegate.hasSearch = self.mf.hasSearch;
     }
 }
 
@@ -174,7 +181,13 @@
 }
 
 -(void) displayPickerView {
-    self.pickerListTableView = [[[NSBundle bundleForClass:[MFPickerListTableView class]] loadNibNamed:@"PickerListView" owner:self.mf.listItemBindingDelegate options:nil] firstObject];
+    
+    NSString *xibIdentifier = @"PickerListView";
+    if(self.mf.hasSearch) {
+        xibIdentifier = @"PickerListViewWithSearch";
+    }
+    
+    self.pickerListTableView = [[[NSBundle bundleForClass:[MFPickerListTableView class]] loadNibNamed:xibIdentifier owner:self.mf.listItemBindingDelegate options:nil] firstObject];
     self.pickerListTableView.tableView.delegate = self.mf.listItemBindingDelegate;
     self.pickerListTableView.tableView.dataSource = self.mf.listItemBindingDelegate;
     self.pickerListTableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -188,13 +201,13 @@
     
     [self.parentNavigationController.view addConstraints:@[right, left, bottom, top]];
     self.pickerListTableView.alpha = 0;
-    
+    [self.mf.listItemBindingDelegate willDisplayPickerListView];
     [UIView animateWithDuration:0.25 animations:^{
         self.pickerListTableView.alpha = 1;
     } completion:^(BOOL finished) {
         if(finished) {
             int index = 0;
-            for(id object in [self getValues].viewModels) {
+            for(id object in [self getValues]) {
                 if([object isEqual:[self getData]]) {
                     break;
                 }
@@ -206,7 +219,7 @@
     }];
 }
 
--(MFUIBaseListViewModel *) getValues {
+-(NSArray *) getValues {
     MFUIBaseListViewModel *values = nil;
     if(self.mf.pickerValuesKey) {
         MFUIBaseViewModel *formViewModel = (MFUIBaseViewModel *)[((MFFormViewController *)self.parentViewController) getViewModel];
@@ -233,7 +246,7 @@
             values = (MFUIBaseListViewModel *) object;
         }
     }
-    return values;
+    return values.viewModels;
 }
 
 -(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
@@ -252,6 +265,24 @@
 }
 #pragma clang diagnostic pop
 
+@end
 
+@implementation MFPickerListDefaultFilter
+
+-(NSArray *)filterItems:(NSArray *)items withString:(NSString *)string {
+    NSMutableArray *result = [NSMutableArray array];
+    for(MFUIBaseViewModel *viewModel in items) {
+        for(NSString *bindedProtperty in [viewModel getBindedProperties]) {
+            id object = [viewModel valueForKey:bindedProtperty];
+            if([object isKindOfClass:[NSString class]]) {
+                if([(NSString *)object containsString:string]) {
+                    [result addObject:viewModel];
+                    break;
+                }
+            }
+        }
+    }
+    return result;
+}
 
 @end

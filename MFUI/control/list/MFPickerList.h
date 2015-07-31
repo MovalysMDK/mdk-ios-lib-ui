@@ -28,6 +28,30 @@
 @property (nonatomic, strong) MFPickerListTableView *pickerListTableView;
 
 
--(MFUIBaseListViewModel *) getValues;
+-(NSArray *) getValues;
+
+@end
+
+/*!
+ * @protocol MFPickerListFilterProtocol
+ * @brief A protocol that identfy a PickerList filter
+ * @discussion The class that implements this protocol can filter a list of picker items bu
+ * implementing the filterItems:withString: method
+ */
+@protocol MFPickerListFilterProtocol <NSObject>
+
+/*!
+ * @brief Filters a given array of items with a given string
+ * @param items An array of items
+ * @param string The string used to filter
+ * @return An array of filtered items
+ */
+@required
+-(NSArray *)filterItems:(NSArray *)items withString:(NSString *)string;
+
+@end
+
+
+@interface MFPickerListDefaultFilter : NSObject <MFPickerListFilterProtocol>
 
 @end

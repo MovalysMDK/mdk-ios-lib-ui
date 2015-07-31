@@ -26,9 +26,12 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (strong, nonatomic) NSArray *filteredViewModels;
 
 @property (nonatomic) BOOL hasComputeContentSize;
 @end
+
+NSString *tableViewHeightConstraintIdentifier = @"realHeightConstraintIdentifier";
 
 @implementation MFPickerListItemBindingDelegate
 @synthesize bindingDelegate = _bindingDelegate;
@@ -51,7 +54,7 @@
     [self.bindingDelegate clear];
     [self createBindingStructure];
     self.hasComputeContentSize = NO;
-     MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[LISTITEM_PICKERLIST_DESCRIPTOR];
+    MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[LISTITEM_PICKERLIST_DESCRIPTOR];
     UINib *cellNib = [UINib nibWithNibName:bindingData.cellIdentifier bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:bindingData.cellIdentifier];
 }
@@ -72,26 +75,36 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger value = 0 ;
-    MFUIBaseListViewModel *lvm = ((MFUIBaseListViewModel *)[self getViewModel]);
-    NSFetchedResultsController *fetch =lvm.fetch;
-    if ( fetch != nil ) {
-        // mode curseur (le view model est construit au fur et à mesure)
-        id <NSFetchedResultsSectionInfo> sectionInfo = [fetch.sections objectAtIndex:section];
-        value  = sectionInfo ? [sectionInfo numberOfObjects]  : 0;
-    }
-    else {
-        // mode direct (le view model est complet tout de suite)
-        value = (lvm.viewModels == nil)?0:lvm.viewModels.count;
-    }
+    NSInteger value = self.filteredViewModels.count ;
     
     if(!self.hasComputeContentSize) {
         MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[LISTITEM_PICKERLIST_DESCRIPTOR];
         [self.tableView registerNib:[UINib nibWithNibName:bindingData.cellIdentifier bundle:[NSBundle mainBundle]] forCellReuseIdentifier:bindingData.cellIdentifier];
         NSInteger contentSize = value * ([bindingData.cellHeight integerValue]);
-        NSLayoutConstraint *realHeight = [NSLayoutConstraint constraintWithItem:self.picker.pickerListTableView.tableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:contentSize];
-        realHeight.priority = UILayoutPriorityDefaultHigh;
-        [self.picker.parentNavigationController.view addConstraint:realHeight];
+        if(self.hasSearch) {
+            contentSize += 44;
+        }
+        
+        NSLayoutConstraint *constraintToUpdate = nil;
+        for(NSLayoutConstraint *constraint in self.picker.parentNavigationController.view.constraints) {
+            if([constraint.identifier isEqualToString:tableViewHeightConstraintIdentifier]) {
+                constraintToUpdate = constraint;
+                break;
+            }
+        }
+        if(!constraintToUpdate) {
+            NSLayoutConstraint *realHeight = [NSLayoutConstraint constraintWithItem:self.picker.pickerListTableView.tableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:contentSize];
+            realHeight.priority = UILayoutPriorityDefaultHigh;
+            realHeight.identifier = tableViewHeightConstraintIdentifier;
+            [self.picker.parentNavigationController.view addConstraint:realHeight];
+        }
+        else {
+            constraintToUpdate.constant = contentSize;
+        }
+        
+        [UIView animateWithDuration:0.15 animations:^{
+            [self.picker.parentNavigationController.view layoutIfNeeded];
+        }];
     }
     return value;
 }
@@ -123,6 +136,9 @@
     [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingData generatedBindingKey]];
 }
 
+-(void) willDisplayPickerListView {
+    self.filteredViewModels = [self getViewModels];
+}
 
 
 -(void) updateCellFromBindingData:(MFBindingCellDescriptor *)bindingData atIndexPath:(NSIndexPath *)indexPath{
@@ -152,38 +168,45 @@
 -(NSObject<MFUIBaseViewModelProtocol> *) viewModelAtIndexPath:(NSIndexPath *)indexPath
 {
     NSObject<MFUIBaseViewModelProtocol> *vmItem = nil;
-    MFUIBaseListViewModel *listVm = ((MFUIBaseListViewModel *)[self getViewModel]);
+    NSArray *items = self.filteredViewModels;
     
     
-    if ( [listVm.viewModels count]>indexPath.row) {
-        vmItem = [listVm.viewModels objectAtIndex:indexPath.row];
+    if ( [items count]>indexPath.row) {
+        vmItem = [items objectAtIndex:indexPath.row];
         if ( [[NSNull null] isEqual: vmItem]) {
             vmItem = nil ;
         }
     }
     
-    
-    if (vmItem == nil ) {
-        
-        id vmCreator = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_VIEW_MODEL_CREATOR];
-        if([[listVm.fetch.sections objectAtIndex:0] objects].count > indexPath.row) {
-            id temp = [listVm.fetch objectAtIndexPath:indexPath];
-            
-#pragma clang diagnostic push
-#pragma GCC diagnostic ignored "-Wundeclared-selector"
-            id tempVM =[vmCreator performSelector:@selector(createOrUpdateItemVM:withData:) withObject:[listVm defineViewModelName] withObject: temp];
-#pragma clang diagnostic pop
-            
-            [listVm add:tempVM atIndex:indexPath.row];
-            vmItem = tempVM ; //[listVm.viewModels objectAtIndex:indexPath.row];
-        }
-    }
     return vmItem;
 }
 
--(MFUIBaseListViewModel *)getViewModel {
+-(NSArray *)getViewModels {
     id object = [self.picker getValues];
     return object;
+}
+
+#pragma mark - Search Bar Delegate
+
+-(void)searchBar:(nonnull UISearchBar *)searchBar textDidChange:(nonnull NSString *)searchText {
+    [self checkFilter];
+    if(searchText && searchText.length > 0) {
+        self.filteredViewModels = [self.filter filterItems:[self getViewModels] withString:searchText];
+        if(!self.filteredViewModels) {
+            self.filteredViewModels = @[];
+        }
+    }else {
+        self.filteredViewModels = [self getViewModels];
+    }    self.hasComputeContentSize = NO;
+    
+    self.hasComputeContentSize = NO;
+    [self.tableView reloadData];
+}
+
+-(void) checkFilter {
+    if(!self.filter) {
+        self.filter = [MFPickerListDefaultFilter new];
+    }
 }
 
 @end

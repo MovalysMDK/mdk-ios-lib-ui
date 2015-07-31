@@ -159,6 +159,7 @@
 		B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */; };
 		B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */; };
 		B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */; };
+		B0792E581B6B741A00904BE3 /* PickerListViewWithSearch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0792E571B6B741A00904BE3 /* PickerListViewWithSearch.xib */; };
 		B07E794B1B4D1D1800822A1B /* MFBindingConverterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B07E794A1B4D1D1800822A1B /* MFBindingConverterProtocol.h */; };
 		B07E79501B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B07E794F1B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h */; };
 		B08528851B43F18A00B46194 /* MFDoubleTextFieldWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B08528831B43F18A00B46194 /* MFDoubleTextFieldWrapper.h */; };
@@ -751,6 +752,7 @@
 		B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUIErrorView.xib; sourceTree = "<group>"; };
 		B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUILabel.xib; sourceTree = "<group>"; };
 		B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUITextField.xib; sourceTree = "<group>"; };
+		B0792E571B6B741A00904BE3 /* PickerListViewWithSearch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerListViewWithSearch.xib; sourceTree = "<group>"; };
 		B07E794A1B4D1D1800822A1B /* MFBindingConverterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBindingConverterProtocol.h; sourceTree = "<group>"; };
 		B07E794F1B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBaseViewModelWithSublistProtocol.h; sourceTree = "<group>"; };
 		B08528831B43F18A00B46194 /* MFDoubleTextFieldWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDoubleTextFieldWrapper.h; sourceTree = "<group>"; };
@@ -1345,6 +1347,7 @@
 		B001B2541B5F87D80063F819 /* xib */ = {
 			isa = PBXGroup;
 			children = (
+				B0792E571B6B741A00904BE3 /* PickerListViewWithSearch.xib */,
 				B0F8966E1B614861005C3AA7 /* PickerListView.xib */,
 				B001B2551B5F87D80063F819 /* PhotoFixedListItemCell.xib */,
 			);
@@ -3002,6 +3005,7 @@
 				B001B2641B5F87D80063F819 /* no_photo.png in Resources */,
 				B001B26D1B5F87D80063F819 /* image_tooltip_valid.png in Resources */,
 				B001B25E1B5F87D80063F819 /* ios_ic_mail_active@2x.png in Resources */,
+				B0792E581B6B741A00904BE3 /* PickerListViewWithSearch.xib in Resources */,
 				B001B2671B5F87D80063F819 /* map.png in Resources */,
 				B001B2691B5F87D80063F819 /* qrcode_icon.png in Resources */,
 				B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */,

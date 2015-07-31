@@ -45,4 +45,9 @@
  */
 @property (nonatomic) BOOL hasSearch;
 
+/**
+ * @brief the filter to use when search is available
+ */
+@property (nonatomic, strong) id<MFPickerListFilterProtocol> filter;
+
 @end

@@ -16,7 +16,7 @@
 
 
 #import "MFUIOldBaseComponent.h"
-
+IB_DESIGNABLE
 @interface MFButton : MFUIOldBaseComponent <UIAppearanceContainer>
 
 @property (nonatomic, strong)   UIButton *button;

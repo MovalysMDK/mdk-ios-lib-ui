@@ -530,4 +530,13 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 #pragma clang diagnostic pop
 
 
+-(void)prepareForInterfaceBuilder {
+    UILabel *innerDescriptionLabel = [[UILabel alloc] initWithFrame:self.bounds];
+    innerDescriptionLabel.text = [[self class] description];
+    innerDescriptionLabel.textAlignment = NSTextAlignmentCenter;
+    innerDescriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+    innerDescriptionLabel.backgroundColor = [UIColor colorWithRed:0.84 green:0.96 blue:0.97 alpha:0.8];
+    [self addSubview:innerDescriptionLabel];
+}
+
 @end

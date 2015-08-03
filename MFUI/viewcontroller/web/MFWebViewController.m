@@ -78,7 +78,7 @@
 	webFrame.origin.y += kTopMargin + kNavigationBarHeight + kTextFieldHeight;	// leave from the URL input field and its label
 	webFrame.size.height -= 40.0;
 	self.myWebView = [[UIWebView alloc] initWithFrame:webFrame];
-	self.myWebView.backgroundColor = [UIColor whiteColor];
+//	self.myWebView.backgroundColor = [UIColor whiteColor];
 	self.myWebView.scalesPageToFit = YES;
 	self.myWebView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 	self.myWebView.delegate = self;

@@ -28,6 +28,7 @@
  * @brief The framework Signature component
  * @discussion This component display a view that allows the user to draw a signature.
  */
+IB_DESIGNABLE
 @interface MFSignature : MFUIOldBaseComponent <MFControlChangesProtocol>
 
 #pragma mark - Properties

@@ -129,4 +129,14 @@
     return @[[MFDoubleFieldValidator sharedInstance]];
 }
 
+
+-(void)prepareForInterfaceBuilder {
+    self.backgroundColor = [UIColor colorWithWhite:0.93 alpha:1];
+    UILabel *innerDescriptionLabel = [[UILabel alloc] initWithFrame:self.bounds];
+    innerDescriptionLabel.text = [[self class] description];
+    innerDescriptionLabel.textAlignment = NSTextAlignmentCenter;
+    innerDescriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+    [self addSubview:innerDescriptionLabel];
+}
+
 @end

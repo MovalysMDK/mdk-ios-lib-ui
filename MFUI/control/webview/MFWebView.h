@@ -27,6 +27,7 @@
  * @class MFWebView
  * @brief The base Movalys webview component
  */
+IB_DESIGNABLE
 @interface MFWebView : MFUIOldBaseComponent<UIWebViewDelegate>
 
 

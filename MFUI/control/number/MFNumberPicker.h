@@ -25,6 +25,7 @@
  * @brief The framework number picker component
  * @discussion This component display a picker aimed to select a n interger value.
  */
+IB_DESIGNABLE
 @interface MFNumberPicker : MFUIOldBaseComponent <MFDefaultConstraintsProtocol, UITextFieldDelegate, MFControlChangesProtocol>
 
 #pragma mark - Properties

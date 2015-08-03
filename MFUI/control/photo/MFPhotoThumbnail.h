@@ -24,6 +24,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "MFUIOldBaseComponent.h"
 #import "MFControlChangesProtocol.h"
+IB_DESIGNABLE
 
 @interface MFPhotoThumbnail : MFUIOldBaseComponent <MFControlChangesProtocol>
 

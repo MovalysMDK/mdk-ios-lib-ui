@@ -28,6 +28,7 @@
  * @discussion The list is editable : it's possible to add, delete or edit elements.
  * @warning This component is necessarily associated to a MFCellComponentFixedList because of its special size behavior.
  */
+IB_DESIGNABLE
 @interface MFFixedList : MFUIOldBaseComponent
 
 #pragma mark - Custom enumeration (edit mode options)

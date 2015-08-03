@@ -37,4 +37,5 @@
     [MFException throwNotImplementedExceptionOfMethodName:@"doAction" inClass:[self class] andUserInfo:nil];
 }
 
+
 @end

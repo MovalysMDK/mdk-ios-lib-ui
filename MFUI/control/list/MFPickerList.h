@@ -21,6 +21,7 @@
 
 @class MFUIBaseListViewModel;
 
+IB_DESIGNABLE
 @interface MFPickerList : MFUIOldBaseComponent <UIGestureRecognizerDelegate, MFControlChangesProtocol>
 
 @property (nonatomic, strong) UIView *selectedView;

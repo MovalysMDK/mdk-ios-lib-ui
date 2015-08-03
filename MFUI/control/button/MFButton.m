@@ -143,5 +143,15 @@
     [self.button setEnabled:([editable isEqualToNumber:@1]? YES : NO)];
 }
 
+-(void)prepareForInterfaceBuilder {
+    UILabel *innerDescriptionLabel = [[UILabel alloc] initWithFrame:self.bounds];
+    innerDescriptionLabel.text = self.mf.title;
+    innerDescriptionLabel.textColor = self.tintColor;
+    innerDescriptionLabel.textAlignment = NSTextAlignmentCenter;
+//    innerDescriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+    innerDescriptionLabel.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+    [self addSubview:innerDescriptionLabel];
+}
+
 
 @end

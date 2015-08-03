@@ -23,7 +23,7 @@
 #import "MFUIConversion.h"
 #import "MFUIOldBaseComponent.h"
 #import "MFControlChangesProtocol.h"
-
+IB_DESIGNABLE
 @interface MFSlider : MFUIOldBaseComponent <MFControlChangesProtocol>
 
 

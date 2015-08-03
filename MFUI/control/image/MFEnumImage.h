@@ -27,6 +27,7 @@ FOUNDATION_EXPORT NSString *MF_ENUM_CLASS_NAME_PARAMETER_KEY;
  * @class MFEnumImage
  * @brief The MFEnumImage component
  */
+IB_DESIGNABLE
 @interface MFEnumImage : MFUIOldBaseComponent <UIGestureRecognizerDelegate, MFOrientationChangedProtocol>
 
 #pragma mark - Properties

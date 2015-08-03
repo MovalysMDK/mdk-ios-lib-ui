@@ -53,14 +53,14 @@ NSTimer *timer =nil;
 
 
 -(void) initialize {
-    
+#if !TARGET_INTERFACE_BUILDER
+
     //Création du label et ajout à la vue
     self.webview = [[UIWebView alloc] initWithFrame:self.bounds];
     self.webview.translatesAutoresizingMaskIntoConstraints = NO;
     
     self.webview.userInteractionEnabled = YES;
     self.webview.delegate=self;
-    
     self.isLoading = NO;
     self.userInteractionEnabled = YES;
     
@@ -73,6 +73,7 @@ NSTimer *timer =nil;
     
     
     [self addConstraints:@[insideLabelConstraintLeftMargin, insideLabelConstraintTopMargin, insideLabelConstraintHeight, insideLabelConstraintWidth]];
+#endif
 }
 
 
@@ -226,5 +227,16 @@ NSTimer *timer =nil;
     //Rien a faire.
     //On ne souhaite pas faire le super qui rend le composant non interactif (userInteractionEnbaled =NO)
 }
+
+-(void)prepareForInterfaceBuilder {
+    UILabel *innerDescriptionLabel = [[UILabel alloc] initWithFrame:self.bounds];
+    innerDescriptionLabel.text = [[self class] description];
+    innerDescriptionLabel.textAlignment = NSTextAlignmentCenter;
+    innerDescriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+    [self addSubview:innerDescriptionLabel];
+    self.backgroundColor = [UIColor colorWithRed:0.88f green:0.88f blue:0.97f alpha:1.0f];
+
+}
+
 
 @end

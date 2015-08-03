@@ -74,6 +74,7 @@ NSString *MF_ENUM_CLASS_NAME_PARAMETER_KEY = @"enumClassName";
 -(void)initialize {
     [super initialize];
     
+#if !TARGET_INTERFACE_BUILDER
     self.mf = [MFEnumExtension new];
     
     self.imageView = [[UIImageView alloc] init];
@@ -103,6 +104,7 @@ NSString *MF_ENUM_CLASS_NAME_PARAMETER_KEY = @"enumClassName";
     [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     [self registerOrientationChange];
+#endif
 }
 
 #pragma mark - Class lifecycle
@@ -218,4 +220,12 @@ NSString *MF_ENUM_CLASS_NAME_PARAMETER_KEY = @"enumClassName";
     }
 }
 
+-(void)prepareForInterfaceBuilder {
+    UILabel *innerDescriptionLabel = [[UILabel alloc] initWithFrame:self.bounds];
+    innerDescriptionLabel.text = [[self class] description];
+    innerDescriptionLabel.textAlignment = NSTextAlignmentCenter;
+    innerDescriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+    [self addSubview:innerDescriptionLabel];
+    self.backgroundColor = [UIColor colorWithRed:0.98f green:0.98f blue:0.34f alpha:0.5f];
+}
 @end

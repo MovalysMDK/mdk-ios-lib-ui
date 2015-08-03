@@ -226,16 +226,6 @@
     [self.controlDelegate onErrorButtonClick:sender];
 }
 
--(void)prepareForInterfaceBuilder {
-    [self applyStandardStyle];
-    
-    if(self.onError_MDK) {
-        [self applyErrorStyle];
-    }
-    else {
-        [self applyValidStyle];
-    }
-}
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -315,6 +305,26 @@
 -(void)addControlAttribute:(id)controlAttribute forKey:(NSString *)key {
     [self.controlDelegate addControlAttribute:controlAttribute forKey:key];
 }
+
+-(void)prepareForInterfaceBuilder {
+    [self applyStandardStyle];
+    
+    if(self.onError_MDK) {
+        [self applyErrorStyle];
+    }
+    else {
+        [self applyValidStyle];
+    }
+
+    
+    UILabel *innerDescriptionLabel = [[UILabel alloc] initWithFrame:self.bounds];
+    innerDescriptionLabel.text = [[self class] description];
+    innerDescriptionLabel.textAlignment = NSTextAlignmentCenter;
+    innerDescriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+    innerDescriptionLabel.backgroundColor = [UIColor colorWithWhite:0.91 alpha:0.75];
+    [self addSubview:innerDescriptionLabel];
+}
+
 
 
 @end

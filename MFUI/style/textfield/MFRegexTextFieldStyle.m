@@ -24,7 +24,7 @@
 -(void)applyStandardStyleOnComponent:(MFRegexTextField *)component {
     [super applyStandardStyleOnComponent:component];
     if(self.hasAccessoryButton && self.backgroundView) {
-        component.backgroundColor = [UIColor whiteColor];
+        component.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1];
     }
 }
 

@@ -41,6 +41,7 @@ NSInteger DEFAULT_ACCESSORIES_MARGIN = 2;
 -(void)applyErrorStyleOnComponent:(MFTextField *)component {
     [super applyErrorStyleOnComponent:component];
     [self performSelector:@selector(addErrorViewOnComponent:) withObject:component];
+    
 }
 
 -(void)applyValidStyleOnComponent:(MFTextField *) component {

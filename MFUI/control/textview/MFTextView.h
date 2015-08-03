@@ -36,7 +36,7 @@
 /*!
  * TextView component permit the input of a multiline text
  */
-
+IB_DESIGNABLE
 @interface MFTextView : MFUIOldBaseComponent<UITextViewDelegate, MFOrientationChangedProtocol, MFControlChangesProtocol>
 
 #pragma mark - Properties

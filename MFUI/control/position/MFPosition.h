@@ -34,6 +34,8 @@
  * @brief Custom control to display geo-position (latitude and longitude).
  * @discussion
  */
+
+IB_DESIGNABLE
 @interface MFPosition : MFUIOldBaseComponent<MFUIComponentProtocol, CLLocationManagerDelegate, MFControlChangesProtocol>
 
 #pragma mark - Properties

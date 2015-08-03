@@ -66,6 +66,7 @@
 
 
 - (void) initialize {
+#if !TARGET_INTERFACE_BUILDER
     [super initialize];
 
     _data = @"{}";
@@ -79,7 +80,7 @@
                                SIGNATURE_DRAWING_WIDTH, SIGNATURE_DRAWING_HEIGHT);
     [self setFrame:frame];
     [self setBackgroundColor:[UIColor colorWithRed:242./255. green:242./255. blue:242./255. alpha:1.0]];
-
+#endif
     
 }
 
@@ -438,6 +439,16 @@
     [cctd.target performSelector:cctd.action withObject:self];
 }
 #pragma clang diagnostic pop
+
+-(void)prepareForInterfaceBuilder {
+    UILabel *innerDescriptionLabel = [[UILabel alloc] initWithFrame:self.bounds];
+    innerDescriptionLabel.text = [[self class] description];
+    innerDescriptionLabel.textAlignment = NSTextAlignmentCenter;
+    innerDescriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+    [self addSubview:innerDescriptionLabel];
+    self.backgroundColor = [UIColor colorWithRed:0.86f green:0.87f blue:0.65f alpha:1.0f];
+    
+}
 
 
 @end

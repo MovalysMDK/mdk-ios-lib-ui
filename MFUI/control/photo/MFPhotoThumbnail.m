@@ -26,7 +26,6 @@
 #import "MFCellAbstract.h"
 #import "MFPhotoDetailViewController.h"
 #import "MFPhotoViewModel.h"
-
 @interface MFPhotoThumbnail()
 
 /**
@@ -450,5 +449,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 
 
+-(void)prepareForInterfaceBuilder {
+    self.backgroundColor = [UIColor colorWithRed:0.56 green:0.83 blue:1 alpha:1];
+    UILabel *innerDescriptionLabel = [[UILabel alloc] initWithFrame:self.bounds];
+    innerDescriptionLabel.text = [[self class] description];
+    innerDescriptionLabel.textAlignment = NSTextAlignmentCenter;
+    innerDescriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+    [self addSubview:innerDescriptionLabel];
+}
 
 @end

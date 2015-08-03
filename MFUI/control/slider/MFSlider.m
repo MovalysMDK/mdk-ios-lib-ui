@@ -271,13 +271,6 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 }
 
 
--(void)prepareForInterfaceBuilder {
-    [super prepareForInterfaceBuilder];
-
-    self.innerSliderValueLabel.textAlignment = NSTextAlignmentCenter;
-    self.innerSliderValueLabel.textColor = [UIColor colorWithRed:0 green:128.0/255.0 blue:1 alpha:1];
-}
-
 -(void)willLayoutSubviewsNoDesignable {
     self.innerSliderValueLabel.textAlignment = NSTextAlignmentCenter;
 }
@@ -312,5 +305,13 @@ NSString *const SLIDER_PARAMETER_STEP_KEY = @"step";
 }
 #pragma clang diagnostic pop
 
+-(void)prepareForInterfaceBuilder {
+    UILabel *innerDescriptionLabel = [[UILabel alloc] initWithFrame:self.bounds];
+    innerDescriptionLabel.text = [[self class] description];
+    innerDescriptionLabel.textAlignment = NSTextAlignmentCenter;
+    innerDescriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+    innerDescriptionLabel.backgroundColor = [UIColor colorWithRed:0.91 green:0.86 blue:0.92 alpha:0.8];
+    [self addSubview:innerDescriptionLabel];
+}
 
 @end

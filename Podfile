@@ -7,7 +7,6 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 pod 'MFCore', :path => '../mfcore'
-pod 'ViewDeck', '2.2.11'
 pod 'MBProgressHUD', '0.8'
 
 post_install do |installer_representation|

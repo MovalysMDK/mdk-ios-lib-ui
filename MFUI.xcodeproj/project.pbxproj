@@ -474,11 +474,6 @@
 		B0D45E3F1A5ED2F400C6D376 /* MFWorkspaceMasterColumnProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45CC41A5ED2F400C6D376 /* MFWorkspaceMasterColumnProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E401A5ED2F400C6D376 /* MFWorkspaceViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45CC51A5ED2F400C6D376 /* MFWorkspaceViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E411A5ED2F400C6D376 /* MFWorkspaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45CC61A5ED2F400C6D376 /* MFWorkspaceViewController.m */; };
-		B0D45E421A5ED2F400C6D376 /* MFDeckViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45CC81A5ED2F400C6D376 /* MFDeckViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45E431A5ED2F400C6D376 /* MFDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45CC91A5ED2F400C6D376 /* MFDeckViewController.m */; };
-		B0D45E441A5ED2F400C6D376 /* MFDeckViewGestureDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45CCA1A5ED2F400C6D376 /* MFDeckViewGestureDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45E451A5ED2F400C6D376 /* MFDeckViewGestureDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45CCB1A5ED2F400C6D376 /* MFDeckViewGestureDelegate.m */; };
-		B0D45E461A5ED2F400C6D376 /* MFUIViewControllerDeck.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45CCC1A5ED2F400C6D376 /* MFUIViewControllerDeck.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E471A5ED2F400C6D376 /* MFDetailViewControllerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45CCE1A5ED2F400C6D376 /* MFDetailViewControllerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E481A5ED2F400C6D376 /* MFCreateEmailViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45CD01A5ED2F400C6D376 /* MFCreateEmailViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E491A5ED2F400C6D376 /* MFCreateEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45CD11A5ED2F400C6D376 /* MFCreateEmailViewController.m */; };
@@ -524,8 +519,6 @@
 		B0D45E711A5ED2F400C6D376 /* MFTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45CFE1A5ED2F400C6D376 /* MFTransitionController.m */; };
 		B0D45E721A5ED2F400C6D376 /* MFUITransitionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45CFF1A5ED2F400C6D376 /* MFUITransitionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E731A5ED2F400C6D376 /* MFUIViewControllerTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45D001A5ED2F400C6D376 /* MFUIViewControllerTransition.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45E741A5ED2F400C6D376 /* UIViewController+MFMenuManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45D011A5ED2F400C6D376 /* UIViewController+MFMenuManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45E751A5ED2F400C6D376 /* UIViewController+MFMenuManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45D021A5ED2F400C6D376 /* UIViewController+MFMenuManager.m */; };
 		B0D45E761A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45D031A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45E771A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45D041A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.m */; };
 		B0D45E7A1A5ED2F400C6D376 /* MFDefaultViewModelCreator.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45D081A5ED2F400C6D376 /* MFDefaultViewModelCreator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1071,11 +1064,6 @@
 		B0D45CC41A5ED2F400C6D376 /* MFWorkspaceMasterColumnProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFWorkspaceMasterColumnProtocol.h; sourceTree = "<group>"; };
 		B0D45CC51A5ED2F400C6D376 /* MFWorkspaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFWorkspaceViewController.h; sourceTree = "<group>"; };
 		B0D45CC61A5ED2F400C6D376 /* MFWorkspaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFWorkspaceViewController.m; sourceTree = "<group>"; };
-		B0D45CC81A5ED2F400C6D376 /* MFDeckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDeckViewController.h; sourceTree = "<group>"; };
-		B0D45CC91A5ED2F400C6D376 /* MFDeckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDeckViewController.m; sourceTree = "<group>"; };
-		B0D45CCA1A5ED2F400C6D376 /* MFDeckViewGestureDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDeckViewGestureDelegate.h; sourceTree = "<group>"; };
-		B0D45CCB1A5ED2F400C6D376 /* MFDeckViewGestureDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDeckViewGestureDelegate.m; sourceTree = "<group>"; };
-		B0D45CCC1A5ED2F400C6D376 /* MFUIViewControllerDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIViewControllerDeck.h; sourceTree = "<group>"; };
 		B0D45CCE1A5ED2F400C6D376 /* MFDetailViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDetailViewControllerProtocol.h; sourceTree = "<group>"; };
 		B0D45CD01A5ED2F400C6D376 /* MFCreateEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCreateEmailViewController.h; sourceTree = "<group>"; };
 		B0D45CD11A5ED2F400C6D376 /* MFCreateEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCreateEmailViewController.m; sourceTree = "<group>"; };
@@ -1121,8 +1109,6 @@
 		B0D45CFE1A5ED2F400C6D376 /* MFTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTransitionController.m; sourceTree = "<group>"; };
 		B0D45CFF1A5ED2F400C6D376 /* MFUITransitionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUITransitionDelegate.h; sourceTree = "<group>"; };
 		B0D45D001A5ED2F400C6D376 /* MFUIViewControllerTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIViewControllerTransition.h; sourceTree = "<group>"; };
-		B0D45D011A5ED2F400C6D376 /* UIViewController+MFMenuManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFMenuManager.h"; sourceTree = "<group>"; };
-		B0D45D021A5ED2F400C6D376 /* UIViewController+MFMenuManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFMenuManager.m"; sourceTree = "<group>"; };
 		B0D45D031A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFViewControllerUtils.h"; sourceTree = "<group>"; };
 		B0D45D041A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFViewControllerUtils.m"; sourceTree = "<group>"; };
 		B0D45D081A5ED2F400C6D376 /* MFDefaultViewModelCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDefaultViewModelCreator.h; sourceTree = "<group>"; };
@@ -2339,7 +2325,6 @@
 			children = (
 				B02C1C561B395B1000155DC0 /* attributes */,
 				B0D45CB41A5ED2F400C6D376 /* container */,
-				B0D45CC71A5ED2F400C6D376 /* deck */,
 				B0D45CCD1A5ED2F400C6D376 /* detail */,
 				B0D45CCF1A5ED2F400C6D376 /* email */,
 				B0D45CD31A5ED2F400C6D376 /* form */,
@@ -2357,8 +2342,6 @@
 				B0D45CF41A5ED2F400C6D376 /* photo */,
 				B0D45CF81A5ED2F400C6D376 /* splash */,
 				B0D45CFC1A5ED2F400C6D376 /* transition */,
-				B0D45D011A5ED2F400C6D376 /* UIViewController+MFMenuManager.h */,
-				B0D45D021A5ED2F400C6D376 /* UIViewController+MFMenuManager.m */,
 				B0D45D031A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.h */,
 				B0D45D041A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.m */,
 				B08AAC5B1AE91C5D0029EC88 /* web */,
@@ -2403,18 +2386,6 @@
 				B0D45CC61A5ED2F400C6D376 /* MFWorkspaceViewController.m */,
 			);
 			path = workspace;
-			sourceTree = "<group>";
-		};
-		B0D45CC71A5ED2F400C6D376 /* deck */ = {
-			isa = PBXGroup;
-			children = (
-				B0D45CC81A5ED2F400C6D376 /* MFDeckViewController.h */,
-				B0D45CC91A5ED2F400C6D376 /* MFDeckViewController.m */,
-				B0D45CCA1A5ED2F400C6D376 /* MFDeckViewGestureDelegate.h */,
-				B0D45CCB1A5ED2F400C6D376 /* MFDeckViewGestureDelegate.m */,
-				B0D45CCC1A5ED2F400C6D376 /* MFUIViewControllerDeck.h */,
-			);
-			path = deck;
 			sourceTree = "<group>";
 		};
 		B0D45CCD1A5ED2F400C6D376 /* detail */ = {
@@ -2617,7 +2588,6 @@
 				B08EF7001AE53F8F00F3754E /* MFUrlTextField.h in Headers */,
 				B0D45D261A5ED2F400C6D376 /* MFAbstractPersistentSaveDetailAction.h in Headers */,
 				B0D45D821A5ED2F400C6D376 /* MFPositionVoProtocol.h in Headers */,
-				B0D45E441A5ED2F400C6D376 /* MFDeckViewGestureDelegate.h in Headers */,
 				B0D45E3E1A5ED2F400C6D376 /* MFWorkspaceDetailColumnProtocol.h in Headers */,
 				B0D45DBA1A5ED2F400C6D376 /* InvalidTooltipView.h in Headers */,
 				B0D45DCC1A5ED2F400C6D376 /* MFUIControlExtension.h in Headers */,
@@ -2659,7 +2629,6 @@
 				B0D45D371A5ED2F400C6D376 /* MFUIApplication.h in Headers */,
 				B00787CE1AB1E37A009F6D95 /* UIView+JDFTooltips.h in Headers */,
 				B02C1C591B395B2600155DC0 /* MFViewControllerAttributes.h in Headers */,
-				B0D45E421A5ED2F400C6D376 /* MFDeckViewController.h in Headers */,
 				B0D45E4D1A5ED2F400C6D376 /* MFForm3DListViewController.h in Headers */,
 				B0C9B2D11AFA21E700FC9665 /* MFDoubleTextFieldStyle.h in Headers */,
 				B0D45E611A5ED2F400C6D376 /* MFUIViewController.h in Headers */,
@@ -2718,7 +2687,6 @@
 				B0D45DD21A5ED2F400C6D376 /* MFNumberConverter.h in Headers */,
 				B0D45D981A5ED2F400C6D376 /* MFUIControlSlider.h in Headers */,
 				B0D45E0E1A5ED2F400C6D376 /* MFUIProtocol.h in Headers */,
-				B0D45E461A5ED2F400C6D376 /* MFUIViewControllerDeck.h in Headers */,
 				B0D45E111A5ED2F400C6D376 /* MFAutoLayoutHelper.h in Headers */,
 				B0D45D701A5ED2F400C6D376 /* MFViewTags.h in Headers */,
 				B0D45E621A5ED2F400C6D376 /* MFViewController.h in Headers */,
@@ -2728,7 +2696,6 @@
 				B0D45D351A5ED2F400C6D376 /* MFApplication+MFUIAppSingleton.h in Headers */,
 				B0D45D7D1A5ED2F400C6D376 /* MFMapViewController.h in Headers */,
 				B0B760C21AEFE75200E52B97 /* MFLabel.h in Headers */,
-				B0D45E741A5ED2F400C6D376 /* UIViewController+MFMenuManager.h in Headers */,
 				B0D45E3F1A5ED2F400C6D376 /* MFWorkspaceMasterColumnProtocol.h in Headers */,
 				B006CEE91B32C1E700B78782 /* MFFormConfiguration.h in Headers */,
 				B08EF7061AE53F9E00F3754E /* MFErrorViewProtocol.h in Headers */,
@@ -3228,7 +3195,6 @@
 				B0390DE31B4BD572007DB82B /* MFPhoneFieldValidator.m in Sources */,
 				B0D45D1E1A5ED2F400C6D376 /* MFDeleteDetailActionParamOut.m in Sources */,
 				B0FC78EE1B3ACE1400DD225F /* MFSignatureWrapper.m in Sources */,
-				B0D45E431A5ED2F400C6D376 /* MFDeckViewController.m in Sources */,
 				B0D45DBB1A5ED2F400C6D376 /* InvalidTooltipView.m in Sources */,
 				B0D45DE61A5ED2F400C6D376 /* MFTooLongStringUIValidationError.m in Sources */,
 				B08528861B43F18A00B46194 /* MFDoubleTextFieldWrapper.m in Sources */,
@@ -3236,7 +3202,6 @@
 				B0390DDF1B4BD2B8007DB82B /* MFUrlFieldValidator.m in Sources */,
 				B0D45D211A5ED2F400C6D376 /* MFEmailLogsAction.m in Sources */,
 				B0D45E411A5ED2F400C6D376 /* MFWorkspaceViewController.m in Sources */,
-				B0D45E451A5ED2F400C6D376 /* MFDeckViewGestureDelegate.m in Sources */,
 				B0FFDB0E1B3463DA00CA6E5E /* MFMandatoryFieldValidator.m in Sources */,
 				B0FFDAFB1B343D3300CA6E5E /* MFBeanComponentProvider.m in Sources */,
 				B032D0D81AB188CE001C114F /* MFUIErrorView.m in Sources */,
@@ -3261,7 +3226,6 @@
 				B0129F741B33362C0090B0AF /* MFEmail.m in Sources */,
 				B0D45D761A5ED2F400C6D376 /* MFPhotoPropertiesViewController.m in Sources */,
 				B0D45D451A5ED2F400C6D376 /* MFPhotoFixedListDataDelegate.m in Sources */,
-				B0D45E751A5ED2F400C6D376 /* UIViewController+MFMenuManager.m in Sources */,
 				B0D45D8E1A5ED2F400C6D376 /* MFSignature.m in Sources */,
 				B0FC78F41B3AD22700DD225F /* MFTextViewWrapper.m in Sources */,
 				B0D45DC41A5ED2F400C6D376 /* MFWebView.m in Sources */,

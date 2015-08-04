@@ -98,15 +98,12 @@ static MFMenuViewController * getMenuViewController() {
             NSString *storyboardName = [actionName substringFromIndex:4];
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
             MFViewController *vc = [storyboard instantiateInitialViewController];
-            MFTransitionController *transitionController = (MFTransitionController *) self.viewDeckController.centerController;
-            UINavigationController *navigationController = (UINavigationController *) transitionController.viewController;
+            UINavigationController *navigationController = (UINavigationController *) self.navigationController;
             
             if ([vc isKindOfClass:[UINavigationController class]]) {
                 [navigationController popToRootViewControllerAnimated:YES];
-                [self.viewDeckController closeLeftViewAnimated:YES];
             } else {
                 [navigationController popToRootViewControllerAnimated:NO];
-                [self.viewDeckController closeLeftViewAnimated:YES];
                 [navigationController pushViewController:vc animated:YES];
             }
             

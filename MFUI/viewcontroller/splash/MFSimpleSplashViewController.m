@@ -26,7 +26,6 @@
 
 #import "MFSimpleSplashViewController.h"
 #import "MFTransitionController.h"
-#import <ViewDeck/IIViewDeckController.h>
 #import "MFViewController.h"
 
 @interface MFSimpleSplashViewController ()
@@ -53,11 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self initProgressBar];
-
-    //    // avoid to use the menu while loading
-    self.transitionController.viewDeckController.panningMode = IIViewDeckNoPanning;
 }
 
 
@@ -113,8 +108,6 @@
                 else {
                     initialViewController = [[MFViewController alloc] init];
                 }
-                self.transitionController.viewDeckController.panningMode = IIViewDeckFullViewPanning;//IIViewDeckPanningViewPanning;
-                //  self.transitionController.viewDeckController.panningView = self.transitionController.view;
                 [self.transitionController transitionToViewController:initialViewController withOptions:UIViewAnimationOptionTransitionCurlUp];
                 
                 

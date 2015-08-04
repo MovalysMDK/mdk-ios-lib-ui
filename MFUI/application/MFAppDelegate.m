@@ -28,7 +28,6 @@
 #import "MFMenuViewController.h"
 #import "MFSimpleSplashViewController.h"
 #import "MFTransitionController.h"
-#import "MFDeckViewController.h"
 #import "UIViewController+MFViewControllerUtils.h"
 #import "MFHelperFile.h"
 #import "MFFormBaseViewController.h"
@@ -70,29 +69,20 @@ static NSString *const CONST_HOST = @"http://localhost:8888/";
     _starter = [MFStarter getInstance];
     [self setupFirstLaunching];
     
-    //retrieve the default Movalys menu.
-    UIViewController<MFMenuViewControllerProtocol> __block *leftController = [self customMenuViewController];
-    if([leftController isKindOfClass:[MFFormBaseViewController class]]) {
-        ((MFFormBaseViewController *)leftController).needDoFillAction = NO;
-    }
-    
+
     MFTransitionController *transitionController = [[MFTransitionController alloc] initWithViewController:splashViewController];
     self.transitionController = transitionController;
+    splashViewController.transitionController = transitionController;
     
-    MFDeckViewController *menuController = [[MFDeckViewController alloc] initWithCenterViewController:transitionController leftViewController:leftController];
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    menuController.leftSize = screenRect.size.width - 200;
-    
-    self.window.rootViewController = menuController;
+    self.window.rootViewController = transitionController;
     
     [self.window makeKeyAndVisible];
     
     if ( [_starter.settingsValidationManager isUserSettingsValuesCorrect] == YES ) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             [_starter start];
-            if([leftController isKindOfClass:[MFFormBaseViewController class]]) {
-                ((MFFormBaseViewController *)leftController).needDoFillAction = YES;
-            }        });
+
+        });
     }
     
     return YES;
@@ -143,10 +133,6 @@ void ApplicationExceptionHandler(NSException *exception)
 
 -(void) setupFirstLaunching{
     [_starter setupFirstLaunching];
-}
-
--(UIViewController<MFMenuViewControllerProtocol> *) customMenuViewController {
-    return [MFMenuViewController getInstance];
 }
 
 -(id<MFComponentProviderProtocol>)componentProvider {

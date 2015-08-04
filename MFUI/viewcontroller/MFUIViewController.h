@@ -27,11 +27,9 @@
 #import "MFViewControllerDelegate+MFUIViewControllerDelegate.h"
 #import "MFViewControllerObserverProtocol.h"
 #import "MFViewControllerProtocol.h"
-#import "UIViewController+MFMenuManager.h"
 #import "UIViewController+MFViewControllerUtils.h"
 
 #import "MFUIViewControllerContainer.h"
-#import "MFUIViewControllerDeck.h"
 #import "MFUIViewControllerEmail.h"
 #import "MFUIViewControllerForm.h"
 #import "MFUIViewControllerMenu.h"

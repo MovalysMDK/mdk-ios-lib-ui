@@ -35,12 +35,4 @@
 
 
 
-#pragma mark - Methods
-/*!
- * @brief This method should return a ViewController that will be displayed in
- * the menu on the left
- * @param customMenuViewController A UIViewController object that implements MFMenuViewControllerProtocol
- */
--(UIViewController<MFMenuViewControllerProtocol> *) customMenuViewController;
-
 @end

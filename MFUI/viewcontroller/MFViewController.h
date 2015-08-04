@@ -31,8 +31,6 @@
 #import "MFViewControllerAttributes.h"
 
 
-//Menu
-#import "UIViewController+MFMenuManager.h"
 
 //#import "MFUIComponents.h"
 

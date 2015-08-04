@@ -63,16 +63,8 @@
 /*!
  * @brief Le transition controller qui permet l'affichage de l'écran principal (central)
  */
-@property(nonatomic, strong, readonly) MFTransitionController *transitionController;
+@property(nonatomic, strong) MFTransitionController *transitionController;
 
-/*!
- * @brief Cette méthode permet de pousser un nouveau controller dans le navigationController de 
- * l'écran central. 
- * @param viewController L'objet UIViewController à pousser sur l'écran central
- * @param animated Booléen qui indique si l'object UIViewController doit être affiché avec ou
- * sans animation
- */
--(void) pushCenterViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
 
 @end

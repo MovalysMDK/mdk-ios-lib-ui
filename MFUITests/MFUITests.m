@@ -13,13 +13,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUITests.m
-//  MFUITests
-//
-//  Created by Laurent Michenaud on 10/10/2014.
-//  Copyright (c) 2014 Sopra Consulting. All rights reserved.
-//
+
 
 #import <XCTest/XCTest.h>
 

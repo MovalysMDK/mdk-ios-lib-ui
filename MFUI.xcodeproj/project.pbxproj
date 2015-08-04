@@ -90,7 +90,7 @@
 		B00787CF1AB1E37A009F6D95 /* UIView+JDFTooltips.m in Sources */ = {isa = PBXBuildFile; fileRef = B00787C41AB1E37A009F6D95 /* UIView+JDFTooltips.m */; };
 		B008ADB21B32CA4E00D42F90 /* MFUIBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = B006CF1B1B32C55600B78782 /* MFUIBinding.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B008ADB31B32CA4E00D42F90 /* MFUIConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = B006CF1C1B32C5B600B78782 /* MFUIConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B008ADB41B32CA4E00D42F90 /* MFUIControlTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B07615EC1AF0D13E00217010 /* MFUIControlTextField.h */; };
+		B008ADB41B32CA4E00D42F90 /* MFUIControlTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B07615EC1AF0D13E00217010 /* MFUIControlTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B008ADB51B32CA4E00D42F90 /* MFUIListener.h in Headers */ = {isa = PBXBuildFile; fileRef = B006CF1D1B32C63100B78782 /* MFUIListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B008ADB61B32CA4E00D42F90 /* MFUIWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B006CF1E1B32C68200B78782 /* MFUIWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B01075A81B710615009D63B9 /* CocoaLumberJack.txt in Resources */ = {isa = PBXBuildFile; fileRef = B01075A41B710615009D63B9 /* CocoaLumberJack.txt */; };
@@ -101,6 +101,8 @@
 		B01075AF1B710711009D63B9 /* MFErrorViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B01075AE1B710711009D63B9 /* MFErrorViewProtocol.h */; };
 		B01075B11B71073A009D63B9 /* MFStyleProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B01075B01B71073A009D63B9 /* MFStyleProtocol.h */; };
 		B01075B31B71077E009D63B9 /* MFDefaultConstraintsProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B01075B21B71077E009D63B9 /* MFDefaultConstraintsProtocol.h */; };
+		B01075B91B710D63009D63B9 /* MFUIFieldValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FFDB071B34439000CA6E5E /* MFUIFieldValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B01075BA1B710D63009D63B9 /* MFUIStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = B01075B81B710907009D63B9 /* MFUIStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0129F5E1B3323790090B0AF /* MFCommandProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0129F5D1B3323790090B0AF /* MFCommandProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0129F611B3323850090B0AF /* MFCommandHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = B0129F5F1B3323850090B0AF /* MFCommandHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0129F621B3323850090B0AF /* MFCommandHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B0129F601B3323850090B0AF /* MFCommandHandler.m */; };
@@ -119,13 +121,13 @@
 		B01840001AB09E530081133F /* MFButton+UIButtonForwarding.m in Sources */ = {isa = PBXBuildFile; fileRef = B0183FF91AB09E530081133F /* MFButton+UIButtonForwarding.m */; };
 		B01840011AB09E530081133F /* MFButton.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FFA1AB09E530081133F /* MFButton.h */; };
 		B01840021AB09E530081133F /* MFButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B0183FFB1AB09E530081133F /* MFButton.m */; };
-		B01840031AB09E530081133F /* MFUIControlButton.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FFC1AB09E530081133F /* MFUIControlButton.h */; };
+		B01840031AB09E530081133F /* MFUIControlButton.h in Headers */ = {isa = PBXBuildFile; fileRef = B0183FFC1AB09E530081133F /* MFUIControlButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0266AE21B3BE7BA0007E1EA /* MFComponentAttributesProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0266AE11B3BE7BA0007E1EA /* MFComponentAttributesProtocol.h */; };
 		B0266AE51B3C07780007E1EA /* UISliderWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0266AE31B3C07780007E1EA /* UISliderWrapper.h */; };
 		B0266AE61B3C07780007E1EA /* UISliderWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0266AE41B3C07780007E1EA /* UISliderWrapper.m */; };
 		B0266AE91B3C2A620007E1EA /* MFBindingFormatParser.h in Headers */ = {isa = PBXBuildFile; fileRef = B0266AE71B3C2A620007E1EA /* MFBindingFormatParser.h */; };
 		B0266AEA1B3C2A620007E1EA /* MFBindingFormatParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B0266AE81B3C2A620007E1EA /* MFBindingFormatParser.m */; };
-		B0289F281AA892A8007A2E75 /* MFUIBaseRenderableComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = B0289F261AA892A8007A2E75 /* MFUIBaseRenderableComponent.h */; };
+		B0289F281AA892A8007A2E75 /* MFUIBaseRenderableComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = B0289F261AA892A8007A2E75 /* MFUIBaseRenderableComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0289F291AA892A8007A2E75 /* MFUIBaseRenderableComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B0289F271AA892A8007A2E75 /* MFUIBaseRenderableComponent.m */; };
 		B02C1C591B395B2600155DC0 /* MFViewControllerAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = B02C1C571B395B2600155DC0 /* MFViewControllerAttributes.h */; };
 		B02C1C5A1B395B2600155DC0 /* MFViewControllerAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = B02C1C581B395B2600155DC0 /* MFViewControllerAttributes.m */; };
@@ -133,7 +135,7 @@
 		B02C1C5E1B395EA900155DC0 /* MFViewControllerAttributes_Workspace.m in Sources */ = {isa = PBXBuildFile; fileRef = B02C1C5C1B395EA900155DC0 /* MFViewControllerAttributes_Workspace.m */; };
 		B0304A6A1B4A6551002A1876 /* MFEnumExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = B0304A681B4A6551002A1876 /* MFEnumExtension.h */; };
 		B0304A6B1B4A6551002A1876 /* MFEnumExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B0304A691B4A6551002A1876 /* MFEnumExtension.m */; };
-		B032D0D71AB188CE001C114F /* MFUIErrorView.h in Headers */ = {isa = PBXBuildFile; fileRef = B032D0D51AB188CE001C114F /* MFUIErrorView.h */; };
+		B032D0D71AB188CE001C114F /* MFUIErrorView.h in Headers */ = {isa = PBXBuildFile; fileRef = B032D0D51AB188CE001C114F /* MFUIErrorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B032D0D81AB188CE001C114F /* MFUIErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B032D0D61AB188CE001C114F /* MFUIErrorView.m */; };
 		B037F8CA1B0DC839005C12F2 /* MFAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = B037F8C81B0DC839005C12F2 /* MFAlertView.h */; };
 		B037F8CB1B0DC839005C12F2 /* MFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B037F8C91B0DC839005C12F2 /* MFAlertView.m */; };
@@ -201,14 +203,14 @@
 		B09CAC461B3D55F50067A8DE /* MFIntegerTextFieldWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B09CAC441B3D55F50067A8DE /* MFIntegerTextFieldWrapper.m */; };
 		B09CAC491B3D7BB40067A8DE /* MFBindingViewDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = B09CAC471B3D7BB40067A8DE /* MFBindingViewDescriptor.h */; };
 		B09CAC4A1B3D7BB40067A8DE /* MFBindingViewDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = B09CAC481B3D7BB40067A8DE /* MFBindingViewDescriptor.m */; };
-		B0A0ED621AE8D578004F0FF7 /* MFUIOldBaseComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = B0A0ED601AE8D578004F0FF7 /* MFUIOldBaseComponent.h */; };
+		B0A0ED621AE8D578004F0FF7 /* MFUIOldBaseComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = B0A0ED601AE8D578004F0FF7 /* MFUIOldBaseComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0A0ED631AE8D578004F0FF7 /* MFUIOldBaseComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0ED611AE8D578004F0FF7 /* MFUIOldBaseComponent.m */; };
 		B0AF66FD1AE64E1400A472FC /* MFCommonControlDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0AF66FB1AE64E1400A472FC /* MFCommonControlDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0AF66FE1AE64E1400A472FC /* MFCommonControlDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0AF66FC1AE64E1400A472FC /* MFCommonControlDelegate.m */; };
 		B0B760C21AEFE75200E52B97 /* MFLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B760C01AEFE75200E52B97 /* MFLabel.h */; };
 		B0B760C31AEFE75200E52B97 /* MFLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B760C11AEFE75200E52B97 /* MFLabel.m */; };
 		B0C28DF91AE647BF00640748 /* MFComponentBindingProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C28DF71AE647BF00640748 /* MFComponentBindingProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0C28DFA1AE647BF00640748 /* MFUIComponentProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C28DF81AE647BF00640748 /* MFUIComponentProtocol.h */; };
+		B0C28DFA1AE647BF00640748 /* MFUIComponentProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C28DF81AE647BF00640748 /* MFUIComponentProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0C9B2C91AFA21E700FC9665 /* MFDefaultStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C9B2A81AFA21E700FC9665 /* MFDefaultStyle.h */; };
 		B0C9B2CA1AFA21E700FC9665 /* MFDefaultStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C9B2A91AFA21E700FC9665 /* MFDefaultStyle.m */; };
 		B0C9B2CB1AFA21E700FC9665 /* UIView+Styleable.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C9B2AA1AFA21E700FC9665 /* UIView+Styleable.h */; };
@@ -2613,9 +2615,17 @@
 				B0FFDB0D1B3463DA00CA6E5E /* MFMandatoryFieldValidator.h in Headers */,
 				B00787C51AB1E37A009F6D95 /* JDFSequentialTooltipManager.h in Headers */,
 				B0D45D421A5ED2F400C6D376 /* MFCellAbstract.h in Headers */,
+				B0289F281AA892A8007A2E75 /* MFUIBaseRenderableComponent.h in Headers */,
+				B01840031AB09E530081133F /* MFUIControlButton.h in Headers */,
+				B0C28DFA1AE647BF00640748 /* MFUIComponentProtocol.h in Headers */,
+				B008ADB41B32CA4E00D42F90 /* MFUIControlTextField.h in Headers */,
+				B0A0ED621AE8D578004F0FF7 /* MFUIOldBaseComponent.h in Headers */,
+				B032D0D71AB188CE001C114F /* MFUIErrorView.h in Headers */,
 				B006CEF11B32C1E700B78782 /* MFListenerDescriptorManager.h in Headers */,
 				B0D45E801A5ED2F400C6D376 /* MFUIBaseListViewModel.h in Headers */,
 				B0D45DD61A5ED2F400C6D376 /* MFUIConversion.h in Headers */,
+				B01075B91B710D63009D63B9 /* MFUIFieldValidator.h in Headers */,
+				B01075BA1B710D63009D63B9 /* MFUIStyle.h in Headers */,
 				B0D45E861A5ED2F400C6D376 /* MFUpdateVMInParameter.h in Headers */,
 				B0D45E731A5ED2F400C6D376 /* MFUIViewControllerTransition.h in Headers */,
 				B0D45E021A5ED2F400C6D376 /* MFUILog.h in Headers */,
@@ -2649,8 +2659,6 @@
 				B0D2AD821B3C512C008D1352 /* MFComponentAssociatedLabelProtocol.h in Headers */,
 				B0183FFF1AB09E530081133F /* MFButton+UIButtonForwarding.h in Headers */,
 				B0D45E841A5ED2F400C6D376 /* MFUIBaseViewModelProtocol.h in Headers */,
-				B0289F281AA892A8007A2E75 /* MFUIBaseRenderableComponent.h in Headers */,
-				B01840031AB09E530081133F /* MFUIControlButton.h in Headers */,
 				B0D45DCA1A5ED2F400C6D376 /* MFRegexTextExtensionProtocol.h in Headers */,
 				B0D45E3B1A5ED2F400C6D376 /* MFWorkspaceColumnProtocol.h in Headers */,
 				B0D45DE51A5ED2F400C6D376 /* MFTooLongStringUIValidationError.h in Headers */,
@@ -2662,7 +2670,6 @@
 				B0D45E0F1A5ED2F400C6D376 /* MFTestHelper.h in Headers */,
 				B0C9B2CF1AFA21E700FC9665 /* MFBarCodeScanTextFieldStyle.h in Headers */,
 				B08EF6F81AE53F8F00F3754E /* MFTextField.h in Headers */,
-				B0C28DFA1AE647BF00640748 /* MFUIComponentProtocol.h in Headers */,
 				B0D45DF81A5ED2F400C6D376 /* MFFormValidationDelegate.h in Headers */,
 				B0D45DF41A5ED2F400C6D376 /* MFUIForm.h in Headers */,
 				B0D45E7E1A5ED2F400C6D376 /* MFPositionViewModel.h in Headers */,
@@ -2807,7 +2814,6 @@
 				B0D45D8F1A5ED2F400C6D376 /* MFSignatureDrawing.h in Headers */,
 				B0D45E6F1A5ED2F400C6D376 /* MFUIViewControllerSplash.h in Headers */,
 				B0D45E301A5ED2F400C6D376 /* MFWorkspaceView.h in Headers */,
-				B008ADB41B32CA4E00D42F90 /* MFUIControlTextField.h in Headers */,
 				B0D45D6E1A5ED2F400C6D376 /* MFUIComponents.h in Headers */,
 				B0D45D231A5ED2F400C6D376 /* MFActionLauncher+MFUIActionLauncher.h in Headers */,
 				B0D45D681A5ED2F400C6D376 /* MFSimplePickerList.h in Headers */,
@@ -2834,7 +2840,6 @@
 				B0D45D541A5ED2F400C6D376 /* MFEnumImage.h in Headers */,
 				B0D45D5E1A5ED2F400C6D376 /* MFFixedList.h in Headers */,
 				B0D45E351A5ED2F400C6D376 /* MFUIViewControllerContainer.h in Headers */,
-				B0A0ED621AE8D578004F0FF7 /* MFUIOldBaseComponent.h in Headers */,
 				B0D45D5C1A5ED2F400C6D376 /* MFFixedList+UITableViewForwarding.h in Headers */,
 				B08AAC591AE91C500029EC88 /* MFTextView.h in Headers */,
 				B0D45D771A5ED2F400C6D376 /* MFPhotoState.h in Headers */,
@@ -2847,7 +2852,6 @@
 				B0D45D2E1A5ED2F400C6D376 /* MFChildSaveProtocol.h in Headers */,
 				B0D45E5D1A5ED2F400C6D376 /* MFMenuViewController.h in Headers */,
 				B0D45D7C1A5ED2F400C6D376 /* MFUIControlPhoto.h in Headers */,
-				B032D0D71AB188CE001C114F /* MFUIErrorView.h in Headers */,
 				B0D45D841A5ED2F400C6D376 /* MFBarCodeScannerDelegate.h in Headers */,
 				B08EF72D1AE5407E00F3754E /* MFCreateEmailViewControllerDelegate.h in Headers */,
 				B000D5161B42793E0018281E /* UIView+Binding.h in Headers */,

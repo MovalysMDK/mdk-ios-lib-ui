@@ -22,9 +22,6 @@ FOUNDATION_EXPORT double MFUIVersionNumber;
 //! Project version string for MFUI.
 FOUNDATION_EXPORT const unsigned char MFUIVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <MFUI/PublicHeader.h>
-
-
 #import <MFUI/MFUIAction.h>
 #import <MFUI/MFUIAlertView.h>
 #import <MFUI/MFUIApplication.h>
@@ -40,10 +37,10 @@ FOUNDATION_EXPORT const unsigned char MFUIVersionString[];
 #import <MFUI/MFUIListener.h>
 #import <MFUI/MFUILog.h>
 #import <MFUI/MFUIMotion.h>
-#import <MFUI/MFUIProtocol.h>
 #import <MFUI/MFUIUtils.h>
 #import <MFUI/MFUIView.h>
 #import <MFUI/MFUIViewModel.h>
 #import <MFUI/MFUIViewController.h>
 #import <MFUI/MFUIComponentProvider.h>
 #import <MFUI/MFUIStyle.h>
+#import <MFUI/MFUIFieldValidator.h>

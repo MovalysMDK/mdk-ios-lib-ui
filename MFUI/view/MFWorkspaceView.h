@@ -22,7 +22,6 @@
 
 
 #import "MFUIMotion.h"
-#import "MFUIProtocol.h"
 
 #import "MFUIViewControllerContainerWorkspace.h"
 

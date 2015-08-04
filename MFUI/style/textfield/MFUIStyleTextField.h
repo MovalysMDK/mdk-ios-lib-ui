@@ -13,15 +13,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUIProtocol.h
-//  MFUI
-//
-//
 
-#ifndef MFUI_MFUIProtocol_h
-#define MFUI_MFUIProtocol_h
+#ifndef MFUI_MFUIStyleTextField_h
+#define MFUI_MFUIStyleTextField_h
 
-#import "MFDefaultConstraintsProtocol.h"
+#import "MFBarCodeScanTextFieldStyle.h"
+#import "MFDoubleTextFieldStyle.h"
+#import "MFEmailTextFieldStyle.h"
+#import "MFIntegerTextFieldStyle.h"
+#import "MFPhoneTextFieldStyle.h"
+#import "MFRegexTextFieldStyle+Button.h"
+#import "MFRegexTextFieldStyle.h"
+#import "MFTextFieldStyle+BackgroundView.h"
+#import "MFTextFieldStyle+ErrorView.h"
+#import "MFTextFieldStyle+TextLayouting.h"
+#import "MFTextFieldStyle.h"
+#import "MFUrlTextFieldStyle.h"
 
 #endif

@@ -46,3 +46,4 @@ FOUNDATION_EXPORT const unsigned char MFUIVersionString[];
 #import <MFUI/MFUIViewModel.h>
 #import <MFUI/MFUIViewController.h>
 #import <MFUI/MFUIComponentProvider.h>
+#import <MFUI/MFUIStyle.h>

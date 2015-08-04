@@ -19,7 +19,6 @@
 #import <MFCore/MFCoreApplication.h>
 
 #import "MFUIErrorView.h"
-#import "MFUIProtocol.h"
 
 #import "MFUITransitionDelegate.h"
 #import "MFFormCellProtocol.h"

@@ -14,30 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef MFUI_MFUIStyle_h
+#define MFUI_MFUIStyle_h
 
-#import "MFUIBinding.h"
-#import "MFUIForm.h"
-#import "MFUIComponents.h"
+#import "MFUIStyleCommons.h"
+#import "MFUIStyleLabel.h"
+#import "MFUIStyleTextField.h"
+#import "MFUIStyleTextView.h"
 
-
-/*!
- * @brief The class is an abstract class for framework cells.
- * @discussion It does some basic treatments common to all framework cells. Basically, it allows to bind some properties to a ViewModel.
- */
-@interface MFCellAbstract : UITableViewCell<MFFormCellProtocol, MFFormViewProtocol, MFDefaultConstraintsProtocol>
-
-
-#pragma mark - Methods
-
-/*!
- * @brief this common methods allows to do some treatment on this cell before using it
- */
--(void) initialize;
-
-/*!
- * @brief Callback called after the cell is configured by its form controller.
- */
--(void) cellIsConfigured;
-
-
-@end
+#endif

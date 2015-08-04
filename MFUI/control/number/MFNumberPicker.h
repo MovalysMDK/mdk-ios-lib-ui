@@ -16,7 +16,7 @@
 
 
 #import "MFUIMotion.h"
-#import "MFUIProtocol.h"
+#import "MFUIView.h"
 #import "MFUIOldBaseComponent.h"
 #import "MFControlChangesProtocol.h"
 

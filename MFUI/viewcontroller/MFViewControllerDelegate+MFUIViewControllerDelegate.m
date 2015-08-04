@@ -88,7 +88,7 @@
                 UIViewController *initialViewController = [storyboard instantiateInitialViewController];
                 /*[self.navigationController pushViewController:initialViewController animated:YES];
                  */
-                [self.viewController.navigationController pushViewController:initialViewController animated:NO];
+                [self.viewController.navigationController pushViewController:initialViewController animated:YES];
                 //             [[MFActionLauncher getInstance] launchActionWithoutWaitingView:@"MTestAction" withCaller:self withInParameter:nil];
                 MFUILogVerbose(@"After launching ...");
                 

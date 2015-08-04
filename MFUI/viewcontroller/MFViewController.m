@@ -40,6 +40,8 @@
 @interface MFViewController()
 @property (nonatomic, strong) NSMutableArray *observers;
 
+@property (nonatomic, weak) UIActionSheet *mdkNavigationActionSheet;
+
 @end
 
 @implementation MFViewController
@@ -70,12 +72,25 @@
            ![self isKindOfClass:[MFFormDetailViewController class]] &&
            ![self.parentViewController isKindOfClass:[UITabBarController class]]) {
             [self computeScreenTitle];
+            MFConfigurationHandler *configHandler = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
+            NSArray * array = [configHandler getArrayProperty:[NSString stringWithFormat:@"Menu_%@", [self.storyboard valueForKey:@"name"]]];
+            if(array && array.count > 0 && [self navigationsEnabled]) {
+                UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+                [button addTarget:self action:@selector(showNavigationsActionSheet) forControlEvents:UIControlEventTouchUpInside];
+                button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+                [button setTitle:self.title forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor colorWithRed:0 green:0.5 blue:0.8 alpha:1] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+                self.navigationItem.titleView = button;
+
+            }
         }
     });
     
     self.view.autoresizesSubviews = YES;
     
     [self performSelector:@selector(checkIfComment) withObject:nil afterDelay:0.5];
+    
     
 }
 
@@ -88,26 +103,15 @@
     // does nothing
 }
 
-- (void) mFViewControllerViewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    
-    MFMenuViewController *mfViewController = [MFMenuViewController getInstance];
-    NSArray* menuActions = [self getOptionMenuIds];
-    [mfViewController setMenuWithActions:menuActions];
-    
-    [self setButtonsActions];
-    
-}
 
 -(void)viewDidAppear:(BOOL)animated {
     [self viewDidAppear:animated withOberversParameters:nil];
     [super viewDidAppear:animated];
+    [self setButtonsActions];
 }
 
 -(void)viewDidAppear:(BOOL)animated withOberversParameters: (NSDictionary *) parameters {
     //[super viewDidAppear:animated];
-    [self mFViewControllerViewDidAppear: animated];
     if (self.observers) {
         for (id<MFViewControllerObserverProtocol> observer in self.observers) {
             [observer onObservedViewController: self didAppear:parameters];
@@ -259,7 +263,7 @@
             self.title = MFLocalizedStringFromKey( screenTitleLocalized );
         }
     }
-
+    
 }
 
 -(NSString *) customTitle {
@@ -299,6 +303,37 @@
     }
 }
 
+- (void)showNavigationsActionSheet {
+    MFConfigurationHandler *configHandler = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
+    NSArray * array = [configHandler getArrayProperty:[NSString stringWithFormat:@"Menu_%@", [self.storyboard valueForKey:@"name"]]];
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:MFLocalizedStringFromKey(@"mdk_navigate_to")
+                                                             delegate:self
+                                                    cancelButtonTitle:MFLocalizedStringFromKey(@"form_cancel")
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:nil];
+    for(NSString *nav in [self defineTitlesButtonsForNavigation:array]) {
+        [actionSheet addButtonWithTitle:[nav stringByReplacingOccurrencesOfString:@"nav_" withString:@""]];
+    }
+    [actionSheet showInView:self.view];
+    self.mdkNavigationActionSheet = actionSheet;
+}
 
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if([actionSheet isEqual:self.mdkNavigationActionSheet] && buttonIndex != actionSheet.cancelButtonIndex) {
+        MFConfigurationHandler *configHandler = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_CONFIGURATION_HANDLER];
+        NSArray * array = [configHandler getArrayProperty:[NSString stringWithFormat:@"Menu_%@", [self.storyboard valueForKey:@"name"]]];
+        UIViewController *nextController = [[UIStoryboard storyboardWithName:[array[buttonIndex-1] stringByReplacingOccurrencesOfString:@"nav_" withString:@""] bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+        [self.navigationController pushViewController:nextController animated:YES];
+    }
+}
+
+-(BOOL) navigationsEnabled {
+    return YES;
+}
+
+-(NSDictionary *) defineTitlesButtonsForNavigation:(NSArray *)navigations {
+    return [NSDictionary dictionaryWithObjects:navigations forKeys:navigations];
+}
 
 @end

@@ -36,7 +36,7 @@
 
 @class MFButton;
 
-@interface MFViewController : UIViewController<MFViewControllerProtocol, MFDefaultConstraintsProtocol>
+@interface MFViewController : UIViewController<MFViewControllerProtocol, MFDefaultConstraintsProtocol, UIActionSheetDelegate>
 
 
 #pragma mark - Properties
@@ -84,6 +84,25 @@
 -(void) showWaitingViewDuring:(int)seconds;
 
 /*!
+ * @brief Indicates if MDK navigations are enabled on this screen
+ * @return YES if MDK navigations are enabled, NO otherwhise.
+ */
+-(BOOL)navigationsEnabled;
+
+/*!
+ * @brief Defines the titles to show in navigation action sheet.
+ * @param navigations The MDK navigations of this ViewController
+ * @return A dictionary where the keys are the MDK navigations and the values are the 
+ * titles to show in the MDK navigations action sheet.
+ */
+-(NSDictionary *) defineTitlesButtonsForNavigation:(NSArray *)navigations;
+
+/*!
+ * @brief Shows the action sheet that displays the MDK navigations for this ViewController
+ */
+- (void)showNavigationsActionSheet;
+
+/*!
 * @brief Initialization of the menu with buttons
 *
 */
@@ -99,7 +118,6 @@
  */
 -(NSString *) customTitle;
 
-- (void) mFViewControllerViewDidAppear:(BOOL)animated;
 
 - (void) registerObserver:(id<MFViewControllerObserverProtocol>) observer;
 - (void) unregisterObserver:(id<MFViewControllerObserverProtocol>) observer;

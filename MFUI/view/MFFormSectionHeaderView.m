@@ -84,9 +84,9 @@
 #pragma clang diagnostic pop
 
 -(void) addDisclosureIndicator {
-    
+    UIImage *arrowImage = [UIImage imageWithContentsOfFile:[[NSBundle bundleForClass:NSClassFromString(@"MFForm2DListViewController")] pathForResource:@"arrow" ofType:@"png"]];
     self.disclosureIndicator = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-    [self.disclosureIndicator setImage:[UIImage imageNamed:@"arrow"] forState:UIControlStateNormal];
+    [self.disclosureIndicator setImage:arrowImage forState:UIControlStateNormal];
     
     self.disclosureIndicator.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *disclosureCenterY = [NSLayoutConstraint constraintWithItem:self.disclosureIndicator attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];

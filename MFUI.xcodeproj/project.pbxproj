@@ -93,6 +93,10 @@
 		B008ADB41B32CA4E00D42F90 /* MFUIControlTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B07615EC1AF0D13E00217010 /* MFUIControlTextField.h */; };
 		B008ADB51B32CA4E00D42F90 /* MFUIListener.h in Headers */ = {isa = PBXBuildFile; fileRef = B006CF1D1B32C63100B78782 /* MFUIListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B008ADB61B32CA4E00D42F90 /* MFUIWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B006CF1E1B32C68200B78782 /* MFUIWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B01075A81B710615009D63B9 /* CocoaLumberJack.txt in Resources */ = {isa = PBXBuildFile; fileRef = B01075A41B710615009D63B9 /* CocoaLumberJack.txt */; };
+		B01075A91B710615009D63B9 /* CocoaSecurity.txt in Resources */ = {isa = PBXBuildFile; fileRef = B01075A51B710615009D63B9 /* CocoaSecurity.txt */; };
+		B01075AA1B710615009D63B9 /* IQKeyboardManager.txt in Resources */ = {isa = PBXBuildFile; fileRef = B01075A61B710615009D63B9 /* IQKeyboardManager.txt */; };
+		B01075AB1B710615009D63B9 /* MagicalRecord.txt in Resources */ = {isa = PBXBuildFile; fileRef = B01075A71B710615009D63B9 /* MagicalRecord.txt */; };
 		B0129F5E1B3323790090B0AF /* MFCommandProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0129F5D1B3323790090B0AF /* MFCommandProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0129F611B3323850090B0AF /* MFCommandHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = B0129F5F1B3323850090B0AF /* MFCommandHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0129F621B3323850090B0AF /* MFCommandHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B0129F601B3323850090B0AF /* MFCommandHandler.m */; };
@@ -676,6 +680,10 @@
 		B00787C21AB1E37A009F6D95 /* UILabel+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+JDFTooltips.m"; sourceTree = "<group>"; };
 		B00787C31AB1E37A009F6D95 /* UIView+JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JDFTooltips.h"; sourceTree = "<group>"; };
 		B00787C41AB1E37A009F6D95 /* UIView+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JDFTooltips.m"; sourceTree = "<group>"; };
+		B01075A41B710615009D63B9 /* CocoaLumberJack.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CocoaLumberJack.txt; sourceTree = "<group>"; };
+		B01075A51B710615009D63B9 /* CocoaSecurity.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CocoaSecurity.txt; sourceTree = "<group>"; };
+		B01075A61B710615009D63B9 /* IQKeyboardManager.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IQKeyboardManager.txt; sourceTree = "<group>"; };
+		B01075A71B710615009D63B9 /* MagicalRecord.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MagicalRecord.txt; sourceTree = "<group>"; };
 		B0129F5D1B3323790090B0AF /* MFCommandProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCommandProtocol.h; sourceTree = "<group>"; };
 		B0129F5F1B3323850090B0AF /* MFCommandHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCommandHandler.h; sourceTree = "<group>"; };
 		B0129F601B3323850090B0AF /* MFCommandHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCommandHandler.m; sourceTree = "<group>"; };
@@ -1351,6 +1359,10 @@
 		B001B2581B5F87D80063F819 /* licenses */ = {
 			isa = PBXGroup;
 			children = (
+				B01075A41B710615009D63B9 /* CocoaLumberJack.txt */,
+				B01075A51B710615009D63B9 /* CocoaSecurity.txt */,
+				B01075A61B710615009D63B9 /* IQKeyboardManager.txt */,
+				B01075A71B710615009D63B9 /* MagicalRecord.txt */,
 				B001B2591B5F87D80063F819 /* MBProgressHUD.txt */,
 			);
 			path = licenses;
@@ -2965,12 +2977,15 @@
 				B001B2651B5F87D80063F819 /* gps.png in Resources */,
 				B001B2741B5F87D80063F819 /* PhotoFixedListItemCell.xib in Resources */,
 				B001B25D1B5F87D80063F819 /* arrow.png in Resources */,
+				B01075AA1B710615009D63B9 /* IQKeyboardManager.txt in Resources */,
 				B001B25B1B5F87D80063F819 /* ios_ic_edit_pressed@2x.png in Resources */,
+				B01075A81B710615009D63B9 /* CocoaLumberJack.txt in Resources */,
 				B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */,
 				B001B25A1B5F87D80063F819 /* ios_ic_edit_active@2x.png in Resources */,
 				B001B2621B5F87D80063F819 /* ios_ic_phone_pressed@2x.png in Resources */,
 				B001B2641B5F87D80063F819 /* no_photo.png in Resources */,
 				B001B26D1B5F87D80063F819 /* image_tooltip_valid.png in Resources */,
+				B01075A91B710615009D63B9 /* CocoaSecurity.txt in Resources */,
 				B001B25E1B5F87D80063F819 /* ios_ic_mail_active@2x.png in Resources */,
 				B0792E581B6B741A00904BE3 /* PickerListViewWithSearch.xib in Resources */,
 				B001B2671B5F87D80063F819 /* map.png in Resources */,
@@ -2981,6 +2996,7 @@
 				B001B26A1B5F87D80063F819 /* qrcode_icon@2x.png in Resources */,
 				B001B2631B5F87D80063F819 /* ios_ic_phone_unactive@2x.png in Resources */,
 				B001B2751B5F87D80063F819 /* MDKFieldValidatorList.plist in Resources */,
+				B01075AB1B710615009D63B9 /* MagicalRecord.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

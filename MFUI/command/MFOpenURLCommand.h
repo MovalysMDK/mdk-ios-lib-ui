@@ -14,24 +14,14 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFUICommand.h"
+#import <Foundation/Foundation.h>
+#import "MFCommandProtocol.h"
 
-#import "MFUrlTextField.h"
+/*!
+ * @class MFOpenURLCommand
+ * @brief The class describing the command to execute to open an URL
+ * (from MFUrlTextField)
+ */
+@interface MFOpenURLCommand : NSObject <MFCommandProtocol>
 
-@implementation MFUrlTextField
-
--(UIKeyboardType)keyboardType {
-    return UIKeyboardTypeURL;
-}
-
--(void) doAction {
-    // Create and show composer
-    MFURL *url = [[MFURL alloc] initWithString:[self getData]];
-    [[MFCommandHandler commandWithKey:@"OpenURLCommand" withQualifier:nil] executeFromViewController:[self parentViewController] withParameters:url, nil];
-    
-}
-
--(NSArray *)controlValidators {
-    return @[[MFUrlFieldValidator sharedInstance]];
-}
 @end

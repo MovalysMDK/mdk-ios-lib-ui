@@ -14,24 +14,35 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFUICommand.h"
+#import <Foundation/Foundation.h>
 
-#import "MFUrlTextField.h"
+/*!
+ * @class MFPhoneNumber
+ * @brief This class describes a phone number
+ */
+@interface MFPhoneNumber : NSObject
 
-@implementation MFUrlTextField
+#pragma mark - Properties
+/*!
+ * @brief The base phone number
+ */
+@property (nonatomic, strong) NSString *baseNumber;
 
--(UIKeyboardType)keyboardType {
-    return UIKeyboardTypeURL;
-}
+/*!
+ * @brief The international prefix number, like '33' for France
+ */
+@property (nonatomic, strong) NSString *internationalPrefix;
 
--(void) doAction {
-    // Create and show composer
-    MFURL *url = [[MFURL alloc] initWithString:[self getData]];
-    [[MFCommandHandler commandWithKey:@"OpenURLCommand" withQualifier:nil] executeFromViewController:[self parentViewController] withParameters:url, nil];
-    
-}
+/*!
+ * @brief The potential symbol prefix ('+');
+ */
+@property (nonatomic, strong) NSString *symbolPrefix;
 
--(NSArray *)controlValidators {
-    return @[[MFUrlFieldValidator sharedInstance]];
-}
+#pragma mark - Methods
+
+/**
+ * @brief Builds an returns a string that represents this phone number
+ * @return A phone number as string
+ */
+-(NSString *) buildPhoneString;
 @end

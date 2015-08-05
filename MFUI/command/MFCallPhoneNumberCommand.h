@@ -14,24 +14,14 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFUICommand.h"
+#import <Foundation/Foundation.h>
+#import "MFCommandProtocol.h"
 
-#import "MFUrlTextField.h"
+/*!
+ * @class MFCallPhoneNumberCommand
+ * @brief The class describing the command to execute to call a phone number
+ * (from MFPhoneTextField)
+ */
+@interface MFCallPhoneNumberCommand : NSObject <MFCommandProtocol>
 
-@implementation MFUrlTextField
-
--(UIKeyboardType)keyboardType {
-    return UIKeyboardTypeURL;
-}
-
--(void) doAction {
-    // Create and show composer
-    MFURL *url = [[MFURL alloc] initWithString:[self getData]];
-    [[MFCommandHandler commandWithKey:@"OpenURLCommand" withQualifier:nil] executeFromViewController:[self parentViewController] withParameters:url, nil];
-    
-}
-
--(NSArray *)controlValidators {
-    return @[[MFUrlFieldValidator sharedInstance]];
-}
 @end

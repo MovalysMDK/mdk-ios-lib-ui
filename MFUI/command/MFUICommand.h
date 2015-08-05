@@ -21,5 +21,7 @@
 #import "MFCommandHandler.h"
 #import "MFSendEmailCommand.h"
 #import "MFEmail.h"
+#import "MFPhoneNumber.h"
+#import "MFCallPhoneNumberCommand.h"
 
 #endif

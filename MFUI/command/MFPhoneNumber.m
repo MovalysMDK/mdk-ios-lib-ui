@@ -14,24 +14,13 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFUICommand.h"
+#import "MFPhoneNumber.h"
 
-#import "MFUrlTextField.h"
+@implementation MFPhoneNumber
 
-@implementation MFUrlTextField
 
--(UIKeyboardType)keyboardType {
-    return UIKeyboardTypeURL;
+-(NSString *)buildPhoneString {
+    return [NSString stringWithFormat:@"%@%@%@", self.symbolPrefix ? self.symbolPrefix : @"" , self.internationalPrefix ? self.internationalPrefix : @"", self.baseNumber];
 }
 
--(void) doAction {
-    // Create and show composer
-    MFURL *url = [[MFURL alloc] initWithString:[self getData]];
-    [[MFCommandHandler commandWithKey:@"OpenURLCommand" withQualifier:nil] executeFromViewController:[self parentViewController] withParameters:url, nil];
-    
-}
-
--(NSArray *)controlValidators {
-    return @[[MFUrlFieldValidator sharedInstance]];
-}
 @end

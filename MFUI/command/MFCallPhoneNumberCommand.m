@@ -14,24 +14,31 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFUICommand.h"
+#import "MFCallPhoneNumberCommand.h"
+#import "MFPhoneNumber.h"
 
-#import "MFUrlTextField.h"
+@implementation MFCallPhoneNumberCommand
 
-@implementation MFUrlTextField
+#pragma mark - Initialization
 
--(UIKeyboardType)keyboardType {
-    return UIKeyboardTypeURL;
++(MFCallPhoneNumberCommand *)sharedInstance{
+    static MFCallPhoneNumberCommand *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc]init];
+    });
+    return instance;
 }
 
--(void) doAction {
-    // Create and show composer
-    MFURL *url = [[MFURL alloc] initWithString:[self getData]];
-    [[MFCommandHandler commandWithKey:@"OpenURLCommand" withQualifier:nil] executeFromViewController:[self parentViewController] withParameters:url, nil];
+- (id) executeFromViewController:(UIViewController *)viewController withParameters:(id)parameters, ... NS_REQUIRES_NIL_TERMINATION {
     
+    va_list args;
+    va_start(args, parameters);
+    MFPhoneNumber *phone = parameters;
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [phone buildPhoneString]]];
+    [[UIApplication sharedApplication] openURL:url];
+    return nil;
 }
 
--(NSArray *)controlValidators {
-    return @[[MFUrlFieldValidator sharedInstance]];
-}
 @end

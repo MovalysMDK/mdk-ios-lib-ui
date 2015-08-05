@@ -14,24 +14,29 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFUICommand.h"
+#import "MFOpenURLCommand.h"
+#import "MFURL.h"
 
-#import "MFUrlTextField.h"
+@implementation MFOpenURLCommand
 
-@implementation MFUrlTextField
-
--(UIKeyboardType)keyboardType {
-    return UIKeyboardTypeURL;
++(MFOpenURLCommand *)sharedInstance{
+    static MFOpenURLCommand *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc]init];
+    });
+    return instance;
 }
 
--(void) doAction {
-    // Create and show composer
-    MFURL *url = [[MFURL alloc] initWithString:[self getData]];
-    [[MFCommandHandler commandWithKey:@"OpenURLCommand" withQualifier:nil] executeFromViewController:[self parentViewController] withParameters:url, nil];
+- (id) executeFromViewController:(UIViewController *)viewController withParameters:(id)parameters, ... NS_REQUIRES_NIL_TERMINATION {
     
+    va_list args;
+    va_start(args, parameters);
+    MFURL *url = parameters;
+    
+    [[UIApplication sharedApplication] openURL:[url absoluteURL]];
+
+    return nil;
 }
 
--(NSArray *)controlValidators {
-    return @[[MFUrlFieldValidator sharedInstance]];
-}
 @end

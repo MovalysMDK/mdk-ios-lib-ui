@@ -14,13 +14,11 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import <MFCore/MFCoreBean.h>
+#import "MFUICommand.h"
 
 #import "MFEmailTextField.h"
 #import "MFInvalidEmailValueUIValidationError.h"
 #import "MFCreateEmailViewController.h"
-#import "MFUICommand.h"
-#import "MFEmail.h"
 
 
 @interface MFEmailTextField ()

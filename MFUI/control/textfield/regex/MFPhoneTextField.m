@@ -14,6 +14,9 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+
+#import "MFUICommand.h"
+
 #import "MFPhoneTextField.h"
 #import "MFInvalidPhoneNumberValueUIValidationError.h"
 #import "MFPhoneFieldValidator.h"
@@ -26,10 +29,15 @@
     return UIKeyboardTypePhonePad;
 }
 
+
 -(void) doAction {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [self getData]]];
-    [[UIApplication sharedApplication] openURL:url];
+    // Create and show composer
+    MFPhoneNumber *phone = [MFPhoneNumber new];
+    phone.baseNumber = [self getData];
+    [[MFCommandHandler commandWithKey:@"CallPhoneNumberCommand" withQualifier:nil] executeFromViewController:[self parentViewController] withParameters:phone, nil];
+    
 }
+
 
 -(NSArray *)controlValidators {
     return @[[MFPhoneFieldValidator sharedInstance]];

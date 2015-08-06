@@ -14,8 +14,8 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFTextField.h"
+#import "MFRegexTextField.h"
 
-@interface MFBarCodeScanTextField : MFTextField
+@interface MFBarCodeScanTextField : MFRegexTextField
 
 @end

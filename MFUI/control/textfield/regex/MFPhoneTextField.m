@@ -23,8 +23,6 @@
 
 @implementation MFPhoneTextField
 
-
-
 -(UIKeyboardType)keyboardType {
     return UIKeyboardTypePhonePad;
 }

@@ -28,8 +28,8 @@
 		B001B2661B5F87D80063F819 /* gps@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B001B2411B5F87D80063F819 /* gps@2x.png */; };
 		B001B2671B5F87D80063F819 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = B001B2421B5F87D80063F819 /* map.png */; };
 		B001B2681B5F87D80063F819 /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B001B2431B5F87D80063F819 /* map@2x.png */; };
-		B001B2691B5F87D80063F819 /* qrcode_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B001B2451B5F87D80063F819 /* qrcode_icon.png */; };
-		B001B26A1B5F87D80063F819 /* qrcode_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B001B2461B5F87D80063F819 /* qrcode_icon@2x.png */; };
+		B001B2691B5F87D80063F819 /* ios_ic_qrcode_icon_active.png in Resources */ = {isa = PBXBuildFile; fileRef = B001B2451B5F87D80063F819 /* ios_ic_qrcode_icon_active.png */; };
+		B001B26A1B5F87D80063F819 /* ios_ic_qrcode_icon_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B001B2461B5F87D80063F819 /* ios_ic_qrcode_icon_active@2x.png */; };
 		B001B26B1B5F87D80063F819 /* image_tooltip_invalid.png in Resources */ = {isa = PBXBuildFile; fileRef = B001B2481B5F87D80063F819 /* image_tooltip_invalid.png */; };
 		B001B26C1B5F87D80063F819 /* image_tooltip_invalid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B001B2491B5F87D80063F819 /* image_tooltip_invalid@2x.png */; };
 		B001B26D1B5F87D80063F819 /* image_tooltip_valid.png in Resources */ = {isa = PBXBuildFile; fileRef = B001B24A1B5F87D80063F819 /* image_tooltip_valid.png */; };
@@ -623,8 +623,8 @@
 		B001B2411B5F87D80063F819 /* gps@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gps@2x.png"; sourceTree = "<group>"; };
 		B001B2421B5F87D80063F819 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		B001B2431B5F87D80063F819 /* map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map@2x.png"; sourceTree = "<group>"; };
-		B001B2451B5F87D80063F819 /* qrcode_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qrcode_icon.png; sourceTree = "<group>"; };
-		B001B2461B5F87D80063F819 /* qrcode_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_icon@2x.png"; sourceTree = "<group>"; };
+		B001B2451B5F87D80063F819 /* ios_ic_qrcode_icon_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios_ic_qrcode_icon_active.png; sourceTree = "<group>"; };
+		B001B2461B5F87D80063F819 /* ios_ic_qrcode_icon_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios_ic_qrcode_icon_active@2x.png"; sourceTree = "<group>"; };
 		B001B2481B5F87D80063F819 /* image_tooltip_invalid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_tooltip_invalid.png; sourceTree = "<group>"; };
 		B001B2491B5F87D80063F819 /* image_tooltip_invalid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_tooltip_invalid@2x.png"; sourceTree = "<group>"; };
 		B001B24A1B5F87D80063F819 /* image_tooltip_valid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_tooltip_valid.png; sourceTree = "<group>"; };
@@ -1320,8 +1320,8 @@
 		B001B2441B5F87D80063F819 /* qrcode */ = {
 			isa = PBXGroup;
 			children = (
-				B001B2451B5F87D80063F819 /* qrcode_icon.png */,
-				B001B2461B5F87D80063F819 /* qrcode_icon@2x.png */,
+				B001B2451B5F87D80063F819 /* ios_ic_qrcode_icon_active.png */,
+				B001B2461B5F87D80063F819 /* ios_ic_qrcode_icon_active@2x.png */,
 			);
 			path = qrcode;
 			sourceTree = "<group>";
@@ -3012,11 +3012,11 @@
 				B001B25E1B5F87D80063F819 /* ios_ic_mail_active@2x.png in Resources */,
 				B0792E581B6B741A00904BE3 /* PickerListViewWithSearch.xib in Resources */,
 				B001B2671B5F87D80063F819 /* map.png in Resources */,
-				B001B2691B5F87D80063F819 /* qrcode_icon.png in Resources */,
+				B001B2691B5F87D80063F819 /* ios_ic_qrcode_icon_active.png in Resources */,
 				B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */,
 				B001B2601B5F87D80063F819 /* ios_ic_mail_unactive@2x.png in Resources */,
 				B001B26F1B5F87D80063F819 /* ios_ic_nav_active@2x.png in Resources */,
-				B001B26A1B5F87D80063F819 /* qrcode_icon@2x.png in Resources */,
+				B001B26A1B5F87D80063F819 /* ios_ic_qrcode_icon_active@2x.png in Resources */,
 				B001B2631B5F87D80063F819 /* ios_ic_phone_unactive@2x.png in Resources */,
 				B001B2751B5F87D80063F819 /* MDKFieldValidatorList.plist in Resources */,
 				B01075AB1B710615009D63B9 /* MagicalRecord.txt in Resources */,

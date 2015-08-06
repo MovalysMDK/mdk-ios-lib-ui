@@ -20,14 +20,6 @@
 
 @implementation MFBarCodeScanTextField
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-#pragma clang diagnostic ignored "-Wundeclared-selector"
--(void)initializeComponent {
-    [self.styleClass performSelector:@selector(addButtonOnTextField:) withObject:self];
-    [super initializeComponent];
-}
-#pragma clang diagnostic pop
 
 #pragma mark - Custom MFBarCodeScanTextField methods
 

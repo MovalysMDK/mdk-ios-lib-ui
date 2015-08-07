@@ -34,7 +34,7 @@
 /*!
  * @brief The object with binding that own the component associated to this wrapper
  */
-@property (nonatomic, strong) NSObject<MFObjectWithBindingProtocol> *objectWithBinding;
+@property (nonatomic, weak) NSObject<MFObjectWithBindingProtocol> *objectWithBinding;
 
 /*!
  * @brief The fictive indexPath to the component that is owned by this wrapper

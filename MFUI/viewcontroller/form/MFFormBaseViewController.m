@@ -209,6 +209,7 @@
 
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.bindingDelegate = nil;
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
@@ -226,9 +227,9 @@
     MFBindingCellDescriptor *bindingData = ((NSArray *)self.bindingDelegate.structure[sectionIdentifier])[indexPath.row];
     NSString *identifier = bindingData.cellIdentifier;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-//    if(!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//    }
+    //    if(!cell) {
+    //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    //    }
     bindingData.cellIndexPath = indexPath;
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
     [self updateCellFromBindingData:bindingData];
@@ -339,7 +340,9 @@
 #pragma mark - New Binding
 -(void)setBindingDelegate:(MFBindingDelegate *)bindingDelegate {
     _bindingDelegate = bindingDelegate;
-    [self createBindingStructure];
+    if(bindingDelegate) {
+        [self createBindingStructure];
+    }
 }
 
 -(void)createBindingStructure {
@@ -367,12 +370,14 @@
             UIView *componentView = [cell valueForKey:@"componentView"];
             height -= componentView.frame.size.height;
             height += [notification.object floatValue];
-
+            
         }
         cellDescriptor.cellHeight = @(height);
         
-//        cellDescriptor.cellHeight = notification.object;
+        //        cellDescriptor.cellHeight = notification.object;
         [self.tableView reloadData];
     }
 }
+
+
 @end

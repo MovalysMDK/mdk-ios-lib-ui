@@ -37,7 +37,7 @@
     if (self) {
         self.picker = pickerList;
         [self initialize];
-
+        
     }
     return self;
 }
@@ -58,8 +58,10 @@
 #pragma mark - New Binding
 -(void)setBindingDelegate:(MFBindingDelegate *)bindingDelegate {
     _bindingDelegate = bindingDelegate;
-    [self createBindingStructure];
-
+    if(bindingDelegate) {
+        [self createBindingStructure];
+    }
+    
 }
 
 -(void)createBindingStructure {
@@ -110,5 +112,8 @@
     }
 }
 
+-(void)dealloc {
+    self.bindingDelegate = nil;
+}
 
 @end

@@ -448,7 +448,9 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 
 -(void)setBindingDelegate:(MFBindingDelegate *)bindingDelegate {
     _bindingDelegate = bindingDelegate;
-    [self createBindingStructure];
+    if(bindingDelegate) {
+        [self createBindingStructure];
+    }
 }
 
 -(void) computeCellHeightAndDispatchToFormController {
@@ -484,6 +486,9 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     [tableConfiguration createFixedListTableCellWithDescriptor:photoCellDescriptor];
 }
 
+-(void)dealloc {
+    self.bindingDelegate = nil;
+}
 
 
 @end

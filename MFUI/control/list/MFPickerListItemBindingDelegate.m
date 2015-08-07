@@ -209,4 +209,8 @@ NSString *tableViewHeightConstraintIdentifier = @"realHeightConstraintIdentifier
     }
 }
 
+-(void)dealloc {
+    self.bindingDelegate = nil;
+}
+
 @end

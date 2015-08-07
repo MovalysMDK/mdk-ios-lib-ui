@@ -13,19 +13,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFScanner.h
-//  scanner
-//
-//
 
+#import "MFBarCodeScanTextFieldWrapper.h"
 
-// Custom imports
-#import "MFBarCodeScanTextField.h"
-#import "MFBarCodeScannerDelegate.h"
-#import "MFUIOldBaseComponent.h"
-#import "MFControlChangesProtocol.h"
-
-@interface MFScanner : MFUIOldBaseComponent  <MFBarCodeScannerProtocol, MFControlChangesProtocol>
+@implementation MFBarCodeScanTextFieldWrapper
 
 @end

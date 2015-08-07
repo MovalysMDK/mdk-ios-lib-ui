@@ -35,6 +35,7 @@
 
 -(void) updateValueFromExternalSource:(NSString *)value {
     [self setText:value];
+    [self valueChanged:self];
 }
 
 

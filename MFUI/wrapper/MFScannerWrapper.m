@@ -13,19 +13,29 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFScanner.h
-//  scanner
-//
-//
 
+#import "MFObjectWithBindingProtocol.h"
+#import "MFScannerWrapper.h"
+#import "MFScanner.h"
 
-// Custom imports
-#import "MFBarCodeScanTextField.h"
-#import "MFBarCodeScannerDelegate.h"
-#import "MFUIOldBaseComponent.h"
-#import "MFControlChangesProtocol.h"
+@implementation MFScannerWrapper
 
-@interface MFScanner : MFUIOldBaseComponent  <MFBarCodeScannerProtocol, MFControlChangesProtocol>
+-(instancetype)initWithComponent:(UIControl *)component {
+    self = [super initWithComponent:component];
+    if(self) {
+        [[self typeComponent] addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
+    }
+    return self;
+}
+
+-(MFScanner *)typeComponent {
+    return (MFScanner *)self.component;
+}
+
+-(void)componentValueChanged:(MFScanner *)scanner
+{
+    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[scanner getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
+    
+}
 
 @end

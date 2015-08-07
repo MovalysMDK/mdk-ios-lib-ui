@@ -52,6 +52,7 @@ NSUInteger ERROR_BUTTON_RIGHT_MARGIN = 5;
 @synthesize mainView = _mainView;
 @synthesize orientationChangedDelegate = _orientationChangedDelegate;
 @synthesize privateData = _privateData;
+@synthesize targetDescriptors = _targetDescriptors;
 
 #pragma mark - MFUIBaseCompoennt - Initializing
 
@@ -167,10 +168,27 @@ NSUInteger ERROR_BUTTON_RIGHT_MARGIN = 5;
     if(![detectionString isEqualToString:_privateData]) {
         MFUILogInfo(@"Scan ok device with detection string = %@", detectionString);
         _privateData = detectionString;
+        [self valueChanged:self.mainView];
     }
 }
 
+#pragma mark - Control changes
 
+-(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
+    commonCCTD.target = target;
+    commonCCTD.action = action;
+    self.targetDescriptors = @{@(self.mainView.hash) : commonCCTD};
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+-(void) valueChanged:(UIView *)sender {
+    MFControlChangedTargetDescriptor *cctd = self.targetDescriptors[@(sender.hash)];
+    [cctd.target performSelector:cctd.action withObject:self];
+}
+#pragma clang diagnostic pop
 
 
 @end

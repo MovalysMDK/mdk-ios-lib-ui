@@ -154,6 +154,10 @@
 		B051A3C41B0F5E2800F4F99C /* MFUIAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = B037F8D01B0DD673005C12F2 /* MFUIAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B054860E1B46DC4A0094846E /* MFEnumImageWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B054860C1B46DC4A0094846E /* MFEnumImageWrapper.h */; };
 		B054860F1B46DC4A0094846E /* MFEnumImageWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B054860D1B46DC4A0094846E /* MFEnumImageWrapper.m */; };
+		B0643EAE1B74B1F3001F844C /* MFScannerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0643EAC1B74B1F3001F844C /* MFScannerWrapper.h */; };
+		B0643EAF1B74B1F3001F844C /* MFScannerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643EAD1B74B1F3001F844C /* MFScannerWrapper.m */; };
+		B0643EB21B74B391001F844C /* MFBarCodeScanTextFieldWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0643EB01B74B391001F844C /* MFBarCodeScanTextFieldWrapper.h */; };
+		B0643EB31B74B391001F844C /* MFBarCodeScanTextFieldWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643EB11B74B391001F844C /* MFBarCodeScanTextFieldWrapper.m */; };
 		B06730521AE6833900CB0900 /* MFComponentErrorProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730511AE6833900CB0900 /* MFComponentErrorProtocol.h */; };
 		B06730541AE6857D00CB0900 /* MFComponentPropertiesProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730531AE6857D00CB0900 /* MFComponentPropertiesProtocol.h */; };
 		B06730561AE685B600CB0900 /* MFComponentValidationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730551AE685B600CB0900 /* MFComponentValidationProtocol.h */; };
@@ -751,6 +755,10 @@
 		B04D12981B453E3900B64421 /* MFPickerListConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPickerListConfiguration.m; sourceTree = "<group>"; };
 		B054860C1B46DC4A0094846E /* MFEnumImageWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFEnumImageWrapper.h; sourceTree = "<group>"; };
 		B054860D1B46DC4A0094846E /* MFEnumImageWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFEnumImageWrapper.m; sourceTree = "<group>"; };
+		B0643EAC1B74B1F3001F844C /* MFScannerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFScannerWrapper.h; sourceTree = "<group>"; };
+		B0643EAD1B74B1F3001F844C /* MFScannerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFScannerWrapper.m; sourceTree = "<group>"; };
+		B0643EB01B74B391001F844C /* MFBarCodeScanTextFieldWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBarCodeScanTextFieldWrapper.h; sourceTree = "<group>"; };
+		B0643EB11B74B391001F844C /* MFBarCodeScanTextFieldWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBarCodeScanTextFieldWrapper.m; sourceTree = "<group>"; };
 		B06730511AE6833900CB0900 /* MFComponentErrorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentErrorProtocol.h; sourceTree = "<group>"; };
 		B06730531AE6857D00CB0900 /* MFComponentPropertiesProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentPropertiesProtocol.h; sourceTree = "<group>"; };
 		B06730551AE685B600CB0900 /* MFComponentValidationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentValidationProtocol.h; sourceTree = "<group>"; };
@@ -1463,6 +1471,10 @@
 				B0266AE41B3C07780007E1EA /* UISliderWrapper.m */,
 				B0F474621B4A764600F20FEA /* MFSimplePickerListWrapper.h */,
 				B0F474631B4A764600F20FEA /* MFSimplePickerListWrapper.m */,
+				B0643EAC1B74B1F3001F844C /* MFScannerWrapper.h */,
+				B0643EAD1B74B1F3001F844C /* MFScannerWrapper.m */,
+				B0643EB01B74B391001F844C /* MFBarCodeScanTextFieldWrapper.h */,
+				B0643EB11B74B391001F844C /* MFBarCodeScanTextFieldWrapper.m */,
 			);
 			path = wrapper;
 			sourceTree = "<group>";
@@ -2641,6 +2653,7 @@
 				B0A0ED621AE8D578004F0FF7 /* MFUIOldBaseComponent.h in Headers */,
 				B032D0D71AB188CE001C114F /* MFUIErrorView.h in Headers */,
 				B006CEF11B32C1E700B78782 /* MFListenerDescriptorManager.h in Headers */,
+				B0643EB21B74B391001F844C /* MFBarCodeScanTextFieldWrapper.h in Headers */,
 				B0D45E801A5ED2F400C6D376 /* MFUIBaseListViewModel.h in Headers */,
 				B0D45DD61A5ED2F400C6D376 /* MFUIConversion.h in Headers */,
 				B01075B91B710D63009D63B9 /* MFUIFieldValidator.h in Headers */,
@@ -2791,6 +2804,7 @@
 				B0D45D251A5ED2F400C6D376 /* MFUIAction.h in Headers */,
 				B0D45D601A5ED2F400C6D376 /* MFFixedListDataDelegate.h in Headers */,
 				B08528891B441EC400B46194 /* MFFixedListExtension.h in Headers */,
+				B0643EAE1B74B1F3001F844C /* MFScannerWrapper.h in Headers */,
 				B0266AE21B3BE7BA0007E1EA /* MFComponentAttributesProtocol.h in Headers */,
 				B0C9B2CD1AFA21E700FC9665 /* MFLabelStyle.h in Headers */,
 				B0FFDAFE1B343D3300CA6E5E /* MFSimpleComponentProvider.h in Headers */,
@@ -3318,10 +3332,12 @@
 				B0F896731B614909005C3AA7 /* MFPickerListTableView.m in Sources */,
 				B0D45E831A5ED2F400C6D376 /* MFUIBaseViewModel.m in Sources */,
 				B0D45E371A5ED2F400C6D376 /* MFMultiPanelViewController.m in Sources */,
+				B0643EAF1B74B1F3001F844C /* MFScannerWrapper.m in Sources */,
 				B0D45D891A5ED2F400C6D376 /* MFBarCodeScanViewController.m in Sources */,
 				B000D51B1B42837A0018281E /* MFFixedListWrapper.m in Sources */,
 				B0D45D6C1A5ED2F400C6D376 /* MFUIBaseComponent.m in Sources */,
 				B0D45D711A5ED2F400C6D376 /* MFViewTags.m in Sources */,
+				B0643EB31B74B391001F844C /* MFBarCodeScanTextFieldWrapper.m in Sources */,
 				B0D45D971A5ED2F400C6D376 /* MFSlider.m in Sources */,
 				B0D45E121A5ED2F400C6D376 /* MFAutoLayoutHelper.m in Sources */,
 				B0D45D241A5ED2F400C6D376 /* MFActionLauncher+MFUIActionLauncher.m in Sources */,

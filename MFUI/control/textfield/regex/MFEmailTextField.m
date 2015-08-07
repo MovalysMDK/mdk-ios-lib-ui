@@ -29,7 +29,8 @@
 
 -(void) doAction {
     BOOL canSendMail = NO;
-    if ([MFMailComposeViewController canSendMail]){
+    if ([MFMailComposeViewController canSendMail] && ([self validate] == 0)){
+        canSendMail = YES;
         // Create and show composer
         MFEmail *email = [MFEmail new];
         email.to = [self getData];

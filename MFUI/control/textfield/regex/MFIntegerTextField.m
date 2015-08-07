@@ -20,7 +20,11 @@
 
 @import MFCore.MFLocalizedString;
 
+@interface MFIntegerTextField ()
 
+@property (nonatomic, strong) UIBarButtonItem *minusButton;
+
+@end
 
 @implementation MFIntegerTextField
 
@@ -31,9 +35,8 @@
 
 
 -(UIKeyboardType)keyboardType {
-    return UIKeyboardTypeNumberPad;
+    return UIKeyboardTypeDecimalPad;
 }
-
 
 -(void) customizeKeyboard {
     //Si on est pas sur iPad
@@ -58,11 +61,11 @@
         
         toolBar.translucent = NO;
         
-        UIBarButtonItem *minusButton = [[UIBarButtonItem alloc] initWithTitle:@"—"
-                                                                        style:UIBarButtonItemStylePlain
-                                                                       target:self
-                                                                       action:@selector(signButtonClick:)];
-        minusButton.tintColor = [UIColor blackColor];
+        self.minusButton = [[UIBarButtonItem alloc] initWithTitle:([self.text rangeOfString:@"-"].location != NSNotFound) ? @"+" :@"—"
+                                                            style:UIBarButtonItemStylePlain
+                                                           target:self
+                                                           action:@selector(signButtonClick:)];
+        self.minusButton.tintColor = [UIColor blackColor];
         
         
         UIBarButtonItem *okButton = [[UIBarButtonItem alloc] initWithTitle:MFLocalizedStringFromKey(@"okButton")
@@ -71,7 +74,7 @@
                                                                     action:@selector(okButtonClick:)];
         okButton.tintColor = [UIColor blackColor];
         
-        toolBar.items =   @[minusButton,
+        toolBar.items =   @[self.minusButton,
                             [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                           target:nil
                                                                           action:nil],
@@ -85,12 +88,12 @@
 
 -(void) signButtonClick:(UIBarButtonItem *)sender {
     if([sender.title isEqualToString:@"—"]) {
-        [self.sender setData:[NSString stringWithFormat:@"-%@", [self getData]]];
+        [self setData:[NSString stringWithFormat:@"-%@", [self getData]]];
         sender.title = @"+";
     }
     else {
         if([[self getData] rangeOfString:@"-"].location != NSNotFound) {
-            [self.sender setData:[[self getData] substringFromIndex:1]];
+            [self setData:[[self getData] substringFromIndex:1]];
         }
         sender.title = @"—";
     }
@@ -100,6 +103,17 @@
 
 -(void) okButtonClick:(id)sender {
     [self resignFirstResponder];
+}
+
+
+-(void)setData:(id)data {
+    [super setData:data];
+    if([data rangeOfString:@"-"].location != NSNotFound) {
+        [self.minusButton setTitle:@"+"];
+    }
+    else {
+        [self.minusButton setTitle:@"—"];
+    }
 }
 
 -(NSArray *)controlValidators {

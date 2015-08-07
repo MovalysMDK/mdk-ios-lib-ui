@@ -107,6 +107,7 @@
         }
         sender.title = @"—";
     }
+    [self valueChanged:self];
 }
 
 

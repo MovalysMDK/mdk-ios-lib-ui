@@ -20,7 +20,6 @@
 #import "MFDefaultConstraintsProtocol.h"
 #import "MFControlChangesProtocol.h"
 
-
 IB_DESIGNABLE
 /*!
  * @class MFDatePicker

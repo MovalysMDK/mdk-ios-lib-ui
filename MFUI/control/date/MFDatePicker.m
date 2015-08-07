@@ -35,6 +35,7 @@
 
 #define PICKER_LIST_HEIGHT 164.f
 
+const NSString *PARAMETER_DATE_PICKER_MODE = @"datePickerMode";
 
 @interface MFDatePicker()
 
@@ -472,7 +473,12 @@
     }
 }
 
-
+-(void)setControlAttributes:(NSDictionary *)controlAttributes {
+    [super setControlAttributes:controlAttributes];
+    if(controlAttributes[PARAMETER_DATE_PICKER_MODE]) {
+        self.datePickerMode = [controlAttributes[PARAMETER_DATE_PICKER_MODE] integerValue];
+    }
+}
 
 -(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
     MFControlChangedTargetDescriptor *commonCCTD = [MFControlChangedTargetDescriptor new];
@@ -497,6 +503,7 @@
     innerDescriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
     [self addSubview:innerDescriptionLabel];
 }
+
 
 
 @end

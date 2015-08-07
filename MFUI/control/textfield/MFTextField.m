@@ -30,7 +30,7 @@
 
 @property (nonatomic, strong) MFTextFieldExtension *extension;
 
-
+@property (nonatomic) BOOL initializing;
 
 @end
 
@@ -89,6 +89,7 @@
     if(!self.sender) {
         self.sender = self;
     }
+    self.initializing = YES;
     self.componentValidation = YES;
     [self addTarget:self action:@selector(innerTextDidChange:) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
     
@@ -135,7 +136,7 @@
 
 #pragma mark - Target Actions
 -(void)textDidChange:(id)sender {
-//    [self valueChanged:sender];
+    //    [self valueChanged:sender];
 }
 
 -(void)innerTextDidChange:(id)sender {
@@ -163,6 +164,7 @@
 
 
 -(void)setData:(id)data {
+    
     id fixedData = data;
     if(data && ![data isKindOfClass:[MFKeyNotFound class]]) {
         NSString *stringData = (NSString *)data;
@@ -172,7 +174,12 @@
         fixedData = @"";
     }
     self.text = fixedData;
-    [self validate];
+    if(!self.initializing) {
+        [self validate];
+    }
+    else {
+        self.initializing = NO;
+    }
 }
 
 -(id)getData {
@@ -315,7 +322,7 @@
     else {
         [self applyValidStyle];
     }
-
+    
     
     UILabel *innerDescriptionLabel = [[UILabel alloc] initWithFrame:self.bounds];
     innerDescriptionLabel.text = [[self class] description];

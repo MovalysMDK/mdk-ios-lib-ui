@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   }
   s.author       = "Sopra Steria"
   s.requires_arc = true
-  s.source       = { :git => "", :tag => "1.5.0" }
+  s.source       = { :git => "gitmovalys@git.ptx.fr.sopra:mfui.git", :tag => "1.5.0" }
   s.platform     = :ios, '7.0'
 
   s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore'

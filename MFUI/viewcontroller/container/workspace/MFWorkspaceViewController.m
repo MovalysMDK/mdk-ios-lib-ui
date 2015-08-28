@@ -404,10 +404,10 @@ const int kMasterSelectSaveChangesAlert = 12 ;
     
     for(UIStoryboardSegue *segue in self.segueColumns) {
         MFFormBaseViewController *columnViewcontroller = (MFFormBaseViewController *)segue.destinationViewController;
-        [[MFActionLauncher getInstance] MF_unregister:columnViewcontroller];
+//        [[MFActionLauncher getInstance] MF_unregister:columnViewcontroller];
         
         [columnViewcontroller removeFromParentViewController];
-        columnViewcontroller.formBindingDelegate = nil;
+        
         ((id<MFUIBaseViewModelProtocol>)columnViewcontroller.viewModel).form = nil;
         columnViewcontroller.onDestroy = NO;
     }

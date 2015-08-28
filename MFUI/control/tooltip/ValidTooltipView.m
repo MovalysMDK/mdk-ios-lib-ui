@@ -52,7 +52,8 @@
     [super _buildUserInterface];
     
     // Set image
-    self.image = [[UIImage imageNamed:@"image_tooltip_valid" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil] stretchableImageWithLeftCapWidth:48.0 topCapHeight:18.0];
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"image_tooltip_valid" ofType:@"png"]];
+    self.image = image;
 }
 
 @end

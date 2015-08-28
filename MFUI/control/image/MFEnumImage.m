@@ -52,8 +52,8 @@ NSString *MF_ENUM_CLASS_NAME_PARAMETER_KEY = @"enumClassName";
 
 @implementation MFEnumImage
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize transitionDelegate = _transitionDelegate;
-@synthesize selfDescriptor = _selfDescriptor;
+
+
 @synthesize isValid = _isValid;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize data =_data;

@@ -37,9 +37,9 @@
 @implementation MFTextField
 @synthesize styleClass = _styleClass;
 @synthesize componentInCellAtIndexPath = _componentInCellAtIndexPath;
-@synthesize transitionDelegate = _transitionDelegate;
+
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize selfDescriptor = _selfDescriptor;
+
 @synthesize inInitMode = _inInitMode;
 @synthesize controlDelegate = _bindingDelegate;
 @synthesize isValid = _isValid;
@@ -98,7 +98,9 @@
 
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self removeTarget:self action:@selector(innerTextDidChange:) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
     self.targetDescriptors = nil;
+
 }
 
 #pragma mark - TextField Methods

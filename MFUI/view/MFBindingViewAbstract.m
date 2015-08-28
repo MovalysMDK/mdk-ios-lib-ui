@@ -31,7 +31,7 @@
 
 @implementation MFBindingViewAbstract
 
-@synthesize transitionDelegate = _transitionDelegate;
+
 @synthesize cellIndexPath = _cellIndexPath;
 @synthesize formController = _formController;
 @synthesize hasChanged = _hasChanged;

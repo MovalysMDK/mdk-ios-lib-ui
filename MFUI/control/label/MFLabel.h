@@ -34,7 +34,7 @@ IB_DESIGNABLE
 @property (nonatomic, strong) NSMutableArray *errors;
 
 
-@property (nonatomic, strong) id<MFUIComponentProtocol> sender;
+@property (nonatomic, weak) id<MFUIComponentProtocol> sender;
 
 
 #pragma mark - Methods

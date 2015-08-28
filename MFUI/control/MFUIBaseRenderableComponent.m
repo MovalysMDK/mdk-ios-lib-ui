@@ -496,13 +496,6 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
 }
 
 
--(void)setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor {
-    [super setSelfDescriptor:selfDescriptor];
-    if([self conformsToProtocol:@protocol(MFExternalComponent)]) {
-        [self.internalView setSelfDescriptor:selfDescriptor];
-    }
-}
-
 -(NSString *)className {
     return [self respondsToSelector:@selector(defaultXIBName)] ? [[self performSelector:@selector(defaultXIBName)] stringByReplacingOccurrencesOfString:MDK_XIB_IDENTIFIER withString:@""] : nil;
 }

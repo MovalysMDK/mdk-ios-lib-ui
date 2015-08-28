@@ -37,7 +37,7 @@
 
 -(void) initialize {
     [super initialize];
-    self.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 }
 
 -(void)awakeFromNib {
@@ -47,9 +47,19 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     
+    if([self showTouchAnimation]) {
+        UIView *selectionView = [[UIView alloc] initWithFrame:self.bounds];
+        selectionView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.25];
+        [self addSubview:selectionView];
+        [UIView animateWithDuration:0.35 animations:^{
+            selectionView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [selectionView removeFromSuperview];
+        }];
+    }
     self.userInteractionEnabled = NO;
     [self animateDisclosurechanges];
-
+    
 }
 
 -(void) animateDisclosurechanges {
@@ -72,13 +82,15 @@
             [self.sender performSelector:@selector(closeSectionAtIndex:) withObject:self.identifier];
         }
         self.disclosureIndicator.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
-
+        self.disclosureIndicator.tag = 0;
+        
     }
     else {
         if([self.sender respondsToSelector:@selector(openSectionAtIndex:)] && withAction) {
             [self.sender performSelector:@selector(openSectionAtIndex:) withObject:self.identifier];
         }
         self.disclosureIndicator.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(90));
+        self.disclosureIndicator.tag = 1;
     }
 }
 #pragma clang diagnostic pop
@@ -94,18 +106,29 @@
     NSLayoutConstraint *disclosureWidth= [NSLayoutConstraint constraintWithItem:self.disclosureIndicator attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:32];
     NSLayoutConstraint *disclosureLeftMargin = [NSLayoutConstraint constraintWithItem:self.disclosureIndicator attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:MF_SECTION_DISCLOSURE_DETAIL_BUTTON_MARGIN];
     [self addSubview:self.disclosureIndicator];
-
+    
     [self addConstraints:@[disclosureCenterY, disclosureHeight, disclosureLeftMargin, disclosureWidth]];
     
     [self.disclosureIndicator addTarget:self action:@selector(touchesEnded:withEvent:) forControlEvents:UIControlEventTouchDown];
     
     if(self.isOpened) {
         self.disclosureIndicator.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(90));
+        self.disclosureIndicator.tag = 1;
     }
 }
 
 -(void)setIsOpened:(BOOL)isOpened {
     _isOpened = isOpened;
+    
+    //Restoring discluse state
+    if(isOpened && self.disclosureIndicator.tag ==0) {
+        self.disclosureIndicator.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(90));
+        self.disclosureIndicator.tag = 1;
+    }
+    else if(!isOpened && self.disclosureIndicator.tag == 1) {
+        self.disclosureIndicator.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
+        self.disclosureIndicator.tag = 0;
+    }
     if(!self.disclosureIndicator) {
         [self addDisclosureIndicator];
     }
@@ -115,6 +138,7 @@
     self.isOpened = YES;
     [UIView beginAnimations:@"" context:nil];
     self.disclosureIndicator.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(90));
+    self.disclosureIndicator.tag = 1;
     [UIView commitAnimations];
     
 }
@@ -127,4 +151,9 @@
 -(void) openedStateChanged {
     //Nothing here
 }
+
+-(BOOL) showTouchAnimation {
+    return YES;
+}
+
 @end

@@ -37,4 +37,9 @@
  * @brief Callback called when the opened state of the section has changed
  */
 -(void)openedStateChanged;
+
+/*! 
+ * @brief Indicated if the touch animation should be displayed on touche event
+ */
+-(BOOL) showTouchAnimation;
 @end

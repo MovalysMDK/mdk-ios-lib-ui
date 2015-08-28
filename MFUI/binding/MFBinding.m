@@ -41,6 +41,8 @@
     if(!registeredValues) {
         registeredValues = [NSMutableArray new];
     }
+    registeredValues = [self clearUnusedBindingValues:registeredValues forBindingValue:bindingValue];
+
     [registeredValues addObject:bindingValue];
     [self.bindingByViewModelKeys setObject:registeredValues forKey:bindingValue.abstractBindedPropertyName];
     
@@ -60,12 +62,22 @@
     if(!bindingValuesforKey) {
         bindingValuesforKey = [NSMutableArray array];
     }
+    bindingValuesforKey = [self clearUnusedBindingValues:bindingValuesforKey forBindingValue:bindingValue];
+    
     [bindingValuesforKey addObject:bindingValue];
     _bindingByBindingKeys[bindingKey] = bindingValuesforKey;
     [bindingValue.wrapper dispatchDidBinded];
 }
 
-
+-(NSMutableArray *) clearUnusedBindingValues:(NSMutableArray *)array forBindingValue:(MFBindingValue *)bindingValue {
+    NSMutableArray *result = [array mutableCopy];
+    for(MFBindingValue *registeredValue in array) {
+        if(registeredValue.wrapper.hash == bindingValue.wrapper.hash) {
+            [result removeObject:registeredValue];
+        }
+    }
+    return result;
+}
 
 -(void) clearBindingValuesForBindingKey:(NSString *)bindingKey {
     NSArray *bindingValues = _bindingByBindingKeys[bindingKey];

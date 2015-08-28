@@ -56,6 +56,7 @@
         self.waitingView = [MBProgressHUD showHUDAddedTo:self.viewController.view animated:YES];
         self.waitingView.mode = MBProgressHUDModeIndeterminate;
         self.waitingView.labelText = MFLocalizedStringFromKey(key);
+        self.waitingView.removeFromSuperViewOnHide = YES;
     });
 }
 

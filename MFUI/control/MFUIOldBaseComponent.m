@@ -44,8 +44,8 @@
 
 
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize transitionDelegate = _transitionDelegate;
-@synthesize selfDescriptor = _selfDescriptor;
+
+
 @synthesize isValid = _isValid;
 @synthesize mandatory = _mandatory;
 @synthesize visible = _visible;
@@ -504,35 +504,10 @@
     }
 }
 
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-//-(void) setInnerComponentsBackgroundColor:(NSDictionary *)componentsWithColors {
-//    for(NSString *key in [componentsWithColors allKeys]) {
-//        if([self respondsToSelector:NSSelectorFromString(key)]) {
-//            MFUIOldBaseComponent *component = [self performSelector:NSSelectorFromString(key)];
-//            dispatch_barrier_async(dispatch_get_main_queue(), ^{
-//                [component setBackgroundColor:[componentsWithColors objectForKey:key]];
-//            });
-//        }
-//    }
-//}
-#pragma clang diagnostic pop
-
-
-
 -(void)setEditable:(NSNumber *)editable {
     _editable = editable;
     self.userInteractionEnabled = [editable boolValue];
 }
-
-
-
--(void) setTransitionDelegate:(id<MFUITransitionDelegate>)transitionDelegate {
-    _transitionDelegate = transitionDelegate;
-}
-
-
 
 #pragma mark - Live Rendering Default Implementation
 

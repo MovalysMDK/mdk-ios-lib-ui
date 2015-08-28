@@ -209,6 +209,7 @@
 
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.bindingDelegate.structure removeAllObjects];
     self.bindingDelegate = nil;
 }
 
@@ -236,6 +237,7 @@
     
     return cell;
 }
+
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -342,7 +344,12 @@
     _bindingDelegate = bindingDelegate;
     if(bindingDelegate) {
         [self createBindingStructure];
+        [self didCreateBindingStructure];
     }
+}
+
+-(void) didCreateBindingStructure {
+    // implemet if necessary in child classes
 }
 
 -(void)createBindingStructure {

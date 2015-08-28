@@ -214,7 +214,10 @@
                 index++;
             }
             [self.pickerListTableView.tableView reloadData];
-            [self.pickerListTableView.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+            //SI index < au nombre d'items on scroll vers l'item sélectionné, sinon on ne scrolle pas : aucun item n'est sélectionné (cas de l'itinitalisation)
+            if(index < [self getValues].count) {
+                [self.pickerListTableView.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+            }
         }
     }];
 }
@@ -224,10 +227,15 @@
     if(self.mf.pickerValuesKey) {
         MFUIBaseViewModel *formViewModel = (MFUIBaseViewModel *)[((MFFormViewController *)self.parentViewController) getViewModel];
         
+        if([self.parentViewController conformsToProtocol:@protocol(MFDetailViewControllerProtocol)] && [self.parentViewController respondsToSelector:@selector(parentFormController)]) {
+            formViewModel = [((MFFormBaseViewController *)[((id<MFDetailViewControllerProtocol>)self.parentViewController) parentFormController]) getViewModel];
+        }
+        
         //SI le controller répond à partialViewModelKeys, on est dans le cas d'un controller conteneur
         // et on prend du coup le ViewModel associé à l'une des clés qui nous est donnée,
         //SINON on remontre dans les parentViewModel jusqu'à trouver le ListViewModel recherché.
-        if([self.parentViewController respondsToSelector:@selector(partialViewModelKeys)]) {
+        if([self.parentViewController respondsToSelector:@selector(partialViewModelKeys)]
+           && [(NSArray *)[self.parentViewController performSelector:@selector(partialViewModelKeys)] count] > 0 ) {
             MFFormViewController *controller = (MFFormViewController *)self.parentViewController;
             for(NSString *key in [controller partialViewModelKeys]) {
                 if([formViewModel respondsToSelector:NSSelectorFromString(key)]) {

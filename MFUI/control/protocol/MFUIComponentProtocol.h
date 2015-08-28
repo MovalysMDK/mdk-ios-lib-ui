@@ -55,16 +55,6 @@
 @property(nonatomic, strong) NSString *localizedFieldDisplayName;
 
 /*!
- * @brief Transition delegate uses to open a new controller.
- */
-@property(nonatomic, weak) id<MFUITransitionDelegate> transitionDelegate;
-
-/*!
- * @brief Current component's descriptor.
- */
-@property(nonatomic, weak) NSObject<MFDescriptorCommonProtocol> *selfDescriptor;
-
-/*!
  * @brief The name of the custom class to use to render component style
  */
 @property (nonatomic, strong) NSString *styleClassName;

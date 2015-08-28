@@ -57,8 +57,6 @@ const NSString *PARAMETER_DATE_PICKER_MODE = @"datePickerMode";
 @end
 
 @implementation MFDatePicker
-@synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize transitionDelegate = _transitionDelegate;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize data =_data;
 @synthesize currentOrientation = _currentOrientation;

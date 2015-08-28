@@ -35,7 +35,7 @@ IB_DESIGNABLE
 @property (nonatomic) Class customStyleClass;
 
 
-@property (nonatomic, strong) id<MFUIComponentProtocol> sender;
+@property (nonatomic, weak) id<MFUIComponentProtocol> sender;
 
 
 #pragma mark - Methods
@@ -61,7 +61,5 @@ IB_DESIGNABLE
 
 
 -(void) onErrorButtonClick:(id)sender;
-
--(void) setSender:(id<MFUIComponentProtocol>)sender ;
 @end
 

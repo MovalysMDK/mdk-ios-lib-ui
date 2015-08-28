@@ -31,7 +31,7 @@
 @implementation MFCellAbstract
 
 // Synthesizing protocols properties (Auto synthesizing will not work for protocol properties)
-@synthesize transitionDelegate = _transitionDelegate;
+
 @synthesize cellIndexPath = _cellIndexPath;
 @synthesize formController = _formController;
 @synthesize hasChanged = _hasChanged;

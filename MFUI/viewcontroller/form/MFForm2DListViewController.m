@@ -75,6 +75,11 @@
  */
 @property (nonatomic, strong) NSMutableArray *animatedSectionsIndexPath;
 
+/**
+ * @brief An array that contains the liste of indexPathes to animate
+ */
+@property (nonatomic, strong) NSMutableArray *alreadyBindedSections;
+
 @end
 
 
@@ -98,7 +103,7 @@
  */
 -(void) initialize {
     [super initialize];
-
+    
     // Form's location manager init
     self.applicationContext = [MFApplication getInstance];
     self.viewModel.form = self;
@@ -107,6 +112,7 @@
     self.animatedSectionsIndexPath = [[NSMutableArray alloc] init];
     self.showAddItemButton = NO;
     self.longPressToDelete = NO;
+    self.alreadyBindedSections = [NSMutableArray array];
 }
 
 - (void) setupBarItems {
@@ -128,6 +134,11 @@
     
 }
 
+-(void) didCreateBindingStructure {
+    MFBindingViewDescriptor *bindingDataSection = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
+    UINib *sectionHeaderViewNib = [UINib nibWithNibName:bindingDataSection.viewIdentifier bundle:[NSBundle mainBundle]];
+    [self.tableView registerNib:sectionHeaderViewNib forHeaderFooterViewReuseIdentifier:SECTION_HEADER_VIEW_2D_DESCRIPTOR];
+}
 
 #pragma mark - Cycle de vie du controller
 
@@ -259,25 +270,39 @@
     return [bindingData.viewHeight floatValue];
 }
 
+
+-(void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section {
+    MFBindingViewDescriptor *bindingDataSection = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
+    bindingDataSection.viewIndexPath = [NSIndexPath indexPathForRow:section inSection:SECTION_INDEXPATH_IDENTIFIER];
+    [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingDataSection generatedBindingKey]];
+    [self.alreadyBindedSections removeObject:@(section)];
+
+}
+
+
 -(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     MFBindingCellDescriptor *bindingDataCell = self.bindingDelegate.structure[CELL_1D_DESCRIPTOR];
     bindingDataCell.cellIndexPath = indexPath;
     [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingDataCell generatedBindingKey]];
     
     
-    MFBindingViewDescriptor *bindingDataSection = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
-    bindingDataSection.viewIndexPath = indexPath;
-    [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingDataSection generatedBindingKey]];
-}
+   }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MFBindingViewDescriptor *bindingData = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
-    MFFormSectionHeaderView *view = nil;
+    MFFormSectionHeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:SECTION_HEADER_VIEW_2D_DESCRIPTOR];
     if(!view) {
         view = [self sectionView];
+
     }
     bindingData.viewIndexPath = [NSIndexPath indexPathForRow:section inSection:SECTION_INDEXPATH_IDENTIFIER];
-    [view bindViewFromDescriptor:bindingData onObjectWithBinding:self];
+    
+//    if(![self.alreadyBindedSections containsObject:@(section)]) {
+        [view bindViewFromDescriptor:bindingData onObjectWithBinding:self];
+        [self.alreadyBindedSections addObject:@(section)];
+//    }
+
+    
     [self updateViewFromBindingData:bindingData atIndexPath:bindingData.viewIndexPath];
     view.sender = self;
     view.identifier = @(section);
@@ -426,7 +451,7 @@
 
 -(MFFormSectionHeaderView *) sectionView {
     MFBindingViewDescriptor *bindingData = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
-    MFFormSectionHeaderView *view = [[[NSBundle mainBundle] loadNibNamed:bindingData.viewIdentifier owner:nil options:nil] firstObject];
+    MFFormSectionHeaderView *view = [[MFFormSectionHeaderView alloc] initWithReuseIdentifier:SECTION_HEADER_VIEW_2D_DESCRIPTOR];
     return view;
 }
 
@@ -444,7 +469,7 @@
     //Update the tableView
     [self.tableView beginUpdates];
     [self.tableView deleteRowsAtIndexPaths:self.animatedSectionsIndexPath withRowAnimation:UITableViewRowAnimationMiddle];
-
+    
     
     [self.openedSectionStates setObject:@0 forKey:section];
     [self.animatedSectionsIndexPath removeAllObjects];

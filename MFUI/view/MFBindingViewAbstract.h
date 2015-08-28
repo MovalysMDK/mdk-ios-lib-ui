@@ -22,7 +22,7 @@
  * @class MFBindingViewAbstract
  * @brief A specific view that can be binded to the MDK iOS Framework
  */
-@interface MFBindingViewAbstract : UIView <MFFormViewProtocol, MFFormCellProtocol>
+@interface MFBindingViewAbstract : UITableViewHeaderFooterView <MFFormViewProtocol, MFFormCellProtocol>
 
 #pragma mark - Properties
 /*!

@@ -362,12 +362,6 @@
 #pragma mark - Descriptor
 
 
--(void) setSelfDescriptor:(NSObject<MFDescriptorCommonProtocol> *)selfDescriptor
-{
-    [super setSelfDescriptor:selfDescriptor];
-}
-
-
 -(NSString *) description
 {
     return [NSString stringWithFormat:@"MFTextView<value:%@, active: %c, mf.mandatory: %@, mf.maxLength: %@, mf.minLength: %@>", [self getValue], self.isActive ?  : NO, self.mandatory ? @"YES" : @"NO", self.mf.maxLength, self.mf.minLength];

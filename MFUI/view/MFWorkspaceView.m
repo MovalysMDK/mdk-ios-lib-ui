@@ -258,7 +258,10 @@ NSString *const WORKSPACE_VIEW_DID_SCROLL_NOTIFICATION_KEY = @"workspaceViewDidS
     frame.origin.x = frame.size.width * index;
     frame.origin.y = 0;
     [self flashScrollIndicators];
-    [self scrollRectToVisible:frame animated:YES];
+//    Dispatch after 0.15 to avoid lag during animation
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self scrollRectToVisible:frame animated:YES];
+    });
 }
 
 -(BOOL) isColumnWithNameVisible:(NSString *)columnName{

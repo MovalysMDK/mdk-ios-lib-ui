@@ -37,9 +37,9 @@
 @implementation MFLabel
 @synthesize styleClass = _styleClass;
 @synthesize componentInCellAtIndexPath = _componentInCellAtIndexPath;
-@synthesize transitionDelegate = _transitionDelegate;
+
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize selfDescriptor = _selfDescriptor;
+
 @synthesize inInitMode = _inInitMode;
 @synthesize controlDelegate = _controlDelegate;
 @synthesize isValid = _isValid;

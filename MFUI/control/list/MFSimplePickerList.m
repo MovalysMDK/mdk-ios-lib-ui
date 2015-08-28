@@ -65,8 +65,8 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 
 @implementation MFSimplePickerList
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize transitionDelegate = _transitionDelegate;
-@synthesize selfDescriptor = _selfDescriptor;
+
+
 @synthesize isValid = _isValid;
 @synthesize componentInCellAtIndexPath =_componentInCellAtIndexPath;
 @synthesize data =_data;
@@ -504,8 +504,7 @@ NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY = @"enumClassName";
 
 #pragma mark - Set control attributes
 -(void)setControlAttributes:(NSDictionary *)controlAttributes {
-    _controlAttributes = controlAttributes;
-    
+    [super setControlAttributes:controlAttributes];
     if(controlAttributes[PICKER_PARAMETER_ENUM_CLASS_NAME_KEY]) {
         self.mf.enumClassName = controlAttributes[PICKER_PARAMETER_ENUM_CLASS_NAME_KEY];
     }

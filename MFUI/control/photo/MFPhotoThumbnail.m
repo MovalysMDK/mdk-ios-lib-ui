@@ -125,6 +125,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [self defineTitreLabelConstraints];
 }
 
+-(void)dealloc {
+    [self removeTarget:self action:@selector(displayManagePhotoView:) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
 #pragma mark - Define constraints
 
 -(void) definePhotoConstraints {

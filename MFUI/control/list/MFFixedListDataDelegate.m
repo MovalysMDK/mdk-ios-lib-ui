@@ -121,17 +121,12 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     if(!self.bindingDelegate.structure) {
         return [[UITableViewCell alloc] init];
     }
+    
     MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_FIXEDLIST_DESCRIPTOR];
     NSString *identifier = bindingData.cellIdentifier;
-    UINib *nib = [UINib nibWithNibName:identifier bundle:[NSBundle mainBundle]];
-    if([identifier isEqualToString:@"PhotoFixedListItemCell"]) {
-        nib = [UINib nibWithNibName:identifier bundle:[NSBundle bundleForClass:[MFCellAbstract class]]];
-    }
-    [tableView registerNib:nib forCellReuseIdentifier:identifier];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    
-    
+
     bindingData.cellIndexPath = indexPath;
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
     [self updateCellFromBindingData:bindingData atIndexPath:indexPath];
@@ -204,6 +199,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         self.HUD = [MBProgressHUD showHUDAddedTo:((UIViewController *)self.formController).view animated:YES];
         self.HUD.mode = MBProgressHUDModeIndeterminate;
         self.HUD.labelText = MFLocalizedStringFromKey(@"waiting.view.refreshing.list");
+        self.HUD.removeFromSuperViewOnHide = YES;
         // Suppression
         MFUIBaseListViewModel *viewModel = ((MFUIBaseListViewModel *)[self.fixedList getData]);
         NSMutableArray *tempData = [viewModel.viewModels mutableCopy];
@@ -450,6 +446,14 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     _bindingDelegate = bindingDelegate;
     if(bindingDelegate) {
         [self createBindingStructure];
+        MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_FIXEDLIST_DESCRIPTOR];
+        NSString *identifier = bindingData.cellIdentifier;
+        UINib *nib = [UINib nibWithNibName:identifier bundle:[NSBundle mainBundle]];
+        if([identifier isEqualToString:@"PhotoFixedListItemCell"]) {
+            nib = [UINib nibWithNibName:identifier bundle:[NSBundle bundleForClass:[MFCellAbstract class]]];
+        }
+        [self.fixedList.tableView registerNib:nib forCellReuseIdentifier:identifier];
+
     }
 }
 

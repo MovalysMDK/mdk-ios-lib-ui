@@ -35,6 +35,6 @@
 /*!
  * @brief The View Model used to bind, of the object that need the binding
  */
-@property(nonatomic, strong, getter=getViewModel) NSObject<MFUIBaseViewModelProtocol> *viewModel;
+@property(nonatomic, weak, getter=getViewModel) NSObject<MFUIBaseViewModelProtocol> *viewModel;
 
 @end

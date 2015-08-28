@@ -60,10 +60,7 @@ FOUNDATION_EXPORT NSString *const MF_BINDABLE_PROPERTIES;
  */
 @property (nonatomic, strong) UISearchDisplayController *searchController;
 
-/*!
- * @brief Le delegate permettant le binding Formulaire<->ViewModel
- */
-@property(nonatomic, strong) id<MFCommonFormProtocol> formBindingDelegate ;
+
 
 /*!
  *  @brief la table associée

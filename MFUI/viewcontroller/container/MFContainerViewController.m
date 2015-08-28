@@ -141,7 +141,7 @@
  * @brief Register success and fail action events
  */
 -(void) registerChildrenActions {
-//    [[MFActionLauncher getInstance] MF_register:self];
+    //    [[MFActionLauncher getInstance] MF_register:self];
 }
 
 
@@ -156,8 +156,8 @@ MFRegister_ActionListenerOnSuccess(MFAction_MFChainSaveDetailAction, succeedSave
     
     BOOL isExiting = NO;
     if(self.hasRequestPopViewController &&
-            [self isKindOfClass:[MFWorkspaceViewController class]] &&
-            [[((MFWorkspaceViewController*)self) getWorkspaceView] isMasterColumnVisible]) {
+       [self isKindOfClass:[MFWorkspaceViewController class]] &&
+       [[((MFWorkspaceViewController*)self) getWorkspaceView] isMasterColumnVisible]) {
         [((MFWorkspaceViewController*)self) releaseRetainedObjects];
         [self popViewControllerAndReleaseObjects];
         isExiting = YES;
@@ -174,6 +174,8 @@ MFRegister_ActionListenerOnSuccess(MFAction_MFChainSaveDetailAction, succeedSave
             [baseViewController.viewModel resetChanged];
         }
     }
+    
+    self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 
 
@@ -198,6 +200,7 @@ MFRegister_ActionListenerOnFailed(MFAction_MFChainSaveDetailAction, failedSaveAc
         [invalidDataAlert show];
         self.hasRequestPopViewController = NO;
     }
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     
 }
 
@@ -331,6 +334,9 @@ MFRegister_ActionListenerOnFailed(MFAction_MFChainSaveDetailAction, failedSaveAc
     }
     
     if(namesOfSaveActions.count > 0  ) {
+        if(self.navigationItem.rightBarButtonItem.tag == SAVE_BUTTON_TAG) {
+            self.navigationItem.rightBarButtonItem.enabled = NO;
+        }
         MFChainSaveActionDetailParameter *parameters = [[MFChainSaveActionDetailParameter alloc] init];
         parameters.actions = namesOfSaveActions;
         

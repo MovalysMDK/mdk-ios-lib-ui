@@ -33,6 +33,9 @@
 #pragma clang diagnostic pop
 
 
+-(void)dealloc {
+    [self removeTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
+}
 -(void) doAction {
     [MFException throwNotImplementedExceptionOfMethodName:@"doAction" inClass:[self class] andUserInfo:nil];
 }

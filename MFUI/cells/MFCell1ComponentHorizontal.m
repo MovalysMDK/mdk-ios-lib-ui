@@ -41,29 +41,6 @@
     return self;
 }
 
-#pragma mark - MFUITransitionDelegate implementation
-
--(void) setTransitionDelegate:(id<MFUITransitionDelegate>)transitionDelegate
-{
-    if(self.componentView && [self.componentView conformsToProtocol:@protocol(MFUIComponentProtocol)])
-    {
-        id<MFUIComponentProtocol> protocol = (id<MFUIComponentProtocol>) self.componentView;
-        protocol.transitionDelegate = transitionDelegate;
-    }
-}
-
--(id<MFUITransitionDelegate>) transitionDelegate
-{
-    if(self.componentView && [self.componentView conformsToProtocol:@protocol(MFUIComponentProtocol)])
-    {
-        id<MFUIComponentProtocol> protocol = (id<MFUIComponentProtocol>) self.componentView;
-        return protocol.transitionDelegate;
-    }
-    else
-    {
-        return nil;
-    }
-}
 
 /**
  * give the index path to the component too

@@ -83,10 +83,6 @@
 @property(nonatomic) BOOL hasBeenReload;
 
 /*!
- * @brief Form Binding Delegate. This delegate allow to bind a ViewModel to a Form easily
- */
-@property(nonatomic, strong) id<MFCommonFormProtocol> formBindingDelegate ;
-/*!
  * @brief The fixedList that used this data delegate
  */
 @property (nonatomic, weak) MFFixedList *fixedList;

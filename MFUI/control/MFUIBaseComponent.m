@@ -57,8 +57,8 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
 @implementation MFUIBaseComponent
 
 @synthesize localizedFieldDisplayName = _localizedFieldDisplayName;
-@synthesize transitionDelegate = _transitionDelegate;
-@synthesize selfDescriptor = _selfDescriptor;
+
+
 @synthesize isValid = _isValid;
 @synthesize mandatory = _mandatory;
 @synthesize visible = _visible;

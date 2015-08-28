@@ -160,6 +160,7 @@ NSTimer *timer =nil;
         if((!self.HUD ||self.HUD.alpha==0)){
             self.HUD = [MBProgressHUD showHUDAddedTo:self.parentViewController.view animated:YES];
             self.HUD.mode = MBProgressHUDModeIndeterminate;
+            self.HUD.removeFromSuperViewOnHide = YES;
         }
         
         // for timeout

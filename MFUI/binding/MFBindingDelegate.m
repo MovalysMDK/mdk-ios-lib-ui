@@ -61,6 +61,7 @@
 
 -(MFBindingValue *) registerComponentBindingProperty:(NSString *)componentBindingProperty withViewModelProperty:(NSString *) viewModelProperty forComponent:(UIView *)component withOutletName:(NSString *)outletName withMode:(MFBindingValueMode)bindingMode  fromBindingSource:(MFBindingSource)bindingSource {
     
+    [self fixKnownWrappers];
     MFAbstractComponentWrapper *wrapper = self.knwonWrappers[@(component.hash)];
     if(!wrapper) {
         NSString *customWrapper = nil;
@@ -96,6 +97,18 @@
     return nil;
 }
 
+-(void) fixKnownWrappers {
+    NSMutableDictionary *result = [self.knwonWrappers mutableCopy];
+    NSMutableArray *objectToRemoveKeys = [NSMutableArray array];
+    
+    for(MFAbstractComponentWrapper *wrapper in self.knwonWrappers.allValues) {
+        if(!wrapper.component) {
+            [objectToRemoveKeys addObjectsFromArray:[self.knwonWrappers allKeysForObject:wrapper]];
+        }
+    }
+    [result removeObjectsForKeys:objectToRemoveKeys];
+    self.knwonWrappers = result;
+}
 -(MFBinding *)binding {
     return _binding;
 }

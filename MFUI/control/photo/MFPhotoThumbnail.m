@@ -50,6 +50,8 @@
 
 @property (nonatomic, strong) MFPhotoViewModel *photoViewModel;
 
+@property (nonatomic, strong) NSMutableDictionary *savedConstraints;
+
 @end
 
 
@@ -84,14 +86,14 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [super initialize];
     
     
-    
+    self.savedConstraints = [NSMutableDictionary dictionary];
     
     //Ajout des éléments du composant
     self.isInitialized = NO;
     self.photoImageView = [[UIImageView alloc] init];
     self.photoImageView.translatesAutoresizingMaskIntoConstraints = NO;
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
-    UIImage* image = [UIImage imageNamed:[self defaultImage]];
+    UIImage* image = [self defaultImage];
     self.photoImageView.image = image;
     self.dateLabel = [[UILabel alloc] init];
     self.dateLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -155,6 +157,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     [self addConstraints:@[insidePhotoConstraintLeftMargin, insidePhotoConstraintTopMargin,
                            insidePhotoConstraintHeight, insidePhotoConstraintWidth]];
+    
+    [self.savedConstraints addEntriesFromDictionary:NSDictionaryOfVariableBindings(insidePhotoConstraintLeftMargin)];
     
 }
 
@@ -224,11 +228,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     [self addConstraints:@[insideDateConstraintLeftMargin, insideDateConstraintTopMargin,
                            insideDateConstraintRightMargin, insideDateConstraintBottom]];
-}
-
-#pragma mark - View lifecycle
--(void)layoutSubviews {
-    [super layoutSubviews];
 }
 
 #pragma mark - Tags for automatic testing
@@ -335,7 +334,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                     if (iref) {
                         self.photoImageView.image = [UIImage imageWithCGImage:iref];
                     } else {
-                        UIImage* image = [UIImage imageNamed:[self defaultImage]];
+                        UIImage* image = [self defaultImage];
                         self.photoImageView.image = image;
                     }
                     
@@ -359,7 +358,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                 //Echec de chargement de la photo
                 ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
                 {
-                    UIImage* image = [UIImage imageNamed:[self defaultImage]];
+                    UIImage* image = [self defaultImage];
                     self.photoImageView.image = image;
                 };
                 
@@ -376,7 +375,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             //Si aucune URI n'est spécifiée, il n'y a pas de photo à afficher
             else
             {
-                UIImage* image = [UIImage imageNamed:[self defaultImage]];
+                UIImage* image = [self defaultImage];
                 self.photoImageView.image = image;
             }
             
@@ -396,9 +395,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         self.dateLabel.text = nil;
         self.titreLabel.text = nil;
         self.descriptionLabel.text = nil;
-        UIImage* image = [UIImage imageNamed:[self defaultImage]];
+        UIImage* image = [self defaultImage];
         self.photoImageView.image = image;
     }
+    [self validate];
 }
 
 
@@ -425,8 +425,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 
 
--(NSString *) defaultImage {
-    return nil;
+-(UIImage *) defaultImage {
+    return [UIImage imageWithContentsOfFile:[[NSBundle bundleForClass:[MFAppDelegate class]] pathForResource:@"no_photo" ofType:@"png"]];
 }
 
 
@@ -462,4 +462,17 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [self addSubview:innerDescriptionLabel];
 }
 
+
+
+-(void)applyErrorStyle {
+    [super applyErrorStyle];
+    [self.savedConstraints[@"insidePhotoConstraintLeftMargin"] setConstant:35];
+//    [self layoutIfNeeded];
+}
+
+-(void)applyValidStyle {
+    [super applyValidStyle];
+    [self.savedConstraints[@"insidePhotoConstraintLeftMargin"] setConstant:0];
+//    [self layoutIfNeeded];
+}
 @end

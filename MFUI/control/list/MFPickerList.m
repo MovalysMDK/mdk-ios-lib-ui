@@ -83,6 +83,7 @@
         [self.mf.selectedItemBindingDelegate performSelector:@selector(computeCellHeightAndDispatchToFormController)];
         [self.mf.selectedItemBindingDelegate performSelector:@selector(updateStaticView)];
     }
+    [self validate];
 }
 #pragma clang diagnostic pop
 

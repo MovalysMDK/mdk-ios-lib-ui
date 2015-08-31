@@ -427,11 +427,9 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     NSString *imagePath = nil;
     if(self.mf.canDeleteItem) {
         imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"ios_ic_edit_active@2x" ofType:@"png"];
-        self.editButton.enabled = YES;
     }
     else {
         imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"ios_ic_edit_unactive@2x" ofType:@"png"];
-        self.editButton.enabled = NO;
     }
     [self.editButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
     imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"ios_ic_edit_pressed@2x" ofType:@"png"];

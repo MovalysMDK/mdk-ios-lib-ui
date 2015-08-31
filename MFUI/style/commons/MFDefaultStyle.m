@@ -34,7 +34,7 @@
 
 -(void)applyValidStyleOnComponent:(UIView *)component {
     if(component) {
-        
+
     }
 }
 

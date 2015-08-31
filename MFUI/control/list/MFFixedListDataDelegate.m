@@ -478,7 +478,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
             [self.fixedList changeDynamicHeight:height];
             
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"MDK_ComponentSize_%@", [selfBindingValue.bindingIndexPath stringIndexPath]] object:@(height)];
+            [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"MDK_ComponentSize_%@_%@", parentObjectWithBinding, [selfBindingValue.bindingIndexPath stringIndexPath]] object:@(height)];
         }
     }
     

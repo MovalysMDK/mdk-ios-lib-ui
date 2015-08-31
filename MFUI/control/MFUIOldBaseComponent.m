@@ -123,7 +123,7 @@
     //    self.tag = [MFApplication getViewTag];
     [self initErrors];
     
-
+    
     //Par défaut tout composant est éditable.
     self.editable = @1;
     self.sender = self;
@@ -133,7 +133,7 @@
     
     [self computeStyleClass];
     [self applyStandardStyle];
-
+    
 #endif
 }
 
@@ -165,6 +165,7 @@
     self.baseErrorButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
     self.baseErrorButton.backgroundColor = [UIColor clearColor];
     self.baseErrorButton.alpha = 0.0;
+    self.baseErrorButton.tintColor = [UIColor redColor];
     [self.baseErrorButton addTarget:self action:@selector(toggleErrorInfo) forControlEvents:UIControlEventTouchUpInside];
     
 }
@@ -185,37 +186,6 @@
         [self applyErrorStyle];
         [self showErrorButtons];
     }
-
-}
-
-
--(void)layoutSubviews {
-    
-//    if(self.IB_enableIBStyle) {
-//        
-//        [self willLayoutSubviewsDesignable];
-//    }
-#if !TARGET_INTERFACE_BUILDER
-    
-//    [self willLayoutSubviewsNoDesignable];
-    [super layoutSubviews];
-    
-#else
-#endif
-    
-//    if(self.IB_enableIBStyle) {
-//        [self didLayoutSubviewsDesignable];
-//    }
-#if !TARGET_INTERFACE_BUILDER
-    
-//    [self didLayoutSubviewsNoDesignable];
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self selfCustomization];
-//    });
-    
-#else
-#endif
-    
     
 }
 
@@ -274,17 +244,11 @@
     CGFloat const value = 1.0f;
     if(value != self.baseErrorButton.alpha)
     {
-        [[MFApplication getInstance] execInMainQueue:^{
-            [UIView animateWithDuration:ERROR_BUTTON_ANIMATION_DURATION animations:^{
-                [self bringSubviewToFront:self.baseErrorButton];
-                self.baseErrorButton.frame = [self getErrorButtonFrameForInvalid];
-                self.baseErrorButton.alpha = value;
-                
-            } completion:^(BOOL finished){
-                //              self.isValid = NO;
-                [self modifyComponentAfterShowErrorButtons];
-            }];
-        }];
+        
+        [self bringSubviewToFront:self.baseErrorButton];
+        self.baseErrorButton.frame = [self getErrorButtonFrameForInvalid];
+        self.baseErrorButton.alpha = value;
+        [self modifyComponentAfterShowErrorButtons];
     }
     
 }
@@ -303,17 +267,9 @@
             self.baseErrorButton.alpha = value;
         };
         
-        [[MFApplication getInstance] execInMainQueue:^{
-            if ( anim ) {
-                [UIView animateWithDuration:ERROR_BUTTON_ANIMATION_DURATION animations:bloc completion:^(BOOL finished) {
-                    //                    self.isValid = YES;
-                    [self hideErrorTooltips];
-                    [self modifyComponentAfterHideErrorButtons];
-                }];
-            } else {
-                bloc();
-            }
-        }];
+        [self hideErrorTooltips];
+        [self modifyComponentAfterHideErrorButtons];
+        bloc();
     }
 }
 
@@ -533,7 +489,7 @@
 
 -(void)prepareForInterfaceBuilder {
     [self computeStyleClass];
-//    self.backgroundColor = [UIColor clearColor];
+    //    self.backgroundColor = [UIColor clearColor];
 }
 
 -(void)setControlAttributes:(NSDictionary *)controlAttributes {

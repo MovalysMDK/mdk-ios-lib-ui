@@ -189,7 +189,9 @@
     [super viewWillDisappear:animated];
     
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:PICKER_NOTIFICATION_SHOW object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:PICKER_NOTIFICATION_HIDE object:nil];
+    
     
     // On vérifie que le controller n'est plus dans la liste des viewcontrollers, s'il est dans un conteneur, on vérifie si le conteneur est dans la liste
     // Attention : très impactant, à ne modifier qu'en cas d'extrême nécessité

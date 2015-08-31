@@ -69,7 +69,6 @@
 
 -(void)setIsValid:(BOOL)isValid {
     dispatch_async(dispatch_get_main_queue(), ^{
-        
         [self.component applyStandardStyle];
     });
     if(isValid) {
@@ -212,12 +211,14 @@
     }
     
     int numberOfErrors = 0;
+    [self clearErrors];
     for(id result in validationState.allValues) {
         if(![result isKindOfClass:[NSNull class]]) {
             numberOfErrors++;
             [self addErrors:@[result]];
         }
     }
+    
     return numberOfErrors;
 }
 

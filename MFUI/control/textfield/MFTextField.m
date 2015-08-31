@@ -176,12 +176,9 @@
         fixedData = @"";
     }
     self.text = fixedData;
-    if(!self.initializing) {
         [self validate];
-    }
-    else {
+
         self.initializing = NO;
-    }
 }
 
 -(id)getData {

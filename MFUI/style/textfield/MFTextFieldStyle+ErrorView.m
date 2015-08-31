@@ -50,6 +50,7 @@ NSString * ERROR_VIEW_RIGHT_CONSTRAINT = @"ERROR_VIEW_RIGHT_CONSTRAINT";
         [errorButton addTarget:component action:@selector(onErrorButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         self.errorView = errorButton;
         self.errorView.alpha = 0.0;
+        self.errorView.tintColor = [UIColor redColor];
         [component addSubview:self.errorView];
         
         NSDictionary *errorViewConstraints = [self defineErrorViewConstraintsOnComponent:component];

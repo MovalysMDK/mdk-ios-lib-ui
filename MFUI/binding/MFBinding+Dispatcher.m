@@ -78,6 +78,8 @@
                 }
                 value = [self convertValue:value isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
                 value = [self applyCustomConverter:bindingValue.converterName onValue:value isFromViewModelToControl:YES];
+                
+                //FIXME: ne pas apperler le setValue:ForKey: sur le composant, mais faire ça sur wrapper.
                 [bindingValue.wrapper.component setValue:value forKeyPath:bindingValue.componentBindedPropertyName];
             }
         }

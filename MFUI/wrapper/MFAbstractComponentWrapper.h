@@ -39,10 +39,11 @@
 /*!
  * @brief The fictive indexPath to the component that is owned by this wrapper
  */
+//FIXME: Pourquoi fictive
 @property (nonatomic, strong) NSIndexPath *wrapperIndexPath;
 
 /*!
- * @brief The component opwned by this wrapper
+ * @brief The component owned by this wrapper
  */
 @property (nonatomic, weak, readonly) UIView *component;
 
@@ -62,6 +63,8 @@
  * primitive type and not an object, like UISlider.
  * @return A dictionary that describes the value to return instead of nil for given selector of the component.
  */
+
+//FIXME: refaire description pourquoi nil
 -(NSDictionary *) nilValueBySelector;
 
 /*!

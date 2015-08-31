@@ -43,6 +43,9 @@
  * This protocol is used by the MOVALYS Generic Form to fit the process to the UI component.
  * All MOVALYS UI element must implement this protocol.
  */
+
+//FIXME: rename en control
+
 @protocol MFUIComponentProtocol < MFComponentBindingProtocol, MFComponentErrorProtocol, MFComponentPropertiesProtocol, MFComponentValidationProtocol, MFComponentAttributesProtocol, MFComponentAssociatedLabelProtocol>
 
 #pragma mark - Properties

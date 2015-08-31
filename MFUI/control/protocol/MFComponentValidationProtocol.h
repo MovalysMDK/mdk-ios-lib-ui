@@ -16,6 +16,8 @@
 
 #import <Foundation/Foundation.h>
 
+//FIXME: Doc
+
 @protocol MFComponentValidationProtocol <NSObject>
 
 

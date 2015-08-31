@@ -233,34 +233,36 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     if(!self.fixedList.mf.canEditItem)
         return;
     
-    if(self.fixedList.mf.editMode == MFFixedListEditModePopup) {
-        //PROTODO : MF ?
+    if(self.fixedList.mf.editMode == MFFixedListEditModePopup) {        
         
-        
-        // Getting the parent controller of this form which will push the detail controller in its navigationController.
-        id<MFCommonFormProtocol> parentController = self.formController;
-        
-        // Getting the detailController to display
-        id<MFDetailViewControllerProtocol> nextController = [self detailController];
-        [nextController setEditable:self.fixedList.editable];
-        [nextController setParentFormController:self];
-        [nextController setIndexPath:indexPath];
-        MFUIBaseViewModel *tempViewModel = [[((MFUIBaseListViewModel *)self.viewModel).viewModels objectAtIndex:indexPath.row] copy];
-        tempViewModel.parentViewModel = self.viewModel;
-        //Displaying the detail controller
-        [nextController setOriginalViewModel:tempViewModel];
-        
-        [((UIViewController *)parentController).navigationController pushViewController:(UIViewController *)nextController animated:YES];
+        [self showDetailControllerForItemAtIndexPath:indexPath];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+}
+
+-(void) showDetailControllerForItemAtIndexPath:(NSIndexPath *)indexPath {
+    // Getting the parent controller of this form which will push the detail controller in its navigationController.
+    id<MFCommonFormProtocol> parentController = self.formController;
+    
+    // Getting the detailController to display
+    id<MFDetailViewControllerProtocol> nextController = [self detailController];
+    [nextController setEditable:self.fixedList.editable];
+    [nextController setParentFormController:self];
+    [nextController setIndexPath:indexPath];
+    MFUIBaseViewModel *tempViewModel = [[((MFUIBaseListViewModel *)self.viewModel).viewModels objectAtIndex:indexPath.row] copy];
+    tempViewModel.parentViewModel = self.viewModel;
+    //Displaying the detail controller
+    [nextController setOriginalViewModel:tempViewModel];
+    
+    [((UIViewController *)parentController).navigationController pushViewController:(UIViewController *)nextController animated:YES];
 }
 
 
 #pragma mark - Buttons
 
 -(CGFloat)marginForCustomButtons {
-    return 5;
+    return 25;
 }
 
 -(CGSize)sizeForCustomButtons {
@@ -288,18 +290,6 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         [self.fixedList.tableView reloadData];
     });
     
-    [self callEditItemListenerAtIndexPath:indexPath];
-}
-
--(void) callEditItemListenerAtIndexPath:(NSIndexPath *)indexPath {
-    //PROTODO
-    //    NSString *customEditItemListener = ((MFFieldDescriptor *)self.fixedList.selfDescriptor).editItemListener;
-    //    customEditItemListener = [customEditItemListener stringByAppendingString:@"AtIndexPath:"];
-    //    if(customEditItemListener) {
-    //        if( [self respondsToSelector:NSSelectorFromString(customEditItemListener)]) {
-    //            [self performSelector:NSSelectorFromString(customEditItemListener) withObject:indexPath];
-    //        }
-    //    }
 }
 
 -(void)addItemOnFixedList{
@@ -370,6 +360,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         //On affiche la vue
         [((UIViewController *)parentController).navigationController pushViewController:managePhotoViewController animated:YES];
     }
+    
     [self computeCellHeightAndDispatchToFormController];
 }
 

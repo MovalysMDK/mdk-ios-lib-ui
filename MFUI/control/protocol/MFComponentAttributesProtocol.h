@@ -19,6 +19,8 @@
  * @protocol MFComponentAttributesProtocol
  * @brief This protocol provides a property to hold control attributes
  */
+
+//FIXME: Rename en control
 @protocol MFComponentAttributesProtocol <NSObject>
 
 /*!

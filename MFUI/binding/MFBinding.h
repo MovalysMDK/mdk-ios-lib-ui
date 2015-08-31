@@ -33,6 +33,8 @@
  * that needs it to do the binding.
  * @see MFBindingValue
  */
+
+//FIXME: Indiqier pourquoi les 3 structures, quand est-ce qu'elles sont appelées.
 @interface MFBinding : NSObject
 
 #pragma mark - Properties
@@ -104,6 +106,10 @@
  */
 @property (nonatomic, strong) NSIndexPath *bindingIndexPath;
 
+
+
+//FIXME: Mettre des exemples oour illustrer ce que sont ces propriétés
+
 /*!
  * @brief The property name of the component to bind
  */
@@ -118,6 +124,8 @@
  * @brief The binding mode for this binding value
  */
 @property (nonatomic) MFBindingValueMode bindingMode;
+
+//FIXME: abstract pas clair, souceBindedPropertyName ? + Explication
 
 /*!
  * @brief The View Model property name to bind
@@ -136,6 +144,7 @@
 
 /*!
  * @brief The name of a converter to use
+ * @see MFConverterProtocol
  */
 @property (nonatomic) NSString *converterName;
 

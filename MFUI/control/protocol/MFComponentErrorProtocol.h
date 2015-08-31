@@ -17,6 +17,7 @@
 #import <Foundation/Foundation.h>
 #import "JDFTooltipView.h"
 
+//FIXME: Doc
 @protocol MFComponentErrorProtocol <NSObject>
 
 #pragma mark - Properties

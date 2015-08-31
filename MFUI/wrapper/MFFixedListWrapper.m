@@ -45,6 +45,8 @@
 #pragma clang diagnostic ignored "-Wundeclared-selector"
 -(void)setWrapperIndexPath:(NSIndexPath *)wrapperIndexPath {
     _wrapperIndexPath = wrapperIndexPath;
+    
+    //FIXME: Expliquer pourquoi on fait ça
     [[NSNotificationCenter defaultCenter] removeObserver:self.objectWithBinding name:[NSString stringWithFormat:@"MDK_ComponentSize_%@_%@", self.objectWithBinding, [self.wrapperIndexPath stringIndexPath]] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self.objectWithBinding selector:@selector(cellSizeChanges:) name:[NSString stringWithFormat:@"MDK_ComponentSize_%@_%@", self.objectWithBinding, [self.wrapperIndexPath stringIndexPath]] object:nil];
 

@@ -15,6 +15,7 @@
  */
 #import <Foundation/Foundation.h>
 
+//FIXME: Doc
 @protocol MFComponentPropertiesProtocol <NSObject>
 
 

@@ -184,8 +184,6 @@
 		B08AAC491AE919410029EC88 /* MFDoubleTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B08AAC471AE919410029EC88 /* MFDoubleTextField.m */; };
 		B08AAC4C1AE919F30029EC88 /* MFIntegerTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B08AAC4A1AE919F30029EC88 /* MFIntegerTextField.h */; };
 		B08AAC4D1AE919F30029EC88 /* MFIntegerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B08AAC4B1AE919F30029EC88 /* MFIntegerTextField.m */; };
-		B08AAC571AE91C500029EC88 /* MFTextView + UITextViewForwarding.h in Headers */ = {isa = PBXBuildFile; fileRef = B08AAC531AE91C500029EC88 /* MFTextView + UITextViewForwarding.h */; };
-		B08AAC581AE91C500029EC88 /* MFTextView + UITextViewForwarding.m in Sources */ = {isa = PBXBuildFile; fileRef = B08AAC541AE91C500029EC88 /* MFTextView + UITextViewForwarding.m */; };
 		B08AAC591AE91C500029EC88 /* MFTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = B08AAC551AE91C500029EC88 /* MFTextView.h */; };
 		B08AAC5A1AE91C500029EC88 /* MFTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B08AAC561AE91C500029EC88 /* MFTextView.m */; };
 		B08AAC5E1AE91C5D0029EC88 /* MFWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B08AAC5C1AE91C5D0029EC88 /* MFWebViewController.h */; };
@@ -209,6 +207,8 @@
 		B08EF72D1AE5407E00F3754E /* MFCreateEmailViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B08EF72C1AE5407E00F3754E /* MFCreateEmailViewControllerDelegate.h */; };
 		B099BE6A1AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.h in Headers */ = {isa = PBXBuildFile; fileRef = B099BE681AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.h */; };
 		B099BE6B1AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.m in Sources */ = {isa = PBXBuildFile; fileRef = B099BE691AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.m */; };
+		B09CA2C91B95D9FA00224C07 /* MFTextView+UITextViewForwarding.h in Headers */ = {isa = PBXBuildFile; fileRef = B09CA2C71B95D9FA00224C07 /* MFTextView+UITextViewForwarding.h */; };
+		B09CA2CA1B95D9FA00224C07 /* MFTextView+UITextViewForwarding.m in Sources */ = {isa = PBXBuildFile; fileRef = B09CA2C81B95D9FA00224C07 /* MFTextView+UITextViewForwarding.m */; };
 		B09CAC451B3D55F50067A8DE /* MFIntegerTextFieldWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B09CAC431B3D55F50067A8DE /* MFIntegerTextFieldWrapper.h */; };
 		B09CAC461B3D55F50067A8DE /* MFIntegerTextFieldWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B09CAC441B3D55F50067A8DE /* MFIntegerTextFieldWrapper.m */; };
 		B09CAC491B3D7BB40067A8DE /* MFBindingViewDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = B09CAC471B3D7BB40067A8DE /* MFBindingViewDescriptor.h */; };
@@ -788,8 +788,6 @@
 		B08AAC471AE919410029EC88 /* MFDoubleTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDoubleTextField.m; sourceTree = "<group>"; };
 		B08AAC4A1AE919F30029EC88 /* MFIntegerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFIntegerTextField.h; sourceTree = "<group>"; };
 		B08AAC4B1AE919F30029EC88 /* MFIntegerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFIntegerTextField.m; sourceTree = "<group>"; };
-		B08AAC531AE91C500029EC88 /* MFTextView + UITextViewForwarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFTextView + UITextViewForwarding.h"; sourceTree = "<group>"; };
-		B08AAC541AE91C500029EC88 /* MFTextView + UITextViewForwarding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFTextView + UITextViewForwarding.m"; sourceTree = "<group>"; };
 		B08AAC551AE91C500029EC88 /* MFTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTextView.h; sourceTree = "<group>"; };
 		B08AAC561AE91C500029EC88 /* MFTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTextView.m; sourceTree = "<group>"; };
 		B08AAC5C1AE91C5D0029EC88 /* MFWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFWebViewController.h; sourceTree = "<group>"; };
@@ -813,6 +811,8 @@
 		B08EF72C1AE5407E00F3754E /* MFCreateEmailViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCreateEmailViewControllerDelegate.h; sourceTree = "<group>"; };
 		B099BE681AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFInvalidLocationValueUIValidationError.h; sourceTree = "<group>"; };
 		B099BE691AEA7D0C00898AD7 /* MFInvalidLocationValueUIValidationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFInvalidLocationValueUIValidationError.m; sourceTree = "<group>"; };
+		B09CA2C71B95D9FA00224C07 /* MFTextView+UITextViewForwarding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFTextView+UITextViewForwarding.h"; sourceTree = "<group>"; };
+		B09CA2C81B95D9FA00224C07 /* MFTextView+UITextViewForwarding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFTextView+UITextViewForwarding.m"; sourceTree = "<group>"; };
 		B09CAC431B3D55F50067A8DE /* MFIntegerTextFieldWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFIntegerTextFieldWrapper.h; sourceTree = "<group>"; };
 		B09CAC441B3D55F50067A8DE /* MFIntegerTextFieldWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFIntegerTextFieldWrapper.m; sourceTree = "<group>"; };
 		B09CAC471B3D7BB40067A8DE /* MFBindingViewDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBindingViewDescriptor.h; sourceTree = "<group>"; };
@@ -1605,8 +1605,8 @@
 		B08AAC521AE91C500029EC88 /* textview */ = {
 			isa = PBXGroup;
 			children = (
-				B08AAC531AE91C500029EC88 /* MFTextView + UITextViewForwarding.h */,
-				B08AAC541AE91C500029EC88 /* MFTextView + UITextViewForwarding.m */,
+				B09CA2C71B95D9FA00224C07 /* MFTextView+UITextViewForwarding.h */,
+				B09CA2C81B95D9FA00224C07 /* MFTextView+UITextViewForwarding.m */,
 				B08AAC551AE91C500029EC88 /* MFTextView.h */,
 				B08AAC561AE91C500029EC88 /* MFTextView.m */,
 			);
@@ -2799,7 +2799,6 @@
 				B0D45E6C1A5ED2F400C6D376 /* MFUIViewControllerPhoto.h in Headers */,
 				B0D45E691A5ED2F400C6D376 /* MFViewControllerProtocol.h in Headers */,
 				B0D45E641A5ED2F400C6D376 /* MFViewControllerDelegate+MFUIViewControllerDelegate.h in Headers */,
-				B08AAC571AE91C500029EC88 /* MFTextView + UITextViewForwarding.h in Headers */,
 				B00787CA1AB1E37A009F6D95 /* JDFTooltipView.h in Headers */,
 				B0D45D251A5ED2F400C6D376 /* MFUIAction.h in Headers */,
 				B0D45D601A5ED2F400C6D376 /* MFFixedListDataDelegate.h in Headers */,
@@ -2845,6 +2844,7 @@
 				B0D45D301A5ED2F400C6D376 /* MFUIActionUpdate.h in Headers */,
 				B08EF6FE1AE53F8F00F3754E /* MFRegexTextField.h in Headers */,
 				B0D45D8F1A5ED2F400C6D376 /* MFSignatureDrawing.h in Headers */,
+				B09CA2C91B95D9FA00224C07 /* MFTextView+UITextViewForwarding.h in Headers */,
 				B0D45E6F1A5ED2F400C6D376 /* MFUIViewControllerSplash.h in Headers */,
 				B0D45E301A5ED2F400C6D376 /* MFWorkspaceView.h in Headers */,
 				B0D45D6E1A5ED2F400C6D376 /* MFUIComponents.h in Headers */,
@@ -3210,7 +3210,6 @@
 				B0D45E161A5ED2F400C6D376 /* MFHelperImage.m in Sources */,
 				B0D45D921A5ED2F400C6D376 /* MFSignatureHelper.m in Sources */,
 				B0D45E251A5ED2F400C6D376 /* MFDictionaryValueProcessing.m in Sources */,
-				B08AAC581AE91C500029EC88 /* MFTextView + UITextViewForwarding.m in Sources */,
 				B0FFDB161B3470DD00CA6E5E /* MFLengthFieldValidator.m in Sources */,
 				B0F896601B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.m in Sources */,
 				B08CEA2A1B72579000A2F727 /* MFOpenURLCommand.m in Sources */,
@@ -3342,6 +3341,7 @@
 				B0D45E121A5ED2F400C6D376 /* MFAutoLayoutHelper.m in Sources */,
 				B0D45D241A5ED2F400C6D376 /* MFActionLauncher+MFUIActionLauncher.m in Sources */,
 				B0D45E521A5ED2F400C6D376 /* MFFormDetailViewController.m in Sources */,
+				B09CA2CA1B95D9FA00224C07 /* MFTextView+UITextViewForwarding.m in Sources */,
 				B0D45D431A5ED2F400C6D376 /* MFCellAbstract.m in Sources */,
 				B0FFDAFF1B343D3300CA6E5E /* MFSimpleComponentProvider.m in Sources */,
 				B0D45D7A1A5ED2F400C6D376 /* MFPhotoThumbnail.m in Sources */,

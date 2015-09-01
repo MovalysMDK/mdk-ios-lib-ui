@@ -19,7 +19,7 @@
 //
 //
 
-#import "MFTextView + UITextViewForwarding.h"
+#import "MFTextView+UITextViewForwarding.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"

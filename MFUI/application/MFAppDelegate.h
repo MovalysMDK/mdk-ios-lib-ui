@@ -18,6 +18,12 @@
 #import "MFUIViewController.h"
 #import "MFComponentApplicationProtocol.h"
 
+/*!
+ * @class MFAppDelegate
+ * @brief This class is the MDK AppDelegate parent class for MDK generated application
+ * @discussion It defines some base treatments for MDK iOS generated application in order
+ * to make MDK iOS working.
+ */
 @interface MFAppDelegate :  UIResponder <UIApplicationDelegate, MFComponentApplicationProtocol>
 
 

@@ -13,11 +13,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUIControlSwitch.h
-//  MFUI
-//
-//
+
 
 #ifndef MFUI_MFUIControlSwitch_h
 #define MFUI_MFUIControlSwitch_h

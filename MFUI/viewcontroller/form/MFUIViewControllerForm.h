@@ -13,11 +13,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUIViewControllerForm.h
-//  MFUI
-//
-//
+
 
 #ifndef MFUI_MFUIViewControllerForm_h
 #define MFUI_MFUIViewControllerForm_h

@@ -13,11 +13,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUIActionDelete.h
-//  MFUI
-//
-//
+
 
 #ifndef MFUI_MFUIActionDelete_h
 #define MFUI_MFUIActionDelete_h

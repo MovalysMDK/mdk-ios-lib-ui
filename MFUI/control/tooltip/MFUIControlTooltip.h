@@ -13,11 +13,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUIControlTooltip.h
-//  MFUI
-//
-//
+
 
 #ifndef MFUI_MFUIControlTooltip_h
 #define MFUI_MFUIControlTooltip_h

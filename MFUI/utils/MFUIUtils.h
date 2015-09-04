@@ -13,11 +13,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-//
-//  MFUIUtils.h
-//  MFUI
-//
-//
+
 
 #ifndef MFUI_MFUIUtils_h
 #define MFUI_MFUIUtils_h

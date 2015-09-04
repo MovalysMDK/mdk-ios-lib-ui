@@ -17,6 +17,10 @@
 #import <Foundation/Foundation.h>
 #import "MFBindingDictionary.h"
 
+/*!
+ * @class MFBindingViewDescriptor
+ * @brief This class describes all properties needed to bind a view
+ */
 @interface MFBindingViewDescriptor : NSObject <MFBindingConsistencyProtocol>
 
 #pragma mark - Properties

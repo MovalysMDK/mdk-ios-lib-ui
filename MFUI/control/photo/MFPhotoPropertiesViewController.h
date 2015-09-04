@@ -25,7 +25,12 @@
 #import "MFViewControllerProtocol.h"
 @class MFPhotoViewModel;
 
-
+/*!
+ * @class MFPhotoPropertiesViewController
+ * @brief This class represents the ViewController used to show the properties of a 
+ * MFPhotoThumbnail component
+ * @discussion This ViewController is not a binded MDK ViewController
+ */
 @interface MFPhotoPropertiesViewController : UIViewController<MFViewControllerProtocol>
 
 #pragma mark - Properties

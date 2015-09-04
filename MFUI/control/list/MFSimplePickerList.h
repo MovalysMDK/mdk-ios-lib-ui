@@ -27,6 +27,13 @@
 FOUNDATION_EXPORT NSString *const PICKER_PARAMETER_ENUM_CLASS_NAME_KEY;
 
 IB_DESIGNABLE
+
+/*!
+ * @class MFSimplePickerList
+ * @brief This class represents the MFSimplePickerList component
+ * @discussion This component can be compared to a RadioGroup component, that allows
+ * to select a value of an enumeration.
+ */
 @interface MFSimplePickerList : MFUIOldBaseComponent <UIGestureRecognizerDelegate, MFOrientationChangedProtocol, UIPickerViewDataSource, UIPickerViewDelegate, MFControlChangesProtocol>
 
 #pragma mark - Properties

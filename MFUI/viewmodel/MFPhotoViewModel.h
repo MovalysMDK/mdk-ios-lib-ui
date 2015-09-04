@@ -18,6 +18,12 @@
 #import "MFUIControlPhoto.h"
 #import "MFPositionViewModel.h"
 
+/*!
+ * @class MFPhotoViewModel
+ * @brief This class is a simple ViewModel that is used by the MFPhotoThumbnail component
+ * @discussion It describes a photo URI and its properties
+ * @see MFPhotoThumbnail
+ */
 @interface MFPhotoViewModel : MFUIBaseViewModel
 
 #pragma mark - Properties

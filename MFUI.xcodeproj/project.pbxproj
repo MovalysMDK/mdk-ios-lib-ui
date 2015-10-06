@@ -170,9 +170,6 @@
 		B06F3E1E1B39973C005170FC /* MFSwitchWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F3E1C1B39973C005170FC /* MFSwitchWrapper.m */; };
 		B06F3E211B39A550005170FC /* MFPositionWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B06F3E1F1B39A550005170FC /* MFPositionWrapper.h */; };
 		B06F3E221B39A550005170FC /* MFPositionWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F3E201B39A550005170FC /* MFPositionWrapper.m */; };
-		B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */; };
-		B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */; };
-		B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */; };
 		B0792E581B6B741A00904BE3 /* PickerListViewWithSearch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0792E571B6B741A00904BE3 /* PickerListViewWithSearch.xib */; };
 		B07E794B1B4D1D1800822A1B /* MFBindingConverterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B07E794A1B4D1D1800822A1B /* MFBindingConverterProtocol.h */; };
 		B07E79501B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B07E794F1B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h */; };
@@ -774,9 +771,6 @@
 		B07615EC1AF0D13E00217010 /* MFUIControlTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFUIControlTextField.h; sourceTree = "<group>"; };
 		B076BEDD1ABC565200756351 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B076BEDE1ABC565200756351 /* Pods.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUIErrorView.xib; sourceTree = "<group>"; };
-		B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUILabel.xib; sourceTree = "<group>"; };
-		B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDK_MFUITextField.xib; sourceTree = "<group>"; };
 		B0792E571B6B741A00904BE3 /* PickerListViewWithSearch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerListViewWithSearch.xib; sourceTree = "<group>"; };
 		B07E794A1B4D1D1800822A1B /* MFBindingConverterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBindingConverterProtocol.h; sourceTree = "<group>"; };
 		B07E794F1B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBaseViewModelWithSublistProtocol.h; sourceTree = "<group>"; };
@@ -1563,9 +1557,6 @@
 		B0289F331AA893B9007A2E75 /* xib */ = {
 			isa = PBXGroup;
 			children = (
-				B076BEE11ABC576C00756351 /* MDK_MFUIErrorView.xib */,
-				B076BEE21ABC576C00756351 /* MDK_MFUILabel.xib */,
-				B076BEE31ABC576C00756351 /* MDK_MFUITextField.xib */,
 			);
 			path = xib;
 			sourceTree = "<group>";
@@ -3002,7 +2993,6 @@
 				B0F8966F1B614861005C3AA7 /* PickerListView.xib in Resources */,
 				B001B26B1B5F87D80063F819 /* image_tooltip_invalid.png in Resources */,
 				B001B26E1B5F87D80063F819 /* image_tooltip_valid@2x.png in Resources */,
-				B076BEE61ABC576C00756351 /* MDK_MFUITextField.xib in Resources */,
 				B001B2701B5F87D80063F819 /* ios_ic_nav_pressed@2x.png in Resources */,
 				B001B25C1B5F87D80063F819 /* ios_ic_edit_unactive@2x.png in Resources */,
 				B001B2731B5F87D80063F819 /* Photo.storyboard in Resources */,
@@ -3017,7 +3007,6 @@
 				B01075AA1B710615009D63B9 /* IQKeyboardManager.txt in Resources */,
 				B001B25B1B5F87D80063F819 /* ios_ic_edit_pressed@2x.png in Resources */,
 				B01075A81B710615009D63B9 /* CocoaLumberJack.txt in Resources */,
-				B076BEE41ABC576C00756351 /* MDK_MFUIErrorView.xib in Resources */,
 				B001B25A1B5F87D80063F819 /* ios_ic_edit_active@2x.png in Resources */,
 				B001B2621B5F87D80063F819 /* ios_ic_phone_pressed@2x.png in Resources */,
 				B001B2641B5F87D80063F819 /* no_photo.png in Resources */,
@@ -3027,7 +3016,6 @@
 				B0792E581B6B741A00904BE3 /* PickerListViewWithSearch.xib in Resources */,
 				B001B2671B5F87D80063F819 /* map.png in Resources */,
 				B001B2691B5F87D80063F819 /* ios_ic_qrcode_icon_active.png in Resources */,
-				B076BEE51ABC576C00756351 /* MDK_MFUILabel.xib in Resources */,
 				B001B2601B5F87D80063F819 /* ios_ic_mail_unactive@2x.png in Resources */,
 				B001B26F1B5F87D80063F819 /* ios_ic_nav_active@2x.png in Resources */,
 				B001B26A1B5F87D80063F819 /* ios_ic_qrcode_icon_active@2x.png in Resources */,

@@ -5,6 +5,7 @@ source 'gitmovalys@git.ptx.fr.sopra:podspecs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 use_frameworks!
+inhibit_all_warnings!
 
 pod 'MFCore', :path => '../mfcore'
 pod 'MBProgressHUD', '0.8'

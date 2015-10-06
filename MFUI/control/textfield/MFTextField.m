@@ -323,12 +323,12 @@
     }
     
     
-    UILabel *innerDescriptionLabel = [[UILabel alloc] initWithFrame:self.bounds];
-    innerDescriptionLabel.text = [[self class] description];
-    innerDescriptionLabel.textAlignment = NSTextAlignmentCenter;
-    innerDescriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
-    innerDescriptionLabel.backgroundColor = [UIColor colorWithWhite:0.91 alpha:0.75];
-    [self addSubview:innerDescriptionLabel];
+//    UILabel *innerDescriptionLabel = [[UILabel alloc] initWithFrame:self.bounds];
+//    innerDescriptionLabel.text = [[self class] description];
+//    innerDescriptionLabel.textAlignment = NSTextAlignmentCenter;
+//    innerDescriptionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+//    innerDescriptionLabel.backgroundColor = [UIColor colorWithWhite:0.91 alpha:0.75];
+//    [self addSubview:innerDescriptionLabel];
 }
 
 

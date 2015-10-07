@@ -18,10 +18,7 @@
 
 @implementation MFPickerListTableView
 
--(void)drawRect:(CGRect)rect {
-    self.tableView.layer.cornerRadius = 10;
-    self.tableView.clipsToBounds = YES;
-}
+content
 
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

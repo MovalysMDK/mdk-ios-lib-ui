@@ -450,7 +450,6 @@
 
 
 -(MFFormSectionHeaderView *) sectionView {
-    MFBindingViewDescriptor *bindingData = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
     MFFormSectionHeaderView *view = [[MFFormSectionHeaderView alloc] initWithReuseIdentifier:[NSString stringWithFormat:@"%@", SECTION_HEADER_VIEW_2D_DESCRIPTOR]];
     return view;
 }

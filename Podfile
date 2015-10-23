@@ -13,6 +13,7 @@ post_install do |installer_representation|
   installer_representation.project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['ENABLE_STRICT_OBJC_MSGSEND'] = 'NO'
+      config.build_settings['GCC_WARN_INHIBIT_ALL_WARNINGS'] = 'YES'
     end
   end
 end

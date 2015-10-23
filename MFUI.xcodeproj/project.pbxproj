@@ -81,7 +81,7 @@
 		B00787C61AB1E37A009F6D95 /* JDFSequentialTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B00787BB1AB1E37A009F6D95 /* JDFSequentialTooltipManager.m */; };
 		B00787C71AB1E37A009F6D95 /* JDFTooltipManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B00787BC1AB1E37A009F6D95 /* JDFTooltipManager.h */; };
 		B00787C81AB1E37A009F6D95 /* JDFTooltipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B00787BD1AB1E37A009F6D95 /* JDFTooltipManager.m */; };
-		B00787C91AB1E37A009F6D95 /* JDFTooltips.h in Headers */ = {isa = PBXBuildFile; fileRef = B00787BE1AB1E37A009F6D95 /* JDFTooltips.h */; };
+		B00787C91AB1E37A009F6D95 /* MFUIControlTooltip.h in Headers */ = {isa = PBXBuildFile; fileRef = B00787BE1AB1E37A009F6D95 /* MFUIControlTooltip.h */; };
 		B00787CA1AB1E37A009F6D95 /* JDFTooltipView.h in Headers */ = {isa = PBXBuildFile; fileRef = B00787BF1AB1E37A009F6D95 /* JDFTooltipView.h */; };
 		B00787CB1AB1E37A009F6D95 /* JDFTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B00787C01AB1E37A009F6D95 /* JDFTooltipView.m */; };
 		B00787CC1AB1E37A009F6D95 /* UILabel+JDFTooltips.h in Headers */ = {isa = PBXBuildFile; fileRef = B00787C11AB1E37A009F6D95 /* UILabel+JDFTooltips.h */; };
@@ -363,14 +363,6 @@
 		B0D45D9B1A5ED2F400C6D376 /* MFSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C051A5ED2F300C6D376 /* MFSwitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45D9C1A5ED2F400C6D376 /* MFSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45C061A5ED2F300C6D376 /* MFSwitch.m */; };
 		B0D45D9D1A5ED2F400C6D376 /* MFUIControlSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C071A5ED2F300C6D376 /* MFUIControlSwitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45DBA1A5ED2F400C6D376 /* InvalidTooltipView.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C2A1A5ED2F300C6D376 /* InvalidTooltipView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45DBB1A5ED2F400C6D376 /* InvalidTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45C2B1A5ED2F300C6D376 /* InvalidTooltipView.m */; };
-		B0D45DBC1A5ED2F400C6D376 /* MFUIControlTooltip.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C2C1A5ED2F300C6D376 /* MFUIControlTooltip.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45DBD1A5ED2F400C6D376 /* TooltipView.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C2D1A5ED2F300C6D376 /* TooltipView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45DBE1A5ED2F400C6D376 /* TooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45C2E1A5ED2F300C6D376 /* TooltipView.m */; };
-		B0D45DBF1A5ED2F400C6D376 /* TooltipViewPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C2F1A5ED2F300C6D376 /* TooltipViewPrivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45DC01A5ED2F400C6D376 /* ValidTooltipView.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C301A5ED2F300C6D376 /* ValidTooltipView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0D45DC11A5ED2F400C6D376 /* ValidTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45C311A5ED2F300C6D376 /* ValidTooltipView.m */; };
 		B0D45DC21A5ED2F400C6D376 /* MFUIControlWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C331A5ED2F300C6D376 /* MFUIControlWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45DC31A5ED2F400C6D376 /* MFWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D45C341A5ED2F300C6D376 /* MFWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0D45DC41A5ED2F400C6D376 /* MFWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D45C351A5ED2F300C6D376 /* MFWebView.m */; };
@@ -677,17 +669,17 @@
 		B006CF1C1B32C5B600B78782 /* MFUIConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFUIConfiguration.h; sourceTree = "<group>"; };
 		B006CF1D1B32C63100B78782 /* MFUIListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFUIListener.h; sourceTree = "<group>"; };
 		B006CF1E1B32C68200B78782 /* MFUIWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFUIWrapper.h; sourceTree = "<group>"; };
-		B00787BA1AB1E37A009F6D95 /* JDFSequentialTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = JDFSequentialTooltipManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B00787BB1AB1E37A009F6D95 /* JDFSequentialTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFSequentialTooltipManager.m; sourceTree = "<group>"; };
-		B00787BC1AB1E37A009F6D95 /* JDFTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = JDFTooltipManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B00787BD1AB1E37A009F6D95 /* JDFTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFTooltipManager.m; sourceTree = "<group>"; };
-		B00787BE1AB1E37A009F6D95 /* JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltips.h; sourceTree = "<group>"; };
-		B00787BF1AB1E37A009F6D95 /* JDFTooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFTooltipView.h; sourceTree = "<group>"; };
-		B00787C01AB1E37A009F6D95 /* JDFTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFTooltipView.m; sourceTree = "<group>"; };
-		B00787C11AB1E37A009F6D95 /* UILabel+JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+JDFTooltips.h"; sourceTree = "<group>"; };
-		B00787C21AB1E37A009F6D95 /* UILabel+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+JDFTooltips.m"; sourceTree = "<group>"; };
-		B00787C31AB1E37A009F6D95 /* UIView+JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JDFTooltips.h"; sourceTree = "<group>"; };
-		B00787C41AB1E37A009F6D95 /* UIView+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JDFTooltips.m"; sourceTree = "<group>"; };
+		B00787BA1AB1E37A009F6D95 /* JDFSequentialTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = JDFSequentialTooltipManager.h; path = new/JDFSequentialTooltipManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		B00787BB1AB1E37A009F6D95 /* JDFSequentialTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDFSequentialTooltipManager.m; path = new/JDFSequentialTooltipManager.m; sourceTree = "<group>"; };
+		B00787BC1AB1E37A009F6D95 /* JDFTooltipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = JDFTooltipManager.h; path = new/JDFTooltipManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		B00787BD1AB1E37A009F6D95 /* JDFTooltipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDFTooltipManager.m; path = new/JDFTooltipManager.m; sourceTree = "<group>"; };
+		B00787BE1AB1E37A009F6D95 /* MFUIControlTooltip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFUIControlTooltip.h; path = new/MFUIControlTooltip.h; sourceTree = "<group>"; };
+		B00787BF1AB1E37A009F6D95 /* JDFTooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDFTooltipView.h; path = new/JDFTooltipView.h; sourceTree = "<group>"; };
+		B00787C01AB1E37A009F6D95 /* JDFTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDFTooltipView.m; path = new/JDFTooltipView.m; sourceTree = "<group>"; };
+		B00787C11AB1E37A009F6D95 /* UILabel+JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+JDFTooltips.h"; path = "new/UILabel+JDFTooltips.h"; sourceTree = "<group>"; };
+		B00787C21AB1E37A009F6D95 /* UILabel+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+JDFTooltips.m"; path = "new/UILabel+JDFTooltips.m"; sourceTree = "<group>"; };
+		B00787C31AB1E37A009F6D95 /* UIView+JDFTooltips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+JDFTooltips.h"; path = "new/UIView+JDFTooltips.h"; sourceTree = "<group>"; };
+		B00787C41AB1E37A009F6D95 /* UIView+JDFTooltips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+JDFTooltips.m"; path = "new/UIView+JDFTooltips.m"; sourceTree = "<group>"; };
 		B01075A41B710615009D63B9 /* CocoaLumberJack.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CocoaLumberJack.txt; sourceTree = "<group>"; };
 		B01075A51B710615009D63B9 /* CocoaSecurity.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CocoaSecurity.txt; sourceTree = "<group>"; };
 		B01075A61B710615009D63B9 /* IQKeyboardManager.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IQKeyboardManager.txt; sourceTree = "<group>"; };
@@ -968,14 +960,6 @@
 		B0D45C051A5ED2F300C6D376 /* MFSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSwitch.h; sourceTree = "<group>"; };
 		B0D45C061A5ED2F300C6D376 /* MFSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSwitch.m; sourceTree = "<group>"; };
 		B0D45C071A5ED2F300C6D376 /* MFUIControlSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIControlSwitch.h; sourceTree = "<group>"; };
-		B0D45C2A1A5ED2F300C6D376 /* InvalidTooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = InvalidTooltipView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B0D45C2B1A5ED2F300C6D376 /* InvalidTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = InvalidTooltipView.m; sourceTree = "<group>"; };
-		B0D45C2C1A5ED2F300C6D376 /* MFUIControlTooltip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIControlTooltip.h; sourceTree = "<group>"; };
-		B0D45C2D1A5ED2F300C6D376 /* TooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TooltipView.h; sourceTree = "<group>"; };
-		B0D45C2E1A5ED2F300C6D376 /* TooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TooltipView.m; sourceTree = "<group>"; };
-		B0D45C2F1A5ED2F300C6D376 /* TooltipViewPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TooltipViewPrivate.h; sourceTree = "<group>"; };
-		B0D45C301A5ED2F300C6D376 /* ValidTooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidTooltipView.h; sourceTree = "<group>"; };
-		B0D45C311A5ED2F300C6D376 /* ValidTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidTooltipView.m; sourceTree = "<group>"; };
 		B0D45C331A5ED2F300C6D376 /* MFUIControlWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIControlWebView.h; sourceTree = "<group>"; };
 		B0D45C341A5ED2F300C6D376 /* MFWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFWebView.h; sourceTree = "<group>"; };
 		B0D45C351A5ED2F300C6D376 /* MFWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFWebView.m; sourceTree = "<group>"; };
@@ -1499,24 +1483,6 @@
 				B07E794A1B4D1D1800822A1B /* MFBindingConverterProtocol.h */,
 			);
 			path = binding;
-			sourceTree = "<group>";
-		};
-		B00787B91AB1E37A009F6D95 /* new */ = {
-			isa = PBXGroup;
-			children = (
-				B00787BA1AB1E37A009F6D95 /* JDFSequentialTooltipManager.h */,
-				B00787BB1AB1E37A009F6D95 /* JDFSequentialTooltipManager.m */,
-				B00787BC1AB1E37A009F6D95 /* JDFTooltipManager.h */,
-				B00787BD1AB1E37A009F6D95 /* JDFTooltipManager.m */,
-				B00787BE1AB1E37A009F6D95 /* JDFTooltips.h */,
-				B00787BF1AB1E37A009F6D95 /* JDFTooltipView.h */,
-				B00787C01AB1E37A009F6D95 /* JDFTooltipView.m */,
-				B00787C11AB1E37A009F6D95 /* UILabel+JDFTooltips.h */,
-				B00787C21AB1E37A009F6D95 /* UILabel+JDFTooltips.m */,
-				B00787C31AB1E37A009F6D95 /* UIView+JDFTooltips.h */,
-				B00787C41AB1E37A009F6D95 /* UIView+JDFTooltips.m */,
-			);
-			path = new;
 			sourceTree = "<group>";
 		};
 		B0129F4E1B3317460090B0AF /* command */ = {
@@ -2118,15 +2084,17 @@
 		B0D45C291A5ED2F300C6D376 /* tooltip */ = {
 			isa = PBXGroup;
 			children = (
-				B00787B91AB1E37A009F6D95 /* new */,
-				B0D45C2A1A5ED2F300C6D376 /* InvalidTooltipView.h */,
-				B0D45C2B1A5ED2F300C6D376 /* InvalidTooltipView.m */,
-				B0D45C2C1A5ED2F300C6D376 /* MFUIControlTooltip.h */,
-				B0D45C2D1A5ED2F300C6D376 /* TooltipView.h */,
-				B0D45C2E1A5ED2F300C6D376 /* TooltipView.m */,
-				B0D45C2F1A5ED2F300C6D376 /* TooltipViewPrivate.h */,
-				B0D45C301A5ED2F300C6D376 /* ValidTooltipView.h */,
-				B0D45C311A5ED2F300C6D376 /* ValidTooltipView.m */,
+				B00787BA1AB1E37A009F6D95 /* JDFSequentialTooltipManager.h */,
+				B00787BB1AB1E37A009F6D95 /* JDFSequentialTooltipManager.m */,
+				B00787BC1AB1E37A009F6D95 /* JDFTooltipManager.h */,
+				B00787BD1AB1E37A009F6D95 /* JDFTooltipManager.m */,
+				B00787BE1AB1E37A009F6D95 /* MFUIControlTooltip.h */,
+				B00787BF1AB1E37A009F6D95 /* JDFTooltipView.h */,
+				B00787C01AB1E37A009F6D95 /* JDFTooltipView.m */,
+				B00787C11AB1E37A009F6D95 /* UILabel+JDFTooltips.h */,
+				B00787C21AB1E37A009F6D95 /* UILabel+JDFTooltips.m */,
+				B00787C31AB1E37A009F6D95 /* UIView+JDFTooltips.h */,
+				B00787C41AB1E37A009F6D95 /* UIView+JDFTooltips.m */,
 			);
 			path = tooltip;
 			sourceTree = "<group>";
@@ -2623,7 +2591,6 @@
 				B0D45D261A5ED2F400C6D376 /* MFAbstractPersistentSaveDetailAction.h in Headers */,
 				B0D45D821A5ED2F400C6D376 /* MFPositionVoProtocol.h in Headers */,
 				B0D45E3E1A5ED2F400C6D376 /* MFWorkspaceDetailColumnProtocol.h in Headers */,
-				B0D45DBA1A5ED2F400C6D376 /* InvalidTooltipView.h in Headers */,
 				B0D45DCC1A5ED2F400C6D376 /* MFUIControlExtension.h in Headers */,
 				B0D45D201A5ED2F400C6D376 /* MFEmailLogsAction.h in Headers */,
 				B0D45E471A5ED2F400C6D376 /* MFDetailViewControllerProtocol.h in Headers */,
@@ -2656,7 +2623,6 @@
 				B0D45D2F1A5ED2F400C6D376 /* MFUIActionSave.h in Headers */,
 				B0D45E361A5ED2F400C6D376 /* MFMultiPanelViewController.h in Headers */,
 				B0E86BE21B452FFF00F5CB41 /* MFPickerListWrapper.h in Headers */,
-				B0D45DBF1A5ED2F400C6D376 /* TooltipViewPrivate.h in Headers */,
 				B0C9B2D31AFA21E700FC9665 /* MFEmailTextFieldStyle.h in Headers */,
 				B08AAC5E1AE91C5D0029EC88 /* MFWebViewController.h in Headers */,
 				B0D45E1E1A5ED2F400C6D376 /* MFAlignmentValueProcessing.h in Headers */,
@@ -2700,7 +2666,7 @@
 				B0D45E6D1A5ED2F400C6D376 /* MFSimpleSplashViewController.h in Headers */,
 				B0D45DF51A5ED2F400C6D376 /* MFFormSearchDelegate.h in Headers */,
 				B0D4551F1A5ED26A00C6D376 /* MFUI.h in Headers */,
-				B00787C91AB1E37A009F6D95 /* JDFTooltips.h in Headers */,
+				B00787C91AB1E37A009F6D95 /* MFUIControlTooltip.h in Headers */,
 				B0D4C4BE1B3816F60020ACF2 /* MFCommonFormDelegate.h in Headers */,
 				B0C9B2D51AFA21E700FC9665 /* MFIntegerTextFieldStyle.h in Headers */,
 				B0D45E5C1A5ED2F400C6D376 /* MFUIViewControllerForm.h in Headers */,
@@ -2723,7 +2689,6 @@
 				B0D45DF71A5ED2F400C6D376 /* MFFormSearchProtocol.h in Headers */,
 				B04D12991B453E3900B64421 /* MFPickerListConfiguration.h in Headers */,
 				B01840011AB09E530081133F /* MFButton.h in Headers */,
-				B0D45DC01A5ED2F400C6D376 /* ValidTooltipView.h in Headers */,
 				B0D45E851A5ED2F400C6D376 /* MFUIViewModel.h in Headers */,
 				B0D45DD21A5ED2F400C6D376 /* MFNumberConverter.h in Headers */,
 				B0D45D981A5ED2F400C6D376 /* MFUIControlSlider.h in Headers */,
@@ -2852,13 +2817,11 @@
 				B0D45E2B1A5ED2F400C6D376 /* MFForm3DHeaderViewControls.h in Headers */,
 				B0D45E0A1A5ED2F400C6D376 /* MFUIMotion.h in Headers */,
 				B0D45D881A5ED2F400C6D376 /* MFBarCodeScanViewController.h in Headers */,
-				B0D45DBC1A5ED2F400C6D376 /* MFUIControlTooltip.h in Headers */,
 				B0C9B2E31AFA21E700FC9665 /* MFTextFieldStyle.h in Headers */,
 				B0D45D7B1A5ED2F400C6D376 /* MFPhotoVoProtocol.h in Headers */,
 				B0D45DEA1A5ED2F400C6D376 /* MFUITechnicalError.h in Headers */,
 				B0D45E551A5ED2F400C6D376 /* MFFormSearchViewController.h in Headers */,
 				B0D45E131A5ED2F400C6D376 /* MFHelperFile.h in Headers */,
-				B0D45DBD1A5ED2F400C6D376 /* TooltipView.h in Headers */,
 				B0D45E071A5ED2F400C6D376 /* MFOrientationChangedDelegate.h in Headers */,
 				B07E79501B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h in Headers */,
 				B0D45D541A5ED2F400C6D376 /* MFEnumImage.h in Headers */,
@@ -3116,7 +3079,6 @@
 				B0FFDB121B346A4500CA6E5E /* MFFieldValidatorHandler.m in Sources */,
 				B0D45D901A5ED2F400C6D376 /* MFSignatureDrawing.m in Sources */,
 				B0D45D611A5ED2F400C6D376 /* MFFixedListDataDelegate.m in Sources */,
-				B0D45DBE1A5ED2F400C6D376 /* TooltipView.m in Sources */,
 				B00787CF1AB1E37A009F6D95 /* UIView+JDFTooltips.m in Sources */,
 				B054860F1B46DC4A0094846E /* MFEnumImageWrapper.m in Sources */,
 				B0D45E581A5ED2F400C6D376 /* MFFormViewController.m in Sources */,
@@ -3238,7 +3200,6 @@
 				B0390DE31B4BD572007DB82B /* MFPhoneFieldValidator.m in Sources */,
 				B0D45D1E1A5ED2F400C6D376 /* MFDeleteDetailActionParamOut.m in Sources */,
 				B0FC78EE1B3ACE1400DD225F /* MFSignatureWrapper.m in Sources */,
-				B0D45DBB1A5ED2F400C6D376 /* InvalidTooltipView.m in Sources */,
 				B0D45DE61A5ED2F400C6D376 /* MFTooLongStringUIValidationError.m in Sources */,
 				B08528861B43F18A00B46194 /* MFDoubleTextFieldWrapper.m in Sources */,
 				B0D45D1A1A5ED2F400C6D376 /* MFAbstractPersistentDeleteDetailAction.m in Sources */,
@@ -3313,7 +3274,6 @@
 				B0E86BE31B452FFF00F5CB41 /* MFPickerListWrapper.m in Sources */,
 				B0289F291AA892A8007A2E75 /* MFUIBaseRenderableComponent.m in Sources */,
 				B0D45E711A5ED2F400C6D376 /* MFTransitionController.m in Sources */,
-				B0D45DC11A5ED2F400C6D376 /* ValidTooltipView.m in Sources */,
 				B0D45DF91A5ED2F400C6D376 /* MFFormValidationDelegate.m in Sources */,
 				B0C9B2D41AFA21E700FC9665 /* MFEmailTextFieldStyle.m in Sources */,
 				B0F896731B614909005C3AA7 /* MFPickerListTableView.m in Sources */,
@@ -3480,6 +3440,7 @@
 				GCC_PREFIX_HEADER = "MFUI/MFUI-Prefix.pch";
 				INFOPLIST_FILE = MFUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -3505,6 +3466,7 @@
 				GCC_PREFIX_HEADER = "MFUI/MFUI-Prefix.pch";
 				INFOPLIST_FILE = MFUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";

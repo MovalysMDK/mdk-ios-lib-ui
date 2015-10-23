@@ -304,7 +304,7 @@
 -(void)showErrorTooltips {
     
     if( (self.errors != nil) &&  [self.errors count] >0) {
-        if(nil == self.baseTooltipView.text){
+        if(nil == self.baseTooltipView.tooltipText){
             
             // We calculate the tooltip's anchor point
             CGPoint point = [self.baseErrorButton convertPoint:CGPointMake(0.0, self.baseErrorButton.frame.size.height - 4.0) toView:self];
@@ -313,17 +313,17 @@
             CGRect tooltipViewFrame = CGRectMake(-10, point.y, self.sender.frame.size.width, self.baseTooltipView.frame.size.height);
             
             // We create the tooltip' size
-            self.baseTooltipView = [[InvalidTooltipView alloc] init];
+//            self.baseTooltipView = [[InvalidTooltipView alloc] init];
             self.baseTooltipView.frame = tooltipViewFrame;
             
             // We build the tooltip's message : one message per line
             int errorNumber = 0;
             for (NSError *error in self.errors) {
                 if(errorNumber > 0){
-                    self.baseTooltipView.text = [self.baseTooltipView.text stringByAppendingString: @"\n"];
+                    self.baseTooltipView.tooltipText = [self.baseTooltipView.tooltipText stringByAppendingString: @"\n"];
                 }
                 errorNumber++;
-                self.baseTooltipView.text = [self.baseTooltipView.text stringByAppendingString: [error localizedDescription]];
+                self.baseTooltipView.tooltipText = [self.baseTooltipView.tooltipText stringByAppendingString: [error localizedDescription]];
             }
             // We add tooltip to view
             [self addSubview:self.baseTooltipView];

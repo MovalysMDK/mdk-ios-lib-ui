@@ -137,7 +137,7 @@
 -(void) didCreateBindingStructure {
     MFBindingViewDescriptor *bindingDataSection = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
     UINib *sectionHeaderViewNib = [UINib nibWithNibName:bindingDataSection.viewIdentifier bundle:[NSBundle mainBundle]];
-    [self.tableView registerNib:sectionHeaderViewNib forHeaderFooterViewReuseIdentifier:SECTION_HEADER_VIEW_2D_DESCRIPTOR];
+    [self.tableView registerNib:sectionHeaderViewNib forHeaderFooterViewReuseIdentifier:[NSString stringWithFormat:@"%@", SECTION_HEADER_VIEW_2D_DESCRIPTOR]];
 }
 
 #pragma mark - Cycle de vie du controller
@@ -290,7 +290,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MFBindingViewDescriptor *bindingData = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
-    MFFormSectionHeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:SECTION_HEADER_VIEW_2D_DESCRIPTOR];
+    MFFormSectionHeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[NSString stringWithFormat:@"%@", SECTION_HEADER_VIEW_2D_DESCRIPTOR]];
     if(!view) {
         view = [self sectionView];
 
@@ -451,7 +451,7 @@
 
 -(MFFormSectionHeaderView *) sectionView {
     MFBindingViewDescriptor *bindingData = self.bindingDelegate.structure[SECTION_HEADER_VIEW_2D_DESCRIPTOR];
-    MFFormSectionHeaderView *view = [[MFFormSectionHeaderView alloc] initWithReuseIdentifier:SECTION_HEADER_VIEW_2D_DESCRIPTOR];
+    MFFormSectionHeaderView *view = [[MFFormSectionHeaderView alloc] initWithReuseIdentifier:[NSString stringWithFormat:@"%@", SECTION_HEADER_VIEW_2D_DESCRIPTOR]];
     return view;
 }
 

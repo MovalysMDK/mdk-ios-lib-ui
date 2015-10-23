@@ -46,6 +46,12 @@
  */
 @property (nonatomic, weak) NSLayoutConstraint *errorLeftConstraint, *errorCenterYConstraint, *errorWidthConstraint, *errorHeightConstraint;
 
+/**
+ * @brief The value of component
+ * @discussion Allow to display the value about the current component
+ */
+@property (nonatomic, strong) id displayComponentValue;
+
 @end
 
 

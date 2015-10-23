@@ -229,7 +229,7 @@
         MFUIBaseViewModel *formViewModel = (MFUIBaseViewModel *)[((MFFormViewController *)self.parentViewController) getViewModel];
         
         if([self.parentViewController conformsToProtocol:@protocol(MFDetailViewControllerProtocol)] && [self.parentViewController respondsToSelector:@selector(parentFormController)]) {
-            formViewModel = [((MFFormBaseViewController *)[((id<MFDetailViewControllerProtocol>)self.parentViewController) parentFormController]) getViewModel];
+            formViewModel = (MFUIBaseViewModel *)[((MFFormBaseViewController *)[((id<MFDetailViewControllerProtocol>)self.parentViewController) parentFormController]) getViewModel];
         }
         
         //SI le controller répond à partialViewModelKeys, on est dans le cas d'un controller conteneur

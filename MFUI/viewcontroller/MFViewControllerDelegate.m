@@ -32,24 +32,4 @@
     return self;
 }
 
--(IBAction)genericButtonPressed:(id)sender {
-    // Implementation is in the category MFViewControllerDelegate+MFUIViewControllerDelegate
-}
-
--(void) showWaitingView{
-    // Implementation is in the category MFViewControllerDelegate+MFUIViewControllerDelegate
-}
-
--(void) showWaitingViewWithMessageKey:(NSString *) key{
-    // Implementation is in the category MFViewControllerDelegate+MFUIViewControllerDelegate
-}
-
--(void) dismissWaitingView{
-    // Implementation is in the category MFViewControllerDelegate+MFUIViewControllerDelegate  
-}
-
--(void) showWaitingViewDuring:(int)seconds {
-    // Implementation is in the category MFViewControllerDelegate+MFUIViewControllerDelegate
-}
-
 @end

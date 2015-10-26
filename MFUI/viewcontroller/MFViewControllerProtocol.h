@@ -24,6 +24,8 @@
 @protocol MFViewControllerProtocol <NSObject>
 
 #pragma mark - MEthods
+@optional
+
 /*!
  * @brief Generic action called when a button is pressed on a mains creen
  * @param the sender of the action

@@ -7,6 +7,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 pod 'MFCore', :path => '../mfcore'
+pod 'MDKControl', :path => '../mdkcontrol'
 pod 'MBProgressHUD', '0.8'
 
 post_install do |installer_representation|

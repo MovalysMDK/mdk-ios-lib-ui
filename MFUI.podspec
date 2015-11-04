@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "", :tag => "1.5.1" }
   s.platform     = :ios, '7.0'
 
-  s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore'
+  s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore', 'MDKControl'
   s.header_mappings_dir = '.'
   s.source_files = 'MFUI/**/*.{h,m}'
   s.resources = 'MFUI/**/*.xib', "MFUI/resources/**/*.png", "MFUI/resources/**/*.plist", "MFUI/resources/**/*.txt",  "MFUI/resources/**/*.storyboard"
@@ -24,7 +24,6 @@ Pod::Spec.new do |s|
 
   s.subspec 'Dependencies' do|dep| 
     dep.dependency 'MBProgressHUD', '0.8'
-    dep.dependency 'IQKeyboardManager', '3.2.3'
   end
 
   s.subspec 'NonARC' do |files|

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "MFUI"
-  s.version      = "1.5.1"
+  s.version      = "2.0.0"
   s.summary      = "Movalys Framework MFUI."
   s.homepage     = "http://nansrvintc1.adeuza.fr/mfdocs-5.1.0/"
   s.license      = {
@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   }
   s.author       = "Sopra Steria"
   s.requires_arc = true
-  s.source       = { :git => "", :tag => "1.5.1" }
-  s.platform     = :ios, '7.0'
+  s.source       = { :git => "", :tag => "2.0.0" }
+  s.platform     = :ios, '8.0'
 
   s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore', 'MDKControl'
   s.header_mappings_dir = '.'

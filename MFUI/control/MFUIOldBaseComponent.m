@@ -509,7 +509,7 @@
     }
 }
 
--(void)setAssociatedLabel:(MFLabel *)associatedLabel {
+-(void)setAssociatedLabel:(MDKLabel *)associatedLabel {
     _associatedLabel = associatedLabel;
     self.associatedLabel.mandatory = self.mandatory;
 }

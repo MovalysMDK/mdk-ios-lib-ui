@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.author       = "Sopra Steria"
   s.requires_arc = true
   s.source       = { :git => "", :tag => "2.0.0" }
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, "8.0"
 
   s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore', 'MDKControl'
   s.header_mappings_dir = '.'

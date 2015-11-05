@@ -14,9 +14,9 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+@import MDKControl.ControlEnumImage;
 
 #import "MFEnumImageWrapper.h"
-#import "MFEnumImage.h"
 #import "MFObjectWithBindingProtocol.h"
 
 @implementation MFEnumImageWrapper
@@ -30,11 +30,11 @@
     return self;
 }
 
--(MFEnumImage *)typeComponent {
-    return (MFEnumImage *)self.component;
+-(MDKUIEnumImage *)typeComponent {
+    return (MDKUIEnumImage *)self.component;
 }
 
--(void)componentValueChanged:(MFEnumImage *)enumImage
+-(void)componentValueChanged:(MDKUIEnumImage *)enumImage
 {
     [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[enumImage getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
     

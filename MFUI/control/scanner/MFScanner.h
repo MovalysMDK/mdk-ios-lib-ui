@@ -19,9 +19,10 @@
 //
 //
 
+@import MDKControl.ControlTextFieldRegex;
+
 
 // Custom imports
-#import "MFBarCodeScanTextField.h"
 #import "MFBarCodeScannerDelegate.h"
 #import "MFUIOldBaseComponent.h"
 #import "MFControlChangesProtocol.h"

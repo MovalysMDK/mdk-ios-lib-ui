@@ -14,15 +14,13 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+@import MDKControl.ControlTextFieldRegex;
 
 #import <CoreLocation/CoreLocation.h>
 
 #import "MFPositionDelegate.h"
 #import "MFUIComponentProtocol.h"
 #import "MFUIOldBaseComponent.h"
-#import "MFTextField.h"
-#import "MFDoubleTextField.h"
 #import "MFControlChangesProtocol.h"
 
 /*!
@@ -43,12 +41,12 @@ IB_DESIGNABLE
 /*!
  * @brief The textfield to display latitude
  */
-@property(nonatomic, strong) MFDoubleTextField *latitude;
+@property(nonatomic, strong) MDKDoubleTextField *latitude;
 
 /*!
  * @brief The textfield to display longitude
  */
-@property(nonatomic, strong) MFDoubleTextField *longitude;
+@property(nonatomic, strong) MDKDoubleTextField *longitude;
 
 @end
 

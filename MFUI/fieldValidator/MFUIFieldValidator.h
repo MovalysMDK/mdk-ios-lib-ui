@@ -17,16 +17,6 @@
 #ifndef MFUI_MFUIFieldValidator_h
 #define MFUI_MFUIFieldValidator_h
 
-#import "MFFieldValidatorProtocol.h"
-#import "MFFieldValidatorHandler.h"
-
-#import "MFMandatoryFieldValidator.h"
-#import "MFLengthFieldValidator.h"
-#import "MFUrlFieldValidator.h"
-#import "MFEmailFieldValidator.h"
-#import "MFPhoneFieldValidator.h"
 #import "MFFixedListContentFieldValidator.h"
-#import "MFDoubleFieldValidator.h"
-#import "MFIntegerFieldValidator.h"
 
 #endif

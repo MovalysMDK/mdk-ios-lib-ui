@@ -46,7 +46,7 @@
 
 #pragma mark - Constructors
 
--(id) initWithSourceComponent:(MFBarCodeScanTextField *)sourceComponent {
+-(id) initWithSourceComponent:(MDKBarCodeScanTextField *)sourceComponent {
     self = [super init];
     if(self ) {
         self.sourceComponent = sourceComponent;

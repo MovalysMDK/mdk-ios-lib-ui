@@ -164,10 +164,10 @@
     
     //Mandatory validator
     id mandatoryError = nil;
-    id<MFFieldValidatorProtocol> mandatoryValidator = nil;
+    id<MDKFieldValidatorProtocol> mandatoryValidator = nil;
     if([self.component mandatory]) {
         
-        mandatoryValidator = [[MFFieldValidatorHandler fieldValidatorsForAttributes:@[FIELD_VALIDATOR_ATTRIBUTE_MANDATORY] forControl:[self component]] firstObject];
+        mandatoryValidator = [[MDKFieldValidatorHandler fieldValidatorsForAttributes:@[FIELD_VALIDATOR_ATTRIBUTE_MANDATORY] forControl:[self component]] firstObject];
         mandatoryError = [mandatoryValidator validate:[self.component getData] withCurrentState:validationState withParameters:@{FIELD_VALIDATOR_ATTRIBUTE_MANDATORY : self.component.mandatory}];
     }
     if(!mandatoryError && self.component.controlAttributes) {
@@ -176,10 +176,10 @@
         [validators addObjectsFromArray:[self.component controlValidators]];
         
         //Other validatos
-        [validators addObjectsFromArray:[MFFieldValidatorHandler fieldValidatorsForAttributes:self.component.controlAttributes.allKeys forControl:[self component]]];
+        [validators addObjectsFromArray:[MDKFieldValidatorHandler fieldValidatorsForAttributes:self.component.controlAttributes.allKeys forControl:[self component]]];
         
         
-        for(id<MFFieldValidatorProtocol> fieldValidator in validators) {
+        for(id<MDKFieldValidatorProtocol> fieldValidator in validators) {
             if(validationState[NSStringFromClass([fieldValidator class])]) {
                 continue;
             }

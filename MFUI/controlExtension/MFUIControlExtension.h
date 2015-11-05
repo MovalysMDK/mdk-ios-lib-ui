@@ -18,10 +18,7 @@
 #ifndef MFUI_MFUIControlExtension_h
 #define MFUI_MFUIControlExtension_h
 
-#import "MFTextFieldExtension.h"
 #import "MFBaseTextExtensionProtocol.h"
-#import "MFRegularExpressionTextFieldExtension.h"
-#import "MFRegexTextExtensionProtocol.h"
 #import "MFFixedListExtension.h"
 #import "MFEnumExtension.h"
 

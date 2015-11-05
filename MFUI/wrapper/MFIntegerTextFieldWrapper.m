@@ -14,9 +14,10 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+@import MDKControl.ControlTextFieldRegex;
+
 #import "MFObjectWithBindingProtocol.h"
 #import "MFIntegerTextFieldWrapper.h"
-#import "MFIntegerTextField.h"
 #import "MFKeyNotFound.h"
 
 @implementation MFIntegerTextFieldWrapper
@@ -29,11 +30,11 @@
     return self;
 }
 
--(MFIntegerTextField *)typeComponent {
-    return (MFIntegerTextField *)self.component;
+-(MDKIntegerTextField *)typeComponent {
+    return (MDKIntegerTextField *)self.component;
 }
 
--(void)componentValueChanged:(MFIntegerTextField *)integerTextField
+-(void)componentValueChanged:(MDKIntegerTextField *)integerTextField
 {
     [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:integerTextField.text fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
 }

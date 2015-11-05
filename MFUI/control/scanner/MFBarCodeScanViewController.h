@@ -14,9 +14,9 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+@import MDKControl.ControlTextFieldRegex;
 
 // Custom imports
-#import "MFBarCodeScanTextField.h"
 #import "MFBarCodeScannerDelegate.h"
 
 
@@ -30,7 +30,7 @@
 /*!
  * @brief The MFBarCodeScanTextField source component that pushed this ViewController.
  */
-@property (nonatomic, strong) MFBarCodeScanTextField *sourceComponent;
+@property (nonatomic, strong) MDKBarCodeScanTextField *sourceComponent;
 
 
 
@@ -41,6 +41,6 @@
  * @param sourceComponent The source component that pushed this ViewController.
  * @return A MFBarCodeScanViewController new instance
  */
--(id) initWithSourceComponent:(MFBarCodeScanTextField *)sourceComponent;
+-(id) initWithSourceComponent:(MDKBarCodeScanTextField *)sourceComponent;
 
 @end

@@ -18,6 +18,7 @@
 
 //iOS Framework imports
 
+@import MDKControl.Utils;
 
 //MFCore
 #import <MFCore/MFCoreBean.h>

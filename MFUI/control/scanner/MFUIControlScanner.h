@@ -19,7 +19,6 @@
 #define MFUI_MFUIControlScanner_h
 
 #import "MFBarCodeScannerDelegate.h"
-#import "MFBarCodeScanTextField.h"
 #import "MFScanner.h"
 
 #endif

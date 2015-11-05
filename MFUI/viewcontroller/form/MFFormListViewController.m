@@ -14,6 +14,7 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+@import MDKControl.ControlTextField;
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -26,7 +27,6 @@
 #import "MFFormCellProtocol.h"
 #import "MFPosition.h"
 #import "MFMapViewController.h"
-#import "MFTextField.h"
 #import "MFConstants.h"
 #import "MFUIBaseViewModel.h"
 #import "MFCellAbstract.h"

@@ -14,9 +14,8 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+@import MDKControl.ControlDateTime;
 #import "MFConverterProtocol.h"
-#import "MFDatePicker.h"
 
 /*!
  * @class MFDateConverter
@@ -46,7 +45,7 @@
  * @param mode The MFDatePickerMode to use to format the converted string value
  * @return The string converted value
  */
-+(NSString *)toString:(id)value withMode:(MFDatePickerMode)mode;
++(NSString *)toString:(id)value withMode:(MDKDateTimeMode)mode;
 
 /*!
  * @brief Convert a datetime to a string

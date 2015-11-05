@@ -42,7 +42,7 @@
             if(associatedLabelOutletName) {
                 UIView *associatedLabel = [self valueForKey:associatedLabelOutletName];
                 if(associatedLabel && [associatedLabel isKindOfClass:NSClassFromString(@"MFLabel")]) {
-                    ((id<MFComponentAssociatedLabelProtocol>)valueAsView).associatedLabel = (MFLabel *)associatedLabel;
+                    ((id<MFComponentAssociatedLabelProtocol>)valueAsView).associatedLabel = (MDKLabel *)associatedLabel;
                 }
             }
         }

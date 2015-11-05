@@ -25,15 +25,6 @@
 //Button
 #import "MFUIControlButton.h"
 
-//Date
-#import "MFUIControlDate.h"
-
-//Image
-#import "MFUIControlImage.h"
-
-//Label
-#import "MFUIControlLabel.h"
-
 //Lists
 #import "MFUIControlList.h"
 
@@ -49,14 +40,8 @@
 //Signature
 #import "MFUIControlSignature.h"
 
-//Slider
-#import "MFUIControlSlider.h"
-
 //Switch
 #import "MFUIControlSwitch.h"
-
-//TextField
-#import "MFUIControlTextField.h"
 
 //Webview
 #import "MFUIControlWebView.h"

@@ -14,8 +14,9 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+@import MDKControl.ControlDateTime;
+
 #import "MFDatePickerWrapper.h"
-#import "MFDatePicker.h"
 #import "MFObjectWithBindingProtocol.h"
 
 @implementation MFDatePickerWrapper
@@ -28,11 +29,11 @@
     return self;
 }
 
--(MFDatePicker *)typeComponent {
-    return (MFDatePicker *)self.component;
+-(MDKUIDateTime *)typeComponent {
+    return (MDKUIDateTime *)self.component;
 }
 
--(void)componentValueChanged:(MFDatePicker *)datePicker
+-(void)componentValueChanged:(MDKUIDateTime *)datePicker
 {
     [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[datePicker getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
     

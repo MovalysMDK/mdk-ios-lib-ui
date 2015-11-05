@@ -53,14 +53,14 @@
     [super initialize];
     
     // Latitude Field
-    self.latitude = [[MFDoubleTextField alloc] initWithFrame:CGRectZero];
+    self.latitude = [[MDKDoubleTextField alloc] initWithFrame:CGRectZero];
     
     [self.latitude addControlAttribute:@6 forKey:@"decimalPartMaxDigits"];
     self.latitude.placeholder = MFLocalizedStringFromKey(@"MFPositionLatitudePlaceholderRW");
     [self.latitude setSender:self];
     
     // Longitude Field
-    self.longitude = [[MFDoubleTextField alloc] initWithFrame:CGRectZero];
+    self.longitude = [[MDKDoubleTextField alloc] initWithFrame:CGRectZero];
     [self.longitude addControlAttribute:@6 forKey:@"decimalPartMaxDigits"];
     self.longitude.placeholder = MFLocalizedStringFromKey(@"MFPositionLongitudePlaceholderRW");
     [self.longitude setSender:self];

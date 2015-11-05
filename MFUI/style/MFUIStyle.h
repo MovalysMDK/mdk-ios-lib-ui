@@ -18,8 +18,6 @@
 #define MFUI_MFUIStyle_h
 
 #import "MFUIStyleCommons.h"
-#import "MFUIStyleLabel.h"
-#import "MFUIStyleTextField.h"
 #import "MFUIStyleTextView.h"
 
 #endif

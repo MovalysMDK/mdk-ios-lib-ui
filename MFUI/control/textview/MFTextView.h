@@ -18,9 +18,9 @@
 
 
 #import <MFCore/MFCoreI18n.h>
+@import MDKControl.ControlExtension;
 
 #import "MFUIUtils.h"
-#import "MFUIControlExtension.h"
 #import "MFUIMotion.h"
 #import "MFUIBinding.h"
 
@@ -40,7 +40,7 @@ IB_DESIGNABLE
 /*
  Extended properties of text field.
  */
-@property(nonatomic, strong) NSObject<MFBaseTextExtensionProtocol> *mf;
+@property(nonatomic, strong) NSObject<MDKBaseTextExtensionProtocol> *mf;
 
 /*!
  Underlying component.

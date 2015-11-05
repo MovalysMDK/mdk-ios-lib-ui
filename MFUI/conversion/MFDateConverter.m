@@ -38,31 +38,31 @@
 }
 
 +(NSString *)toString:(id)value {
-    return [MFDateConverter toString:value withMode:MFDatePickerModeDate];
+    return [MFDateConverter toString:value withMode:MDKDateTimeModeDate];
 }
 
 +(NSString *)fromTimeToString:(id)value {
-    return [MFDateConverter toString:value withMode:MFDatePickerModeTime];
+    return [MFDateConverter toString:value withMode:MDKDateTimeModeTime];
 }
 
 +(NSString *)fromDateTimeToString:(id)value {
-    return [MFDateConverter toString:value withMode:MFDatePickerModeDateTime];
+    return [MFDateConverter toString:value withMode:MDKDateTimeModeDateTime];
 }
 
-+(NSString *)toString:(id)value withMode:(MFDatePickerMode)datePickerMode{
++(NSString *)toString:(id)value withMode:(MDKDateTimeMode)datePickerMode{
     NSDate *date = value;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
     switch(datePickerMode) {
-        case MFDatePickerModeDate:
+        case MDKDateTimeModeDate:
             [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
             [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
             break;
-        case MFDatePickerModeTime :
+        case MDKDateTimeModeTime :
             [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
             [dateFormatter setDateStyle:NSDateFormatterNoStyle];
             break;
-        case MFDatePickerModeDateTime :
+        case MDKDateTimeModeDateTime :
             [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
             [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
             break;

@@ -14,14 +14,16 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+@import MDKControl.Command;
+@import MDKControl.FieldValidator;
+
 #import "MFSimpleComponentProvider.h"
-#import "MFCommandProtocol.h"
-#import "MFFieldValidatorProtocol.h"
+#import "MDKFieldValidatorProtocol.h"
 
 @implementation MFSimpleComponentProvider
 
--(id<MFCommandProtocol>)commandWithKey:(NSString *)baseKey withQualifier:(NSString *)qualifier {
-    id<MFCommandProtocol> command = nil;
+-(id<MDKCommandProtocol>)commandWithKey:(NSString *)baseKey withQualifier:(NSString *)qualifier {
+    id<MDKCommandProtocol> command = nil;
     Class commandClass = [self classWithKey:baseKey withQualifier:qualifier];
     if(commandClass) {
         command = [commandClass sharedInstance];

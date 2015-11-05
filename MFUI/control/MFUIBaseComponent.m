@@ -333,7 +333,7 @@ CGFloat const ERROR_BUTTON_SIZE = 30;
     }
 }
 
--(void)setAssociatedLabel:(MFLabel *)associatedLabel {
+-(void)setAssociatedLabel:(MDKLabel *)associatedLabel {
     _associatedLabel = associatedLabel;
     self.associatedLabel.mandatory = self.mandatory;
 }

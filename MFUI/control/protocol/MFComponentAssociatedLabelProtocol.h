@@ -15,7 +15,7 @@
  */
 
 #import <Foundation/Foundation.h>
-@class MFLabel;
+@import MDKControl.ControlLabel;
 
 /*!
  * @protocol MFComponentAssociatedLabelProtocol
@@ -23,6 +23,6 @@
  */
 @protocol MFComponentAssociatedLabelProtocol <NSObject>
 
-@property (nonatomic, weak) MFLabel *associatedLabel;
+@property (nonatomic, weak) MDKLabel *associatedLabel;
 
 @end

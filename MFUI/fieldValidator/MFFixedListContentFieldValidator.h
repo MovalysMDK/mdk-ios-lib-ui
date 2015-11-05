@@ -14,14 +14,16 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+@import MDKControl.FieldValidator;
+
 #import <Foundation/Foundation.h>
-#import "MFFieldValidatorProtocol.h"
+#import "MDKFieldValidatorProtocol.h"
 
 /*!
  * @class MFFixedListContentFieldValidator
  * @brief The FieldValidator for FixedList content
  * @discussion This validator checks the validity of the content of a FixedList
  */
-@interface MFFixedListContentFieldValidator : NSObject <MFFieldValidatorProtocol>
+@interface MFFixedListContentFieldValidator : NSObject <MDKFieldValidatorProtocol>
 
 @end

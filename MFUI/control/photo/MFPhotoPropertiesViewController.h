@@ -64,12 +64,12 @@
 /*!
  * @brief Le composant affichant le titre de la photo
  */
-@property (weak, nonatomic) IBOutlet MFTextField *titreField;
+@property (weak, nonatomic) IBOutlet MDKTextField *titreField;
 
 /*!
  * @brief Le composant affichant la description de la photo
  */
-@property (weak, nonatomic) IBOutlet MFTextField *descriptionField;
+@property (weak, nonatomic) IBOutlet MDKTextField *descriptionField;
 
 /*!
  * @brief Le composant affichant la localisation de la photo

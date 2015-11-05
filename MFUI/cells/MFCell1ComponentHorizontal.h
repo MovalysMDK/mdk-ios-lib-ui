@@ -38,7 +38,7 @@
 /*!
  * @brief The label at the top of the cell
  */
-@property(nonatomic, strong) IBOutlet MFLabel *label;
+@property(nonatomic, strong) IBOutlet MDKLabel *label;
 
 
 /*!

@@ -15,11 +15,10 @@
  */
 
 
-
+@import MDKControl.ControlTextFieldRegex;
 #import <MFCore/MFCoreI18n.h>
 
 #import "MFNumberPicker.h"
-#import "MFIntegerTextField.h"
 
 #pragma mark - Define some constants
 
@@ -30,7 +29,7 @@
 /**
  * @brief The inner texfield of this component that displays the number
  */
-@property (nonatomic, strong) MFIntegerTextField *innerTextField;
+@property (nonatomic, strong) MDKIntegerTextField *innerTextField;
 
 /**
  * @brief The inner stepper used to choose the value of the stepper.
@@ -71,8 +70,7 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 -(void)initialize {
     
     //Create inner components
-    self.innerTextField = [[MFIntegerTextField alloc] initWithFrame:self.frame];
-    self.innerTextField.componentValidation = NO;
+    self.innerTextField = [[MDKIntegerTextField alloc] initWithFrame:self.frame];
     self.innerTextField.sender = self;
     self.innerStepper = [[UIStepper alloc] init];
     
@@ -218,7 +216,7 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
     [self valueChanged:stepper];
 }
 
--(void)textFieldValueChanged:(MFIntegerTextField *)integerTextfield {
+-(void)textFieldValueChanged:(MDKIntegerTextField *)integerTextfield {
     self.currentValue = [integerTextfield.text doubleValue];
     [self valueChanged:integerTextfield];
 }

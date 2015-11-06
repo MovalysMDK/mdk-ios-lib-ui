@@ -19,7 +19,7 @@
 #define MFUI_MFUIWrapper_h
 
 #import "MFAbstractComponentWrapper.h"
-#import "MFDatePickerWrapper.h"
+#import "MDKDateTimeWrapper.h"
 #import "MFNumberPickerWrapper.h"
 #import "MFPhotoThumbnailWrapper.h"
 #import "MFPositionWrapper.h"

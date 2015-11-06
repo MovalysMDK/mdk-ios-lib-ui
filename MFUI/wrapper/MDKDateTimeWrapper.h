@@ -20,6 +20,6 @@
  * @class MFDatePickerWrapper
  * @brief The wrapper for the MFDatePicker component.
  */
-@interface MFDatePickerWrapper : MFAbstractComponentWrapper
+@interface MDKDateTimeWrapper : MFAbstractComponentWrapper
 
 @end

@@ -16,10 +16,10 @@
 
 @import MDKControl.ControlDateTime;
 
-#import "MFDatePickerWrapper.h"
+#import "MDKDateTimeWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
 
-@implementation MFDatePickerWrapper
+@implementation MDKDateTimeWrapper
 
 -(instancetype)initWithComponent:(UIControl *)component {
     self = [super initWithComponent:component];

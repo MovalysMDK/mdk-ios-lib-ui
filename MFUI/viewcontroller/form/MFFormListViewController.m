@@ -38,7 +38,7 @@
 #import "MFUIBaseListViewModel.h"
 #import "MFFormViewController.h"
 #import "MFLocalizedString.h"
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
 
 #pragma mark - Interface privée

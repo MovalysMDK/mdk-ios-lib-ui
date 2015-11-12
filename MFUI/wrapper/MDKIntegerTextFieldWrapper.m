@@ -14,10 +14,13 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFSliderWrapper.h"
-#import "MFObjectWithBindingProtocol.h"
+@import MDKControl.ControlTextFieldRegex;
 
-@implementation MFSliderWrapper
+#import "MFObjectWithBindingProtocol.h"
+#import "MDKIntegerTextFieldWrapper.h"
+#import "MFKeyNotFound.h"
+
+@implementation MDKIntegerTextFieldWrapper
 
 -(instancetype)initWithComponent:(UIControl *)component {
     self = [super initWithComponent:component];
@@ -27,20 +30,28 @@
     return self;
 }
 
--(UISlider *)typeComponent {
-    return (UISlider *)self.component;
+-(MDKIntegerTextField *)typeComponent {
+    return (MDKIntegerTextField *)self.component;
 }
 
--(void)componentValueChanged:(UISlider *)slider
+-(void)componentValueChanged:(MDKIntegerTextField *)integerTextField
 {
-    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:@(slider.value) fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
-    
+    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:integerTextField.text fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
 }
 
--(NSDictionary *) nilValueBySelector {
-    NSMutableDictionary *superDict = [[super nilValueBySelector] mutableCopy];
-    [superDict setObject:@0 forKey:@"setValue:"];
-    return superDict;
+-(id)convertValue:(id)value isFromViewModelToControl:(NSNumber *)isVmToControl {
+    id result = nil;
+    if(value && ![value isKindOfClass:[NSNull class]] && ![value isKindOfClass:[MFKeyNotFound class]]) {
+        if([isVmToControl integerValue] == 1) {
+            NSNumber *vmValue = (NSNumber *)value;
+            result = [NSString stringWithFormat:@"%@", vmValue];
+        }
+        else {
+            NSString *controlValue = (NSString *)value;
+            result = @([controlValue integerValue]);
+        }
+    }
+    return result;
 }
 
 @end

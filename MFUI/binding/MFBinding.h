@@ -19,7 +19,7 @@
 
 @class MFOneWayBindingValue;
 @class MFBindingValue;
-@class MFAbstractComponentWrapper;
+@class MFAbstractControlWrapper;
 
 
 /*!
@@ -118,7 +118,7 @@
 /*!
  * @brief The wrapper of the component to bind
  */
-@property (nonatomic, strong) MFAbstractComponentWrapper *wrapper;
+@property (nonatomic, strong) MFAbstractControlWrapper *wrapper;
 
 /*!
  * @brief The binding mode for this binding value
@@ -158,7 +158,7 @@
  * @param componentOutletName The Outlet name of the component to bien
  * @return The new MFOneWayBindingValue built instance
  */
--(instancetype) initWithWrapper:(MFAbstractComponentWrapper *)componentWrapper withBindingMode:(MFBindingValueMode)bindingMode withVmBindedPropertyName:(NSString *)vmBindedPropertyName withComponentOutletName:(NSString *)componentOutletName fromSource:(MFBindingSource)bindingSource;
+-(instancetype) initWithWrapper:(MFAbstractControlWrapper *)componentWrapper withBindingMode:(MFBindingValueMode)bindingMode withVmBindedPropertyName:(NSString *)vmBindedPropertyName withComponentOutletName:(NSString *)componentOutletName fromSource:(MFBindingSource)bindingSource;
 
 /*!
  * @brief Initializes a new binding filled with the given parameters and returns it to the caller
@@ -169,6 +169,6 @@
  * @param componentOutletName The Outlet name of the component to bien
  * @return The new MFOneWayBindingValue built instance
  */
--(instancetype) initWithWrapper:(MFAbstractComponentWrapper *)componentWrapper withBindingMode:(MFBindingValueMode)bindingMode withVmBindedPropertyName:(NSString *)vmBindedPropertyName withComponentBindedPropertyName:(NSString *)componentBindedPropertyName withComponentOutletName:(NSString *)componentOutletName fromSource:(MFBindingSource)bindingSource;
+-(instancetype) initWithWrapper:(MFAbstractControlWrapper *)componentWrapper withBindingMode:(MFBindingValueMode)bindingMode withVmBindedPropertyName:(NSString *)vmBindedPropertyName withComponentBindedPropertyName:(NSString *)componentBindedPropertyName withComponentOutletName:(NSString *)componentOutletName fromSource:(MFBindingSource)bindingSource;
 
 @end

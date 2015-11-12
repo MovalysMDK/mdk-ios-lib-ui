@@ -14,24 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFDoubleTextFieldWrapper.h"
-#import "MFKeyNotFound.h"
+#import "MFAbstractControlWrapper.h"
 
-@implementation MFDoubleTextFieldWrapper
-
--(id)convertValue:(id)value isFromViewModelToControl:(NSNumber *)isVmToControl {
-    id result = nil;
-    if(value && ![value isKindOfClass:[NSNull class]] && ![value isKindOfClass:[MFKeyNotFound class]]) {
-        if([isVmToControl integerValue] == 1) {
-            NSNumber *vmValue = (NSNumber *)value;
-            result = [NSString stringWithFormat:@"%@", vmValue];
-        }
-        else {
-            NSString *controlValue = (NSString *)value;
-            result = @([controlValue doubleValue]);
-        }
-    }
-    return result;
-}
+/*!
+ * @class MDKTextFieldWrapper
+ * @brief The wrapper for the MFTextField component.
+ */
+@interface MDKTextFieldWrapper : MFAbstractControlWrapper
 
 @end

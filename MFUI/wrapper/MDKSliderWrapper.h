@@ -14,12 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 
 /*!
- * @class MFTextFieldWrapper
- * @brief The wrapper for the MFTextField component.
+ * @class MDKSliderWrapper
+ * @brief The wrapper for the MDKSlider component.
  */
-@interface MFTextFieldWrapper : MFAbstractComponentWrapper
+@interface MDKSliderWrapper : MFAbstractControlWrapper
 
 @end

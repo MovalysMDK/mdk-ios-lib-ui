@@ -14,12 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 
 /*!
  * @class MFSwitchWrapper
  * @brief The wrapper for the MFSwitch component.
  */
-@interface MFSwitchWrapper : MFAbstractComponentWrapper
+@interface MFSwitchWrapper : MFAbstractControlWrapper
 
 @end

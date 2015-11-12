@@ -14,16 +14,15 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+@import MDKControl.Control;
 
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 #import "UIView+Binding.h"
-@interface MFAbstractComponentWrapper ()
-
-
+@interface MFAbstractControlWrapper ()
 
 @end
 
-@implementation MFAbstractComponentWrapper
+@implementation MFAbstractControlWrapper
 @synthesize component = _component;
 
 -(instancetype) initWithComponent:(UIView *)component {
@@ -57,5 +56,14 @@ return @{};
 
 -(void) dispatchDidBinded {
     [self.component didBinded];
+}
+
+-(void)setComponentValue:(id)value forKeyPath:(NSString *)keyPath {
+    if([[self component] isKindOfClass:NSClassFromString(@"MDKRenderableControl")]) {
+        [((MDKRenderableControl *)self.component).internalView setValue:value forKeyPath:keyPath];
+    }
+    else {
+        [[self component] setValue:value forKeyPath:keyPath];
+    }
 }
 @end

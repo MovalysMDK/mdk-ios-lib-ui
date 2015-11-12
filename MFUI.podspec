@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "", :tag => "2.0.0" }
   s.platform     = :ios, "8.0"
 
-  s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore', 'MDKControl'
+  s.frameworks   = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore', 'MBProgressHUD', 'MDKControl'
   s.header_mappings_dir = '.'
   s.source_files = 'MFUI/**/*.{h,m}'
   s.resources = 'MFUI/**/*.xib', "MFUI/resources/**/*.png", "MFUI/resources/**/*.plist", "MFUI/resources/**/*.txt",  "MFUI/resources/**/*.storyboard"
@@ -23,7 +23,6 @@ Pod::Spec.new do |s|
     #import "UIView+ViewController.h"'
 
   s.subspec 'Dependencies' do|dep| 
-    dep.dependency 'MBProgressHUD', '0.8'
   end
 
   s.subspec 'NonARC' do |files|

@@ -14,12 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 
 /*!
  * @class MFFixedListWrapper
  * @brief The wrapper for the MFFixedList component.
  */
-@interface MFFixedListWrapper : MFAbstractComponentWrapper
+@interface MFFixedListWrapper : MFAbstractControlWrapper
 
 @end

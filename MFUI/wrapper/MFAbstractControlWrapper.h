@@ -22,12 +22,12 @@
 
 
 /*!
- * @class AbstractComponentWrapper
+ * @class AbstractControlWrapper
  * @brief Represents an abstract component wrapper.
  * @discussion The component wrapper is used by binding and ViewControllers to display and bind
  * some components.
  */
-@interface MFAbstractComponentWrapper : NSObject
+@interface MFAbstractControlWrapper : NSObject
 
 #pragma mark - Properties
 
@@ -50,10 +50,16 @@
 
 #pragma mark - Initialization
 
+/**
+ * @brief Set the data of the component associated to this wrapper
+ * @param data The data to set on the component
+ */
+-(void)setComponentValue:(id)value forKeyPath:(NSString *)keyPath;
+
 /*!
  * @brief Initializes a new wrapper with a given component, and returns it to the caller
  * @param component The component associated to this wrapper
- * @return The new AbstractComponentWrapper nuilt instance
+ * @return The new AbstractControlWrapper nuilt instance
  */
 -(instancetype) initWithComponent:(UIView *)component;
 

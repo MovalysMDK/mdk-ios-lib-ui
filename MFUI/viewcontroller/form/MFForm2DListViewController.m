@@ -48,7 +48,7 @@
 #import <MFCore/MFCoreI18n.h>
 #import "MFConstants.h"
 #import "MFTypeValueProcessingProtocol.h"
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 #import "UIView+Binding.h"
 #import "MFObjectWithBindingProtocol.h"
 

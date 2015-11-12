@@ -17,7 +17,7 @@
 
 #import "MFBindingDelegate.h"
 #import "MFObjectWithBindingProtocol.h"
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 
 @interface MFBindingDelegate ()
 
@@ -62,11 +62,11 @@
 -(MFBindingValue *) registerComponentBindingProperty:(NSString *)componentBindingProperty withViewModelProperty:(NSString *) viewModelProperty forComponent:(UIView *)component withOutletName:(NSString *)outletName withMode:(MFBindingValueMode)bindingMode  fromBindingSource:(MFBindingSource)bindingSource {
     
     [self fixKnownWrappers];
-    MFAbstractComponentWrapper *wrapper = self.knwonWrappers[@(component.hash)];
+    MFAbstractControlWrapper *wrapper = self.knwonWrappers[@(component.hash)];
     if(!wrapper) {
         NSString *customWrapper = nil;
         Class currentClass = [component class];
-        wrapper = [[MFAbstractComponentWrapper alloc] initWithComponent:component];
+        wrapper = [[MFAbstractControlWrapper alloc] initWithComponent:component];
         while(currentClass != nil) {
             if( (customWrapper = [self wrappersConfiguration][NSStringFromClass(currentClass)]) != nil) {
                 wrapper = [[NSClassFromString(customWrapper) alloc] initWithComponent:(UIView<MFUIComponentProtocol> *)component];
@@ -101,7 +101,7 @@
     NSMutableDictionary *result = [self.knwonWrappers mutableCopy];
     NSMutableArray *objectToRemoveKeys = [NSMutableArray array];
     
-    for(MFAbstractComponentWrapper *wrapper in self.knwonWrappers.allValues) {
+    for(MFAbstractControlWrapper *wrapper in self.knwonWrappers.allValues) {
         if(!wrapper.component) {
             [objectToRemoveKeys addObjectsFromArray:[self.knwonWrappers allKeysForObject:wrapper]];
         }

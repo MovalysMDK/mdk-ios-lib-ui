@@ -14,12 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFSliderWrapper.h"
+#import "MDKSliderWrapper.h"
 
 /*!
  * @class UISliderWrapper
  * @brief The wrapper for the UISlider component.
  */
-@interface UISliderWrapper : MFSliderWrapper
+@interface UISliderWrapper : MDKSliderWrapper
 
 @end

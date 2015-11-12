@@ -14,12 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 
 /*!
  * @class MFSimplePickerListWrapper
  * @brief The wrapper for the MFSimplePickerList component.
  */
-@interface MFSimplePickerListWrapper : MFAbstractComponentWrapper
+@interface MFSimplePickerListWrapper : MFAbstractControlWrapper
 
 @end

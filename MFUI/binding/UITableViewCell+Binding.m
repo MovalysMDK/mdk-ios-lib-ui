@@ -14,6 +14,8 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+@import MDKControl.Protocol;
+
 #import "UITableViewCell+Binding.h"
 #import "MFBindingDelegate.h"
 #import "MFObjectWithBindingProtocol.h"
@@ -30,18 +32,18 @@
     MFBindingDictionary *bindingDictionary = bindingCellDescriptor.cellBinding;
     for(MFOutletBindingKey* outletBindingKey in bindingDictionary.allKeys) {
         UIView *valueAsView = [self valueForKey:outletBindingKey.outletName];
-        if([valueAsView conformsToProtocol:@protocol(MFComponentAttributesProtocol)]) {
+        if([valueAsView conformsToProtocol:@protocol(MFComponentAssociatedLabelProtocol)] || [valueAsView conformsToProtocol:@protocol(MDKControlAttributesProtocol)] ) {
             NSDictionary *controlAttributes = bindingCellDescriptor.controlsAttributes[outletBindingKey.outletName];
             if(!controlAttributes) {
                 controlAttributes = @{};
             }
             [((id<MFComponentAttributesProtocol>)valueAsView) setControlAttributes:controlAttributes];
         }
-        if([valueAsView conformsToProtocol:@protocol(MFComponentAssociatedLabelProtocol)]) {
+        if([valueAsView conformsToProtocol:@protocol(MFComponentAssociatedLabelProtocol)] || [valueAsView conformsToProtocol:@protocol(MDKControlAssociatedLabelProtocol)] ) {
             NSString *associatedLabelOutletName = bindingCellDescriptor.associatedLabels[outletBindingKey.outletName];
             if(associatedLabelOutletName) {
                 UIView *associatedLabel = [self valueForKey:associatedLabelOutletName];
-                if(associatedLabel && [associatedLabel isKindOfClass:NSClassFromString(@"MFLabel")]) {
+                if(associatedLabel && [associatedLabel isKindOfClass:NSClassFromString(@"MDKLabel")]) {
                     ((id<MFComponentAssociatedLabelProtocol>)valueAsView).associatedLabel = (MDKLabel *)associatedLabel;
                 }
             }

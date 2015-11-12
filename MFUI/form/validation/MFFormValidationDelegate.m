@@ -23,7 +23,7 @@
 #import "MFFormValidationDelegate.h"
 #import "MFUIBaseListViewModel.h"
 #import "MFUIControl.h"
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 
 const int kDiscardChangesAlert = 10 ;
 const int kSaveChangesAlert = 11 ;

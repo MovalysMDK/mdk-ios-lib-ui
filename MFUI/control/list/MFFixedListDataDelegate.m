@@ -48,7 +48,7 @@
 #import "MFFormBaseViewController.h"
 
 
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
 
 //FIXME : A supprimer ?

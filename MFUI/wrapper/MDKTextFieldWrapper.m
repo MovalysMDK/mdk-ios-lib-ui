@@ -14,11 +14,11 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFTextFieldWrapper.h"
+#import "MDKTextFieldWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
 #import "MFKeyNotFound.h"
 
-@implementation MFTextFieldWrapper
+@implementation MDKTextFieldWrapper
 
 -(instancetype)initWithComponent:(UIControl *)component {
     self = [super initWithComponent:component];

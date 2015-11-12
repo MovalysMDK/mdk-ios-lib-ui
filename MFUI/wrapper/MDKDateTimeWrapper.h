@@ -14,12 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 
 /*!
  * @class MFDatePickerWrapper
  * @brief The wrapper for the MFDatePicker component.
  */
-@interface MDKDateTimeWrapper : MFAbstractComponentWrapper
+@interface MDKDateTimeWrapper : MFAbstractControlWrapper
 
 @end

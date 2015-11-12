@@ -14,12 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFTextFieldWrapper.h"
+#import "MDKTextFieldWrapper.h"
 
 /*!
  * @class MFBarCodeScanTextFieldWrapper
  * @brief The wrapper for the MFBarCodeScanTextField component.
  */
-@interface MFBarCodeScanTextFieldWrapper : MFTextFieldWrapper
+@interface MFBarCodeScanTextFieldWrapper : MDKTextFieldWrapper
 
 @end

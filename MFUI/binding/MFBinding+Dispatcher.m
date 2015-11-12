@@ -17,7 +17,7 @@
 #import <MFCore/MFCoreBean.h>
 #import "MFBinding+Dispatcher.h"
 #import "MFUIBaseListViewModel.h"
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 #import "MFLocalizedString.h"
 #import "MFBindingConverterProtocol.h"
 
@@ -56,7 +56,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 id convertedValue = [self convertValue:value isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
                 convertedValue = [self applyCustomConverter:bindingValue.converterName onValue:convertedValue isFromViewModelToControl:YES];
-                [bindingValue.wrapper.component setValue:convertedValue forKeyPath:bindingValue.componentBindedPropertyName];
+                [bindingValue.wrapper setComponentValue:convertedValue forKeyPath:bindingValue.componentBindedPropertyName];
             });
         }
     }
@@ -80,7 +80,7 @@
                 value = [self applyCustomConverter:bindingValue.converterName onValue:value isFromViewModelToControl:YES];
                 
                 //FIXME: ne pas apperler le setValue:ForKey: sur le composant, mais faire ça sur wrapper.
-                [bindingValue.wrapper.component setValue:value forKeyPath:bindingValue.componentBindedPropertyName];
+                [bindingValue.wrapper setComponentValue:value forKeyPath:bindingValue.componentBindedPropertyName];
             }
         }
     }
@@ -90,7 +90,7 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 #pragma clang diagnostic ignored "-Wundeclared-selector"
--(id)convertValue:(id)value isFromViewModelToControl:(BOOL)isVmToControl withWrapper:(MFAbstractComponentWrapper *) wrapper{
+-(id)convertValue:(id)value isFromViewModelToControl:(BOOL)isVmToControl withWrapper:(MFAbstractControlWrapper *) wrapper{
     if([wrapper respondsToSelector:@selector(convertValue:isFromViewModelToControl:)]) {
         value = [wrapper performSelector:@selector(convertValue:isFromViewModelToControl:) withObject:value withObject:@(isVmToControl)];
     }

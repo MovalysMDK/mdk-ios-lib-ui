@@ -16,7 +16,7 @@
 
 
 #import "MFBinding.h"
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 
 
 
@@ -142,7 +142,7 @@
 
 @implementation MFBindingValue
 
--(instancetype)initWithWrapper:(MFAbstractComponentWrapper *)componentWrapper withBindingMode:(MFBindingValueMode)bindingMode withVmBindedPropertyName:(NSString *)vmBindedPropertyName withComponentBindedPropertyName:(NSString *)componentBindedPropertyName withComponentOutletName:(NSString *)componentOutletName fromSource:(MFBindingSource)bindingSource{
+-(instancetype)initWithWrapper:(MFAbstractControlWrapper *)componentWrapper withBindingMode:(MFBindingValueMode)bindingMode withVmBindedPropertyName:(NSString *)vmBindedPropertyName withComponentBindedPropertyName:(NSString *)componentBindedPropertyName withComponentOutletName:(NSString *)componentOutletName fromSource:(MFBindingSource)bindingSource{
     self = [self initWithWrapper:componentWrapper withBindingMode:bindingMode withVmBindedPropertyName:vmBindedPropertyName withComponentOutletName:componentOutletName fromSource:bindingSource];
     if(self) {
         self.componentBindedPropertyName = componentBindedPropertyName;
@@ -150,7 +150,7 @@
     return self;
 }
 
--(instancetype)initWithWrapper:(MFAbstractComponentWrapper *)componentWrapper withBindingMode:(MFBindingValueMode)bindingMode withVmBindedPropertyName:(NSString *)vmBindedPropertyName withComponentOutletName:(NSString *)componentOutletName  fromSource:(MFBindingSource)bindingSource{
+-(instancetype)initWithWrapper:(MFAbstractControlWrapper *)componentWrapper withBindingMode:(MFBindingValueMode)bindingMode withVmBindedPropertyName:(NSString *)vmBindedPropertyName withComponentOutletName:(NSString *)componentOutletName  fromSource:(MFBindingSource)bindingSource{
     self = [super init];
     if(self) {
         self.wrapper = componentWrapper;

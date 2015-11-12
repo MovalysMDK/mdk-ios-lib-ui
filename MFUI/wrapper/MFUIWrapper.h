@@ -18,16 +18,16 @@
 #ifndef MFUI_MFUIWrapper_h
 #define MFUI_MFUIWrapper_h
 
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 #import "MDKDateTimeWrapper.h"
 #import "MFNumberPickerWrapper.h"
 #import "MFPhotoThumbnailWrapper.h"
 #import "MFPositionWrapper.h"
 #import "MFSignatureWrapper.h"
 #import "MFTextViewWrapper.h"
-#import "MFSliderWrapper.h"
+#import "MDKSliderWrapper.h"
 #import "MFSwitchWrapper.h"
-#import "MFTextFieldWrapper.h"
+#import "MDKTextFieldWrapper.h"
 #import "MFPhotoFixedListWrapper.h"
 #import "MFFixedListWrapper.h"
 #import "MFPickerListWrapper.h"

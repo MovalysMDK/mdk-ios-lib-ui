@@ -14,29 +14,35 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-@import MDKControl.ControlDateTime;
+@import MDKControl.ControlSlider;
 
-#import "MDKDateTimeWrapper.h"
+#import "MDKSliderWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
 
-@implementation MDKDateTimeWrapper
+@implementation MDKSliderWrapper
 
 -(instancetype)initWithComponent:(UIControl *)component {
     self = [super initWithComponent:component];
     if(self) {
-        [[self typeComponent].internalView addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
+        [[self typeComponent].internalView addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
     }
     return self;
 }
 
--(MDKUIDateTime *)typeComponent {
-    return (MDKUIDateTime *)self.component;
+-(MDKUISlider *)typeComponent {
+    return (MDKUISlider *)self.component;
 }
 
--(void)componentValueChanged:(MDKUIDateTime *)datePicker
+-(void)componentValueChanged:(MDKUISlider *)slider
 {
-    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[datePicker getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
+    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[slider getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
     
+}
+
+-(NSDictionary *) nilValueBySelector {
+    NSMutableDictionary *superDict = [[super nilValueBySelector] mutableCopy];
+    [superDict setObject:@0 forKey:@"setValue:"];
+    return superDict;
 }
 
 @end

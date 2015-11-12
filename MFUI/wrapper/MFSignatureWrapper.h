@@ -14,12 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 
 /*!
  * @class MFSignatureWrapper
  * @brief The wrapper for the MFSignature component.
  */
-@interface MFSignatureWrapper : MFAbstractComponentWrapper
+@interface MFSignatureWrapper : MFAbstractControlWrapper
 
 @end

@@ -14,12 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 
 /*!
  * @class MFPositionWrapper
  * @brief The wrapper for the MFPosition component.
  */
-@interface MFPositionWrapper : MFAbstractComponentWrapper
+@interface MFPositionWrapper : MFAbstractControlWrapper
 
 @end

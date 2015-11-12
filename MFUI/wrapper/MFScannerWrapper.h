@@ -14,12 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFAbstractComponentWrapper.h"
+#import "MFAbstractControlWrapper.h"
 
 /*!
  * @class MFScannerWrapper
  * @brief The wrapper for the MFScanner component.
  */
-@interface MFScannerWrapper : MFAbstractComponentWrapper
+@interface MFScannerWrapper : MFAbstractControlWrapper
 
 @end

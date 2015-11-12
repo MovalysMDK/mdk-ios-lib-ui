@@ -14,12 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFTextFieldWrapper.h"
+#import "MDKTextFieldWrapper.h"
 
 /*!
- * @class MFIntegerTextFieldWrapper
- * @brief The wrapper for the MFIntegerTextField component.
+ * @class MDKDoubleTextFieldWrapper
+ * @brief The wrapper for the MDKDoubleTextField component.
  */
-@interface MFIntegerTextFieldWrapper : MFTextFieldWrapper
+@interface MDKDoubleTextFieldWrapper : MDKTextFieldWrapper
 
 @end

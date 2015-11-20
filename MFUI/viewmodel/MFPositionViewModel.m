@@ -22,7 +22,8 @@
 
 
 @implementation MFPositionViewModel
-
+@synthesize latitude;
+@synthesize longitude;
 
 #pragma mark - Constructeurs
 -(id)init {

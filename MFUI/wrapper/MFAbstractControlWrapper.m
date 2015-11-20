@@ -16,6 +16,8 @@
 
 @import MDKControl.Control;
 
+#import "MFUIBaseListViewModel.h"
+
 #import "MFAbstractControlWrapper.h"
 #import "UIView+Binding.h"
 @interface MFAbstractControlWrapper ()
@@ -59,7 +61,12 @@ return @{};
 }
 
 -(void)setComponentValue:(id)value forKeyPath:(NSString *)keyPath {
-    if([[self component] isKindOfClass:NSClassFromString(@"MDKRenderableControl")]) {
+    if([[self component] isKindOfClass:NSClassFromString(@"MDKUIFixedList")]) {
+        if([keyPath isEqualToString:@"data"] && [value isKindOfClass:[MFUIBaseListViewModel class]]) {
+            [((MDKRenderableControl *)self.component).internalView setValue:((MFUIBaseListViewModel *)value).viewModels forKeyPath:keyPath];
+        }
+    }
+    else if([[self component] isKindOfClass:NSClassFromString(@"MDKRenderableControl")]) {
         [((MDKRenderableControl *)self.component).internalView setValue:value forKeyPath:keyPath];
     }
     else {

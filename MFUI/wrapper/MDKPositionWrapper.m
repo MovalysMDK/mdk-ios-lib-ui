@@ -14,25 +14,27 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFPositionWrapper.h"
-#import "MFPosition.h"
+
+@import MDKControl.ControlPosition;
+
+#import "MDKPositionWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
 
-@implementation MFPositionWrapper
+@implementation MDKPositionWrapper
 
 -(instancetype)initWithComponent:(UIControl *)component {
     self = [super initWithComponent:component];
     if(self) {
-        [[self typeComponent] addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
+        [[self typeComponent].internalView addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
     }
     return self;
 }
 
--(MFPosition *)typeComponent {
-    return (MFPosition *)self.component;
+-(MDKUIPosition *)typeComponent {
+    return (MDKUIPosition *)self.component;
 }
 
--(void)componentValueChanged:(MFPosition *)position
+-(void)componentValueChanged:(MDKUIPosition *)position
 {
     [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[position getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
     

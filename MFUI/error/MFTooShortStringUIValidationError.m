@@ -19,7 +19,7 @@
 
 @implementation MFTooShortStringUIValidationError
 
-NSInteger const TOO_SHORT_STRING_UI_VALIDATION_ERROR_CODE = 10001;
+NSInteger const TOO_SHORT_STRING_UI_VALIDATION_ERROR_CODE = 3001;
 
 NSString *const TOO_SHORT_STRING_UI_VALIDATION_LOCALIZED_DESCRIPTION_KEY = @"MFTooShortStringUIValidationError";
 

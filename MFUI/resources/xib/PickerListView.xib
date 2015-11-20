@@ -41,7 +41,7 @@
             <connections>
                 <outlet property="tableView" destination="smy-dR-hU4" id="zIY-Wl-eG8"/>
             </connections>
-            <point key="canvasLocation" x="240.5" y="401.5"/>
+            <point key="canvasLocation" x="139.5" y="352.5"/>
         </view>
     </objects>
 </document>

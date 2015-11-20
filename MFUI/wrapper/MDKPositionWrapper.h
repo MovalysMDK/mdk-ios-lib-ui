@@ -17,9 +17,9 @@
 #import "MFAbstractControlWrapper.h"
 
 /*!
- * @class MFPositionWrapper
+ * @class MDKPositionWrapper
  * @brief The wrapper for the MFPosition component.
  */
-@interface MFPositionWrapper : MFAbstractControlWrapper
+@interface MDKPositionWrapper : MFAbstractControlWrapper
 
 @end

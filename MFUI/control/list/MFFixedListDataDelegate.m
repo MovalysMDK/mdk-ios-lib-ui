@@ -75,7 +75,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 
 
 #pragma mark - Initialization
--(instancetype)initWithFixedList:(MFFixedList *) fixedList {
+-(instancetype)initWithFixedList:(MDKUIFixedList *) fixedList {
     self = [super init];
     if(self) {
         self.fixedList = fixedList;
@@ -164,9 +164,9 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 /**
  * @brief Indique que cette cellule est éditable
  */
--(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.fixedList.mf.canDeleteItem;
-}
+//-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return self.fixedList.mf.canDeleteItem;
+//}
 
 
 
@@ -206,7 +206,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         [tempData removeObjectAtIndex:indexPath.row];
         viewModel.viewModels = tempData;
         viewModel.hasChanged = YES ;
-        [self.fixedList setDataAfterEdition:viewModel];
+//        [self.fixedList setDataAfterEdition:viewModel];
         self.hasBeenReload = NO;    //Permet de recharger les données lors de l'appel à reloadData dans le block
         
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -230,13 +230,13 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(!self.fixedList.mf.canEditItem)
-        return;
-    
-    if(self.fixedList.mf.editMode == MFFixedListEditModePopup) {        
-        
-        [self showDetailControllerForItemAtIndexPath:indexPath];
-    }
+//    if(!self.fixedList.mf.canEditItem)
+//        return;
+//    
+//    if(self.fixedList.mf.editMode == MFFixedListEditModePopup) {        
+//        
+//        [self showDetailControllerForItemAtIndexPath:indexPath];
+//    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
@@ -324,7 +324,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     if (reload) {
         [self.fixedList setData:viewModel];
     } else {
-        [self.fixedList setDataAfterEdition:viewModel];
+//        [self.fixedList setDataAfterEdition:viewModel];
     }
     
     //Perform an action if exists
@@ -336,30 +336,30 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         });
     }
     
-    if([self.fixedList isPhotoFixedList]) {
-        UIViewController *parentController = self.fixedList.parentViewController;
-        //On ajoute l'élément à la liste
-        //On créé le contrôleur à afficher
-        MFPhotoDetailViewController *managePhotoViewController = [[UIStoryboard storyboardWithName:DEFAUT_PHOTO_STORYBOARD_NAME bundle:[NSBundle bundleForClass:[MFPhotoDetailViewController class]]] instantiateViewControllerWithIdentifier:DEFAUT_PHOTO_MANAGER_CONTROLLER_NAME];
-        
-        //Récupération du view model créé lors de l'ajout de l'élément.
-        //Il correspond au dernier élément ajouté au tableau des view models de la liste
-        MFUIBaseListViewModel *viewModel = [self.fixedList getData];
-        NSMutableArray *data = viewModel.viewModels;
-        MFUIBaseViewModel *baseViewModel = (MFUIBaseViewModel *)[data objectAtIndex:data.count-1];
-        
-        //On instancie un nouveau view model de photo que l'on passe au view model de la cellule
-        MFPhotoViewModel *newPhotoViewModel = [[MFPhotoViewModel alloc] init];
-        [baseViewModel setValue:newPhotoViewModel forKeyPath:@"photo"];
-        
-        //Le contrôleur récupère la liste, la cellule et le view model créé.
-        managePhotoViewController.fixedList = self.fixedList;
-        managePhotoViewController.cellPhotoFixedList = (MFPhotoFixedListDataDelegate *)self;
-        managePhotoViewController.photoViewModel = newPhotoViewModel;
-        
-        //On affiche la vue
-        [((UIViewController *)parentController).navigationController pushViewController:managePhotoViewController animated:YES];
-    }
+//    if([self.fixedList isPhotoFixedList]) {
+//        UIViewController *parentController = self.fixedList.parentViewController;
+//        //On ajoute l'élément à la liste
+//        //On créé le contrôleur à afficher
+//        MFPhotoDetailViewController *managePhotoViewController = [[UIStoryboard storyboardWithName:DEFAUT_PHOTO_STORYBOARD_NAME bundle:[NSBundle bundleForClass:[MFPhotoDetailViewController class]]] instantiateViewControllerWithIdentifier:DEFAUT_PHOTO_MANAGER_CONTROLLER_NAME];
+//        
+//        //Récupération du view model créé lors de l'ajout de l'élément.
+//        //Il correspond au dernier élément ajouté au tableau des view models de la liste
+//        MFUIBaseListViewModel *viewModel = [self.fixedList getData];
+//        NSMutableArray *data = viewModel.viewModels;
+//        MFUIBaseViewModel *baseViewModel = (MFUIBaseViewModel *)[data objectAtIndex:data.count-1];
+//        
+//        //On instancie un nouveau view model de photo que l'on passe au view model de la cellule
+//        MFPhotoViewModel *newPhotoViewModel = [[MFPhotoViewModel alloc] init];
+//        [baseViewModel setValue:newPhotoViewModel forKeyPath:@"photo"];
+//        
+//        //Le contrôleur récupère la liste, la cellule et le view model créé.
+//        managePhotoViewController.fixedList = self.fixedList;
+//        managePhotoViewController.cellPhotoFixedList = (MFPhotoFixedListDataDelegate *)self;
+//        managePhotoViewController.photoViewModel = newPhotoViewModel;
+//        
+//        //On affiche la vue
+//        [((UIViewController *)parentController).navigationController pushViewController:managePhotoViewController animated:YES];
+//    }
     
     [self computeCellHeightAndDispatchToFormController];
 }
@@ -382,7 +382,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 }
 
 -(void) setContent{
-    [self.fixedList setItemClassName:[self itemListViewModelName]];
+//    [self.fixedList setItemClassName:[self itemListViewModelName]];
     
     self.viewModel = [self.fixedList getData];
     if(self.viewModel) {
@@ -444,7 +444,6 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
             nib = [UINib nibWithNibName:identifier bundle:[NSBundle bundleForClass:[MFCellAbstract class]]];
         }
         [self.fixedList.tableView registerNib:nib forCellReuseIdentifier:identifier];
-
     }
 }
 
@@ -461,12 +460,12 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
             NSUInteger numberOfItems = ((MFUIBaseListViewModel *)[self getViewModel]).viewModels.count;
             float height = numberOfItems * itemHeight ;
             height += (numberOfItems - 1) * TABLEVIEW_SEPARATOR_HEIGHT;
-            height += self.fixedList.topBarView.frame.size.height;
-            if(((MFUIBaseListViewModel *)[self getViewModel]).viewModels.count == 0) {
-                height = self.fixedList.topBarViewHeight;
-            }
-            
-            [self.fixedList changeDynamicHeight:height];
+//            height += self.fixedList.topBarView.frame.size.height;
+//            if(((MFUIBaseListViewModel *)[self getViewModel]).viewModels.count == 0) {
+//                height = self.fixedList.topBarViewHeight;
+//            }
+//            
+//            [self.fixedList changeDynamicHeight:height];
             
             
             [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"MDK_ComponentSize_%@_%@", parentObjectWithBinding, [selfBindingValue.bindingIndexPath stringIndexPath]] object:@(height)];

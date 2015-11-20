@@ -18,7 +18,7 @@
 
 @implementation MFInvalidUrlValueUIValidationError
 
-NSInteger const INVALID_URL_VALUE_UI_VALIDATION_ERROR_CODE = 10005;
+NSInteger const INVALID_URL_VALUE_UI_VALIDATION_ERROR_CODE = 1003;
 
 NSString *const INVALID_URL_VALUE_UI_VALIDATION_LOCALIZED_DESCRIPTION_KEY = @"MFInvalidUrlValueUIValidationError";
 

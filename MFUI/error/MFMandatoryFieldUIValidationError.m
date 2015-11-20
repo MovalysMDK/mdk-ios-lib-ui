@@ -19,7 +19,7 @@
 
 @implementation MFMandatoryFieldUIValidationError
 
-NSInteger const MANDATORY_FIELD_UI_VALIDATION_ERROR_CODE = 10002;
+NSInteger const MANDATORY_FIELD_UI_VALIDATION_ERROR_CODE = 2000;
 
 NSString *const MANDATORY_FIELD_UI_VALIDATION_LOCALIZED_DESCRIPTION_KEY = @"MFMandatoryFieldUIValidationError";
 

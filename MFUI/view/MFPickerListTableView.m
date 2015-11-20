@@ -18,7 +18,6 @@
 
 @implementation MFPickerListTableView
 
-
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self dismiss];
 }

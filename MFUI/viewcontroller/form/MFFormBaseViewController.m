@@ -243,7 +243,6 @@
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
     return ((NSArray *)self.bindingDelegate.structure[SECTION_ORDER_KEY]).count;
 }
 

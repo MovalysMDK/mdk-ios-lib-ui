@@ -22,7 +22,7 @@
 #import "MDKDateTimeWrapper.h"
 #import "MFNumberPickerWrapper.h"
 #import "MFPhotoThumbnailWrapper.h"
-#import "MFPositionWrapper.h"
+#import "MDKPositionWrapper.h"
 #import "MFSignatureWrapper.h"
 #import "MFTextViewWrapper.h"
 #import "MDKSliderWrapper.h"

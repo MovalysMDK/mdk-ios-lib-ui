@@ -35,10 +35,10 @@ NSString const *bindedNameKey = @"bindedNameKey";
     for(MFOutletBindingKey* outletBindingKey in bindingDictionary.allKeys) {
         UIView *valueAsView = [self valueForKey:outletBindingKey.outletName];
         
-        if([valueAsView conformsToProtocol:@protocol(MFComponentAttributesProtocol)]) {
+        if([valueAsView conformsToProtocol:@protocol(MFComponentAttributesProtocol)] || [valueAsView conformsToProtocol:@protocol(MDKControlAttributesProtocol)]) {
             [((id<MFComponentAttributesProtocol>)valueAsView) setControlAttributes:bindingViewDescriptor.controlsAttributes[outletBindingKey.outletName]];
         }
-        if([valueAsView conformsToProtocol:@protocol(MFComponentAssociatedLabelProtocol)]) {
+        if([valueAsView conformsToProtocol:@protocol(MFComponentAssociatedLabelProtocol)] || [valueAsView conformsToProtocol:@protocol(MDKControlAssociatedLabelProtocol)]) {
             NSString *associatedLabelOutletName = bindingViewDescriptor.associatedLabels[outletBindingKey.outletName];
             if(associatedLabelOutletName) {
                 UIView *associatedLabel = [self valueForKey:associatedLabelOutletName];

@@ -23,7 +23,7 @@
 #import "MFFormWithDetailViewControllerProtocol.h"
 #import "MFFormBaseViewController.h"
 
-@class MFFixedList;
+@import MDKControl.ControlFixedList;
 
 
 
@@ -42,7 +42,7 @@
  * @param fixedList The MFFixedList component managed by this delegate
  * @return The built object
  */
--(instancetype)initWithFixedList:(MFFixedList *) fixedList;
+-(instancetype)initWithFixedList:(MDKUIFixedList *) fixedList;
 
 /*!
  * @brief Returns the margin to use for custom buttons. You should implement this method to customize the FixedList appearence
@@ -85,7 +85,7 @@
 /*!
  * @brief The fixedList that used this data delegate
  */
-@property (nonatomic, weak) MFFixedList *fixedList;
+@property (nonatomic, weak) MDKUIFixedList *fixedList;
 
 @end
 

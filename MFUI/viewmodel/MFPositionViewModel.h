@@ -16,13 +16,10 @@
 
 
 #import "MFUIControl.h"
-
 #import "MFUIBaseViewModel.h"
 
-@interface MFPositionViewModel : MFUIBaseViewModel
 
-@property (nonatomic, strong) NSString *latitude;
-@property (nonatomic, strong) NSString *longitude;
+@interface MFPositionViewModel : MFUIBaseViewModel <MDKUIDataPositionProtocol>
 
 /*!
  * @brief convert MFPositionVoProtocol to MFPositionViewModel instance

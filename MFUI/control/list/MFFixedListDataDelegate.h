@@ -33,7 +33,7 @@
  * @discussion This delegate acts as a specific controller to bind FixedList component and its data.
  * This class is also a UITableView DataSource & Delegate.
  */
-@interface MFFixedListDataDelegate : NSObject <UITableViewDelegate, UITableViewDataSource, MFCommonFormProtocol, MFFormWithDetailViewControllerProtocol, MFContentDelegate>
+@interface MFFixedListDataDelegate : MDKUIFixedListBaseDelegate <UITableViewDelegate, UITableViewDataSource, MFCommonFormProtocol, MFFormWithDetailViewControllerProtocol, MFContentDelegate>
 
 #pragma mark - Methods
 

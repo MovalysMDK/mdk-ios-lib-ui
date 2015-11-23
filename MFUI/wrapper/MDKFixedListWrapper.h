@@ -17,9 +17,9 @@
 #import "MFAbstractControlWrapper.h"
 
 /*!
- * @class MFFixedListWrapper
- * @brief The wrapper for the MFFixedList component.
+ * @class MDKFixedListWrapper
+ * @brief The wrapper for the MDKFixedList component.
  */
-@interface MFFixedListWrapper : MFAbstractControlWrapper
+@interface MDKFixedListWrapper : MFAbstractControlWrapper
 
 @end

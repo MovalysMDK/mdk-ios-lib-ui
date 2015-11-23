@@ -116,17 +116,12 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if(!self.bindingDelegate.structure) {
-        return [[UITableViewCell alloc] init];
-    }
-    
+
+-(void)fixedList:(MDKUIFixedList *)fixedList mapCell:(UITableViewCell *)cell withObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
     MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_FIXEDLIST_DESCRIPTOR];
     NSString *identifier = bindingData.cellIdentifier;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-
+    
     bindingData.cellIndexPath = indexPath;
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
     [self updateCellFromBindingData:bindingData atIndexPath:indexPath];
@@ -135,7 +130,6 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         [(MFCellAbstract *)cell cellIsConfigured];
     }
     [self.fixedList validate];
-    return cell;
 }
 
 
@@ -256,24 +250,6 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     [nextController setOriginalViewModel:tempViewModel];
     
     [((UIViewController *)parentController).navigationController pushViewController:(UIViewController *)nextController animated:YES];
-}
-
-
-#pragma mark - Buttons
-
--(CGFloat)marginForCustomButtons {
-    return 25;
-}
-
--(CGSize)sizeForCustomButtons {
-    UIButton *referenceButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    return CGSizeMake(referenceButton.frame.size.width,referenceButton.frame.size.height);
-}
-
-
--(NSArray *)customButtonsForFixedList {
-    [MFException throwNotImplementedExceptionOfMethodName:@"customButtonsForFixedList" inClass:[self class] andUserInfo:nil];
-    return @[];
 }
 
 
@@ -422,7 +398,8 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 }
 
 -(MFUIBaseViewModel *)viewModelAtIndexPath:(NSIndexPath *)indexPath {
-    return ((MFUIBaseListViewModel *)[self getViewModel]).viewModels[indexPath.row];
+    [self computeCellHeightAndDispatchToFormController];
+    return ((NSArray *)[self.fixedList getData])[indexPath.row];
 }
 
 -(void) initializeBinding {
@@ -455,9 +432,9 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     UIViewController *parent = self.fixedList.parentViewController;
     if(parent && [parent conformsToProtocol:@protocol(MFObjectWithBindingProtocol)]) {
         id<MFObjectWithBindingProtocol> parentObjectWithBinding = (id<MFObjectWithBindingProtocol>)parent;
-        MFBindingValue *selfBindingValue = parentObjectWithBinding.bindingDelegate.binding.bindingByComponents[@(self.fixedList.hash)];
+        MFBindingValue *selfBindingValue = parentObjectWithBinding.bindingDelegate.binding.bindingByComponents[@(self.fixedList.externalView.hash)];
         if(selfBindingValue && [self getViewModel]) {
-            NSUInteger numberOfItems = ((MFUIBaseListViewModel *)[self getViewModel]).viewModels.count;
+            NSUInteger numberOfItems = ((NSArray *)[self getViewModel]).count;
             float height = numberOfItems * itemHeight ;
             height += (numberOfItems - 1) * TABLEVIEW_SEPARATOR_HEIGHT;
 //            height += self.fixedList.topBarView.frame.size.height;
@@ -480,9 +457,17 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     [tableConfiguration createFixedListTableCellWithDescriptor:photoCellDescriptor];
 }
 
--(void)dealloc {
-    self.bindingDelegate = nil;
+
+-(NSString *)xibNameForFixedListCells {
+    MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_FIXEDLIST_DESCRIPTOR];
+    NSString *identifier = bindingData.cellIdentifier;
+    
+    UINib *nib = [UINib nibWithNibName:identifier bundle:[NSBundle mainBundle]];
+    [self.fixedList.tableView registerNib:nib forCellReuseIdentifier:identifier];
+    
+    return identifier;
 }
+
 
 
 @end

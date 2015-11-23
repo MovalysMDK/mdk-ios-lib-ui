@@ -116,14 +116,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     
 }
 
--(void)awakeFromNib {
-    [super awakeFromNib];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //        self.tableView.frame = self.bounds;
-        [self defineAndAddConstraint];
-    });
-    
-}
 
 -(void) changeDynamicHeight:(int)newHeight {
     if(!self.fixedListHeightConstraint) {
@@ -137,90 +129,12 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     [self.fixedListHeightConstraint setConstant:newHeight];
     [self setNeedsLayout];
 }
-
--(void)defineAndAddConstraint {
-    int customButtonsMargin = [self.mf.dataDelegate marginForCustomButtons];
-    
-    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.topBarView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    //    [self.waitingView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.buttonsView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    
-    //display a button if the user is allowed to add an item
-    [self resetCustomButtons];
-    [self refreshCustomButtons];
-    
-    NSLayoutConstraint *topBarViewWidth = [NSLayoutConstraint constraintWithItem:self.topBarView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
-    NSLayoutConstraint *topBarViewHeight = [NSLayoutConstraint constraintWithItem:self.topBarView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:[self topBarViewHeight]];
-    NSLayoutConstraint *topBarViewLeft = [NSLayoutConstraint constraintWithItem:self.topBarView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
-    NSLayoutConstraint *topBarViewTop = [NSLayoutConstraint constraintWithItem:self.topBarView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    
-    
-    NSLayoutConstraint *tableViewRight = [NSLayoutConstraint constraintWithItem:self.tableView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0];
-    NSLayoutConstraint *tableViewBottom = [NSLayoutConstraint constraintWithItem:self.tableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    NSLayoutConstraint *tableViewLeft = [NSLayoutConstraint constraintWithItem:self.tableView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
-    NSLayoutConstraint *tableViewTop = [NSLayoutConstraint constraintWithItem:self.tableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.topBarView attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    
-    NSLayoutConstraint *buttonsViewHeight = [NSLayoutConstraint constraintWithItem:self.buttonsView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.topBarView attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
-    NSLayoutConstraint *buttonsViewRight = [NSLayoutConstraint constraintWithItem:self.buttonsView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.topBarView attribute:NSLayoutAttributeRight multiplier:1 constant:0];
-    NSLayoutConstraint *buttonsViewTop = [NSLayoutConstraint constraintWithItem:self.buttonsView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.topBarView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    
-    NSInteger buttonsViewsize = [self customButtonsArray].count * [self topBarViewHeight] + ([self customButtonsArray].count -1) * customButtonsMargin;
-    NSLayoutConstraint *buttonsViewWidth = [NSLayoutConstraint constraintWithItem:self.buttonsView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:buttonsViewsize];
-    
-    if(![self showButtons]) {
-        buttonsViewWidth = [NSLayoutConstraint constraintWithItem:self.buttonsView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:0];
-    }
-    if(![self showTitle]) {
-        buttonsViewWidth = [NSLayoutConstraint constraintWithItem:self.buttonsView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.topBarView attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
-    }
-    
-    
-    NSLayoutConstraint *titleLabelLeft = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.topBarView attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
-    NSLayoutConstraint *titleLabelTop = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.topBarView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    NSLayoutConstraint *titleLabelBottom = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.topBarView attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    NSLayoutConstraint *titleLabelRight = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.buttonsView attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
-    
-    
-    
-    [self.topBarView addConstraints:@[
-                                      buttonsViewHeight, buttonsViewRight, buttonsViewTop, buttonsViewWidth,
-                                      titleLabelLeft, titleLabelTop, titleLabelRight, titleLabelBottom
-                                      ]];
-    
-    [self addConstraints:@[
-                           topBarViewHeight, topBarViewLeft, topBarViewTop, topBarViewWidth,
-                           tableViewRight, tableViewBottom,tableViewLeft, tableViewTop
-                           ]];
-    
-}
-
 #pragma mark - Méthodes dérivées de MFUIComponentProtocol
 
 +(NSString *)getDataType {
     return @"MFUIBaseListViewModel";
 }
 
-/**
- * @brief Set value of the field
- * @param value the value of the string
- */
--(void) setData:(id)data {
-    //Set Data
-    if(![_data isEqual:data] && ![data isKindOfClass:[MFKeyNotFound class]]) {
-        _data= data;
-        [self.mf.dataDelegate computeCellHeightAndDispatchToFormController];
-    }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
-    [self.mf.dataDelegate initializeModel];
-    self.tableView.editing = YES;
-    //PROTODO : mode edit ?
-}
 
 -(BOOL) dataDifferentFrom:(id) data
 {
@@ -326,76 +240,7 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
     [self refreshCustomButtons];
 }
 
--(void) refreshCustomButtons {
-    for(UIButton *button in [self.mf.dataDelegate customButtonsForFixedList]) {
-        [self addCustomButton:button];
-    }
-    
-    int marginForCustomButtons = -[self.mf.dataDelegate marginForCustomButtons];
-    CGSize sizeForCustomButtons = [self.mf.dataDelegate sizeForCustomButtons];
-    
-    self.buttonsView.userInteractionEnabled = YES;
-    [self.topBarView addSubview:self.buttonsView];
-    [self.topBarView bringSubviewToFront:self.buttonsView];
-    
-    UIButton *lasButtonReference = nil;
-    for(UIButton *button in self.customButtonsArray) {
-        [self.buttonsView addSubview:button];
-        
-        [button setTranslatesAutoresizingMaskIntoConstraints:NO];
-        NSLayoutConstraint *rightButtonMargin = nil;
-        NSLayoutConstraint *centerYButton = nil;
-        NSLayoutConstraint *buttonWidth = nil;
-        NSLayoutConstraint *buttonHeight = nil;
-        //NSLayoutConstraint *leftContainer = nil;
-        
-        if([self.customButtonsArray indexOfObject:button] == 0 ) {
-            if([self buttonsAlignment] == MFFixedListAlignmentCenter) {
-                rightButtonMargin = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.buttonsView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-            }
-            else if([self buttonsAlignment] == MFFixedListAlignmentRight){
-                rightButtonMargin = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.buttonsView attribute:NSLayoutAttributeRight multiplier:1 constant:0];
-            }
-            else {
-                rightButtonMargin = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.buttonsView attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
-            }
-            
-        }
-        else {
-            if(lasButtonReference) {
-                rightButtonMargin = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:lasButtonReference attribute:NSLayoutAttributeLeft multiplier:1 constant:marginForCustomButtons];
-            }
-        }
-        centerYButton = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.buttonsView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-        buttonWidth = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:sizeForCustomButtons.width];
-        buttonHeight = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:sizeForCustomButtons.height];
-        
-        [self.buttonsView addConstraints:@[centerYButton, buttonHeight, buttonWidth ]];
-        if(rightButtonMargin) {
-            [self.buttonsView addConstraint:rightButtonMargin];
-        }
-        lasButtonReference = button;
-    }
-    
-}
 
--(void)resetCustomButtons {
-    for(UIView *button in self.buttonsView.subviews) {
-        [button removeFromSuperview];
-    }
-    if(self.mf.canAddItem) {
-        self.addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-        [self.customButtonsArray addObject:self.addButton];
-        [self.addButton addTarget:self action:@selector(addItem) forControlEvents:UIControlEventTouchUpInside];
-    }
-    if(self.mf.canDeleteItem) {
-        self.editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-        [self.editButton addTarget:self action:@selector(toogleEditMode) forControlEvents:UIControlEventTouchUpInside];
-        [self toogleEditMode];[self toogleEditMode];
-        [self.customButtonsArray addObject:self.editButton];
-    }
-    [self.buttonsView removeConstraints:[self.buttonsView constraints]];
-}
 
 
 
@@ -403,11 +248,6 @@ NSString *const FIXED_LIST_PARAMETER_IS_PHOTO = @"isPhotoFixedList";
 
 -(void) setTitle:(NSString *)title {
     [self.titleLabel setText:title];
-}
-
--(NSInteger) topBarViewHeight {
-    int customButtonsSize = [self.mf.dataDelegate sizeForCustomButtons].height;
-    return customButtonsSize;
 }
 
 -(BOOL)showTitle {

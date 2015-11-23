@@ -14,12 +14,14 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFFixedList.h"
-#import "MFFixedListWrapper.h"
+@import MDKControl.ControlFixedList;
+
+
+#import "MDKFixedListWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
 #import "NSIndexPath+Utils.h"
 
-@implementation MFFixedListWrapper
+@implementation MDKFixedListWrapper
 @synthesize objectWithBinding = _objectWithBinding;
 @synthesize wrapperIndexPath = _wrapperIndexPath;
 
@@ -31,11 +33,11 @@
     return self;
 }
 
--(MFFixedList *)typeComponent {
-    return (MFFixedList *)self.component;
+-(MDKUIFixedList *)typeComponent {
+    return (MDKUIFixedList *)self.component;
 }
 
--(void)componentValueChanged:(MFFixedList *)fixedList
+-(void)componentValueChanged:(MDKUIFixedList *)fixedList
 {
     [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[fixedList getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
 }

@@ -14,12 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFFixedListWrapper.h"
+#import "MDKFixedListWrapper.h"
 
 /*!
  * @class MFPhotoFixedListWrapper
  * @brief The wrapper for the MFPhotoFixedList component.
  */
-@interface MFPhotoFixedListWrapper : MFFixedListWrapper
+@interface MFPhotoFixedListWrapper : MDKFixedListWrapper
 
 @end

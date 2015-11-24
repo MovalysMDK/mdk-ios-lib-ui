@@ -25,7 +25,7 @@
 #import "MFObjectWithBindingProtocol.h"
 
 
-@interface MFUIBaseViewModel : NSObject <MFUIBaseViewModelProtocol, MFObjectWithListenerProtocol, NSCopying, MFObjectWithListenerProtocol>
+@interface MFUIBaseViewModel : NSObject <MFUIBaseViewModelProtocol, MFObjectWithListenerProtocol, NSCopying>
 
 
 #pragma mark - Properties

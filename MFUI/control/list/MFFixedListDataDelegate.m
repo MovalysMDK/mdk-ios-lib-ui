@@ -217,7 +217,6 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     // Exécution du block
     [CATransaction commit];
     [self.fixedList.tableView reloadData];
-    [self computeCellHeightAndDispatchToFormController];
     
     [self.HUD hide:YES];
     
@@ -268,9 +267,9 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     
 }
 
--(void)addItemOnFixedList{
-    [self addItemOnFixedList:YES];
-}
+//-(void)addItemOnFixedList{
+//    [self addItemOnFixedList:YES];
+//}
 
 -(void)addItemOnFixedList:(BOOL) reload{
     
@@ -398,7 +397,6 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 }
 
 -(MFUIBaseViewModel *)viewModelAtIndexPath:(NSIndexPath *)indexPath {
-    [self computeCellHeightAndDispatchToFormController];
     return ((NSArray *)[self.fixedList getData])[indexPath.row];
 }
 
@@ -434,18 +432,14 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         id<MFObjectWithBindingProtocol> parentObjectWithBinding = (id<MFObjectWithBindingProtocol>)parent;
         MFBindingValue *selfBindingValue = parentObjectWithBinding.bindingDelegate.binding.bindingByComponents[@(self.fixedList.externalView.hash)];
         if(selfBindingValue && [self getViewModel]) {
-            NSUInteger numberOfItems = ((NSArray *)[self getViewModel]).count;
+            NSInteger numberOfItems = ((NSArray *)[self getViewModel]).count;
             float height = numberOfItems * itemHeight ;
-            height += (numberOfItems - 1) * TABLEVIEW_SEPARATOR_HEIGHT;
-//            height += self.fixedList.topBarView.frame.size.height;
-//            if(((MFUIBaseListViewModel *)[self getViewModel]).viewModels.count == 0) {
-//                height = self.fixedList.topBarViewHeight;
-//            }
-//            
-//            [self.fixedList changeDynamicHeight:height];
+            height += MAX((numberOfItems - 1), 0) * TABLEVIEW_SEPARATOR_HEIGHT;
+            for(NSNumber *offet in [self fixedList:self.fixedList topOffsets:@[@(self.fixedList.addButton.frame.size.height)]]) {
+                height += [offet floatValue];
+            }
             
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"MDK_ComponentSize_%@_%@", parentObjectWithBinding, [selfBindingValue.bindingIndexPath stringIndexPath]] object:@(height)];
+            [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"MDK_ComponentSize_%@_%@", parentObjectWithBinding, [selfBindingValue.bindingIndexPath stringIndexPath]] object:@{@"height":@(height), @"mustReload":@(YES)}];
         }
     }
     
@@ -466,6 +460,17 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     [self.fixedList.tableView registerNib:nib forCellReuseIdentifier:identifier];
     
     return identifier;
+}
+
+
+-(NSArray *)fixedList:(MDKUIFixedList *)fixedList topOffsets:(NSArray *)baseOffsets {
+    return baseOffsets;
+}
+
+-(void)fixedList:(MDKUIFixedList *)fixedList didDeleteRowAtIndexPath:(NSIndexPath *)indexPath withObject:(id)object {
+    [super fixedList:fixedList didDeleteRowAtIndexPath:indexPath withObject:object];
+    [fixedList valueChanged:fixedList.tableView];
+    [self computeCellHeightAndDispatchToFormController];
 }
 
 

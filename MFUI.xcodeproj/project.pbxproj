@@ -459,6 +459,7 @@
 		B0D4C4BF1B3816F60020ACF2 /* MFCommonFormDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D4C4BB1B3816F60020ACF2 /* MFCommonFormDelegate.m */; };
 		B0D4C4C01B3816F60020ACF2 /* MFCommonFormProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D4C4BC1B3816F60020ACF2 /* MFCommonFormProtocol.h */; };
 		B0D4C4C11B3816F60020ACF2 /* MFViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D4C4BD1B3816F60020ACF2 /* MFViewProtocol.h */; };
+		B0DDE5CB1C0372DD00F965C7 /* MFUIFixedListAdditionalProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0DDE5CA1C0372DD00F965C7 /* MFUIFixedListAdditionalProtocol.h */; };
 		B0E155C01B414C8600D5A213 /* UITableViewCell+Binding.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E155BE1B414C8600D5A213 /* UITableViewCell+Binding.m */; };
 		B0E155C11B414C8600D5A213 /* UITableViewCell+Binding.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E155BF1B414C8600D5A213 /* UITableViewCell+Binding.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0E86BE21B452FFF00F5CB41 /* MFPickerListWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E86BE01B452FFF00F5CB41 /* MFPickerListWrapper.h */; };
@@ -961,6 +962,7 @@
 		B0D4C4BB1B3816F60020ACF2 /* MFCommonFormDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCommonFormDelegate.m; sourceTree = "<group>"; };
 		B0D4C4BC1B3816F60020ACF2 /* MFCommonFormProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCommonFormProtocol.h; sourceTree = "<group>"; };
 		B0D4C4BD1B3816F60020ACF2 /* MFViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFViewProtocol.h; sourceTree = "<group>"; };
+		B0DDE5CA1C0372DD00F965C7 /* MFUIFixedListAdditionalProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIFixedListAdditionalProtocol.h; sourceTree = "<group>"; };
 		B0E155BE1B414C8600D5A213 /* UITableViewCell+Binding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Binding.m"; sourceTree = "<group>"; };
 		B0E155BF1B414C8600D5A213 /* UITableViewCell+Binding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Binding.h"; sourceTree = "<group>"; };
 		B0E86BE01B452FFF00F5CB41 /* MFPickerListWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPickerListWrapper.h; sourceTree = "<group>"; };
@@ -1665,6 +1667,7 @@
 				B0D45BCB1A5ED2F300C6D376 /* MFSimplePickerList.h */,
 				B0D45BCC1A5ED2F300C6D376 /* MFSimplePickerList.m */,
 				B0D45BCD1A5ED2F300C6D376 /* MFUIControlList.h */,
+				B0DDE5CA1C0372DD00F965C7 /* MFUIFixedListAdditionalProtocol.h */,
 			);
 			path = list;
 			sourceTree = "<group>";
@@ -2389,6 +2392,7 @@
 				B0FC78E51B3A99EE00DD225F /* MFNumberPickerWrapper.h in Headers */,
 				B06F3E211B39A550005170FC /* MDKPositionWrapper.h in Headers */,
 				B06F3E1D1B39973C005170FC /* MFSwitchWrapper.h in Headers */,
+				B0DDE5CB1C0372DD00F965C7 /* MFUIFixedListAdditionalProtocol.h in Headers */,
 				B06F3E191B3962AF005170FC /* MDKTextFieldWrapper.h in Headers */,
 				B0FC78E91B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h in Headers */,
 				B0D45D471A5ED2F400C6D376 /* MFPhotoFixedListItemCell.h in Headers */,

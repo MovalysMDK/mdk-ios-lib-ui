@@ -28,7 +28,7 @@
 -(instancetype)initWithComponent:(UIControl *)component {
     self = [super initWithComponent:component];
     if(self) {
-        [[self typeComponent] addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [[self typeComponent].internalView addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
     }
     return self;
 }

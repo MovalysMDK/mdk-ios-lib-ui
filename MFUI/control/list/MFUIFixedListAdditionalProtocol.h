@@ -14,23 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#import <Foundation/Foundation.h>
 
-#ifndef MFUI_MFUIWrapper_h
-#define MFUI_MFUIWrapper_h
+@import MDKControl.ControlFixedList;
 
-#import "MFAbstractControlWrapper.h"
-#import "MDKDateTimeWrapper.h"
-#import "MFNumberPickerWrapper.h"
-#import "MFPhotoThumbnailWrapper.h"
-#import "MDKPositionWrapper.h"
-#import "MFSignatureWrapper.h"
-#import "MFTextViewWrapper.h"
-#import "MDKSliderWrapper.h"
-#import "MFSwitchWrapper.h"
-#import "MDKTextFieldWrapper.h"
-#import "MFPhotoFixedListWrapper.h"
-#import "MDKFixedListWrapper.h"
-#import "MFPickerListWrapper.h"
-#import "MFEnumImageWrapper.h"
+@protocol MFUIFixedListAdditionalProtocol <NSObject>
 
-#endif
+-(NSArray *)fixedList:(MDKUIFixedList *)fixedList topOffsets:(NSArray *)baseOffsets;
+
+@end

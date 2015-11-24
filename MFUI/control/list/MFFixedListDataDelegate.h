@@ -22,6 +22,7 @@
 #import "MFTableConfiguration.h"
 #import "MFFormWithDetailViewControllerProtocol.h"
 #import "MFFormBaseViewController.h"
+#import "MFUIFixedListAdditionalProtocol.h"
 
 @import MDKControl.ControlFixedList;
 
@@ -33,7 +34,7 @@
  * @discussion This delegate acts as a specific controller to bind FixedList component and its data.
  * This class is also a UITableView DataSource & Delegate.
  */
-@interface MFFixedListDataDelegate : MDKUIFixedListBaseDelegate <UITableViewDelegate, UITableViewDataSource, MFCommonFormProtocol, MFFormWithDetailViewControllerProtocol, MFContentDelegate>
+@interface MFFixedListDataDelegate : MDKUIFixedListBaseDelegate <UITableViewDelegate, UITableViewDataSource, MFCommonFormProtocol, MFFormWithDetailViewControllerProtocol, MFContentDelegate, MFUIFixedListAdditionalProtocol>
 
 #pragma mark - Methods
 

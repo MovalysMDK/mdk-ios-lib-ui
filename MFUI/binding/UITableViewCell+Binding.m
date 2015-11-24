@@ -32,7 +32,7 @@
     MFBindingDictionary *bindingDictionary = bindingCellDescriptor.cellBinding;
     for(MFOutletBindingKey* outletBindingKey in bindingDictionary.allKeys) {
         UIView *valueAsView = [self valueForKey:outletBindingKey.outletName];
-        if([valueAsView conformsToProtocol:@protocol(MFComponentAssociatedLabelProtocol)] || [valueAsView conformsToProtocol:@protocol(MDKControlAttributesProtocol)] ) {
+        if([valueAsView conformsToProtocol:@protocol(MFComponentAttributesProtocol)] || [valueAsView conformsToProtocol:@protocol(MDKControlAttributesProtocol)] ) {
             NSDictionary *controlAttributes = bindingCellDescriptor.controlsAttributes[outletBindingKey.outletName];
             if(!controlAttributes) {
                 controlAttributes = @{};

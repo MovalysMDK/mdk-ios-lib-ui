@@ -98,7 +98,8 @@
             id<MFObjectWithBindingProtocol> parentObjectWithBinding = (id<MFObjectWithBindingProtocol>)parent;
             MFBindingValue *selfBindingValue = parentObjectWithBinding.bindingDelegate.binding.bindingByComponents[@(self.picker.hash)];
             if(selfBindingValue) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"MDK_ComponentSize_%@_%@", parentObjectWithBinding, [selfBindingValue.bindingIndexPath stringIndexPath]] object:@(itemHeight)];
+                [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"MDK_ComponentSize_%@_%@", parentObjectWithBinding, [selfBindingValue.bindingIndexPath stringIndexPath]] object:@{@"height":@(itemHeight), @"mustReload":@(YES)}];
+
             }
         }
         self.computeAlreadyDone = YES;

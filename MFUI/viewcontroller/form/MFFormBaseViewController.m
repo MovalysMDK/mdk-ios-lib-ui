@@ -350,7 +350,7 @@
 }
 
 -(void) didCreateBindingStructure {
-    // implemet if necessary in child classes
+    // implement if necessary in child classes
 }
 
 -(void)createBindingStructure {
@@ -377,13 +377,13 @@
         if([cell isKindOfClass:[MFCellAbstract class]]) {
             UIView *componentView = [cell valueForKey:@"componentView"];
             height -= componentView.frame.size.height;
-            height += [notification.object floatValue];
+            height += [notification.object[@"height"] floatValue];
             
         }
-        cellDescriptor.cellHeight = @(height);
-        
-        //        cellDescriptor.cellHeight = notification.object;
-        [self.tableView reloadData];
+        if(![cellDescriptor.cellHeight isEqualToNumber:@(height)]) {
+            cellDescriptor.cellHeight = @(height);
+            [self.tableView reloadData];
+        }
     }
 }
 

@@ -14,8 +14,8 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+@import MDKControl.ControlFixedList;
 #import "MFFixedListContentFieldValidator.h"
-#import "MFFixedList.h"
 #import "MFUIBaseListViewModel.h"
 
 @implementation MFFixedListContentFieldValidator
@@ -44,7 +44,7 @@
 }
 
 -(BOOL)canValidControl:(UIView *)control {
-    return [control isKindOfClass:[MFFixedList class]];
+    return [control isKindOfClass:[MDKUIFixedList class]];
 }
 
 -(NSArray *)recognizedAttributes {

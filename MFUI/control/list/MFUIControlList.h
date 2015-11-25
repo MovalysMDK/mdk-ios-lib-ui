@@ -18,9 +18,7 @@
 #ifndef MFUI_MFUIControlList_h
 #define MFUI_MFUIControlList_h
 
-#import "MFFixedList.h"
-#import "MFFixedList+UITableViewForwarding.h"
-#import "MFFixedListDataDelegate.h"
+#import "MDKFixedListDataDelegate.h"
 #import "MFPickerSelectedItemBindingDelegate.h"
 #import "MFPickerListItemBindingDelegate.h"
 #import "MFPickerList.h"

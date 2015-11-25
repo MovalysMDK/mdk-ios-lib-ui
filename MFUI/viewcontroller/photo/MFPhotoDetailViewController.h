@@ -47,7 +47,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *prendrePhotoButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *supprimerPhotoButton;
 
-@property (nonatomic, strong) MFFixedList *fixedList;
+@property (nonatomic, strong) MDKUIFixedList *fixedList;
 @property (nonatomic, strong) MFPhotoFixedListDataDelegate *cellPhotoFixedList;
 
 /*!

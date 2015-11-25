@@ -16,7 +16,7 @@
 
 
 //Interface import
-#import "MFFixedListDataDelegate.h"
+#import "MDKFixedListDataDelegate.h"
 
 //MFCore imports
 #import <MFCore/MFCoreBean.h>
@@ -28,7 +28,6 @@
 
 
 //FixedList import
-#import "MFFixedList.h"
 #import "MFFormDetailViewController.h"
 #import "MFPhotoDetailViewController.h"
 
@@ -55,7 +54,7 @@
 const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 
 
-@interface MFFixedListDataDelegate ()
+@interface MDKFixedListDataDelegate ()
 
 
 
@@ -67,7 +66,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 
 @end
 
-@implementation MFFixedListDataDelegate
+@implementation MDKFixedListDataDelegate
 @synthesize viewModel = _viewModel;
 @synthesize formValidation = _formValidation;
 @synthesize bindingDelegate = _bindingDelegate;

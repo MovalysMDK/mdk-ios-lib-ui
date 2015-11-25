@@ -15,12 +15,12 @@
  */
 
 
-#import "MFFixedListDataDelegate.h"
+#import "MDKFixedListDataDelegate.h"
 
 /*!
  * @class MFPhotoFixedListDataDelegate
  * @brief The data delegate for PhotoFixedList component
  */
-@interface MFPhotoFixedListDataDelegate : MFFixedListDataDelegate
+@interface MFPhotoFixedListDataDelegate : MDKFixedListDataDelegate
 
 @end

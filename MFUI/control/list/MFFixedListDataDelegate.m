@@ -267,11 +267,11 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     
 }
 
-//-(void)addItemOnFixedList{
-//    [self addItemOnFixedList:YES];
-//}
+-(void)addItemOnFixedList:(id)sender{
+    [self addItemOnFixedListAndReload:YES];
+}
 
--(void)addItemOnFixedList:(BOOL) reload{
+-(void)addItemOnFixedListAndReload:(BOOL) reload{
     
     if (reload) {
         self.HUD = [MBProgressHUD showHUDAddedTo:((UIViewController *)self.formController).view animated:YES];

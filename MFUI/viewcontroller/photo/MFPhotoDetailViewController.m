@@ -488,7 +488,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
         
         //Rafraichissement de la liste (pour éviter un espace blanc à l'emplacement de la cellule supprimée)
-        self.cellPhotoFixedList.hasBeenReload = NO;
+//        self.cellPhotoFixedList.hasBeenReload = NO;
 //        [self.fixedList.tableView reloadData];
 
     }

@@ -29,7 +29,7 @@
     return nil;
 }
 
-- (UIViewController *)parentNavigationController {
+- (UINavigationController *)parentNavigationController {
     UIViewController * firstViewController = [self parentViewController];
     UINavigationController *navigationController = firstViewController.navigationController;
     while (!navigationController && firstViewController.parentViewController) {

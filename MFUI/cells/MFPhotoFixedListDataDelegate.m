@@ -29,16 +29,6 @@
 @implementation MFPhotoFixedListDataDelegate
 
 
-/**
- * @brief Surcharge de la méthode d'ajout d'un item à la fixed list pour l'ajout du composant
- * MPhotoThumbnail
- */
--(void)addItemOnFixedList
-{
-
-    
-}
-
 -(NSArray *)customButtonsForFixedList {
 //    [MFException throwNotImplementedExceptionOfMethodName:@"customButtonsForFixedList" inClass:[self class] andUserInfo:nil];
     return @[];

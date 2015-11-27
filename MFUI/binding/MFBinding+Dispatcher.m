@@ -23,6 +23,9 @@
 
 @implementation MFBinding (Dispatcher)
 
+
+
+#pragma mark -  Dispatch WRAPPER --> VM
 -(void)dispatchValue:(id)value fromComponent:(UIView *)component onObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
     MFBindingValue *bindingValue = self.bindingByComponents[@(component.hash)];
     if(bindingValue) {
@@ -32,11 +35,14 @@
         }
         value = [self convertValue:value isFromViewModelToControl:NO withWrapper:bindingValue.wrapper];
         value = [self applyCustomConverter:bindingValue.converterName onValue:value isFromViewModelToControl:NO];
-        [object setValue:value forKeyPath:bindingValue.abstractBindedPropertyName];
+        [object setValue:[bindingValue.wrapper componentValue:(id)value forKeyPath:bindingValue.componentBindedPropertyName onObject:[object valueForKeyPath:bindingValue.abstractBindedPropertyName]] forKeyPath:bindingValue.abstractBindedPropertyName];
         
     }
 }
 
+
+
+#pragma mark -  Dispatch VM --> WRAPPER
 -(void)dispatchValue:(id)value fromPropertyName:(NSString *)propertyName fromSource:(MFBindingSource)bindingSource{
     if(bindingSource == MFBindingSourceStrings) {
         value = MFLocalizedStringFromKey(propertyName);
@@ -78,8 +84,6 @@
                 }
                 value = [self convertValue:value isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
                 value = [self applyCustomConverter:bindingValue.converterName onValue:value isFromViewModelToControl:YES];
-                
-                //FIXME: ne pas apperler le setValue:ForKey: sur le composant, mais faire ça sur wrapper.
                 [bindingValue.wrapper setComponentValue:value forKeyPath:bindingValue.componentBindedPropertyName];
             }
         }

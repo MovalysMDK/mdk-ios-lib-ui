@@ -56,6 +56,12 @@
  */
 -(void)setComponentValue:(id)value forKeyPath:(NSString *)keyPath;
 
+/**
+ * @brief Get the data of the component associated to this wrapper
+ * @param keyPath The key of the data to get form the component
+ * @param object the sourceObject to set
+ */
+-(id)componentValue:(id)value forKeyPath:(NSString *)keyPath onObject:(id)object;
 /*!
  * @brief Initializes a new wrapper with a given component, and returns it to the caller
  * @param component The component associated to this wrapper

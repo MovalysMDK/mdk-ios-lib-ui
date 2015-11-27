@@ -73,4 +73,27 @@ return @{};
         [[self component] setValue:value forKeyPath:keyPath];
     }
 }
+
+-(id)componentValue:(id)value forKeyPath:(NSString *)keyPath onObject:(id)object{
+    NSString *fixedKeyPath = keyPath;
+    if([keyPath isEqualToString:@"data"]) {
+        fixedKeyPath = @"getData";
+    }
+    id result = nil;
+    if([((MDKRenderableControl *)self.component) isKindOfClass:NSClassFromString(@"MDKUIFixedList")]) {
+        if([object isKindOfClass:[MFUIBaseListViewModel class]]) {
+            NSMutableArray *viewModels = [object viewModels];
+            viewModels = [self.component valueForKeyPath:fixedKeyPath];
+            [object setViewModels:viewModels];
+            result = object;
+        }
+    }
+    else if([[self component] isKindOfClass:NSClassFromString(@"MDKRenderableControl")]) {
+        result = value;
+    }
+    else {
+        result = value;
+    }
+    return result;
+}
 @end

@@ -23,7 +23,7 @@
 #import "MFPickerListItemBindingDelegate.h"
 #import "MFPickerSelectedItemBindingDelegate.h"
 #import "MFUIBaseListViewModel.h"
-
+#import "MFDetailViewControllerProtocol.h"
 #import "MFFormViewController.h"
 
 @interface MFPickerList ()
@@ -228,16 +228,23 @@
     if(self.mf.pickerValuesKey) {
         MFUIBaseViewModel *formViewModel = (MFUIBaseViewModel *)[((MFFormViewController *)self.parentViewController) getViewModel];
         
+        BOOL hasParentFormController = NO;
         if([self.parentViewController conformsToProtocol:@protocol(MFDetailViewControllerProtocol)] && [self.parentViewController respondsToSelector:@selector(parentFormController)]) {
+            hasParentFormController = YES;
             formViewModel = (MFUIBaseViewModel *)[((MFFormBaseViewController *)[((id<MFDetailViewControllerProtocol>)self.parentViewController) parentFormController]) getViewModel];
         }
+        
         
         //SI le controller répond à partialViewModelKeys, on est dans le cas d'un controller conteneur
         // et on prend du coup le ViewModel associé à l'une des clés qui nous est donnée,
         //SINON on remontre dans les parentViewModel jusqu'à trouver le ListViewModel recherché.
-        if([self.parentViewController respondsToSelector:@selector(partialViewModelKeys)]
-           && [(NSArray *)[self.parentViewController performSelector:@selector(partialViewModelKeys)] count] > 0 ) {
-            MFFormViewController *controller = (MFFormViewController *)self.parentViewController;
+        MFFormViewController *formViewController = self.parentViewController;
+        if(hasParentFormController) {
+            formViewController = [((id<MFDetailViewControllerProtocol>)self.parentViewController) parentFormController];
+        }
+        if([formViewController respondsToSelector:@selector(partialViewModelKeys)]
+           && [(NSArray *)[formViewController performSelector:@selector(partialViewModelKeys)] count] > 0 ) {
+            MFFormViewController *controller = (MFFormViewController *)formViewController;
             for(NSString *key in [controller partialViewModelKeys]) {
                 if([formViewModel respondsToSelector:NSSelectorFromString(key)]) {
                     formViewModel = [formViewModel valueForKey:key];

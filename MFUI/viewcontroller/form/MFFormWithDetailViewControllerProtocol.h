@@ -28,7 +28,7 @@
  * @param indexPath The indexPath of the cell in which the components will be updated
  * @param valuesForComponents A dictionary containing the name of the component to update as key, and the new Value for the component as value (or entry).
  */
--(void) updateChangesFromDetailControllerOnCellAtIndexPath:(NSIndexPath *)indexPath withViewModel:(id<MFUIBaseViewModelProtocol>)viewModel;
+-(void) updateChangesFromDetailControllerOnCellAtIndexPath:(NSIndexPath *)indexPath withViewModel:(id<MFUIBaseViewModelProtocol>)viewModel editionType:(NSUInteger)editionType;
 
 @required
 /*!

@@ -34,7 +34,7 @@
  * @discussion This delegate acts as a specific controller to bind FixedList component and its data.
  * This class is also a UITableView DataSource & Delegate.
  */
-@interface MDKFixedListDataDelegate : MDKUIFixedListBaseDelegate <UITableViewDelegate, UITableViewDataSource, MFCommonFormProtocol, MFFormWithDetailViewControllerProtocol, MFContentDelegate, MFUIFixedListAdditionalProtocol>
+@interface MDKFixedListDataDelegate : MDKUIFixedListBaseDelegate <MFCommonFormProtocol, MFFormWithDetailViewControllerProtocol, MFUIFixedListAdditionalProtocol, MFObjectWithBindingProtocol>
 
 #pragma mark - Methods
 
@@ -45,27 +45,9 @@
  */
 -(instancetype)initWithFixedList:(MDKUIFixedList *) fixedList;
 
-/*!
- * @brief Returns the margin to use for custom buttons. You should implement this method to customize the FixedList appearence
- * @return The margin to use in MFFixedList for custom button
+/**
+ * @brief Initializes the ViewModel used by this data delegate
  */
--(CGFloat)marginForCustomButtons;
-
-/*!
- * @brief Returns the size to use for custom buttons. You should implement this method to customize the FixedList appearence
- * @return The size to use in MFFixedList for custom button
- */
--(CGSize)sizeForCustomButtons;
-
-/*!
- * @brief Returns an array of custom buttons to add to the MFFixedList component. 
- * You should implement this method to customize the FixedList appearence
- * @return An array of custom buttons to add to he MFFixedList component managed by this delegate.
- */
--(NSArray *)customButtonsForFixedList;
--(void)addItemOnFixedList:(BOOL) reload;
-
-
 -(void)initializeModel;
 /*!
  * @brief Used to create the binding structure of this object with binding
@@ -73,15 +55,14 @@
  */
 -(void) createBindingStructure;
 
+/**
+ * @brief Compute the height of the cell that contains the FixedList and dispatch it 
+ * to the form controller
+ */
 -(void) computeCellHeightAndDispatchToFormController;
 
 
 #pragma mark - Properties
-
-/*!
- * @brief Indicates if the FixedList have been reload after cell was created
- */
-@property(nonatomic) BOOL hasBeenReload;
 
 /*!
  * @brief The fixedList that used this data delegate

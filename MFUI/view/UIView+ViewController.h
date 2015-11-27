@@ -34,7 +34,7 @@
  * @brief Returns the parent navigation controller of this view
  * @return The parent NavigationController of this view if exists, nil otherwhise
  */
-- (UIViewController *)parentNavigationController;
+- (UINavigationController *)parentNavigationController;
 
 /*!
  * @brief Returns the parent top ViewController of this view

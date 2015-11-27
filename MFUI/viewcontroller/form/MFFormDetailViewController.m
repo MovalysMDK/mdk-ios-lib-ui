@@ -38,6 +38,8 @@
 @synthesize indexPath = _indexPath;
 @synthesize formValidation = _formValidation;
 @synthesize originalViewModel = _originalViewModel;
+@synthesize editionType = _editionType;
+@synthesize sender = _sender;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -83,7 +85,7 @@
     if ([self isMovingFromParentViewController])
     {
         if(!self.shouldUpdateSender) {
-            [self.parentFormController updateChangesFromDetailControllerOnCellAtIndexPath:self.indexPath withViewModel:self.viewModel];
+            [self.sender updateChangesFromDetailControllerOnCellAtIndexPath:self.indexPath withViewModel:self.viewModel editionType:self.editionType];
         }    }
     else
     {

@@ -16,8 +16,14 @@
 
 
 
+#import "MFFormViewController.h"
 @protocol MFFormWithDetailViewControllerProtocol;
 @protocol MFUIBaseViewModelProtocol;
+
+typedef NS_ENUM(NSUInteger, MFFormDetailEditionType) {
+    MFFormDetailEditionTypeEdit,
+    MFFormDetailEditionTypeAdd
+};
 
 
 /*!
@@ -29,9 +35,14 @@
 #pragma mark - Properties
 
 /*!
- * @brief This attribute is the parent controller which opens this detailController
+ * @brief This attribute is the parent Form View Controller that push/modal this Detail View Controller
  */
-@property (nonatomic, weak) id<MFFormWithDetailViewControllerProtocol> parentFormController;
+@property (nonatomic, weak) MFFormViewController *parentFormController;
+
+/*!
+ * @brief This attributes is the sender object that needs this detail controller
+ */
+@property (nonatomic, weak) id<MFFormWithDetailViewControllerProtocol> sender;
 
 /*!
  * @brief This attribute is the indexPath of the current editing cell
@@ -47,5 +58,10 @@
  * @brief The original view model used to display detail data
  */
 @property id<MFUIBaseViewModelProtocol> originalViewModel;
+
+/**
+ * @brief The edition type for this detail form view controller
+ */
+@property (nonatomic) MFFormDetailEditionType editionType;
 
 @end

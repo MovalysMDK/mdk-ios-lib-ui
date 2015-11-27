@@ -14,28 +14,41 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFObjectWithBindingProtocol.h"
-#import "MFPhotoThumbnailWrapper.h"
-#import "MFPhotoThumbnail.h"
+@import MDKControl.ControlMedia;
 
-@implementation MFPhotoThumbnailWrapper
+#import "MFObjectWithBindingProtocol.h"
+#import "MDKMediaWrapper.h"
+#import "MFPhotoViewModel.h"
+
+
+@implementation MDKMediaWrapper
 
 -(instancetype)initWithComponent:(UIControl *)component {
     self = [super initWithComponent:component];
     if(self) {
-        [[self typeComponent] addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
+        [[self typeComponent].internalView addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
     }
     return self;
 }
 
--(MFPhotoThumbnail *)typeComponent {
-    return (MFPhotoThumbnail *)self.component;
+-(MDKUIMedia *)typeComponent {
+    return (MDKUIMedia *)self.component;
 }
 
--(void)componentValueChanged:(MFPhotoThumbnail *)numberPicker
+-(void)componentValueChanged:(MDKUIMedia *)media
 {
-    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[numberPicker getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
+    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[media getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
     
 }
+-(id)fixComponentValue:(id)value forKeyPath:(NSString *)keyPath onObject:(id)object {
+    id result = value;
+    if([object isKindOfClass:[MFPhotoViewModel class]]) {
+        [object setUri:value];
+        result = object;
+    }
+    return result;
+}
+
+
 
 @end

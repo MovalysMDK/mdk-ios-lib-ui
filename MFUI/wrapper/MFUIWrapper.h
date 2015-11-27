@@ -21,7 +21,7 @@
 #import "MFAbstractControlWrapper.h"
 #import "MDKDateTimeWrapper.h"
 #import "MFNumberPickerWrapper.h"
-#import "MFPhotoThumbnailWrapper.h"
+#import "MDKMediaWrapper.h"
 #import "MDKPositionWrapper.h"
 #import "MFSignatureWrapper.h"
 #import "MFTextViewWrapper.h"

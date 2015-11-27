@@ -16,9 +16,9 @@
 #import "MFAbstractControlWrapper.h"
 
 /*!
- * @class MFPhotoThumbnailWrapper
- * @brief The wrapper for the MFPhotoThumbnail component.
+ * @class MDKMediaWrapper
+ * @brief The wrapper for the MDKMedia component.
  */
-@interface MFPhotoThumbnailWrapper : MFAbstractControlWrapper
+@interface MDKMediaWrapper : MFAbstractControlWrapper
 
 @end

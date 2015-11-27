@@ -17,6 +17,7 @@
 @import MDKControl.Control;
 
 #import "MFUIBaseListViewModel.h"
+#import "MFPhotoViewModel.h"
 
 #import "MFAbstractControlWrapper.h"
 #import "UIView+Binding.h"
@@ -66,6 +67,11 @@ return @{};
             [((MDKRenderableControl *)self.component).internalView setValue:((MFUIBaseListViewModel *)value).viewModels forKeyPath:keyPath];
         }
     }
+    else if([[self component] isKindOfClass:NSClassFromString(@"MDKUIMedia")]) {
+        if([keyPath isEqualToString:@"data"] && [value isKindOfClass:[MFPhotoViewModel class]]) {
+            [((MDKRenderableControl *)self.component).internalView setValue:((MFPhotoViewModel *)value).uri forKeyPath:keyPath];
+        }
+    }
     else if([[self component] isKindOfClass:NSClassFromString(@"MDKRenderableControl")]) {
         [((MDKRenderableControl *)self.component).internalView setValue:value forKeyPath:keyPath];
     }
@@ -79,21 +85,13 @@ return @{};
     if([keyPath isEqualToString:@"data"]) {
         fixedKeyPath = @"getData";
     }
-    id result = nil;
-    if([((MDKRenderableControl *)self.component) isKindOfClass:NSClassFromString(@"MDKUIFixedList")]) {
-        if([object isKindOfClass:[MFUIBaseListViewModel class]]) {
-            NSMutableArray *viewModels = [object viewModels];
-            viewModels = [self.component valueForKeyPath:fixedKeyPath];
-            [object setViewModels:viewModels];
-            result = object;
-        }
-    }
-    else if([[self component] isKindOfClass:NSClassFromString(@"MDKRenderableControl")]) {
-        result = value;
-    }
-    else {
-        result = value;
-    }
+    id result =  [self fixComponentValue:value forKeyPath:fixedKeyPath onObject:object];
     return result;
+}
+
+
+
+-(id)fixComponentValue:(id)value forKeyPath:(NSString *)keyPath onObject:(id)object {
+    return value;
 }
 @end

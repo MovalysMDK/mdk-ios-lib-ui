@@ -471,8 +471,8 @@
 		B0F896731B614909005C3AA7 /* MFPickerListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F896711B614909005C3AA7 /* MFPickerListTableView.m */; };
 		B0FC78E51B3A99EE00DD225F /* MFNumberPickerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78E31B3A99EE00DD225F /* MFNumberPickerWrapper.h */; };
 		B0FC78E61B3A99EE00DD225F /* MFNumberPickerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FC78E41B3A99EE00DD225F /* MFNumberPickerWrapper.m */; };
-		B0FC78E91B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78E71B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h */; };
-		B0FC78EA1B3AAE9200DD225F /* MFPhotoThumbnailWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FC78E81B3AAE9200DD225F /* MFPhotoThumbnailWrapper.m */; };
+		B0FC78E91B3AAE9200DD225F /* MDKMediaWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78E71B3AAE9200DD225F /* MDKMediaWrapper.h */; };
+		B0FC78EA1B3AAE9200DD225F /* MDKMediaWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FC78E81B3AAE9200DD225F /* MDKMediaWrapper.m */; };
 		B0FC78ED1B3ACE1400DD225F /* MFSignatureWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78EB1B3ACE1400DD225F /* MFSignatureWrapper.h */; };
 		B0FC78EE1B3ACE1400DD225F /* MFSignatureWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FC78EC1B3ACE1400DD225F /* MFSignatureWrapper.m */; };
 		B0FC78F31B3AD22700DD225F /* MFTextViewWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FC78F11B3AD22700DD225F /* MFTextViewWrapper.h */; };
@@ -968,8 +968,8 @@
 		B0F896711B614909005C3AA7 /* MFPickerListTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPickerListTableView.m; sourceTree = "<group>"; };
 		B0FC78E31B3A99EE00DD225F /* MFNumberPickerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFNumberPickerWrapper.h; sourceTree = "<group>"; };
 		B0FC78E41B3A99EE00DD225F /* MFNumberPickerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFNumberPickerWrapper.m; sourceTree = "<group>"; };
-		B0FC78E71B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPhotoThumbnailWrapper.h; sourceTree = "<group>"; };
-		B0FC78E81B3AAE9200DD225F /* MFPhotoThumbnailWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPhotoThumbnailWrapper.m; sourceTree = "<group>"; };
+		B0FC78E71B3AAE9200DD225F /* MDKMediaWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDKMediaWrapper.h; sourceTree = "<group>"; };
+		B0FC78E81B3AAE9200DD225F /* MDKMediaWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDKMediaWrapper.m; sourceTree = "<group>"; };
 		B0FC78EB1B3ACE1400DD225F /* MFSignatureWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSignatureWrapper.h; sourceTree = "<group>"; };
 		B0FC78EC1B3ACE1400DD225F /* MFSignatureWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSignatureWrapper.m; sourceTree = "<group>"; };
 		B0FC78F11B3AD22700DD225F /* MFTextViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTextViewWrapper.h; sourceTree = "<group>"; };
@@ -1232,8 +1232,8 @@
 				B0FC78E41B3A99EE00DD225F /* MFNumberPickerWrapper.m */,
 				B01461F41B4445DB00008874 /* MFPhotoFixedListWrapper.h */,
 				B01461F51B4445DB00008874 /* MFPhotoFixedListWrapper.m */,
-				B0FC78E71B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h */,
-				B0FC78E81B3AAE9200DD225F /* MFPhotoThumbnailWrapper.m */,
+				B0FC78E71B3AAE9200DD225F /* MDKMediaWrapper.h */,
+				B0FC78E81B3AAE9200DD225F /* MDKMediaWrapper.m */,
 				B0E86BE01B452FFF00F5CB41 /* MFPickerListWrapper.h */,
 				B0E86BE11B452FFF00F5CB41 /* MFPickerListWrapper.m */,
 				B06F3E1F1B39A550005170FC /* MDKPositionWrapper.h */,
@@ -2375,7 +2375,7 @@
 				B06F3E1D1B39973C005170FC /* MFSwitchWrapper.h in Headers */,
 				B0DDE5CB1C0372DD00F965C7 /* MFUIFixedListAdditionalProtocol.h in Headers */,
 				B06F3E191B3962AF005170FC /* MDKTextFieldWrapper.h in Headers */,
-				B0FC78E91B3AAE9200DD225F /* MFPhotoThumbnailWrapper.h in Headers */,
+				B0FC78E91B3AAE9200DD225F /* MDKMediaWrapper.h in Headers */,
 				B0D45D471A5ED2F400C6D376 /* MFPhotoFixedListItemCell.h in Headers */,
 				B01075AF1B710711009D63B9 /* MFErrorViewProtocol.h in Headers */,
 				B0D45E4A1A5ED2F400C6D376 /* MFUIViewControllerEmail.h in Headers */,
@@ -2725,7 +2725,7 @@
 				B0D45DE01A5ED2F400C6D376 /* MFInvalidUrlValueUIValidationError.m in Sources */,
 				B0D45E561A5ED2F400C6D376 /* MFFormSearchViewController.m in Sources */,
 				B0D45E6E1A5ED2F400C6D376 /* MFSimpleSplashViewController.m in Sources */,
-				B0FC78EA1B3AAE9200DD225F /* MFPhotoThumbnailWrapper.m in Sources */,
+				B0FC78EA1B3AAE9200DD225F /* MDKMediaWrapper.m in Sources */,
 				B0D45E101A5ED2F400C6D376 /* MFTestHelper.m in Sources */,
 				B0D45E4C1A5ED2F400C6D376 /* MFForm2DListViewController.m in Sources */,
 				B0D45E341A5ED2F400C6D376 /* MFContainerViewController.m in Sources */,

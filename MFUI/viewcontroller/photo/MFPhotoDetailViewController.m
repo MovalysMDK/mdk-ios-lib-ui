@@ -247,8 +247,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
         ALAssetsLibraryWriteImageCompletionBlock imageWriteCompletionBlock =^(NSURL *assetURL, NSError *error) {
             
-
-            
             if (error)
             {
                 UIAlertView *alert = [[UIAlertView alloc]

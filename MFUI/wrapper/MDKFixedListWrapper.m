@@ -20,6 +20,7 @@
 #import "MDKFixedListWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
 #import "NSIndexPath+Utils.h"
+#import "MFUIBaseListViewModel.h"
 
 @implementation MDKFixedListWrapper
 @synthesize objectWithBinding = _objectWithBinding;
@@ -54,5 +55,18 @@
 
 }
 #pragma clang diagnostic pop
+
+
+-(id)fixComponentValue:(id)value forKeyPath:(NSString *)keyPath onObject:(id)object {
+    id result = value;
+    if([object isKindOfClass:NSClassFromString(@"MFUIBaseListViewModel")]) {
+        NSMutableArray *viewModels = [object viewModels];
+        viewModels = [self.component valueForKeyPath:keyPath];
+        [object setViewModels:viewModels];
+        result = object;
+    }
+    return result;
+}
+
 
 @end

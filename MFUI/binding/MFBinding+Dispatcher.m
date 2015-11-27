@@ -35,7 +35,7 @@
         }
         value = [self convertValue:value isFromViewModelToControl:NO withWrapper:bindingValue.wrapper];
         value = [self applyCustomConverter:bindingValue.converterName onValue:value isFromViewModelToControl:NO];
-        [object setValue:[bindingValue.wrapper componentValue:(id)value forKeyPath:bindingValue.componentBindedPropertyName onObject:[object valueForKeyPath:bindingValue.abstractBindedPropertyName]] forKeyPath:bindingValue.abstractBindedPropertyName];
+        [object setValue:[bindingValue.wrapper componentValue:value forKeyPath:bindingValue.componentBindedPropertyName onObject:[object valueForKeyPath:bindingValue.abstractBindedPropertyName]] forKeyPath:bindingValue.abstractBindedPropertyName];
         
     }
 }

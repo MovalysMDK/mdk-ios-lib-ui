@@ -52,7 +52,8 @@ const int kSaveChangesAlert = 11 ;
         NSDictionary *components = objectWithBinding.bindingDelegate.binding.bindingByComponents;
         for(MFBindingValue *bindingValue in components.allValues) {
             UIView *view = [bindingValue.wrapper component];
-            if([view conformsToProtocol:@protocol(MFComponentValidationProtocol)] && [view respondsToSelector:@selector(validate)]) {
+            if(([view conformsToProtocol:@protocol(MFComponentValidationProtocol)] || [view conformsToProtocol:@protocol(MDKControlValidationProtocol)]) &&
+               [view respondsToSelector:@selector(validate)]) {
                 //ATTENTION : c'est bien l'opérateur '&' et non '&&' afin de continuer la validation des autres
                 //composant même dans le cas ou la validation a déja échoué.
                 valid = valid & ([((id<MFComponentValidationProtocol>)view) validate] == 0);

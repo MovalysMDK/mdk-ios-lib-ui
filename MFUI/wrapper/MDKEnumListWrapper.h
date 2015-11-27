@@ -17,9 +17,9 @@
 #import "MFAbstractControlWrapper.h"
 
 /*!
- * @class MFSimplePickerListWrapper
- * @brief The wrapper for the MFSimplePickerList component.
+ * @class MDKEnumListWrapper
+ * @brief The wrapper for the MDKEnumList component.
  */
-@interface MFSimplePickerListWrapper : MFAbstractControlWrapper
+@interface MDKEnumListWrapper : MFAbstractControlWrapper
 
 @end

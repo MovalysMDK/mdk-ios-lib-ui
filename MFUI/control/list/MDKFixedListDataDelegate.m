@@ -143,7 +143,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     MFFormDetailViewController *detailController = [self detailController];
     [detailController setParentFormController:self.fixedList.parentViewController];
     [detailController setSender:self];
-    [detailController setEditionType:MFFormDetailEditionTypeEdit];
+    [detailController setEditionType:editionType];
     return detailController;
 }
 
@@ -199,11 +199,13 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 
 -(void) updateChangesFromDetailControllerOnCellAtIndexPath:(NSIndexPath *)indexPath withViewModel:(MFUIBaseViewModel *)viewModel editionType:(MFFormDetailEditionType)editionType {
     NSMutableArray * tempViewModels = [[self.fixedList getData] mutableCopy] ;
-    MFUIBaseViewModel *oldViewModel = [tempViewModels objectAtIndex:indexPath.row];
+    if(!tempViewModels) {
+        tempViewModels = [NSMutableArray array];
+    }
 
     switch (editionType) {
         case MFFormDetailEditionTypeEdit:
-            viewModel.parentViewModel = oldViewModel.parentViewModel;
+            viewModel.parentViewModel = ((MFUIBaseViewModel *)[tempViewModels objectAtIndex:indexPath.row]).parentViewModel;
             [tempViewModels replaceObjectAtIndex:indexPath.row withObject:viewModel];
             break;
         case MFFormDetailEditionTypeAdd:

@@ -46,6 +46,12 @@
 @synthesize mandatory = _mandatory;
 @synthesize textView = _textView;
 @synthesize targetDescriptors = _targetDescriptors;
+@synthesize isValid = _isValid;
+@synthesize tooltipView= _tooltipView;
+@synthesize errors = _errors;
+@synthesize controlAttributes = _controlAttributes;
+@synthesize editable = _editable;
+@synthesize visible = _visible;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -172,6 +178,8 @@
             [textView setContentOffset:offset];
         }];
     }
+    
+    
     [self valueChanged:textView];
 }
 
@@ -291,13 +299,13 @@
 //        [self addErrors:@[error]];
 //        nbOfErrors++;
 //    }
-//    
+//
 //    return nbOfErrors;
 //}
 
 -(void) setValue:(NSString *) value{
-    
     self.textView.text = value;
+    [self validate];
 }
 
 -(NSString *) getValue{
@@ -328,6 +336,80 @@
 
 -(void) setIsActive:(BOOL)isActive{
     self.textView.editable = isActive;
+}
+
+#pragma mark - Validation
+-(void)setIsValid:(BOOL) isValid {
+    [self.controlDelegate setIsValid:isValid];
+}
+
+-(BOOL) isValid {
+    return ([self validate] == 0);
+}
+
+-(NSArray *)controlValidators {
+    return @[];
+}
+
+- (NSInteger)validate {
+    return [self.controlDelegate validate];
+}
+
+#pragma mark - Errors
+-(NSArray *)getErrors {
+    return [self.controlDelegate getErrors];
+}
+
+-(void)addErrors:(NSArray *)errors {
+    [self.controlDelegate addErrors:errors];
+}
+
+-(void)clearErrors {
+    [self.controlDelegate clearErrors];
+}
+
+-(void)showError:(BOOL)showError {
+    [self.controlDelegate setIsValid:!showError];
+}
+
+-(void)onErrorButtonClick:(id)sender {
+    [self.controlDelegate onErrorButtonClick:sender];
+}
+
+
+
+#pragma mark - Control attributes
+-(void)setControlAttributes:(NSDictionary *)controlAttributes {
+    _controlAttributes = controlAttributes;
+    self.mandatory = controlAttributes[@"mandatory"] ? controlAttributes[@"mandatory"] : @1;
+    if(self.associatedLabel) {
+        self.associatedLabel.mandatory = self.mandatory;
+    }
+    self.editable = controlAttributes[@"editable"] ? controlAttributes[@"editable"] : @1;
+    self.visible = controlAttributes[@"visible"] ? controlAttributes[@"visible"] : @1;
+}
+
+-(void)addControlAttribute:(id)controlAttribute forKey:(NSString *)key {
+    [self.controlDelegate addControlAttribute:controlAttribute forKey:key];
+}
+
+
+#pragma mark - Properties
+-(void)setMandatory:(NSNumber *)mandatory {
+    _mandatory = mandatory;
+    if(self.associatedLabel) {
+        self.associatedLabel.mandatory = _mandatory;
+    }
+}
+//-(void)setEditable:(NSNumber *)editable {
+//    _editable = editable;
+//    self.userInteractionEnabled = [editable boolValue];
+//    [self applyStandardStyle];
+//}
+
+-(void)setVisible:(NSNumber *)visible {
+    _visible = visible;
+    [self.controlDelegate setVisible:visible];
 }
 
 
@@ -361,10 +443,6 @@
 -(NSString *) description
 {
     return [NSString stringWithFormat:@"MFTextView<value:%@, active: %c, mf.mandatory: %@, mf.maxLength: %@, mf.minLength: %@>", [self getValue], self.isActive ?  : NO, self.mandatory ? @"YES" : @"NO", self.mf.maxLength, self.mf.minLength];
-}
-
--(void)setMandatory:(NSNumber *)mandatory {
-    _mandatory = mandatory ;
 }
 
 
@@ -410,6 +488,7 @@
     //Cela permet d'éviter l'apparition de la barre de boutons seule dans le cas où le composant
     //n'est pas éditable mais qu'on double clique sur le texte.
     self.textView.inputAccessoryView = ([editable isEqualToNumber:@1]) ? self.keyboardToolBar : nil;
+    [self applyStandardStyle];
 }
 
 

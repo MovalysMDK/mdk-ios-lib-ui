@@ -18,6 +18,17 @@
 #import "MFTextView.h"
 
 @implementation MFTextViewStyle
+@synthesize errorView;
+
+-(void)applyErrorStyleOnComponent:(MFTextView *)component {
+    [super applyErrorStyleOnComponent:component];
+    [self performSelector:@selector(addErrorViewOnComponent:) withObject:component];
+}
+
+-(void)applyValidStyleOnComponent:(MFTextView *) component {
+    [super applyValidStyleOnComponent:component];
+    [self performSelector:@selector(removeErrorViewOnComponent:) withObject:component];
+}
 
 -(void)applyStandardStyleOnComponent:(MFTextView *)component {
     [super applyStandardStyleOnComponent:component];
@@ -26,6 +37,82 @@
             component.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1];
         }
     }
+}
+
+-(void) addErrorViewOnComponent:(MFTextView *)component {
+    if(!self.errorView) {
+        UIButton *errorButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+        errorButton.clipsToBounds = YES;
+        [errorButton addTarget:component action:@selector(onErrorButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        self.errorView = errorButton;
+        self.errorView.alpha = 0.0;
+        self.errorView.tintColor = [UIColor redColor];
+        [component addSubview:self.errorView];
+        
+        NSDictionary *errorViewConstraints = [self defineErrorViewConstraintsOnComponent:component];
+        errorViewConstraints = [self customizeErrorViewConstraints:errorViewConstraints onComponent:component];
+        [component addConstraints:errorViewConstraints.allValues];
+        
+    }
+    [component layoutIfNeeded];
+    
+    self.errorView.alpha = 1.0;
+    
+}
+
+-(void) removeErrorViewOnComponent:(MFTextView *)component {
+    if (!self.errorView) {
+        return;
+    }
+    [self.errorView removeFromSuperview];
+    self.errorView = nil;
+}
+
+-(NSDictionary *)defineErrorViewConstraintsOnComponent:(UIView *)component {
+    
+    component.translatesAutoresizingMaskIntoConstraints = NO;
+    self.errorView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:self.errorView
+                                                               attribute:NSLayoutAttributeCenterY
+                                                               relatedBy:NSLayoutRelationEqual toItem:component
+                                                               attribute:NSLayoutAttributeCenterY
+                                                              multiplier:1 constant:0];
+    
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.errorView
+                                                             attribute:NSLayoutAttributeRight
+                                                             relatedBy:NSLayoutRelationEqual toItem:component
+                                                             attribute:NSLayoutAttributeRight
+                                                            multiplier:1 constant:-DEFAULT_ACCESSORIES_MARGIN];
+    
+    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.errorView
+                                                             attribute:NSLayoutAttributeWidth
+                                                             relatedBy:NSLayoutRelationEqual toItem:nil
+                                                             attribute:NSLayoutAttributeNotAnAttribute
+                                                            multiplier:0 constant:DEFAULT_ERROR_VIEW_SQUARE_SIZE];
+    
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.errorView
+                                                              attribute:NSLayoutAttributeHeight
+                                                              relatedBy:NSLayoutRelationEqual toItem:nil
+                                                              attribute:NSLayoutAttributeNotAnAttribute
+                                                             multiplier:0 constant:DEFAULT_ERROR_VIEW_SQUARE_SIZE];
+    NSDictionary *errorViewConstraints = @{
+                                           ERROR_VIEW_CENTER_Y_CONSTRAINT:centerY,
+                                           ERROR_VIEW_HEIGHT_CONSTRAINT:height,
+                                           ERROR_VIEW_RIGHT_CONSTRAINT:right,
+                                           ERROR_VIEW_WIDTH_CONSTRAINT:width
+                                           };
+    
+    return errorViewConstraints;
+    
+}
+
+
+#pragma mark - Public Methods
+
+
+-(NSDictionary *) customizeErrorViewConstraints:(NSDictionary *)errorViewConstraints onComponent:(MFTextView *)component{
+    return errorViewConstraints;
 }
 
 

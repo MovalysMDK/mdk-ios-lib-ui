@@ -86,7 +86,7 @@
     }
 }
 
--(void) onErrorButtonClick:(id)sender {
+-(void) userTapOnErrorButton:(id)sender {
     if(![self.component.tooltipView superview]){
         //Récupération du texte des erreurs
         NSString *errorText = @"";
@@ -168,7 +168,7 @@
     if([self.component mandatory]) {
         
         mandatoryValidator = [[MDKFieldValidatorHandler fieldValidatorsForAttributes:@[FIELD_VALIDATOR_ATTRIBUTE_MANDATORY] forControl:[self component]] firstObject];
-        mandatoryError = [mandatoryValidator validate:[self.component getData] withCurrentState:validationState withParameters:@{FIELD_VALIDATOR_ATTRIBUTE_MANDATORY : self.component.mandatory}];
+        mandatoryError = [mandatoryValidator validate:[self.component getData] withCurrentState:validationState withParameters:@{FIELD_VALIDATOR_ATTRIBUTE_MANDATORY : self.component.mandatory, @"componentName" : NSStringFromClass(self.component.class)}];
     }
     if(!mandatoryError && self.component.controlAttributes) {
         

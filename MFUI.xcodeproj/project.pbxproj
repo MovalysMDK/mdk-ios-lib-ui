@@ -147,7 +147,6 @@
 		B06F3E1E1B39973C005170FC /* MFSwitchWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F3E1C1B39973C005170FC /* MFSwitchWrapper.m */; };
 		B06F3E211B39A550005170FC /* MDKPositionWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B06F3E1F1B39A550005170FC /* MDKPositionWrapper.h */; };
 		B06F3E221B39A550005170FC /* MDKPositionWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B06F3E201B39A550005170FC /* MDKPositionWrapper.m */; };
-		B0792E581B6B741A00904BE3 /* PickerListViewWithSearch.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0792E571B6B741A00904BE3 /* PickerListViewWithSearch.xib */; };
 		B07E794B1B4D1D1800822A1B /* MFBindingConverterProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B07E794A1B4D1D1800822A1B /* MFBindingConverterProtocol.h */; };
 		B07E79501B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B07E794F1B4D440200822A1B /* MFBaseViewModelWithSublistProtocol.h */; };
 		B08528851B43F18A00B46194 /* MDKDoubleTextFieldWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B08528831B43F18A00B46194 /* MDKDoubleTextFieldWrapper.h */; };
@@ -2531,7 +2530,6 @@
 				B001B26D1B5F87D80063F819 /* image_tooltip_valid.png in Resources */,
 				B01075A91B710615009D63B9 /* CocoaSecurity.txt in Resources */,
 				B001B25E1B5F87D80063F819 /* ios_ic_mail_active@2x.png in Resources */,
-				B0792E581B6B741A00904BE3 /* PickerListViewWithSearch.xib in Resources */,
 				B001B2671B5F87D80063F819 /* map.png in Resources */,
 				B001B2691B5F87D80063F819 /* ios_ic_qrcode_icon_active.png in Resources */,
 				B001B2601B5F87D80063F819 /* ios_ic_mail_unactive@2x.png in Resources */,

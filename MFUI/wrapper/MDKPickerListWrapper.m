@@ -14,27 +14,29 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFPickerList.h"
-#import "MFPickerListWrapper.h"
+
+@import MDKControl.ControlPickerList;
+
+#import "MDKPickerListWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
 #import "NSIndexPath+Utils.h"
 
-@implementation MFPickerListWrapper
+@implementation MDKPickerListWrapper
 @synthesize  wrapperIndexPath = _wrapperIndexPath;
 
 -(instancetype)initWithComponent:(UIControl *)component {
     self = [super initWithComponent:component];
     if(self) {
-        [[self typeComponent] addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [[self typeComponent].internalView addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
     }
     return self;
 }
 
--(MFPickerList *)typeComponent {
-    return (MFPickerList *)self.component;
+-(MDKUIPickerList *)typeComponent {
+    return (MDKUIPickerList *)self.component;
 }
 
--(void)componentValueChanged:(MFPickerList *)picker
+-(void)componentValueChanged:(MDKUIPickerList *)picker
 {
     [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[picker getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
     

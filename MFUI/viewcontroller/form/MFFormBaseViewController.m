@@ -40,7 +40,6 @@
 // ViewModel
 #import "MFUIBaseListViewModel.h"
 #import "MFUIBaseViewModelProtocol.h"
-#import "MFPickerList.h"
 #import "MFCell1ComponentHorizontal.h"
 
 //Application

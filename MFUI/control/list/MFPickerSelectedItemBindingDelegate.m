@@ -15,9 +15,11 @@
  */
 
 #import "MFPickerSelectedItemBindingDelegate.h"
-#import "MFPickerList.h"
 #import "MFObjectWithBindingProtocol.h"
 #import "MFPickerListconfiguration.h"
+
+#import "UIView+Binding.h"
+
 
 @interface MFPickerSelectedItemBindingDelegate()
 @property (nonatomic) BOOL computeAlreadyDone;
@@ -31,7 +33,7 @@
 @synthesize viewModel = _viewModel;
 @synthesize formValidation = _formValidation;
 
-- (instancetype)initWithPickerList:(MFPickerList *)pickerList
+- (instancetype)initWithPickerList:(MDKUIPickerList *)pickerList
 {
     self = [super init];
     if (self) {
@@ -115,6 +117,10 @@
 
 -(void)dealloc {
     self.bindingDelegate = nil;
+}
+
+-(void)mappXibViewWithObject:(id)object {
+    [self updateStaticView];
 }
 
 @end

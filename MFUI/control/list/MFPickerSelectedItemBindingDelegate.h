@@ -16,9 +16,10 @@
 
 #import <Foundation/Foundation.h>
 #import "MFCommonFormProtocol.h"
-@class MFPickerList;
 
-@interface MFPickerSelectedItemBindingDelegate : NSObject <MFCommonFormProtocol>
+@import MDKControl.ControlPickerList;
+
+@interface MFPickerSelectedItemBindingDelegate : NSObject <MFCommonFormProtocol, MDKUIPickerSelectedDataProtocol>
 
 #pragma mark - Methods
 
@@ -27,7 +28,7 @@
  * @param pickerList The pickerList reference to set to this bindingDelegate
  * @return A new instance of MFPickerSelectedItemBindingDelegate
  */
-- (instancetype)initWithPickerList:(MFPickerList *)pickerList;
+- (instancetype)initWithPickerList:(MDKUIPickerList *)pickerList;
 
 
 #pragma mark - Properties
@@ -35,6 +36,6 @@
 /*!
  * @brief The pickerList to manage.
  */
-@property (nonatomic, weak) MFPickerList *picker;
+@property (nonatomic, weak) MDKUIPickerList *picker;
 
 @end

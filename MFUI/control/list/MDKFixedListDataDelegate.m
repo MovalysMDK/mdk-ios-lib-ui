@@ -90,13 +90,10 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 }
 
 
-
-
 #pragma  mark - Fixed List Base Data Delegate implementation
 -(void)fixedList:(MDKUIFixedList *)fixedList mapCell:(UITableViewCell *)cell withObject:(id)object atIndexPath:(NSIndexPath *)indexPath {
     MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_FIXEDLIST_DESCRIPTOR];
     NSString *identifier = bindingData.cellIdentifier;
-    
     
     bindingData.cellIndexPath = indexPath;
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
@@ -105,6 +102,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     if([cell isKindOfClass:[MFCellAbstract class]]) {
         [(MFCellAbstract *)cell cellIsConfigured];
     }
+    
     [self.fixedList validate];
 }
 
@@ -185,7 +183,6 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         bindingValue.wrapper.wrapperIndexPath = indexPath;
         [self.bindingDelegate.binding dispatchValue:[[self viewModelAtIndexPath:indexPath] valueForKeyPath:bindingValue.abstractBindedPropertyName] fromPropertyName:bindingValue.abstractBindedPropertyName atIndexPath:indexPath fromSource:bindingValue.bindingSource];
     }
-    
 }
 
 

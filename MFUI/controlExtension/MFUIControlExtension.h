@@ -19,7 +19,5 @@
 #define MFUI_MFUIControlExtension_h
 
 #import "MFBaseTextExtensionProtocol.h"
-#import "MFFixedListExtension.h"
-#import "MFEnumExtension.h"
 
 #endif

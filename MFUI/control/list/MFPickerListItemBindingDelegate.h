@@ -14,13 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+@import MDKControl.ControlPickerList;
+
 #import <Foundation/Foundation.h>
 #import "MFCommonFormProtocol.h"
 
-@class MFPickerList;
-@protocol MFPickerListFilterProtocol;
-
-@interface MFPickerListItemBindingDelegate : NSObject <MFCommonFormProtocol, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface MFPickerListItemBindingDelegate : MDKPickerListBaseDelegate <MFCommonFormProtocol, UISearchBarDelegate, MDKUIPickerListDataProtocol>
 
 #pragma mark - Methods
 
@@ -29,15 +28,10 @@
  * @param pickerList The pickerList reference to set to this bindingDelegate
  * @return A new instance of MFPickerListItemBindingDelegate
  */
-- (instancetype)initWithPickerList:(MFPickerList *)pickerList;
+- (instancetype)initWithPickerList:(MDKUIPickerList *)pickerList;
 
 
 #pragma mark - Properties
-
-/*!
- * @brief The pickerList to manage.
- */
-@property (nonatomic, weak) MFPickerList *picker;
 
 /*!
  * @brief Indicates if the picker has search
@@ -48,7 +42,7 @@
 /*!
  * @brief Indicates if the picker has search
  */
-@property (nonatomic, strong) id<MFPickerListFilterProtocol> filter;
+@property (nonatomic, strong) id<MDKPickerListFilterProtocol> filter;
 
 -(void) willDisplayPickerListView;
 

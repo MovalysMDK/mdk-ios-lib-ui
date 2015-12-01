@@ -14,8 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFPickerListExtension.h"
+#import "MFAbstractControlWrapper.h"
 
-@implementation MFPickerListExtension
+/*!
+ * @class MDKPickerListWrapper
+ * @brief The wrapper for the MDKPickerList component.
+ */
+@interface MDKPickerListWrapper : MFAbstractControlWrapper
 
 @end

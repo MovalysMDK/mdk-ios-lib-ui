@@ -22,7 +22,6 @@
 
 #import "MFWorkspaceView.h"
 #import "MFWorkspaceViewController.h"
-#import "MFPickerList.h"
 #import "MFUILog.h"
 
 #define POR_COLUMN_NUMBER 1

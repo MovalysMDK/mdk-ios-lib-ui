@@ -72,6 +72,11 @@ return @{};
             [((MDKRenderableControl *)self.component).internalView setValue:((MFPhotoViewModel *)value).uri forKeyPath:keyPath];
         }
     }
+    else if([[self component] isKindOfClass:NSClassFromString(@"MDKUIWebView")]) {
+        if([keyPath isEqualToString:@"data"] && [value isKindOfClass:[NSString class]]) {
+            [((MDKRenderableControl *)self.component).internalView setValue:[NSURL URLWithString:value] forKeyPath:keyPath];
+        }
+    }
     else if([[self component] isKindOfClass:NSClassFromString(@"MDKRenderableControl")]) {
         [((MDKRenderableControl *)self.component).internalView setValue:value forKeyPath:keyPath];
     }

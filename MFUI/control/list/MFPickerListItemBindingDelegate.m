@@ -15,12 +15,12 @@
  */
 
 #import "MFPickerListItemBindingDelegate.h"
-#import "MFPickerList.h"
 #import "MFCommonFormProtocol.h"
 #import "MFUIBaseListViewModel.h"
 #import "MFObjectWithBindingProtocol.h"
 #import "MFAbstractControlWrapper.h"
 #import "MFPickerListConfiguration.h"
+
 
 @interface MFPickerListItemBindingDelegate ()
 
@@ -38,7 +38,7 @@ NSString *tableViewHeightConstraintIdentifier = @"realHeightConstraintIdentifier
 @synthesize formValidation = _formValidation;
 @synthesize viewModel = _viewModel;
 
-- (instancetype)initWithPickerList:(MFPickerList *)pickerList
+- (instancetype)initWithPickerList:(MDKUIPickerList *)pickerList
 {
     self = [super init];
     if (self) {
@@ -69,7 +69,6 @@ NSString *tableViewHeightConstraintIdentifier = @"realHeightConstraintIdentifier
 
 
 #pragma mark - TableView DataSource & Delegate
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -93,7 +92,7 @@ NSString *tableViewHeightConstraintIdentifier = @"realHeightConstraintIdentifier
             }
         }
         if(!constraintToUpdate) {
-            NSLayoutConstraint *realHeight = [NSLayoutConstraint constraintWithItem:self.picker.pickerListTableView.tableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:contentSize];
+            NSLayoutConstraint *realHeight = [NSLayoutConstraint constraintWithItem:self.picker.uiList.tableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:contentSize];
             realHeight.priority = UILayoutPriorityDefaultHigh;
             realHeight.identifier = tableViewHeightConstraintIdentifier;
             [self.picker.parentNavigationController.view addConstraint:realHeight];
@@ -111,10 +110,9 @@ NSString *tableViewHeightConstraintIdentifier = @"realHeightConstraintIdentifier
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[LISTITEM_PICKERLIST_DESCRIPTOR];
-    NSString *identifier = bindingData.cellIdentifier;
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self xibNameForPickerListCells]];
     if(!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:identifier owner:tableView options:nil] firstObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:[self xibNameForPickerListCells] owner:tableView options:nil] firstObject];
     }
     bindingData.cellIndexPath = indexPath;
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
@@ -130,16 +128,27 @@ NSString *tableViewHeightConstraintIdentifier = @"realHeightConstraintIdentifier
     return cell;
 }
 
+
+-(NSString *)xibNameForPickerListCells {
+    MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[LISTITEM_PICKERLIST_DESCRIPTOR];
+    NSString *identifier = bindingData.cellIdentifier;
+    return identifier;
+}
+
 -(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[LISTITEM_PICKERLIST_DESCRIPTOR];
     bindingData.cellIndexPath = indexPath;
     [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingData generatedBindingKey]];
 }
 
--(void) willDisplayPickerListView {
-    self.filteredViewModels = [self getViewModels];
+
+-(BOOL)hasSearch {
+    return [self.picker.controlAttributes[PICKER_PARAMETER_SEARCH_KEY] boolValue];
 }
 
+-(void) willDisplayPickerListView {
+    self.filteredViewModels = [self getContent];
+}
 
 -(void) updateCellFromBindingData:(MFBindingCellDescriptor *)bindingData atIndexPath:(NSIndexPath *)indexPath{
     NSArray *bindingValues = [self.bindingDelegate bindingValuesForCellBindingKey:[bindingData generatedBindingKey]];
@@ -156,9 +165,9 @@ NSString *tableViewHeightConstraintIdentifier = @"realHeightConstraintIdentifier
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.picker.pickerListTableView dismiss];
-    [self.picker setData:[self viewModelAtIndexPath:indexPath]];
-    [self.picker performSelector:@selector(valueChanged:) withObject:self.picker];
+    [self.picker.uiList dismiss];
+    [self.picker setControlData:[self viewModelAtIndexPath:indexPath]];
+    [self.picker valueChanged:self.picker.button];
 }
 
 
@@ -181,31 +190,69 @@ NSString *tableViewHeightConstraintIdentifier = @"realHeightConstraintIdentifier
     return vmItem;
 }
 
--(NSArray *)getViewModels {
-    id object = [self.picker getValues];
-    return object;
+-(id)getContent {
+    MFUIBaseListViewModel *values = nil;
+    if(self.picker.controlAttributes[PICKER_PARAMETER_VALUES_KEY]) {
+        MFUIBaseViewModel *formViewModel = (MFUIBaseViewModel *)[((MFFormViewController *)self.picker.parentViewController) getViewModel];
+        
+        BOOL hasParentFormController = NO;
+        if([self.picker.parentViewController conformsToProtocol:@protocol(MFDetailViewControllerProtocol)] && [self.picker.parentViewController respondsToSelector:@selector(parentFormController)]) {
+            hasParentFormController = YES;
+            formViewModel = (MFUIBaseViewModel *)[((MFFormBaseViewController *)[((id<MFDetailViewControllerProtocol>)self.picker.parentViewController) parentFormController]) getViewModel];
+        }
+        
+        
+        //SI le controller répond à partialViewModelKeys, on est dans le cas d'un controller conteneur
+        // et on prend du coup le ViewModel associé à l'une des clés qui nous est donnée,
+        //SINON on remontre dans les parentViewModel jusqu'à trouver le ListViewModel recherché.
+        MFFormViewController *formViewController = self.picker.parentViewController;
+        if(hasParentFormController) {
+            formViewController = [((id<MFDetailViewControllerProtocol>)self.picker.parentViewController) parentFormController];
+        }
+        if([formViewController respondsToSelector:@selector(partialViewModelKeys)]
+           && [(NSArray *)[formViewController performSelector:@selector(partialViewModelKeys)] count] > 0 ) {
+            MFFormViewController *controller = (MFFormViewController *)formViewController;
+            for(NSString *key in [controller partialViewModelKeys]) {
+                if([formViewModel respondsToSelector:NSSelectorFromString(key)]) {
+                    formViewModel = [formViewModel valueForKey:key];
+                }
+            }
+        }
+        else {
+            while(formViewModel && ![formViewModel respondsToSelector:NSSelectorFromString(self.picker.controlAttributes[PICKER_PARAMETER_VALUES_KEY])]) {
+                formViewModel = (MFUIBaseViewModel *)formViewModel.parentViewModel;
+            }
+        }
+        
+        id object = [formViewModel valueForKeyPath:self.picker.controlAttributes[PICKER_PARAMETER_VALUES_KEY]];
+        if(object && [object isKindOfClass:[MFUIBaseListViewModel class]]) {
+            values = (MFUIBaseListViewModel *) object;
+        }
+    }
+    return values.viewModels;
 }
+
 
 #pragma mark - Search Bar Delegate
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [self checkFilter];
     if(searchText && searchText.length > 0) {
-        self.filteredViewModels = [self.filter filterItems:[self getViewModels] withString:searchText];
+        self.filteredViewModels = [self.filter filterItems:[self getContent] withString:searchText];
         if(!self.filteredViewModels) {
             self.filteredViewModels = @[];
         }
     }else {
-        self.filteredViewModels = [self getViewModels];
+        self.filteredViewModels = [self getContent];
     }    self.hasComputeContentSize = NO;
     
     self.hasComputeContentSize = NO;
-    [self.tableView reloadData];
+    [self.list.tableView reloadData];
 }
 
 -(void) checkFilter {
     if(!self.filter) {
-        self.filter = [MFPickerListDefaultFilter new];
+        self.filter = [MDKPickerListDefaultFilter new];
     }
 }
 

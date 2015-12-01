@@ -30,7 +30,7 @@
 #import "MDKTextFieldWrapper.h"
 #import "MFPhotoFixedListWrapper.h"
 #import "MDKFixedListWrapper.h"
-#import "MFPickerListWrapper.h"
+#import "MDKPickerListWrapper.h"
 #import "MFEnumImageWrapper.h"
 
 #endif

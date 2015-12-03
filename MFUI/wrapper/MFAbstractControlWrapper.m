@@ -66,15 +66,24 @@ return @{};
         if([keyPath isEqualToString:@"data"] && [value isKindOfClass:[MFUIBaseListViewModel class]]) {
             [((MDKRenderableControl *)self.component).internalView setValue:((MFUIBaseListViewModel *)value).viewModels forKeyPath:keyPath];
         }
+        else {
+            [[self component] setValue:value forKeyPath:keyPath];
+        }
     }
     else if([[self component] isKindOfClass:NSClassFromString(@"MDKUIMedia")]) {
         if([keyPath isEqualToString:@"data"] && [value isKindOfClass:[MFPhotoViewModel class]]) {
             [((MDKRenderableControl *)self.component).internalView setValue:((MFPhotoViewModel *)value).uri forKeyPath:keyPath];
         }
+        else {
+            [[self component] setValue:value forKeyPath:keyPath];
+        }
     }
     else if([[self component] isKindOfClass:NSClassFromString(@"MDKUIWebView")]) {
         if([keyPath isEqualToString:@"data"] && [value isKindOfClass:[NSString class]]) {
             [((MDKRenderableControl *)self.component).internalView setValue:[NSURL URLWithString:value] forKeyPath:keyPath];
+        }
+        else {
+            [[self component] setValue:value forKeyPath:keyPath];
         }
     }
     else if([[self component] isKindOfClass:NSClassFromString(@"MDKRenderableControl")]) {

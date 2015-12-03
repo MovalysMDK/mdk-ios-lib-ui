@@ -170,5 +170,9 @@
     _bindingIndexPath = bindingIndexPath;
     self.wrapper.wrapperIndexPath = bindingIndexPath;
 }
+
+-(void)setWrapper:(MFAbstractControlWrapper *)wrapper {
+    _wrapper = wrapper;
+}
 @end
 

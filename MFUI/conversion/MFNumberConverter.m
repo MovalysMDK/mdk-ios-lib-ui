@@ -41,10 +41,14 @@
     //Le formatter permet d'obtenir une version du nombre en chaine contenant le bon séparateur décimal (lié aux
     //régales linguistiques de l'appareil).
     //Cette chaine pourra ensuite être à nouveau convertie en NSNumber sans erreur.
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+    [numberFormatter setLocale:[NSLocale currentLocale]];
+    [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
     //Par défaut, le formatter arrondi à l'entier supérieur : il faut lui spécifier un nombre maximal de décimales
     //pour pouvoir conserver un nombre décimal.
-    [numberFormatter setMaximumFractionDigits:1000000];
+//    [numberFormatter setMaximumFractionDigits:1000000];
     
     return [numberFormatter stringFromNumber:value];
 }

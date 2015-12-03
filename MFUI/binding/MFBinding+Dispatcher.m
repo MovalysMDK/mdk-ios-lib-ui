@@ -63,12 +63,13 @@
             if(!value) {
                 value = [bindingValue.wrapper nilValueBySelector][stringSelector];
             }
+            MFAbstractControlWrapper *__block controlWrapper = bindingValue.wrapper;
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSString *vmType = NSStringFromClass([[bindingValue.wrapper.component performSelector:@selector(getData)] class]);
+                NSString *vmType = NSStringFromClass([[controlWrapper.component performSelector:@selector(getData)] class]);
                 id convertedValue = [self convertValue:value toType:vmType];
-                convertedValue = [self convertValue:convertedValue isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
+                convertedValue = [self convertValue:convertedValue isFromViewModelToControl:YES withWrapper:controlWrapper];
                 convertedValue = [self applyCustomConverter:bindingValue.converterName onValue:convertedValue isFromViewModelToControl:YES];
-                [bindingValue.wrapper setComponentValue:convertedValue forKeyPath:bindingValue.componentBindedPropertyName];
+                [controlWrapper setComponentValue:convertedValue forKeyPath:bindingValue.componentBindedPropertyName];
             });
         }
     }
@@ -90,9 +91,9 @@
                 }
                 NSString *vmType = NSStringFromClass([[bindingValue.wrapper.component performSelector:@selector(getData)] class]);
                 id convertedValue = [self convertValue:value toType:vmType];
-                value = [self convertValue:value isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
-                value = [self applyCustomConverter:bindingValue.converterName onValue:value isFromViewModelToControl:YES];
-                [bindingValue.wrapper setComponentValue:value forKeyPath:bindingValue.componentBindedPropertyName];
+                convertedValue = [self convertValue:convertedValue isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
+                convertedValue = [self applyCustomConverter:bindingValue.converterName onValue:convertedValue isFromViewModelToControl:YES];
+                [bindingValue.wrapper setComponentValue:convertedValue forKeyPath:bindingValue.componentBindedPropertyName];
             }
         }
     }

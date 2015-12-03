@@ -46,6 +46,11 @@
         [object setUri:value];
         result = object;
     }
+    else if(!object) {
+        object = [MFPhotoViewModel new];
+        [object setUri:value];
+        result = object;
+    }
     return result;
 }
 

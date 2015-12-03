@@ -225,18 +225,9 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 #pragma mark - UITextField Delegate
 
 
-//-(NSInteger)validateWithParameters:(NSDictionary *)parameters {
-//    
-//    NSInteger nbOfErrors = [super validateWithParameters:parameters];
-//    
-//    if ([self number:@(self.currentValue) isEqualToString:[self.innerTextField getData]]) {
-//        NSError *error = [[MFInvalidIntegerValueUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-//        [self addErrors:@[error]];
-//        nbOfErrors++;
-//    }
-//    
-//    return nbOfErrors;
-//}
+-(NSInteger)validate {
+    return [self.innerTextField validate];
+}
 
 -(BOOL)number:(NSNumber *)number isEqualToString:(NSString *)string {
     BOOL result = NO;

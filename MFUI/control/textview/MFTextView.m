@@ -132,19 +132,6 @@
     }
 
     
-    //Gestion du déplacement lors de l'apparition/disparition du clavier
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector (keyboardDidHide:)
-                                                 name: UIKeyboardDidHideNotification
-                                               object:nil];
-    
-    //L'ajout de la toolbar est géré au niveau du setter de l'attribut editable.
-    
     //Le textview est ajouté au composant
     self.textView.backgroundColor = [UIColor clearColor];
     [self addSubview:self.textView];
@@ -218,9 +205,7 @@
 -(void)layoutSubviews {
     [super layoutSubviews];
     CGFloat errorButtonSize = ERROR_BUTTON_SIZE;
-    if(self.isValid) {
-        errorButtonSize = 0;
-    }
+
     self.textView.frame = CGRectMake(self.bounds.origin.x + errorButtonSize,
                                       self.bounds.origin.y,
                                       self.bounds.size.width - 4 - errorButtonSize,
@@ -243,9 +228,9 @@
 
 
 #pragma mark - Fast Forwarding
--(id)forwardingTargetForSelector:(SEL)sel {
-    return self.textView;
-}
+//-(id)forwardingTargetForSelector:(SEL)sel {
+//    return self.textView;
+//}
 
 #pragma mark - KVC magic forwarding
 -(id)valueForUndefinedKey:(NSString *)key {
@@ -271,37 +256,6 @@
     return self.textView.delegate;
 }
 
-#pragma mark - Validation API
-
-//-(NSInteger) validateWithParameters:(NSDictionary *)parameters{
-//    
-//    [super validateWithParameters:parameters];
-//    NSInteger length = [[self getValue] length];
-//    NSError *error = nil;
-//    // Control's errros init or reinit
-//    NSInteger nbOfErrors = 0;
-//    
-//    // We search the component's errors
-//    if(self.mf.minLength != nil && [self.mf.minLength integerValue] > length)
-//    {
-//        error = [[MFTooShortStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-//        [self addErrors:@[error]];
-//        nbOfErrors++;
-//    }
-//    if(self.mf.maxLength != nil && [self.mf.maxLength integerValue] != 0 && [self.mf.maxLength integerValue] < length)
-//    {
-//        error = [[MFTooLongStringUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-//        [self addErrors:@[error]];
-//        nbOfErrors++;
-//    }
-//    if(self.mandatory != nil && [self.mandatory integerValue] == 1 && [self getValue].length == 0){
-//        error = [[MFMandatoryFieldUIValidationError alloc] initWithLocalizedFieldName:self.localizedFieldDisplayName technicalFieldName:NSStringFromClass(self.class)];
-//        [self addErrors:@[error]];
-//        nbOfErrors++;
-//    }
-//
-//    return nbOfErrors;
-//}
 
 -(void) setValue:(NSString *) value{
     self.textView.text = value;
@@ -443,37 +397,6 @@
 -(NSString *) description
 {
     return [NSString stringWithFormat:@"MFTextView<value:%@, active: %c, mf.mandatory: %@, mf.maxLength: %@, mf.minLength: %@>", [self getValue], self.isActive ?  : NO, self.mandatory ? @"YES" : @"NO", self.mf.maxLength, self.mf.minLength];
-}
-
-
-
-#pragma mark - Observers
--(void)keyboardWillShow:(NSNotification *)notification {
-    if(self.scrollingTableView) {
-        self.contentOffset = self.scrollingTableView.contentOffset;
-    }
-
-    self.keyboardHeight = MIN([[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height,
-                              [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.width);
-
-}
-
-
-
--(void)keyboardDidHide:(NSNotification *)notification {
-    
-    //Sur iPhone, en mode paysage : la textview reprend sa hauteur initiale quand le clavier disparait
-    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) && UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
-        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.hauteurInitiale);
-    }
-    // Reset the frame scroll view to its original value
-    self.scrollingTableView.frame = self.originalFrame;
-    // Reset the scrollview to previous location
-    //    self.scrollingTableView.contentOffset = self.contentOffset;
-    [self.scrollingTableView setContentSize:self.originalContentSize];
-    // Keyboard is no longer visible
-    self.keyboardVisible = NO;
-    
 }
 
 

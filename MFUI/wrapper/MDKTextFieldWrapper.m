@@ -43,17 +43,6 @@
     return superDict;
 }
 
--(id)convertValue:(id)value isFromViewModelToControl:(NSNumber *)isVmToControl {
-    id result = value;
-    if(value && ![value isKindOfClass:[NSNull class]] && ![value isKindOfClass:[MFKeyNotFound class]]) {
-        if([value isKindOfClass:[NSNumber class]]) {
-            if([isVmToControl integerValue] == 1) {
-                NSNumber *vmValue = (NSNumber *)value;
-                result = [NSString stringWithFormat:@"%@", vmValue];
-            }
-        }
-    }
-    return result;
-}
+
 
 @end

@@ -214,20 +214,23 @@ NSString *tableViewHeightConstraintIdentifier = @"realHeightConstraintIdentifier
             MFFormViewController *controller = (MFFormViewController *)formViewController;
             for(NSString *key in [controller partialViewModelKeys]) {
                 if([formViewModel respondsToSelector:NSSelectorFromString(key)]) {
-                    formViewModel = [formViewModel valueForKey:key];
+                    id tempViewModel = [formViewModel valueForKey:key];
+                    id object = [tempViewModel valueForKeyPath:self.picker.controlAttributes[PICKER_PARAMETER_VALUES_KEY]];
+                    if(object && [object isKindOfClass:[MFUIBaseListViewModel class]]) {
+                        values = (MFUIBaseListViewModel *) object;
+                        break;
+                    }
+                    
                 }
             }
         }
         else {
+            values = [formViewModel valueForKeyPath:self.picker.controlAttributes[PICKER_PARAMETER_VALUES_KEY]];
             while(formViewModel && ![formViewModel respondsToSelector:NSSelectorFromString(self.picker.controlAttributes[PICKER_PARAMETER_VALUES_KEY])]) {
                 formViewModel = (MFUIBaseViewModel *)formViewModel.parentViewModel;
             }
         }
         
-        id object = [formViewModel valueForKeyPath:self.picker.controlAttributes[PICKER_PARAMETER_VALUES_KEY]];
-        if(object && [object isKindOfClass:[MFUIBaseListViewModel class]]) {
-            values = (MFUIBaseListViewModel *) object;
-        }
     }
     return values.viewModels;
 }

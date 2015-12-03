@@ -86,6 +86,10 @@
     }
 }
 
+-(void)onErrorButtonClick:(id)sender {
+    [self userTapOnErrorButton:sender];
+}
+
 -(void) userTapOnErrorButton:(id)sender {
     if(![self.component.tooltipView superview]){
         //Récupération du texte des erreurs

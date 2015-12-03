@@ -33,6 +33,10 @@
             //object is list ViewModel
             object = ((MFUIBaseListViewModel *)object).viewModels[indexPath.row];
         }
+        
+        NSString *vmType = NSStringFromClass([[object valueForKey:bindingValue.abstractBindedPropertyName] class]);
+        value = [self convertValue:value toType:vmType];
+        
         value = [self convertValue:value isFromViewModelToControl:NO withWrapper:bindingValue.wrapper];
         value = [self applyCustomConverter:bindingValue.converterName onValue:value isFromViewModelToControl:NO];
         [object setValue:[bindingValue.wrapper componentValue:value forKeyPath:bindingValue.componentBindedPropertyName onObject:[object valueForKeyPath:bindingValue.abstractBindedPropertyName]] forKeyPath:bindingValue.abstractBindedPropertyName];
@@ -60,7 +64,9 @@
                 value = [bindingValue.wrapper nilValueBySelector][stringSelector];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                id convertedValue = [self convertValue:value isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
+                NSString *vmType = NSStringFromClass([[bindingValue.wrapper.component performSelector:@selector(getData)] class]);
+                id convertedValue = [self convertValue:value toType:vmType];
+                convertedValue = [self convertValue:convertedValue isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
                 convertedValue = [self applyCustomConverter:bindingValue.converterName onValue:convertedValue isFromViewModelToControl:YES];
                 [bindingValue.wrapper setComponentValue:convertedValue forKeyPath:bindingValue.componentBindedPropertyName];
             });
@@ -82,6 +88,8 @@
                 if(!value) {
                     value = [bindingValue.wrapper nilValueBySelector][stringSelector];
                 }
+                NSString *vmType = NSStringFromClass([[bindingValue.wrapper.component performSelector:@selector(getData)] class]);
+                id convertedValue = [self convertValue:value toType:vmType];
                 value = [self convertValue:value isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
                 value = [self applyCustomConverter:bindingValue.converterName onValue:value isFromViewModelToControl:YES];
                 [bindingValue.wrapper setComponentValue:value forKeyPath:bindingValue.componentBindedPropertyName];
@@ -117,5 +125,37 @@
 
 #pragma clang diagnostic pop
 
+
+-(id)convertValue:(id)value toType:(NSString *)type {
+    id result = value;
+    if(value && type) {
+        NSString *sourceClassName = NSStringFromClass([value class]);
+        NSString *destClassName = type;
+        
+        NSArray *basePrefixes = @[@"__", @"NS", @"CF", @"Constant", @"TaggedPointer", @"MF", @"MDK", @"UI", @"CG"];
+        for(NSString *prefix in basePrefixes) {
+            if([sourceClassName hasPrefix:prefix]) {
+                sourceClassName = [sourceClassName stringByReplacingOccurrencesOfString:prefix withString:@"" options:0 range:NSMakeRange(0, prefix.length +1)];
+            }
+            if([destClassName hasPrefix:prefix]) {
+                destClassName = [destClassName stringByReplacingOccurrencesOfString:prefix withString:@"" options:0 range:NSMakeRange(0, prefix.length +1)];
+            }
+        }
+        if([sourceClassName isEqualToString:destClassName]) {
+            return result;
+        }
+        
+        NSString *converterName = [NSString stringWithFormat:@"MF%@Converter", sourceClassName];
+        id converterObject = [NSClassFromString(converterName) alloc];
+        if(converterObject) {
+            NSString *methodName = [NSString stringWithFormat:@"to%@:", destClassName];
+            SEL toConvertSelector = NSSelectorFromString(methodName);
+            if([[converterObject class] respondsToSelector:toConvertSelector]) {
+                result = [[converterObject class] performSelector:toConvertSelector withObject:value];
+            }
+        }
+    }
+    return result;
+}
 
 @end

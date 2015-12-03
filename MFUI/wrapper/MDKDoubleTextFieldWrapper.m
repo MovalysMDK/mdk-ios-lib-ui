@@ -22,13 +22,17 @@
 -(id)convertValue:(id)value isFromViewModelToControl:(NSNumber *)isVmToControl {
     id result = nil;
     if(value && ![value isKindOfClass:[NSNull class]] && ![value isKindOfClass:[MFKeyNotFound class]]) {
+        NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+        [numberFormatter setLocale:[NSLocale currentLocale]];
+        [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
         if([isVmToControl integerValue] == 1) {
             NSNumber *vmValue = (NSNumber *)value;
-            result = [NSString stringWithFormat:@"%@", vmValue];
+            result = [numberFormatter stringFromNumber:vmValue];
         }
         else {
             NSString *controlValue = (NSString *)value;
-            result = @([controlValue doubleValue]);
+            result = [numberFormatter numberFromString:controlValue];
         }
     }
     return result;

@@ -44,7 +44,11 @@
 {
     //Le formatter permet d'obtenir un nombre en gérant automatiquement le séparateur
     //décimal qui dépend des réglages linguistiques de l'appareil.
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+    [numberFormatter setLocale:[NSLocale currentLocale]];
+    [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numberFormatter setGroupingSeparator:@""];
     NSNumber *number = [numberFormatter numberFromString:value];
     return number;
 }

@@ -65,8 +65,8 @@
             }
             MFAbstractControlWrapper *__block controlWrapper = bindingValue.wrapper;
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSString *vmType = NSStringFromClass([[controlWrapper.component performSelector:@selector(getData)] class]);
-                id convertedValue = [self convertValue:value toType:vmType];
+                NSString *controlType = NSStringFromClass([[controlWrapper.component performSelector:@selector(getData)] class]);
+                id convertedValue = [self convertValue:value toType:controlType];
                 convertedValue = [self convertValue:convertedValue isFromViewModelToControl:YES withWrapper:controlWrapper];
                 convertedValue = [self applyCustomConverter:bindingValue.converterName onValue:convertedValue isFromViewModelToControl:YES];
                 [controlWrapper setComponentValue:convertedValue forKeyPath:bindingValue.componentBindedPropertyName];
@@ -89,8 +89,8 @@
                 if(!value) {
                     value = [bindingValue.wrapper nilValueBySelector][stringSelector];
                 }
-                NSString *vmType = NSStringFromClass([[bindingValue.wrapper.component performSelector:@selector(getData)] class]);
-                id convertedValue = [self convertValue:value toType:vmType];
+                NSString *controlType = NSStringFromClass([[bindingValue.wrapper.component performSelector:@selector(getData)] class]);
+                id convertedValue = [self convertValue:value toType:controlType];
                 convertedValue = [self convertValue:convertedValue isFromViewModelToControl:YES withWrapper:bindingValue.wrapper];
                 convertedValue = [self applyCustomConverter:bindingValue.converterName onValue:convertedValue isFromViewModelToControl:YES];
                 [bindingValue.wrapper setComponentValue:convertedValue forKeyPath:bindingValue.componentBindedPropertyName];

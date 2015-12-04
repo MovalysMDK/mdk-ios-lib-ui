@@ -39,23 +39,5 @@
     [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:integerTextField.text fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
 }
 
--(id)convertValue:(id)value isFromViewModelToControl:(NSNumber *)isVmToControl {
-    id result = nil;
-    if(value && ![value isKindOfClass:[NSNull class]] && ![value isKindOfClass:[MFKeyNotFound class]]) {
-        NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
-        [numberFormatter setLocale:[NSLocale currentLocale]];
-        [numberFormatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        if([isVmToControl integerValue] == 1) {
-            NSNumber *vmValue = (NSNumber *)value;
-            result = [numberFormatter stringFromNumber:vmValue];
-        }
-        else {
-            NSString *controlValue = (NSString *)value;
-            result = [numberFormatter numberFromString:controlValue];
-        }
-    }
-    return result;
-}
 
 @end

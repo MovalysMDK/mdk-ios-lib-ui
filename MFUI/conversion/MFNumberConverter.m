@@ -45,6 +45,7 @@
     [numberFormatter setLocale:[NSLocale currentLocale]];
     [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numberFormatter setGroupingSeparator:@""];
     
     //Par défaut, le formatter arrondi à l'entier supérieur : il faut lui spécifier un nombre maximal de décimales
     //pour pouvoir conserver un nombre décimal.

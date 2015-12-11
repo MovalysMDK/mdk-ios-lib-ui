@@ -186,7 +186,6 @@ NSString *const NUMBER_PICKER_PARAMETER_STEP_KEY = @"step";
 
 
 -(void)setCurrentValue:(NSInteger)currentValue {
-    NSLog(@"CURRENT VALUE : %@", @(currentValue));
     _currentValue = currentValue;
     self.innerStepper.value = currentValue;
     dispatch_async(dispatch_get_main_queue(), ^{

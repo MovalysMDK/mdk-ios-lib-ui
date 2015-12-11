@@ -463,7 +463,7 @@ const struct ErrorPositionParameters_Struct ErrorPositionParameters = {
  * @brief This method describes the treatment to do when the user click the error button of this component
  * @discussion By default, this method displays the error information
  */
--(void)doOnErrorButtonClicked {
+-(void)doonMessageButtonClicked {
     if(![self.tooltipView superview]) {
         NSString *errorText = @"";
         

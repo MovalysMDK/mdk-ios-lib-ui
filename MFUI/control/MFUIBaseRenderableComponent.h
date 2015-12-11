@@ -150,7 +150,7 @@ IB_DESIGNABLE
  * @brief This method describes the treatment to do when the user click the error button of this component
  * @discussion By default, this method displays the error information
  */
--(void) doOnErrorButtonClicked;
+-(void) doOnMessageButtonClicked;
 
 /*!
  * @brief This method allows to do some treatments on outlets of this view

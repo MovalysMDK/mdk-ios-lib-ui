@@ -37,6 +37,6 @@
  * @brief The action called when the user clicks the errorButton 
  * @param sender The sender of the action
  */
-- (IBAction)onErrorButtonClick:(id)sender;
+- (IBAction)onMessageButtonClick:(id)sender;
 
 @end

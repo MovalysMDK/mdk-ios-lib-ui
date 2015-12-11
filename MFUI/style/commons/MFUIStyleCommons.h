@@ -19,6 +19,5 @@
 
 #import "MFStyleProtocol.h"
 #import "MFDefaultStyle.h"
-#import "UIView+Styleable.h"
 
 #endif

@@ -18,7 +18,7 @@
 #import "MFTextView.h"
 
 @implementation MFTextViewStyle
-@synthesize errorView;
+@synthesize messageView;
 
 -(void)applyErrorStyleOnComponent:(MFTextView *)component {
     [super applyErrorStyleOnComponent:component];
@@ -40,70 +40,70 @@
 }
 
 -(void) addErrorViewOnComponent:(MFTextView *)component {
-    if(!self.errorView) {
+    if(!self.messageView) {
         UIButton *errorButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
         errorButton.clipsToBounds = YES;
-        [errorButton addTarget:component action:@selector(onErrorButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        self.errorView = errorButton;
-        self.errorView.alpha = 0.0;
-        self.errorView.tintColor = [UIColor redColor];
-        [component addSubview:self.errorView];
+        [errorButton addTarget:component action:@selector(onMessageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        self.messageView = errorButton;
+        self.messageView.alpha = 0.0;
+        self.messageView.tintColor = [UIColor redColor];
+        [component addSubview:self.messageView];
         
-        NSDictionary *errorViewConstraints = [self defineErrorViewConstraintsOnComponent:component];
-        errorViewConstraints = [self customizeErrorViewConstraints:errorViewConstraints onComponent:component];
-        [component addConstraints:errorViewConstraints.allValues];
+        NSDictionary *messageViewConstraints = [self defineErrorViewConstraintsOnComponent:component];
+        messageViewConstraints = [self customizeErrorViewConstraints:messageViewConstraints onComponent:component];
+        [component addConstraints:messageViewConstraints.allValues];
         
     }
     [component layoutIfNeeded];
     
-    self.errorView.alpha = 1.0;
+    self.messageView.alpha = 1.0;
     
 }
 
 -(void) removeErrorViewOnComponent:(MFTextView *)component {
-    if (!self.errorView) {
+    if (!self.messageView) {
         return;
     }
-    [self.errorView removeFromSuperview];
-    self.errorView = nil;
+    [self.messageView removeFromSuperview];
+    self.messageView = nil;
 }
 
 -(NSDictionary *)defineErrorViewConstraintsOnComponent:(UIView *)component {
     
     component.translatesAutoresizingMaskIntoConstraints = NO;
-    self.errorView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.messageView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:self.errorView
+    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:self.messageView
                                                                attribute:NSLayoutAttributeCenterY
                                                                relatedBy:NSLayoutRelationEqual toItem:component
                                                                attribute:NSLayoutAttributeCenterY
                                                               multiplier:1 constant:0];
     
-    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.errorView
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.messageView
                                                              attribute:NSLayoutAttributeRight
                                                              relatedBy:NSLayoutRelationEqual toItem:component
                                                              attribute:NSLayoutAttributeRight
                                                             multiplier:1 constant:-DEFAULT_ACCESSORIES_MARGIN];
     
-    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.errorView
+    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.messageView
                                                              attribute:NSLayoutAttributeWidth
                                                              relatedBy:NSLayoutRelationEqual toItem:nil
                                                              attribute:NSLayoutAttributeNotAnAttribute
                                                             multiplier:0 constant:DEFAULT_ERROR_VIEW_SQUARE_SIZE];
     
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.errorView
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.messageView
                                                               attribute:NSLayoutAttributeHeight
                                                               relatedBy:NSLayoutRelationEqual toItem:nil
                                                               attribute:NSLayoutAttributeNotAnAttribute
                                                              multiplier:0 constant:DEFAULT_ERROR_VIEW_SQUARE_SIZE];
-    NSDictionary *errorViewConstraints = @{
+    NSDictionary *messageViewConstraints = @{
                                            ERROR_VIEW_CENTER_Y_CONSTRAINT:centerY,
                                            ERROR_VIEW_HEIGHT_CONSTRAINT:height,
                                            ERROR_VIEW_RIGHT_CONSTRAINT:right,
                                            ERROR_VIEW_WIDTH_CONSTRAINT:width
                                            };
     
-    return errorViewConstraints;
+    return messageViewConstraints;
     
 }
 
@@ -111,8 +111,8 @@
 #pragma mark - Public Methods
 
 
--(NSDictionary *) customizeErrorViewConstraints:(NSDictionary *)errorViewConstraints onComponent:(MFTextView *)component{
-    return errorViewConstraints;
+-(NSDictionary *) customizeErrorViewConstraints:(NSDictionary *)messageViewConstraints onComponent:(MFTextView *)component{
+    return messageViewConstraints;
 }
 
 

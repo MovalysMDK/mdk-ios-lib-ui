@@ -29,6 +29,7 @@
 @interface MFUIBaseViewModel ()
 
 @property (nonatomic, strong) NSMutableArray *synchronizedProperties;
+@property (nonatomic, strong) NSMutableDictionary *bindedPropertiesWithTypes;
 
 @end
 
@@ -74,9 +75,47 @@
     for (NSString *key in allProperties) {
         [self addObserver:self forKeyPath:key options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew) context:nil];
     }
-    
+    [self extractTypeForProperties:allProperties];
     [self createViewModelConfiguration];
 }
+
+-(void) extractTypeForProperties:(NSArray *)propertiesToParse {
+    //Initialisation
+    self.bindedPropertiesWithTypes = [NSMutableDictionary new];
+    id aClass = objc_getClass([NSStringFromClass(self.class) UTF8String]);
+    unsigned int outCount, i;
+    
+    //Récupération et itération sur toutes les propriétés de la classe
+    objc_property_t *properties = class_copyPropertyList(aClass, &outCount);
+    for (i = 0; i < outCount; i++) {
+        objc_property_t property = properties[i];
+        NSString *propertyName = [NSString stringWithCString:property_getName(property) encoding:NSUTF8StringEncoding];
+       
+        //Pour les propriétés qui nous intéressent seulement (les propriétés bindées)
+        if([propertiesToParse containsObject:propertyName]) {
+            NSString *propertyType = [NSString stringWithCString:property_getAttributes(property) encoding:NSUTF8StringEncoding];
+            NSArray *propertyTypeParts = [propertyType componentsSeparatedByString:@","];
+            
+            //Extraction du type
+            for(NSString *part in propertyTypeParts) {
+                if([part containsString:@"T@"]) {
+                    propertyType = [part stringByReplacingOccurrencesOfString:@"T@" withString:@""];
+                    propertyType = [propertyType stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+                    break;
+                }
+            }
+            
+            //ajout de la pire propertyName/propertyType dans le dictionnaire
+            self.bindedPropertiesWithTypes[propertyName] = propertyType;
+        }
+
+    }
+}
+
+-(NSString *)typeForProperty:(NSString *)propertyName {
+    return self.bindedPropertiesWithTypes[propertyName];
+}
+
 
 
 /**
@@ -110,7 +149,7 @@
                     [self dispatchValue:newValue fromPropertyName:keyPath];
                 }
             }else {
-                if (![oldValue isEqual:newValue]) {
+                if ([oldValue isKindOfClass:[MFUIBaseViewModel class]] ||![oldValue isEqual:newValue]) {
                     [self dispatchValue:newValue fromPropertyName:keyPath];
                 }
             }

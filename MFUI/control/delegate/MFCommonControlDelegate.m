@@ -86,7 +86,7 @@
     }
 }
 
--(void)onErrorButtonClick:(id)sender {
+-(void)onMessageButtonClick:(id)sender {
     [self userTapOnErrorButton:sender];
 }
 

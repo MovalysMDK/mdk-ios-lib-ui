@@ -34,7 +34,7 @@
             object = ((MFUIBaseListViewModel *)object).viewModels[indexPath.row];
         }
         
-        NSString *vmType = NSStringFromClass([[object valueForKey:bindingValue.abstractBindedPropertyName] class]);
+        NSString *vmType = [object typeForProperty:bindingValue.abstractBindedPropertyName];
         value = [self convertValue:value toType:vmType];
         
         value = [self convertValue:value isFromViewModelToControl:NO withWrapper:bindingValue.wrapper];

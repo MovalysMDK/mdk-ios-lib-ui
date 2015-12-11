@@ -61,7 +61,7 @@
  * @brief Does an action when the error button is clicked
  * @param sender The sender of the action
  */
--(void)onErrorButtonClick:(id)sender;
+-(void)onMessageButtonClick:(id)sender;
 
 /*!
  * @brief Sets the visibility state of the component

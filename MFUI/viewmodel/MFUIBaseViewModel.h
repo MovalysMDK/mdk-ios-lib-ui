@@ -110,9 +110,21 @@
  */
 -(void) modifyToIdentifiable:(id)entity inContext:(id<MFContextProtocol>)context ;
 
+/*!
+ * @brief Called to declare then create this ViewModel configuration
+ * @discussion A ViewModel configuration allows to associates events to propeties changes
+ */
 -(void) createViewModelConfiguration;
 
-
+/*!
+ * @brief Returns the type of a property of this ViewModel if it exists
+ * @discussion This method is used by the binding to auto-convert values
+ * from ViewModel to Control or from Control to ViewModel
+ * @param propertyName The name of the property of this ViewModel. If the property is not a member
+ * of this ViewModel, this method will return nil.
+ * @return The type of the given property as String.
+ */
+-(NSString *)typeForProperty:(NSString *)propertyName;
 
 @end
 

@@ -174,8 +174,6 @@
 		B0C28DFA1AE647BF00640748 /* MFUIComponentProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C28DF81AE647BF00640748 /* MFUIComponentProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0C9B2C91AFA21E700FC9665 /* MFDefaultStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C9B2A81AFA21E700FC9665 /* MFDefaultStyle.h */; };
 		B0C9B2CA1AFA21E700FC9665 /* MFDefaultStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C9B2A91AFA21E700FC9665 /* MFDefaultStyle.m */; };
-		B0C9B2CB1AFA21E700FC9665 /* UIView+Styleable.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C9B2AA1AFA21E700FC9665 /* UIView+Styleable.h */; };
-		B0C9B2CC1AFA21E700FC9665 /* UIView+Styleable.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C9B2AB1AFA21E700FC9665 /* UIView+Styleable.m */; };
 		B0C9B2E91AFA220000FC9665 /* MFTextViewStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C9B2E71AFA220000FC9665 /* MFTextViewStyle.h */; };
 		B0C9B2EA1AFA220000FC9665 /* MFTextViewStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C9B2E81AFA220000FC9665 /* MFTextViewStyle.m */; };
 		B0D2AD821B3C512C008D1352 /* MFComponentAssociatedLabelProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D2AD811B3C512C008D1352 /* MFComponentAssociatedLabelProtocol.h */; };
@@ -661,8 +659,6 @@
 		B0C28DF81AE647BF00640748 /* MFUIComponentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIComponentProtocol.h; sourceTree = "<group>"; };
 		B0C9B2A81AFA21E700FC9665 /* MFDefaultStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDefaultStyle.h; sourceTree = "<group>"; };
 		B0C9B2A91AFA21E700FC9665 /* MFDefaultStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDefaultStyle.m; sourceTree = "<group>"; };
-		B0C9B2AA1AFA21E700FC9665 /* UIView+Styleable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Styleable.h"; sourceTree = "<group>"; };
-		B0C9B2AB1AFA21E700FC9665 /* UIView+Styleable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Styleable.m"; sourceTree = "<group>"; };
 		B0C9B2E71AFA220000FC9665 /* MFTextViewStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTextViewStyle.h; sourceTree = "<group>"; };
 		B0C9B2E81AFA220000FC9665 /* MFTextViewStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTextViewStyle.m; sourceTree = "<group>"; };
 		B0D2AD811B3C512C008D1352 /* MFComponentAssociatedLabelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentAssociatedLabelProtocol.h; sourceTree = "<group>"; };
@@ -688,7 +684,7 @@
 		B0D45B7C1A5ED2F300C6D376 /* MFActionLauncher+MFUIActionLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "MFActionLauncher+MFUIActionLauncher.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B0D45B7D1A5ED2F300C6D376 /* MFUIAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIAction.h; sourceTree = "<group>"; };
 		B0D45B7F1A5ED2F300C6D376 /* MFAbstractPersistentSaveDetailAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAbstractPersistentSaveDetailAction.h; sourceTree = "<group>"; };
-		B0D45B801A5ED2F300C6D376 /* MFAbstractPersistentSaveDetailAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MFAbstractPersistentSaveDetailAction.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B0D45B801A5ED2F300C6D376 /* MFAbstractPersistentSaveDetailAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MFAbstractPersistentSaveDetailAction.m; sourceTree = "<group>"; };
 		B0D45B811A5ED2F300C6D376 /* MFAbstractSaveDetailAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAbstractSaveDetailAction.h; sourceTree = "<group>"; };
 		B0D45B821A5ED2F300C6D376 /* MFAbstractSaveDetailAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MFAbstractSaveDetailAction.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B0D45B831A5ED2F300C6D376 /* MFChainSaveActionDetailParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFChainSaveActionDetailParameter.h; sourceTree = "<group>"; };
@@ -1388,8 +1384,6 @@
 				B01075B01B71073A009D63B9 /* MFStyleProtocol.h */,
 				B0C9B2A81AFA21E700FC9665 /* MFDefaultStyle.h */,
 				B0C9B2A91AFA21E700FC9665 /* MFDefaultStyle.m */,
-				B0C9B2AA1AFA21E700FC9665 /* UIView+Styleable.h */,
-				B0C9B2AB1AFA21E700FC9665 /* UIView+Styleable.m */,
 				B01075B41B7107DF009D63B9 /* MFUIStyleCommons.h */,
 			);
 			path = commons;
@@ -2377,7 +2371,6 @@
 				B0D45D441A5ED2F400C6D376 /* MFPhotoFixedListDataDelegate.h in Headers */,
 				B0D45E291A5ED2F400C6D376 /* MFBindingViewAbstract.h in Headers */,
 				B0D45E481A5ED2F400C6D376 /* MFCreateEmailViewController.h in Headers */,
-				B0C9B2CB1AFA21E700FC9665 /* UIView+Styleable.h in Headers */,
 				B0D45E2B1A5ED2F400C6D376 /* MFForm3DHeaderViewControls.h in Headers */,
 				B0D45E0A1A5ED2F400C6D376 /* MFUIMotion.h in Headers */,
 				B0D45D881A5ED2F400C6D376 /* MFBarCodeScanViewController.h in Headers */,
@@ -2680,7 +2673,6 @@
 				B0F896601B611283005C3AA7 /* MFPickerSelectedItemBindingDelegate.m in Sources */,
 				B006CF0D1B32C25800B78782 /* MFBinding+Dispatcher.m in Sources */,
 				B006CF151B32C25800B78782 /* MFBindingDictionary.m in Sources */,
-				B0C9B2CC1AFA21E700FC9665 /* UIView+Styleable.m in Sources */,
 				B0D45E541A5ED2F400C6D376 /* MFFormListViewController.m in Sources */,
 				B0D45D851A5ED2F400C6D376 /* MFBarCodeScannerDelegate.m in Sources */,
 				B0F474651B4A764600F20FEA /* MDKEnumListWrapper.m in Sources */,

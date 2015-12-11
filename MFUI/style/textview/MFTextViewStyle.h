@@ -17,6 +17,6 @@
 
 #import "MFDefaultStyle.h"
 
-@interface MFTextViewStyle : MFDefaultStyle <MDKErrorViewProtocol, MDKBackgroundViewProtocol>
+@interface MFTextViewStyle : MFDefaultStyle <MDKMessageViewProtocol, MDKBackgroundViewProtocol>
 
 @end

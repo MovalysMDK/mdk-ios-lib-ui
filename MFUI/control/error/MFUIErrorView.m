@@ -22,7 +22,7 @@
 
 
 
-- (IBAction)onErrorButtonClick:(id)sender {
+- (IBAction)onMessageButtonClick:(id)sender {
     //Forwarding this event on MFUIBaseRenderableComponent parent
     UIView *currentView = self;
     while (currentView && ![currentView isKindOfClass:[MFUIBaseRenderableComponent class]]) {
@@ -31,7 +31,7 @@
     
     if(currentView) {
         MFUIBaseRenderableComponent *parentComponent = (MFUIBaseRenderableComponent *)currentView;
-        [parentComponent doOnErrorButtonClicked];
+        [parentComponent doOnMessageButtonClicked];
     }
 }
 

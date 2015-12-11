@@ -326,8 +326,8 @@
     [self.controlDelegate setIsValid:!showError];
 }
 
--(void)onErrorButtonClick:(id)sender {
-    [self.controlDelegate onErrorButtonClick:sender];
+-(void)onMessageButtonClick:(id)sender {
+    [self.controlDelegate onMessageButtonClick:sender];
 }
 
 

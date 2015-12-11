@@ -18,7 +18,8 @@
 #import "MFTextView.h"
 
 @implementation MFTextViewStyle
-@synthesize messageView;
+@synthesize messageView = _messageView;
+@synthesize backgroundView = _backgroundView;
 
 -(void)applyErrorStyleOnComponent:(MFTextView *)component {
     [super applyErrorStyleOnComponent:component];

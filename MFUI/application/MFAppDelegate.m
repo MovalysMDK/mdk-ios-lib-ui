@@ -18,7 +18,7 @@
 //  MMCore
 //
 //
-
+@import MDKControl.MDKComponentProviderProtocol;
 
 #import <MFCore/MFCoreFoundationExt.h>
 #import <MFCore/MFCoreLog.h>
@@ -135,7 +135,7 @@ void ApplicationExceptionHandler(NSException *exception)
     [_starter setupFirstLaunching];
 }
 
--(id<MFComponentProviderProtocol>)componentProvider {
+-(id<MDKComponentProviderProtocol>)componentProvider {
     return [NSClassFromString(@"MFBeanComponentProvider") new];
 }
 

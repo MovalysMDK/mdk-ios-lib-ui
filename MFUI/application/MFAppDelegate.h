@@ -14,9 +14,8 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #import "MFUIViewController.h"
-#import "MFComponentApplicationProtocol.h"
+@import MDKControl.MDKComponentApplicationProtocol;
 
 /*!
  * @class MFAppDelegate
@@ -24,7 +23,7 @@
  * @discussion It defines some base treatments for MDK iOS generated application in order
  * to make MDK iOS working.
  */
-@interface MFAppDelegate :  UIResponder <UIApplicationDelegate, MFComponentApplicationProtocol>
+@interface MFAppDelegate :  UIResponder <UIApplicationDelegate, MDKComponentApplicationProtocol>
 
 
 #pragma mark - Properties

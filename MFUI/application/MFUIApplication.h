@@ -19,7 +19,6 @@
 #import <MFCore/MFCoreCoredata.h>
 
 #import "MFUIUtils.h"
-#import "MFAppDelegate.h"
 
 
 @interface MFUIApplication : MFApplication<MFMailComposeViewControllerDelegate>

@@ -697,7 +697,7 @@
 		B0D45B8B1A5ED2F300C6D376 /* MFUpdateVMWithDataLoaderAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUpdateVMWithDataLoaderAction.h; sourceTree = "<group>"; };
 		B0D45B8C1A5ED2F300C6D376 /* MFUpdateVMWithDataLoaderAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUpdateVMWithDataLoaderAction.m; sourceTree = "<group>"; };
 		B0D45B8E1A5ED2F300C6D376 /* MFAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAppDelegate.h; sourceTree = "<group>"; };
-		B0D45B8F1A5ED2F300C6D376 /* MFAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MFAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B0D45B8F1A5ED2F300C6D376 /* MFAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MFAppDelegate.m; sourceTree = "<group>"; };
 		B0D45B901A5ED2F300C6D376 /* MFApplication+MFUIAppSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFApplication+MFUIAppSingleton.h"; sourceTree = "<group>"; };
 		B0D45B911A5ED2F300C6D376 /* MFApplication+MFUIAppSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "MFApplication+MFUIAppSingleton.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B0D45B921A5ED2F300C6D376 /* MFUIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIApplication.h; sourceTree = "<group>"; };

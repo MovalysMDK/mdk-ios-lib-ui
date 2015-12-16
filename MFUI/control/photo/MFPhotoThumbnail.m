@@ -26,6 +26,9 @@
 #import "MFCellAbstract.h"
 #import "MFPhotoDetailViewController.h"
 #import "MFPhotoViewModel.h"
+#import "MFAppDelegate.h"
+
+
 @interface MFPhotoThumbnail()
 
 /**

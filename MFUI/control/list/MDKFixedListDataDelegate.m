@@ -26,6 +26,7 @@
 //UI
 #import <MBProgressHUD/MBProgressHUD.h>
 
+@import MDKControl.Command;
 
 //FixedList import
 #import "MFFormDetailViewController.h"
@@ -54,9 +55,13 @@
 const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 
 
-@interface MDKFixedListDataDelegate ()
+@interface MDKFixedListDataDelegate () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 
+/*!
+ * @brief The command used to show media picker
+ */
+@property (nonatomic, strong) id<MDKCommandProtocol> pickMediaCommand;
 
 /**
  * @brief The view that is shown during loading
@@ -109,40 +114,53 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 
 -(void)fixedList:(MDKUIFixedList *)fixedList addItemFromSender:(id)sender {
     
-    //Get de detail controller
-    MFFormDetailViewController *detailController = [self instantiateDetailViewControllerForEditionType:MFFormDetailEditionTypeAdd];
-    [detailController setIndexPath:nil];
+    //Get the action result object
+    MFFormDetailViewController *detailController = [self instantiateObjectForActionWithEditionType:MFFormDetailEditionTypeAdd];
     
-    //Creating an empty ViewModel copy
-    MFUIBaseViewModel *viewModel = [[MFBeanLoader getInstance] getBeanWithKey:[self itemListViewModelName]];
-    [viewModel updateFromIdentifiable:nil];
-    [detailController setOriginalViewModel:viewModel];
-
-    //Display the controller
-    [[self.fixedList parentNavigationController] pushViewController:detailController animated:YES];
+    if([detailController isKindOfClass:MFFormDetailViewController.class]) {
+        [detailController setIndexPath:nil];
+        
+        //Creating an empty ViewModel copy
+        MFUIBaseViewModel *viewModel = [[MFBeanLoader getInstance] getBeanWithKey:[self itemListViewModelName]];
+        [viewModel updateFromIdentifiable:nil];
+        [detailController setOriginalViewModel:viewModel];
+        
+        //Display the controller
+        [[self.fixedList parentNavigationController] pushViewController:detailController animated:YES];
+    }
 }
 
 -(void)fixedList:(MDKUIFixedList *)fixedList didSelectRowAtIndexPath:(NSIndexPath *)indexPath withObject:(id)object {
     
-    //Get de detail controller
-    MFFormDetailViewController *detailController = [self instantiateDetailViewControllerForEditionType:MFFormDetailEditionTypeEdit];
-    [detailController setIndexPath:indexPath];
+    //Get the action result object
+    MFFormDetailViewController *detailController = [self instantiateObjectForActionWithEditionType:MFFormDetailEditionTypeEdit];
     
-    //Creating a ViewModel copy
-    MFUIBaseViewModel *tempViewModel = [object copy];
-    [detailController setOriginalViewModel:tempViewModel];
-    
-    //Display the controller
-    [[self.fixedList parentNavigationController] pushViewController:detailController animated:YES];
+    if([detailController isKindOfClass:MFFormDetailViewController.class]) {
+        [detailController setIndexPath:indexPath];
+        
+        //Creating a ViewModel copy
+        MFUIBaseViewModel *tempViewModel = [object copy];
+        [detailController setOriginalViewModel:tempViewModel];
+        
+        //Display the controller
+        [[self.fixedList parentNavigationController] pushViewController:detailController animated:YES];
+    }
 }
 
--(MFFormDetailViewController *)instantiateDetailViewControllerForEditionType:(MFFormDetailEditionType)editionType {
-    //Get de detail controller
-    MFFormDetailViewController *detailController = [self detailController];
-    [detailController setParentFormController:self.fixedList.parentViewController];
-    [detailController setSender:self];
-    [detailController setEditionType:editionType];
-    return detailController;
+-(id)instantiateObjectForActionWithEditionType:(MFFormDetailEditionType)editionType {
+    id result = nil;
+    if(![_fixedList isPhotoFixedList]) {
+        MFFormDetailViewController *detailController = [self detailController];
+        [detailController setParentFormController:self.fixedList.parentViewController];
+        [detailController setSender:self];
+        [detailController setEditionType:editionType];
+        result = detailController;
+    }
+    else {
+        self.pickMediaCommand = [[MDKCommandHandler commandWithKey:@"PickMediaCommand" withQualifier:@""] executeFromViewController:[self.fixedList parentViewController] withParameters:self, nil];
+        result = self.pickMediaCommand;
+    }
+    return result;
 }
 
 -(void)fixedList:(MDKUIFixedList *)fixedList didDeleteRowAtIndexPath:(NSIndexPath *)indexPath withObject:(id)object {
@@ -188,7 +206,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 
 -(void)createBindingStructure {
     MFTableConfiguration *tableConfiguration = [MFTableConfiguration createTableConfigurationForObjectWithBinding:self];
-    MFBindingCellDescriptor *photoCellDescriptor = [MFBindingCellDescriptor cellDescriptorWithIdentifier:@"PhotoFixedListItemCell" withCellHeight:@(123) withCellBindingFormat:@"outlet.photoValue.binding : vm.photo<->c.data", nil];
+    MFBindingCellDescriptor *photoCellDescriptor = [MFBindingCellDescriptor cellDescriptorWithIdentifier:@"PhotoFixedListItemCell" withCellHeight:@(147) withCellBindingFormat:@"outlet.photoValue.binding : vm.photo<->c.data",@"outlet.photoValue.attributes : editable=NO", nil];
     [tableConfiguration createFixedListTableCellWithDescriptor:photoCellDescriptor];
 }
 
@@ -199,7 +217,7 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     if(!tempViewModels) {
         tempViewModels = [NSMutableArray array];
     }
-
+    
     switch (editionType) {
         case MFFormDetailEditionTypeEdit:
             viewModel.parentViewModel = ((MFUIBaseViewModel *)[tempViewModels objectAtIndex:indexPath.row]).parentViewModel;
@@ -267,6 +285,56 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     [self.fixedList.tableView registerNib:nib forCellReuseIdentifier:identifier];
     
     return identifier;
+}
+
+
+#pragma mark - UIImagePickerControllerDelegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    //Retrieve image
+    UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
+
+    //Creating an empty ViewModel copy
+    MFUIBaseViewModel *viewModel = [[MFBeanLoader getInstance] getBeanWithKey:[self itemListViewModelName]];
+    [viewModel updateFromIdentifiable:nil];
+    MFPhotoViewModel *photoViewModel = [[MFPhotoViewModel alloc] init];
+
+    if ([picker sourceType] == UIImagePickerControllerSourceTypeCamera) {
+        //Sauvegarde de la photo dans l'album
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+        ALAssetsLibraryWriteImageCompletionBlock imageWriteCompletionBlock =^(NSURL *assetURL, NSError *error) {
+            if (error) {
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle: @"Error"
+                                      message:@"Saving image has failed"
+                                      delegate: nil
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil];
+                
+                [alert show];
+            }
+            else {
+                [photoViewModel setUri:[assetURL absoluteString]];
+            }
+        };
+        
+        NSMutableDictionary *imageMetadata = [info[UIImagePickerControllerMediaMetadata] mutableCopy];
+        
+        //Sauvegarde de la photo avec ses données EXIF + ses éventuelles données de localisation
+        [library writeImageToSavedPhotosAlbum:[image CGImage] metadata:imageMetadata completionBlock:imageWriteCompletionBlock];
+        
+    }
+    else if([picker sourceType] == UIImagePickerControllerSourceTypePhotoLibrary) {
+        [photoViewModel setUri:[info[UIImagePickerControllerReferenceURL] absoluteString]];
+    }
+    
+    [viewModel setValue:photoViewModel forKeyPath:@"photo"];
+
+    
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [self updateChangesFromDetailControllerOnCellAtIndexPath:nil withViewModel:viewModel editionType:MFFormDetailEditionTypeAdd];
+    }];
+    
 }
 
 

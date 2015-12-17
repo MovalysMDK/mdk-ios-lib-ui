@@ -23,11 +23,11 @@
 @implementation MFPhotoViewModel
 
 @synthesize identifier = _identifier;
-@synthesize titre;
-@synthesize descr;
-@synthesize uri;
-@synthesize date;
-@synthesize photoState;
+@synthesize titre = _titre;
+@synthesize descr = _descr;
+@synthesize uri =_uri;
+@synthesize date = _date;
+@synthesize photoState = _photoState;
 @synthesize position = _position;
 
 
@@ -112,6 +112,10 @@
 
 -(BOOL) isEmpty {
     return !self.titre && !self.descr && !self.uri && !self.date;
+}
+
+-(void)setUri:(NSString *)uri{
+    _uri = uri;
 }
 
 @end

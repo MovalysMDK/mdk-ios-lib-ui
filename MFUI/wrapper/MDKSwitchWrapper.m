@@ -14,28 +14,28 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFSwitch.h"
-#import "MFSwitchWrapper.h"
+@import MDKControl.ControlSwitch;
+
+#import "MDKSwitchWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
 
-@implementation MFSwitchWrapper
+@implementation MDKSwitchWrapper
 
 -(instancetype)initWithComponent:(UIControl *)component {
     self = [super initWithComponent:component];
     if(self) {
-        [[self typeComponent] addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [[self typeComponent].internalView addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
     }
     return self;
 }
 
--(MFSwitch *)typeComponent {
-    return (MFSwitch *)self.component;
+-(MDKUISwitch *)typeComponent {
+    return (MDKUISwitch *)self.component;
 }
 
--(void)componentValueChanged:(MFSwitch *)cSwitch
+-(void)componentValueChanged:(MDKUISwitch *)cSwitch
 {
-    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:@(cSwitch.on) fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
-    
+    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[cSwitch getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
 }
 
 -(NSDictionary *) nilValueBySelector {

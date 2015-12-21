@@ -18,8 +18,8 @@
 
 /*!
  * @class MFSwitchWrapper
- * @brief The wrapper for the MFSwitch component.
+ * @brief The wrapper for the MDKSwitch component.
  */
-@interface MFSwitchWrapper : MFAbstractControlWrapper
+@interface MDKSwitchWrapper : MFAbstractControlWrapper
 
 @end

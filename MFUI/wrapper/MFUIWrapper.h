@@ -26,7 +26,7 @@
 #import "MFSignatureWrapper.h"
 #import "MFTextViewWrapper.h"
 #import "MDKSliderWrapper.h"
-#import "MFSwitchWrapper.h"
+#import "MDKSwitchWrapper.h"
 #import "MDKTextFieldWrapper.h"
 #import "MFPhotoFixedListWrapper.h"
 #import "MDKFixedListWrapper.h"

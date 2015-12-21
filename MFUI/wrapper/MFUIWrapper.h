@@ -20,7 +20,7 @@
 
 #import "MFAbstractControlWrapper.h"
 #import "MDKDateTimeWrapper.h"
-#import "MFNumberPickerWrapper.h"
+#import "MDKNumberPickerWrapper.h"
 #import "MDKMediaWrapper.h"
 #import "MDKPositionWrapper.h"
 #import "MFSignatureWrapper.h"

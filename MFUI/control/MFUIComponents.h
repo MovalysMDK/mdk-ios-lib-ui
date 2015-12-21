@@ -28,22 +28,8 @@
 //Lists
 #import "MFUIControlList.h"
 
-//Number
-#import "MFUIControlNumber.h"
-
-//Photo
-#import "MFUIControlPhoto.h"
-
-//Position
-#import "MFUIControlPosition.h"
-
 //Signature
 #import "MFUIControlSignature.h"
 
-//Switch
-#import "MFUIControlSwitch.h"
-
-//Webview
-#import "MFUIControlWebView.h"
 
 #endif

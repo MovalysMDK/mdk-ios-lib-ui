@@ -15,6 +15,9 @@
  */
 
 
+@protocol MFPositionVoProtocol;
+
+
 #import "MFUIControl.h"
 #import "MFUIBaseViewModel.h"
 

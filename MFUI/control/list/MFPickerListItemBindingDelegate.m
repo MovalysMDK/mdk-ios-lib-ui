@@ -20,6 +20,8 @@
 #import "MFObjectWithBindingProtocol.h"
 #import "MFAbstractControlWrapper.h"
 #import "MFPickerListConfiguration.h"
+#import "MFFormViewController.h"
+#import "MFDetailViewControllerProtocol.h"
 
 
 @interface MFPickerListItemBindingDelegate ()

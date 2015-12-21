@@ -13,11 +13,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
+#import "MFAbstractControlWrapper.h"
 
+/*!
+ * @class MDKNumberPickerWrapper
+ * @brief The wrapper for the MDKNumberPicker component.
+ */
+@interface MDKNumberPickerWrapper : MFAbstractControlWrapper
 
-#ifndef MFUI_MFUIControlNumber_h
-#define MFUI_MFUIControlNumber_h
-
-#import "MFNumberPicker.h"
-
-#endif
+@end

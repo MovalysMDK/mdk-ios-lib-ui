@@ -13,25 +13,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
-#import "MFNumberPickerWrapper.h"
-#import "MFNumberPicker.h"
+
+@import MDKControl.ControlNumberPicker;
+
+#import "MDKNumberPickerWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
 
-@implementation MFNumberPickerWrapper
+@implementation MDKNumberPickerWrapper
 
 -(instancetype)initWithComponent:(UIControl *)component {
     self = [super initWithComponent:component];
     if(self) {
-        [[self typeComponent] addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
+        [[self typeComponent].internalView addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventEditingChanged|UIControlEventValueChanged];
     }
     return self;
 }
 
--(MFNumberPicker *)typeComponent {
-    return (MFNumberPicker *)self.component;
+-(MDKUINumberPicker *)typeComponent {
+    return (MDKUINumberPicker *)self.component;
 }
 
--(void)componentValueChanged:(MFNumberPicker *)numberPicker
+-(void)componentValueChanged:(MDKUINumberPicker *)numberPicker
 {
     [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[numberPicker getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
     

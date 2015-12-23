@@ -15,22 +15,29 @@
  */
 
 
-#ifndef MFUI_MFUIWrapper_h
-#define MFUI_MFUIWrapper_h
+@import MDKControl.ControlSignature;
 
-#import "MFAbstractControlWrapper.h"
-#import "MDKDateTimeWrapper.h"
-#import "MDKNumberPickerWrapper.h"
-#import "MDKMediaWrapper.h"
-#import "MDKPositionWrapper.h"
 #import "MDKSignatureWrapper.h"
-#import "MFTextViewWrapper.h"
-#import "MDKSliderWrapper.h"
-#import "MDKSwitchWrapper.h"
-#import "MDKTextFieldWrapper.h"
-#import "MFPhotoFixedListWrapper.h"
-#import "MDKFixedListWrapper.h"
-#import "MDKPickerListWrapper.h"
-#import "MFEnumImageWrapper.h"
+#import "MFObjectWithBindingProtocol.h"
 
-#endif
+@implementation MDKSignatureWrapper
+
+-(instancetype)initWithComponent:(UIControl *)component {
+    self = [super initWithComponent:component];
+    if(self) {
+        [[self typeComponent].internalView addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
+    }
+    return self;
+}
+
+-(MDKUISignature *)typeComponent {
+    return (MDKUISignature *)self.component;
+}
+
+-(void)componentValueChanged:(MDKUISignature *)signature
+{
+    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[signature getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
+    
+}
+
+@end

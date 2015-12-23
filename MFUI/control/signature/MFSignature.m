@@ -81,26 +81,6 @@
 }
 
 
-// Drawing has to be done here
-- (void) drawRect:(CGRect)rect {
-    
-    // Get graphic context
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // Configure stroke style
-    
-    CGContextSetStrokeColorWithColor(context, _strokeColor.CGColor);
-    CGContextSetLineWidth(context, _lineWidth);
-    CGContextSetLineCap(context , kCGLineCapRound);
-    
-    // Draw lines
-    for (NSValue *nsLine in _signaturePath) {
-        struct Line couple;
-        [nsLine getValue:&couple];
-        [self drawLineFrom:couple.from to:couple.to context:context];
-    }
-    CGContextStrokePath(context);
-}
 
 - (void) drawLineFrom:(CGPoint)from to:(CGPoint)to context:(CGContextRef) context {
     CGContextMoveToPoint(context, from.x, from.y);  // Start at this point
@@ -119,45 +99,6 @@
 }
 
 
-- (void) layoutSubviews {
-    [super layoutSubviews];
-    CGRect frame = CGRectMake(self.frame.origin.x, self.frame.origin.y,
-                              SIGNATURE_DRAWING_WIDTH, SIGNATURE_DRAWING_HEIGHT);
-    
-    [self setFrame:frame];
-    
-    if([MFVersionManager isCurrentDeviceOfTypePhone]) {
-        if (self.modalSignatureDrawingView) {
-            frame = CGRectMake(self.mainFormControllerView.frame.origin.x,
-                                                               self.mainFormControllerView.frame.size.height - SIGNATURE_DRAWING_HEIGHT - 50,
-                                                               self.mainFormControllerView.frame.size.width,
-                                                               SIGNATURE_DRAWING_HEIGHT + 50);
-            
-            [self.modalSignatureDrawingView setFrame:frame];
-            
-            frame = CGRectMake((self.mainFormControllerView.frame.size.width - SIGNATURE_DRAWING_WIDTH)/2,
-                                40,
-                                SIGNATURE_DRAWING_WIDTH,
-                                SIGNATURE_DRAWING_HEIGHT);
-            
-            [self.signature setFrame:frame];
-            
-            frame = CGRectMake((self.mainFormControllerView.frame.size.width + SIGNATURE_DRAWING_WIDTH)/2 - 100, 0, 100.0, 30.0);
-            [self.confirmButton setFrame:frame];
-            frame = CGRectMake((self.mainFormControllerView.frame.size.width - SIGNATURE_DRAWING_WIDTH)/2, 0, 100.0, 30.0);
-            [self.cancelButton setFrame:frame];
-            frame = CGRectMake(self.mainFormControllerView.frame.size.width/2 - 50, 0, 100.0, 30.0);
-            [self.clearButton setFrame:frame];
-        } else {
-          /*  frame = CGRectMake(self.mainFormControllerView.frame.origin.x,
-                               self.mainFormControllerView.frame.size.height - SIGNATURE_DRAWING_HEIGHT - 50,
-                               self.mainFormControllerView.frame.size.width,
-                               SIGNATURE_DRAWING_HEIGHT + 50);
-            [self.popoverController setFrame:];*/
-        }
-    }
-    [self setNeedsDisplay];
-}
 
 #pragma mark - Tags for automatic testing
 -(void) setAllTags {

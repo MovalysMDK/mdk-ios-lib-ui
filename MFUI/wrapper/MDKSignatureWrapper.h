@@ -14,28 +14,12 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFSignature.h"
-#import "MFSignatureWrapper.h"
-#import "MFObjectWithBindingProtocol.h"
+#import "MFAbstractControlWrapper.h"
 
-@implementation MFSignatureWrapper
-
--(instancetype)initWithComponent:(UIControl *)component {
-    self = [super initWithComponent:component];
-    if(self) {
-        [[self typeComponent] addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
-    }
-    return self;
-}
-
--(MFSignature *)typeComponent {
-    return (MFSignature *)self.component;
-}
-
--(void)componentValueChanged:(MFSignature *)signature
-{
-    [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[signature getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
-    
-}
+/*!
+ * @class MDKSignatureWrapper
+ * @brief The wrapper for the MDKSignature component.
+ */
+@interface MDKSignatureWrapper : MFAbstractControlWrapper
 
 @end

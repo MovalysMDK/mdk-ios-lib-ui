@@ -44,6 +44,7 @@
 /*!
  * @brief The main Movalys component for this cell
  */
-@property(nonatomic, strong) IBOutlet UIView<MFUIComponentProtocol> *componentView;
+@property (weak, nonatomic) IBOutlet UIView<MDKControlProtocol> *componentView;
+
 
 @end

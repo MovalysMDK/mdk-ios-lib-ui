@@ -131,8 +131,8 @@
 		B051A3C41B0F5E2800F4F99C /* MFUIAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = B037F8D01B0DD673005C12F2 /* MFUIAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B054860E1B46DC4A0094846E /* MFEnumImageWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B054860C1B46DC4A0094846E /* MFEnumImageWrapper.h */; };
 		B054860F1B46DC4A0094846E /* MFEnumImageWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B054860D1B46DC4A0094846E /* MFEnumImageWrapper.m */; };
-		B0643EAE1B74B1F3001F844C /* MFScannerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0643EAC1B74B1F3001F844C /* MFScannerWrapper.h */; };
-		B0643EAF1B74B1F3001F844C /* MFScannerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643EAD1B74B1F3001F844C /* MFScannerWrapper.m */; };
+		B0643EAE1B74B1F3001F844C /* MDKScannerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0643EAC1B74B1F3001F844C /* MDKScannerWrapper.h */; };
+		B0643EAF1B74B1F3001F844C /* MDKScannerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643EAD1B74B1F3001F844C /* MDKScannerWrapper.m */; };
 		B0643EB21B74B391001F844C /* MFBarCodeScanTextFieldWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0643EB01B74B391001F844C /* MFBarCodeScanTextFieldWrapper.h */; };
 		B0643EB31B74B391001F844C /* MFBarCodeScanTextFieldWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0643EB11B74B391001F844C /* MFBarCodeScanTextFieldWrapper.m */; };
 		B06730521AE6833900CB0900 /* MFComponentErrorProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = B06730511AE6833900CB0900 /* MFComponentErrorProtocol.h */; };
@@ -605,8 +605,8 @@
 		B04D12981B453E3900B64421 /* MFPickerListConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPickerListConfiguration.m; sourceTree = "<group>"; };
 		B054860C1B46DC4A0094846E /* MFEnumImageWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFEnumImageWrapper.h; sourceTree = "<group>"; };
 		B054860D1B46DC4A0094846E /* MFEnumImageWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFEnumImageWrapper.m; sourceTree = "<group>"; };
-		B0643EAC1B74B1F3001F844C /* MFScannerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFScannerWrapper.h; sourceTree = "<group>"; };
-		B0643EAD1B74B1F3001F844C /* MFScannerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFScannerWrapper.m; sourceTree = "<group>"; };
+		B0643EAC1B74B1F3001F844C /* MDKScannerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDKScannerWrapper.h; sourceTree = "<group>"; };
+		B0643EAD1B74B1F3001F844C /* MDKScannerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDKScannerWrapper.m; sourceTree = "<group>"; };
 		B0643EB01B74B391001F844C /* MFBarCodeScanTextFieldWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBarCodeScanTextFieldWrapper.h; sourceTree = "<group>"; };
 		B0643EB11B74B391001F844C /* MFBarCodeScanTextFieldWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBarCodeScanTextFieldWrapper.m; sourceTree = "<group>"; };
 		B06730511AE6833900CB0900 /* MFComponentErrorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFComponentErrorProtocol.h; sourceTree = "<group>"; };
@@ -729,7 +729,7 @@
 		B0D45BE81A5ED2F300C6D376 /* MFPositionVoProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPositionVoProtocol.h; sourceTree = "<group>"; };
 		B0D45BE91A5ED2F300C6D376 /* MFUIControlPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIControlPosition.h; sourceTree = "<group>"; };
 		B0D45BEB1A5ED2F300C6D376 /* MFBarCodeScannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBarCodeScannerDelegate.h; sourceTree = "<group>"; };
-		B0D45BEC1A5ED2F300C6D376 /* MFBarCodeScannerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MFBarCodeScannerDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B0D45BEC1A5ED2F300C6D376 /* MFBarCodeScannerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MFBarCodeScannerDelegate.m; sourceTree = "<group>"; };
 		B0D45BEF1A5ED2F300C6D376 /* MFBarCodeScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBarCodeScanViewController.h; sourceTree = "<group>"; };
 		B0D45BF01A5ED2F300C6D376 /* MFBarCodeScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MFBarCodeScanViewController.m; sourceTree = "<group>"; };
 		B0D45BF11A5ED2F300C6D376 /* MFScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFScanner.h; sourceTree = "<group>"; };
@@ -1213,8 +1213,8 @@
 				B01461F51B4445DB00008874 /* MFPhotoFixedListWrapper.m */,
 				B0E86BE01B452FFF00F5CB41 /* MDKPickerListWrapper.h */,
 				B0E86BE11B452FFF00F5CB41 /* MDKPickerListWrapper.m */,
-				B0643EAC1B74B1F3001F844C /* MFScannerWrapper.h */,
-				B0643EAD1B74B1F3001F844C /* MFScannerWrapper.m */,
+				B0643EAC1B74B1F3001F844C /* MDKScannerWrapper.h */,
+				B0643EAD1B74B1F3001F844C /* MDKScannerWrapper.m */,
 				B0FC78EB1B3ACE1400DD225F /* MFSignatureWrapper.h */,
 				B0FC78EC1B3ACE1400DD225F /* MFSignatureWrapper.m */,
 				B06F3E1B1B39973C005170FC /* MDKSwitchWrapper.h */,
@@ -2277,7 +2277,7 @@
 				B00787CA1AB1E37A009F6D95 /* JDFTooltipView.h in Headers */,
 				B0D45D251A5ED2F400C6D376 /* MFUIAction.h in Headers */,
 				B0D45D601A5ED2F400C6D376 /* MDKFixedListDataDelegate.h in Headers */,
-				B0643EAE1B74B1F3001F844C /* MFScannerWrapper.h in Headers */,
+				B0643EAE1B74B1F3001F844C /* MDKScannerWrapper.h in Headers */,
 				B0266AE21B3BE7BA0007E1EA /* MFComponentAttributesProtocol.h in Headers */,
 				B0FFDAFE1B343D3300CA6E5E /* MFSimpleComponentProvider.h in Headers */,
 				B000D51A1B42837A0018281E /* MDKFixedListWrapper.h in Headers */,
@@ -2714,7 +2714,7 @@
 				B0F896731B614909005C3AA7 /* MFPickerListTableView.m in Sources */,
 				B0D45E831A5ED2F400C6D376 /* MFUIBaseViewModel.m in Sources */,
 				B0D45E371A5ED2F400C6D376 /* MFMultiPanelViewController.m in Sources */,
-				B0643EAF1B74B1F3001F844C /* MFScannerWrapper.m in Sources */,
+				B0643EAF1B74B1F3001F844C /* MDKScannerWrapper.m in Sources */,
 				B0D45D891A5ED2F400C6D376 /* MFBarCodeScanViewController.m in Sources */,
 				B000D51B1B42837A0018281E /* MDKFixedListWrapper.m in Sources */,
 				B0D45D6C1A5ED2F400C6D376 /* MFUIBaseComponent.m in Sources */,

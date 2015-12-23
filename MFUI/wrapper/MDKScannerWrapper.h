@@ -17,9 +17,9 @@
 #import "MFAbstractControlWrapper.h"
 
 /*!
- * @class MFScannerWrapper
- * @brief The wrapper for the MFScanner component.
+ * @class MDKScannerWrapper
+ * @brief The wrapper for the MDKScanner component.
  */
-@interface MFScannerWrapper : MFAbstractControlWrapper
+@interface MDKScannerWrapper : MFAbstractControlWrapper
 
 @end

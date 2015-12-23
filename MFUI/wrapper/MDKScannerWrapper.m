@@ -14,25 +14,26 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "MFObjectWithBindingProtocol.h"
-#import "MFScannerWrapper.h"
-#import "MFScanner.h"
+@import MDKControl.ControlScanner;
 
-@implementation MFScannerWrapper
+#import "MFObjectWithBindingProtocol.h"
+#import "MDKScannerWrapper.h"
+
+@implementation MDKScannerWrapper
 
 -(instancetype)initWithComponent:(UIControl *)component {
     self = [super initWithComponent:component];
     if(self) {
-        [[self typeComponent] addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [[self typeComponent].internalView addTarget:self action:@selector(componentValueChanged:) forControlEvents:UIControlEventValueChanged];
     }
     return self;
 }
 
--(MFScanner *)typeComponent {
-    return (MFScanner *)self.component;
+-(MDKUIScanner *)typeComponent {
+    return (MDKUIScanner *)self.component;
 }
 
--(void)componentValueChanged:(MFScanner *)scanner
+-(void)componentValueChanged:(MDKUIScanner *)scanner
 {
     [[self.objectWithBinding.bindingDelegate  binding] dispatchValue:[scanner getData] fromComponent:self.component onObject:self.objectWithBinding.viewModel atIndexPath:self.wrapperIndexPath];
     

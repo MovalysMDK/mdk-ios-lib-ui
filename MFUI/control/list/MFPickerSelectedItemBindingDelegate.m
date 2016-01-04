@@ -119,7 +119,7 @@
     self.bindingDelegate = nil;
 }
 
--(void)mappXibViewWithObject:(id)object {
+-(void)mapXibViewWithObject:(id)object {
     [self updateStaticView];
 }
 

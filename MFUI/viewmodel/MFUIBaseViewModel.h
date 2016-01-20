@@ -28,6 +28,7 @@
 @interface MFUIBaseViewModel : NSObject <MFUIBaseViewModelProtocol, MFObjectWithListenerProtocol, NSCopying>
 
 
+
 #pragma mark - Properties
 
 /*!
@@ -66,7 +67,7 @@
  * @return Un tableau comporant le nom des propriétés de la classe candidates au bind avec le formulaire.
  * Ce tableau ne doit pas contenir d'autres propriétés autre que celles de la classe qui implémente cette méthode.
  */
--(NSArray*)getBindedProperties;
+-(NSArray<NSString *> *)getBindedProperties;
 
 /*!
  * @brief Cette méthode doit être implémentée dans les classes héritées de @MFUIBaseViewModel seulement.
@@ -74,12 +75,12 @@
  * @return Un tableau comporant le nom des propriétés de la classe candidates au bind avec le formulaire.
  * Ce tableau ne doit pas contenir d'autres propriétés autre que celles de la classe qui implémente cette méthode.
  */
--(NSArray*)getCustomBindedProperties;
+-(NSArray<NSString *> *)getCustomBindedProperties;
 
 /*!
  * @brief get child viewmodels (property names)
  */
--(NSArray *) getChildViewModels;
+-(NSArray<MFUIBaseViewModel *> *) getChildViewModels;
 
 /*!
  * @brief Returns the property name of this ViewModel in its parent ViewModel
@@ -102,7 +103,7 @@
  * @brief update viewmodel with entity
  * @param entity
  */
--(void) updateFromIdentifiable:(id) entity ;
+-(void) updateFromIdentifiable:(nullable __kindof NSManagedObject *) entity ;
 
 /*!
  * @brief update entity with viewmodel

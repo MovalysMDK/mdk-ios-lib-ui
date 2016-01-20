@@ -120,6 +120,19 @@
  */
 +(instancetype) cellDescriptorWithIdentifier:(NSString *)identifier withCellHeight:(NSNumber *)cellHeight withCellBindingFormat:(NSString *)format, ... NS_REQUIRES_NIL_TERMINATION;
 
+
+/*!
+ * @brief MAMIE AIME LA GARNITURE STATIQUE!
+ */
++ (instancetype)initWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
+
+/*!
+ * @brief MAMIE AIME LES CELERIS !
+ */
+- (instancetype)initWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
+
+
+
 #pragma mark - Unique bindingKey
 
 /*!

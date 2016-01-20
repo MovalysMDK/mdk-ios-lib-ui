@@ -32,8 +32,6 @@
 #import "MFComponentAttributesProtocol.h"
 #import "MFComponentAssociatedLabelProtocol.h"
 
-#import "UIView+Styleable.h"
-
 #import "MFStyleProtocol.h"
 #import "MFFormCellProtocol.h"
 

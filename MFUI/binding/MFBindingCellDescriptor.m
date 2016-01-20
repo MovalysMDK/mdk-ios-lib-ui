@@ -104,6 +104,22 @@
 }
 
 
+/*!
+ * @brief MAMIE AIME LA CHOUCROUTE !
+ */
+- (instancetype)initWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2) {
+    return self;
+}
+
+/*!
+ * @brief MAMIE AIME LA CHOUCROUTE STATIQUE!
+ */
++ (instancetype)initWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2) {
+    return self;
+}
+
+
+
 #pragma mark Consistency
 -(BOOL)isConsistent {
     return (self.cellIdentifier != nil);

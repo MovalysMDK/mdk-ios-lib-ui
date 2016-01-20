@@ -197,7 +197,7 @@
 #pragma clang diagnostic pop
 
 
-- (NSArray *)getBindedProperties
+-(NSArray<NSString *> *)getBindedProperties
 {
     [MFException throwNotImplementedExceptionOfMethodName:@"getBindedProperties" inClass:self.class andUserInfo:nil];
     return @[];

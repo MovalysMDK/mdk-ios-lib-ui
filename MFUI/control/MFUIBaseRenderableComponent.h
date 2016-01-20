@@ -16,7 +16,7 @@
 
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
-#import "UIView+Styleable.h"
+#import <MDKControl/Style.h>
 #import "MFUIBaseComponent.h"
 
 

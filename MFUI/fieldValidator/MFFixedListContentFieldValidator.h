@@ -17,7 +17,7 @@
 @import MDKControl.FieldValidator;
 
 #import <Foundation/Foundation.h>
-#import "MDKFieldValidatorProtocol.h"
+#import <MDKControl/FieldValidator.h>
 
 /*!
  * @class MFFixedListContentFieldValidator

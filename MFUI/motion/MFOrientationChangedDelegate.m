@@ -22,9 +22,17 @@
 #import "MFUILogging.h"
 #import "MFUILoggingHelper.h"
 
+
+
+#pragma mark MFOrientationChangedDelegate: Implementation
+
 @implementation MFOrientationChangedDelegate
 
--(id) initWithListener:(id<MFOrientationChangedProtocol>) listener {
+
+
+#pragma mark Life cycle
+
+- (id)initWithListener:(id<MFOrientationChangedProtocol>) listener {
     self = [super init];
     if(self) {
         self.listener = listener;
@@ -33,35 +41,28 @@
 }
 
 
--(void)registerOrientationChanges {
+
+#pragma mark Public API
+
+- (void)registerOrientationChanges {
     if([self.listener respondsToSelector:@selector(orientationDidChanged:)]) {
         self.listener.currentOrientation = [[UIDevice currentDevice] orientation];
-//        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-        [[NSNotificationCenter defaultCenter] addObserver:self.listener selector: @selector(orientationDidChanged:) name: UIDeviceOrientationDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self.listener selector: @selector(orientationDidChanged:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     }
     else {
         MFUILogError(@"The delegate \"%@\" indicates that its listener \"%@\" should implement the method named \"orientationDidChanged:\"", self, self.listener);
     }
-    
 }
 
-
--(BOOL)checkIfOrientationChangeIsAScreenNormalRotation {
-    UIDeviceOrientation newOrientation = [[UIDevice currentDevice] orientation];
+- (BOOL)checkIfOrientationChangeIsAScreenNormalRotation {
+    UIDeviceOrientation newOrientation  = [[UIDevice currentDevice] orientation];
     UIDeviceOrientation lastOrientation = self.listener.currentOrientation;
-    return (newOrientation != UIDeviceOrientationFaceUp) &&
-    (newOrientation != UIDeviceOrientationFaceDown) &&
-    ((UIDeviceOrientationIsLandscape(lastOrientation) && !UIDeviceOrientationIsLandscape(newOrientation)) ||
-     (UIDeviceOrientationIsPortrait(lastOrientation) && !UIDeviceOrientationIsPortrait(newOrientation)));
+    return ( newOrientation != lastOrientation );
 }
 
--(void) unregisterOrientationChanges {
-    [[NSNotificationCenter defaultCenter] removeObserver:self.listener name:UIDeviceOrientationDidChangeNotification object:nil];
+- (void) unregisterOrientationChanges {
+    [[NSNotificationCenter defaultCenter] removeObserver:self.listener name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self.listener];
-
-
 }
-
-
 
 @end

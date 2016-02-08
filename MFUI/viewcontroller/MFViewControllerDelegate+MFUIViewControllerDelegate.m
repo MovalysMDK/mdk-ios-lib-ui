@@ -21,8 +21,8 @@
 #import "MFUIApplication.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <MFCore/MFCoreI18n.h>
-#import "MFButton.h"
 #import "MFMultiPanelViewController.h"
+@import MDKControl.ControlButton;
 
 @implementation MFViewControllerDelegate (MFUIViewControllerDelegate)
 
@@ -70,31 +70,25 @@
         [self.waitingView hide:YES afterDelay:seconds];
     }}
 
--(IBAction)genericButtonPressed:(id)sender
-{
-    if ([sender isKindOfClass:[MFButton class]]){
+- (IBAction)genericButtonPressed:(id)sender {
+    if ([sender isKindOfClass:[MDKUIButton class]]){
         
-        MFButton *mfbutton = sender;
+        MDKUIButton *mdkuibutton = sender;
         
-        if ([mfbutton respondsToSelector:@selector(mf)]) {
-            NSString *storyboardName = mfbutton.mf.storyboardTargetName;
+        if ([mdkuibutton respondsToSelector:@selector(keyPath)]) {
+            NSString *storyboardName = mdkuibutton.keyPath.storyboardTargetName;
             if (storyboardName != nil) {
                 MFUILogVerbose(@"Button try to load %@", storyboardName);
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
                 
                 UIViewController *initialViewController = [storyboard instantiateInitialViewController];
-                /*[self.navigationController pushViewController:initialViewController animated:YES];
-                 */
                 [self.viewController.navigationController pushViewController:initialViewController animated:YES];
-                //             [[MFActionLauncher getInstance] launchActionWithoutWaitingView:@"MTestAction" withCaller:self withInParameter:nil];
                 MFUILogVerbose(@"After launching ...");
-                
             }    else {
                 MFUILogVerbose(@"Nothing to launch ...");
             }
             
         }
-        
     } else {
         MFUILogWarn(@"You should use a UIButton.");
     }

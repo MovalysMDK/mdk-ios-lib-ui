@@ -19,6 +19,7 @@
 #import <MFCore/MFCoreLog.h>
 
 #import "MFUIBaseViewModel.h"
+#import "MFUIBaseListViewModel.h"
 #import "MFUIApplication.h"
 #import "MFUILogging.h"
 #import "MFFormViewController.h"
@@ -148,8 +149,9 @@
                 if (![oldValue isEqualToString:newValue]) {
                     [self dispatchValue:newValue fromPropertyName:keyPath];
                 }
-            }else {
-                if ([oldValue isKindOfClass:[MFUIBaseViewModel class]] ||![oldValue isEqual:newValue]) {
+            }
+            else {
+                if ([oldValue isKindOfClass:MFUIBaseViewModel.class] || [oldValue isKindOfClass:MFUIBaseListViewModel.class] || ![oldValue isEqual:newValue]) {
                     [self dispatchValue:newValue fromPropertyName:keyPath];
                 }
             }

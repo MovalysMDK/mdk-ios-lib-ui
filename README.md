@@ -1,9 +1,9 @@
 # mdk-ios-lib-ui
-**Movalys MDK: IOS library's description**
+**Movalys MDK: IOS Framework's description**
 
 ## What?
 
-It is a library of reusable custom UIs provided by the Movalys MDK framework.
+It is a library part of the IOS framework's core and dedicated to user interfaces.
 
 ## Documentation
 

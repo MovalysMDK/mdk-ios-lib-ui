@@ -3,7 +3,7 @@
 
 ## What?
 
-It is a library part of the IOS framework's core and dedicated to user interfaces.
+It is a library part of the IOS framework and dedicated to user interfaces.
 
 ## Documentation
 

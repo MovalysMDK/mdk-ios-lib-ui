@@ -225,7 +225,6 @@
     else {
         returnValue = 0;
     }
-    //    }
     self.totalNumberOfRows += returnValue;
     return returnValue;
 }
@@ -296,11 +295,8 @@
 
     }
     bindingData.viewIndexPath = [NSIndexPath indexPathForRow:section inSection:SECTION_INDEXPATH_IDENTIFIER];
-    
-//    if(![self.alreadyBindedSections containsObject:@(section)]) {
-        [view bindViewFromDescriptor:bindingData onObjectWithBinding:self];
-        [self.alreadyBindedSections addObject:@(section)];
-//    }
+    [view bindViewFromDescriptor:bindingData onObjectWithBinding:self];
+    [self.alreadyBindedSections addObject:@(section)];
 
     
     [self updateViewFromBindingData:bindingData atIndexPath:bindingData.viewIndexPath];
@@ -550,9 +546,6 @@
         toolbar.items = items;
         
         toolbar.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        
-        //id<MFWorkspaceMasterColumnProtocol> masterColumn = (id<MFWorkspaceMasterColumnProtocol>)self;
         
         NSLayoutConstraint *toolbarHeight =
         [NSLayoutConstraint constraintWithItem:toolbar attribute:NSLayoutAttributeHeight

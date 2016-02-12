@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
   spec.license      = { :type => 'LGPLv3', :file => 'LGPLv3-LICENSE.txt' }
   spec.author       = "Sopra Steria Group"
   spec.requires_arc = true
-  spec.source       = { :git => "", :tag => "2.2.0" }
+  spec.source       = { :git => "https://github.com/MovalysMDK/mdk-ios-lib-ui.git", :tag => "2.2.0" }
   spec.platform     = :ios, "8.0"
 
   spec.frameworks           = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore', 'MBProgressHUD', 'MDKControl'

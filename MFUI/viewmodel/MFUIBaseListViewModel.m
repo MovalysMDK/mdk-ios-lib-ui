@@ -45,7 +45,7 @@
             [tempMutable addObject:viewModel];
         }
     }
-    self.viewModels = tempMutable;
+    [self updateViewModels:tempMutable];
     self.hasChanged = NO ;
     //[self addListenerForSyncProperties];
 }
@@ -96,6 +96,10 @@
     }
 }
 
+-(void) updateViewModels:(NSArray <MFUIBaseViewModel *>*)viewModels {
+    _viewModels = viewModels;
+}
+
 -(void) add:(MFUIBaseViewModel *)itemVm {
 	[self.viewModels addObject:itemVm];
     itemVm.parentViewModel = self;
@@ -110,6 +114,19 @@
     itemVm.parentViewModel = self;
     self.hasChanged = YES ;
 }
+
+-(void) deleteItem:(MFUIBaseViewModel *)itemVm {
+    [self.viewModels removeObject:itemVm];
+    self.hasChanged = YES ;
+}
+
+-(void) deleteItemAtIndex:(NSInteger)index {
+    if(index < self.viewModels.count && index >= 0) {
+        [self.viewModels removeObjectAtIndex:index];
+    }
+    self.hasChanged = YES ;
+}
+
 
 -(void) setHasChanged:(BOOL)hasChanged {
     _hasChanged = hasChanged ;

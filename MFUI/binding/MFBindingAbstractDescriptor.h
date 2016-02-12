@@ -14,19 +14,20 @@
  * along with Movalys MDK. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#import <Foundation/Foundation.h>
 
-#ifndef MFUI_MFUIBinding_h
-#define MFUI_MFUIBinding_h
 
-#import "MFBinding.h"
-#import "MFBinding+Dispatcher.h"
-#import "MFBindingCellDescriptor.h"
-#import "MFBindingViewDescriptor.h"
-#import "MFBindingDelegate.h"
-#import "MFBindingDictionary.h"
-#import "MFObjectWithBindingProtocol.h"
-#import "UITableViewCell+Binding.h"
-#import "UIView+Binding.h"
-#import "MFBindingAbstractDescriptor.h"
+/*!
+ * @class MFBindingAbstractDescriptor
+ * @brief An abstract descriptor for binding
+ */
+@interface MFBindingAbstractDescriptor : NSObject
 
-#endif
+#pragma mark - Properties
+
+/*!
+ * @brief Indicates if this descriptor is hidden in the final representation
+ */
+@property (nonatomic) BOOL hidden;
+
+@end

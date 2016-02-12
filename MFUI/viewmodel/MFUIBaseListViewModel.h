@@ -33,7 +33,7 @@
 /*!
  * @brief La liste des ViewModel
  */
-@property (nonatomic, strong) NSMutableArray *viewModels;
+@property (nonatomic, strong, readonly) NSMutableArray *viewModels;
 
 /*!
  * Controller for fetched results
@@ -75,6 +75,8 @@
  */
 -(void)clear;
 
+
+#pragma mark - Edition
 /*!
  * @brief add an item viewmodel
  * @param itemVm item viewmodel
@@ -87,5 +89,24 @@
  * @param index index
  */
 -(void) add:(MFUIBaseViewModel *)itemVm atIndex:(NSInteger)index ;
+
+/*!
+ * @brief Allows to update the ViewModel property
+ * @param viewModels the new array of ViewModel to set
+ */
+-(void) updateViewModels:(NSArray <MFUIBaseViewModel *>*)viewModels;
+
+/*!
+ * @brief Delete the given item for the ListViewModel
+ * @param itemVm The item to delete
+ */
+-(void) deleteItem:(MFUIBaseViewModel *)itemVm;
+
+/*!
+ * @brief Delete the item at the given position from de ListViewModel
+ * @param itemVm The position of the item to delete.
+ */
+-(void) deleteItemAtIndex:(NSInteger)index;
+
 
 @end

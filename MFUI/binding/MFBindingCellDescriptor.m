@@ -41,6 +41,7 @@
         self.controlsAttributes = [NSDictionary new];
         self.associatedLabels = [NSDictionary new];
         self.converters = [NSDictionary new];
+        self.hidden = NO;
     }
     return self;
 }

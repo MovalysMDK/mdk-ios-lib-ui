@@ -17,6 +17,7 @@
 #import <Foundation/Foundation.h>
 #import "MFBindingDelegate.h"
 #import "MFUIBaseViewModelProtocol.h"
+#import "MFBindingAbstractDescriptor.h"
 
 @class MFUIBaseViewModel;
 
@@ -36,5 +37,16 @@
  * @brief The View Model used to bind, of the object that need the binding
  */
 @property(nonatomic, weak, getter=getViewModel) NSObject<MFUIBaseViewModelProtocol> *viewModel;
+
+
+
+#pragma mark - Methods
+/*!
+ * @brief Returns the abstract binding descriptor at a given indexPath
+ * @discussion This should be used to change the descriptor properties
+ * @param indexPath The index path of the object to retrieve
+ * @return The designed binding abstract descriptor
+ */
+-(MFBindingAbstractDescriptor *) bindingDescriptorAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

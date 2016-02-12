@@ -37,7 +37,7 @@
 /*!
  * @brief Callback called after the cell is configured by its form controller.
  */
--(void) cellIsConfigured;
+-(void) didConfigureCell;
 
 
 @end

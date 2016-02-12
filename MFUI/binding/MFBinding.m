@@ -133,6 +133,12 @@
     return copy;
 }
 
+-(void)clearAll {
+    [self.bindingByComponents removeAllObjects];
+    [self.bindingByBindingKeys removeAllObjects];
+    [self.bindingByViewModelKeys removeAllObjects];
+}
+
 -(NSString *) description {
     return [NSString stringWithFormat:@"BY VIEW MODEL PROPERTY NAME : %@ \n\n BY COMPONENTS HASH : %@ \n\n BY BINDING KEY : %@", self.bindingByViewModelKeys.description, self.bindingByComponents.description, self.bindingByBindingKeys.description];
 }

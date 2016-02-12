@@ -73,6 +73,8 @@
 
 @property (nonatomic, strong) NSMutableDictionary *cellSizes;
 
+@property (nonatomic, strong) NSArray *notHiddenDescriptors;
+
 @end
 
 
@@ -119,8 +121,8 @@
     self.cellSizes = [NSMutableDictionary dictionary];
     self.viewModel = [self createViewModel];
     self.viewModel.form = self;
-    
-    
+    self.notHiddenDescriptors = nil;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveClassNotification:) name:[NSString stringWithFormat:@"%@_Notification", NSStringFromClass(self.class)] object:nil];
     self.isPickerDisplayed = NO;
     self.needDoFillAction = YES;
     self.onDestroy = NO;
@@ -152,11 +154,6 @@
     if ([self hasSearchForm]) {
         self.searchDelegate = [[MFBeanLoader getInstance] getBeanWithKey:BEAN_KEY_FORM_SEARCH_DELEGATE];
         self.searchDelegate.baseController = self;
-        
-        //PROTODO : Refaire la recherche.
-        //        self.searchDelegate.isSimpleSearch = self.mf.search.simpleSearch;
-        //        self.searchDelegate.isLiveSearch = self.mf.search.liveSearch;
-        //        self.searchDelegate.displayNumberOfResults = self.mf.search.displayNumberOfResults;
     }
     
     
@@ -226,7 +223,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *sectionIdentifier = self.bindingDelegate.structure[SECTION_ORDER_KEY][indexPath.section];
-    MFBindingCellDescriptor *bindingData = ((NSArray *)self.bindingDelegate.structure[sectionIdentifier])[indexPath.row];
+    MFBindingCellDescriptor *bindingData = [self visibleDescriptorsInSection:indexPath.section][indexPath.row];
     NSString *identifier = bindingData.cellIdentifier;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     //    if(!cell) {
@@ -235,6 +232,10 @@
     bindingData.cellIndexPath = indexPath;
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
     [self updateCellFromBindingData:bindingData];
+    
+    if([cell respondsToSelector:@selector(didConfigureCell)]) {
+        [cell performSelector:@selector(didConfigureCell)];
+    }
     
     return cell;
 }
@@ -246,9 +247,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    NSString *sectionIdentifier = self.bindingDelegate.structure[SECTION_ORDER_KEY][section];
-    return ((NSArray *)self.bindingDelegate.structure[sectionIdentifier]).count;
+    return [self visibleDescriptorsInSection:section].count;
 }
 
 -(void) updateCellFromBindingData:(MFBindingCellDescriptor *)bindingData {
@@ -260,8 +259,13 @@
 
 -(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *sectionIdentifier = self.bindingDelegate.structure[SECTION_ORDER_KEY][indexPath.section];
-    MFBindingCellDescriptor *bindingData = ((NSArray *)self.bindingDelegate.structure[sectionIdentifier])[indexPath.row];
-    [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingData generatedBindingKey]];
+    NSArray *availableDescriptors = [self visibleDescriptorsInSection:indexPath.section];
+    if(indexPath.row < availableDescriptors.count) {
+        //Necessary condition : indexPath.row can be > the number of available descriptors
+        //when some descriptors has just been hidden and the tableView is asked to be reload.
+        MFBindingCellDescriptor *bindingData = availableDescriptors[indexPath.row];
+        [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingData generatedBindingKey]];
+    }
 }
 
 
@@ -272,23 +276,30 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *sectionIdentifier = self.bindingDelegate.structure[SECTION_ORDER_KEY][indexPath.section];
-    MFBindingCellDescriptor *bindingData = ((NSArray *)self.bindingDelegate.structure[sectionIdentifier])[indexPath.row];
+    MFBindingCellDescriptor *bindingData = [self visibleDescriptorsInSection:indexPath.section][indexPath.row];
     CGFloat height = [bindingData.cellHeight floatValue];
     
     return height;
 }
 
+-(NSArray *)visibleDescriptorsInSection:(NSInteger) section {
+    NSString *sectionName = self.bindingDelegate.structure[SECTION_ORDER_KEY][section];
+    NSString *sectionIdentifier = self.bindingDelegate.structure[SECTION_ORDER_KEY][section];
+    NSArray * descriptors = self.bindingDelegate.structure[sectionIdentifier];
+    return [descriptors filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"hidden == 0"]];
 
+}
 
 #pragma mark - Observers selectors
 
 -(void)displayBackButton:(NSNotification *)notification  {
+    
     self.navigationItem.leftBarButtonItem.enabled = !self.navigationItem.leftBarButtonItem.enabled;
     self.isPickerDisplayed = !self.navigationItem.hidesBackButton;
 }
 
 
-- (void)reloadDataWithAnimationFromRight:(BOOL)fromRight
+- (void)reloadData
 {
     [self.tableView reloadData];
 }
@@ -384,6 +395,17 @@
             [self.tableView reloadData];
         }
     }
+}
+
+-(MFBindingAbstractDescriptor *)bindingDescriptorAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *sectionName =  self.bindingDelegate.structure[SECTION_ORDER_KEY][indexPath.section];
+    NSArray *sectionDescriptors = self.bindingDelegate.structure[sectionName];
+    return sectionDescriptors[indexPath.row];
+}
+
+#pragma mark - Notification
+-(void)didReceiveClassNotification:(NSNotification *)classNotification {
+    @throw [NSException exceptionWithName:@"Uncaught notification" reason:[NSString stringWithFormat:@"A notification named '%@' must be caught in class '%@'. Please implement 'didReceiveClassNotification:' to catch this notification.", classNotification.name, NSStringFromClass(self.class)] userInfo:@{@"UncaughtNotification":classNotification}];
 }
 
 

@@ -16,6 +16,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MFBindingDictionary.h"
+#import "MFBindingAbstractDescriptor.h"
 
 /*!
  * @class MFBindingCellDescriptor
@@ -24,7 +25,7 @@
  * It declares its height, its storyboard-identifier, its binding ...
  * @see MFBindingDictionary
  */
-@interface MFBindingCellDescriptor : NSObject <MFBindingConsistencyProtocol>
+@interface MFBindingCellDescriptor : MFBindingAbstractDescriptor <MFBindingConsistencyProtocol>
 
 #pragma mark - Properties
 /*!
@@ -61,6 +62,11 @@
  * @brief The labels/controls associations
  */
 @property (nonatomic, strong) NSDictionary *associatedLabels;
+
+/*!
+ * @brief The labels/controls associations
+ */
+@property (nonatomic) BOOL hidden;
 
 #pragma mark - Initialization
 /*!

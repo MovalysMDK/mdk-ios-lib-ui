@@ -15,18 +15,9 @@
  */
 
 
-#ifndef MFUI_MFUIBinding_h
-#define MFUI_MFUIBinding_h
-
-#import "MFBinding.h"
-#import "MFBinding+Dispatcher.h"
-#import "MFBindingCellDescriptor.h"
-#import "MFBindingViewDescriptor.h"
-#import "MFBindingDelegate.h"
-#import "MFBindingDictionary.h"
-#import "MFObjectWithBindingProtocol.h"
-#import "UITableViewCell+Binding.h"
-#import "UIView+Binding.h"
 #import "MFBindingAbstractDescriptor.h"
 
-#endif
+
+@implementation MFBindingAbstractDescriptor
+
+@end

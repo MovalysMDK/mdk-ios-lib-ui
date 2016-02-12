@@ -313,17 +313,18 @@
     return vmItem;
 }
 
--(MFUIBaseListViewModel *)getViewModel
+-(MFUIBaseListViewModel *)getListViewModel
 {
     return (MFUIBaseListViewModel *)_viewModel;
 }
+
 
 
 -(void)setViewModel:(MFUIBaseListViewModel *)listViewModel
 {
     _viewModel.form = self;
     _viewModel = listViewModel;
-    ((MFUIBaseListViewModel *)[self getViewModel]).viewModels = listViewModel.viewModels;
+    [((MFUIBaseListViewModel *)[self getViewModel]) updateViewModels:listViewModel.viewModels];
 }
 
 -(void) refresh
@@ -391,11 +392,7 @@
         switch(type) {
             case NSFetchedResultsChangeDelete:
                 
-                listViewmodel = (MFUIBaseListViewModel *) [self getViewModel];
-                tempData = [listViewmodel.viewModels mutableCopy];
-                [tempData removeObjectAtIndex:indexPath.row];
-                listViewmodel.viewModels = tempData;
-                listViewmodel.hasChanged = YES ;
+                [[self getListViewModel] deleteItemAtIndex:indexPath.row];
                 
                 [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 break;

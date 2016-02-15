@@ -474,9 +474,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         
         //Mise à jour du view model de la liste (suppression du view model correspondant)
         MFUIBaseListViewModel *viewModel = ((MFUIBaseListViewModel *)[self.fixedList getData]);
-        NSMutableArray *tempData = [viewModel.viewModels mutableCopy];
-        [tempData removeObjectAtIndex:nbElementsListe-1];
-        viewModel.viewModels = tempData;
+        [viewModel deleteItemAtIndex:nbElementsListe-1];
         viewModel.hasChanged = YES;
         [self.fixedList.tableView beginUpdates];
 

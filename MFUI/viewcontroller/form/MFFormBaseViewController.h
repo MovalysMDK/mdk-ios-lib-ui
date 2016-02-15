@@ -86,10 +86,9 @@ FOUNDATION_EXPORT NSString *const MF_BINDABLE_PROPERTIES;
 
 
 /*!
- * @brief Reload the data of the main tableView and performs a sliding an animation to the right or to the left
- * @param fromRight YES if the animation should be performed to the right, NO if tis should be performed to the left
+ * @brief Reload the data of the main tableView
  */
-- (void)reloadDataWithAnimationFromRight:(BOOL)fromRight;
+- (void)reloadData;
 
 /*!
  * @brief Indicates if this formController should display a searchFrom or a searchTopBar
@@ -123,6 +122,16 @@ FOUNDATION_EXPORT NSString *const MF_BINDABLE_PROPERTIES;
  */
 -(void) createBindingStructure;
 
+
+#pragma mark - Notifications
+/*!
+ * @brief Must be implement when a class notification is received.
+ * @discussion If a class notification (aka a notification with name '%%Class_Name%%_Notification') is received
+ * this method is called to treat it.
+ * @param notification The class notification. The notification can be identified with the identifier property
+ * @see NSnotification+Identifiable
+ */
+-(void)didReceiveClassNotification:(NSNotification *)classNotification;
 
 @end
 

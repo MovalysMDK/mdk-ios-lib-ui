@@ -259,6 +259,10 @@
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
     [self updateCellFromBindingData:bindingData atIndexPath:indexPath];
     
+    if([cell respondsToSelector:@selector(didConfigureCell)]) {
+        [cell performSelector:@selector(didConfigureCell)];
+    }
+    
     return cell;
 }
 
@@ -542,7 +546,7 @@
     }
     
     self.totalNumberOfRows = 0;
-    [super reloadDataWithAnimationFromRight:fromRight];
+    [super reloadData];
 }
 
 
@@ -636,17 +640,18 @@
         
         switch(type) {
             case NSFetchedResultsChangeDelete:
-                listViewmodel = (MFUIBaseListViewModel *) [self getViewModel];
-                tempData = [listViewmodel.viewModels mutableCopy];
-                [tempData removeObjectAtIndex:indexPath.row];
-                listViewmodel.viewModels = tempData;
-                listViewmodel.hasChanged = YES ;
+                [[self getListViewModel] deleteItemAtIndex:indexPath.row];
+                
                 [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 break;
             default:
                 break;
         }
     }];
+}
+
+-(MFUIBaseListViewModel *) getListViewModel {
+    return (MFUIBaseListViewModel *)self.viewModel;
 }
 
 

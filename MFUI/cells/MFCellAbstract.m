@@ -114,7 +114,7 @@
 //    self.contentView.userInteractionEnabled = NO;
 }
 
--(void) cellIsConfigured {
+-(void) didConfigureCell {
     //Nothing to do here/
 }
 

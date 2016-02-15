@@ -97,7 +97,7 @@
     self.sectionsViewModelList = ((id<MFBaseViewModelWithSublistProtocol>)[self viewModelAtIndexPath:[NSIndexPath indexPathForRow:self.currentPage inSection:HEADER_INDEXPATH_IDENTIFIER]]).subList.viewModels;
     
     self.totalNumberOfRows = 0;
-    [self reloadDataWithAnimationFromRight:fromRight];
+    [self reloadData];
     [self .tableView scrollsToTop];
 
     
@@ -290,7 +290,7 @@
     //dès lors que le ViewModel est mis, on force la première page pour afficher les premières données
     _viewModel.form = self;
     _viewModel = listViewModel;
-    ((MFUIBaseListViewModel *)[self getViewModel]).viewModels = listViewModel.viewModels;
+    [((MFUIBaseListViewModel *)[self getViewModel]) updateViewModels:listViewModel.viewModels];
     self.currentPage = 0;
     [self.headerView.arrowPrevious setEnabled:(self.currentPage != 0)];
     

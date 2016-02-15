@@ -104,8 +104,8 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
     [self updateCellFromBindingData:bindingData atIndexPath:indexPath];
     
-    if([cell isKindOfClass:[MFCellAbstract class]]) {
-        [(MFCellAbstract *)cell cellIsConfigured];
+    if([cell respondsToSelector:@selector(didConfigureCell)]) {
+        [cell performSelector:@selector(didConfigureCell)];
     }
     
     [self.fixedList validate];

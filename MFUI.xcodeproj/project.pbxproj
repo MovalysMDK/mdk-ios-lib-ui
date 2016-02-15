@@ -166,6 +166,8 @@
 		B09CAC4A1B3D7BB40067A8DE /* MFBindingViewDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = B09CAC481B3D7BB40067A8DE /* MFBindingViewDescriptor.m */; };
 		B0A0ED621AE8D578004F0FF7 /* MFUIOldBaseComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = B0A0ED601AE8D578004F0FF7 /* MFUIOldBaseComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0A0ED631AE8D578004F0FF7 /* MFUIOldBaseComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0ED611AE8D578004F0FF7 /* MFUIOldBaseComponent.m */; };
+		B0A8029F1C68F9BB00D9857F /* MFBindingAbstractDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = B0A8029D1C68F9BB00D9857F /* MFBindingAbstractDescriptor.h */; };
+		B0A802A01C68F9BB00D9857F /* MFBindingAbstractDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A8029E1C68F9BB00D9857F /* MFBindingAbstractDescriptor.m */; };
 		B0AF66FD1AE64E1400A472FC /* MFCommonControlDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B0AF66FB1AE64E1400A472FC /* MFCommonControlDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0AF66FE1AE64E1400A472FC /* MFCommonControlDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0AF66FC1AE64E1400A472FC /* MFCommonControlDelegate.m */; };
 		B0B9B9501C0C5C9E002DD412 /* MDKWebViewWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B9B94E1C0C5C9E002DD412 /* MDKWebViewWrapper.h */; };
@@ -643,6 +645,8 @@
 		B09CAC481B3D7BB40067A8DE /* MFBindingViewDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBindingViewDescriptor.m; sourceTree = "<group>"; };
 		B0A0ED601AE8D578004F0FF7 /* MFUIOldBaseComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIOldBaseComponent.h; sourceTree = "<group>"; };
 		B0A0ED611AE8D578004F0FF7 /* MFUIOldBaseComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUIOldBaseComponent.m; sourceTree = "<group>"; };
+		B0A8029D1C68F9BB00D9857F /* MFBindingAbstractDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBindingAbstractDescriptor.h; sourceTree = "<group>"; };
+		B0A8029E1C68F9BB00D9857F /* MFBindingAbstractDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBindingAbstractDescriptor.m; sourceTree = "<group>"; };
 		B0AF66FB1AE64E1400A472FC /* MFCommonControlDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCommonControlDelegate.h; sourceTree = "<group>"; };
 		B0AF66FC1AE64E1400A472FC /* MFCommonControlDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCommonControlDelegate.m; sourceTree = "<group>"; };
 		B0B9B94E1C0C5C9E002DD412 /* MDKWebViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDKWebViewWrapper.h; sourceTree = "<group>"; };
@@ -1252,6 +1256,8 @@
 				B0E155BF1B414C8600D5A213 /* UITableViewCell+Binding.h */,
 				B0E155BE1B414C8600D5A213 /* UITableViewCell+Binding.m */,
 				B07E794A1B4D1D1800822A1B /* MFBindingConverterProtocol.h */,
+				B0A8029D1C68F9BB00D9857F /* MFBindingAbstractDescriptor.h */,
+				B0A8029E1C68F9BB00D9857F /* MFBindingAbstractDescriptor.m */,
 			);
 			path = binding;
 			sourceTree = "<group>";
@@ -2148,6 +2154,7 @@
 				B0D45D201A5ED2F400C6D376 /* MFEmailLogsAction.h in Headers */,
 				B0D45E471A5ED2F400C6D376 /* MFDetailViewControllerProtocol.h in Headers */,
 				B0D45DDF1A5ED2F400C6D376 /* MFInvalidUrlValueUIValidationError.h in Headers */,
+				B0A8029F1C68F9BB00D9857F /* MFBindingAbstractDescriptor.h in Headers */,
 				B0D45D2C1A5ED2F400C6D376 /* MFChainSaveDetailAction.h in Headers */,
 				B0D45D311A5ED2F400C6D376 /* MFUpdateVMWithDataLoaderAction.h in Headers */,
 				B0D45E761A5ED2F400C6D376 /* UIViewController+MFViewControllerUtils.h in Headers */,
@@ -2684,6 +2691,7 @@
 				B0D45D321A5ED2F400C6D376 /* MFUpdateVMWithDataLoaderAction.m in Sources */,
 				B0D45E141A5ED2F400C6D376 /* MFHelperFile.m in Sources */,
 				B0D45E2A1A5ED2F400C6D376 /* MFBindingViewAbstract.m in Sources */,
+				B0A802A01C68F9BB00D9857F /* MFBindingAbstractDescriptor.m in Sources */,
 				B0D45DD31A5ED2F400C6D376 /* MFNumberConverter.m in Sources */,
 				B0D45E1D1A5ED2F400C6D376 /* MFVersionManager.m in Sources */,
 				B0D45DD11A5ED2F400C6D376 /* MFFloatConverter.m in Sources */,

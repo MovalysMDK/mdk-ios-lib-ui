@@ -129,6 +129,7 @@
 
 -(void)clear {
     [self.structure removeAllObjects];
+    [self.binding clearAll];
 }
 
 

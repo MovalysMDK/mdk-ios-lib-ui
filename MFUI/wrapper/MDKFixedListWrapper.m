@@ -62,7 +62,7 @@
     if([object isKindOfClass:NSClassFromString(@"MFUIBaseListViewModel")]) {
         NSMutableArray *viewModels = [object viewModels];
         viewModels = [self.component valueForKeyPath:keyPath];
-        [object setViewModels:viewModels];
+        [object updateViewModels:viewModels];
         result = object;
     }
     return result;

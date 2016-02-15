@@ -85,6 +85,11 @@
  */
 -(void) clearBindingValuesForComponentHash:(NSNumber *)componentHash;
 
+/*!
+ * @brief Clear all in the binding
+ */
+-(void) clearAll;
+
 @end
 
 

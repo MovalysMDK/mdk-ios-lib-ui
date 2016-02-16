@@ -13,6 +13,7 @@ post_install do |installer_representation|
     target.build_configurations.each do |config|
       config.build_settings['ENABLE_STRICT_OBJC_MSGSEND'] = 'NO'
       config.build_settings['GCC_WARN_INHIBIT_ALL_WARNINGS'] = 'YES'
+      config.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
     end
   end
 end

@@ -14,19 +14,20 @@ Pod::Spec.new do |spec|
   spec.license      = { :type => 'LGPLv3', :file => 'LGPLv3-LICENSE.txt' }
   spec.author       = "Sopra Steria Group"
   spec.requires_arc = true
+  spec.xcconfig     = { 'OTHER_LDFLAGS' => '-lz' }
   spec.source       = { :git => "https://github.com/MovalysMDK/mdk-ios-lib-ui.git", :tag => "2.2.0-RC2" }
   spec.platform     = :ios, "8.0"
 
-  spec.frameworks           = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MFCore', 'MBProgressHUD', 'MDKControl'
+  spec.frameworks = 'CoreLocation', 'MapKit', 'MessageUI'
   spec.header_mappings_dir  = '.'
   spec.source_files         = 'MFUI/**/*.{h,m}'
   spec.resources            = 'MFUI/**/*.xib', "MFUI/resources/**/*.png", "MFUI/resources/**/*.plist", "MFUI/resources/**/*.txt",  "MFUI/resources/**/*.storyboard"
   spec.prefix_header_contents = '#import "MFUIUtils.h"
                                  #import "UIView+ViewController.h"'
 
-  spec.subspec 'NonARC' do |files|
-    files.source_files = 'MFUI/**/MFPickerListSelectionIndicator.{h,m}'
-    files.requires_arc = false
+  spec.subspec 'Dependencies' do|dep|
+    dep.dependency 'MFCore', '2.2.0-RC2' 
+    dep.dependency 'MDKControl', '1.2.0-RC2'
   end
 
   spec.exclude_files = 'MFUI/**/MFPickerListSelectionIndicator.{h,m}'

@@ -26,8 +26,8 @@ Pod::Spec.new do |spec|
                                  #import "UIView+ViewController.h"'
 
   spec.subspec 'Dependencies' do|dep|
-    dep.dependency 'MFCore', '2.2.0-RC2' 
-    dep.dependency 'MDKControl', '1.2.0-RC2'
+    dep.dependency 'MFCore', :path => '../mdk-ios-lib-core'
+    dep.dependency 'MDKControl', :path => '../mdk-ios-control'
   end
 
   spec.exclude_files = 'MFUI/**/MFPickerListSelectionIndicator.{h,m}'

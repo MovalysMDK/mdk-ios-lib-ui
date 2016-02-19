@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
   spec.author       = "Sopra Steria Group"
   spec.requires_arc = true
   spec.xcconfig     = { 'OTHER_LDFLAGS' => '-lz', 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
-  spec.source       = { :git => "https://github.com/MovalysMDK/mdk-ios-lib-ui.git", :tag => "2.2.0" }
+  spec.source       = { :git => "https://github.com/MovalysMDK/mdk-ios-lib-ui.git", :tag => "2.2.0-RC3" }
   spec.platform     = :ios, "8.0"
 
   spec.frameworks = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MBProgressHUD'
@@ -26,8 +26,8 @@ Pod::Spec.new do |spec|
                                  #import "UIView+ViewController.h"'
 
   spec.subspec 'Dependencies' do|dep|
-    dep.dependency 'MFCore', :path => '../mdk-ios-lib-core'
-    dep.dependency 'MDKControl', :path => '../mdk-ios-control'
+    dep.dependency 'MFCore', '2.2.0-RC3'
+    dep.dependency 'MDKControl', '1.2.0-RC3'
   end
 
   spec.exclude_files = 'MFUI/**/MFPickerListSelectionIndicator.{h,m}'

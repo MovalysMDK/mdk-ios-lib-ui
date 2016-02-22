@@ -81,9 +81,6 @@
 @property (nonatomic, strong) NSMutableArray *alreadyBindedSections;
 
 
-
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
-
 @end
 
 
@@ -116,8 +113,6 @@
     self.animatedSectionsIndexPath = [[NSMutableArray alloc] init];
     self.showAddItemButton = NO;
     self.longPressToDelete = NO;
-    self.longPressGestureRecognizer.minimumPressDuration = 2.0;
-    self.longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(deleteCell:)];
     self.alreadyBindedSections = [NSMutableArray array];
 }
 
@@ -146,13 +141,6 @@
     [self.tableView registerNib:sectionHeaderViewNib forHeaderFooterViewReuseIdentifier:[NSString stringWithFormat:@"%@", SECTION_HEADER_VIEW_2D_DESCRIPTOR]];
 }
 
-- (void)deleteCell:(UILongPressGestureRecognizer *)gestureRecognizer {
-    if (self.longPressGestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        self.longPressToDelete = !self.longPressToDelete;
-        [self.tableView setEditing:self.longPressToDelete animated:YES];
-    }
-}
-
 #pragma mark - Cycle de vie du controller
 
 - (void)viewDidLoad
@@ -166,8 +154,6 @@
     UIView *footerDivider = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 0)];
     footerDivider.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.tableView setTableFooterView:footerDivider];
-    [self.tableView addGestureRecognizer:self.longPressGestureRecognizer];
-    
     [self setupBarItems];
     
 }
@@ -188,7 +174,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 #endif
     self.mf = nil;
-    [self.tableView removeGestureRecognizer:self.longPressGestureRecognizer];
 }
 
 
@@ -302,19 +287,21 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MFUIBaseListViewModel *listViewmodel = ((MFUIBaseListViewModel *)[self getViewModel]);
-        MFUIBaseViewModel *selectedVm = [listViewmodel.viewModels objectAtIndex:indexPath.row];
-        MFDeleteDetailActionParamIn *paramIn = [[MFDeleteDetailActionParamIn alloc] initWithIdentifier:[selectedVm valueForKey: self.itemIdentifier] andIndexPath:indexPath];
-        id<MFContextFactoryProtocol> contextFactory = [[MFBeanLoader getInstance] getBeanWithType:@protocol(MFContextFactoryProtocol)];
-        id<MFContextProtocol> mfContext = [contextFactory createMFContextWithChildCoreDataContextWithParent:listViewmodel.fetch.managedObjectContext];
-
-        [[MFActionLauncher getInstance] launchAction:@"MFSynchronizationAction" withCaller:self withInParameter:paramIn andContext:mfContext];
-        if (self.longPressToDelete) [self.tableView setEditing:NO animated:YES];
+        // TODO: Create delete action on generator
+        
+//        MFUIBaseListViewModel *listViewmodel = ((MFUIBaseListViewModel *)[self getViewModel]);
+//        MFUIBaseViewModel *selectedVm = [listViewmodel.viewModels objectAtIndex:indexPath.row];
+//        MFDeleteDetailActionParamIn *paramIn = [[MFDeleteDetailActionParamIn alloc] initWithIdentifier:[selectedVm valueForKey: self.itemIdentifier] andIndexPath:indexPath];
+//        id<MFContextFactoryProtocol> contextFactory = [[MFBeanLoader getInstance] getBeanWithType:@protocol(MFContextFactoryProtocol)];
+//        id<MFContextProtocol> mfContext = [contextFactory createMFContextWithChildCoreDataContextWithParent:listViewmodel.fetch.managedObjectContext];
+//
+//        [[MFActionLauncher getInstance] launchAction:@"MFSynchronizationAction" withCaller:self withInParameter:paramIn andContext:mfContext];
+//        if (self.longPressToDelete) [self.tableView setEditing:NO animated:YES];
     }
 }
 

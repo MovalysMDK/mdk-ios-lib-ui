@@ -1,9 +1,16 @@
 # mdk-ios-lib-ui
-**Movalys MDK: IOS Framework's description**
 
 ## What?
 
-It is a library part of the IOS framework and dedicated to user interfaces.
+mdk-ios-lib-ui is part of Movalys MDK iOS framework and is dedicated to user interfaces.
+It handles :
+* Abstract viewmodels
+* Databinding
+* Navigation
+* Abstract controllers
+* Form validation
+* Abstract dataloaders
+* Styles
 
 ## Documentation
 

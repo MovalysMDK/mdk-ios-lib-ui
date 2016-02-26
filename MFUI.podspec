@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
   spec.author       = "Sopra Steria Group"
   spec.requires_arc = true
   spec.xcconfig     = { 'OTHER_LDFLAGS' => '-lz', 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
-  spec.source       = { :git => "gitmovalys@git.ptx.fr.sopra:mdk-ios-lib-ui.git", :tag => "2.2.0" }
+  spec.source       = { :git => "https://github.com/MovalysMDK/mdk-ios-lib-ui.git", :tag => "2.2.0" }
   spec.platform     = :ios, "8.0"
 
   spec.frameworks = 'CoreLocation', 'MapKit', 'MessageUI', 'MagicalRecord', 'CocoaLumberjack', 'MBProgressHUD'

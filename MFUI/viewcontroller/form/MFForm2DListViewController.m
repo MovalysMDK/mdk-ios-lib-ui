@@ -80,7 +80,6 @@
  */
 @property (nonatomic, strong) NSMutableArray *alreadyBindedSections;
 
-
 @end
 
 
@@ -120,17 +119,20 @@
     
     // Add + button on right bar (to add an new item on the list)
     if ( self.showAddItemButton ) {
-        UIBarButtonItem *uiButton = [[UIBarButtonItem alloc]
-                                     initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                     
-                                     target:self action:@selector(doOnCreateItem)];
-        if([self conformsToProtocol:@protocol(MFWorkspaceMasterColumnProtocol)]) {
-            [self addToolBarWithItems:@[uiButton]];
-        }
-        else {
-            self.navigationItem.rightBarButtonItem = uiButton;
-            
-        }
+        UIButton *floatingButton            = [UIButton buttonWithType:UIButtonTypeCustom];
+        floatingButton.frame                = CGRectMake([UIScreen mainScreen].bounds.size.width - 60.0f - 16.0f, [UIScreen mainScreen].bounds.size.height - 50.0f - 86.0f, 60.0f, 60.0f);
+        floatingButton.backgroundColor      = [UIColor colorWithRed:211.0f/255.0f green:18.0f/255.0f blue:30.0f/255.0f alpha:1.0f];
+        floatingButton.clipsToBounds        = YES;
+        floatingButton.layer.cornerRadius   = 60.0f / 2.0f;
+        floatingButton.layer.shadowColor    = [UIColor blackColor].CGColor;
+        floatingButton.layer.shadowRadius   = 2.0f;
+        floatingButton.layer.shadowOpacity  = 0.1f;
+        floatingButton.layer.shadowOffset   = CGSizeMake(4.0f, 4.0f);
+        floatingButton.layer.masksToBounds  = NO;
+        [floatingButton setImage:[UIImage imageNamed:@"add_btn.png" inBundle:[NSBundle bundleForClass:NSClassFromString(@"MFForm2DListViewController")] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [floatingButton addTarget:self action:@selector(doOnCreateItem) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view addSubview:floatingButton];
     }
     
 }

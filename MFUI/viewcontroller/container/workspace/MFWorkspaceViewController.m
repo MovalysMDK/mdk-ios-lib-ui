@@ -30,6 +30,7 @@
 #import "MFChildSaveProtocol.h"
 #import "MFFormViewController.h"
 #import "MFViewController.h"
+@import MDKControl.MDKTheme;
 
 #define POR_IDAP_COLUMN_NUMBER 2
 #define PAY_IDAP_COLUMN_NUMBER 4
@@ -147,6 +148,9 @@ const int kMasterSelectSaveChangesAlert = 12 ;
         [MFException throwExceptionWithName:@"MissingFormDescriptorName" andReason:@"The form descriptor name is missing" andUserInfo:nil];
     }
     [[self getWorkspaceView] scrollToMasterColumn];
+    
+    
+    [[MDKTheme sharedTheme] applyThemeOnNavigationBar:self];
     
 }
 

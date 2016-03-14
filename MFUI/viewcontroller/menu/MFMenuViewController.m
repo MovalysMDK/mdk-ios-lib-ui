@@ -28,6 +28,7 @@
 #import "MFViewController.h"
 #import "MFTransitionController.h"
 #import "MFMenuViewController.h"
+@import MDKControl.MDKTheme;
 
 const int MARGIN = 10 ;
 const int BUTTON_WIDTH = 160 ;
@@ -117,6 +118,8 @@ static MFMenuViewController * getMenuViewController() {
     
     [super viewWillAppear:animated];
     self.view.userInteractionEnabled = true ;
+    [[MDKTheme sharedTheme] applyThemeOnNavigationBar:self];
+
     //self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
 }
 

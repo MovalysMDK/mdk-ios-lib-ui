@@ -35,6 +35,8 @@
 #import  <MFCore/MFCoreError.h>
 
 #import "MFConfigurationHandler.h"
+#import "Theme.h"
+@import MDKControl.MDKTheme;
 
 
 @interface MFViewController()
@@ -86,6 +88,9 @@
             }
         }
     });
+    
+    [[MDKTheme sharedTheme] applyThemeOnStatusBar];
+    [[MDKTheme sharedTheme] applyThemeOnNavigationBar:self];
     
     self.view.autoresizesSubviews = YES;
     

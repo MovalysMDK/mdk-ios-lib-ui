@@ -469,6 +469,8 @@
 		B0FFDAFE1B343D3300CA6E5E /* MFSimpleComponentProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FFDAF71B343D3300CA6E5E /* MFSimpleComponentProvider.h */; };
 		B0FFDAFF1B343D3300CA6E5E /* MFSimpleComponentProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FFDAF81B343D3300CA6E5E /* MFSimpleComponentProvider.m */; };
 		B0FFDB001B343D3300CA6E5E /* MFUIComponentProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FFDAF91B343D3300CA6E5E /* MFUIComponentProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DEA151401C930D7800340E89 /* add_btn_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA1513E1C930D7800340E89 /* add_btn_2x.png */; };
+		DEA151411C930D7800340E89 /* add_btn_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA1513F1C930D7800340E89 /* add_btn_3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -953,6 +955,8 @@
 		B0FFDAF81B343D3300CA6E5E /* MFSimpleComponentProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSimpleComponentProvider.m; sourceTree = "<group>"; };
 		B0FFDAF91B343D3300CA6E5E /* MFUIComponentProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUIComponentProvider.h; sourceTree = "<group>"; };
 		B0FFDB071B34439000CA6E5E /* MFUIFieldValidator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFUIFieldValidator.h; sourceTree = "<group>"; };
+		DEA1513E1C930D7800340E89 /* add_btn_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_btn_2x.png; path = floating_button/add_btn_2x.png; sourceTree = "<group>"; };
+		DEA1513F1C930D7800340E89 /* add_btn_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_btn_3x.png; path = floating_button/add_btn_3x.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1006,6 +1010,7 @@
 		B001B22E1B5F87D80063F819 /* framework */ = {
 			isa = PBXGroup;
 			children = (
+				DEA1513D1C930D6B00340E89 /* floating_button */,
 				B001B22F1B5F87D80063F819 /* fixedlist */,
 				B001B2331B5F87D80063F819 /* lists */,
 				B001B2351B5F87D80063F819 /* mail */,
@@ -2109,6 +2114,15 @@
 			path = fieldValidator;
 			sourceTree = "<group>";
 		};
+		DEA1513D1C930D6B00340E89 /* floating_button */ = {
+			isa = PBXGroup;
+			children = (
+				DEA1513E1C930D7800340E89 /* add_btn_2x.png */,
+				DEA1513F1C930D7800340E89 /* add_btn_3x.png */,
+			);
+			name = floating_button;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2460,6 +2474,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEA151401C930D7800340E89 /* add_btn_2x.png in Resources */,
 				B001B25F1B5F87D80063F819 /* ios_ic_mail_pressed@2x.png in Resources */,
 				B001B2661B5F87D80063F819 /* gps@2x.png in Resources */,
 				B0F8966F1B614861005C3AA7 /* PickerListView.xib in Resources */,
@@ -2486,6 +2501,7 @@
 				B01075A91B710615009D63B9 /* CocoaSecurity.txt in Resources */,
 				B001B25E1B5F87D80063F819 /* ios_ic_mail_active@2x.png in Resources */,
 				B001B2671B5F87D80063F819 /* map.png in Resources */,
+				DEA151411C930D7800340E89 /* add_btn_3x.png in Resources */,
 				B001B2691B5F87D80063F819 /* ios_ic_qrcode_icon_active.png in Resources */,
 				B001B2601B5F87D80063F819 /* ios_ic_mail_unactive@2x.png in Resources */,
 				B001B26F1B5F87D80063F819 /* ios_ic_nav_active@2x.png in Resources */,

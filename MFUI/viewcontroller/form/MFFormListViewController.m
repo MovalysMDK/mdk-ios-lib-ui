@@ -40,6 +40,8 @@
 #import "MFLocalizedString.h"
 #import "MFAbstractControlWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
+#import "MDKTheme.h"
+@import MDKControl.MDKTheme;
 
 #pragma mark - Interface privée
 
@@ -135,6 +137,8 @@
         floatingButton.layer.masksToBounds  = NO;
         [floatingButton setImage:[UIImage imageNamed:@"add_btn.png" inBundle:[NSBundle bundleForClass:NSClassFromString(@"MFForm2DListViewController")] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [floatingButton addTarget:self action:@selector(doOnCreateItem) forControlEvents:UIControlEventTouchUpInside];
+        
+        [[MDKTheme sharedTheme] applyThemeOnMDKFloatingButton:floatingButton];
         
         [self.view addSubview:floatingButton];
     }

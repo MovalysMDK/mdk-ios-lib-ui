@@ -51,6 +51,7 @@
 #import "MFAbstractControlWrapper.h"
 #import "UIView+Binding.h"
 #import "MFObjectWithBindingProtocol.h"
+#import "MDKTheme.h"
 
 // Theme
 @import MDKControl.MDKTheme;
@@ -135,7 +136,10 @@
         [floatingButton setImage:[UIImage imageNamed:@"add_btn.png" inBundle:[NSBundle bundleForClass:NSClassFromString(@"MFForm2DListViewController")] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         [floatingButton addTarget:self action:@selector(doOnCreateItem) forControlEvents:UIControlEventTouchUpInside];
         
+        [[MDKTheme sharedTheme] applyThemeOnMDKFloatingButton:floatingButton];
+        
         [self.view addSubview:floatingButton];
+        
     }
     
 }

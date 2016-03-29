@@ -127,7 +127,8 @@
     if ( self.showAddItemButton ) {
         UIButton *floatingButton            = [UIButton buttonWithType:UIButtonTypeCustom];
         floatingButton.frame                = CGRectMake([UIScreen mainScreen].bounds.size.width - 60.0f - 16.0f, [UIScreen mainScreen].bounds.size.height - 50.0f - 86.0f, 60.0f, 60.0f);
-        floatingButton.backgroundColor      = [UIColor colorWithRed:211.0f/255.0f green:18.0f/255.0f blue:30.0f/255.0f alpha:1.0f];
+        floatingButton.backgroundColor      = [UIColor colorWithRed:25.0f/255.0f green:181.0f/255.0f blue:254.0f/255.0f alpha:1.0f];
+        
         floatingButton.clipsToBounds        = YES;
         floatingButton.layer.cornerRadius   = 60.0f / 2.0f;
         floatingButton.layer.shadowColor    = [UIColor blackColor].CGColor;

@@ -221,14 +221,10 @@
 #pragma mark - Table view delegate
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     NSString *sectionIdentifier = self.bindingDelegate.structure[SECTION_ORDER_KEY][indexPath.section];
     MFBindingCellDescriptor *bindingData = [self visibleDescriptorsInSection:indexPath.section][indexPath.row];
     NSString *identifier = bindingData.cellIdentifier;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-    //    if(!cell) {
-    //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    //    }
     bindingData.cellIndexPath = indexPath;
     [cell bindCellFromDescriptor:bindingData onObjectWithBinding:self];
     [self updateCellFromBindingData:bindingData];
@@ -266,11 +262,6 @@
         MFBindingCellDescriptor *bindingData = availableDescriptors[indexPath.row];
         [self.bindingDelegate.binding clearBindingValuesForBindingKey:[bindingData generatedBindingKey]];
     }
-}
-
-
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.bindingDelegate.structure[SECTION_ORDER_KEY][section];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

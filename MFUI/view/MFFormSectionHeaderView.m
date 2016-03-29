@@ -26,7 +26,7 @@
 @implementation MFFormSectionHeaderView
 
 
--(id) initWithIdentifier:(NSNumber *)identifier {
+- (id)initWithIdentifier:(NSNumber *)identifier {
     self = [super init];
     if(self) {
         self.identifier = identifier;
@@ -34,49 +34,30 @@
     return self;
 }
 
-
--(void) initialize {
+- (void)initialize {
     [super initialize];
     self.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 }
 
--(void)awakeFromNib {
-    [super awakeFromNib];
-}
-
-
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    
-    if([self showTouchAnimation]) {
-        UIView *selectionView = [[UIView alloc] initWithFrame:self.bounds];
-        selectionView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.25];
-        [self addSubview:selectionView];
-        [UIView animateWithDuration:0.35 animations:^{
-            selectionView.alpha = 0;
-        } completion:^(BOOL finished) {
-            [selectionView removeFromSuperview];
-        }];
-    }
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     self.userInteractionEnabled = NO;
     [self animateDisclosurechanges];
-    
 }
 
--(void) animateDisclosurechanges {
-    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction
-                     animations:^{
-                         [self toogleDisclosureStateWithAction:YES];
-                     }
-                     completion:^(BOOL finished) {
-                         self.isOpened = ! self.isOpened;
-                         self.userInteractionEnabled = YES;
-                         [self openedStateChanged];
-                     }];
+- (void)animateDisclosurechanges {
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        [self toogleDisclosureStateWithAction:YES];
+    }
+    completion:^(BOOL finished) {
+        self.isOpened = ! self.isOpened;
+        self.userInteractionEnabled = YES;
+        [self openedStateChanged];
+    }];
 }
 
 #pragma clang diagnostic push
 #pragma GCC diagnostic ignored "-Wundeclared-selector"
--(void) toogleDisclosureStateWithAction:(BOOL)withAction {
+- (void)toogleDisclosureStateWithAction:(BOOL)withAction {
     if(self.isOpened) {
         if([self.sender respondsToSelector:@selector(closeSectionAtIndex:)] && withAction) {
             [self.sender performSelector:@selector(closeSectionAtIndex:) withObject:self.identifier];
@@ -95,7 +76,7 @@
 }
 #pragma clang diagnostic pop
 
--(void) addDisclosureIndicator {
+- (void)addDisclosureIndicator {
     UIImage *arrowImage = [UIImage imageWithContentsOfFile:[[NSBundle bundleForClass:NSClassFromString(@"MFForm2DListViewController")] pathForResource:@"arrow" ofType:@"png"]];
     self.disclosureIndicator = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
     [self.disclosureIndicator setImage:arrowImage forState:UIControlStateNormal];
@@ -106,7 +87,6 @@
     NSLayoutConstraint *disclosureWidth= [NSLayoutConstraint constraintWithItem:self.disclosureIndicator attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:32];
     NSLayoutConstraint *disclosureLeftMargin = [NSLayoutConstraint constraintWithItem:self.disclosureIndicator attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:MF_SECTION_DISCLOSURE_DETAIL_BUTTON_MARGIN];
     [self addSubview:self.disclosureIndicator];
-    
     [self addConstraints:@[disclosureCenterY, disclosureHeight, disclosureLeftMargin, disclosureWidth]];
     
     [self.disclosureIndicator addTarget:self action:@selector(touchesEnded:withEvent:) forControlEvents:UIControlEventTouchDown];
@@ -117,7 +97,7 @@
     }
 }
 
--(void)setIsOpened:(BOOL)isOpened {
+- (void)setIsOpened:(BOOL)isOpened {
     _isOpened = isOpened;
     
     //Restoring discluse state
@@ -134,7 +114,7 @@
     }
 }
 
--(void)reinit {
+- (void)reinit {
     self.isOpened = YES;
     [UIView beginAnimations:@"" context:nil];
     self.disclosureIndicator.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(90));
@@ -143,17 +123,12 @@
     
 }
 
-
--(void)setParentEditable:(NSNumber *)parentEditable {
+- (void)setParentEditable:(NSNumber *)parentEditable {
     [super setParentEditable:@0];
 }
 
--(void) openedStateChanged {
+- (void)openedStateChanged {
     //Nothing here
-}
-
--(BOOL) showTouchAnimation {
-    return YES;
 }
 
 @end

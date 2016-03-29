@@ -52,6 +52,9 @@
 #import "UIView+Binding.h"
 #import "MFObjectWithBindingProtocol.h"
 
+// Theme
+@import MDKControl.MDKTheme;
+
 #pragma mark - Interface privée
 @interface MFForm2DListViewController ()
 
@@ -157,7 +160,6 @@
     footerDivider.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.tableView setTableFooterView:footerDivider];
     [self setupBarItems];
-    
 }
 
 
@@ -234,12 +236,9 @@
     MFBindingCellDescriptor *bindingData = self.bindingDelegate.structure[CELL_1D_DESCRIPTOR];
     NSString *identifier = bindingData.cellIdentifier;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    
     if(!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
-    
-    if ([self.openedSectionStates objectForKey:[NSNumber numberWithInteger:indexPath.section]]) {
-        
     }
     
     bindingData.cellIndexPath = indexPath;
@@ -333,10 +332,6 @@
     view.identifier = @(section);
     view.isOpened = [self.openedSectionStates[@(section)] boolValue];
     return view;
-}
-
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return nil;
 }
 
 

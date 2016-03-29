@@ -30,16 +30,12 @@
  */
 @property (nonatomic, strong) UIButton *disclosureIndicator;
 
--(void)reinit;
--(void)initialize;
+- (void)reinit;
+- (void)initialize;
 
 /*!
  * @brief Callback called when the opened state of the section has changed
  */
--(void)openedStateChanged;
+- (void)openedStateChanged;
 
-/*! 
- * @brief Indicated if the touch animation should be displayed on touche event
- */
--(BOOL) showTouchAnimation;
 @end

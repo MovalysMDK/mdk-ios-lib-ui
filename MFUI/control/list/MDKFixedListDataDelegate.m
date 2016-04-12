@@ -51,6 +51,8 @@
 #import "MFAbstractControlWrapper.h"
 #import "MFObjectWithBindingProtocol.h"
 
+@import MDKControl.AlertView;
+
 //FIXME : A supprimer ?
 const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
 
@@ -304,14 +306,10 @@ const static int TABLEVIEW_SEPARATOR_HEIGHT = 1;
         ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
         ALAssetsLibraryWriteImageCompletionBlock imageWriteCompletionBlock =^(NSURL *assetURL, NSError *error) {
             if (error) {
-                UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle: @"Error"
-                                      message:@"Saving image has failed"
-                                      delegate: nil
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil];
-                
-                [alert show];
+                MDKUIAlertController *alertController = [MDKUIAlertController alertControllerWithTitle:@"Error" message:@"Saving image has failed" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:NULL];
+                [alertController addAction:cancelAction];
+                [picker presentViewController:alertController animated:true completion:NULL];
             }
             else {
                 [photoViewModel setUri:[assetURL absoluteString]];

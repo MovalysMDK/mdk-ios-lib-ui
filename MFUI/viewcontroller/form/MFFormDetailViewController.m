@@ -22,6 +22,8 @@
 #import "MFFormValidationDelegate.h"
 #import "MFUIComponentProtocol.h"
 
+@import MDKControl.AlertView;
+
 @interface MFFormDetailViewController ()
 
 /**
@@ -125,14 +127,10 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     else {
-        UIAlertView *invalidDataAlert = [[UIAlertView alloc]
-                                         initWithTitle:MFLocalizedStringFromKey(@"form_savefailed_title")
-                                         message:MFLocalizedStringFromKey(@"form_savefailed_title")
-                                         delegate:self
-                                         cancelButtonTitle:@"OK"
-                                         otherButtonTitles:nil, nil];
-        invalidDataAlert.tag = kDiscardChangesAlert;
-        [invalidDataAlert show];
+        MDKUIAlertController *alertController = [MDKUIAlertController alertControllerWithTitle:MFLocalizedStringFromKey(@"form_savefailed_title") message:MFLocalizedStringFromKey(@"form_savefailed_title") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:NULL];
+        [alertController addAction:alertAction];
+        [self.parentViewController presentViewController:alertController animated:true completion:NULL];
     }
 }
 

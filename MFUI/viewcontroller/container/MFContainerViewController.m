@@ -190,14 +190,12 @@ MFRegister_ActionListenerOnFailed(MFAction_MFChainSaveDetailAction, failedSaveAc
     
     if(context && context.errors && context.errors.count >0) {
         NSError *error = [context.errors objectAtIndex:0];
-        UIAlertView *invalidDataAlert = [[UIAlertView alloc]
-                                         initWithTitle:[error.userInfo objectForKey:NSLocalizedDescriptionKey]//MFLocalizedStringFromKey(@"alert_discardchanges_title")
-                                         message:[error.userInfo objectForKey:NSLocalizedDescriptionKey]//MFLocalizedStringFromKey(@"alert_discardchanges_message")
-                                         delegate:self
-                                         cancelButtonTitle:@"OK"
-                                         otherButtonTitles:nil, nil];
-        invalidDataAlert.tag = kDiscardChangesAlert;
-        [invalidDataAlert show];
+        
+        MDKUIAlertController *alertController = [MDKUIAlertController alertControllerWithTitle:[error.userInfo objectForKey:NSLocalizedDescriptionKey] message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:NULL];
+        [alertController addAction:alertAction];
+        [self.parentViewController presentViewController:alertController animated:true completion:NULL];
+        
         self.hasRequestPopViewController = NO;
     }
     self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -289,22 +287,25 @@ MFRegister_ActionListenerOnFailed(MFAction_MFChainSaveDetailAction, failedSaveAc
     if([self checkHasChangedOrAsInvalidValues]) {
         if ( doShowAlert ) {
             if ( !doSave) {
-                // Alert and no save => discard changes dialog
-                UIAlertView *discardChangesAlert = [[UIAlertView alloc]
-                                                    initWithTitle:MFLocalizedStringFromKey(@"alert_discardchanges_title")
-                                                    message:MFLocalizedStringFromKey(@"alert_discardchanges_message")
-                                                    delegate:self cancelButtonTitle:MFLocalizedStringFromKey(@"alert_discardchanges_no") otherButtonTitles:MFLocalizedStringFromKey(@"alert_discardchanges_yes"), nil];
-                discardChangesAlert.tag = kDiscardChangesAlert;
-                [discardChangesAlert show];
+                MDKUIAlertController *alertController = [MDKUIAlertController alertControllerWithTitle:MFLocalizedStringFromKey(@"alert_discardchanges_title") message:MFLocalizedStringFromKey(@"alert_discardchanges_message") preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *alertNoAction = [UIAlertAction actionWithTitle:MFLocalizedStringFromKey(@"alert_discardchanges_no") style:UIAlertActionStyleCancel handler:NULL];
+                UIAlertAction *alertYesAction = [UIAlertAction actionWithTitle:MFLocalizedStringFromKey(@"alert_discardchanges_yes") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self popViewControllerAndReleaseObjects];
+                }];
+                [alertController addAction:alertNoAction];
+                [alertController addAction:alertYesAction];
+                [self.parentViewController presentViewController:alertController animated:true completion:NULL];
             }
             else {
-                // Alert and save => ask user for save
-                UIAlertView *cancelSaveAlert = [[UIAlertView alloc]
-                                                initWithTitle:MFLocalizedStringFromKey(@"alert_savechanges_title")
-                                                message:MFLocalizedStringFromKey(@"alert_savechanges_message")
-                                                delegate:self cancelButtonTitle:MFLocalizedStringFromKey(@"alert_savechanges_no") otherButtonTitles:MFLocalizedStringFromKey(@"alert_savechanges_yes"), nil];
-                cancelSaveAlert.tag = kSaveChangesAlert;
-                [cancelSaveAlert show];
+                MDKUIAlertController *alertController = [MDKUIAlertController alertControllerWithTitle:MFLocalizedStringFromKey(@"alert_savechanges_title") message:MFLocalizedStringFromKey(@"alert_savechanges_message") preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *alertNoAction = [UIAlertAction actionWithTitle:MFLocalizedStringFromKey(@"alert_savechanges_no") style:UIAlertActionStyleCancel handler:NULL];
+                UIAlertAction *alertYesAction = [UIAlertAction actionWithTitle:MFLocalizedStringFromKey(@"alert_savechanges_yes") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self onSavePressed:self.navigationItem.leftBarButtonItem];
+                    self.hasRequestPopViewController = YES;
+                }];
+                [alertController addAction:alertNoAction];
+                [alertController addAction:alertYesAction];
+                [self.parentViewController presentViewController:alertController animated:true completion:NULL];
             }
         } else if ( doSave ) {
             [self onSavePressed:self.navigationItem.rightBarButtonItem];
@@ -343,27 +344,6 @@ MFRegister_ActionListenerOnFailed(MFAction_MFChainSaveDetailAction, failedSaveAc
         [[MFActionLauncher getInstance] launchAction:@"MFChainSaveDetailAction" withCaller:sender withInParameter:parameters];
     }
     
-}
-
-
-#pragma MARK - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    // alert for discard changes
-    if (alertView.tag == kDiscardChangesAlert && buttonIndex == 1){
-        [self popViewControllerAndReleaseObjects];
-    }
-    // alert for save changes
-    if (alertView.tag == kSaveChangesAlert ){
-        if (buttonIndex == 0) {
-            [self popViewControllerAndReleaseObjects];
-        }
-        else {
-            [self onSavePressed:self.navigationItem.leftBarButtonItem];
-            self.hasRequestPopViewController = YES;
-        }
-    }
 }
 
 -(void) popViewControllerAndReleaseObjects {

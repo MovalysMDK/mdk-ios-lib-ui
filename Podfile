@@ -5,8 +5,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 use_frameworks!
 
-pod 'MFCore', :path => '../mdk-ios-lib-core'
-pod 'MDKControl', :path => '../mdk-ios-control'
+pod 'MFCore', '2.4.0'
+pod 'MDKControl', '1.4.0'
 
 post_install do |installer_representation|
   installer_representation.pods_project.targets.each do |target|
